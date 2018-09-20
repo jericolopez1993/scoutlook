@@ -1,0 +1,67 @@
+<!-- begin #page-loader -->
+	<div id="page-loader" class="fade show"><span class="spinner"></span></div>
+	<!-- end #page-loader -->
+
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade">
+		<!-- begin login -->
+		<div class="login login-with-news-feed">
+			<!-- begin news-feed -->
+			<div class="news-feed">
+				<div class="news-image" style="background-image: url(/assets/login-bg-11.jpg)"></div>
+				<div class="news-caption">
+					<h4 class="caption-title"><b>PB</b> Platform</h4>
+					<p>
+						Welcome.
+					</p>
+				</div>
+			</div>
+			<!-- end news-feed -->
+			<!-- begin right-content -->
+			<div class="right-content">
+				<!-- begin login-header -->
+				<div class="login-header">
+					<div class="brand">
+						<span class="logo"></span> <b>PB</b> Platform
+						<small>Please sign in.</small>
+					</div>
+					<div class="icon">
+						<i class="fa fa-sign-in"></i>
+					</div>
+				</div>
+				<!-- end login-header -->
+				<!-- begin login-content -->
+				<div class="login-content">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'margin-bottom-0'}) do |f| %>
+          <div class="form-group m-b-15">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control form-control-lg', required: true %>
+          </div>
+          <div class="form-group m-b-15">
+            <%= f.password_field :password, autocomplete: "current-password", :class => 'form-control form-control-lg', required: true %>
+          </div>
+
+
+            <% if devise_mapping.rememberable? -%>
+            <div class="checkbox checkbox-css m-b-30">
+              <%= f.check_box :remember_me %>
+              <label for="remember_me_checkbox">
+              Remember Me
+              </label>
+            </div>
+            <% end -%>
+            <div class="login-buttons">
+              <%= f.submit "Sign me in", :class => 'btn btn-success btn-block btn-lg' %>
+            </div>
+          <% end %>
+          <div class="m-t-20 m-b-40 p-b-40 text-inverse">
+            <%= render "devise/shared/links" %>
+          </div>
+				</div>
+				<!-- end login-content -->
+			</div>
+			<!-- end right-container -->
+		</div>
+		<!-- end login -->
+
+	</div>
+	<!-- end page container -->
