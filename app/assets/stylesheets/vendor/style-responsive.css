@@ -25,7 +25,7 @@ Website: http://www.seantheme.com/color-admin-v4.2/admin/
     2.4  Page Option - Right Sidebar
     2.5  Page Option - Transparent Sidebar
     2.6  Page Option - Boxed Layout
-	
+
 ::  3.0 Components
 -------------------------------------------
     3.1  Component - Theme Panel
@@ -44,7 +44,7 @@ Website: http://www.seantheme.com/color-admin-v4.2/admin/
 -------------------------------------------
     4.1  Widget - Widget Chart (Added in V1.3)
     4.2  Widget - Superbox Setting (Added in V1.3)
-	
+
 ::  5.0 Plugins
 -------------------------------------------
     5.1  Plugin - jQuery Wizard
@@ -71,13 +71,13 @@ Website: http://www.seantheme.com/color-admin-v4.2/admin/
     6.12 Page - Inbox V2 (Added in V1.4)
     6.13 Page - Login / Register V3 (Added in V1.7)
     6.14 Page - Profile (Added in V1.7)
-	
+
 ::  7.0 Predefined CSS
 -------------------------------
     7.1 CSS - Vertical Box
     7.2 CSS - Width
     7.3 CSS - Padding / Margin / Display (Added in V4.0)
-	
+
 ::  8.0 Content Right To Left (Added in V4.1)
 -------------------------------
     8.1 RTL Settings
@@ -281,7 +281,7 @@ Website: http://www.seantheme.com/color-admin-v4.2/admin/
 	.header .navbar-user .image.image-icon {
 		margin-right: 3px;
 	}
-	.header .navbar-user>a .caret.
+	.header .navbar-user>a .caret,
 	.header .navbar-user .dropown-toggle .caret {
 		margin-right: -5px;
 	}
