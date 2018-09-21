@@ -27,7 +27,7 @@
 
             <% if devise_mapping.rememberable? -%>
             <div class="checkbox checkbox-css m-b-30">
-              <%= f.check_box :remember_me %>
+              <%= f.check_box :remember_me, :id => "remember_me_checkbox" %>
               <label for="remember_me_checkbox">
               Remember Me
               </label>
