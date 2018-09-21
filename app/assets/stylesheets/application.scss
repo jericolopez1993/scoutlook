@@ -20,3 +20,7 @@
  *= require vendor/default
  *= require_self
  */
+
+body {
+  background: url(asset_path('squared_metal.png'));
+}
