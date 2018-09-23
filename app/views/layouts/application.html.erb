@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-	<meta charset="utf-8" />
-	<title>PB Platform | Offical Page</title>
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
+  	<meta charset="utf-8" />
+  	<title>Piggyback</title>
+  	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+  	<meta content="" name="description" />
+  	<meta content="" name="author" />
+    <%= favicon_link_tag %>
+    <%= favicon_link_tag 'favicon.png', rel: 'apple-touch-icon', type: 'image/png' %>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -18,9 +20,9 @@
   <body class="<%= user_signed_in? ? '' : 'pace-top bg-white'%>">
     <%= yield %>
     <script>
-  $(document).ready(function() {
-    App.init();
-  });
-</script>
+      $(document).ready(function() {
+        App.init();
+      });
+    </script>
   </body>
 </html>

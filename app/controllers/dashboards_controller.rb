@@ -1,6 +1,6 @@
 class DashboardsController < ApplicationController
 
   def index
-	puts "WORKING>>>>"
+    puts "WORKING>>>>"
   end
 end
