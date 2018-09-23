@@ -1,21 +1,21 @@
 <!-- begin #page-loader -->
 <%= render 'devise/static/loader'%>
-	<!-- end #page-loader -->
+  <!-- end #page-loader -->
 
-	<!-- begin #page-container -->
-	<div id="page-container" class="fade">
-		<!-- begin login -->
-		<div class="login login-with-news-feed">
-			<!-- begin news-feed -->
-			<%= render 'devise/static/logo'%>
-			<!-- end news-feed -->
-			<!-- begin right-content -->
-			<div class="right-content">
-				<!-- begin login-header -->
-				<%= render 'devise/static/header', :header_title => "Resend confirmation instructions"%>
-				<!-- end login-header -->
-				<!-- begin login-content -->
-				<div class="login-content">
+  <!-- begin #page-container -->
+  <div id="page-container" class="fade">
+    <!-- begin login -->
+    <div class="login login-with-news-feed">
+      <!-- begin news-feed -->
+      <%= render 'devise/static/logo'%>
+      <!-- end news-feed -->
+      <!-- begin right-content -->
+      <div class="right-content">
+        <!-- begin login-header -->
+        <%= render 'devise/static/header', :header_title => "Resend confirmation instructions"%>
+        <!-- end login-header -->
+        <!-- begin login-content -->
+        <div class="login-content">
           <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, :class => 'margin-bottom-0' }) do |f| %>
           <%= devise_error_messages! %>
           <div class="form-group m-b-15">
@@ -26,13 +26,13 @@
               <%= f.submit "Resend confirmation instructions", :class => 'btn btn-success btn-block btn-lg' %>
             </div>
           <% end %>
-					<%= render 'devise/static/links'%>
-				</div>
-				<!-- end login-content -->
-			</div>
-			<!-- end right-container -->
-		</div>
-		<!-- end login -->
+          <%= render 'devise/static/links'%>
+        </div>
+        <!-- end login-content -->
+      </div>
+      <!-- end right-container -->
+    </div>
+    <!-- end login -->
 
-	</div>
-	<!-- end page container -->
+  </div>
+  <!-- end page container -->
