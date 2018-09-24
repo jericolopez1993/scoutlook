@@ -1,94 +1,108 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Client type:</strong>
-  <%= @client.client_type %>
-</p>
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: 'Clients', sub_header_title: 'Create/Edit/View'%>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title"><%= @client.company_name %></h4>
+  </div>
+  <div class="panel-body">
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Type:</label>
+      <div class="col-md-7">
+        <%= @client.client_type %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Sales priority:</label>
+      <div class="col-md-7">
+        <%= @client.sales_priority %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Address:</label>
+      <div class="col-md-7">
+        <%= @client.address %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">City:</label>
+      <div class="col-md-7">
+        <%= @client.city %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">State:</label>
+      <div class="col-md-7">
+        <%= @client.state %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Postal:</label>
+      <div class="col-md-7">
+        <%= @client.postal %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Country:</label>
+      <div class="col-md-7">
+        <%= @client.country %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Phone:</label>
+      <div class="col-md-7">
+        <%= @client.phone %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Annual Revenue:</label>
+      <div class="col-md-7">
+        <%= @client.annual_revenue %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Industry:</label>
+      <div class="col-md-7">
+        <%= @client.industry %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Primary Industry:</label>
+      <div class="col-md-7">
+        <%= @client.primary_industry %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Hazardous:</label>
+      <div class="col-md-7">
+        <%= @client.hazardous %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Food Grade:</label>
+      <div class="col-md-7">
+        <%= @client.food_grade %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Freight Revenue:</label>
+      <div class="col-md-7">
+        <%= @client.postal %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Postal:</label>
+      <div class="col-md-7">
+        <%= @client.freight_revenue %>
+      </div>
+    </div>
 
-<p>
-  <strong>Relationship owner:</strong>
-  <%= @client.relationship_owner %>
-</p>
-
-<p>
-  <strong>Company name:</strong>
-  <%= @client.company_name %>
-</p>
-
-<p>
-  <strong>Client:</strong>
-  <%= @client.client_id %>
-</p>
-
-<p>
-  <strong>Parent:</strong>
-  <%= @client.parent_id %>
-</p>
-
-<p>
-  <strong>Sales priority:</strong>
-  <%= @client.sales_priority %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @client.address %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @client.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @client.state %>
-</p>
-
-<p>
-  <strong>Postal:</strong>
-  <%= @client.postal %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @client.country %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @client.phone %>
-</p>
-
-<p>
-  <strong>Annual revenue:</strong>
-  <%= @client.annual_revenue %>
-</p>
-
-<p>
-  <strong>Industry:</strong>
-  <%= @client.industry %>
-</p>
-
-<p>
-  <strong>Primary industry:</strong>
-  <%= @client.primary_industry %>
-</p>
-
-<p>
-  <strong>Hazardous:</strong>
-  <%= @client.hazardous %>
-</p>
-
-<p>
-  <strong>Food grade:</strong>
-  <%= @client.food_grade %>
-</p>
-
-<p>
-  <strong>Freight revenue:</strong>
-  <%= @client.freight_revenue %>
-</p>
-
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+    <%= link_to 'Edit', edit_client_path(@client), :class => 'btn btn-warning' %>&nbsp;&nbsp;
+    <%= link_to 'Back', clients_path, :class => 'btn btn-info' %>
+  </div>
+</div>
+<!-- end panel -->

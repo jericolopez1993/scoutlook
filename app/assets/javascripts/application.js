@@ -32,4 +32,7 @@
 //= require vendor/buttons.print.min.js
 //= require vendor/dataTables.responsive.min
 //= require vendor/table-manage-buttons.demo.min
+//= require vendor/parsley.min
+//= require vendor/highlight.common
+//= require vendor/render.highlight
 //= require_tree .

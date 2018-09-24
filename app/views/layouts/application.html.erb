@@ -38,6 +38,7 @@
       $(document).ready(function() {
         App.init();
         <%= (params[:action] == 'index' && params[:controller] != 'dashboards') ? 'TableManageButtons.init();' : ''%>
+        <%= ((params[:action] == 'new' || params[:action] == 'edit') && params[:controller] != 'dashboards') ? 'Highlight.init();' : ''%>
       });
     </script>
   </body>
