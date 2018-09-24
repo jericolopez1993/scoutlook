@@ -21,4 +21,15 @@
 //= require vendor/js.cookie
 //= require vendor/default
 //= require vendor/apps.min
+//= require vendor/jquery.dataTables
+//= require vendor/dataTables.buttons.min
+//= require vendor/buttons.bootstrap.min
+//= require vendor/buttons.flash.min
+//= require vendor/jszip.min
+//= require vendor/pdfmake.min
+//= require vendor/vfs_fonts.min
+//= require vendor/buttons.html5.min
+//= require vendor/buttons.print.min.js
+//= require vendor/dataTables.responsive.min
+//= require vendor/table-manage-buttons.demo.min
 //= require_tree .

@@ -37,6 +37,7 @@
     <script>
       $(document).ready(function() {
         App.init();
+        <%= (params[:action] == 'index' && params[:controller] != 'dashboards') ? 'TableManageButtons.init();' : ''%>
       });
     </script>
   </body>
