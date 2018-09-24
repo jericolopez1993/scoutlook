@@ -1,0 +1,94 @@
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: 'Locations', sub_header_title: 'Create/Edit/View'%>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Location' : "Edit Location ##{location.location_id}"%></h4>
+  </div>
+  <div class="panel-body">
+  <%= form_with(model: location, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+  <% if location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+
+      <ul>
+      <% client.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+              <div class="form-group row m-b-15">
+                <%= form.label :client_id, 'Client*:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                <div class="col-md-8 col-sm-8">
+                <%= form.select :client_id, Client.all.collect {|c| [ c.company_name, c.client_id ] },{:include_blank => true, :selected => location.client_id}, class: 'form-control' %>
+                </div>
+              </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :name, 'Location Name *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :name, class: 'form-control', 'data-parsley-required' => true %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :loc_type, 'Type *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.select :loc_type, options_for_select(['Plant', 'Warehouse', 'DC', 'Supplier', 'Customer', 'Third Party'], location.loc_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :address, 'Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :address, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :city, class: 'form-control' %>
+                  </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                  <%= form.label :state, 'Province / State:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :state, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :postal, 'Postal / Zip:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :postal, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.select :country, options_for_select(['USA', 'CANADA'], location.country),{:include_blank => true}, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :phone, 'Phone #:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :phone, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-0">
+                  <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
+                  <div class="col-md-8 col-sm-8">
+                    <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+                    <% if params[:action] == 'edit' %>
+                      &nbsp;&nbsp;<%= link_to 'Show', location, :class => 'btn btn-info' %>
+                    <% end %>
+                    <% if params[:action] == 'new' %>
+                      &nbsp;&nbsp;<%= link_to 'Back', locations_path, :class => 'btn btn-default' %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+</div>
+<!-- end panel -->

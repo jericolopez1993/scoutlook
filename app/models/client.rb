@@ -23,7 +23,7 @@ class Client < ApplicationRecord
   before_create :set_client_id
 
   def set_client_id
-    count = Client.all.length.to_s.rjust(5, '0')
+    count = (Client.all.length + 1).to_s.rjust(5, '0')
     self.client_id = "LOOP" + count
   end
 end
