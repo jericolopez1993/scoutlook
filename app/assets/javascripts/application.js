@@ -35,4 +35,5 @@
 //= require vendor/parsley.min
 //= require vendor/highlight.common
 //= require vendor/render.highlight
+//= require vendor/jquery.gritter
 //= require_tree .

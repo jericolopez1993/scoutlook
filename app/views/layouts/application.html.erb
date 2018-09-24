@@ -39,6 +39,26 @@
         App.init();
         <%= (params[:action] == 'index' && params[:controller] != 'dashboards') ? 'TableManageButtons.init();' : ''%>
         <%= ((params[:action] == 'new' || params[:action] == 'edit') && params[:controller] != 'dashboards') ? 'Highlight.init();' : ''%>
+        <% if flash[:error] %>
+        $.gritter.add({
+            title: 'ERROR',
+            text: '<%= flash[:error] %>',
+            sticky: false,
+            time: 8000,
+            class_name: 'my-sticky-class'
+  });
+  return false;
+        <% end %>
+        <% if flash[:notice] %>
+        $.gritter.add({
+            title: 'NOTICE',
+            text: '<%= flash[:notice] %>',
+            sticky: false,
+            time: 8000,
+            class_name: 'my-sticky-class'
+  });
+  return false;
+        <% end %>
       });
     </script>
   </body>
