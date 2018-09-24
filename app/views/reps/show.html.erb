@@ -1,0 +1,47 @@
+
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: 'Reps', sub_header_title: 'Create/Edit/View'%>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title"><%= @rep.first_name %>&nbsp;<%= @rep.last_name %></h4>
+  </div>
+  <div class="panel-body">
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">ID:</label>
+      <div class="col-md-7">
+        <%= @rep.rep_id %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Location:</label>
+      <div class="col-md-7">
+        <%= @rep.location %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Date of Hire:</label>
+      <div class="col-md-7">
+        <%= @rep.date_of_hire %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Phone:</label>
+      <div class="col-md-7">
+        <%= @rep.phone %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">E-mail:</label>
+      <div class="col-md-7">
+        <%= @rep.email %>
+      </div>
+    </div>
+    <%= link_to 'Edit', edit_rep_path(@rep), :class => 'btn btn-warning' %>&nbsp;&nbsp;
+    <%= link_to 'Back', reps_path, :class => 'btn btn-info' %>
+  </div>
+</div>
+<!-- end panel -->
