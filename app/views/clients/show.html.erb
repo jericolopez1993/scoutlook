@@ -1,0 +1,94 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Client type:</strong>
+  <%= @client.client_type %>
+</p>
+
+<p>
+  <strong>Relationship owner:</strong>
+  <%= @client.relationship_owner %>
+</p>
+
+<p>
+  <strong>Company name:</strong>
+  <%= @client.company_name %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @client.client_id %>
+</p>
+
+<p>
+  <strong>Parent:</strong>
+  <%= @client.parent_id %>
+</p>
+
+<p>
+  <strong>Sales priority:</strong>
+  <%= @client.sales_priority %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @client.address %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @client.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @client.state %>
+</p>
+
+<p>
+  <strong>Postal:</strong>
+  <%= @client.postal %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @client.country %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @client.phone %>
+</p>
+
+<p>
+  <strong>Annual revenue:</strong>
+  <%= @client.annual_revenue %>
+</p>
+
+<p>
+  <strong>Industry:</strong>
+  <%= @client.industry %>
+</p>
+
+<p>
+  <strong>Primary industry:</strong>
+  <%= @client.primary_industry %>
+</p>
+
+<p>
+  <strong>Hazardous:</strong>
+  <%= @client.hazardous %>
+</p>
+
+<p>
+  <strong>Food grade:</strong>
+  <%= @client.food_grade %>
+</p>
+
+<p>
+  <strong>Freight revenue:</strong>
+  <%= @client.freight_revenue %>
+</p>
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>
