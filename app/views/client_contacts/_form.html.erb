@@ -81,7 +81,7 @@
                   <label class="col-md-4 col-sm-4 col-form-label">Make it Primary?</label>
                   <div class="col-md-8 col-sm-8">
                     <div class="switcher">
-                    <input type="checkbox" name="switcher_checkbox_1" id="switcher_checkbox_1" value="0">
+                    <input type="checkbox" name="primary" id="switcher_checkbox_1" <%= is_primary ? 'checked' : '' %> >
                     <label for="switcher_checkbox_1"></label>
                   </div>
                   </div>
@@ -90,6 +90,7 @@
                   <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
                   <div class="col-md-8 col-sm-8">
                     <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+                    <% client = Client.find(client_contact.client_id)%>
                     <% if params[:action] == 'edit' %>
                       &nbsp;&nbsp;<%= link_to 'Show', client, :class => 'btn btn-info' %>
                     <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_125000) do
+ActiveRecord::Schema.define(version: 2018_09_25_142512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 2018_09_25_125000) do
     t.string "client_type"
     t.integer "relationship_owner"
     t.string "company_name"
-    t.string "client_id"
     t.string "parent_id"
     t.integer "sales_priority"
     t.string "address"
@@ -51,6 +50,7 @@ ActiveRecord::Schema.define(version: 2018_09_25_125000) do
     t.decimal "freight_revenue"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "client_contact_id"
   end
 
   create_table "locations", force: :cascade do |t|
