@@ -22,7 +22,9 @@ class ClientContactsController < ApplicationController
 
   # GET /client_contacts/1/edit
   def edit
-    @primary_contact = Client.find(@client_contact.client_id).client_contact_id == @client_contact.id
+    client = Client.find(@client_contact.client_id)
+    @is_pdm = client.pdm_id == @client_contact.id
+    @is_poc = client.poc_id == @client_contact.id
   end
 
   # POST /client_contacts
@@ -32,11 +34,14 @@ class ClientContactsController < ApplicationController
 
     respond_to do |format|
       if @client_contact.save
-        if params[:primary].present?
-          client = Client.find(@client_contact.client_id)
-          client.update_attributes(:client_contact_id => @client_contact.id)
+        client = Client.find(@client_contact.client_id)
+        if params[:pdm].present?
+          client.update_attributes(:pdm_id => @client_contact.id)
         end
-        format.html { redirect_to client_path(:id => @client_contact.client_id), notice: 'Client contact was successfully created.' }
+        if params[:poc].present?
+          client.update_attributes(:poc_id => @client_contact.id)
+        end
+        format.html { redirect_to client_path(:id => client.id), notice: 'Client contact was successfully created.' }
         format.json { render :show, status: :created, location: @client_contact }
       else
         format.html { render :new }
@@ -50,11 +55,14 @@ class ClientContactsController < ApplicationController
   def update
     respond_to do |format|
       if @client_contact.update(client_contact_params)
-        if params[:primary].present?
-          client = Client.find(@client_contact.client_id)
-          client.update_attributes(:client_contact_id => @client_contact.id)
+        client = Client.find(@client_contact.client_id)
+        if params[:pdm].present?
+          client.update_attributes(:pdm_id => @client_contact.id)
         end
-        format.html { redirect_to client_path(:id => @client_contact.client_id), notice: 'Client contact was successfully updated.' }
+        if params[:poc].present?
+          client.update_attributes(:poc_id => @client_contact.id)
+        end
+        format.html { redirect_to client_path(:id => client.id), notice: 'Client contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @client_contact }
       else
         format.html { render :edit }

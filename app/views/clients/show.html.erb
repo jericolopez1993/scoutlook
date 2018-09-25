@@ -182,7 +182,8 @@
     <table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons">
                     <thead>
                       <tr class="odd gradeX">
-      									<th width="1%"></th>
+      									<th width="1%">PDM</th>
+        								<th width="1%">POC</th>
                         <th class="text-nowrap">Title</th>
                         <th class="text-nowrap">Email</th>
                         <th class="text-nowrap">Address</th>
@@ -194,7 +195,8 @@
                     <tbody>
                       <% ClientContact.where(:client_id => @client.id).each do |contact| %>
                         <tr>
-                          <td><%= (@client.client_contact_id == contact.id) ? '<i class="label label-green far fa-check-circle"></i>'.html_safe : '' %></td>
+                          <td style="text-align: center;"><%= (@client.pdm_id == contact.id) ? '<i class="label label-green far fa-check-circle"></i>'.html_safe : '' %></td>
+                          <td style="text-align: center;"><%= (@client.poc_id == contact.id) ? '<i class="label label-green far fa-check-circle"></i>'.html_safe : '' %></td>
                           <td><%= contact.title %></td>
                           <td><%= contact.email %></td>
                           <td><%= contact.address %></td>

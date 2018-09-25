@@ -78,11 +78,20 @@
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <label class="col-md-4 col-sm-4 col-form-label">Make it Primary?</label>
+                  <label class="col-md-4 col-sm-4 col-form-label">is it Primary Ops Contact?</label>
                   <div class="col-md-8 col-sm-8">
                     <div class="switcher">
-                    <input type="checkbox" name="primary" id="switcher_checkbox_1" <%= is_primary ? 'checked' : '' %> >
+                    <input type="checkbox" name="pdm" id="switcher_checkbox_1" <%= is_pdm ? 'checked' : '' %> >
                     <label for="switcher_checkbox_1"></label>
+                  </div>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <label class="col-md-4 col-sm-4 col-form-label">is it Primary Decision Maker?</label>
+                  <div class="col-md-8 col-sm-8">
+                    <div class="switcher">
+                    <input type="checkbox" name="poc" id="switcher_checkbox_2" <%= is_poc ? 'checked' : '' %> >
+                    <label for="switcher_checkbox_2"></label>
                   </div>
                   </div>
                 </div>
