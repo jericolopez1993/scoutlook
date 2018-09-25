@@ -18,13 +18,13 @@ module PbPlatform
 
     config.action_controller.allow_forgery_protection = false
     config.action_mailer.delivery_method = :smtp
-    config.action_mailer.default_url_options = { host:'ec2-35-183-0-148.ca-central-1.compute.amazonaws.com'}
+    config.action_mailer.default_url_options = { host:'piggyback.net'}
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.smtp_settings = {
       :user_name => 'kevinmarceloph',
       :password => 'bd2ejj36epxP3Qcn',
-      :domain => 'ec2-35-183-0-148.ca-central-1.compute.amazonaws.com',
+      :domain => 'piggyback.net',
       :address => 'smtp.sendgrid.net',
       :port => 587,
       :authentication => :plain,
