@@ -6,12 +6,18 @@
       <li class="nav-profile">
         <a href="javascript:;" data-toggle="nav-profile">
           <div class="cover with-shadow"></div>
-          <div class="image image-icon bg-black text-grey-darker">
-            <i class="fa fa-user"></i>
-          </div>
+            <% if current_user.avatar.attached? %>
+              <div class="image extend_image">
+                <%= image_tag current_user.avatar %>
+              </div>
+            <% else %>
+              <div class="image image-icon bg-black text-grey-darker">
+                <i class="fa fa-user"></i>
+              </div>
+            <% end %>
           <div class="info">
             <b class="caret pull-right"></b>
-            Sample Name
+          <%= (!current_user.first_name.nil? && !current_user.last_name.nil?) ? (current_user.first_name + " " + current_user.last_name) : '' %>
             <small><%= current_user.email %></small>
           </div>
         </a>

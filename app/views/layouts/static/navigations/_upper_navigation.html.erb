@@ -35,10 +35,18 @@
     </li>
     <li class="dropdown navbar-user">
       <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-        <div class="image image-icon bg-black text-grey-darker">
-          <i class="fa fa-user"></i>
-        </div>
-        <span class="d-none d-md-inline"><%= current_user.email %></span> <b class="caret"></b>
+
+        <% if current_user.avatar.attached? %>
+          <div class="image">
+            <%= image_tag current_user.avatar %>
+          </div>
+        <% else %>
+          <div class="image image-icon bg-black text-grey-darker">
+            <i class="fa fa-user"></i>
+          </div>
+        <% end %>
+        <span class="d-none d-md-inline">
+      <%= (!current_user.first_name.nil? && !current_user.last_name.nil?) ? (current_user.first_name + " " + current_user.last_name) : current_user.email %></span> <b class="caret"></b>
       </a>
       <div class="dropdown-menu dropdown-menu-right">
       <%= link_to('Edit Profile', edit_user_registration_path, class: "dropdown-item") %>

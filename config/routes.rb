@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :reps
   resources :client_locations
   resources :clients
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     authenticated :user do
       root 'dashboards#index', as: :authenticated_root
