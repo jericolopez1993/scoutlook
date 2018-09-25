@@ -10,6 +10,7 @@
   </div>
   <div class="panel-body">
   <%= form_with(model: client_contact, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+  <%= form.hidden_field :client_id %>
   <% if client_contact.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(client_contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
@@ -73,10 +74,18 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :country, options_for_select(['USA', 'CANADA'], client.country),{:include_blank => true}, class: 'form-control' %>
+                  <%= form.select :country, options_for_select(['USA', 'CANADA'], client_contact.country),{:include_blank => true}, class: 'form-control' %>
                   </div>
                 </div>
-
+                <div class="form-group row m-b-15">
+                  <label class="col-md-4 col-sm-4 col-form-label">Make it Primary?</label>
+                  <div class="col-md-8 col-sm-8">
+                    <div class="switcher">
+                    <input type="checkbox" name="switcher_checkbox_1" id="switcher_checkbox_1" value="0">
+                    <label for="switcher_checkbox_1"></label>
+                  </div>
+                  </div>
+                </div>
                 <div class="form-group row m-b-0">
                   <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
                   <div class="col-md-8 col-sm-8">

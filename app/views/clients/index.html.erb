@@ -25,7 +25,7 @@
     								<tbody>
                       <% @clients.each do |client| %>
                         <tr>
-                          <td><%= client.client_id %></td>
+                          <td><%= generate_alphanumeric_id(client.client_type, client.id) %></td>
                           <td><%= client.company_name %></td>
                           <td><%= client.client_type %></td>
                           <td><%= client.country %></td>
