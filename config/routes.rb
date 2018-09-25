@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :reps
   resources :client_locations
   resources :clients
+  resources :users
   devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     authenticated :user do

@@ -54,6 +54,13 @@
         </a>
       </li>
 
+      <li class="<%= (params[:controller] == 'users') ? 'active' : ''%>">
+        <a href="<%= users_path %>">
+        <i class="fas fa-users-cog"></i>
+          <span>Users</span>
+        </a>
+      </li>
+
       <li class="has-sub<%= (params[:controller] == 'locations') ? ' active' : ''%>">
           <a href="javascript:;">
             <b class="caret"></b>
