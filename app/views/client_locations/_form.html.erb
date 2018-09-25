@@ -10,6 +10,7 @@
   </div>
   <div class="panel-body">
   <%= form_with(model: client_location, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+  <%= form.hidden_field :client_id %>
   <% if client_location.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
@@ -21,14 +22,8 @@
       </ul>
     </div>
   <% end %>
-              <div class="form-group row m-b-15">
-                <%= form.label :client_id, 'Client*:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                <div class="col-md-8 col-sm-8">
-                <%= form.select :client_id, Client.all.collect {|c| [ c.company_name, c.id ] },{:include_blank => true, :selected => client_location.id}, class: 'form-control' %>
-                </div>
-              </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :name, 'client_location Name *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :name, 'Location Name *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.text_field :name, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
