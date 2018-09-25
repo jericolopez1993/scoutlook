@@ -38,7 +38,7 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :location, 'Location *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :location, options_for_select(['Toronto'], rep.location),{}, class: 'form-control', 'data-parsley-required' => true %>
+                  <%= form.select :location, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => rep.location}, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">

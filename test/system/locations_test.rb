@@ -14,17 +14,7 @@ class LocationsTest < ApplicationSystemTestCase
     visit locations_url
     click_on "New Location"
 
-    fill_in "Address", with: @location.address
-    fill_in "City", with: @location.city
-    fill_in "Client", with: @location.client_id
-    fill_in "Country", with: @location.country
-    fill_in "Loc Type", with: @location.loc_type
-    fill_in "Location", with: @location.location_id
     fill_in "Name", with: @location.name
-    fill_in "Phone", with: @location.phone
-    fill_in "Postal", with: @location.postal
-    fill_in "Special Instructions", with: @location.special_instructions
-    fill_in "State", with: @location.state
     click_on "Create Location"
 
     assert_text "Location was successfully created"
@@ -35,17 +25,7 @@ class LocationsTest < ApplicationSystemTestCase
     visit locations_url
     click_on "Edit", match: :first
 
-    fill_in "Address", with: @location.address
-    fill_in "City", with: @location.city
-    fill_in "Client", with: @location.client_id
-    fill_in "Country", with: @location.country
-    fill_in "Loc Type", with: @location.loc_type
-    fill_in "Location", with: @location.location_id
     fill_in "Name", with: @location.name
-    fill_in "Phone", with: @location.phone
-    fill_in "Postal", with: @location.postal
-    fill_in "Special Instructions", with: @location.special_instructions
-    fill_in "State", with: @location.state
     click_on "Update Location"
 
     assert_text "Location was successfully updated"

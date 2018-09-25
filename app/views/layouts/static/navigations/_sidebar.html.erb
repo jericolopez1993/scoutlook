@@ -48,6 +48,17 @@
         </a>
       </li>
 
+      <li class="has-sub<%= (params[:controller] == 'locations') ? ' active' : ''%>">
+          <a href="javascript:;">
+            <b class="caret"></b>
+            <i class="fas fa-cog"></i>
+            <span>System Settings</span>
+          </a>
+          <ul class="sub-menu">
+            <li><a href="<%= locations_path %>"><i class="fas fa-map-marked-alt"></i>&nbsp;<span>Locations</span></a></li>
+          </ul>
+        </li>
+
       <!-- begin sidebar minify button -->
       <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
       <!-- end sidebar minify button -->
