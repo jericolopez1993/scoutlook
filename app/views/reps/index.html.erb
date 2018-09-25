@@ -26,7 +26,7 @@
     								<tbody>
                       <% @reps.each do |rep| %>
                         <tr>
-                          <td><%= rep.rep_id %></td>
+                          <td><%= generate_alphanumeric_id(rep.last_name, rep.id) %></td>
                           <td><%= rep.first_name %> <%= rep.last_name %></td>
                           <td><%= rep.location %></td>
                           <td><%= rep.date_of_hire %></td>
