@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_142512) do
+ActiveRecord::Schema.define(version: 2018_09_25_145237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,22 @@ ActiveRecord::Schema.define(version: 2018_09_25_142512) do
     t.string "postal"
     t.string "country"
     t.integer "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "client_locations", force: :cascade do |t|
+    t.string "client_id"
+    t.string "location_id"
+    t.string "name"
+    t.string "loc_type"
+    t.text "special_instructions"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "postal"
+    t.string "country"
+    t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,22 +67,6 @@ ActiveRecord::Schema.define(version: 2018_09_25_142512) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "client_contact_id"
-  end
-
-  create_table "locations", force: :cascade do |t|
-    t.string "client_id"
-    t.string "location_id"
-    t.string "name"
-    t.string "loc_type"
-    t.text "special_instructions"
-    t.string "address"
-    t.string "city"
-    t.string "state"
-    t.string "postal"
-    t.string "country"
-    t.string "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "reps", force: :cascade do |t|

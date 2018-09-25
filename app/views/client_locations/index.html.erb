@@ -6,7 +6,7 @@
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
-    <%= link_to 'New Location', new_location_path, :class => 'btn btn-primary btn-xs' %>
+    <%= link_to 'New Location', new_client_location_path, :class => 'btn btn-primary btn-xs' %>
     </div>
     <h4 class="panel-title">List of Locations</h4>
   </div>
@@ -25,19 +25,19 @@
     									</tr>
     								</thead>
     								<tbody>
-                      <% @locations.each do |location| %>
+                      <% @client_locations.each do |client_location| %>
                         <tr>
-                          <td><%= location.location_id %></td>
-                          <td><%= link_to location.client_id, client_path(:id => Client.where(:client_id => location.client_id).first.id) %></td>
-                          <td><%= location.name %></td>
-                          <td><%= location.loc_type %></td>
-                          <td><%= location.address %></td>
-                          <td><%= location.country %></td>
-                          <td><%= location.phone %></td>
+                          <td><%= client_location.location_id %></td>
+                          <td><%= client_location.client_id %></td>
+                          <td><%= client_location.name %></td>
+                          <td><%= client_location.loc_type %></td>
+                          <td><%= client_location.address %></td>
+                          <td><%= client_location.country %></td>
+                          <td><%= client_location.phone %></td>
                           <td>
-                            <%= link_to 'Show', location, :class => 'btn btn-info' %>
-                            <%= link_to 'Edit', edit_location_path(location), :class => 'btn btn-warning' %>
-                            <%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                            <%= link_to 'Show', client_location, :class => 'btn btn-info' %>
+                            <%= link_to 'Edit', edit_client_location_path(client_location), :class => 'btn btn-warning' %>
+                            <%= link_to 'Destroy', client_location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
                           </td>
 
                         </tr>

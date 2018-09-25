@@ -6,11 +6,11 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Location' : "Edit Location ##{location.location_id}"%></h4>
+    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Location' : "Edit Location ##{client_location.id}"%></h4>
   </div>
   <div class="panel-body">
-  <%= form_with(model: location, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-  <% if location.errors.any? %>
+  <%= form_with(model: client_location, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+  <% if client_location.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
 
@@ -24,11 +24,11 @@
               <div class="form-group row m-b-15">
                 <%= form.label :client_id, 'Client*:', class: 'col-md-4 col-sm-4 col-form-label' %>
                 <div class="col-md-8 col-sm-8">
-                <%= form.select :client_id, Client.all.collect {|c| [ c.company_name, c.client_id ] },{:include_blank => true, :selected => location.client_id}, class: 'form-control' %>
+                <%= form.select :client_id, Client.all.collect {|c| [ c.company_name, c.id ] },{:include_blank => true, :selected => client_location.id}, class: 'form-control' %>
                 </div>
               </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :name, 'Location Name *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :name, 'client_location Name *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.text_field :name, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
@@ -36,7 +36,7 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :loc_type, 'Type *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :loc_type, options_for_select(['Plant', 'Warehouse', 'DC', 'Supplier', 'Customer', 'Third Party'], location.loc_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                  <%= form.select :loc_type, options_for_select(['Plant', 'Warehouse', 'DC', 'Supplier', 'Customer', 'Third Party'], client_location.loc_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
@@ -67,7 +67,7 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :country, options_for_select(['USA', 'CANADA'], location.country),{:include_blank => true}, class: 'form-control' %>
+                  <%= form.select :country, options_for_select(['USA', 'CANADA'], client_location.country),{:include_blank => true}, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
@@ -81,10 +81,10 @@
                   <div class="col-md-8 col-sm-8">
                     <%= form.submit 'Submit', :class => 'btn btn-primary' %>
                     <% if params[:action] == 'edit' %>
-                      &nbsp;&nbsp;<%= link_to 'Show', location, :class => 'btn btn-info' %>
+                      &nbsp;&nbsp;<%= link_to 'Show', client_location, :class => 'btn btn-info' %>
                     <% end %>
                     <% if params[:action] == 'new' %>
-                      &nbsp;&nbsp;<%= link_to 'Back', locations_path, :class => 'btn btn-default' %>
+                      &nbsp;&nbsp;<%= link_to 'Back', client_locations_path, :class => 'btn btn-default' %>
                     <% end %>
                   </div>
                 </div>
