@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :client_contacts
   resources :reps
   resources :locations
   resources :clients

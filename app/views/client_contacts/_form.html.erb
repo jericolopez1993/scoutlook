@@ -1,0 +1,95 @@
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: 'Client Contact', sub_header_title: 'Create/Edit/View'%>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Contact' : "Edit Contact ##{client_contact.client_id}"%></h4>
+  </div>
+  <div class="panel-body">
+  <%= form_with(model: client_contact, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+  <% if client_contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(client_contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% client_contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+                <div class="form-group row m-b-15">
+                  <%= form.label :title, 'Title:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :title, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :email, 'Email Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.email_field :email, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :work_phone, 'Work Phone:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :work_phone, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :home_phone, 'Cell:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :home_phone, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :address, 'Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :address, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :city, class: 'form-control' %>
+                  </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                  <%= form.label :state, 'Province / State:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :state, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :postal, 'Postal / Zip:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :postal, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.select :country, options_for_select(['USA', 'CANADA'], client.country),{:include_blank => true}, class: 'form-control' %>
+                  </div>
+                </div>
+
+                <div class="form-group row m-b-0">
+                  <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
+                  <div class="col-md-8 col-sm-8">
+                    <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+                    <% if params[:action] == 'edit' %>
+                      &nbsp;&nbsp;<%= link_to 'Show', client, :class => 'btn btn-info' %>
+                    <% end %>
+                    <% if params[:action] == 'new' %>
+                      &nbsp;&nbsp;<%= link_to 'Back', clients_path, :class => 'btn btn-default' %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+</div>
+<!-- end panel -->
