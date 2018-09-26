@@ -118,6 +118,48 @@
                   <%= form.number_field :freight_revenue, class: 'form-control', 'data-parsley-type' => 'number' %>
                   </div>
                 </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :volume_intra, 'Volume Intra:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :volume_intra, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :volume_inter, 'Volume Inter:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :volume_inter, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :volume_to_usa, 'Volume To USA:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :volume_to_usa, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :volume_from_usa, 'Volume From USA:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :volume_from_usa, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :notes, 'Notes:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'form-control')  %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :credit_status, 'Credit Status:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.select :credit_status, options_for_select(['Credit', 'Hold', 'Cash Only'], client.credit_status),{:include_blank => true}, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :credit_approval, 'Credit Approval:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.number_field :credit_approval, class: 'form-control', 'data-parsley-type' => 'number' %>
+                  </div>
+                </div>
 
                 <div class="form-group row m-b-0">
                   <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
