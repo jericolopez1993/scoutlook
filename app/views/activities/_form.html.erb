@@ -2,6 +2,8 @@
 <%= render 'layouts/static/header', header_title: 'Activities', sub_header_title: 'Create/Edit/View'%>
 <!-- end page-header -->
 <!-- begin panel -->
+
+<%= form_with(model: activity, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
@@ -9,7 +11,6 @@
     <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Activity' : "Edit Activity ##{generate_alphanumeric_id(activity.activity_type, activity.id)}"%></h4>
   </div>
   <div class="panel-body">
-  <%= form_with(model: activity, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
   <% if activity.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
@@ -22,15 +23,15 @@
     </div>
   <% end %>
                 <div class="form-group row m-b-15">
-                  <%= form.label :type, 'Type *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :activity_type, 'Type *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :type, options_for_select(['Loop', 'Engagement'], activity.type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                  <%= form.select :activity_type, options_for_select(['Loop', 'Engagement'], activity.activity_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
                 </div>
-                <div class="form-group row m-b-15">
+                <div class="form-group row m-b-15 engagement-fields"  style="display: none;">
                   <%= form.label :engagement_type, 'Engagement Type *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :engagement_type, options_for_select(['Phone', 'In-Person'], activity.engagement_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                  <%= form.select :engagement_type, options_for_select(['Phone', 'In-Person'], activity.engagement_type),{:include_blank => true}, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
@@ -46,9 +47,60 @@
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
+                  <%= form.label :proposal_pdf, 'Proposal PDF:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.file_field :proposal_pdf, autocomplete: "proposal_pdf", placeholder: 'Proposal PDF' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
                   <%= form.label :status, 'Status *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :status, options_for_select(['Open', 'Closed'], activity.status),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                  <%= form.select :status, options_for_select([['Open', true], ['Closed', false]], activity.status),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :other_notes, 'Other Notes:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_area(:other_notes, cols: 20, rows: 15,  class: 'form-control')  %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :credit_application, 'Complete Credit Application:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.file_field :credit_application, autocomplete: "credit_application", placeholder: 'Proposal PDF' %>
+                  </div>
+                </div>
+            </div>
+</div>
+<div class="panel panel-inverse outcome-fields" style="display: none;">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title">Outcome</h4>
+  </div>
+  <div class="panel-body">
+                <div class="form-group row m-b-15 engagement-fields"  style="display: none;">
+                  <%= form.label :outcome, 'Outcome:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.select :outcome, options_for_select(['Proposal', 'Learn'], activity.outcome.outcome),{:include_blank => true}, class: 'form-control'%>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15 loop-fields"  style="display: none;">
+                  <%= form.label :outcome, 'Outcome:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.select :outcome, options_for_select(['Win', 'Learn'], activity.outcome.outcome),{:include_blank => true}, class: 'form-control'%>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :reason, 'Reason:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :reason, class: 'form-control', value: activity.outcome.reason %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :notes, 'Notes:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'form-control', :value => activity.outcome.notes)  %>
                   </div>
                 </div>
                 <div class="form-group row m-b-0">
@@ -63,7 +115,8 @@
                     <% end %>
                   </div>
                 </div>
-              <% end %>
             </div>
 </div>
+
+<% end %>
 <!-- end panel -->

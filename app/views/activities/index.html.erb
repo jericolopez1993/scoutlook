@@ -26,11 +26,11 @@
     								<tbody>
                       <% @activities.each do |activity| %>
                         <tr>
-                          <td><%= generate_alphanumeric_id(activity.type, activity.id) %></td>
-                          <td><%= activity.type %></td>
+                          <td><%= generate_alphanumeric_id(activity.activity_type, activity.id) %></td>
+                          <td><%= activity.activity_type %></td>
                           <td><%= activity.rep_id %></td>
                           <td><%= activity.annual_value %></td>
-                          <td><%= activity.status %></td>
+                          <td><%= activity.status ? 'Open' : 'Closed' %></td>
                           <td><%= activity.date_opened %></td>
                           <td><%= activity.date_closed %></td>
                           <td>

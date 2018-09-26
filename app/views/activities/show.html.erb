@@ -7,19 +7,19 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title">  <%= generate_alphanumeric_id(@activity.type, @activity.id) %></h4>
+    <h4 class="panel-title">  <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %></h4>
   </div>
   <div class="panel-body">
     <div class="form-group row m-b-15">
       <label class="col-md-3 col-form-label">ID:</label>
       <div class="col-md-7">
-        <%= generate_alphanumeric_id(@activity.type, @activity.id) %>
+        <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-3 col-form-label">Type:</label>
       <div class="col-md-7">
-        <%= @activity.type %>
+        <%= @activity.activity_type %>
       </div>
     </div>
     <div class="form-group row m-b-15">
@@ -43,7 +43,7 @@
     <div class="form-group row m-b-15">
       <label class="col-md-3 col-form-label">Status:</label>
       <div class="col-md-7">
-        <%= @activity.status %>
+      <%= @activity.status ? 'Open' : 'Closed' %>
       </div>
     </div>
     <div class="form-group row m-b-15">

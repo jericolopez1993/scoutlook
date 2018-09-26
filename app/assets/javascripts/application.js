@@ -37,3 +37,31 @@
 //= require vendor/render.highlight
 //= require vendor/jquery.gritter
 //= require_tree .
+$(document).on('turbolinks:load', function(){
+  activityOutcomeFields($("#activity_activity_type").val());
+  $(function(){
+      $("#activity_activity_type").change(function(){
+        activityOutcomeFields($(this).val());
+      });
+  });
+});
+
+
+
+function activityOutcomeFields(actype) {
+  if (actype === 'Engagement') {
+      $(".outcome-fields").show();
+      $(".activity_buttons").hide();
+      $(".engagement-fields").show();
+      $(".loop-fields").hide();
+  }else if (actype === 'Loop') {
+      $(".outcome-fields").show();
+      $(".activity_buttons").hide();
+      $(".engagement-fields").hide();
+      $(".loop-fields").show();
+  }else{
+      $(".outcome-fields").hide();
+      $(".activity_buttons").show();
+
+  }
+}

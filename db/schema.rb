@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_26_133636) do
+ActiveRecord::Schema.define(version: 2018_09_26_153617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2018_09_26_133636) do
   end
 
   create_table "activities", force: :cascade do |t|
-    t.string "type"
+    t.string "activity_type"
     t.string "engagement_type"
     t.integer "client_id"
     t.integer "rep_id"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2018_09_26_133636) do
     t.boolean "status"
     t.datetime "date_opened"
     t.datetime "date_closed"
-    t.text "notes"
+    t.text "other_notes"
     t.integer "outcome_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -25,9 +25,21 @@ class ActivitiesController < ApplicationController
   # POST /activities.json
   def create
     @activity = Activity.new(activity_params)
+    if params[:activity][:outcome].present? || params[:activity][:reason].present? || params[:activity][:notes].present?
+      @outcome = ActivityOutcome.new(activity_outcome_params)
+      if @outcome.save
+        @activity.outcome_id = @outcome.id
+      end
+    end
 
     respond_to do |format|
       if @activity.save
+        if params[:activity][:proposal_pdf].present?
+          @activity.proposal_pdf.attach(params[:activity][:proposal_pdf])
+        end
+        if params[:activity][:credit_application].present?
+          @activity.credit_application.attach(params[:activity][:credit_application])
+        end
         format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
         format.json { render :show, status: :created, location: @activity }
       else
@@ -40,8 +52,23 @@ class ActivitiesController < ApplicationController
   # PATCH/PUT /activities/1
   # PATCH/PUT /activities/1.json
   def update
+    if @activity.outcome_id.nil? && (params[:activity][:outcome].present? || params[:activity][:reason].present? || params[:activity][:notes].present?)
+      @outcome = ActivityOutcome.new(activity_outcome_params)
+      if @outcome.save
+        @activity.outcome_id = @outcome.id
+      end
+    else
+      @outcome = ActivityOutcome.find(@activity.outcome_id)
+      @outcome.update(activity_outcome_params)
+    end
     respond_to do |format|
       if @activity.update(activity_params)
+        if params[:activity][:proposal_pdf].present?
+          @activity.proposal_pdf.attach(params[:activity][:proposal_pdf])
+        end
+        if params[:activity][:credit_application].present?
+          @activity.credit_application.attach(params[:activity][:credit_application])
+        end
         format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
         format.json { render :show, status: :ok, location: @activity }
       else
@@ -69,6 +96,9 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:type, :engagement_type, :client_id, :rep_id, :annual_value, :status, :date_opened, :date_closed, :notes, :outcome_id)
+      params.require(:activity).permit(:activity_type, :engagement_type, :client_id, :rep_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id)
+    end
+    def activity_outcome_params
+      params.require(:activity).permit(:outcome, :reason, :notes)
     end
 end
