@@ -1,0 +1,65 @@
+
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: 'Activities', sub_header_title: 'Create/Edit/View'%>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title">  <%= generate_alphanumeric_id(@activity.type, @activity.id) %></h4>
+  </div>
+  <div class="panel-body">
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">ID:</label>
+      <div class="col-md-7">
+        <%= generate_alphanumeric_id(@activity.type, @activity.id) %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Type:</label>
+      <div class="col-md-7">
+        <%= @activity.type %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Engagement Type:</label>
+      <div class="col-md-7">
+        <%= @activity.engagement_type %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Rep:</label>
+      <div class="col-md-7">
+        <%= @activity.rep_id %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Annual Value:</label>
+      <div class="col-md-7">
+        <%= @activity.annual_value %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Status:</label>
+      <div class="col-md-7">
+        <%= @activity.status %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Date Opened:</label>
+      <div class="col-md-7">
+        <%= @activity.date_opened %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Date Closed:</label>
+      <div class="col-md-7">
+        <%= @activity.date_closed %>
+      </div>
+    </div>
+    <%= link_to 'Edit', edit_activity_path(@activity), :class => 'btn btn-warning' %>&nbsp;&nbsp;
+    <%= link_to 'Back', activities_path, :class => 'btn btn-info' %>
+  </div>
+</div>
+<!-- end panel -->

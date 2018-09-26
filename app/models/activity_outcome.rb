@@ -1,0 +1,2 @@
+class ActivityOutcome < ApplicationRecord
+end

@@ -40,6 +40,12 @@
           <span>Home</span>
         </a>
       </li>
+      <li class="<%= (params[:controller] == 'activities') ? 'active' : ''%>">
+        <a href="<%= activities_path %>">
+          <i class="fas fa-user-tag"></i>
+          <span>Activities</span>
+        </a>
+      </li>
       <li class="<%= (params[:controller] == 'clients') ? 'active' : ''%>">
         <a href="<%= clients_path %>">
           <i class="fas fa-people-carry"></i>

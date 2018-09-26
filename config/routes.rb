@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :activity_outcomes
+  resources :activities
   resources :locations
   resources :client_contacts
   resources :reps

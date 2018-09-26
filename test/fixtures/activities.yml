@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  engagement_type: MyString
+  client_id: 1
+  rep_id: 1
+  annual_value: MyString
+  status: false
+  date_opened: 2018-09-26 21:33:15
+  date_closed: 2018-09-26 21:33:15
+  notes: MyText
+  outcome_id: 1
+
+two:
+  type: 
+  engagement_type: MyString
+  client_id: 1
+  rep_id: 1
+  annual_value: MyString
+  status: false
+  date_opened: 2018-09-26 21:33:15
+  date_closed: 2018-09-26 21:33:15
+  notes: MyText
+  outcome_id: 1
