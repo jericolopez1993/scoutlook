@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :reps
   resources :client_locations
   resources :clients
-  resources :users
   devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     authenticated :user do
@@ -17,5 +16,6 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
+  match '/users',   to: 'users#index',   via: 'get'
  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.htmlerb
 end
