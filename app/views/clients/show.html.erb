@@ -10,6 +10,8 @@
       <div class="panel panel-inverse">
         <div class="panel-heading">
           <div class="panel-heading-btn">
+            <%= link_to 'Edit', edit_client_path(@client), :class => 'btn btn-warning btn-xs' %>
+            <%= link_to 'Back', clients_path, :class => 'btn btn-info btn-xs' %>
           </div>
           <h4 class="panel-title"><%= @client.company_name %></h4>
         </div>
@@ -82,9 +84,20 @@
               <%= @client.freight_revenue %>
             </div>
           </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Credit Status:</label>
+            <div class="col-md-7">
+              <%= @client.credit_status %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Credit Approval:</label>
+            <div class="col-md-7">
+              <%= @client.credit_approval %>
+            </div>
+          </div>
 
-          <%= link_to 'Edit', edit_client_path(@client), :class => 'btn btn-warning' %>&nbsp;&nbsp;
-          <%= link_to 'Back', clients_path, :class => 'btn btn-info' %>
+
         </div>
       </div>
       <div class="panel panel-inverse">
@@ -122,6 +135,47 @@
             <label class="col-md-3 col-form-label">Country:</label>
             <div class="col-md-7">
               <%= @client.country %>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <div class="panel-heading-btn">
+          </div>
+          <h4 class="panel-title">Volume</h4>
+        </div>
+        <div class="panel-body">
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Intra:</label>
+            <div class="col-md-7">
+              <%= @client.volume_intra %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Inter:</label>
+            <div class="col-md-7">
+              <%= @client.volume_inter %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">to USA:</label>
+            <div class="col-md-7">
+              <%= @client.volume_to_usa %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">from USA:</label>
+            <div class="col-md-7">
+              <%= @client.volume_from_usa %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Notes:</label>
+            <div class="col-md-7">
+              <%= @client.notes %>
             </div>
           </div>
 
