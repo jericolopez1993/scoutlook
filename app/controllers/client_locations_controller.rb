@@ -72,6 +72,6 @@ class ClientLocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_location_params
-      params.require(:client_location).permit(:client_id, :client_location_id, :name, :loc_type, :special_instructions, :address, :city, :state, :postal, :country, :phone)
+      params.require(:client_location).permit(:client_id, :client_location_id, :name, :loc_type, :special_instructions, :address, :city, :state, :postal, :country, :phone, :poc_id, :soc_id)
     end
 end

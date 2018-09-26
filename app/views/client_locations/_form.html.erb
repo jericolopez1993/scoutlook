@@ -71,6 +71,18 @@
                   <%= form.text_field :phone, class: 'form-control' %>
                   </div>
                 </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :poc_id, 'Primary Ops Contact:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.select :poc_id, ClientContact.where(:client_id => client_location.client_id).collect {|r| [ "#{generate_alphanumeric_id('Contact', r.id)} - #{r.title} (#{r.email})", r.id ] },{:include_blank => true, :selected => client_location.poc_id}, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :soc_id, 'Secondary Ops Contact:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.select :soc_id, ClientContact.where(:client_id => client_location.client_id).collect {|r| [ "#{generate_alphanumeric_id('Contact', r.id)} - #{r.title} (#{r.email})", r.id ] },{:include_blank => true, :selected => client_location.soc_id}, class: 'form-control' %>
+                  </div>
+                </div>
                 <div class="form-group row m-b-0">
                   <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
                   <div class="col-md-8 col-sm-8">
