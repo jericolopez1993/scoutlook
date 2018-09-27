@@ -2,179 +2,216 @@
 <%= render 'layouts/static/header', header_title: 'Clients', sub_header_title: 'Create/Edit/View'%>
 <!-- end page-header -->
 <!-- begin panel -->
-<div class="panel panel-inverse">
-  <div class="panel-heading">
-    <div class="panel-heading-btn">
-    </div>
-    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Client' : "Edit Client ##{generate_alphanumeric_id(client.client_type, client.id)}"%></h4>
-  </div>
-  <div class="panel-body">
-  <%= form_with(model: client, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-  <% if client.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
 
-      <ul>
-      <% client.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<%= form_with(model: client, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+        </div>
+        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Client' : "Edit Client ##{generate_alphanumeric_id(client.client_type, client.id)}"%></h4>
+      </div>
+      <div class="panel-body">
+      <% if client.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+
+          <ul>
+          <% client.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :company_name, 'Company Name *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :company_name, class: 'form-control', 'data-parsley-required' => true %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :client_type, 'Type *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.select :client_type, options_for_select(['Shipper', 'Carrier'], client.client_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :relationship_owner, 'Relationship Owner:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.select :relationship_owner, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => client.relationship_owner}, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :sales_priority, 'Sales Priority *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.select :sales_priority, options_for_select([1,2,3], client.sales_priority),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                      </div>
+                    </div>
+
+                    <div class="form-group row m-b-15">
+                      <%= form.label :annual_revenue, 'Annual Revenue:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.number_field :annual_revenue, class: 'form-control', 'data-parsley-type' => 'number' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :industry, 'Industry:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :industry, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :primary_industry, 'Primary Industry:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :primary_industry, class: 'form-control' %>
+                      </div>
+                    </div>
+
+
+                </div>
     </div>
-  <% end %>
-                <div class="form-group row m-b-15">
-                  <%= form.label :company_name, 'Company Name *:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :company_name, class: 'form-control', 'data-parsley-required' => true %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :client_type, 'Type *:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.select :client_type, options_for_select(['Shipper', 'Carrier'], client.client_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :relationship_owner, 'Relationship Owner:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.select :relationship_owner, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => client.relationship_owner}, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :sales_priority, 'Sales Priority *:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.select :sales_priority, options_for_select([1,2,3], client.sales_priority),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :address, 'Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :address, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :city, class: 'form-control' %>
-                  </div>
-                </div>
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <h4 class="panel-title">Address</h4>
+      </div>
+      <div class="panel-body">
 
-                <div class="form-group row m-b-15">
-                  <%= form.label :state, 'Province / State:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :state, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :postal, 'Postal / Zip:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :postal, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.select :country, options_for_select(['USA', 'CANADA'], client.country),{:include_blank => true}, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :phone, 'Phone #:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :phone, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :annual_revenue, 'Annual Revenue:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.number_field :annual_revenue, class: 'form-control', 'data-parsley-type' => 'number' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :industry, 'Industry:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :industry, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :primary_industry, 'Primary Industry:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :primary_industry, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :hazardous, 'Hazardous:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :hazardous, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :food_grade, 'Food Grade:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :food_grade, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :freight_revenue, 'Freight Revenue:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.number_field :freight_revenue, class: 'form-control', 'data-parsley-type' => 'number' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :volume_intra, 'Volume Intra:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :volume_intra, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :volume_inter, 'Volume Inter:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :volume_inter, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :volume_to_usa, 'Volume To USA:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :volume_to_usa, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :volume_from_usa, 'Volume From USA:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :volume_from_usa, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :notes, 'Notes:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce')  %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :credit_status, 'Credit Status:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.select :credit_status, options_for_select(['Credit', 'Hold', 'Cash Only'], client.credit_status),{:include_blank => true}, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :credit_approval, 'Credit Approval:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.number_field :credit_approval, class: 'form-control', 'data-parsley-type' => 'number' %>
-                  </div>
-                </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :address, 'Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :address, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :city, class: 'form-control' %>
+                      </div>
+                    </div>
 
-                <div class="form-group row m-b-0">
-                  <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
-                  <div class="col-md-8 col-sm-8">
-                    <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-                    <% if params[:action] == 'edit' %>
-                      &nbsp;&nbsp;<%= link_to 'Show', client, :class => 'btn btn-info' %>
-                    <% end %>
-                    <% if params[:action] == 'new' %>
-                      &nbsp;&nbsp;<%= link_to 'Back', clients_path, :class => 'btn btn-default' %>
-                    <% end %>
-                  </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :state, 'Province / State:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :state, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :postal, 'Postal / Zip:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :postal, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.select :country, options_for_select(['USA', 'CANADA'], client.country),{:include_blank => true}, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :phone, 'Phone #:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :phone, class: 'form-control' %>
+                      </div>
+                    </div>
+
                 </div>
-              <% end %>
-            </div>
+    </div>
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <h4 class="panel-title">Credit</h4>
+      </div>
+      <div class="panel-body">
+        <div class="form-group row m-b-15">
+          <%= form.label :credit_status, 'Credit Status:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.select :credit_status, options_for_select(['Credit', 'Hold', 'Cash Only'], client.credit_status),{:include_blank => true}, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :credit_approval, 'Credit Approval:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.number_field :credit_approval, class: 'form-control', 'data-parsley-type' => 'number' %>
+          </div>
+        </div>
+
+        <div class="form-group row m-b-0">
+          <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
+          <div class="col-md-8 col-sm-8">
+            <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+            <% if params[:action] == 'edit' %>
+              &nbsp;&nbsp;<%= link_to 'Show', client, :class => 'btn btn-info' %>
+            <% end %>
+            <% if params[:action] == 'new' %>
+              &nbsp;&nbsp;<%= link_to 'Back', clients_path, :class => 'btn btn-default' %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <h4 class="panel-title">Item Information</h4>
+      </div>
+      <div class="panel-body">
+        <div class="form-group row m-b-15">
+          <%= form.label :hazardous, 'Hazardous:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.text_field :hazardous, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :food_grade, 'Food Grade:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.text_field :food_grade, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :freight_revenue, 'Freight Revenue:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.number_field :freight_revenue, class: 'form-control', 'data-parsley-type' => 'number' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :volume_intra, 'Volume Intra:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.text_field :volume_intra, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :volume_inter, 'Volume Inter:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.text_field :volume_inter, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :volume_to_usa, 'Volume To USA:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.text_field :volume_to_usa, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :volume_from_usa, 'Volume From USA:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.text_field :volume_from_usa, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :notes, 'Notes:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce')  %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </div>
+
+<% end %>
 <%= tinymce %>
 <!-- end panel -->
