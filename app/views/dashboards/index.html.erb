@@ -2,18 +2,99 @@
 <%= render 'layouts/static/header', header_title: 'Dashboard', sub_header_title: 'Home'%>
 <!-- end page-header -->
 <!-- begin panel -->
-<div class="panel panel-inverse">
-  <div class="panel-heading">
-    <div class="panel-heading-btn">
-      <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-      <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
-      <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-      <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+<!-- begin row -->
+    <div class="row">
+      <!-- begin col-3 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="widget widget-stats bg-red">
+          <div class="stats-icon"><i class="fas fa-users"></i></div>
+          <div class="stats-info">
+            <h4>TOTAL CLIENTS</h4>
+            <p><%= Client.all.length %></p>
+          </div>
+          <div class="stats-link">
+            <a href="<%= clients_path %>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- end col-3 -->
+      <!-- begin col-3 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="widget widget-stats bg-orange">
+          <div class="stats-icon"><i class="fas fa-unlock"></i></div>
+          <div class="stats-info">
+            <h4>ACTIVITIES OPEN</h4>
+            <p><%= Activity.where(:status => true).length %></p>
+          </div>
+          <div class="stats-link">
+            <a href="<%= activities_path %>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- end col-3 -->
+      <!-- begin col-3 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="widget widget-stats bg-grey-darker">
+          <div class="stats-icon"><i class="fas fa-lock"></i></div>
+          <div class="stats-info">
+              <h4>ACTIVITIES CLOSED</h4>
+              <p><%= Activity.where(:status => false).length %></p>
+          </div>
+          <div class="stats-link">
+            <a href="<%= activities_path %>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- end col-3 -->
+      <!-- begin col-3 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="widget widget-stats bg-black-lighter">
+          <div class="stats-icon"><i class="fas fa-users-cog"></i></div>
+          <div class="stats-info">
+            <h4>TOTAL REP</h4>
+            <p><%= Rep.all.length %></p>
+          </div>
+          <div class="stats-link">
+            <a href="<%= reps_path %>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- end col-3 -->
     </div>
-    <h4 class="panel-title">Panel Title here</h4>
-  </div>
-  <div class="panel-body">
-    Panel Content Here
-  </div>
-</div>
-<!-- end panel -->
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+
+        <h4 class="panel-title">Latest Activities</h4>
+      </div>
+      <div class="panel-body">
+        <table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons">
+        								<thead>
+        									<tr class="odd gradeX">
+        										<th width="1%">#</th>
+        										<th class="text-nowrap">Type</th>
+        										<th class="text-nowrap">Rep</th>
+        										<th class="text-nowrap">Annual Value</th>
+        										<th class="text-nowrap">Status</th>
+                            <th class="text-nowrap">Date Opened</th>
+                            <th class="text-nowrap">Date Closed</th>
+        									</tr>
+        								</thead>
+        								<tbody>
+                          <% Activity.order("updated_at DESC").limit(10).each do |activity| %>
+                            <tr>
+                              <td><%= generate_alphanumeric_id(activity.activity_type, activity.id) %></td>
+                              <td><%= activity.activity_type %></td>
+                              <td><%= activity.rep_id %></td>
+                              <td><%= activity.annual_value %></td>
+                              <td><%= activity.status ? 'Open' : 'Closed' %></td>
+                              <td><%= activity.date_opened %></td>
+                              <td><%= activity.date_closed %></td>
+
+
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+      </div>
+    </div>
+    <!-- end panel -->
