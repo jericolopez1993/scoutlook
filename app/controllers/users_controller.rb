@@ -24,10 +24,18 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    if params[:admin].present?
+      params[:user][:admin] = true
+    else
+      params[:user][:admin] = false
+    end
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
+        if params[:user][:avatar].present?
+          user.avatar.attach(params[:user][:avatar])
+        end
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -40,9 +48,17 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    if params[:admin].present?
+      params[:user][:admin] = true
+    else
+      params[:user][:admin] = false
+    end
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        if params[:user][:avatar].present?
+          user.avatar.attach(params[:user][:avatar])
+        end
+        format.html { redirect_to users_path }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -69,6 +85,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.fetch(:user, {})
+      params.require(:user).permit(:first_name, :last_name, :avatar, :email, :password, :admin)
     end
 end

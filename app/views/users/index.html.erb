@@ -17,6 +17,8 @@
     										<th width="1%">#</th>
     										<th class="text-nowrap">Name</th>
     										<th class="text-nowrap">Email</th>
+    										<th width="1%">Is admin?</th>
+										    <th class="text-nowrap" data-orderable="false">Actions</th>
     									</tr>
     								</thead>
     								<tbody>
@@ -25,7 +27,11 @@
                           <td><%= generate_alphanumeric_id('User', user.id) %></td>
                           <td><%= user.first_name %> <%= user.last_name %></td>
                           <td><%= user.email %></td>
-
+                          <td style="text-align: center;"><%= user.admin ? '<i class="text-green fas fa-user-check"></i>'.html_safe : '' %></td>
+                          <td>
+                            <a class="btn btn-warning" href="/users/<%= user.id %>/edit">Edit</a>
+                            <a data-confirm="Are you sure?" class="btn btn-danger" rel="nofollow" data-method="delete" href="/users/<%= user.id %>">Destroy</a>
+                          </td>
                         </tr>
                       <% end %>
                     </tbody>

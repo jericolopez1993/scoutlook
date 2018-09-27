@@ -17,5 +17,10 @@ Rails.application.routes.draw do
     end
   end
   match '/users',   to: 'users#index',   via: 'get'
+  match '/users/:id/edit',   to: 'users#edit',   via: 'get'
+  match '/users/:id',   to: 'users#show',   via: 'get'
+  match '/users/:id',   to: 'users#update',   via: 'patch'
+  match '/users/:id',   to: 'users#update',   via: 'put'
+  match '/users/:id',   to: 'users#destroy',   via: 'delete'
  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.htmlerb
 end
