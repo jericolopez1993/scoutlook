@@ -145,7 +145,7 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :notes, 'Notes:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'form-control')  %>
+                  <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce')  %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
@@ -176,4 +176,5 @@
               <% end %>
             </div>
 </div>
+<%= tinymce %>
 <!-- end panel -->

@@ -36,6 +36,7 @@
 //= require vendor/highlight.common
 //= require vendor/render.highlight
 //= require vendor/jquery.gritter
+//= require tinymce
 //= require_tree .
 $(document).on('turbolinks:load', function(){
   activityOutcomeFields($("#activity_activity_type").val());
