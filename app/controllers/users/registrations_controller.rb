@@ -12,7 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    resource.avatar.attach(params[:user][:avatar])
+    if params[:user][:avatar].present?
+      resource.avatar.attach(params[:user][:avatar])
+    end
   end
 
   # GET /resource/edit
@@ -23,7 +25,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
-    resource.avatar.attach(params[:user][:avatar])
+    if params[:user][:avatar].present?
+      resource.avatar.attach(params[:user][:avatar])
+    end
   end
 
   # DELETE /resource
