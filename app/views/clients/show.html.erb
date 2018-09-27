@@ -175,7 +175,7 @@
           <div class="form-group row m-b-15">
             <label class="col-md-3 col-form-label">Notes:</label>
             <div class="col-md-7">
-              <%= @client.notes %>
+              <%= @client.notes..html_safe %>
             </div>
           </div>
 

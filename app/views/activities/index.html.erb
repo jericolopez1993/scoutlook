@@ -28,7 +28,7 @@
                         <tr>
                           <td><%= generate_alphanumeric_id(activity.activity_type, activity.id) %></td>
                           <td><%= activity.activity_type %></td>
-                          <td><%= activity.rep_id %></td>
+                          <td><%= activity.rep.nil? ? "" : "#{generate_alphanumeric_id((activity.rep.last_name.nil? ? "REP" : activity.rep.last_name), activity.rep_id)} (#{activity.rep.first_name} #{activity.rep.last_name})" %></td>
                           <td><%= activity.annual_value %></td>
                           <td><%= activity.status ? 'Open' : 'Closed' %></td>
                           <td><%= activity.date_opened %></td>

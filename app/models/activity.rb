@@ -18,4 +18,12 @@ class Activity < ApplicationRecord
       ActivityOutcome.new
     end
   end
+
+  def rep
+    if !self.rep_id.nil?
+      Rep.find(self.rep_id)
+    else
+      nil
+    end
+  end
 end

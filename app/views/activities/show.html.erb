@@ -6,8 +6,15 @@
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
+      <%= link_to 'Edit', edit_activity_path(@activity), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
+      <% if @previous_controller == "clients"%>
+        <% client = Client.find(@activity.client_id)%>
+        <%= link_to 'Back to Client', client, :class => 'btn btn-info' %>
+    <% else %>
+        <%= link_to 'Back', activities_path, :class => 'btn btn-default btn-xs' %>
+    <% end %>
     </div>
-    <h4 class="panel-title">  <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %></h4>
+    <h4 class="panel-title">  Activity #<%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %></h4>
   </div>
   <div class="panel-body">
     <div class="form-group row m-b-15">
@@ -22,16 +29,18 @@
         <%= @activity.activity_type %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Engagement Type:</label>
-      <div class="col-md-7">
-        <%= @activity.engagement_type %>
+    <% if @activity.activity_type == "Engagement" %>
+      <div class="form-group row m-b-15">
+        <label class="col-md-3 col-form-label">Engagement Type:</label>
+        <div class="col-md-7">
+          <%= @activity.engagement_type %>
+        </div>
       </div>
-    </div>
+    <% end %>
     <div class="form-group row m-b-15">
       <label class="col-md-3 col-form-label">Rep:</label>
       <div class="col-md-7">
-        <%= @activity.rep_id %>
+      <%= @activity.rep.nil? ? "" : "#{generate_alphanumeric_id((@activity.rep.last_name.nil? ? "REP" : @activity.rep.last_name), @activity.rep_id)} (#{@activity.rep.first_name} #{@activity.rep.last_name})" %>
       </div>
     </div>
     <div class="form-group row m-b-15">
@@ -58,14 +67,50 @@
         <%= @activity.date_closed %>
       </div>
     </div>
-
-    <%= link_to 'Edit', edit_activity_path(@activity), :class => 'btn btn-warning' %>&nbsp;&nbsp;
-    <% if @previous_controller == "clients"%>
-      <% client = Client.find(@activity.client_id)%>
-      <%= link_to 'Back to Client', client, :class => 'btn btn-info' %>
-  <% else %>
-      &nbsp;&nbsp;<%= link_to 'Back', activities_path, :class => 'btn btn-default' %>
-  <% end %>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Other Notes:</label>
+      <div class="col-md-7">
+        <%= @activity.outcome.other_notes.html_safe %>
+      </div>
+    </div>
   </div>
 </div>
+<% if !@activity.outcome_id.nil? %>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title">Outcome</h4>
+  </div>
+  <div class="panel-body">
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">ID:</label>
+      <div class="col-md-7">
+        <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Outcome:</label>
+      <div class="col-md-7">
+        <%= @activity.outcome.outcome %>
+      </div>
+    </div>
+      <div class="form-group row m-b-15">
+        <label class="col-md-3 col-form-label">Reason:</label>
+        <div class="col-md-7">
+          <%= @activity.outcome.reason %>
+        </div>
+      </div>
+
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Notes:</label>
+      <div class="col-md-7">
+        <%= @activity.outcome.notes.html_safe %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<% end %>
 <!-- end panel -->
