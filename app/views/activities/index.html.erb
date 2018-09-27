@@ -34,9 +34,9 @@
                           <td><%= activity.date_opened %></td>
                           <td><%= activity.date_closed %></td>
                           <td>
-                            <%= link_to 'Show', activity, :class => 'btn btn-info' %>
-                            <%= link_to 'Edit', edit_activity_path(activity), :class => 'btn btn-warning' %>
-                            <%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                            <%= link_to 'Show', activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-info' %>
+                            <%= link_to 'Edit', edit_activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-warning' %>
+                            <%= link_to 'Destroy', activity_path(:id => activity.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
                           </td>
 
                         </tr>
