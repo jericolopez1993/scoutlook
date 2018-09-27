@@ -238,7 +238,7 @@
                       <tr class="odd gradeX">
       									<th width="1%">PDM</th>
         								<th width="1%">POC</th>
-                        <th class="text-nowrap">Title</th>
+                        <th class="text-nowrap">Name</th>
                         <th class="text-nowrap">Email</th>
                         <th class="text-nowrap">Address</th>
                         <th class="text-nowrap">Work Phone</th>
@@ -251,7 +251,7 @@
                         <tr>
                           <td style="text-align: center;"><%= (@client.pdm_id == contact.id) ? '<i class="label label-green far fa-check-circle"></i>'.html_safe : '' %></td>
                           <td style="text-align: center;"><%= (@client.poc_id == contact.id) ? '<i class="label label-green far fa-check-circle"></i>'.html_safe : '' %></td>
-                          <td><%= contact.title %></td>
+                          <td><%= contact.name %></td>
                           <td><%= contact.email %></td>
                           <td><%= contact.address %></td>
                           <td><%= contact.work_phone %></td>

@@ -29,6 +29,12 @@
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
+                  <%= form.label :name, 'Name:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.text_field :name, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
                   <%= form.label :email, 'Email Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.email_field :email, class: 'form-control' %>
