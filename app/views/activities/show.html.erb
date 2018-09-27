@@ -58,8 +58,9 @@
         <%= @activity.date_closed %>
       </div>
     </div>
+    <% client = Client.find(@activity.client_id)%>
     <%= link_to 'Edit', edit_activity_path(@activity), :class => 'btn btn-warning' %>&nbsp;&nbsp;
-    <%= link_to 'Back', activities_path, :class => 'btn btn-info' %>
+    <%= link_to 'Back to Client', client, :class => 'btn btn-info' %>
   </div>
 </div>
 <!-- end panel -->

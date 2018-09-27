@@ -15,6 +15,9 @@ class ActivitiesController < ApplicationController
   # GET /activities/new
   def new
     @activity = Activity.new
+    if params[:client_id].present?
+      @activity.client_id = params[:client_id]
+    end
   end
 
   # GET /activities/1/edit
