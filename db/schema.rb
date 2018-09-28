@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_27_123625) do
+ActiveRecord::Schema.define(version: 2018_09_28_144735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,28 @@ ActiveRecord::Schema.define(version: 2018_09_27_123625) do
 
   create_table "locations", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.integer "client_id"
+    t.string "rate_type"
+    t.integer "parent_id"
+    t.string "rate_level"
+    t.integer "rep_id"
+    t.string "effective_to"
+    t.string "effective_from"
+    t.string "origin_city"
+    t.string "origin_state"
+    t.string "origin_country"
+    t.string "destination_city"
+    t.string "destination_state"
+    t.string "destination_country"
+    t.string "freight_desc"
+    t.string "freight_classification"
+    t.string "transit_time"
+    t.string "minimum_density"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

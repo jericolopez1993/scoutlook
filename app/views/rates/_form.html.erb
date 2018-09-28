@@ -1,0 +1,181 @@
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: 'Rates', sub_header_title: 'Create/Edit/View'%>
+<!-- end page-header -->
+<!-- begin panel -->
+
+<%= form_with(model: rate, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+<div class="row">
+
+  <div class="col-lg-6">
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+        </div>
+        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Rate' : "Edit Rate ##{generate_alphanumeric_id(rate.rate_type, rate.id)}"%></h4>
+      </div>
+      <div class="panel-body">
+      <% if rate.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(rate.errors.count, "error") %> prohibited this rate from being saved:</h2>
+
+          <ul>
+          <% rate.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+                  <div class="form-group row m-b-15">
+                    <%= form.label :client_id, 'Client:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <div class="col-md-8 col-sm-8">
+                    <%= form.select :client_id, Client.where(:client_type => "Carrier").collect {|r| [ r.company_name, r.id ] },{:include_blank => true, :selected => rate.client_id}, class: 'form-control' %>
+                    </div>
+                  </div>
+                  <div class="form-group row m-b-15">
+                    <%= form.label :rate_level, 'Level *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <div class="col-md-8 col-sm-8">
+                    <%= form.select :rate_level, options_for_select(['Master', 'Child'], rate.rate_level),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                    </div>
+                  </div>
+                  <div class="form-group row m-b-15">
+                    <%= form.label :parent_id, 'Parent:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <div class="col-md-8 col-sm-8">
+                    <%= form.select :parent_id, Rate.all.collect {|r| [ generate_alphanumeric_id(r.rate_type, r.id), r.id ] },{:include_blank => true, :selected => rate.parent_id}, class: 'form-control' %>
+                    </div>
+                  </div>
+                  <div class="form-group row m-b-15">
+                    <%= form.label :rate_type, 'Type *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <div class="col-md-8 col-sm-8">
+                    <%= form.select :rate_type, options_for_select(['Contract', 'Proposal', 'Spot', 'Quote', 'PB'], rate.rate_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                    </div>
+                  </div>
+                  <div class="form-group row m-b-15">
+                    <%= form.label :rep_id, 'Rep:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <div class="col-md-8 col-sm-8">
+                    <%= form.select :rep_id, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => rate.rep_id}, class: 'form-control', 'data-parsley-required' => true %>
+                    </div>
+                  </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :effective_to, 'Effective To:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :effective_to, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :effective_from, 'Effective From:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :effective_from, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :supporting_pdf, 'Supporting PDF:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.file_field :supporting_pdf %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :freight_desc, 'Freight Description:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :freight_desc, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :freight_classification, 'Freight Classification:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :freight_classification, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :transit_time, 'Transit Time:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :transit_time, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :minimum_density, 'Minimum Density:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :minimum_density, class: 'form-control' %>
+                      </div>
+                    </div>
+
+
+                </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+        </div>
+        <h4 class="panel-title">Origin</h4>
+      </div>
+      <div class="panel-body">
+
+                    <div class="form-group row m-b-15">
+                      <%= form.label :origin_city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :origin_city, class: 'form-control', 'data-parsley-required' => true %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :origin_state, 'State:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :origin_state, class: 'form-control', 'data-parsley-required' => true %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :origin_country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.select :origin_country, options_for_select(['USA', 'CANADA'], rate.origin_country),{:include_blank => true}, class: 'form-control' %>
+                      </div>
+                    </div>
+
+                </div>
+    </div>
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+        </div>
+        <h4 class="panel-title">Destination</h4>
+      </div>
+      <div class="panel-body">
+
+                    <div class="form-group row m-b-15">
+                      <%= form.label :destination_city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :destination_city, class: 'form-control', 'data-parsley-required' => true %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :destination_state, 'State:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :destination_state, class: 'form-control', 'data-parsley-required' => true %>
+                      </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :destination_country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.select :destination_country, options_for_select(['USA', 'CANADA'], rate.destination_country),{:include_blank => true}, class: 'form-control' %>
+                      </div>
+                    </div>
+
+                    <div class="form-group row m-b-0">
+                      <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
+                      <div class="col-md-8 col-sm-8">
+                        <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+                        <% if params[:action] == 'edit' %>
+                          &nbsp;&nbsp;<%= link_to 'Show', rate, :class => 'btn btn-info' %>
+                        <% end %>
+                        <% if params[:action] == 'new' %>
+                          &nbsp;&nbsp;<%= link_to 'Back', rates_path, :class => 'btn btn-default' %>
+                        <% end %>
+                      </div>
+                    </div>
+                </div>
+    </div>
+
+  </div>
+</div>
+
+<% end %>

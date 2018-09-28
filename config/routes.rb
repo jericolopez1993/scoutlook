@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rates
   resources :activity_outcomes
   resources :activities do
     collection do

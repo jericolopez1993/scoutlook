@@ -1,0 +1,158 @@
+
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: 'Rates', sub_header_title: 'Create/Edit/View'%>
+<!-- end page-header -->
+<!-- begin row -->
+<div class="row">
+      <!-- begin col-6 -->
+      <div class="col-lg-6">
+    <!-- begin panel -->
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <div class="panel-heading-btn">
+            <%= link_to 'Edit', edit_rate_path(@rate), :class => 'btn btn-warning btn-xs' %>
+            <%= link_to 'Back', rates_path, :class => 'btn btn-info btn-xs' %>
+          </div>
+          <h4 class="panel-title">  <%= generate_alphanumeric_id(@rate.rate_type, @rate.id) %></h4>
+        </div>
+        <div class="panel-body">
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Client:</label>
+            <div class="col-md-7">
+              <%=  @rate.client.nil? ? "" : "#{generate_alphanumeric_id(@rate.client.client_type, @rate.client.id)} (#{@rate.client.company_name})" %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Level:</label>
+            <div class="col-md-7">
+              <%= @rate.rate_level %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Type:</label>
+            <div class="col-md-7">
+              <%= @rate.rate_type %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Rep:</label>
+            <div class="col-md-7">
+              <%=  @rate.rep.nil? ? "" : "#{generate_alphanumeric_id(@rate.rep.last_name, @rate.rep.id)} (#{@rate.rep.first_name} #{@rate.rep.last_name})" %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Parent:</label>
+            <div class="col-md-7">
+              <%=  @rate.parent.nil? ? "" : "#{generate_alphanumeric_id(@rate.parent.rate_type, @rate.parent.id)}" %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Effective To:</label>
+            <div class="col-md-7">
+              <%= @rate.effective_to %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Effective From:</label>
+            <div class="col-md-7">
+              <%= @rate.effective_from %>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="panel panel-inverse">
+          <div class="panel-heading">
+            <div class="panel-heading-btn">
+            </div>
+            <h4 class="panel-title">Other Information</h4>
+          </div>
+          <div class="panel-body">
+            <div class="form-group row m-b-15">
+              <label class="col-md-3 col-form-label">Freight Description:</label>
+              <div class="col-md-7">
+                <%= @rate.freight_desc %>
+              </div>
+            </div>
+            <div class="form-group row m-b-15">
+              <label class="col-md-3 col-form-label">Freight Classification:</label>
+              <div class="col-md-7">
+                <%= @rate.freight_classification %>
+              </div>
+            </div>
+            <div class="form-group row m-b-15">
+              <label class="col-md-3 col-form-label">Transit Time:</label>
+              <div class="col-md-7">
+                <%= @rate.transit_time %>
+              </div>
+            </div>
+            <div class="form-group row m-b-15">
+              <label class="col-md-3 col-form-label">Minimum Density:</label>
+              <div class="col-md-7">
+                <%= @rate.minimum_density %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <div class="col-lg-6">
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title">Origin</h4>
+  </div>
+  <div class="panel-body">
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">City:</label>
+      <div class="col-md-7">
+        <%= @rate.origin_city %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">State / Province:</label>
+      <div class="col-md-7">
+        <%= @rate.origin_state %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Country:</label>
+      <div class="col-md-7">
+        <%= @rate.origin_country %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title">Destination</h4>
+  </div>
+  <div class="panel-body">
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">City:</label>
+      <div class="col-md-7">
+        <%= @rate.destination_city %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">State / Province:</label>
+      <div class="col-md-7">
+        <%= @rate.destination_state %>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
+      <label class="col-md-3 col-form-label">Country:</label>
+      <div class="col-md-7">
+        <%= @rate.destination_country %>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+<!-- end panel -->

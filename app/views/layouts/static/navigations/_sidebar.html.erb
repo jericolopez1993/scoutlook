@@ -54,6 +54,13 @@
           <span>Activities</span>
         </a>
       </li>
+      <li class="<%= (params[:controller] == 'rates') ? 'active' : ''%>">
+        <a href="<%= rates_path %>">
+        <i class="fas fa-star-half-alt"></i>
+          <span>Rates</span>
+        </a>
+      </li>
+
 
       <li class="<%= (params[:controller] == 'reps') ? 'active' : ''%>">
         <a href="<%= reps_path %>">
