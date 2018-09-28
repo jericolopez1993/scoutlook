@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :activity_outcomes
-  resources :activities
+  resources :activities do
+    collection do
+      post        "quick_create"
+    end
+  end
   resources :locations
   resources :client_contacts
   resources :reps

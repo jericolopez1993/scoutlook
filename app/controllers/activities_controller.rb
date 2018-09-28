@@ -92,6 +92,25 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def quick_create
+    @activity = Activity.new(activity_params)
+    respond_to do |format|
+      if @activity.save
+        if params[:activity][:proposal_pdf].present?
+          @activity.proposal_pdf.attach(params[:activity][:proposal_pdf])
+        end
+        if params[:activity][:credit_application].present?
+          @activity.credit_application.attach(params[:activity][:credit_application])
+        end
+        format.html { redirect_to authenticated_root_path, notice: 'Activity was successfully created.' }
+        format.json { render :show, status: :created, location: @activity }
+      else
+        format.html { render :new }
+        format.json { render json: @activity.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_activity
