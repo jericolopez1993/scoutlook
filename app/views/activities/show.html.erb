@@ -70,7 +70,7 @@
     <div class="form-group row m-b-15">
       <label class="col-md-3 col-form-label">Other Notes:</label>
       <div class="col-md-7">
-        <%= @activity.other_notes.html_safe %>
+        <%= @activity.other_notes.nil? ? "" : @activity.other_notes.html_safe %>
       </div>
     </div>
   </div>
@@ -105,7 +105,7 @@
     <div class="form-group row m-b-15">
       <label class="col-md-3 col-form-label">Notes:</label>
       <div class="col-md-7">
-        <%= @activity.outcome.notes.html_safe %>
+        <%= @activity.outcome.notes.nil? ? "" : @activity.outcome.notes.html_safe %>
       </div>
     </div>
 
