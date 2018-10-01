@@ -20,6 +20,7 @@
 # t.datetime "updated_at", null: false
 
 class Client < ApplicationRecord
+  has_many_attached :attachment_file
   # before_create :set_client_id
   #
   # def set_client_id

@@ -182,6 +182,16 @@
 
         </div>
       </div>
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <h4 class="panel-title">Attachments</h4>
+        </div>
+        <div class="panel-body">
+          <% @client.attachment_file.each do |attachment_file| %>
+            <%= link_to attachment_file.filename, rails_blob_path(attachment_file, disposition: 'preview') %><br />
+          <% end %>
+        </div>
+      </div>
   </div>
   <div class="col-lg-6">
 <!-- begin panel -->
@@ -344,7 +354,7 @@
             </td>
           </tr>
         <% end %>
-        
+
       </tbody>
 
     </table>

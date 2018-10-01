@@ -28,6 +28,9 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.save
+        if params[:client][:attachment_file].present?
+          @client.attachment_file.attach(params[:client][:attachment_file])
+        end
         format.html { redirect_to @client, notice: 'Client was successfully created.' }
         format.json { render :show, status: :created, location: @client }
       else
@@ -42,6 +45,9 @@ class ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @client.update(client_params)
+        if params[:client][:attachment_file].present?
+          @client.attachment_file.attach(params[:client][:attachment_file])
+        end
         format.html { redirect_to @client, notice: 'Client was successfully updated.' }
         format.json { render :show, status: :ok, location: @client }
       else
