@@ -24,13 +24,15 @@
                           <td><%= generate_alphanumeric_id(location.name, location.id) %></td>
                           <td><%= location.name %></td>
                           <td>
-                            <%= link_to 'Edit', edit_location_path(location), :class => 'btn btn-warning' %>
-                            <%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_location_path(location), :class => 'btn btn-warning' %>
+                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
                           </td>
                         </tr>
                       <% end %>
                     </tbody>
                   </table>
+
+                
   </div>
 </div>
 <!-- end panel -->

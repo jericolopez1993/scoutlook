@@ -215,8 +215,8 @@
                           <td><%= client_location.same_ho ? @client.country : client_location.country %></td>
                           <td><%= client_location.same_ho ? @client.phone : client_location.phone %></td>
                           <td>
-                            <%= link_to 'Edit', edit_client_location_path(client_location), :class => 'btn btn-warning' %>
-                            <%= link_to 'Destroy', client_location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_client_location_path(client_location), :class => 'btn btn-warning' %>
+                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, client_location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
                           </td>
 
                         </tr>
@@ -299,9 +299,9 @@
             <td><%= activity.date_opened %></td>
             <td><%= activity.date_closed %></td>
             <td>
-              <%= link_to 'Show', activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-info' %>
-              <%= link_to 'Edit', edit_activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-warning' %>
-              <%= link_to 'Destroy', activity_path(:id => activity.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+              <%= link_to '<i class="far fa-eye"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-info' %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-warning' %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
             </td>
 
           </tr>
@@ -338,13 +338,13 @@
             <td><%= rate.rate_type %></td>
             <td><%= rate.parent.nil? ? "" : "#{generate_alphanumeric_id(rate.parent.rate_type, rate.parent_id)}" %></td>
             <td>
-              <%= link_to 'Show', rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-info' %>
-              <%= link_to 'Edit', edit_rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-warning' %>
-              <%= link_to 'Destroy', rate_path(:id => rate.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+              <%= link_to '<i class="far fa-eye"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-info' %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-warning' %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
             </td>
           </tr>
         <% end %>
-
+        
       </tbody>
 
     </table>

@@ -32,9 +32,9 @@
                           <td><%= client.phone %></td>
                           <td><%= client.industry %></td>
                           <td>
-                            <%= link_to 'Show', client, :class => 'btn btn-info' %>
-                            <%= link_to 'Edit', edit_client_path(client), :class => 'btn btn-warning' %>
-                            <%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                            <%= link_to '<i class="far fa-eye"></i>'.html_safe, client, :class => 'btn btn-info' %>
+                            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_client_path(client), :class => 'btn btn-warning' %>
+                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, client, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
                           </td>
                         </tr>
                       <% end %>
