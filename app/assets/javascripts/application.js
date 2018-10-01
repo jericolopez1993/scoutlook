@@ -38,6 +38,7 @@
 //= require vendor/jquery.gritter
 //= require vendor/switchery.min
 //= require vendor/form-slider-switcher.demo
+//= require vendor/countries
 //= require inputmask
 //= require jquery.inputmask
 //= require inputmask.extensions
@@ -56,7 +57,7 @@ $(document).on('turbolinks:load', function(){
       $("#activity_activity_type").change(function(){
         activityOutcomeFields($(this).val());
       });
-      
+
       $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
         sameHeadOffice($(this).prop('checked'));
     	});
@@ -89,4 +90,9 @@ function sameHeadOffice(isTrue) {
   }else{
     $(".address-fields").show();
   }
+}
+
+function tiggerChangeOnSelectCountry(id, val) {
+  $('#'+id).val(val);
+  $('#'+id).trigger("change");
 }

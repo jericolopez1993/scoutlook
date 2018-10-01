@@ -84,17 +84,17 @@
                       <%= form.text_field :address, class: 'form-control' %>
                       </div>
                     </div>
+
                     <div class="form-group row m-b-15">
-                      <%= form.label :city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <%= form.label :country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :city, class: 'form-control' %>
+                      <%= form.select :country, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
                       </div>
                     </div>
-
                     <div class="form-group row m-b-15">
                       <%= form.label :state, 'Province / State:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :state, class: 'form-control' %>
+                      <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
@@ -104,9 +104,9 @@
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
-                      <%= form.label :country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <%= form.label :city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
-                      <%= form.select :country, options_for_select(['USA', 'CANADA'], client.country),{:include_blank => true}, class: 'form-control' %>
+                      <%= form.text_field :city, class: 'form-control' %>
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
@@ -216,3 +216,12 @@
 <% end %>
 <%= tinymce %>
 <!-- end panel -->
+<script language="javascript">
+	populateCountries("client_country", "client_state");
+  <% if client.country.present? %>
+    tiggerChangeOnSelectCountry('client_country', '<%= client.country %>')
+  <% end %>
+  <% if client.state.present? %>
+    tiggerChangeOnSelectCountry('client_state', '<%= client.state %>')
+  <% end %>
+</script>
