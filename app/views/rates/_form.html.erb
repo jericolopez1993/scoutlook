@@ -29,7 +29,7 @@
                   <div class="form-group row m-b-15">
                     <%= form.label :client_id, 'Client:', class: 'col-md-4 col-sm-4 col-form-label' %>
                     <div class="col-md-8 col-sm-8">
-                    <%= form.select :client_id, Client.where(:client_type => "Carrier").collect {|r| [ r.company_name, r.id ] },{:include_blank => true, :selected => rate.client_id}, class: 'form-control' %>
+                    <%= form.select :client_id, Client.all.collect {|r| [ r.company_name, r.id ] },{:include_blank => true, :selected => rate.client_id}, class: 'form-control' %>
                     </div>
                   </div>
                   <div class="form-group row m-b-15">

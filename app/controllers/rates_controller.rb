@@ -16,6 +16,9 @@ class RatesController < ApplicationController
   # GET /rates/new
   def new
     @rate = Rate.new
+    if params[:client_id].present?
+      @rate.client_id = params[:client_id]
+    end
   end
 
   # GET /rates/1/edit
