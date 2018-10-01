@@ -25,6 +25,7 @@
     								<tbody>
                       <% @rates.each do |rate| %>
                         <tr>
+                          <td><%= generate_alphanumeric_id(rate.rate_type, rate.id) %></td>
                           <td><%= rate.client.nil? ? "" : "#{generate_alphanumeric_id(rate.client.client_type, rate.client_id)}" %></td>
                           <td><%= rate.rate_level %></td>
                           <td><%= rate.rep.nil? ? "" : "#{generate_alphanumeric_id(rate.rep.last_name, rate.rep_id)}" %></td>

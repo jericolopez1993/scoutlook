@@ -1,5 +1,6 @@
 class RatesController < ApplicationController
   before_action :set_rate, only: [:show, :edit, :update, :destroy]
+  before_action :set_previous_controller, only: [:show, :edit, :update, :destroy, :new]
 
   # GET /rates
   # GET /rates.json
@@ -73,6 +74,13 @@ class RatesController < ApplicationController
       @rate = Rate.find(params[:id])
     end
 
+    def set_previous_controller
+      if params[:previous_controller].present?
+        @previous_controller = params[:previous_controller]
+      else
+        @previous_controller = 'rates'
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def rate_params
       params.require(:rate).permit(:client_id, :rate_type, :parent_id, :rate_level, :rep_id, :effective_to, :effective_from, :origin_city, :origin_state, :origin_country, :destination_city, :destination_state, :destination_country, :freight_desc, :freight_classification, :transit_time, :minimum_density)

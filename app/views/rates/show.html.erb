@@ -11,7 +11,12 @@
         <div class="panel-heading">
           <div class="panel-heading-btn">
             <%= link_to 'Edit', edit_rate_path(@rate), :class => 'btn btn-warning btn-xs' %>
+            <% if @previous_controller == "clients"%>
+              <% client = Client.find(@activity.client_id)%>
+              <%= link_to 'Back to Client', client, :class => 'btn btn-info' %>
+          <% else %>
             <%= link_to 'Back', rates_path, :class => 'btn btn-info btn-xs' %>
+          <% end %>
           </div>
           <h4 class="panel-title">  <%= generate_alphanumeric_id(@rate.rate_type, @rate.id) %></h4>
         </div>
