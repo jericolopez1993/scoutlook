@@ -86,19 +86,13 @@
                 <div class="form-group row m-b-15">
                   <label class="col-md-4 col-sm-4 col-form-label">is it Primary Ops Contact?</label>
                   <div class="col-md-8 col-sm-8">
-                    <div class="switcher">
-                    <input type="checkbox" name="pdm" id="switcher_checkbox_1" <%= is_pdm ? 'checked' : '' %> >
-                    <label for="switcher_checkbox_1"></label>
-                  </div>
+                    <input type="checkbox" name="pdm"  data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= is_pdm ? 'checked' : '' %> >
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <label class="col-md-4 col-sm-4 col-form-label">is it Primary Decision Maker?</label>
+                  <label class="col-md-4 col-sm-4 col-form-label">is it Primary Decision Maker? </label>
                   <div class="col-md-8 col-sm-8">
-                    <div class="switcher">
-                    <input type="checkbox" name="poc" id="switcher_checkbox_2" <%= is_poc ? 'checked' : '' %> >
-                    <label for="switcher_checkbox_2"></label>
-                  </div>
+                    <input type="checkbox" name="poc"   data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= is_poc ? 'checked' : '' %> >
                   </div>
                 </div>
                 <div class="form-group row m-b-0">

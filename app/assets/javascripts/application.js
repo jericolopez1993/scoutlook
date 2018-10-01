@@ -36,6 +36,8 @@
 //= require vendor/highlight.common
 //= require vendor/render.highlight
 //= require vendor/jquery.gritter
+//= require vendor/switchery.min
+//= require vendor/form-slider-switcher.demo
 //= require tinymce
 //= require_tree .
 $(document).on('turbolinks:load', function(){
