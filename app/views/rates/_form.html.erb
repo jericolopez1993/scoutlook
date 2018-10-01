@@ -111,26 +111,24 @@
         <h4 class="panel-title">Origin</h4>
       </div>
       <div class="panel-body">
-
-                    <div class="form-group row m-b-15">
-                      <%= form.label :origin_city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :origin_city, class: 'form-control', 'data-parsley-required' => true %>
-                      </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                      <%= form.label :origin_state, 'State:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :origin_state, class: 'form-control', 'data-parsley-required' => true %>
-                      </div>
-                    </div>
                     <div class="form-group row m-b-15">
                       <%= form.label :origin_country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
                       <%= form.select :origin_country, options_for_select(['USA', 'CANADA'], rate.origin_country),{:include_blank => true}, class: 'form-control' %>
                       </div>
                     </div>
-
+                    <div class="form-group row m-b-15">
+                        <%= form.label :origin_state, 'State:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                        <div class="col-md-8 col-sm-8">
+                        <%= form.text_field :origin_state, class: 'form-control', 'data-parsley-required' => true %>
+                        </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :origin_city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :origin_city, class: 'form-control', 'data-parsley-required' => true %>
+                      </div>
+                    </div>
                 </div>
     </div>
     <div class="panel panel-inverse">
@@ -140,13 +138,12 @@
         <h4 class="panel-title">Destination</h4>
       </div>
       <div class="panel-body">
-
-                    <div class="form-group row m-b-15">
-                      <%= form.label :destination_city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :destination_city, class: 'form-control', 'data-parsley-required' => true %>
-                      </div>
+                  <div class="form-group row m-b-15">
+                    <%= form.label :destination_country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <div class="col-md-8 col-sm-8">
+                    <%= form.select :destination_country, options_for_select(['USA', 'CANADA'], rate.destination_country),{:include_blank => true}, class: 'form-control' %>
                     </div>
+                  </div>
                     <div class="form-group row m-b-15">
                       <%= form.label :destination_state, 'State:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
@@ -154,11 +151,12 @@
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
-                      <%= form.label :destination_country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <%= form.label :destination_city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
-                      <%= form.select :destination_country, options_for_select(['USA', 'CANADA'], rate.destination_country),{:include_blank => true}, class: 'form-control' %>
+                      <%= form.text_field :destination_city, class: 'form-control', 'data-parsley-required' => true %>
                       </div>
                     </div>
+
 
                     <div class="form-group row m-b-0">
                       <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
@@ -186,3 +184,19 @@
 </div>
 
 <% end %>
+<script language="javascript">
+	populateCountries("rate_origin_country", "rate_origin_state");
+  <% if rate.origin_country.present? %>
+    tiggerChangeOnSelectCountry('rate_origin_country', '<%= rate.origin_country %>')
+  <% end %>
+  <% if rate.origin_state.present? %>
+    tiggerChangeOnSelectCountry('rate.origin_state', '<%= rate.origin_state %>')
+  <% end %>
+  populateCountries("rate_destination_country", "rate_destination_state");
+  <% if rate.destination_country.present? %>
+    tiggerChangeOnSelectCountry('rate_destination_country', '<%= rate.destination_country %>')
+  <% end %>
+  <% if rate.destination_state.present? %>
+    tiggerChangeOnSelectCountry('rate.destination_state', '<%= rate.destination_state %>')
+  <% end %>
+</script>
