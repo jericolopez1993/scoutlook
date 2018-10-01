@@ -38,15 +38,25 @@
 //= require vendor/jquery.gritter
 //= require vendor/switchery.min
 //= require vendor/form-slider-switcher.demo
+//= require inputmask
+//= require jquery.inputmask
+//= require inputmask.extensions
+//= require inputmask.date.extensions
+//= require inputmask.phone.extensions
+//= require inputmask.numeric.extensions
+//= require inputmask.regex.extensions
 //= require tinymce
 //= require_tree .
 $(document).on('turbolinks:load', function(){
   activityOutcomeFields($("#activity_activity_type").val());
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
   $(function(){
+      Inputmask().mask(document.querySelectorAll("input"));
+
       $("#activity_activity_type").change(function(){
         activityOutcomeFields($(this).val());
       });
+      
       $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
         sameHeadOffice($(this).prop('checked'));
     	});

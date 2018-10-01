@@ -39,6 +39,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '= 1.1.6', require: false
 gem 'devise'
 gem 'tinymce-rails'
+gem 'jquery-inputmask-rails', github: 'knapo/jquery-inputmask-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
