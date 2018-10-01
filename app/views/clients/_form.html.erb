@@ -109,7 +109,7 @@
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
-                      <%= form.label :phone, 'Phone #:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <%= form.label :phone, 'Phone #:', class: 'col-md-4 colVolume-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
                       <%= form.text_field :phone, class: 'form-control' %>
                       </div>
@@ -135,18 +135,7 @@
           </div>
         </div>
 
-        <div class="form-group row m-b-0">
-          <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
-          <div class="col-md-8 col-sm-8">
-            <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-            <% if params[:action] == 'edit' %>
-              &nbsp;&nbsp;<%= link_to 'Show', client, :class => 'btn btn-info' %>
-            <% end %>
-            <% if params[:action] == 'new' %>
-              &nbsp;&nbsp;<%= link_to 'Back', clients_path, :class => 'btn btn-default' %>
-            <% end %>
-          </div>
-        </div>
+
 
       </div>
     </div>
@@ -208,8 +197,19 @@
 
       </div>
     </div>
-
+    <div class="form-group row text-right">
+      <div class="col-md-12 col-sm-12">
+        <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+        <% if params[:action] == 'edit' %>
+          &nbsp;&nbsp;<%= link_to 'Show', client, :class => 'btn btn-info' %>
+        <% end %>
+        <% if params[:action] == 'new' %>
+          &nbsp;&nbsp;<%= link_to 'Back', clients_path, :class => 'btn btn-default' %>
+        <% end %>
+      </div>
+    </div>
   </div>
+
 </div>
 
 <% end %>
