@@ -31,7 +31,11 @@ class ClientContactsController < ApplicationController
   # POST /client_contacts.json
   def create
     @client_contact = ClientContact.new(client_contact_params)
-
+    if params[:same_ho].present?
+      @client_contact.same_ho = true
+    else
+      @client_contact.same_ho = false
+    end
     respond_to do |format|
       if @client_contact.save
         client = Client.find(@client_contact.client_id)
@@ -61,6 +65,11 @@ class ClientContactsController < ApplicationController
         end
         if params[:poc].present?
           client.update_attributes(:poc_id => @client_contact.id)
+        end
+        if params[:same_ho].present?
+          @client_contact.update_attributes(:same_ho => true)
+        else
+          @client_contact.update_attributes(:same_ho => false)
         end
         format.html { redirect_to client_path(:id => client.id), notice: 'Client contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @client_contact }

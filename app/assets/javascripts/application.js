@@ -42,10 +42,14 @@
 //= require_tree .
 $(document).on('turbolinks:load', function(){
   activityOutcomeFields($("#activity_activity_type").val());
+  sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
   $(function(){
       $("#activity_activity_type").change(function(){
         activityOutcomeFields($(this).val());
       });
+      $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
+        sameHeadOffice($(this).prop('checked'));
+    	});
   });
 });
 
@@ -66,5 +70,13 @@ function activityOutcomeFields(actype) {
       $(".outcome-fields").hide();
       $(".activity_buttons").show();
 
+  }
+}
+
+function sameHeadOffice(isTrue) {
+  if (isTrue) {
+    $(".address-fields").hide();
+  }else{
+    $(".address-fields").show();
   }
 }

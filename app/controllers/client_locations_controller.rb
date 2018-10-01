@@ -28,7 +28,11 @@ class ClientLocationsController < ApplicationController
   # POST /client_locations.json
   def create
     @client_location = ClientLocation.new(client_location_params)
-
+    if params[:same_ho].present?
+      @client_location.same_ho = true
+    else
+      @client_location.same_ho = false
+    end
     respond_to do |format|
       if @client_location.save
         format.html { redirect_to client_path(:id => @client_location.client_id), notice: 'Client Location was successfully created.' }
@@ -45,6 +49,11 @@ class ClientLocationsController < ApplicationController
   def update
     respond_to do |format|
       if @client_location.update(client_location_params)
+        if params[:same_ho].present?
+          @client_location.update_attributes(:same_ho => true)
+        else
+          @client_location.update_attributes(:same_ho => false)
+        end
         format.html { redirect_to client_path(:id => @client_location.client_id), notice: 'Client Location was successfully updated.' }
         format.json { render :show, status: :ok, client_location: @client_location }
       else
