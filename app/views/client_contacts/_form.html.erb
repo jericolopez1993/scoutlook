@@ -86,7 +86,7 @@
                 <div class="form-group row m-b-15 address-fields">
                   <%= form.label :city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :city, class: 'form-control' %>
+                    <%= form.select :city, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => client_contact.city}, class: 'form-control'%>
                   </div>
                 </div>
 
