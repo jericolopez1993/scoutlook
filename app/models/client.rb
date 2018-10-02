@@ -27,4 +27,11 @@ class Client < ApplicationRecord
   #   count = (Client.all.length + 1).to_s.rjust(5, '0')
   #   self.client_id = "LOOP" + count
   # end
+  def rep
+    if !self.relationship_owner.nil?
+      Rep.find(self.relationship_owner)
+    else
+      nil
+    end
+  end
 end

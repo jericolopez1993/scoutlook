@@ -29,10 +29,10 @@
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="col-md-3 col-form-label">Relationship Owner:</label>
+            <label class="col-md-3 col-form-label">Rep's Name:</label>
             <div class="col-md-7">
               <% if @client.relationship_owner.present? && !@client.relationship_owner.nil?%>
-                <%= link_to Rep.find(@client.relationship_owner).rep_id, rep_path(:id => @client.relationship_owner) %>
+                <%= link_to "#{@client.rep.first_name} #{@client.rep.last_name} (#{generate_alphanumeric_id(@client.rep.last_name, @client.rep.id)})", rep_path(:id => @client.relationship_owner) %>
               <% end %>
             </div>
           </div>
