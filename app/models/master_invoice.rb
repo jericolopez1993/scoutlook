@@ -1,0 +1,2 @@
+class MasterInvoice < ApplicationRecord
+end

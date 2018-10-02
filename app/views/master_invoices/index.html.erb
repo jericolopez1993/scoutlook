@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Master Invoices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shipment type</th>
+      <th>Shipper</th>
+      <th>Carrier</th>
+      <th>Master account</th>
+      <th>Single invoice date</th>
+      <th>Invoicing period start</th>
+      <th>Invoicing period end</th>
+      <th>Total charge</th>
+      <th>Variance</th>
+      <th>Variance approved</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @master_invoices.each do |master_invoice| %>
+      <tr>
+        <td><%= master_invoice.shipment_type %></td>
+        <td><%= master_invoice.shipper_id %></td>
+        <td><%= master_invoice.carrier_id %></td>
+        <td><%= master_invoice.master_account %></td>
+        <td><%= master_invoice.single_invoice_date %></td>
+        <td><%= master_invoice.invoicing_period_start %></td>
+        <td><%= master_invoice.invoicing_period_end %></td>
+        <td><%= master_invoice.total_charge %></td>
+        <td><%= master_invoice.variance %></td>
+        <td><%= master_invoice.variance_approved %></td>
+        <td><%= link_to 'Show', master_invoice %></td>
+        <td><%= link_to 'Edit', edit_master_invoice_path(master_invoice) %></td>
+        <td><%= link_to 'Destroy', master_invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Master Invoice', new_master_invoice_path %>

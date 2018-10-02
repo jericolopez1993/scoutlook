@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Shipment type:</strong>
+  <%= @master_invoice.shipment_type %>
+</p>
+
+<p>
+  <strong>Shipper:</strong>
+  <%= @master_invoice.shipper_id %>
+</p>
+
+<p>
+  <strong>Carrier:</strong>
+  <%= @master_invoice.carrier_id %>
+</p>
+
+<p>
+  <strong>Master account:</strong>
+  <%= @master_invoice.master_account %>
+</p>
+
+<p>
+  <strong>Single invoice date:</strong>
+  <%= @master_invoice.single_invoice_date %>
+</p>
+
+<p>
+  <strong>Invoicing period start:</strong>
+  <%= @master_invoice.invoicing_period_start %>
+</p>
+
+<p>
+  <strong>Invoicing period end:</strong>
+  <%= @master_invoice.invoicing_period_end %>
+</p>
+
+<p>
+  <strong>Total charge:</strong>
+  <%= @master_invoice.total_charge %>
+</p>
+
+<p>
+  <strong>Variance:</strong>
+  <%= @master_invoice.variance %>
+</p>
+
+<p>
+  <strong>Variance approved:</strong>
+  <%= @master_invoice.variance_approved %>
+</p>
+
+<%= link_to 'Edit', edit_master_invoice_path(@master_invoice) %> |
+<%= link_to 'Back', master_invoices_path %>

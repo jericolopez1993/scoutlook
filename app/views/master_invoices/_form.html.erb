@@ -1,0 +1,67 @@
+<%= form_with(model: master_invoice, local: true) do |form| %>
+  <% if master_invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(master_invoice.errors.count, "error") %> prohibited this master_invoice from being saved:</h2>
+
+      <ul>
+      <% master_invoice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :shipment_type %>
+    <%= form.text_field :shipment_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shipper_id %>
+    <%= form.number_field :shipper_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :carrier_id %>
+    <%= form.number_field :carrier_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :master_account %>
+    <%= form.text_field :master_account %>
+  </div>
+
+  <div class="field">
+    <%= form.label :single_invoice_date %>
+    <%= form.date_select :single_invoice_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :invoicing_period_start %>
+    <%= form.date_select :invoicing_period_start %>
+  </div>
+
+  <div class="field">
+    <%= form.label :invoicing_period_end %>
+    <%= form.date_select :invoicing_period_end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total_charge %>
+    <%= form.text_field :total_charge %>
+  </div>
+
+  <div class="field">
+    <%= form.label :variance %>
+    <%= form.text_field :variance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :variance_approved %>
+    <%= form.check_box :variance_approved %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

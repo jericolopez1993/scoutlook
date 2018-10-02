@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_01_134543) do
+ActiveRecord::Schema.define(version: 2018_10_02_124019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,21 @@ ActiveRecord::Schema.define(version: 2018_10_01_134543) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "master_invoices", force: :cascade do |t|
+    t.string "shipment_type"
+    t.integer "shipper_id"
+    t.integer "carrier_id"
+    t.string "master_account"
+    t.date "single_invoice_date"
+    t.date "invoicing_period_start"
+    t.date "invoicing_period_end"
+    t.decimal "total_charge"
+    t.decimal "variance"
+    t.boolean "variance_approved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rates", force: :cascade do |t|
     t.integer "client_id"
     t.string "rate_type"
@@ -163,6 +178,38 @@ ActiveRecord::Schema.define(version: 2018_10_01_134543) do
     t.string "parent_id"
     t.string "phone"
     t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shipments", force: :cascade do |t|
+    t.integer "header"
+    t.date "shipment_date"
+    t.string "tracking_number"
+    t.string "terms"
+    t.integer "origin_id"
+    t.integer "origin_location_id"
+    t.integer "destination_id"
+    t.integer "destination_location_id"
+    t.decimal "distance"
+    t.integer "pieces"
+    t.integer "pallets"
+    t.decimal "unit_of_weight"
+    t.decimal "declared_weight"
+    t.decimal "billed_weight"
+    t.decimal "raw_weight"
+    t.string "service_mode"
+    t.decimal "billed_rate"
+    t.string "billed_rate_unit"
+    t.decimal "surcharge_ontario"
+    t.decimal "surcharge_non_conveyables"
+    t.decimal "surcharge_non_vault"
+    t.decimal "surchange_multi_piece"
+    t.decimal "surcharge_fuel"
+    t.decimal "surcharge_weight"
+    t.decimal "gst_hst_tax"
+    t.decimal "total_charge"
+    t.decimal "total_charge_with_tax"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

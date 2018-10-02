@@ -1,0 +1,139 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Header:</strong>
+  <%= @shipment.header %>
+</p>
+
+<p>
+  <strong>Shipment date:</strong>
+  <%= @shipment.shipment_date %>
+</p>
+
+<p>
+  <strong>Tracking number:</strong>
+  <%= @shipment.tracking_number %>
+</p>
+
+<p>
+  <strong>Terms:</strong>
+  <%= @shipment.terms %>
+</p>
+
+<p>
+  <strong>Origin:</strong>
+  <%= @shipment.origin_id %>
+</p>
+
+<p>
+  <strong>Origin location:</strong>
+  <%= @shipment.origin_location_id %>
+</p>
+
+<p>
+  <strong>Destination:</strong>
+  <%= @shipment.destination_id %>
+</p>
+
+<p>
+  <strong>Destination location:</strong>
+  <%= @shipment.destination_location_id %>
+</p>
+
+<p>
+  <strong>Distance:</strong>
+  <%= @shipment.distance %>
+</p>
+
+<p>
+  <strong>Pieces:</strong>
+  <%= @shipment.pieces %>
+</p>
+
+<p>
+  <strong>Pallets:</strong>
+  <%= @shipment.pallets %>
+</p>
+
+<p>
+  <strong>Unit of weight:</strong>
+  <%= @shipment.unit_of_weight %>
+</p>
+
+<p>
+  <strong>Declared weight:</strong>
+  <%= @shipment.declared_weight %>
+</p>
+
+<p>
+  <strong>Billed weight:</strong>
+  <%= @shipment.billed_weight %>
+</p>
+
+<p>
+  <strong>Raw weight:</strong>
+  <%= @shipment.raw_weight %>
+</p>
+
+<p>
+  <strong>Service mode:</strong>
+  <%= @shipment.service_mode %>
+</p>
+
+<p>
+  <strong>Billed rate:</strong>
+  <%= @shipment.billed_rate %>
+</p>
+
+<p>
+  <strong>Billed rate unit:</strong>
+  <%= @shipment.billed_rate_unit %>
+</p>
+
+<p>
+  <strong>Surcharge ontario:</strong>
+  <%= @shipment.surcharge_ontario %>
+</p>
+
+<p>
+  <strong>Surcharge non conveyables:</strong>
+  <%= @shipment.surcharge_non_conveyables %>
+</p>
+
+<p>
+  <strong>Surcharge non vault:</strong>
+  <%= @shipment.surcharge_non_vault %>
+</p>
+
+<p>
+  <strong>Surchange multi piece:</strong>
+  <%= @shipment.surchange_multi_piece %>
+</p>
+
+<p>
+  <strong>Surcharge fuel:</strong>
+  <%= @shipment.surcharge_fuel %>
+</p>
+
+<p>
+  <strong>Surcharge weight:</strong>
+  <%= @shipment.surcharge_weight %>
+</p>
+
+<p>
+  <strong>Gst hst tax:</strong>
+  <%= @shipment.gst_hst_tax %>
+</p>
+
+<p>
+  <strong>Total charge:</strong>
+  <%= @shipment.total_charge %>
+</p>
+
+<p>
+  <strong>Total charge with tax:</strong>
+  <%= @shipment.total_charge_with_tax %>
+</p>
+
+<%= link_to 'Edit', edit_shipment_path(@shipment) %> |
+<%= link_to 'Back', shipments_path %>

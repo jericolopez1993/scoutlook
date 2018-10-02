@@ -1,0 +1,152 @@
+<%= form_with(model: shipment, local: true) do |form| %>
+  <% if shipment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shipment.errors.count, "error") %> prohibited this shipment from being saved:</h2>
+
+      <ul>
+      <% shipment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :header %>
+    <%= form.number_field :header %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shipment_date %>
+    <%= form.date_select :shipment_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tracking_number %>
+    <%= form.text_field :tracking_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :terms %>
+    <%= form.text_field :terms %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin_id %>
+    <%= form.number_field :origin_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin_location_id %>
+    <%= form.number_field :origin_location_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination_id %>
+    <%= form.number_field :destination_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination_location_id %>
+    <%= form.number_field :destination_location_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :distance %>
+    <%= form.text_field :distance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pieces %>
+    <%= form.number_field :pieces %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pallets %>
+    <%= form.number_field :pallets %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unit_of_weight %>
+    <%= form.text_field :unit_of_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :declared_weight %>
+    <%= form.text_field :declared_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :billed_weight %>
+    <%= form.text_field :billed_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :raw_weight %>
+    <%= form.text_field :raw_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :service_mode %>
+    <%= form.text_field :service_mode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :billed_rate %>
+    <%= form.text_field :billed_rate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :billed_rate_unit %>
+    <%= form.text_field :billed_rate_unit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surcharge_ontario %>
+    <%= form.text_field :surcharge_ontario %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surcharge_non_conveyables %>
+    <%= form.text_field :surcharge_non_conveyables %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surcharge_non_vault %>
+    <%= form.text_field :surcharge_non_vault %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surchange_multi_piece %>
+    <%= form.text_field :surchange_multi_piece %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surcharge_fuel %>
+    <%= form.text_field :surcharge_fuel %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surcharge_weight %>
+    <%= form.text_field :surcharge_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gst_hst_tax %>
+    <%= form.text_field :gst_hst_tax %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total_charge %>
+    <%= form.text_field :total_charge %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total_charge_with_tax %>
+    <%= form.text_field :total_charge_with_tax %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

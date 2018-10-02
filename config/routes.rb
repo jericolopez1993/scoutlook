@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :shipments
+  resources :master_invoices
   resources :rates
   resources :activity_outcomes
   resources :activities do
