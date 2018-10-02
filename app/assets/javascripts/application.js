@@ -51,6 +51,7 @@
 $(document).on('turbolinks:load', function(){
   activityOutcomeFields($("#activity_activity_type").val());
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
+  isHeadOffice($('[data-change="check-switchery-state-same-office"]').prop('checked'));
   $(function(){
       Inputmask().mask(document.querySelectorAll("input"));
 
@@ -60,6 +61,9 @@ $(document).on('turbolinks:load', function(){
 
       $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
         sameHeadOffice($(this).prop('checked'));
+    	});
+      $(document).on('change', '[data-change="check-switchery-state-same-office"]', function() {
+        isHeadOffice($(this).prop('checked'));
     	});
   });
 });
@@ -90,6 +94,15 @@ function sameHeadOffice(isTrue) {
   }else{
     $(".address-fields").show();
   }
+}
+
+function isHeadOffice(isTrue) {
+  if (isTrue) {
+    $(".head-office-fields").hide();
+  }else{
+    $(".head-office-fields").show();
+  }
+  $(".address-fields").show();
 }
 
 function tiggerChangeOnSelectCountry(id, val) {

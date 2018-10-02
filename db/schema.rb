@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_02_124019) do
+ActiveRecord::Schema.define(version: 2018_10_02_133904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,11 +101,6 @@ ActiveRecord::Schema.define(version: 2018_10_02_124019) do
     t.string "company_name"
     t.string "parent_id"
     t.integer "sales_priority"
-    t.string "address"
-    t.string "city"
-    t.string "state"
-    t.string "postal"
-    t.string "country"
     t.string "phone"
     t.decimal "annual_revenue"
     t.string "industry"
@@ -124,6 +119,9 @@ ActiveRecord::Schema.define(version: 2018_10_02_124019) do
     t.text "notes"
     t.string "credit_status"
     t.decimal "credit_approval"
+    t.integer "origin"
+    t.integer "destination"
+    t.integer "head_office"
   end
 
   create_table "locations", force: :cascade do |t|

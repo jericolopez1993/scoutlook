@@ -22,19 +22,30 @@ class ClientLocationsController < ApplicationController
 
   # GET /client_locations/1/edit
   def edit
+    client = Client.find(@client_location.client_id)
+    @is_origin = client.origin == @client_location.id
+    @is_destination = client.destination == @client_location.id
+    @is_head_office = client.head_office == @client_location.id
   end
 
   # POST /client_locations
   # POST /client_locations.json
   def create
     @client_location = ClientLocation.new(client_location_params)
-    if params[:same_ho].present?
-      @client_location.same_ho = true
-    else
-      @client_location.same_ho = false
-    end
+    @client_location.same_ho = params[:same_ho].present?
+
     respond_to do |format|
       if @client_location.save
+        client = Client.find(@client_location.client_id)
+        if params[:origin].present?
+          client.update_attributes(:origin => @client_location.id)
+        end
+        if params[:destination].present?
+          client.update_attributes(:destination => @client_location.id)
+        end
+        if params[:head_office].present?
+          client.update_attributes(:head_office => @client_location.id)
+        end
         format.html { redirect_to client_path(:id => @client_location.client_id), notice: 'Client Location was successfully created.' }
         format.json { render :show, status: :created, client_location: @client_location }
       else
@@ -49,10 +60,16 @@ class ClientLocationsController < ApplicationController
   def update
     respond_to do |format|
       if @client_location.update(client_location_params)
-        if params[:same_ho].present?
-          @client_location.update_attributes(:same_ho => true)
-        else
-          @client_location.update_attributes(:same_ho => false)
+        @client_location.update_attributes(:same_ho => params[:same_ho].present?)
+        client = Client.find(@client_location.client_id)
+        if params[:origin].present?
+          client.update_attributes(:origin => @client_location.id)
+        end
+        if params[:destination].present?
+          client.update_attributes(:destination => @client_location.id)
+        end
+        if params[:head_office].present?
+          client.update_attributes(:head_office => @client_location.id)
         end
         format.html { redirect_to client_path(:id => @client_location.client_id), notice: 'Client Location was successfully updated.' }
         format.json { render :show, status: :ok, client_location: @client_location }

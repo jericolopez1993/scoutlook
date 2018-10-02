@@ -25,7 +25,12 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-
+    if params[:client][:address].present? ||  params[:client][:city].present? ||  params[:client][:state].present? ||  params[:client][:postal].present? ||  params[:client][:city].present?
+      @client_location = ClientLocation.new(address_params)
+      if @client_location.save
+        @client.head_office = @client_location.id
+      end
+    end
     respond_to do |format|
       if @client.save
         if params[:client][:attachment_file].present?
@@ -75,6 +80,10 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:client_type, :relationship_owner, :company_name, :client_id, :parent_id, :sales_priority, :address, :city, :state, :postal, :country, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval)
+      params.require(:client).permit(:client_type, :relationship_owner, :company_name, :client_id, :parent_id, :sales_priority, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval)
+    end
+
+    def address_params
+      params.require(:client).permit(:address, :city, :state, :postal, :country)
     end
 end

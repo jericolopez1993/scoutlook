@@ -35,6 +35,12 @@
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
+                  <label class="col-md-4 col-sm-4 col-form-label"> is Head Office or MCR? <i>(Need to input address fields)</i></label>
+                  <div class="col-md-8 col-sm-8">
+                    <input type="checkbox" name="head_office" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-same-office"  <%= is_head_office ? 'checked' : '' %>/>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15 head-office-fields">
                   <label class="col-md-4 col-sm-4 col-form-label">same as Head Office or Master Client Record? </label>
                   <div class="col-md-8 col-sm-8">
                     <input type="checkbox" name="same_ho" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-text"  <%= client_location.same_ho ? 'checked' : '' %>/>
@@ -86,6 +92,18 @@
                   <%= form.label :soc_id, 'Secondary Ops Contact:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.select :soc_id, ClientContact.where(:client_id => client_location.client_id).collect {|r| [ "#{generate_alphanumeric_id('Contact', r.id)} - #{r.title} (#{r.email})", r.id ] },{:include_blank => true, :selected => client_location.soc_id}, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <label class="col-md-4 col-sm-4 col-form-label"> is Origin?</label>
+                  <div class="col-md-8 col-sm-8">
+                    <input type="checkbox" name="origin" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" <%= is_origin ? 'checked' : '' %>/>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <label class="col-md-4 col-sm-4 col-form-label"> is Destination? </label>
+                  <div class="col-md-8 col-sm-8">
+                    <input type="checkbox" name="destination" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= is_destination ? 'checked' : '' %>/>
                   </div>
                 </div>
                 <div class="form-group row m-b-0">
