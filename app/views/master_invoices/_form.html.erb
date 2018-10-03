@@ -84,6 +84,14 @@
                     <input type="checkbox" name="variance_approved" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" <%= master_invoice.variance_approved ? 'checked' : '' %>/>
                   </div>
                 </div>
+                <div class="form-group row m-b-15">
+                  <label class="col-md-4 col-sm-4 col-form-label"> Shipment Entry</label>
+                  <div class="col-md-8 col-sm-8">
+                      <%= form.radio_button :shipment_entry, "single shipment" %>&nbsp;Single Shipment<br/><br/>
+                      <%= form.radio_button :shipment_entry, "multiple shipment" %>&nbsp;Multiple Shipments
+                  </div>
+                </div>
+
                 <div class="form-group row m-b-0">
                   <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
                   <div class="col-md-8 col-sm-8">
