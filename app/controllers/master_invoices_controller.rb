@@ -25,7 +25,7 @@ class MasterInvoicesController < ApplicationController
   # POST /master_invoices.json
   def create
     @master_invoice = MasterInvoice.new(master_invoice_params)
-
+    @master_invoice.variance_approved = params[:variance_approved].present?
     respond_to do |format|
       if @master_invoice.save
         format.html { redirect_to @master_invoice, notice: 'Master invoice was successfully created.' }
@@ -40,6 +40,7 @@ class MasterInvoicesController < ApplicationController
   # PATCH/PUT /master_invoices/1
   # PATCH/PUT /master_invoices/1.json
   def update
+    params[:master_invoice][:variance_approved] = params[:variance_approved].present?
     respond_to do |format|
       if @master_invoice.update(master_invoice_params)
         format.html { redirect_to @master_invoice, notice: 'Master invoice was successfully updated.' }

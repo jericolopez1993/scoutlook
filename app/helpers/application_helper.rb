@@ -8,4 +8,10 @@ module ApplicationHelper
     alp = str[0, 4].upcase
     alp + count
   end
+
+  def convert_date(val)
+    unless val.nil?
+      Date.parse(val.to_s).format("%d/%m/%Y")
+    end
+  end
 end
