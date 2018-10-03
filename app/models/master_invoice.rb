@@ -14,4 +14,8 @@ class MasterInvoice < ApplicationRecord
       nil
     end
   end
+
+  def shipment
+    if self
+  end
 end
