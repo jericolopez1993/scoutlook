@@ -97,7 +97,7 @@
 </div>
 
 <div class="shipment-fields">
-<%= render 'shipments/fields', shipment: Shipment.new, form: form %>
+<%= render 'shipments/fields', shipment: (params[:action] == 'new' ? Shipment.new : (master_invoice.shipment.nil? ? Shipment.new : master_invoice.shipment)), form: form %>
 </div>
 <div class="form-group row m-b-0 text-right">
   <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>

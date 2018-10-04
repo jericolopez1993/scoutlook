@@ -1,0 +1,232 @@
+<% if !shipment.nil? %>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+          <% if params[:controller] != 'master_invoices'%>
+            <%= link_to 'Edit', edit_shipment_path(shipment), :class => 'btn btn-warning btn-xs' %>
+            <%= link_to 'Back', shipments_path, :class => 'btn btn-info btn-xs' %>
+          <% end %>
+        </div>
+        <h4 class="panel-title">Basic Information</h4>
+      </div>
+      <div class="panel-body">
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Shipment Date:</label>
+          <div class="col-md-7">
+            <%= shipment.shipment_date %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Tracking Number:</label>
+          <div class="col-md-7">
+            <%= shipment.tracking_number %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Terms:</label>
+          <div class="col-md-7">
+            <%= shipment.terms %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+        </div>
+        <h4 class="panel-title">Bill & Surcharges</h4>
+      </div>
+      <div class="panel-body">
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Billed Rate:</label>
+          <div class="col-md-7">
+            <%= shipment.billed_rate %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Billed Rate Unit:</label>
+          <div class="col-md-7">
+            <%= shipment.billed_rate_unit %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Surcharge Ontario:</label>
+          <div class="col-md-7">
+            <%= shipment.surcharge_ontario %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Surcharge Non Conveyables:</label>
+          <div class="col-md-7">
+            <%= shipment.surcharge_non_conveyables %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Surcharge Non Vault:</label>
+          <div class="col-md-7">
+            <%= shipment.surcharge_non_vault %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Surcharge Multi Piece:</label>
+          <div class="col-md-7">
+            <%= shipment.surchange_multi_piece %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Surcharge Fuel:</label>
+          <div class="col-md-7">
+            <%= shipment.surcharge_fuel %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Surcharge Fuel:</label>
+          <div class="col-md-7">
+            <%= shipment.surcharge_fuel %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Surcharge Weight:</label>
+          <div class="col-md-7">
+            <%= shipment.surcharge_weight %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">GST HST Tax:</label>
+          <div class="col-md-7">
+            <%= shipment.gst_hst_tax %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Total Charge:</label>
+          <div class="col-md-7">
+            <%= shipment.total_charge %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Total Charge with Tax:</label>
+          <div class="col-md-7">
+            <%= shipment.total_charge_with_tax %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+        </div>
+        <h4 class="panel-title">Location</h4>
+      </div>
+      <div class="panel-body">
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Origin:</label>
+          <div class="col-md-7">
+            <%= shipment.origin_id %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Origin Location:</label>
+          <div class="col-md-7">
+            <%= shipment.origin_location_id %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Destination:</label>
+          <div class="col-md-7">
+            <%= shipment.destination_id %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Destination Location:</label>
+          <div class="col-md-7">
+            <%= shipment.destination_location_id %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Distance:</label>
+          <div class="col-md-7">
+            <%= shipment.distance %>
+          </div>
+        </div>
+
+
+                </div>
+    </div>
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+        </div>
+        <h4 class="panel-title">Item Information</h4>
+      </div>
+      <div class="panel-body">
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Pieces:</label>
+          <div class="col-md-7">
+            <%= shipment.pieces %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Pallets:</label>
+          <div class="col-md-7">
+            <%= shipment.pallets %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Unit of Weight:</label>
+          <div class="col-md-7">
+            <%= shipment.unit_of_weight %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Declared Weight:</label>
+          <div class="col-md-7">
+            <%= shipment.declared_weight %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Billed Weight:</label>
+          <div class="col-md-7">
+            <%= shipment.billed_weight %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Raw Weight:</label>
+          <div class="col-md-7">
+            <%= shipment.raw_weight %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Service Mode:</label>
+          <div class="col-md-7">
+            <%= shipment.service_mode %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+        </div>
+        <h4 class="panel-title">Shipment</h4>
+      </div>
+      <div class="panel-body text-center">
+        <span>
+          <i> No Shipment Available.</i>
+        </span>
+
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

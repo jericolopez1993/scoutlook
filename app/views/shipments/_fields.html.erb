@@ -11,13 +11,13 @@
                   <div class="form-group row m-b-15">
                     <%= form.label :shipment_date, 'Shipment Date *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                     <div class="col-md-8 col-sm-8">
-                    <%= form.date_select :shipment_date, class: 'form-control', 'data-parsley-required' => true, order: [:month, :day, :year], use_short_month: true %>
+                    <%= form.date_select :shipment_date, class: 'form-control', 'data-parsley-required' => true, order: [:month, :day, :year], use_short_month: true, default: shipment.shipment_date %>
                     </div>
                   </div>
                     <div class="form-group row m-b-15">
                       <%= form.label :tracking_number, 'Tracking Number *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :tracking_number, class: 'form-control', 'data-parsley-required' => true %>
+                      <%= form.text_field :tracking_number, class: 'form-control', 'data-parsley-required' => true, value: shipment.tracking_number  %>
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
@@ -39,62 +39,62 @@
         <div class="form-group row m-b-15">
           <%= form.label :billed_rate, 'Billed Rate:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :billed_rate, class: 'form-control' %>
+          <%= form.number_field :billed_rate, class: 'form-control', value: shipment.billed_rate %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :billed_rate_unit, 'Billed Rate Unit:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :billed_rate_unit, class: 'form-control' %>
+          <%= form.number_field :billed_rate_unit, class: 'form-control', value: shipment.billed_rate_unit %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surcharge_ontario, 'Surcharge Ontario:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surcharge_ontario, class: 'form-control' %>
+          <%= form.number_field :surcharge_ontario, class: 'form-control', value: shipment.surcharge_ontario %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surcharge_non_conveyables, 'Surcharge Non Conveyables:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surcharge_non_conveyables, class: 'form-control' %>
+          <%= form.number_field :surcharge_non_conveyables, class: 'form-control', value: shipment.surcharge_non_conveyables %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surcharge_non_vault, 'Surcharge Non Vault:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surcharge_non_vault, class: 'form-control' %>
+          <%= form.number_field :surcharge_non_vault, class: 'form-control', value: shipment.surcharge_non_vault %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surchange_multi_piece, 'Surcharge Multi Piece:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surchange_multi_piece, class: 'form-control' %>
+          <%= form.number_field :surchange_multi_piece, class: 'form-control', value: shipment.surchange_multi_piece %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surcharge_fuel, 'Surcharge Ontario:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surcharge_fuel, class: 'form-control' %>
+          <%= form.number_field :surcharge_fuel, class: 'form-control', value: shipment.surcharge_fuel %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surcharge_weight, 'Surcharge Weight:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surcharge_weight, class: 'form-control' %>
+          <%= form.number_field :surcharge_weight, class: 'form-control', value: shipment.surcharge_weight %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :gst_hst_tax, 'Gst Hst Tax:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :gst_hst_tax, class: 'form-control' %>
+          <%= form.number_field :gst_hst_tax, class: 'form-control', value: shipment.gst_hst_tax %>
           </div>
         </div>
         <% if params[:controller] != 'master_invoices'%>
         <div class="form-group row m-b-15">
           <%= form.label :total_charge, 'Total Charge:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :total_charge, class: 'form-control' %>
+          <%= form.number_field :total_charge, class: 'form-control', value: shipment.total_charge %>
           </div>
         </div>
         <% else %>
@@ -109,7 +109,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :total_charge_with_tax, 'Total Charge with Tax:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :total_charge_with_tax, class: 'form-control' %>
+          <%= form.number_field :total_charge_with_tax, class: 'form-control', value: shipment.total_charge_with_tax %>
           </div>
         </div>
       </div>
@@ -150,7 +150,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :distance, 'Distance:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.text_field :distance, class: 'form-control' %>
+          <%= form.text_field :distance, class: 'form-control', value: shipment.distance %>
           </div>
         </div>
 
@@ -166,13 +166,13 @@
         <div class="form-group row m-b-15">
           <%= form.label :pieces, 'Piece:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :pieces, class: 'form-control' %>
+          <%= form.number_field :pieces, class: 'form-control', value: shipment.pieces %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :pallets, 'Pallet:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :pallets, class: 'form-control' %>
+          <%= form.number_field :pallets, class: 'form-control', value: shipment.pallets %>
           </div>
         </div>
         <div class="form-group row m-b-15">
@@ -184,19 +184,19 @@
         <div class="form-group row m-b-15">
           <%= form.label :declared_weight, 'Declared Weight:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :declared_weight, class: 'form-control' %>
+          <%= form.number_field :declared_weight, class: 'form-control', value: shipment.declared_weight %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :billed_weight, 'Billed Weight:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :billed_weight, class: 'form-control' %>
+          <%= form.number_field :billed_weight, class: 'form-control', value: shipment.billed_weight %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :raw_weight, 'Raw Weight:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :raw_weight, class: 'form-control' %>
+          <%= form.number_field :raw_weight, class: 'form-control', value: shipment.raw_weight %>
           </div>
         </div>
         <div class="form-group row m-b-15">

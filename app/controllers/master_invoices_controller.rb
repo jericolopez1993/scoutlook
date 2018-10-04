@@ -28,7 +28,7 @@ class MasterInvoicesController < ApplicationController
     @master_invoice.variance_approved = params[:variance_approved].present?
     respond_to do |format|
       if @master_invoice.save
-        if shipment_entry == "single shipment"
+        if @master_invoice.shipment_entry == "single shipment"
             @shipment = Shipment.new(shipment_params)
             @shipment.total_charge = params[:master_invoice][:total_charge_shipment]
             @shipment.header = @master_invoice.id
@@ -49,10 +49,11 @@ class MasterInvoicesController < ApplicationController
     params[:master_invoice][:variance_approved] = params[:variance_approved].present?
     respond_to do |format|
       if @master_invoice.update(master_invoice_params)
-        if shipment_entry == "single shipment"
+        if @master_invoice.shipment_entry == "single shipment"
             @shipments = Shipment.where(:header => @master_invoice.id)
             if @shipments.present? && !@shipments.nil?
               params[:master_invoice][:total_charge] = params[:master_invoice][:total_charge_shipment]
+              @shipment = @shipments.first
               @shipment.update(shipment_params)
             else
               @shipment = Shipment.new(shipment_params)
@@ -90,6 +91,7 @@ class MasterInvoicesController < ApplicationController
     def master_invoice_params
       params.require(:master_invoice).permit(:shipment_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance, :variance_approved, :shipment_entry)
     end
+
     def shipment_params
       params.require(:master_invoice).permit(:header, :shipment_date, :tracking_number, :terms, :origin_id, :origin_location_id, :destination_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax)
     end
