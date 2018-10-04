@@ -83,6 +83,12 @@ $(document).on('turbolinks:load', function(){
           addTotalNumbers('total_charge_with_tax_fields', 'master_invoice_total_charge_with_tax');
       });
 
+      $("#origin_location_id, #destination_location_id").change(function(){
+        var origin = $("#origin_location_id").val();
+        var destination = $("#destination_location_id").val();
+        getOriginDestination(origin, destination);
+      });
+
   });
 });
 
@@ -145,4 +151,23 @@ function addTotalNumbers(className, id) {
     }
   })
     $('#'+id).val(total_num);
+}
+
+function getOriginDestination(origin, destination){
+  $.ajax({
+    method: 'get',
+    url: "/client_locations/origin_destination",
+    data: {origin: origin, destination: destination}
+  }).done(function(data) {
+    getDistanceLocation(data.origin, data.destination);
+  })
+}
+
+function getDistanceLocation(origin, destination) {
+  $.ajax({
+    url: "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + origin + "&destinations=" + destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0",
+
+  }).done(function(data) {
+    console.log(data)
+  })
 }

@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :locations
   resources :client_contacts
   resources :reps
-  resources :client_locations
+  resources :client_locations do
+    collection do
+      get     'origin_destination'
+    end
+  end
   resources :clients
   devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
