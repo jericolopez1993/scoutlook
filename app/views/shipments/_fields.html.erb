@@ -214,9 +214,11 @@
         <% if params[:action] == 'edit' %>
           &nbsp;&nbsp;<%= link_to 'Show', shipment, :class => 'btn btn-info' %>
         <% end %>
-        <% if params[:action] == 'new' %>
-          &nbsp;&nbsp;<%= link_to 'Back', shipments_path, :class => 'btn btn-default' %>
-        <% end %>
+          <% if shipment.header.nil? %>
+            &nbsp;&nbsp;<%= link_to 'Back', shipments_path, :class => 'btn btn-default' %>
+          <% else %>
+            &nbsp;&nbsp;<%= link_to 'Back to Invoice', master_invoice_path(:id => shipment.header), :class => 'btn btn-default' %>
+          <% end %>
       </div>
     </div>
   <% end %>
