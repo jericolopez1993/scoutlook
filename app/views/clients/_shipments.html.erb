@@ -1,0 +1,29 @@
+<table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons">
+                <thead>
+                  <tr class="odd gradeX">
+                    <th class="text-nowrap">Shipment date</th>
+                    <th class="text-nowrap">Tracking number</th>
+                    <th class="text-nowrap">Terms</th>
+                    <th class="text-nowrap">Origin</th>
+                    <th class="text-nowrap">Origin location</th>
+                    <th class="text-nowrap">Destination</th>
+                    <th class="text-nowrap">Destination location</th>
+                    <th class="text-nowrap">Distance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% shipments.each do |shipment| %>
+                    <tr>
+                      <td><%= shipment.shipment_date %></td>
+                      <td><%= shipment.tracking_number %></td>
+                      <td><%= shipment.terms %></td>
+                      <td><%= shipment.origin.nil? ? "" : "#{shipment.origin.company_name}" %></td>
+                      <td><%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.state}, #{shipment.origin_location.country}" %></td>
+                      <td><%= shipment.destination.nil? ? "" : "#{shipment.destination.company_name}" %></td>
+                      <td><%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.state}, #{shipment.destination_location.country}" %></td>
+                      <td><%= shipment.distance %></td>
+
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>

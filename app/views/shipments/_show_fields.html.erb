@@ -158,8 +158,6 @@
             <%= shipment.distance %>
           </div>
         </div>
-
-
           <img src="https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C<%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.state},#{shipment.origin_location.country}" %>%7C<%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.state},#{shipment.destination_location.country}" %>&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0" />
         </div>
     </div>

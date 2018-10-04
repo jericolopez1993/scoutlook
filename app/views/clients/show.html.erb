@@ -154,6 +154,28 @@
   </div>
   <div class="col-lg-6">
 <!-- begin panel -->
+
+<!-- begin page-header -->
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title">Inbound Shipments</h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'shipments', shipments: Shipment.where(:destination_id => @client.id) %>
+  </div>
+</div>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title">Outbound Shipments</h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'shipments', shipments: Shipment.where(:origin_id => @client.id) %>
+  </div>
+</div>
+<!-- end panel -->
+
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
