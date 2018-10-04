@@ -39,69 +39,69 @@
         <div class="form-group row m-b-15">
           <%= form.label :billed_rate, 'Billed Rate:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :billed_rate, class: 'form-control', value: shipment.billed_rate %>
+          <%= form.text_field :billed_rate, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.billed_rate, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :billed_rate_unit, 'Billed Rate Unit:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :billed_rate_unit, class: 'form-control', value: shipment.billed_rate_unit %>
+          <%= form.select :billed_rate_unit, options_for_select(['CWT', 'TL', 'Pallets'], shipment.billed_rate_unit),{:include_blank => true}, class: 'form-control total_charge_fields' %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surcharge_ontario, 'Surcharge Ontario:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surcharge_ontario, class: 'form-control', value: shipment.surcharge_ontario %>
+          <%= form.text_field :surcharge_ontario, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_ontario, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surcharge_non_conveyables, 'Surcharge Non Conveyables:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surcharge_non_conveyables, class: 'form-control', value: shipment.surcharge_non_conveyables %>
+          <%= form.text_field :surcharge_non_conveyables, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_non_conveyables, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surcharge_non_vault, 'Surcharge Non Vault:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surcharge_non_vault, class: 'form-control', value: shipment.surcharge_non_vault %>
+          <%= form.text_field :surcharge_non_vault, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_non_vault, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surchange_multi_piece, 'Surcharge Multi Piece:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surchange_multi_piece, class: 'form-control', value: shipment.surchange_multi_piece %>
+          <%= form.text_field :surchange_multi_piece, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surchange_multi_piece, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
-          <%= form.label :surcharge_fuel, 'Surcharge Ontario:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <%= form.label :surcharge_fuel, 'Surcharge Fuel:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surcharge_fuel, class: 'form-control', value: shipment.surcharge_fuel %>
+          <%= form.text_field :surcharge_fuel, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_fuel, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :surcharge_weight, 'Surcharge Weight:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :surcharge_weight, class: 'form-control', value: shipment.surcharge_weight %>
+          <%= form.text_field :surcharge_weight, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_weight, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :gst_hst_tax, 'Gst Hst Tax:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :gst_hst_tax, class: 'form-control', value: shipment.gst_hst_tax %>
+          <%= form.text_field :gst_hst_tax, class: 'form-control total_charge_with_tax_fields', value: shipment.gst_hst_tax, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
           </div>
         </div>
         <% if params[:controller] != 'master_invoices'%>
         <div class="form-group row m-b-15">
           <%= form.label :total_charge, 'Total Charge:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :total_charge, class: 'form-control', value: shipment.total_charge %>
+          <%= form.text_field :total_charge, class: 'form-control', value: shipment.total_charge, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
           </div>
         </div>
         <% else %>
         <div class="form-group row m-b-15">
           <%= form.label :total_charge_shipment, 'Total Charge:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :total_charge_shipment, class: 'form-control', value: shipment.total_charge %>
+          <%= form.text_field :total_charge_shipment, class: 'form-control', value: shipment.total_charge, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
           </div>
         </div>
 
@@ -109,7 +109,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :total_charge_with_tax, 'Total Charge with Tax:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :total_charge_with_tax, class: 'form-control', value: shipment.total_charge_with_tax %>
+          <%= form.text_field :total_charge_with_tax, class: 'form-control', value: shipment.total_charge_with_tax, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
           </div>
         </div>
       </div>

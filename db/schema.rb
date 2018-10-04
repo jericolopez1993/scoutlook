@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_04_070320) do
+ActiveRecord::Schema.define(version: 2018_10_04_114425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,7 +198,6 @@ ActiveRecord::Schema.define(version: 2018_10_04_070320) do
     t.decimal "raw_weight"
     t.string "service_mode"
     t.decimal "billed_rate"
-    t.string "billed_rate_unit"
     t.decimal "surcharge_ontario"
     t.decimal "surcharge_non_conveyables"
     t.decimal "surcharge_non_vault"
@@ -211,6 +210,7 @@ ActiveRecord::Schema.define(version: 2018_10_04_070320) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "unit_of_weight"
+    t.string "billed_rate_unit"
   end
 
   create_table "users", force: :cascade do |t|

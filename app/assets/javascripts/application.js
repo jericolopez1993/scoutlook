@@ -70,6 +70,16 @@ $(document).on('turbolinks:load', function(){
       $('input[type=radio][name="master_invoice[shipment_entry]"]').change(function() {
           shipmentFields(this.value);
       });
+
+      $('.total_charge_fields').keyup(function() {
+          addTotalNumbers('total_charge_fields', 'shipment_total_charge');
+          addTotalNumbers('total_charge_fields', 'master_invoice_total_charge_shipment');
+      });
+      $('.total_charge_with_tax_fields').keyup(function() {
+          addTotalNumbers('total_charge_with_tax_fields', 'shipment_total_charge_with_tax');
+          addTotalNumbers('total_charge_with_tax_fields', 'master_invoice_total_charge_with_tax');
+      });
+
   });
 });
 
@@ -122,4 +132,16 @@ function shipmentFields(shipmentEntry) {
   else {
     $(".shipment-fields").hide();
   }
+}
+
+function addTotalNumbers(className, id) {
+  var total_num = 0;
+  $('.'+className).each(function(){
+    if ($(this).val() != ""){
+        total_num = total_num + parseFloat($(this).val().replace('$ ','').replace(/,/g,""));
+    }
+  })
+
+      console.log(total_num)
+    $('#'+id).val(total_num);
 }
