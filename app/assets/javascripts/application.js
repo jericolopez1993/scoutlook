@@ -141,7 +141,5 @@ function addTotalNumbers(className, id) {
         total_num = total_num + parseFloat($(this).val().replace('$ ','').replace(/,/g,""));
     }
   })
-
-      console.log(total_num)
     $('#'+id).val(total_num);
 }

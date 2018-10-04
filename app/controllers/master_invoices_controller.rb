@@ -52,7 +52,6 @@ class MasterInvoicesController < ApplicationController
         if @master_invoice.shipment_entry == "single shipment"
             @shipments = Shipment.where(:header => @master_invoice.id)
             if @shipments.present? && !@shipments.nil?
-              params[:master_invoice][:total_charge] = params[:master_invoice][:total_charge_shipment]
               @shipment = @shipments.first
               @shipment.update(shipment_params)
             else
@@ -93,6 +92,16 @@ class MasterInvoicesController < ApplicationController
     end
 
     def shipment_params
+      params[:master_invoice][:billed_rate] = params[:master_invoice][:billed_rate].gsub('$ ', '').gsub(',', '').to_d
+      params[:master_invoice][:surcharge_ontario] = params[:master_invoice][:surcharge_ontario].gsub('$ ', '').gsub(',', '').to_d
+      params[:master_invoice][:surcharge_non_conveyables] = params[:master_invoice][:surcharge_non_conveyables].gsub('$ ', '').gsub(',', '').to_d
+      params[:master_invoice][:surcharge_non_vault] = params[:master_invoice][:surcharge_non_vault].gsub('$ ', '').gsub(',', '').to_d
+      params[:master_invoice][:surchange_multi_piece] = params[:master_invoice][:surchange_multi_piece].gsub('$ ', '').gsub(',', '').to_d
+      params[:master_invoice][:surcharge_fuel] = params[:master_invoice][:surcharge_fuel].gsub('$ ', '').gsub(',', '').to_d
+      params[:master_invoice][:surcharge_weight] = params[:master_invoice][:surcharge_weight].gsub('$ ', '').gsub(',', '').to_d
+      params[:master_invoice][:gst_hst_tax] = params[:master_invoice][:gst_hst_tax].gsub('$ ', '').gsub(',', '').to_d
+      params[:master_invoice][:total_charge] = params[:master_invoice][:total_charge_shipment].gsub('$ ', '').gsub(',', '').to_d
+      params[:master_invoice][:total_charge_with_tax] = params[:master_invoice][:total_charge_with_tax].gsub('$ ', '').gsub(',', '').to_d
       params.require(:master_invoice).permit(:header, :shipment_date, :tracking_number, :terms, :origin_id, :origin_location_id, :destination_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax)
     end
 end
