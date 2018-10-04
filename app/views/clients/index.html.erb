@@ -28,9 +28,9 @@
                           <td><%= generate_alphanumeric_id(client.client_type, client.id) %></td>
                           <td><%= client.company_name %></td>
                           <td><%= client.client_type %></td>
-                          <td><%= client.origin_location.nil? '' : "#{client.origin_location.state}, #{client.origin_location.country}" %></td>
-                          <td><%= client.destination_location.nil? '' : "#{client.destination_location.state}, #{client.destination_location.country}" %></td>
-                          <td><%= client.head_office_location.nil? '' : "#{client.head_office_location.state}, #{client.head_office_location.country}" %></td>
+                          <td><%= client.origin_location.nil? ? '' : "#{client.origin_location.state}, #{client.origin_location.country}" %></td>
+                          <td><%= client.destination_location.nil? ? '' : "#{client.destination_location.state}, #{client.destination_location.country}" %></td>
+                          <td><%= client.head_office_location.nil? ? '' : "#{client.head_office_location.state}, #{client.head_office_location.country}" %></td>
                           <td>
                             <%= link_to '<i class="far fa-eye"></i>'.html_safe, client, :class => 'btn btn-info' %>
                             <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_client_path(client), :class => 'btn btn-warning' %>
