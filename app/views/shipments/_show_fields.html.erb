@@ -6,7 +6,12 @@
         <div class="panel-heading-btn">
           <% if params[:controller] != 'master_invoices'%>
             <%= link_to 'Edit', edit_shipment_path(shipment), :class => 'btn btn-warning btn-xs' %>
-            <%= link_to 'Back', shipments_path, :class => 'btn btn-info btn-xs' %>
+
+            <% if !shipment.header.nil? %>
+              <%= link_to 'Back to Master Invoice', master_invoice_path(:id => shipment.header), :class => 'btn btn-info btn-xs' %>
+            <% else %>
+              <%= link_to 'Back to Master Invoice List', master_invoices_path, :class => 'btn btn-info btn-xs' %>
+            <% end %>
           <% end %>
         </div>
         <h4 class="panel-title">Basic Information</h4>

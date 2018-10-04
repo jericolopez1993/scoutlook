@@ -4,5 +4,5 @@
 <!-- begin panel -->
 <%= form_with(model: shipment, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
 <%= form.hidden_field :header %>
-<%= render 'fields', shipment: shipment %>
+<%= render 'fields', shipment: shipment, form: form %>
 <% end %>

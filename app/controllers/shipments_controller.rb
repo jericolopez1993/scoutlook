@@ -15,6 +15,10 @@ class ShipmentsController < ApplicationController
   # GET /shipments/new
   def new
     @shipment = Shipment.new
+    if params[:header].present?
+      @shipment.header = params[:header]
+    end
+
   end
 
   # GET /shipments/1/edit
@@ -28,7 +32,7 @@ class ShipmentsController < ApplicationController
 
     respond_to do |format|
       if @shipment.save
-        format.html { redirect_to @shipment, notice: 'Shipment was successfully created.' }
+        format.html { redirect_to master_invoice_path(:id => @shipment.header), notice: 'Shipment was successfully created.' }
         format.json { render :show, status: :created, location: @shipment }
       else
         format.html { render :new }
@@ -42,7 +46,7 @@ class ShipmentsController < ApplicationController
   def update
     respond_to do |format|
       if @shipment.update(shipment_params)
-        format.html { redirect_to @shipment, notice: 'Shipment was successfully updated.' }
+        format.html { redirect_to master_invoice_path(:id => @shipment.header), notice: 'Shipment was successfully updated.' }
         format.json { render :show, status: :ok, location: @shipment }
       else
         format.html { render :edit }
@@ -56,7 +60,7 @@ class ShipmentsController < ApplicationController
   def destroy
     @shipment.destroy
     respond_to do |format|
-      format.html { redirect_to shipments_url, notice: 'Shipment was successfully destroyed.' }
+      format.html { redirect_to master_invoice_path(:id => @shipment.header), notice: 'Shipment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

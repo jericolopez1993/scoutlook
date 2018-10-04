@@ -96,5 +96,5 @@
 <% if @master_invoice.shipment_entry == 'single shipment'%>
   <%= render 'shipments/show_fields', shipment: @master_invoice.shipment %>
 <% else %>
-  <%= render 'shipments/table', shipment: @master_invoice.shipment, master_invoice: @master_invoice %>
+  <%= render 'shipments/table', shipments: Shipment.where(:header => @master_invoice.id), master_invoice: @master_invoice %>
 <% end %>
