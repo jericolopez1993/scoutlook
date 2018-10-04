@@ -18,6 +18,7 @@
                       <%= form.label :tracking_number, 'Tracking Number *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
                       <%= form.text_field :tracking_number, class: 'form-control', 'data-parsley-required' => true, value: shipment.tracking_number  %>
+
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
@@ -126,25 +127,25 @@
         <div class="form-group row m-b-15">
           <%= form.label :origin_id, 'Origin *:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.select :origin_id, Client.all.collect {|l| [l.company_name, l.id]},{:include_blank => true, :selected => shipment.origin_id}, class: 'form-control', 'data-parsley-required' => true %>
+          <%= form.select :origin_id, Client.all.collect {|l| [l.company_name, l.id]},{:include_blank => true, :selected => shipment.origin_id}, class: 'form-control', id: 'origin_id', 'data-parsley-required' => true %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :origin_location_id, 'Origin Location *:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.select :origin_location_id, ClientLocation.all.collect {|l| [l.name, l.id]},{:include_blank => true, :selected => shipment.origin_location_id}, class: 'form-control', 'data-parsley-required' => true %>
+          <%= form.select :origin_location_id, ClientLocation.all.collect {|l| [l.name, l.id, {'data-chained'=> "#{l.client_id}"}]},{:include_blank => true, :selected => shipment.origin_location_id}, class: 'form-control', id: 'origin_location_id', 'data-parsley-required' => true %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :destination_id, 'Destination *:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.select :destination_id, Client.all.collect {|l| [l.company_name, l.id]},{:include_blank => true, :selected => shipment.destination_id}, class: 'form-control', 'data-parsley-required' => true %>
+          <%= form.select :destination_id, Client.all.collect {|l| [l.company_name, l.id]},{:include_blank => true, :selected => shipment.destination_id}, class: 'form-control', id: 'destination_id', 'data-parsley-required' => true %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :destination_location_id, 'Destination Location *:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.select :destination_location_id, ClientLocation.all.collect {|l| [l.name, l.id]},{:include_blank => true, :selected => shipment.destination_location_id}, class: 'form-control', 'data-parsley-required' => true %>
+          <%= form.select :destination_location_id, ClientLocation.all.collect {|l| [l.name, l.id, {'data-chained'=> "#{l.client_id}"}]},{:include_blank => true, :selected => shipment.destination_location_id}, class: 'form-control', id: 'destination_location_id', 'data-parsley-required' => true %>
           </div>
         </div>
         <div class="form-group row m-b-15">

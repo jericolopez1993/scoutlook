@@ -39,6 +39,7 @@
 //= require vendor/switchery.min
 //= require vendor/form-slider-switcher.demo
 //= require vendor/countries
+//= require vendor/jquery.chained
 //= require inputmask
 //= require jquery.inputmask
 //= require inputmask.extensions
@@ -53,6 +54,8 @@ $(document).on('turbolinks:load', function(){
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
   isHeadOffice($('[data-change="check-switchery-state-same-office"]').prop('checked'));
   shipmentFields($('input[type=radio][name="master_invoice[shipment_entry]"]').val());
+  $("#origin_location_id").chained("#origin_id");
+  $("#destination_location_id").chained("#destination_id");
   $(function(){
       Inputmask().mask(document.querySelectorAll("input"));
 
