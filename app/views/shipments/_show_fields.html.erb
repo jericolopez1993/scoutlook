@@ -48,7 +48,7 @@
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Billed Rate:</label>
           <div class="col-md-7">
-            <%= shipment.billed_rate %>
+            <%= shipment.billed_rate.nil? ? '' : number_to_currency(shipment.billed_rate) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
@@ -60,61 +60,61 @@
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Ontario:</label>
           <div class="col-md-7">
-            <%= shipment.surcharge_ontario %>
+            <%= shipment.surcharge_ontario.nil? ? '' : number_to_currency(shipment.surcharge_ontario) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Non Conveyables:</label>
           <div class="col-md-7">
-            <%= shipment.surcharge_non_conveyables %>
+            <%= shipment.surcharge_non_conveyables.nil? ? '' : number_to_currency(shipment.surcharge_non_conveyables) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Non Vault:</label>
           <div class="col-md-7">
-            <%= shipment.surcharge_non_vault %>
+            <%= shipment.surcharge_non_vault.nil? ? '' : number_to_currency(shipment.surcharge_non_vault) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Multi Piece:</label>
           <div class="col-md-7">
-            <%= shipment.surchange_multi_piece %>
+            <%= shipment.surchange_multi_piece.nil? ? '' : number_to_currency(shipment.surchange_multi_piece) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Fuel:</label>
           <div class="col-md-7">
-            <%= shipment.surcharge_fuel %>
+            <%= shipment.surcharge_fuel.nil? ? '' : number_to_currency(shipment.surcharge_fuel) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Fuel:</label>
           <div class="col-md-7">
-            <%= shipment.surcharge_fuel %>
+            <%= shipment.surcharge_fuel.nil? ? '' : number_to_currency(shipment.surcharge_fuel) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Weight:</label>
           <div class="col-md-7">
-            <%= shipment.surcharge_weight %>
+            <%= shipment.surcharge_weight.nil? ? '' : number_to_currency(shipment.surcharge_weight) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">GST HST Tax:</label>
           <div class="col-md-7">
-            <%= shipment.gst_hst_tax %>
+            <%= shipment.gst_hst_tax.nil? ? '' : number_to_currency(shipment.gst_hst_tax) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Total Charge:</label>
           <div class="col-md-7">
-            <%= shipment.total_charge %>
+            <%= shipment.total_charge.nil? ? '' : number_to_currency(shipment.total_charge) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Total Charge with Tax:</label>
           <div class="col-md-7">
-            <%= shipment.total_charge_with_tax %>
+            <%= shipment.total_charge_with_tax.nil? ? '' : number_to_currency(shipment.total_charge_with_tax) %>
           </div>
         </div>
       </div>
