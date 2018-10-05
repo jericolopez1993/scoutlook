@@ -40,23 +40,23 @@
           <span>Home</span>
         </a>
       </li>
-      <li class="<%= (params[:controller] == 'master_invoices') ? 'active' : ''%>">
-        <a href="<%= master_invoices_path %>">
-          <i class="fas fa-file-invoice"></i>
-          <span>Master Invoices</span>
-        </a>
-      </li>
+
       <li class="<%= (params[:controller] == 'clients') ? 'active' : ''%>">
         <a href="<%= clients_path %>">
           <i class="fas fa-users"></i>
           <span>Clients</span>
         </a>
       </li>
-
       <li class="<%= (params[:controller] == 'activities') ? 'active' : ''%>">
         <a href="<%= activities_path %>">
           <i class="fas fa-book"></i>
           <span>Activities</span>
+        </a>
+      </li>
+      <li class="<%= (params[:controller] == 'master_invoices') ? 'active' : ''%>">
+        <a href="<%= master_invoices_path %>">
+          <i class="fas fa-file-invoice"></i>
+          <span>Master Invoices</span>
         </a>
       </li>
       <li class="<%= (params[:controller] == 'rates') ? 'active' : ''%>">
@@ -65,8 +65,12 @@
           <span>Rates</span>
         </a>
       </li>
-
-
+      <li class="<%= (params[:controller] == 'master_signals') ? 'active' : ''%>">
+        <a href="<%= master_signals_path %>">
+          <i class="fas fa-signal"></i>
+          <span>Signal</span>
+        </a>
+      </li>
       <li class="<%= (params[:controller] == 'reps') ? 'active' : ''%>">
         <a href="<%= reps_path %>">
         <i class="fas fa-user-tie"></i>

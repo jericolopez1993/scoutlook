@@ -1,0 +1,2 @@
+json.extract! master_signal, :id, :signal_type, :signal_date, :client_id, :client_contact_id, :rate_id, :origin_city, :origin_state, :origin_country, :destination_city, :destination_state, :destination_country, :start_date, :end_date, :duration, :volume, :uom, :per, :capacity_type, :max_origin, :max_destination, :desired_rate, :notes, :same_hoc, :created_at, :updated_at
+json.url master_signal_url(master_signal, format: :json)

@@ -53,7 +53,7 @@ $(document).on('turbolinks:load', function(){
   activityOutcomeFields($("#activity_activity_type").val());
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
   isHeadOffice($('[data-change="check-switchery-state-same-office"]').prop('checked'));
-  shipmentFields($('input[type=radio][name="master_invoice[shipment_entry]"]').val());
+  shipmentFields($('input[type=radio][name="master_invoice[shipment_entry]"]:checked').val());
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
   $(function(){
@@ -135,6 +135,7 @@ function tiggerChangeOnSelectCountry(id, val) {
 }
 
 function shipmentFields(shipmentEntry) {
+  console.log(shipmentEntry);
   if (shipmentEntry == 'single shipment') {
     $(".shipment-fields").show();
   }

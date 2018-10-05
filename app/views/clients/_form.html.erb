@@ -225,10 +225,4 @@
 <!-- end panel -->
 <script language="javascript">
 	populateCountries("client_country", "client_state");
-  <% if client.country.present? %>
-    tiggerChangeOnSelectCountry('client_country', '<%= client.country %>')
-  <% end %>
-  <% if client.state.present? %>
-    tiggerChangeOnSelectCountry('client_state', '<%= client.state %>')
-  <% end %>
 </script>

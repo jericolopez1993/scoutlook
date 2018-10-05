@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_04_114425) do
+ActiveRecord::Schema.define(version: 2018_10_05_092303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,6 +144,37 @@ ActiveRecord::Schema.define(version: 2018_10_04_114425) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "shipment_entry"
+  end
+
+  create_table "master_signals", force: :cascade do |t|
+    t.string "signal_type"
+    t.date "signal_date"
+    t.integer "client_id"
+    t.integer "client_contact_id"
+    t.integer "rate_id"
+    t.string "origin_city"
+    t.string "origin_state"
+    t.string "origin_country"
+    t.string "destination_city"
+    t.string "destination_state"
+    t.string "destination_country"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "duration"
+    t.integer "volume"
+    t.string "uom"
+    t.string "per"
+    t.string "capacity_type"
+    t.string "max_origin"
+    t.string "max_destination"
+    t.string "desired_rate"
+    t.text "notes"
+    t.boolean "same_origin"
+    t.boolean "same_origin_hoc"
+    t.boolean "same_destination"
+    t.boolean "same_destination_hoc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rates", force: :cascade do |t|
