@@ -31,14 +31,19 @@ class ClientContactsController < ApplicationController
   # POST /client_contacts.json
   def create
     @client_contact = ClientContact.new(client_contact_params)
+    @user = User.new(user_params)
+    @user.skip_confirmation!
     if params[:same_ho].present?
       @client_contact.same_ho = true
     else
       @client_contact.same_ho = false
     end
     respond_to do |format|
-      if @client_contact.save
+      if @client_contact.save && @user.save
+        @user.update_attributes(:client_contact_id => @client_contact.id)
+        @user.add_role :contact
         client = Client.find(@client_contact.client_id)
+
         if params[:pdm].present?
           client.update_attributes(:pdm_id => @client_contact.id)
         end
@@ -98,6 +103,9 @@ class ClientContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_contact_params
-      params.require(:client_contact).permit(:title, :name, :email, :work_phone, :home_phone, :address, :city, :state, :postal, :country, :client_id)
+      params.require(:client_contact).permit(:title, :first_name, :last_name, :email, :work_phone, :home_phone, :address, :city, :state, :postal, :country, :client_id)
+    end
+    def user_params
+      params.require(:client_contact).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
 end

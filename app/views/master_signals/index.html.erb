@@ -27,7 +27,7 @@
                           <td><%= master_signal.signal_type %></td>
                           <td><%= master_signal.signal_date %></td>
                           <td><%= master_signal.client.nil? ? '' : "#{master_signal.client.company_name}" %></td>
-                          <td><%= master_signal.client_contact.nil? ? '' : "#{master_signal.client_contact.name}" %></td>
+                          <td><%= master_signal.client_contact.nil? ? '' : "#{master_signal.client_contact.last_name}" %></td>
                           <td><%= master_signal.rate.nil? ? '' : "#{master_signal.rate.rate_type}" %></td>
                           <td>
                             <%= link_to '<i class="far fa-eye"></i>'.html_safe, master_signal, :class => 'btn btn-info' %>

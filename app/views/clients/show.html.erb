@@ -250,7 +250,7 @@
                         <tr>
                           <td style="text-align: center;"><%= (@client.pdm_id == contact.id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
                           <td style="text-align: center;"><%= (@client.poc_id == contact.id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
-                          <td><%= contact.name %></td>
+                          <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
                           <td><%= contact.email %></td>
                           <td><%= contact.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.address) : contact.address %></td>
                           <td><%= contact.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.phone) : contact.work_phone %></td>

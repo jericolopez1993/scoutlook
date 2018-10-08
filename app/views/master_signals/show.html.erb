@@ -38,7 +38,7 @@
           <div class="form-group row m-b-15">
             <label class="col-md-3 col-form-label">Contact:</label>
             <div class="col-md-7">
-              <%=  @master_signal.client_contact.nil? ? "" : "#{generate_alphanumeric_id(@master_signal.client_contact.name, @master_signal.client_contact.id)} (#{@master_signal.client_contact.name})" %>
+              <%=  @master_signal.client_contact.nil? ? "" : "#{generate_alphanumeric_id(@master_signal.client_contact.last_name, @master_signal.client_contact.id)} (#{@master_signal.client_contact.last_name})" %>
             </div>
           </div>
           <div class="form-group row m-b-15">

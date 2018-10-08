@@ -40,6 +40,7 @@ gem 'bootsnap', '= 1.1.6', require: false
 gem 'devise'
 gem 'tinymce-rails'
 gem 'jquery-inputmask-rails', github: 'knapo/jquery-inputmask-rails'
+gem "rolify"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
