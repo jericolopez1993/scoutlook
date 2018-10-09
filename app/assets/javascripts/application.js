@@ -40,6 +40,7 @@
 //= require vendor/form-slider-switcher.demo
 //= require vendor/countries
 //= require vendor/jquery.chained
+//= require vendor/bootstrap-datepicker.min
 //= require inputmask
 //= require jquery.inputmask
 //= require inputmask.extensions

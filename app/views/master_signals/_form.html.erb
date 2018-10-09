@@ -46,7 +46,7 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :client_contact_id, 'Contact *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :client_contact_id, ClientContact.all.collect {|l| [l.name, l.id, {'data-chained'=> "#{l.client_id}"}]},{:include_blank => true, :selected => master_signal.client_contact_id}, class: 'form-control', id: 'client_contact_id', 'data-parsley-required' => true %>
+                  <%= form.select :client_contact_id, ClientContact.all.collect {|l| ["#{l.first_name} #{l.last_name}", l.id, {'data-chained'=> "#{l.client_id}"}]},{:include_blank => true, :selected => master_signal.client_contact_id}, class: 'form-control', id: 'client_contact_id', 'data-parsley-required' => true %>
                   </div>
                 </div>
                   <div class="form-group row m-b-15">
