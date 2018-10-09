@@ -34,7 +34,7 @@
                     <div class="form-group row m-b-15">
                       <%= form.label :client_type, 'Type *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
-                      <%= form.select :client_type, options_for_select(['Shipper', 'Carrier'], client.client_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                      <%= form.select :client_type, options_for_select(['Shipper', 'Carrier', 'Destination'], client.client_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
