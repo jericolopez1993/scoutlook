@@ -72,6 +72,16 @@ class ClientsController < ApplicationController
     end
   end
 
+  def origins
+    if  params[:client_id].present?
+      client = Client.find(params[:client_id])
+      render json: {:client_id => client.id, :origins => client.origin}
+    else
+      render json: {:client_id => nil, :origins => nil}
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client

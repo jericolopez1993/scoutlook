@@ -74,6 +74,10 @@ $(document).on('turbolinks:load', function(){
           shipmentFields(this.value);
       });
 
+      $("#master_invoice_shipper_id").change(function(){
+        selectOriginClient($(this).val());
+      });
+
       $('.total_charge_fields').keyup(function() {
           addTotalNumbers('total_charge_fields', 'shipment_total_charge');
           addTotalNumbers('total_charge_fields', 'master_invoice_total_charge_shipment');
@@ -152,6 +156,17 @@ function addTotalNumbers(className, id) {
     }
   })
     $('#'+id).val(total_num);
+}
+
+function selectOriginClient(client_id) {
+  $.ajax({
+    method: 'get',
+    url: "/clients/origins",
+    data: {client_id: client_id}
+  }).done(function(data) {
+    $("#origin_id").val(data.client_id).change();
+    $("#origin_location_id").val(data.origins).change();
+  })
 }
 
 function getOriginDestination(origin, destination){

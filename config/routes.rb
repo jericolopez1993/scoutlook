@@ -17,7 +17,11 @@ Rails.application.routes.draw do
       get     'origin_destination'
     end
   end
-  resources :clients
+  resources :clients do
+    collection do
+      get     'origins'
+    end
+  end
   devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     authenticated :user do
