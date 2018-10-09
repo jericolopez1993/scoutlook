@@ -27,4 +27,8 @@ class MasterInvoice < ApplicationRecord
       nil
     end
   end
+
+  def child_total_charge
+    Shipment.where(:header => self.id).sum(:total_charge)
+  end
 end

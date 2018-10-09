@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_08_152055) do
+ActiveRecord::Schema.define(version: 2018_10_09_161419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,7 +140,6 @@ ActiveRecord::Schema.define(version: 2018_10_08_152055) do
     t.date "invoicing_period_start"
     t.date "invoicing_period_end"
     t.decimal "total_charge"
-    t.decimal "variance"
     t.boolean "variance_approved"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
