@@ -11,7 +11,7 @@ module ApplicationHelper
 
   def convert_date(val)
     unless val.nil?
-      Date.parse(val.to_s).format("%d/%m/%Y")
+      Date.parse(val.to_s).strftime("%d/%m/%Y")
     end
   end
 end

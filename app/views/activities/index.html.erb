@@ -31,8 +31,8 @@
                           <td><%= activity.rep.nil? ? "" : "#{generate_alphanumeric_id((activity.rep.last_name.nil? ? "REP" : activity.rep.last_name), activity.rep_id)} (#{activity.rep.first_name} #{activity.rep.last_name})" %></td>
                           <td><%= activity.annual_value %></td>
                           <td><%= activity.status ? 'Open' : 'Closed' %></td>
-                          <td><%= activity.date_opened %></td>
-                          <td><%= activity.date_closed %></td>
+                          <td><%= convert_date(activity.date_opened) %></td>
+                          <td><%= convert_date(activity.date_closed) %></td>
                           <td>
                             <%= link_to '<i class="far fa-eye"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-info' %>
                             <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-warning' %>

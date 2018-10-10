@@ -58,13 +58,13 @@
     <div class="form-group row m-b-15">
       <label class="col-md-3 col-form-label">Date Opened:</label>
       <div class="col-md-7">
-        <%= @activity.date_opened %>
+        <%= convert_date(@activity.date_opened) %>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-3 col-form-label">Date Closed:</label>
       <div class="col-md-7">
-        <%= @activity.date_closed %>
+        <%= convert_date(@activity.date_closed) %>
       </div>
     </div>
     <div class="form-group row m-b-15">
