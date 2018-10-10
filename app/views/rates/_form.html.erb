@@ -112,7 +112,7 @@
       </div>
       <div class="panel-body">
                     <div class="form-group row m-b-15">
-                      <%= form.label :origin_country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <%= form.label :origin_country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
                       <%= form.select :origin_country, options_for_select(['USA', 'CANADA'], rate.origin_country),{:include_blank => true}, class: 'form-control' %>
                       </div>
@@ -124,7 +124,7 @@
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
-                      <%= form.label :origin_city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <%= form.label :origin_city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
                         <%= form.select :origin_city, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => rate.origin_city}, class: 'form-control'%>
                       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="panel-body">
                   <div class="form-group row m-b-15">
-                    <%= form.label :destination_country, 'County:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <%= form.label :destination_country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
                     <div class="col-md-8 col-sm-8">
                     <%= form.select :destination_country, options_for_select(['USA', 'CANADA'], rate.destination_country),{:include_blank => true}, class: 'form-control' %>
                     </div>
@@ -151,7 +151,7 @@
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
-                      <%= form.label :destination_city, 'City:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <%= form.label :destination_city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
                         <%= form.select :destination_city, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => rate.destination_city}, class: 'form-control'%>
                       </div>
