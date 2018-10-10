@@ -49,9 +49,10 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :annual_value, 'Annual Value *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :annual_value, options_for_select(['0 - 5,000', '5,000 - 25,000', '25,000 - 50,000', '50,000 - 100,000', '100,000+'], activity.annual_value),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                  <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+'], activity.annual_value),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
                 </div>
+
                 <div class="form-group row m-b-15">
                   <%= form.label :proposal_pdf, 'Proposal PDF:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
