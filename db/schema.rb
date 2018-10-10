@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_10_163143) do
+ActiveRecord::Schema.define(version: 2018_10_10_172506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2018_10_10_163143) do
     t.string "last_name"
     t.boolean "same_ho", default: false
     t.string "first_name"
+    t.string "linkedin_link"
   end
 
   create_table "client_locations", force: :cascade do |t|

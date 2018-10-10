@@ -242,6 +242,7 @@
                         <th class="text-nowrap">Address</th>
                         <th class="text-nowrap">Work Phone</th>
                         <th class="text-nowrap">Cell</th>
+                        <th class="text-nowrap">Social</th>
                         <th class="text-nowrap" data-orderable="false">Actions</th>
                       </tr>
                     </thead>
@@ -251,10 +252,11 @@
                           <td style="text-align: center;"><%= (@client.pdm_id == contact.id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
                           <td style="text-align: center;"><%= (@client.poc_id == contact.id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
                           <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
-                          <td><%= contact.email %></td>
+                          <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %>" target="_top"><%= contact.email %>&nbsp;<i class="far fa-envelope"></a></i></td>
                           <td><%= contact.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.address) : contact.address %></td>
                           <td><%= contact.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.phone) : contact.work_phone %></td>
                           <td><%= contact.home_phone %></td>
+                          <td style="text-align: center;"><%= contact.linkedin_link.nil? ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
                           <td>
                             <a class="btn btn-warning" href="<%= edit_client_contact_path(contact) %>"><i class="far fa-edit"></i></a>&nbsp;
                             <a data-confirm="Are you sure?" class="btn btn-danger" rel="nofollow" data-method="delete" href="/client_contacts/<%= contact.id %>"><i class="far fa-trash-alt"></i></a>
