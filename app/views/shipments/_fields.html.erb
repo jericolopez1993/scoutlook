@@ -39,6 +39,12 @@
                       <%= form.select :terms, options_for_select(['Prepaid', 'Collect'], shipment.terms),{:include_blank => true}, class: 'form-control' %>
                       </div>
                     </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :notes, 'Notes:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce', :value => shipment.notes)  %>
+                      </div>
+                    </div>
 
                 </div>
     </div>
@@ -236,6 +242,7 @@
   <% end %>
   </div>
 </div>
+<%= tinymce %>
 <script language="javascript">
 <% if !shipment.header.nil? %>
 <% master_invoice = MasterInvoice.find(shipment.header) %>
