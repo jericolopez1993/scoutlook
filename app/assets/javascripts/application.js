@@ -57,6 +57,12 @@ $(document).on('turbolinks:load', function(){
   shipmentFields($('input[type=radio][name="master_invoice[shipment_entry]"]:checked').val());
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
+
+	$('.datepicker-autoClose').datepicker({
+		todayHighlight: true,
+		autoclose: true
+	});
+
   $(function(){
       Inputmask().mask(document.querySelectorAll("input"));
 
