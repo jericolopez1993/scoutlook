@@ -31,7 +31,7 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :loc_type, 'Type *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :loc_type, options_for_select(['Plant', 'Warehouse', 'DC', 'Supplier', 'Customer', 'Third Party'], client_location.loc_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+                  <%= form.select :loc_type, options_for_select(['Plant', 'Warehouse', 'DC', 'Supplier', 'Customer', 'Third Party'], client_location.loc_type),{:include_blank => true}, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
