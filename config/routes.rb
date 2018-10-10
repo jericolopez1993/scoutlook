@@ -38,5 +38,10 @@ Rails.application.routes.draw do
   match '/users/:id',   to: 'users#update',   via: 'patch'
   match '/users/:id',   to: 'users#update',   via: 'put'
   match '/users/:id',   to: 'users#destroy',   via: 'delete'
+
+ #APIs
+ namespace :api do
+   resources :locations
+ end
  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.htmlerb
 end

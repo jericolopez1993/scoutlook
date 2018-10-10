@@ -49,6 +49,7 @@
 //= require inputmask.numeric.extensions
 //= require inputmask.regex.extensions
 //= require tinymce
+//= require select2
 //= require_tree .
 $(document).on('turbolinks:load', function(){
   activityOutcomeFields($("#activity_activity_type").val());
@@ -62,6 +63,40 @@ $(document).on('turbolinks:load', function(){
 		todayHighlight: true,
 		autoclose: true
 	});
+  $(".combo-dropdown").select2({
+    tags: true,
+    createTag: function (params) {
+      return {
+        id: params.term,
+        text: params.term,
+        newOption: true
+      }
+    },
+     templateResult: function (data) {
+      var $result = $("<span>a</span>");
+      $result.text(data.text);
+
+      if (data.newOption) {
+        $result.append(" <em>(new)</em>");
+      }
+
+      return $result;
+    }
+  })
+  $( ".combo-dropdown" ).change(function() {
+    params = $(this).val();
+        $.ajax({
+          method: 'post',
+          url: "/api/locations",
+          data: {location: {name: params}}
+        }).done(function(data) {
+          return {
+            id: data.id,
+            text: data.name,
+            newOption: true
+          }
+        })
+  });
 
   $(function(){
       Inputmask().mask(document.querySelectorAll("input"));
