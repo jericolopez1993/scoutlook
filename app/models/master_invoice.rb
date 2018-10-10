@@ -1,4 +1,5 @@
 class MasterInvoice < ApplicationRecord
+  has_one_attached :attachment_file
 
   def shipper
     if !self.shipper_id.nil?

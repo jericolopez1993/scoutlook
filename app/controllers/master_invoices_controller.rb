@@ -28,6 +28,9 @@ class MasterInvoicesController < ApplicationController
     @master_invoice.variance_approved = params[:variance_approved].present?
     respond_to do |format|
       if @master_invoice.save
+        if params[:master_invoice][:attachment_file].present?
+          @master_invoice.attachment_file.attach(params[:master_invoice][:attachment_file])
+        end
         if @master_invoice.shipment_entry == "single shipment"
             @shipment = Shipment.new(shipment_params)
             @shipment.total_charge = params[:master_invoice][:total_charge_shipment]
@@ -49,6 +52,9 @@ class MasterInvoicesController < ApplicationController
     params[:master_invoice][:variance_approved] = params[:variance_approved].present?
     respond_to do |format|
       if @master_invoice.update(master_invoice_params)
+        if params[:master_invoice][:attachment_file].present?
+          @master_invoice.attachment_file.attach(params[:master_invoice][:attachment_file])
+        end
         if @master_invoice.shipment_entry == "single shipment"
             @shipments = Shipment.where(:header => @master_invoice.id)
             if @shipments.present? && !@shipments.nil?

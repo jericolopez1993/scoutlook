@@ -38,7 +38,14 @@
             <%= @master_invoice.master_account %>
           </div>
         </div>
-
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Attachment:</label>
+          <div class="col-md-7">
+            <% if @master_invoice.attachment_file.attached? %>
+              <%= link_to @master_invoice.attachment_file.filename, rails_blob_path(@master_invoice.attachment_file, disposition: 'preview') %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
