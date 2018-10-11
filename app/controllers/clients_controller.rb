@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: [:show, :edit, :update, :destroy, :remove_attachment]
 
   # GET /clients
   # GET /clients.json
@@ -80,6 +80,18 @@ class ClientsController < ApplicationController
       render json: {:client_id => nil, :origins => nil}
     end
 
+  end
+
+  def remove_attachment
+    respond_to do |format|
+      if @client.attachment_file.find(params[:attachment_id]).purge
+        format.html { redirect_to client_path(:id => @client.id), notice: 'Attachment Successfully Removed.' }
+        format.json { render :show, status: :ok, location: @client }
+      else
+        format.html { redirect_to client_path(:id => @client.id), error: 'Attachment Remove Failed.' }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private

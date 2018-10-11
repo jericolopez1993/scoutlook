@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :clients do
     collection do
       get     'origins'
+      delete  'remove_attachment'
     end
   end
   devise_for :users, controllers: { registrations: 'users/registrations' }
