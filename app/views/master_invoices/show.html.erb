@@ -109,5 +109,21 @@
 <% if @master_invoice.shipment_entry == 'single shipment'%>
   <%= render 'shipments/show_fields', shipment: @master_invoice.shipment %>
 <% else %>
+    <%= form_with(model: Shipment.new, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <div class="panel-heading-btn">
+            <%= form.submit 'Submit', :class => 'btn btn-primary btn-xs' %>
+
+          </div>
+          <h4 class="panel-title">Quick Shipment</h4>
+        </div>
+        <div class="panel-body">
+          <%= form.hidden_field :header, :value => @master_invoice.id %>
+          <%= form.hidden_field :total_charge %>
+          <%= render 'quick_shipment_form', form: form %>
+        </div>
+      </div>
+    <% end %>
   <%= render 'shipments/table', shipments: Shipment.where(:header => @master_invoice.id), master_invoice: @master_invoice %>
 <% end %>
