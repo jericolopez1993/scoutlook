@@ -53,7 +53,8 @@
                     <div class="form-group row m-b-15">
                       <%= form.label :annual_revenue, 'Annual Revenue:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
-                      <%= form.number_field :annual_revenue, class: 'form-control', 'data-parsley-type' => 'number' %>
+                        <%= form.select :annual_revenue, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+'], client.annual_revenue),{:include_blank => true}, class: 'form-control' %>
+
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
