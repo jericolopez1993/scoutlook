@@ -5,6 +5,7 @@ class RepsController < ApplicationController
   # GET /reps.json
   def index
     @reps = Rep.all
+    authorize @reps
   end
 
   # GET /reps/1
@@ -15,6 +16,7 @@ class RepsController < ApplicationController
   # GET /reps/new
   def new
     @rep = Rep.new
+    authorize @rep
   end
 
   # GET /reps/1/edit
@@ -65,6 +67,7 @@ class RepsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_rep
       @rep = Rep.find(params[:id])
+      authorize @rep
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

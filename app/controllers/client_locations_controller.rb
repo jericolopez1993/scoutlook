@@ -5,6 +5,7 @@ class ClientLocationsController < ApplicationController
   # GET /client_locations.json
   def index
     @client_locations = ClientLocation.all
+    authorize @client_locations
   end
 
   # GET /client_locations/1
@@ -18,6 +19,7 @@ class ClientLocationsController < ApplicationController
     if params[:client_id].present?
       @client_location.client_id = params[:client_id]
     end
+    authorize @client_location
   end
 
   # GET /client_locations/1/edit
@@ -111,6 +113,7 @@ class ClientLocationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_client_location
       @client_location = ClientLocation.find(params[:id])
+      authorize @client_location
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

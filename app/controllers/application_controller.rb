@@ -1,8 +1,15 @@
 class ApplicationController < ActionController::Base
+  include Pundit
 before_action :configure_permitted_parameters, if: :devise_controller?
 layout :layout_by_resource
+rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
+
+    def user_not_authorized
+      flash[:error] = "You are not authorized to perform this action."
+      redirect_to(request.referrer || root_path)
+    end
 
   def layout_by_resource
     if devise_controller?

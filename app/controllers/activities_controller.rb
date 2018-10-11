@@ -6,6 +6,7 @@ class ActivitiesController < ApplicationController
   # GET /activities.json
   def index
     @activities = Activity.all
+    authorize @activities
   end
 
   # GET /activities/1
@@ -19,6 +20,7 @@ class ActivitiesController < ApplicationController
     if params[:client_id].present?
       @activity.client_id = params[:client_id]
     end
+    authorize @activity
   end
 
   # GET /activities/1/edit
@@ -127,6 +129,7 @@ class ActivitiesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_activity
       @activity = Activity.find(params[:id])
+      authorize @activity
     end
 
     def set_previous_controller

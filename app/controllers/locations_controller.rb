@@ -5,6 +5,7 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     @locations = Location.all
+    authorize @locations
   end
 
   # GET /locations/1
@@ -15,6 +16,7 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
+    authorize @location
   end
 
   # GET /locations/1/edit
@@ -65,6 +67,7 @@ class LocationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_location
       @location = Location.find(params[:id])
+      authorize @location
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

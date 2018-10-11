@@ -5,6 +5,7 @@ class MasterInvoicesController < ApplicationController
   # GET /master_invoices.json
   def index
     @master_invoices = MasterInvoice.all
+    authorize @master_invoices
   end
 
   # GET /master_invoices/1
@@ -15,6 +16,7 @@ class MasterInvoicesController < ApplicationController
   # GET /master_invoices/new
   def new
     @master_invoice = MasterInvoice.new
+    authorize @master_invoice
   end
 
   # GET /master_invoices/1/edit
@@ -90,6 +92,7 @@ class MasterInvoicesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_master_invoice
       @master_invoice = MasterInvoice.find(params[:id])
+      authorize @master_invoice
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

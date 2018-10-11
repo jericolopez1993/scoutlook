@@ -6,6 +6,7 @@ class RatesController < ApplicationController
   # GET /rates.json
   def index
     @rates = Rate.all
+    authorize @rates
   end
 
   # GET /rates/1
@@ -19,6 +20,7 @@ class RatesController < ApplicationController
     if params[:client_id].present?
       @rate.client_id = params[:client_id]
     end
+    authorize @rate
   end
 
   # GET /rates/1/edit
@@ -75,6 +77,7 @@ class RatesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_rate
       @rate = Rate.find(params[:id])
+      authorize @rate
     end
 
     def set_previous_controller

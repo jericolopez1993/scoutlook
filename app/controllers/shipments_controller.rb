@@ -5,6 +5,7 @@ class ShipmentsController < ApplicationController
   # GET /shipments.json
   def index
     @shipments = Shipment.all
+    authorize @shipments
   end
 
   # GET /shipments/1
@@ -18,7 +19,7 @@ class ShipmentsController < ApplicationController
     if params[:header].present?
       @shipment.header = params[:header]
     end
-
+    authorize @shipment
   end
 
   # GET /shipments/1/edit
@@ -69,6 +70,7 @@ class ShipmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_shipment
       @shipment = Shipment.find(params[:id])
+      authorize @shipment
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

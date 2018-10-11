@@ -5,6 +5,7 @@ class ClientContactsController < ApplicationController
   # GET /client_contacts.json
   def index
     @client_contacts = ClientContact.all
+    authorize @client_contacts
   end
 
   # GET /client_contacts/1
@@ -18,6 +19,7 @@ class ClientContactsController < ApplicationController
     if params[:client_id].present?
       @client_contact.client_id = params[:client_id]
     end
+    authorize @client_contact
   end
 
   # GET /client_contacts/1/edit
@@ -99,6 +101,7 @@ class ClientContactsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_client_contact
       @client_contact = ClientContact.find(params[:id])
+      authorize @client_contact
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

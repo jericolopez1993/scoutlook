@@ -5,6 +5,7 @@ class MasterSignalsController < ApplicationController
   # GET /master_signals.json
   def index
     @master_signals = MasterSignal.all
+    authorize @master_signals
   end
 
   # GET /master_signals/1
@@ -15,6 +16,7 @@ class MasterSignalsController < ApplicationController
   # GET /master_signals/new
   def new
     @master_signal = MasterSignal.new
+    authorize @master_signal
   end
 
   # GET /master_signals/1/edit
@@ -65,6 +67,7 @@ class MasterSignalsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_master_signal
       @master_signal = MasterSignal.find(params[:id])
+      authorize @master_signal
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

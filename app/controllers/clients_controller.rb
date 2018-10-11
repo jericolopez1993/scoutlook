@@ -5,6 +5,7 @@ class ClientsController < ApplicationController
   # GET /clients.json
   def index
     @clients = Client.all
+    authorize @clients
   end
 
   # GET /clients/1
@@ -15,6 +16,7 @@ class ClientsController < ApplicationController
   # GET /clients/new
   def new
     @client = Client.new
+    authorize @client
   end
 
   # GET /clients/1/edit
@@ -106,6 +108,7 @@ class ClientsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_client
       @client = Client.find(params[:id])
+      authorize @client
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

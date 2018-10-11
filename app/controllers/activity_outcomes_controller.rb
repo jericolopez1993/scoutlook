@@ -5,6 +5,7 @@ class ActivityOutcomesController < ApplicationController
   # GET /activity_outcomes.json
   def index
     @activity_outcomes = ActivityOutcome.all
+    authorize @activity_outcomes
   end
 
   # GET /activity_outcomes/1
@@ -15,6 +16,7 @@ class ActivityOutcomesController < ApplicationController
   # GET /activity_outcomes/new
   def new
     @activity_outcome = ActivityOutcome.new
+    authorize @activity_outcome
   end
 
   # GET /activity_outcomes/1/edit
@@ -65,6 +67,7 @@ class ActivityOutcomesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_activity_outcome
       @activity_outcome = ActivityOutcome.find(params[:id])
+      authorize @activity_outcome
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
