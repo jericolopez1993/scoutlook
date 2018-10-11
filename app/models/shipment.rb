@@ -28,4 +28,12 @@ class Shipment < ApplicationRecord
       nil
     end
   end
+
+  def invoice
+    if !self.header.nil?
+      MasterInvoice.find(self.header)
+    else
+      nil
+    end
+  end
 end

@@ -183,18 +183,10 @@
 <!-- begin panel -->
 <div class="panel panel-inverse">
   <div class="panel-heading">
-    <h4 class="panel-title">Inbound Shipments</h4>
+    <h4 class="panel-title">Shipments</h4>
   </div>
   <div class="panel-body">
-    <%= render 'shipments', shipments: Shipment.where(:destination_id => @client.id) %>
-  </div>
-</div>
-<div class="panel panel-inverse">
-  <div class="panel-heading">
-    <h4 class="panel-title">Outbound Shipments</h4>
-  </div>
-  <div class="panel-body">
-    <%= render 'shipments', shipments: Shipment.where(:origin_id => @client.id) %>
+    <%= render 'shipments', shipments: Shipment.where("origin_id = #{@client.id} OR destination_id = #{@client.id}"), client_id: @client.id %>
   </div>
 </div>
 <!-- end panel -->
