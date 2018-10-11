@@ -29,10 +29,18 @@ class ClientsController < ApplicationController
       @client_location = ClientLocation.new(address_params)
       if @client_location.save
         @client.head_office = @client_location.id
+        if params[:origin].present?
+          @client.origin = @client_location.id
+        end
+        if params[:destination].present?
+          @client.destination = @client_location.id
+        end
       end
     end
+
     respond_to do |format|
       if @client.save
+        @client_location.update_attributes(:client_id => @client.id)
         if params[:client][:attachment_file].present?
           @client.attachment_file.attach(params[:client][:attachment_file])
         end
