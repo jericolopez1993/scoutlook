@@ -1,5 +1,5 @@
 class Activity < ApplicationRecord
-  has_one_attached :proposal_pdf
+  has_many_attached :proposal_pdf
   has_one_attached :credit_application
   before_save :set_open_and_close_date
 

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :activities do
     collection do
       post        "quick_create"
+      delete  'remove_attachment'
     end
   end
   resources :locations

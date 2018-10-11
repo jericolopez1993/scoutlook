@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  before_action :set_activity, only: [:show, :edit, :update, :destroy, :remove_attachment]
   before_action :set_previous_controller, only: [:show, :edit, :update, :destroy, :new]
 
   # GET /activities
@@ -106,6 +106,18 @@ class ActivitiesController < ApplicationController
         format.json { render :show, status: :created, location: @activity }
       else
         format.html { render :new }
+        format.json { render json: @activity.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def remove_attachment
+    respond_to do |format|
+      if @activity.proposal_pdf.find(params[:attachment_id]).purge
+        format.html { redirect_to activity_path(:id => @activity.id), notice: 'Attachment Successfully Removed.' }
+        format.json { render :show, status: :ok, location: @activity }
+      else
+        format.html { redirect_to activity_path(:id => @activity.id), error: 'Attachment Remove Failed.' }
         format.json { render json: @activity.errors, status: :unprocessable_entity }
       end
     end

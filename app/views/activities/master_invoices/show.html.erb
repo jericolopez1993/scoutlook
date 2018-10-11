@@ -1,0 +1,113 @@
+
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: 'Master Invoices', sub_header_title: 'Create/Edit/View'%>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+          <%= link_to 'Edit', edit_master_invoice_path(@master_invoice), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
+          <%= link_to 'Back', master_invoices_path, :class => 'btn btn-info btn-xs' %>
+        </div>
+        <h4 class="panel-title">ID: <%= generate_alphanumeric_id(@master_invoice.shipment_type, @master_invoice.id) %></h4>
+      </div>
+      <div class="panel-body">
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Shipment Type:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.shipment_type %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Shipper:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.shipper.nil? ? '' : @master_invoice.shipper.company_name %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Carrier:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.carrier.nil? ? '' : @master_invoice.carrier.company_name %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Master Account:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.master_account %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Attachment:</label>
+          <div class="col-md-7">
+            <% if @master_invoice.attachment_file.attached? %>
+              <%= link_to @master_invoice.attachment_file.filename, rails_blob_path(@master_invoice.attachment_file, disposition: 'preview') %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+
+        </div>
+        <h4 class="panel-title">Invoices</h4>
+      </div>
+      <div class="panel-body">
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Single Invoice Date:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.single_invoice_date %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Invoicing Period Start:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.invoicing_period_start %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Invoicing Period Start:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.invoicing_period_end %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Total from Shipments:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.child_total_charge %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Total Charge:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.total_charge %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Variance:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.total_charge - @master_invoice.child_total_charge %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Approved:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.variance_approved ? '<i class="text-green fas fa-check"></i>'.html_safe : '<i class="text-red fas fa-times"></i>'.html_safe %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<% if @master_invoice.shipment_entry == 'single shipment'%>
+  <%= render 'shipments/show_fields', shipment: @master_invoice.shipment %>
+<% else %>
+  <%= render 'shipments/table', shipments: Shipment.where(:header => @master_invoice.id), master_invoice: @master_invoice %>
+<% end %>
