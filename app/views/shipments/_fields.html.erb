@@ -202,13 +202,14 @@
         <div class="form-group row m-b-15">
           <%= form.label :declared_weight, 'Declared Weight:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :declared_weight, class: 'form-control', value: shipment.declared_weight %>
+          <%= form.text_field :declared_weight, class: 'form-control', value: shipment.declared_weight, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :billed_weight, 'Billed Weight:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :billed_weight, class: 'form-control', value: shipment.billed_weight %>
+          <%= form.text_field :billed_weight, class: 'form-control', value: shipment.billed_weight, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'"%>
+
           </div>
         </div>
         <div class="form-group row m-b-15">
