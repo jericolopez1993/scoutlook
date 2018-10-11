@@ -40,59 +40,59 @@
           <span>Home</span>
         </a>
       </li>
-
-      <li class="<%= (params[:controller] == 'clients') ? 'active' : ''%>">
-        <a href="<%= clients_path %>">
-          <i class="fas fa-users"></i>
-          <span>Clients</span>
-        </a>
-      </li>
-      <li class="<%= (params[:controller] == 'activities') ? 'active' : ''%>">
-        <a href="<%= activities_path %>">
-          <i class="fas fa-book"></i>
-          <span>Activities</span>
-        </a>
-      </li>
-      <li class="<%= (params[:controller] == 'master_invoices') ? 'active' : ''%>">
-        <a href="<%= master_invoices_path %>">
-          <i class="fas fa-file-invoice"></i>
-          <span>Master Invoices</span>
-        </a>
-      </li>
-      <li class="<%= (params[:controller] == 'rates') ? 'active' : ''%>">
-        <a href="<%= rates_path %>">
-        <i class="fas fa-star-half-alt"></i>
-          <span>Rates</span>
-        </a>
-      </li>
-      <li class="<%= (params[:controller] == 'master_signals') ? 'active' : ''%>">
-        <a href="<%= master_signals_path %>">
-          <i class="fas fa-signal"></i>
-          <span>Signal</span>
-        </a>
-      </li>
-      <li class="<%= (params[:controller] == 'reps') ? 'active' : ''%>">
-        <a href="<%= reps_path %>">
-        <i class="fas fa-user-tie"></i>
-          <span>Reps</span>
-        </a>
-      </li>
-
-
-      <li class="has-sub<%= (params[:controller] == 'locations') ? ' active' : ''%>">
-          <a href="javascript:;">
-            <b class="caret"></b>
-            <i class="fas fa-cog"></i>
-            <span>System Settings</span>
+      <% if current_user.has_role?(:admin) %>
+        <li class="<%= (params[:controller] == 'clients') ? 'active' : ''%>">
+          <a href="<%= clients_path %>">
+            <i class="fas fa-users"></i>
+            <span>Clients</span>
           </a>
-          <ul class="sub-menu">
-            <li><a href="<%= locations_path %>"><i class="fas fa-map-marked-alt"></i>&nbsp;<span>Locations</span></a></li>
-            <% if current_user.admin? %>
-              <li><a href="<%= users_path %>">  <i class="fas fa-users-cog"></i>&nbsp;<span>Users</span></a></li>
-            <% end %>
-          </ul>
+        </li>
+        <li class="<%= (params[:controller] == 'activities') ? 'active' : ''%>">
+          <a href="<%= activities_path %>">
+            <i class="fas fa-book"></i>
+            <span>Activities</span>
+          </a>
+        </li>
+        <li class="<%= (params[:controller] == 'master_invoices') ? 'active' : ''%>">
+          <a href="<%= master_invoices_path %>">
+            <i class="fas fa-file-invoice"></i>
+            <span>Master Invoices</span>
+          </a>
+        </li>
+        <li class="<%= (params[:controller] == 'rates') ? 'active' : ''%>">
+          <a href="<%= rates_path %>">
+          <i class="fas fa-star-half-alt"></i>
+            <span>Rates</span>
+          </a>
+        </li>
+        <li class="<%= (params[:controller] == 'master_signals') ? 'active' : ''%>">
+          <a href="<%= master_signals_path %>">
+            <i class="fas fa-signal"></i>
+            <span>Signal</span>
+          </a>
+        </li>
+        <li class="<%= (params[:controller] == 'reps') ? 'active' : ''%>">
+          <a href="<%= reps_path %>">
+          <i class="fas fa-user-tie"></i>
+            <span>Reps</span>
+          </a>
         </li>
 
+
+        <li class="has-sub<%= (params[:controller] == 'locations') ? ' active' : ''%>">
+            <a href="javascript:;">
+              <b class="caret"></b>
+              <i class="fas fa-cog"></i>
+              <span>System Settings</span>
+            </a>
+            <ul class="sub-menu">
+              <li><a href="<%= locations_path %>"><i class="fas fa-map-marked-alt"></i>&nbsp;<span>Locations</span></a></li>
+              <% if current_user.admin? %>
+                <li><a href="<%= users_path %>">  <i class="fas fa-users-cog"></i>&nbsp;<span>Users</span></a></li>
+              <% end %>
+            </ul>
+          </li>
+      <% end %>
       <!-- begin sidebar minify button -->
       <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
       <!-- end sidebar minify button -->
