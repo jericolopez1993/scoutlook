@@ -57,6 +57,8 @@ $(document).on('turbolinks:load', function(){
   isHeadOffice($('[data-change="check-switchery-state-same-office"]').prop('checked'));
   shipmentFields($('input[type=radio][name="master_invoice[shipment_entry]"]:checked').val());
   addressCreate($('[data-change="check-switchery-state-new-location"]').prop('checked'));
+  addressCreateOD($('[data-change="check-switchery-state-new-location-origin"]').prop('checked'), 'origin');
+  addressCreateOD($('[data-change="check-switchery-state-new-location-destination"]').prop('checked'), 'destination');
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
 
@@ -120,6 +122,13 @@ $(document).on('turbolinks:load', function(){
         $("#state").val('').change();
         addressCreate($(this).prop('checked'));
       });
+
+      $(document).on('change', '[data-change="check-switchery-state-new-location-origin"]', function() {
+        addressCreateOD($(this).prop('checked'), 'origin');
+      });
+      $(document).on('change', '[data-change="check-switchery-state-new-location-destination"]', function() {
+        addressCreateOD($(this).prop('checked'), 'destination');
+      });
       $('input[type=radio][name="master_invoice[shipment_entry]"]').change(function() {
           shipmentFields(this.value);
       });
@@ -145,6 +154,12 @@ $(document).on('turbolinks:load', function(){
 
       $("#location_id").change(function(){
         locationDetails($(this).val());
+      });
+      $("#origin_location_id").change(function(){
+        locationDetailsOD($(this).val(), 'origin');
+      });
+      $("#destination_location_id").change(function(){
+        locationDetailsOD($(this).val(), 'destination');
       });
   });
 });
@@ -193,6 +208,30 @@ function addressCreate(isTrue) {
     $("#postal").attr("disabled", true);
     $("#country").attr("disabled", true);
     $("#state").attr("disabled", true);
+  }
+}
+
+function addressCreateOD(isTrue, name) {
+  $("#"+ name +"_address").val('');
+  $("#"+ name +"_city").val('');
+  $("#"+ name +"_postal").val('');
+  $("#"+ name +"_country").val('-1').change();
+  $("#"+ name +"_state").val('').change();
+  if (isTrue) {
+    $("."+ name +"-location-fields").hide();
+    $("#"+ name +"_address").attr("disabled", false);
+    $("#"+ name +"_city").attr("disabled", false);
+    $("#"+ name +"_postal").attr("disabled", false);
+    $("#"+ name +"_country").attr("disabled", false);
+    $("#"+ name +"_state").attr("disabled", false);
+
+  }else{
+    $("."+ name +"-location-fields").show();
+    $("#"+ name +"_address").attr("disabled", true);
+    $("#"+ name +"_city").attr("disabled", true);
+    $("#"+ name +"_postal").attr("disabled", true);
+    $("#"+ name +"_country").attr("disabled", true);
+    $("#"+ name +"_state").attr("disabled", true);
   }
 }
 
@@ -251,6 +290,20 @@ function locationDetails(id) {
     $("#state").val(data.state).change();
     $("#city").val(data.city);
     $("#postal").val(data.postal);
+  })
+
+}
+
+function locationDetailsOD(id, name) {
+  $.ajax({
+    method: 'get',
+    url: "/api/locations/"+id
+  }).done(function(data) {
+    $("#"+ name +"_address").val(data.address);
+    $("#"+ name +"_country").val(data.country).change();
+    $("#"+ name +"_state").val(data.state).change();
+    $("#"+ name +"_city").val(data.city);
+    $("#"+ name +"_postal").val(data.postal);
   })
 
 }
