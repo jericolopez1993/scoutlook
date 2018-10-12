@@ -19,8 +19,8 @@
                   <% shipments.each do |shipment| %>
                   <tr>
                     <td style="text-align: center;"><%= (shipment.destination == client_id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
-                    <td><%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.state}, #{shipment.origin_location.country}" %></td>
-                    <td><%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.state}, #{shipment.destination_location.country}" %></td>
+                    <td><%= shipment.origin_location.nil? ? "" : (shipment.origin_location.location.nil? ? '' : "#{shipment.origin_location.location.state}, #{shipment.origin_location.location.country}") %></td>
+                    <td><%= shipment.destination_location.nil? ? "" : (shipment.destination_location.location.nil? ? '' : "#{shipment.destination_location.location.state}, #{shipment.destination_location.location.country}") %></td>
                     <td><%= shipment.billed_weight.nil? ? 0 : shipment.billed_weight %></td>
                     <td><%= shipment.total_charge.nil? ? 0 : shipment.total_charge %></td>
                     <td><%= (shipment.billed_weight.nil? ? 0 : shipment.billed_weight) / (shipment.total_charge.nil? ? 0 : shipment.total_charge) %></td>

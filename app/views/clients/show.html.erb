@@ -224,9 +224,9 @@
                           <td><%= generate_alphanumeric_id(client_location.loc_type, client_location.id) %></td>
                           <td><%= client_location.name %></td>
                           <td><%= client_location.loc_type %></td>
-                          <td><%= client_location.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.address) : client_location.address %></td>
-                          <td><%= client_location.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.country) : client_location.country %></td>
-                          <td><%= client_location.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.state) : client_location.state %></td>
+                          <td><%= client_location.same_ho ? (@client.head_office_location.nil? ? '' : (@client.head_office_location.location.nil? ? '' : @client.head_office_location.location.address)) : (client_location.location.nil? ? '' : client_location.location.address)%></td>
+                          <td><%= client_location.same_ho ? (@client.head_office_location.nil? ? '' : (@client.head_office_location.location.nil? ? '' : @client.head_office_location.location.country)) : (client_location.location.nil? ? '' : client_location.location.country) %></td>
+                          <td><%= client_location.same_ho ? (@client.head_office_location.nil? ? '' : (@client.head_office_location.location.nil? ? '' : @client.head_office_location.location.state)) : (client_location.location.nil? ? '' : client_location.location.state) %></td>
                           <td><%= client_location.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.phone) : client_location.phone %></td>
                           <td>
                             <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_client_location_path(client_location), :class => 'btn btn-warning' %>
@@ -268,7 +268,7 @@
                           <td style="text-align: center;"><%= (@client.poc_id == contact.id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
                           <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
                           <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %>" target="_top"><%= contact.email %>&nbsp;<i class="far fa-envelope"></a></i></td>
-                          <td><%= contact.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.address) : contact.address %></td>
+                          <td><%= contact.same_ho ? (@client.head_office_location.nil? ? '' : (@client.head_office_location.location.nil? ? '' : @client.head_office_location.location.address)) : (contact.location.nil? ? '' : contact.location.address)%></td>
                           <td><%= contact.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.phone) : contact.work_phone %></td>
                           <td><%= contact.home_phone %></td>
                           <td style="text-align: center;"><%= contact.linkedin_link.nil? ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>

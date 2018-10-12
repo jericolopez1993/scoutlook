@@ -84,38 +84,7 @@
         <h4 class="panel-title">Address</h4>
       </div>
       <div class="panel-body">
-
-                    <div class="form-group row m-b-15">
-                      <%= form.label :address, 'Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :address, class: 'form-control' %>
-                      </div>
-                    </div>
-
-                    <div class="form-group row m-b-15">
-                      <%= form.label :country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                      <%= form.select :country, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
-                      </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                      <%= form.label :state, 'Province / State:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                      <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
-                      </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                      <%= form.label :postal, 'Postal / Zip:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :postal, class: 'form-control', 'data-inputmask' => "'mask': '******'" %>
-                      </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                      <%= form.label :city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                        <%= form.select :city, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true}, class: 'form-control'%>
-                      </div>
-                    </div>
+                    <%= render 'address_form', form: form %>
                     <div class="form-group row m-b-15">
                       <%= form.label :phone, 'Phone #:', class: 'col-md-4 colVolume-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
@@ -236,6 +205,3 @@
 <% end %>
 <%= tinymce %>
 <!-- end panel -->
-<script language="javascript">
-	populateCountries("client_country", "client_state");
-</script>

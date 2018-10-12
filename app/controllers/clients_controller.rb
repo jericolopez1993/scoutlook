@@ -27,8 +27,17 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-    if params[:client][:address].present? ||  params[:client][:city].present? ||  params[:client][:state].present? ||  params[:client][:postal].present? ||  params[:client][:city].present?
-      @client_location = ClientLocation.new(address_params)
+    if params[:client][:location_id].present? || params[:client][:address].present? ||  params[:client][:city].present? ||  params[:client][:state].present? ||  params[:client][:postal].present? ||  params[:client][:city].present?
+      if params[:new_location].present?
+        @location = Location.new(address_params)
+        @location.save
+        @location_id = @location.id
+      else
+        @location_id =  params[:client][:location_id]
+      end
+      @client_location = ClientLocation.new
+      @client_location.location_id = @location_id
+      @client_location.phone = params[:client][:phone]
       if @client_location.save
         @client.head_office = @client_location.id
         if params[:origin].present?

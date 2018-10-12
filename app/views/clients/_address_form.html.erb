@@ -1,0 +1,51 @@
+<div class="form-group row m-b-15 address-fields">
+  <label class="col-md-4 col-sm-4 col-form-label"> Create New Location? </label>
+  <div class="col-md-8 col-sm-8">
+    <input type="checkbox" name="new_location" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-new-location" />
+  </div>
+</div>
+  <div class="form-group row m-b-15 location-fields address-fields">
+    <%= form.label :location_id, 'Select Existing Location:', class: 'col-md-4 col-sm-4 col-form-label' %>
+    <div class="col-md-8 col-sm-8">
+      <%= form.select :location_id, Location.all.collect {|r| [ r.name, r.id ] },{:include_blank => true}, class: 'form-control', :id => 'location_id' %>
+    </div>
+  </div>
+  <div class="form-group row m-b-15 address-fields">
+    <%= form.label :address, 'Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
+    <div class="col-md-8 col-sm-8">
+    <%= form.text_field :address, class: 'form-control', :id => 'address' %>
+    </div>
+  </div>
+  <div class="form-group row m-b-15 address-fields">
+    <%= form.label :country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
+    <div class="col-md-8 col-sm-8">
+    <%= form.select :country, options_for_select([]),{:include_blank => true}, class: 'form-control', :id => 'country' %>
+    </div>
+  </div>
+  <div class="form-group row m-b-15 address-fields">
+    <%= form.label :state, 'Province / State:', class: 'col-md-4 col-sm-4 col-form-label' %>
+    <div class="col-md-8 col-sm-8">
+    <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control', :id => 'state' %>
+    </div>
+  </div>
+  <div class="form-group row m-b-15 address-fields">
+    <%= form.label :postal, 'Postal / Zip:', class: 'col-md-4 col-sm-4 col-form-label' %>
+    <div class="col-md-8 col-sm-8">
+    <%= form.text_field :postal, class: 'form-control', 'data-inputmask' => "'mask': '******'", :id => 'postal' %>
+    </div>
+  </div>
+  <div class="form-group row m-b-15 address-fields">
+    <%= form.label :city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
+    <div class="col-md-8 col-sm-8">
+      <%= form.text_field :city, class: 'form-control', :id => 'city' %>
+    </div>
+  </div>
+
+
+  <script language="javascript">
+  	populateCountries("country", "state");
+
+    <% if params[:action] == 'edit' %>
+      locationDetails($("#location_id").val());
+    <% end %>
+  </script>

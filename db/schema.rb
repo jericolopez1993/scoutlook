@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_11_100529) do
+ActiveRecord::Schema.define(version: 2018_10_12_005433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,11 +64,6 @@ ActiveRecord::Schema.define(version: 2018_10_11_100529) do
     t.string "email"
     t.string "work_phone"
     t.string "home_phone"
-    t.string "address"
-    t.string "city"
-    t.string "state"
-    t.string "postal"
-    t.string "country"
     t.integer "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -76,25 +71,21 @@ ActiveRecord::Schema.define(version: 2018_10_11_100529) do
     t.boolean "same_ho", default: false
     t.string "first_name"
     t.string "linkedin_link"
+    t.integer "location_id"
   end
 
   create_table "client_locations", force: :cascade do |t|
     t.string "client_id"
-    t.string "location_id"
     t.string "name"
     t.string "loc_type"
     t.text "special_instructions"
-    t.string "address"
-    t.string "city"
-    t.string "state"
-    t.string "postal"
-    t.string "country"
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "poc_id"
     t.integer "soc_id"
     t.boolean "same_ho", default: false
+    t.integer "location_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -127,9 +118,14 @@ ActiveRecord::Schema.define(version: 2018_10_11_100529) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string "name"
+    t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
+    t.string "state"
+    t.string "postal"
+    t.string "country"
+    t.string "name"
   end
 
   create_table "master_invoices", force: :cascade do |t|

@@ -46,36 +46,8 @@
                     <input type="checkbox" name="same_ho" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-text"  <%= client_location.same_ho ? 'checked' : '' %>/>
                   </div>
                 </div>
-                <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :address, 'Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :address, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.select :country, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :state, 'Province / State:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :postal, 'Postal / Zip:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :postal, class: 'form-control', 'data-inputmask' => "'mask': '******'" %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
-                    <%= form.select :city, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => client_location.city}, class: 'form-control combo-dropdown'%>
-                  </div>
-                </div>
+
+                <%= render 'clients/address_form', form: form %>
                 <div class="form-group row m-b-15 address-fields">
                   <%= form.label :phone, 'Phone #:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
@@ -125,10 +97,5 @@
 <!-- end panel -->
 <script language="javascript">
 	populateCountries("client_location_country", "client_location_state");
-  <% if client_location.country.present? %>
-    tiggerChangeOnSelectCountry('client_location_country', '<%= client_location.country %>')
-  <% end %>
-  <% if client_location.state.present? %>
-    tiggerChangeOnSelectCountry('client_location_state', '<%= client_location.state %>')
-  <% end %>
+
 </script>

@@ -35,6 +35,16 @@ class ClientLocationsController < ApplicationController
   def create
     @client_location = ClientLocation.new(client_location_params)
     @client_location.same_ho = params[:same_ho].present?
+    if params[:client_location][:location_id].present? || params[:client_location][:address].present? ||  params[:client_location][:city].present? ||  params[:client_location][:state].present? ||  params[:client_location][:postal].present? ||  params[:client_location][:city].present?
+      if params[:new_location].present?
+        @location = Location.new(address_params)
+        @location.save
+        @location_id = @location.id
+      else
+        @location_id =  params[:client_location][:location_id]
+      end
+    end
+    @client_location.location_id = @location_id
 
     respond_to do |format|
       if @client_location.save
@@ -60,6 +70,16 @@ class ClientLocationsController < ApplicationController
   # PATCH/PUT /client_locations/1
   # PATCH/PUT /client_locations/1.json
   def update
+    if params[:client_location][:location_id].present? || params[:client_location][:address].present? ||  params[:client_location][:city].present? ||  params[:client_location][:state].present? ||  params[:client_location][:postal].present? ||  params[:client_location][:city].present?
+      if params[:new_location].present?
+        @location = Location.new(address_params)
+        @location.save
+        @location_id = @location.id
+      else
+        @location_id =  params[:client_location][:location_id]
+      end
+    end
+    params[:client_location][:location_id] = @location_id
     respond_to do |format|
       if @client_location.update(client_location_params)
         @client_location.update_attributes(:same_ho => params[:same_ho].present?)
@@ -118,6 +138,9 @@ class ClientLocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_location_params
-      params.require(:client_location).permit(:client_id, :client_location_id, :name, :loc_type, :special_instructions, :address, :city, :state, :postal, :country, :phone, :poc_id, :soc_id)
+      params.require(:client_location).permit(:client_id, :client_location_id, :name, :loc_type, :special_instructions, :phone, :poc_id, :soc_id, :location_id)
+    end
+    def address_params
+      params.require(:client_location).permit(:address, :city, :state, :postal, :country)
     end
 end
