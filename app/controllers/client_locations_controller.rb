@@ -43,8 +43,8 @@ class ClientLocationsController < ApplicationController
       else
         @location_id =  params[:client_location][:location_id]
       end
+      @client_location.location_id = @location_id
     end
-    @client_location.location_id = @location_id
 
     respond_to do |format|
       if @client_location.save

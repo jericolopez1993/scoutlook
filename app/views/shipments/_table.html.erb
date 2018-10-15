@@ -13,34 +13,39 @@
     <table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons">
     								<thead>
     									<tr class="odd gradeX">
-                        <th class="text-nowrap">Shipment date</th>
-                        <th class="text-nowrap">Tracking number</th>
-                        <th class="text-nowrap">Terms</th>
                         <th class="text-nowrap">Origin</th>
-                        <th class="text-nowrap">Origin location</th>
                         <th class="text-nowrap">Destination</th>
-                        <th class="text-nowrap">Destination location</th>
-                        <th class="text-nowrap">Distance</th>
+                        <th class="text-nowrap">Weight</th>
+                        <th class="text-nowrap">Cost</th>
+                        <th class="text-nowrap">Cost Per LB</th>
+                        <th class="text-nowrap">Carrier</th>
+                        <th class="text-nowrap">Inter</th>
+                        <th class="text-nowrap">Intra</th>
+                        <th class="text-nowrap">to USA</th>
+                        <th class="text-nowrap">from USA</th>
+                        <th class="text-nowrap">Reference #</th>
 										    <th class="text-nowrap" data-orderable="false">Actions</th>
     									</tr>
     								</thead>
-    								<tbody>
+                    <tbody>
                       <% shipments.each do |shipment| %>
-                        <tr>
-                          <td><%= shipment.shipment_date %></td>
-                          <td><%= shipment.tracking_number %></td>
-                          <td><%= shipment.terms %></td>
-                          <td><%= shipment.origin.nil? ? "" : "#{shipment.origin.company_name}" %></td>
-                          <td><%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.state}, #{shipment.origin_location.country}" %></td>
-                          <td><%= shipment.destination.nil? ? "" : "#{shipment.destination.company_name}" %></td>
-                          <td><%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.state}, #{shipment.destination_location.country}" %></td>
-                          <td><%= shipment.distance %></td>
-                          <td>
-                            <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipment, :class => 'btn btn-info' %>
-                            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipment_path(shipment), :class => 'btn btn-warning' %>
-                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipment, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
-                          </td>
-                        </tr>
+                      <tr>
+                        <td><%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.state}, #{shipment.origin_location.country}" %></td>
+                        <td><%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.state}, #{shipment.destination_location.country}" %></td>
+                        <td><%= shipment.billed_weight.nil? ? 0 : shipment.billed_weight %></td>
+                        <td><%= shipment.total_charge.nil? ? 0 : shipment.total_charge %></td>
+                        <td><%= (shipment.billed_weight.nil? ? 0 : shipment.billed_weight) / (shipment.total_charge.nil? ? 0 : shipment.total_charge) %></td>
+                        <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
+                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_inter}" %></td>
+                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_intra}" %></td>
+                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_to_usa}" %></td>
+                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_from_usa}" %></td>
+                        <td><%= shipment.invoice.nil? ? '' : "#{generate_alphanumeric_id(shipment.invoice.shipment_type, shipment.invoice.id)}" %></td>
+                        <td>
+                          <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipment, :class => 'btn btn-info' %>
+                          <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipment_path(shipment), :class => 'btn btn-warning' %>
+                          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipment, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                        </td>
                       <% end %>
                     </tbody>
                   </table>

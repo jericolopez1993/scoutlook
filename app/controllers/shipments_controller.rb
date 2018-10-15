@@ -30,6 +30,38 @@ class ShipmentsController < ApplicationController
   # POST /shipments.json
   def create
     @shipment = Shipment.new(shipment_params)
+    @origin_location_id = nil
+    @destination_location_id = nil
+    if params[:shipment][:origin_location_id].present? || params[:shipment][:origin_address].present? || params[:shipment][:origin_country].present? ||  params[:shipment][:origin_state].present? ||  params[:shipment][:origin_postal].present? ||  params[:shipment][:origin_city].present?
+      if params[:origin_new_location].present?
+        location = Location.new
+        location.address = params[:shipment][:origin_address]
+        location.country = params[:shipment][:origin_country]
+        location.state = params[:shipment][:origin_state]
+        location.city = params[:shipment][:origin_city]
+        location.postal = params[:shipment][:origin_postal]
+        location.save
+        @origin_location_id = location.id
+      else
+        @origin_location_id =  params[:shipment][:origin_location_id]
+      end
+    end
+    @shipment.origin_location_id = @origin_location_id
+    if params[:shipment][:destination_location_id].present? || params[:shipment][:destination_address].present? ||  params[:shipment][:destination_country].present? ||  params[:shipment][:destination_state].present? ||  params[:shipment][:destination_postal].present? ||  params[:shipment][:destination_city].present?
+      if params[:destination_new_location].present?
+        location = Location.new
+        location.address = params[:shipment][:destination_address]
+        location.country = params[:shipment][:destination_country]
+        location.state = params[:shipment][:destination_state]
+        location.city = params[:shipment][:destination_city]
+        location.postal = params[:shipment][:destination_postal]
+        location.save
+        @destination_location_id = location.id
+      else
+        @destination_location_id =  params[:shipment][:destination_location_id]
+      end
+    end
+    @shipment.destination_location_id = @destination_location_id
 
     respond_to do |format|
       if @shipment.save
@@ -45,6 +77,39 @@ class ShipmentsController < ApplicationController
   # PATCH/PUT /shipments/1
   # PATCH/PUT /shipments/1.json
   def update
+    @origin_location_id = nil
+    @destination_location_id = nil
+    if params[:shipment][:origin_location_id].present? || params[:shipment][:origin_address].present? ||  params[:shipment][:origin_country].present? ||  params[:shipment][:origin_state].present? ||  params[:shipment][:origin_postal].present? ||  params[:client_location][:origin_city].present?
+      if params[:origin_new_location].present?
+        location = Location.new
+        location.address = params[:shipment][:origin_address]
+        location.country = params[:shipment][:origin_country]
+        location.state = params[:shipment][:origin_state]
+        location.city = params[:shipment][:origin_city]
+        location.postal = params[:shipment][:origin_postal]
+        location.save
+        @origin_location_id = location.id
+      else
+        @origin_location_id =  params[:shipment][:origin_location_id]
+      end
+    end
+    params[:shipment][:origin_location_id] = @origin_location_id
+    if params[:shipment][:destination_location_id].present? || params[:shipment][:destination_address].present? ||  params[:shipment][:destination_country].present? ||  params[:shipment][:destination_state].present? ||  params[:shipment][:destination_postal].present? ||  params[:client_location][:destination_city].present?
+      if params[:destination_new_location].present?
+        location = Location.new
+        location.address = params[:shipment][:destination_address]
+        location.country = params[:shipment][:destination_country]
+        location.state = params[:shipment][:destination_state]
+        location.city = params[:shipment][:destination_city]
+        location.postal = params[:shipment][:destination_postal]
+        location.save
+        @destination_location_id = location.id
+      else
+        @destination_location_id =  params[:shipment][:destination_location_id]
+      end
+    end
+    params[:shipment][:destination_location_id] = @destination_location_id
+
     respond_to do |format|
       if @shipment.update(shipment_params)
         format.html { redirect_to master_invoice_path(:id => @shipment.header), notice: 'Shipment was successfully updated.' }
@@ -85,6 +150,6 @@ class ShipmentsController < ApplicationController
       params[:shipment][:gst_hst_tax] = params[:shipment][:gst_hst_tax].gsub('$ ', '').gsub(',', '').to_d
       params[:shipment][:total_charge] = params[:shipment][:total_charge].gsub('$ ', '').gsub(',', '').to_d
       params[:shipment][:total_charge_with_tax] = params[:shipment][:total_charge_with_tax].gsub('$ ', '').gsub(',', '').to_d
-      params.require(:shipment).permit(:header, :account_number, :invoice_number, :shipment_date, :tracking_number, :terms, :origin_id, :origin_location_id, :destination_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes)
+      params.require(:shipment).permit(:header, :account_number, :invoice_number, :shipment_date, :tracking_number, :terms, :origin_location_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes)
     end
 end

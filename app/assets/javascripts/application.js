@@ -59,6 +59,7 @@ $(document).on('turbolinks:load', function(){
   addressCreate($('[data-change="check-switchery-state-new-location"]').prop('checked'));
   addressCreateOD($('[data-change="check-switchery-state-new-location-origin"]').prop('checked'), 'origin');
   addressCreateOD($('[data-change="check-switchery-state-new-location-destination"]').prop('checked'), 'destination');
+  addressCreateQuickS($('[data-change="check-switchery-state-new-location-quick-destination"]').prop('checked'), 'quick_destination');
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
 
@@ -129,6 +130,9 @@ $(document).on('turbolinks:load', function(){
       $(document).on('change', '[data-change="check-switchery-state-new-location-destination"]', function() {
         addressCreateOD($(this).prop('checked'), 'destination');
       });
+      $(document).on('change', '[data-change="check-switchery-state-new-location-quick-destination"]', function() {
+        addressCreateQuickS($(this).prop('checked'), 'quick_destination');
+      });
       $('input[type=radio][name="master_invoice[shipment_entry]"]').change(function() {
           shipmentFields(this.value);
       });
@@ -161,7 +165,11 @@ $(document).on('turbolinks:load', function(){
       $("#destination_location_id").change(function(){
         locationDetailsOD($(this).val(), 'destination');
       });
+      $("#quick_destination_id").change(function(){
+        locationDetailsOD($(this).val(), 'quick_destination');
+      });
   });
+
 });
 
 
@@ -210,7 +218,29 @@ function addressCreate(isTrue) {
     $("#state").attr("disabled", true);
   }
 }
+function addressCreateQuickS(isTrue, name) {
+  $("#"+ name +"_address").val('');
+  $("#"+ name +"_city").val('');
+  $("#"+ name +"_postal").val('');
+  $("#"+ name +"_country").val('-1').change();
+  $("#"+ name +"_state").val('').change();
+  if (isTrue) {
+    $("#"+ name +"_id").attr("disabled", true);
+    $("#"+ name +"_address").attr("disabled", false);
+    $("#"+ name +"_city").attr("disabled", false);
+    $("#"+ name +"_postal").attr("disabled", false);
+    $("#"+ name +"_country").attr("disabled", false);
+    $("#"+ name +"_state").attr("disabled", false);
 
+  }else{
+    $("#"+ name +"_id").attr("disabled", false);
+    $("#"+ name +"_address").attr("disabled", true);
+    $("#"+ name +"_city").attr("disabled", true);
+    $("#"+ name +"_postal").attr("disabled", true);
+    $("#"+ name +"_country").attr("disabled", true);
+    $("#"+ name +"_state").attr("disabled", true);
+  }
+}
 function addressCreateOD(isTrue, name) {
   $("#"+ name +"_address").val('');
   $("#"+ name +"_city").val('');

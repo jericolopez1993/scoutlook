@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_12_005433) do
+ActiveRecord::Schema.define(version: 2018_10_15_150615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -224,10 +224,6 @@ ActiveRecord::Schema.define(version: 2018_10_12_005433) do
     t.date "shipment_date"
     t.string "tracking_number"
     t.string "terms"
-    t.integer "origin_id"
-    t.integer "origin_location_id"
-    t.integer "destination_id"
-    t.integer "destination_location_id"
     t.decimal "distance"
     t.integer "pieces"
     t.integer "pallets"
@@ -252,6 +248,8 @@ ActiveRecord::Schema.define(version: 2018_10_12_005433) do
     t.string "account_number"
     t.string "invoice_number"
     t.text "notes"
+    t.integer "origin_location_id"
+    t.integer "destination_location_id"
   end
 
   create_table "users", force: :cascade do |t|

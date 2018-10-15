@@ -11,36 +11,43 @@
         <%= form.text_field :tracking_number, class: 'form-control', 'data-parsley-required' => true %>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <div class="form-group">
-        <%= form.label :terms, 'Terms *:' %>
-        <%= form.select :terms, options_for_select(['Prepaid', 'Collect']),{:include_blank => true}, class: 'form-control' %>
+        <%= form.label :destination_location_id, 'Destination *:'%>
+        <%= form.select :destination_location_id, Location.all.collect {|l| [l.name, l.id]},{:include_blank => true}, class: 'form-control', id: 'quick_destination_id' %>
       </div>
     </div>
+    <div class="col-1 ">
+      <div class="form-group">
+        <label > New Destination? </label><br/>
+          <input type="checkbox" name="destination_new_location" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-new-location-quick-destination" />
+      </div>
+    </div>
+
 </div>
 <div class="row">
     <div class="col-3">
       <div class="form-group">
-        <%= form.label :origin_id, 'Origin *:'%>
-        <%= form.select :origin_id, Client.all.collect {|l| [l.company_name, l.id]},{:include_blank => true}, class: 'form-control', id: 'origin_id', 'data-parsley-required' => true %>
+        <%= form.label "destination_address", 'Address:'%>
+        <%= form.text_field "destination_address", class: 'form-control', :id => "quick_destination_address" %>
       </div>
     </div>
     <div class="col-3">
       <div class="form-group">
-        <%= form.label :origin_location_id, 'Origin Location *:'%>
-        <%= form.select :origin_location_id, ClientLocation.all.collect {|l| [l.name, l.id, {'data-chained'=> "#{l.client_id}"}]},{:include_blank => true}, class: 'form-control', id: 'origin_location_id', 'data-parsley-required' => true %>
+        <%= form.label "destination_country", 'Country:'%>
+      <%= form.select "destination_country", options_for_select([]),{:include_blank => true}, class: 'form-control', :id => "quick_destination_country" %>
       </div>
     </div>
     <div class="col-3">
       <div class="form-group">
-        <%= form.label :destination_id, 'Destination *:'%>
-        <%= form.select :destination_id, Client.all.collect {|l| [l.company_name, l.id]},{:include_blank => true}, class: 'form-control', id: 'origin_id', 'data-parsley-required' => true %>
+        <%= form.label "destination_state", 'Province / State:'%>
+        <%= form.select "destination_state", options_for_select([]),{:include_blank => true}, class: 'form-control', :id => "quick_destination_state" %>
       </div>
     </div>
     <div class="col-3">
       <div class="form-group">
-        <%= form.label :destination_location_id, 'Destination Location *:'%>
-        <%= form.select :destination_location_id, ClientLocation.all.collect {|l| [l.name, l.id, {'data-chained'=> "#{l.client_id}"}]},{:include_blank => true}, class: 'form-control', id: 'origin_location_id', 'data-parsley-required' => true %>
+        <%= form.label  "destination_postal", 'Postal / Zip:'%>
+        <%= form.text_field "destination_postal", class: 'form-control', 'data-inputmask' => "'mask': '******'", :id => "quick_destination_postal" %>
       </div>
     </div>
 </div>
@@ -134,3 +141,7 @@
       </div>
     </div>
 </div>
+
+<script language="javascript">
+  populateCountries("quick_destination_country", "quick_destination_state");
+</script>
