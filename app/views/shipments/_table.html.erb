@@ -34,7 +34,7 @@
                         <td><%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.state}, #{shipment.destination_location.country}" %></td>
                         <td><%= shipment.billed_weight.nil? ? 0 : shipment.billed_weight %></td>
                         <td><%= shipment.total_charge.nil? ? 0 : shipment.total_charge %></td>
-                        <td><%= (shipment.billed_weight.nil? ? 0 : shipment.billed_weight) / (shipment.total_charge.nil? ? 0 : shipment.total_charge) %></td>
+                        <td><%= number_with_precision (shipment.billed_weight.nil? ? 0 : shipment.billed_weight) / (shipment.total_charge.nil? ? 0 : shipment.total_charge), :precision => 2 %></td>
                         <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
                         <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_inter}" %></td>
                         <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_intra}" %></td>

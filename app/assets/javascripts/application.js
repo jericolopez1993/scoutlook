@@ -66,7 +66,8 @@ $(document).on('turbolinks:load', function(){
 
 	$('.datepicker-autoClose').datepicker({
 		todayHighlight: true,
-		autoclose: true
+		autoclose: true,
+    orientation: 'auto bottom'
 	});
   $(".combo-dropdown").select2({
     tags: true,

@@ -80,11 +80,17 @@
     </div>
     <div class="col-2">
       <div class="form-group">
+        <%= form.label :raw_weight, 'Reweigh Weight:'%>
+        <%= form.text_field :raw_weight, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'"%>
+      </div>
+    </div>
+    <div class="col-1">
+      <div class="form-group">
         <%= form.label :pieces, 'Piece:'%>
         <%= form.number_field :pieces, class: 'form-control' %>
       </div>
     </div>
-    <div class="col-2">
+    <div class="col-1">
       <div class="form-group">
         <%= form.label :pallets, 'Pallet:'%>
         <%= form.number_field :pallets, class: 'form-control' %>
