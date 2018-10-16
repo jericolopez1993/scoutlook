@@ -51,10 +51,13 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.save
-        @client_location.update_attributes(:client_id => @client.id)
-        if params[:client][:attachment_file].present?
-          @client.attachment_file.attach(params[:client][:attachment_file])
+        if params[:new_location].present? || params[:client][:location_id].present?
+          @client_location.update_attributes(:client_id => @client.id)
+          if params[:client][:attachment_file].present?
+            @client.attachment_file.attach(params[:client][:attachment_file])
+          end
         end
+
         format.html { redirect_to @client, notice: 'Client was successfully created.' }
         format.json { render :show, status: :created, location: @client }
       else
