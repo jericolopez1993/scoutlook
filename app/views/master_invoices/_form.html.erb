@@ -112,3 +112,14 @@
   </div>
 </div>
 <% end %>
+
+<% if !master_invoice.shipment.nil? %>
+  <script language="javascript">
+    $(function(){
+        $("#origin_location_id").val(<%= master_invoice.shipment.origin_location_id %>)
+        $("#destination_location_id").val(<%= master_invoice.shipment.destination_location_id %>)
+        locationDetailsOD(<%= master_invoice.shipment.origin_location_id %>, 'origin');
+        locationDetailsOD(<%= master_invoice.shipment.destination_location_id %>, 'destination');
+      });
+  </script>
+<% end %>

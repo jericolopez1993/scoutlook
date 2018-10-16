@@ -35,6 +35,38 @@ class MasterInvoicesController < ApplicationController
         end
         if @master_invoice.shipment_entry == "single shipment"
             @shipment = Shipment.new(shipment_params)
+            @origin_location_id = nil
+            @destination_location_id = nil
+            if params[:master_invoice][:origin_location_id].present? || params[:master_invoice][:origin_address].present? || params[:master_invoice][:origin_country].present? ||  params[:master_invoice][:origin_state].present? ||  params[:master_invoice][:origin_postal].present? ||  params[:master_invoice][:origin_city].present?
+              if params[:origin_new_location].present?
+                location = Location.new
+                location.address = params[:master_invoice][:origin_address]
+                location.country = params[:master_invoice][:origin_country]
+                location.state = params[:master_invoice][:origin_state]
+                location.city = params[:master_invoice][:origin_city]
+                location.postal = params[:master_invoice][:origin_postal]
+                location.save
+                @origin_location_id = location.id
+              else
+                @origin_location_id =  params[:master_invoice][:origin_location_id]
+              end
+            end
+            @shipment.origin_location_id = @origin_location_id
+            if params[:master_invoice][:destination_location_id].present? || params[:master_invoice][:destination_address].present? ||  params[:master_invoice][:destination_country].present? ||  params[:master_invoice][:destination_state].present? ||  params[:master_invoice][:destination_postal].present? ||  params[:master_invoice][:destination_city].present?
+              if params[:destination_new_location].present?
+                location = Location.new
+                location.address = params[:master_invoice][:destination_address]
+                location.country = params[:master_invoice][:destination_country]
+                location.state = params[:master_invoice][:destination_state]
+                location.city = params[:master_invoice][:destination_city]
+                location.postal = params[:master_invoice][:destination_postal]
+                location.save
+                @destination_location_id = location.id
+              else
+                @destination_location_id =  params[:master_invoice][:destination_location_id]
+              end
+            end
+            @shipment.destination_location_id = @destination_location_id
             @shipment.total_charge = params[:master_invoice][:total_charge_shipment]
             @shipment.header = @master_invoice.id
             @shipment.save
@@ -59,6 +91,38 @@ class MasterInvoicesController < ApplicationController
         end
         if @master_invoice.shipment_entry == "single shipment"
             @shipments = Shipment.where(:header => @master_invoice.id)
+            @origin_location_id = nil
+            @destination_location_id = nil
+            if params[:master_invoice][:origin_location_id].present? || params[:master_invoice][:origin_address].present? ||  params[:master_invoice][:origin_country].present? ||  params[:master_invoice][:origin_state].present? ||  params[:master_invoice][:origin_postal].present? ||  params[:client_location][:origin_city].present?
+              if params[:origin_new_location].present?
+                location = Location.new
+                location.address = params[:master_invoice][:origin_address]
+                location.country = params[:master_invoice][:origin_country]
+                location.state = params[:master_invoice][:origin_state]
+                location.city = params[:master_invoice][:origin_city]
+                location.postal = params[:master_invoice][:origin_postal]
+                location.save
+                @origin_location_id = location.id
+              else
+                @origin_location_id =  params[:master_invoice][:origin_location_id]
+              end
+            end
+            params[:master_invoice][:origin_location_id] = @origin_location_id
+            if params[:master_invoice][:destination_location_id].present? || params[:master_invoice][:destination_address].present? ||  params[:master_invoice][:destination_country].present? ||  params[:master_invoice][:destination_state].present? ||  params[:master_invoice][:destination_postal].present? ||  params[:client_location][:destination_city].present?
+              if params[:destination_new_location].present?
+                location = Location.new
+                location.address = params[:master_invoice][:destination_address]
+                location.country = params[:master_invoice][:destination_country]
+                location.state = params[:master_invoice][:destination_state]
+                location.city = params[:master_invoice][:destination_city]
+                location.postal = params[:master_invoice][:destination_postal]
+                location.save
+                @destination_location_id = location.id
+              else
+                @destination_location_id =  params[:master_invoice][:destination_location_id]
+              end
+            end
+            params[:master_invoice][:destination_location_id] = @destination_location_id
             if @shipments.present? && !@shipments.nil?
               @shipment = @shipments.first
               @shipment.update(shipment_params)
@@ -97,7 +161,7 @@ class MasterInvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_invoice_params
-      params.require(:master_invoice).permit(:shipment_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance_approved, :shipment_entry)
+      params.require(:master_invoice).permit(:master_invoice_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance_approved, :master_invoice_entry)
     end
 
     def shipment_params
@@ -111,6 +175,6 @@ class MasterInvoicesController < ApplicationController
       params[:master_invoice][:gst_hst_tax] = params[:master_invoice][:gst_hst_tax].gsub('$ ', '').gsub(',', '').to_d
       params[:master_invoice][:total_charge] = params[:master_invoice][:total_charge_shipment].gsub('$ ', '').gsub(',', '').to_d
       params[:master_invoice][:total_charge_with_tax] = params[:master_invoice][:total_charge_with_tax].gsub('$ ', '').gsub(',', '').to_d
-      params.require(:master_invoice).permit(:header, :account_number, :invoice_number, :shipment_date, :tracking_number, :terms, :origin_id, :origin_location_id, :destination_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes)
+      params.require(:master_invoice).permit(:header, :account_number, :invoice_number, :master_invoice_date, :tracking_number, :terms, :origin_location_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes)
     end
 end

@@ -60,7 +60,6 @@ $(document).on('turbolinks:load', function(){
   addressCreateOD($('[data-change="check-switchery-state-new-location-origin"]').prop('checked'), 'origin');
   addressCreateOD($('[data-change="check-switchery-state-new-location-destination"]').prop('checked'), 'destination');
   addressCreateQuickS($('[data-change="check-switchery-state-new-location-quick-destination"]').prop('checked'), 'quick_destination');
-  clientLocation($("#master_invoice_shipper_id").val(), 'origin');
 
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
@@ -137,10 +136,6 @@ $(document).on('turbolinks:load', function(){
       });
       $('input[type=radio][name="master_invoice[shipment_entry]"]').change(function() {
           shipmentFields(this.value);
-      });
-
-      $("#master_invoice_shipper_id").change(function(){
-        selectOriginClient($(this).val());
       });
 
       $("#master_invoice_shipper_id").change(function(){
