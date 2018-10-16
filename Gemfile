@@ -43,6 +43,8 @@ gem 'jquery-inputmask-rails', github: 'knapo/jquery-inputmask-rails'
 gem "rolify"
 gem "select2-rails"
 gem 'pundit'
+gem "sentry-raven"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

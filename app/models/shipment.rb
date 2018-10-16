@@ -30,4 +30,12 @@ class Shipment < ApplicationRecord
       nil
     end
   end
+
+  def shipper_location
+    if !self.header.nil?
+      MasterInvoice.find(self.header).shipper_location
+    else
+      nil
+    end
+  end
 end
