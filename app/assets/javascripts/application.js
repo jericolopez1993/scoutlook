@@ -60,6 +60,8 @@ $(document).on('turbolinks:load', function(){
   addressCreateOD($('[data-change="check-switchery-state-new-location-origin"]').prop('checked'), 'origin');
   addressCreateOD($('[data-change="check-switchery-state-new-location-destination"]').prop('checked'), 'destination');
   addressCreateQuickS($('[data-change="check-switchery-state-new-location-quick-destination"]').prop('checked'), 'quick_destination');
+  clientLocation($("#master_invoice_shipper_id").val(), 'origin');
+
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
 
@@ -139,6 +141,10 @@ $(document).on('turbolinks:load', function(){
 
       $("#master_invoice_shipper_id").change(function(){
         selectOriginClient($(this).val());
+      });
+
+      $("#master_invoice_shipper_id").change(function(){
+        clientLocation($(this).val(), 'origin');
       });
 
       $('.total_charge_fields').keyup(function() {
@@ -334,6 +340,17 @@ function locationDetailsOD(id, name) {
     $("#"+ name +"_state").val(data.state).change();
     $("#"+ name +"_city").val(data.city);
     $("#"+ name +"_postal").val(data.postal);
+  })
+
+}
+
+function clientLocation(id, name) {
+  $.ajax({
+    method: 'get',
+    url: "/api/clients/"+id
+  }).done(function(data) {
+    console.log(data.default_location.id)
+    $("#"+ name +"_location_id").val(data.default_location.id).change();
   })
 
 }

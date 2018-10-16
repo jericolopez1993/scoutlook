@@ -35,6 +35,18 @@ class Client < ApplicationRecord
     end
   end
 
+  def default_location
+      if !self.origin.nil?
+        ClientLocation.find(self.origin).location
+      elsif !self.head_office.nil?
+        ClientLocation.find(self.head_office).location
+      elsif ClientLocation.all.length > 0
+        ClientLocation.first.location
+      else
+        nil
+      end
+  end
+
   def origin_location
     if !self.origin.nil?
       ClientLocation.find(self.origin)

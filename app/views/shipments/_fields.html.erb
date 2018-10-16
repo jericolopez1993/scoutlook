@@ -225,13 +225,3 @@
   </div>
 </div>
 <%= tinymce %>
-<script language="javascript">
-<% if !shipment.header.nil? %>
-<% master_invoice = MasterInvoice.find(shipment.header) %>
-  <% if !master_invoice.shipper_id.nil? %>
-    $( document ).ready(function() {
-        selectOriginClient(<%= master_invoice.shipper_id %>);
-    });
-  <% end %>
-<% end %>
-</script>

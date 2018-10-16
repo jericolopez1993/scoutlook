@@ -35,16 +35,7 @@ class MasterInvoice < ApplicationRecord
 
   def shipper_location
     if !self.shipper_id.nil?
-      client = Client.find(self.shipper_id)
-      if !client.origin.nil?
-        ClientLocation.find(client.origin)
-      elsif !client.head_office.nil?
-        ClientLocation.find(client.head_office)
-      elsif ClientLocation.all.length > 0
-        ClientLocation.first
-      else
-        nil
-      end
+      Client.find(self.shipper_id).default_location
     else
       nil
     end
