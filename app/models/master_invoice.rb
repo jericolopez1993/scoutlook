@@ -33,6 +33,10 @@ class MasterInvoice < ApplicationRecord
     Shipment.where(:header => self.id).sum(:total_charge)
   end
 
+  def child_total_charge_with_tax
+    Shipment.where(:header => self.id).sum(:total_charge_with_tax)
+  end
+
   def shipper_location
     if !self.shipper_id.nil?
       Client.find(self.shipper_id).default_location
