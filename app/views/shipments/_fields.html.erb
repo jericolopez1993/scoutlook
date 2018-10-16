@@ -9,19 +9,19 @@
       </div>
       <div class="panel-body">
               <div class="form-group row m-b-15">
-                <%= form.label :account_number, 'Account Number *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                <%= form.label :account_number, 'Account Number:', class: 'col-md-4 col-sm-4 col-form-label' %>
                 <div class="col-md-8 col-sm-8">
-                <%= form.text_field :account_number, class: 'form-control', 'data-parsley-required' => true, value: shipment.account_number  %>
+                <%= form.text_field :account_number, class: 'form-control', value: shipment.account_number  %>
                 </div>
               </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :invoice_number, 'Invoice Number *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :invoice_number, 'Invoice Number:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.text_field :invoice_number, class: 'form-control', 'data-parsley-required' => true, value: shipment.invoice_number  %>
+                  <%= form.text_field :invoice_number, class: 'form-control', value: shipment.invoice_number  %>
                   </div>
                 </div>
                   <div class="form-group row m-b-15">
-                    <%= form.label :shipment_date, 'Shipment Date *:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <%= form.label :shipment_date, 'Shipment Date *:', class: 'col-md-4 col-sm-4 col-form -label' %>
                     <div class="col-md-8 col-sm-8">
                       <%= form.text_field :shipment_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", 'data-parsley-required' => true %>
                     </div>

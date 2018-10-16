@@ -1,17 +1,30 @@
 <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <div class="form-group">
         <%= form.label :shipment_date, 'Date *:'%>
         <%= form.text_field :shipment_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", 'data-parsley-required' => true %>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-2">
+      <div class="form-group">
+        <%= form.label :invoice_number, 'Invoice Number :'%>
+        <%= form.text_field :invoice_number, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <%= form.label :account_number, 'Account Number :'%>
+        <%= form.text_field :account_number, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-2">
       <div class="form-group">
         <%= form.label :tracking_number, 'Tracking Number *:'%>
         <%= form.text_field :tracking_number, class: 'form-control', 'data-parsley-required' => true %>
       </div>
     </div>
-    <div class="col-3">
+
+    <div class="col-2">
       <div class="form-group">
         <%= form.label :destination_location_id, 'Destination *:'%>
         <%= form.select :destination_location_id, Location.all.collect {|l| [l.name, l.id]},{:include_blank => true}, class: 'form-control', id: 'quick_destination_id' %>
