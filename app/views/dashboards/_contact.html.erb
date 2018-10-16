@@ -1,9 +1,10 @@
 <% client_contact = ClientContact.find(current_user.client_contact_id)%>
+<% client = Client.find(client_contact.client_id)%>
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <h4 class="panel-title">Shipments</h4>
   </div>
   <div class="panel-body">
-    <%= render 'clients/shipments', shipments: Shipment.where("origin_id = #{client_contact.client_id} OR destination_id = #{client_contact.client_id}"), client_id: client_contact.client_id  %>
+    <%= render 'clients/shipments', shipments: client.shipments, client: client  %>
   </div>
 </div>

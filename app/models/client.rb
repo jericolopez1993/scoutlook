@@ -58,4 +58,32 @@ class Client < ApplicationRecord
       nil
     end
   end
+
+  def shipments
+    client_locations = ClientLocation.where(:client_id => self.id).where("location_id IS NOT NULL")
+    if client_locations.length > 0
+      client_location_ids = client_locations.distinct(:location_id).pluck(:location_id).map(&:inspect).join(',')
+      if client_location_ids != ''
+        locations = Location.where("id IN (#{client_location_ids})")
+        if locations.length > 0
+          location_ids = locations.pluck(:id).map(&:inspect).join(',')
+          if location_ids != ''
+            Shipment.where("origin_location_id IN (#{location_ids}) OR destination_location_id IN (#{location_ids})")
+          else
+            nil
+          end
+        else
+          nil
+        end
+      else
+        nil
+      end
+    else
+      nil
+    end
+  end
+
+  def is_inbound?(location_id)
+    ClientLocation.where(:client_id => self.id, :location_id => location_id).length > 0
+  end
 end

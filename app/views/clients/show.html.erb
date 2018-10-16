@@ -186,7 +186,7 @@
     <h4 class="panel-title">Shipments</h4>
   </div>
   <div class="panel-body">
-    <%= render 'shipments', shipments: Shipment.where("origin_id = #{@client.id} OR destination_id = #{@client.id}"), client_id: @client.id %>
+    <%= render 'shipments', shipments: @client.shipments, client: @client %>
   </div>
 </div>
 <!-- end panel -->

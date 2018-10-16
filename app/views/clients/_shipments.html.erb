@@ -16,21 +16,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% shipments.each do |shipment| %>
-                  <tr>
-                    <td style="text-align: center;"><%= (shipment.destination == client_id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
-                    <td><%= shipment.origin_location.nil? ? "" : (shipment.origin_location.location.nil? ? '' : "#{shipment.origin_location.location.state}, #{shipment.origin_location.location.country}") %></td>
-                    <td><%= shipment.destination_location.nil? ? "" : (shipment.destination_location.location.nil? ? '' : "#{shipment.destination_location.location.state}, #{shipment.destination_location.location.country}") %></td>
-                    <td><%= shipment.billed_weight.nil? ? 0 : shipment.billed_weight %></td>
-                    <td><%= shipment.total_charge.nil? ? 0 : shipment.total_charge %></td>
-                    <td><%= (shipment.billed_weight.nil? ? 0 : shipment.billed_weight) / (shipment.total_charge.nil? ? 0 : shipment.total_charge) %></td>
-                    <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
-                    <td><%= shipment.origin.nil? ? "" : "#{shipment.origin.volume_inter}" %></td>
-                    <td><%= shipment.origin.nil? ? "" : "#{shipment.origin.volume_intra}" %></td>
-                    <td><%= shipment.origin.nil? ? "" : "#{shipment.origin.volume_to_usa}" %></td>
-                    <td><%= shipment.origin.nil? ? "" : "#{shipment.origin.volume_from_usa}" %></td>
-                    <td><%= shipment.invoice.nil? ? '' : "#{generate_alphanumeric_id(shipment.invoice.shipment_type, shipment.invoice.id)}" %></td>
-
+                  <% if !shipments.nil? %>
+                    <% shipments.each do |shipment| %>
+                      <tr>
+                        <td style="text-align: center;"><%= client.is_inbound?(shipment.destination_location_id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
+                        <td><%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.state}, #{shipment.origin_location.country}" %></td>
+                        <td><%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.state}, #{shipment.destination_location.country}" %></td>
+                        <td><%= shipment.billed_weight.nil? ? 0 : shipment.billed_weight %></td>
+                        <td><%= shipment.total_charge.nil? ? 0 : shipment.total_charge %></td>
+                        <td><%= (shipment.billed_weight.nil? ? 0 : shipment.billed_weight) / (shipment.total_charge.nil? ? 0 : shipment.total_charge) %></td>
+                        <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
+                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_inter}" %></td>
+                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_intra}" %></td>
+                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_to_usa}" %></td>
+                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_from_usa}" %></td>
+                        <td><%= shipment.invoice.nil? ? '' : "#{generate_alphanumeric_id(shipment.invoice.shipment_type, shipment.invoice.id)}" %></td>
+                      <tr>
+                    <% end %>
                   <% end %>
                 </tbody>
               </table>
