@@ -44,6 +44,7 @@ gem "rolify"
 gem "select2-rails"
 gem 'pundit'
 gem "sentry-raven"
+gem 'seed_dump'
 
 
 group :development, :test do
