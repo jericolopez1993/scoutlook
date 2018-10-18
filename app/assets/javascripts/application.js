@@ -51,6 +51,18 @@
 //= require tinymce
 //= require select2
 //= require_tree .
+(function() {
+  $(document).on('turbolinks:before-cache', function() {
+    var dataTable;
+    dataTable = $($.fn.dataTable.tables(true)).DataTable();
+    if (dataTable !== null) {
+      dataTable.destroy();
+      return dataTable = null;
+    }
+    
+  });
+
+}).call(this);
 $(document).on('turbolinks:load', function(){
   activityOutcomeFields($("#activity_activity_type").val());
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));

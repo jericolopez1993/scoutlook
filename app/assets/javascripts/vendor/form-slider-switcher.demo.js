@@ -7,6 +7,11 @@ Website: http://www.seantheme.com/color-admin-v4.2/admin/
 
 var renderSwitcher = function() {
 	if ($('[data-render=switchery]').length !== 0) {
+		if ($('.switchery').length !== 0) {
+    		$('.switchery').each(function() {
+          $(this).remove();
+        })
+    }
 		$('[data-render=switchery]').each(function() {
 			var themeColor = COLOR_GREEN;
 			if ($(this).attr('data-theme')) {
