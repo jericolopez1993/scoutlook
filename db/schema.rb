@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_15_150615) do
+ActiveRecord::Schema.define(version: 2018_10_17_204850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 2018_10_15_150615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "shipment_entry"
+    t.string "invoice_number"
   end
 
   create_table "master_signals", force: :cascade do |t|
@@ -246,7 +247,6 @@ ActiveRecord::Schema.define(version: 2018_10_15_150615) do
     t.string "unit_of_weight"
     t.string "billed_rate_unit"
     t.string "account_number"
-    t.string "invoice_number"
     t.text "notes"
     t.integer "origin_location_id"
     t.integer "destination_location_id"

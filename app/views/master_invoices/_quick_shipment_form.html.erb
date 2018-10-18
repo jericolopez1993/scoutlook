@@ -5,19 +5,13 @@
         <%= form.text_field :shipment_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", 'data-parsley-required' => true %>
       </div>
     </div>
-    <div class="col-2">
-      <div class="form-group">
-        <%= form.label :invoice_number, 'Invoice Number :'%>
-        <%= form.text_field :invoice_number, class: 'form-control' %>
-      </div>
-    </div>
-    <div class="col-2">
+    <div class="col-3">
       <div class="form-group">
         <%= form.label :account_number, 'Account Number :'%>
         <%= form.text_field :account_number, class: 'form-control' %>
       </div>
     </div>
-    <div class="col-2">
+    <div class="col-3">
       <div class="form-group">
         <%= form.label :tracking_number, 'Tracking Number *:'%>
         <%= form.text_field :tracking_number, class: 'form-control', 'data-parsley-required' => true %>

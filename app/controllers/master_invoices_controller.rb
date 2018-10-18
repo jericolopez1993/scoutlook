@@ -161,7 +161,7 @@ class MasterInvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_invoice_params
-      params.require(:master_invoice).permit(:master_invoice_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance_approved, :master_invoice_entry)
+      params.require(:master_invoice).permit(:invoice_number, :master_invoice_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance_approved, :master_invoice_entry)
     end
 
     def shipment_params
@@ -175,6 +175,6 @@ class MasterInvoicesController < ApplicationController
       params[:master_invoice][:gst_hst_tax] = params[:master_invoice][:gst_hst_tax].gsub('$ ', '').gsub(',', '').to_d
       params[:master_invoice][:total_charge] = params[:master_invoice][:total_charge_shipment].gsub('$ ', '').gsub(',', '').to_d
       params[:master_invoice][:total_charge_with_tax] = params[:master_invoice][:total_charge_with_tax].gsub('$ ', '').gsub(',', '').to_d
-      params.require(:master_invoice).permit(:header, :account_number, :invoice_number, :master_invoice_date, :tracking_number, :terms, :origin_location_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes)
+      params.require(:master_invoice).permit(:header, :account_number, :master_invoice_date, :tracking_number, :terms, :origin_location_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes)
     end
 end
