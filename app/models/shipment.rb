@@ -7,6 +7,7 @@ class Shipment < ApplicationRecord
       nil
     end
   end
+  
   def destination_location
     if !self.destination_location_id.nil?
       Location.find(self.destination_location_id)

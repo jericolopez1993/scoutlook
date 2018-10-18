@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_17_204850) do
+ActiveRecord::Schema.define(version: 2018_10_18_221458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,18 +183,14 @@ ActiveRecord::Schema.define(version: 2018_10_17_204850) do
     t.integer "rep_id"
     t.string "effective_to"
     t.string "effective_from"
-    t.string "origin_city"
-    t.string "origin_state"
-    t.string "origin_country"
-    t.string "destination_city"
-    t.string "destination_state"
-    t.string "destination_country"
     t.string "freight_desc"
     t.string "freight_classification"
     t.string "transit_time"
     t.string "minimum_density"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "origin_location_id"
+    t.integer "destination_location_id"
   end
 
   create_table "reps", force: :cascade do |t|

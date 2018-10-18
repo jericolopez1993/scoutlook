@@ -22,4 +22,21 @@ class Rate < ApplicationRecord
       nil
     end
   end
+  
+  def origin_location
+    if !self.origin_location_id.nil?
+      Location.find(self.origin_location_id)
+    else
+      nil
+    end
+  end
+
+  def destination_location
+    if !self.destination_location_id.nil?
+      Location.find(self.destination_location_id)
+    else
+      nil
+    end
+  end
+
 end

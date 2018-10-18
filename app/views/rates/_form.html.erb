@@ -111,25 +111,8 @@
         <h4 class="panel-title">Origin</h4>
       </div>
       <div class="panel-body">
-                    <div class="form-group row m-b-15">
-                      <%= form.label :origin_country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                      <%= form.select :origin_country, options_for_select(['USA', 'CANADA'], rate.origin_country),{:include_blank => true}, class: 'form-control' %>
-                      </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                        <%= form.label :origin_state, 'State:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                        <div class="col-md-8 col-sm-8">
-                        <%= form.text_field :origin_state, class: 'form-control', 'data-parsley-required' => true %>
-                        </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                      <%= form.label :origin_city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                        <%= form.select :origin_city, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => rate.origin_city}, class: 'form-control combo-dropdown'%>
-                      </div>
-                    </div>
-                </div>
+        <%= render 'clients/od_address_form', form: form, name: 'origin' %>
+      </div>
     </div>
     <div class="panel panel-inverse">
       <div class="panel-heading">
@@ -138,65 +121,29 @@
         <h4 class="panel-title">Destination</h4>
       </div>
       <div class="panel-body">
-                  <div class="form-group row m-b-15">
-                    <%= form.label :destination_country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                    <div class="col-md-8 col-sm-8">
-                    <%= form.select :destination_country, options_for_select(['USA', 'CANADA'], rate.destination_country),{:include_blank => true}, class: 'form-control' %>
-                    </div>
-                  </div>
-                    <div class="form-group row m-b-15">
-                      <%= form.label :destination_state, 'State:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :destination_state, class: 'form-control', 'data-parsley-required' => true %>
-                      </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                      <%= form.label :destination_city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                        <%= form.select :destination_city, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => rate.destination_city}, class: 'form-control combo-dropdown'%>
-                      </div>
-                    </div>
-
-
-                    <div class="form-group row m-b-0">
-                      <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
-                      <div class="col-md-8 col-sm-8">
-                        <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-                        <% if params[:action] == 'edit' %>
-                          &nbsp;&nbsp;<%= link_to 'Show', rate, :class => 'btn btn-info' %>
-                        <% end %>
-                        <% if @previous_controller == "clients"%>
-                          <% client = Client.find(rate.client_id)%>
-                          <% if params[:action] == 'new' %>
-                            &nbsp;&nbsp;<%= link_to 'Back to Client', client, :class => 'btn btn-default' %>
-                          <% end %>
-                      <% else %>
-                        <% if params[:action] == 'new' %>
-                          &nbsp;&nbsp;<%= link_to 'Back', rates_path, :class => 'btn btn-default' %>
-                        <% end %>
-                      <% end %>
-                      </div>
-                    </div>
-                </div>
+        <%= render 'clients/od_address_form', form: form, name: 'destination' %>
+        <div class="form-group row m-b-0">
+          <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
+          <div class="col-md-8 col-sm-8">
+            <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+            <% if params[:action] == 'edit' %>
+              &nbsp;&nbsp;<%= link_to 'Show', rate, :class => 'btn btn-info' %>
+            <% end %>
+            <% if @previous_controller == "clients"%>
+              <% client = Client.find(rate.client_id)%>
+              <% if params[:action] == 'new' %>
+                &nbsp;&nbsp;<%= link_to 'Back to Client', client, :class => 'btn btn-default' %>
+              <% end %>
+          <% else %>
+            <% if params[:action] == 'new' %>
+              &nbsp;&nbsp;<%= link_to 'Back', rates_path, :class => 'btn btn-default' %>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 </div>
 
 <% end %>
-<script language="javascript">
-	populateCountries("rate_origin_country", "rate_origin_state");
-  <% if rate.origin_country.present? %>
-    tiggerChangeOnSelectCountry('rate_origin_country', '<%= rate.origin_country %>')
-  <% end %>
-  <% if rate.origin_state.present? %>
-    tiggerChangeOnSelectCountry('rate.origin_state', '<%= rate.origin_state %>')
-  <% end %>
-  populateCountries("rate_destination_country", "rate_destination_state");
-  <% if rate.destination_country.present? %>
-    tiggerChangeOnSelectCountry('rate_destination_country', '<%= rate.destination_country %>')
-  <% end %>
-  <% if rate.destination_state.present? %>
-    tiggerChangeOnSelectCountry('rate.destination_state', '<%= rate.destination_state %>')
-  <% end %>
-</script>

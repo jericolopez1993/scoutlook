@@ -32,6 +32,37 @@ class RatesController < ApplicationController
   def create
     @rate = Rate.new(rate_params)
 
+    if params[:rate][:origin_location_id].present? || params[:rate][:origin_address].present? || params[:rate][:origin_country].present? ||  params[:rate][:origin_state].present? ||  params[:rate][:origin_postal].present? ||  params[:rate][:origin_city].present?
+      if params[:origin_new_location].present?
+        location = Location.new
+        location.address = params[:rate][:origin_address]
+        location.country = params[:rate][:origin_country]
+        location.state = params[:rate][:origin_state]
+        location.city = params[:rate][:origin_city]
+        location.postal = params[:rate][:origin_postal]
+        location.save
+        @origin_location_id = location.id
+      else
+        @origin_location_id =  params[:rate][:origin_location_id]
+      end
+    end
+    @rate.origin_location_id = @origin_location_id
+    if params[:rate][:destination_location_id].present? || params[:rate][:destination_address].present? ||  params[:rate][:destination_country].present? ||  params[:rate][:destination_state].present? ||  params[:rate][:destination_postal].present? ||  params[:rate][:destination_city].present?
+      if params[:destination_new_location].present?
+        location = Location.new
+        location.address = params[:rate][:destination_address]
+        location.country = params[:rate][:destination_country]
+        location.state = params[:rate][:destination_state]
+        location.city = params[:rate][:destination_city]
+        location.postal = params[:rate][:destination_postal]
+        location.save
+        @destination_location_id = location.id
+      else
+        @destination_location_id =  params[:rate][:destination_location_id]
+      end
+    end
+    @rate.destination_location_id = @destination_location_id
+
     respond_to do |format|
       if @rate.save
         if params[:rate][:supporting_pdf].present?
@@ -49,6 +80,36 @@ class RatesController < ApplicationController
   # PATCH/PUT /rates/1
   # PATCH/PUT /rates/1.json
   def update
+    if params[:rate][:origin_location_id].present? || params[:rate][:origin_address].present? || params[:rate][:origin_country].present? ||  params[:rate][:origin_state].present? ||  params[:rate][:origin_postal].present? ||  params[:rate][:origin_city].present?
+      if params[:origin_new_location].present?
+        location = Location.new
+        location.address = params[:rate][:origin_address]
+        location.country = params[:rate][:origin_country]
+        location.state = params[:rate][:origin_state]
+        location.city = params[:rate][:origin_city]
+        location.postal = params[:rate][:origin_postal]
+        location.save
+        @origin_location_id = location.id
+      else
+        @origin_location_id =  params[:rate][:origin_location_id]
+      end
+    end
+    params[:rate][:origin_location_id] = @origin_location_id
+    if params[:rate][:destination_location_id].present? || params[:rate][:destination_address].present? ||  params[:rate][:destination_country].present? ||  params[:rate][:destination_state].present? ||  params[:rate][:destination_postal].present? ||  params[:rate][:destination_city].present?
+      if params[:destination_new_location].present?
+        location = Location.new
+        location.address = params[:rate][:destination_address]
+        location.country = params[:rate][:destination_country]
+        location.state = params[:rate][:destination_state]
+        location.city = params[:rate][:destination_city]
+        location.postal = params[:rate][:destination_postal]
+        location.save
+        @destination_location_id = location.id
+      else
+        @destination_location_id =  params[:rate][:destination_location_id]
+      end
+    end
+    params[:rate][:destination_location_id] = @destination_location_id
     respond_to do |format|
       if @rate.update(rate_params)
         if params[:rate][:supporting_pdf].present?
@@ -89,6 +150,6 @@ class RatesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def rate_params
-      params.require(:rate).permit(:client_id, :rate_type, :parent_id, :rate_level, :rep_id, :effective_to, :effective_from, :origin_city, :origin_state, :origin_country, :destination_city, :destination_state, :destination_country, :freight_desc, :freight_classification, :transit_time, :minimum_density)
+      params.require(:rate).permit(:client_id, :rate_type, :parent_id, :rate_level, :rep_id, :effective_to, :effective_from, :origin_location_id, :destination_location_id, :freight_desc, :freight_classification, :transit_time, :minimum_density)
     end
 end

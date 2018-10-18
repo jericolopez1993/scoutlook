@@ -106,52 +106,19 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title">Origin</h4>
+    <h4 class="panel-title">Location</h4>
   </div>
   <div class="panel-body">
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">City/Town:</label>
+      <label class="col-md-3 col-form-label">Origin:</label>
       <div class="col-md-7">
-        <%= @rate.origin_city %>
+        <%= @rate.origin_location.nil? ? "" : "#{@rate.origin_location.address} #{@rate.origin_location.state}, #{@rate.origin_location.country} #{@rate.origin_location.postal} #{@rate.origin_location.city}" %>
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">State / Province:</label>
+      <label class="col-md-3 col-form-label">Destination:</label>
       <div class="col-md-7">
-        <%= @rate.origin_state %>
-      </div>
-    </div>
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Country:</label>
-      <div class="col-md-7">
-        <%= @rate.origin_country %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="panel panel-inverse">
-  <div class="panel-heading">
-    <div class="panel-heading-btn">
-    </div>
-    <h4 class="panel-title">Destination</h4>
-  </div>
-  <div class="panel-body">
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">City/Town:</label>
-      <div class="col-md-7">
-        <%= @rate.destination_city %>
-      </div>
-    </div>
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">State / Province:</label>
-      <div class="col-md-7">
-        <%= @rate.destination_state %>
-      </div>
-    </div>
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Country:</label>
-      <div class="col-md-7">
-        <%= @rate.destination_country %>
+        <%= @rate.destination_location.nil? ? "" : "#{@rate.destination_location.address} #{@rate.destination_location.state}, #{@rate.destination_location.country} #{@rate.destination_location.postal} #{@rate.destination_location.city}" %>
       </div>
     </div>
   </div>
