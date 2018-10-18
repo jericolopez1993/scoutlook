@@ -1,4 +1,5 @@
 class ShipmentsController < ApplicationController
+include HTTParty
   before_action :set_shipment, only: [:show, :edit, :update, :destroy]
 
   # GET /shipments
@@ -63,6 +64,15 @@ class ShipmentsController < ApplicationController
     end
     @shipment.destination_location_id = @destination_location_id
 
+    origin = Location.find(@origin_location_id)
+    @origin = origin.address + " " + origin.state + "," + origin.country
+    destination = Location.find(@destination_location_id)
+    @destination = destination.address + " " +destination.state + "," + destination.country
+    str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
+    response = HTTParty.get(str_url)
+    body = JSON.parse(response.body)
+    @shipment.distance = body['rows'][0]['elements'][0]['distance']['value'] / 1000
+
     respond_to do |format|
       if @shipment.save
         format.html { redirect_to master_invoice_path(:id => @shipment.header), notice: 'Shipment was successfully created.' }
@@ -109,6 +119,15 @@ class ShipmentsController < ApplicationController
       end
     end
     params[:shipment][:destination_location_id] = @destination_location_id
+
+    origin = Location.find(@origin_location_id)
+    @origin = origin.address + " " + origin.state + "," + origin.country
+    destination = Location.find(@destination_location_id)
+    @destination = destination.address + " " +destination.state + "," + destination.country
+    str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
+    response = HTTParty.get(str_url)
+    body = JSON.parse(response.body)
+    params[:shipment][:distance] = body['rows'][0]['elements'][0]['distance']['value'] / 1000
 
     respond_to do |format|
       if @shipment.update(shipment_params)

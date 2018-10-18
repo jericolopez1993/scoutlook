@@ -13,11 +13,7 @@ Rails.application.routes.draw do
   resources :locations
   resources :client_contacts
   resources :reps
-  resources :client_locations do
-    collection do
-      get     'origin_destination'
-    end
-  end
+  resources :client_locations 
   resources :clients do
     collection do
       get     'origins'
@@ -43,7 +39,11 @@ Rails.application.routes.draw do
 
  #APIs
  namespace :api do
-   resources :locations
+   resources :locations do
+     collection do
+       get      'distance'
+     end
+   end
    resources :clients
  end
  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.htmlerb

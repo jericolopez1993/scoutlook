@@ -1,4 +1,5 @@
 class MasterInvoicesController < ApplicationController
+include HTTParty
   before_action :set_master_invoice, only: [:show, :edit, :update, :destroy]
 
   # GET /master_invoices
@@ -33,7 +34,7 @@ class MasterInvoicesController < ApplicationController
         if params[:master_invoice][:attachment_file].present?
           @master_invoice.attachment_file.attach(params[:master_invoice][:attachment_file])
         end
-        if @master_invoice.shipment_entry == "single shipment"
+          if @master_invoice.shipment_entry == "single shipment"
             @shipment = Shipment.new(shipment_params)
             @origin_location_id = nil
             @destination_location_id = nil
@@ -66,6 +67,15 @@ class MasterInvoicesController < ApplicationController
                 @destination_location_id =  params[:master_invoice][:destination_location_id]
               end
             end
+            origin = Location.find(@origin_location_id)
+            @origin = origin.address + " " + origin.state + "," + origin.country
+            destination = Location.find(@destination_location_id)
+            @destination = destination.address + " " +destination.state + "," + destination.country
+            str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
+            response = HTTParty.get(str_url)
+            body = JSON.parse(response.body)
+            distance = body['rows'][0]['elements'][0]['distance']['value'] / 1000
+            @shipment.distance = distance
             @shipment.destination_location_id = @destination_location_id
             @shipment.total_charge = params[:master_invoice][:total_charge_shipment]
             @shipment.header = @master_invoice.id
@@ -123,6 +133,14 @@ class MasterInvoicesController < ApplicationController
               end
             end
             params[:master_invoice][:destination_location_id] = @destination_location_id
+            origin = Location.find(@origin_location_id)
+            @origin = origin.address + " " + origin.state + "," + origin.country
+            destination = Location.find(@destination_location_id)
+            @destination = destination.address + " " +destination.state + "," + destination.country
+            str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
+            response = HTTParty.get(str_url)
+            body = JSON.parse(response.body)
+            params[:master_invoice][:distance] = body['rows'][0]['elements'][0]['distance']['value'] / 1000
             if @shipments.present? && !@shipments.nil?
               @shipment = @shipments.first
               @shipment.update(shipment_params)
@@ -161,7 +179,7 @@ class MasterInvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_invoice_params
-      params.require(:master_invoice).permit(:invoice_number, :master_invoice_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance_approved, :master_invoice_entry)
+      params.require(:master_invoice).permit(:invoice_number, :master_invoice_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance_approved, :shipment_entry)
     end
 
     def shipment_params

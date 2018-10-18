@@ -112,23 +112,6 @@ class ClientLocationsController < ApplicationController
     end
   end
 
-  def origin_destination
-    @origin = ""
-    @destination = ""
-
-    if params[:origin].present?
-      origin = ClientLocation.find(params[:origin])
-      @origin = origin.state + "," + origin.country
-    end
-
-    if params[:destination].present?
-      destination = ClientLocation.find(params[:destination])
-      @destination = destination.state + "," + destination.country
-    end
-
-    render json: {:origin => @origin, :destination => @destination}
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client_location
