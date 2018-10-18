@@ -17,7 +17,7 @@
                   <div class="form-group row m-b-15">
                     <%= form.label :shipment_date, 'Shipment Date *:', class: 'col-md-4 col-sm-4 col-form -label' %>
                     <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :shipment_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
+                      <%= form.text_field :shipment_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: shipment.shipment_date%>
                     </div>
                   </div>
                     <div class="form-group row m-b-15">

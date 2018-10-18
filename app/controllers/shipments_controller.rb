@@ -169,6 +169,7 @@ include HTTParty
       params[:shipment][:gst_hst_tax] = params[:shipment][:gst_hst_tax].gsub('$ ', '').gsub(',', '').to_d
       params[:shipment][:total_charge] = params[:shipment][:total_charge].gsub('$ ', '').gsub(',', '').to_d
       params[:shipment][:total_charge_with_tax] = params[:shipment][:total_charge_with_tax].gsub('$ ', '').gsub(',', '').to_d
+      params[:shipment][:shipment_date] = Date::strptime(params[:shipment][:shipment_date], "%m/%d/%Y")
       params.require(:shipment).permit(:header, :account_number, :shipment_date, :tracking_number, :terms, :origin_location_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes)
     end
 end
