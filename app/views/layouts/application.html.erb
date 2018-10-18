@@ -20,12 +20,13 @@
     <!-- begin #page-loader -->
     	<!-- end #page-loader -->
     	<!-- begin #page-container -->
-    	<div id="page-container" class="fade show page-sidebar-fixed page-header-fixed">
+    	<div id="page-container" class="page-container show fade page-without-sidebar page-header-fixed page-with-top-menu">
     		<!-- begin #header -->
         <%= render 'layouts/static/navigations/upper_navigation'%>
     		<!-- end #header -->
     		<!-- begin #sidebar -->
-        <%= render 'layouts/static/navigations/sidebar'%>
+        <%#= render 'layouts/static/navigations/sidebar'%>
+        <%= render 'layouts/static/navigations/top_menu'%>
     		<!-- end #sidebar -->
     		<!-- begin #content -->
     		<div id="content" class="content">
