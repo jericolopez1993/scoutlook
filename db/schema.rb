@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_221458) do
+ActiveRecord::Schema.define(version: 2018_10_18_225559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,12 +150,6 @@ ActiveRecord::Schema.define(version: 2018_10_18_221458) do
     t.integer "client_id"
     t.integer "client_contact_id"
     t.integer "rate_id"
-    t.string "origin_city"
-    t.string "origin_state"
-    t.string "origin_country"
-    t.string "destination_city"
-    t.string "destination_state"
-    t.string "destination_country"
     t.date "start_date"
     t.date "end_date"
     t.string "duration"
@@ -173,6 +167,8 @@ ActiveRecord::Schema.define(version: 2018_10_18_221458) do
     t.boolean "same_destination_hoc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "origin_location_id"
+    t.integer "destination_location_id"
   end
 
   create_table "rates", force: :cascade do |t|

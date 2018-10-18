@@ -27,7 +27,36 @@ class MasterSignalsController < ApplicationController
   # POST /master_signals.json
   def create
     @master_signal = MasterSignal.new(master_signal_params)
-
+    if params[:master_signal][:origin_location_id].present? || params[:master_signal][:origin_address].present? || params[:master_signal][:origin_country].present? ||  params[:master_signal][:origin_state].present? ||  params[:master_signal][:origin_postal].present? ||  params[:master_signal][:origin_city].present?
+      if params[:origin_new_location].present?
+        location = Location.new
+        location.address = params[:master_signal][:origin_address]
+        location.country = params[:master_signal][:origin_country]
+        location.state = params[:master_signal][:origin_state]
+        location.city = params[:master_signal][:origin_city]
+        location.postal = params[:master_signal][:origin_postal]
+        location.save
+        @origin_location_id = location.id
+      else
+        @origin_location_id =  params[:master_signal][:origin_location_id]
+      end
+    end
+    @master_signal.origin_location_id = @origin_location_id
+    if params[:master_signal][:destination_location_id].present? || params[:master_signal][:destination_address].present? ||  params[:master_signal][:destination_country].present? ||  params[:master_signal][:destination_state].present? ||  params[:master_signal][:destination_postal].present? ||  params[:master_signal][:destination_city].present?
+      if params[:destination_new_location].present?
+        location = Location.new
+        location.address = params[:master_signal][:destination_address]
+        location.country = params[:master_signal][:destination_country]
+        location.state = params[:master_signal][:destination_state]
+        location.city = params[:master_signal][:destination_city]
+        location.postal = params[:master_signal][:destination_postal]
+        location.save
+        @destination_location_id = location.id
+      else
+        @destination_location_id =  params[:master_signal][:destination_location_id]
+      end
+    end
+    @master_signal.destination_location_id = @destination_location_id
     respond_to do |format|
       if @master_signal.save
         format.html { redirect_to @master_signal, notice: 'Master signal was successfully created.' }
@@ -42,6 +71,36 @@ class MasterSignalsController < ApplicationController
   # PATCH/PUT /master_signals/1
   # PATCH/PUT /master_signals/1.json
   def update
+    if params[:master_signal][:origin_location_id].present? || params[:master_signal][:origin_address].present? || params[:master_signal][:origin_country].present? ||  params[:master_signal][:origin_state].present? ||  params[:master_signal][:origin_postal].present? ||  params[:master_signal][:origin_city].present?
+      if params[:origin_new_location].present?
+        location = Location.new
+        location.address = params[:master_signal][:origin_address]
+        location.country = params[:master_signal][:origin_country]
+        location.state = params[:master_signal][:origin_state]
+        location.city = params[:master_signal][:origin_city]
+        location.postal = params[:master_signal][:origin_postal]
+        location.save
+        @origin_location_id = location.id
+      else
+        @origin_location_id =  params[:master_signal][:origin_location_id]
+      end
+    end
+    params[:master_signal][:origin_location_id] = @origin_location_id
+    if params[:master_signal][:destination_location_id].present? || params[:master_signal][:destination_address].present? ||  params[:master_signal][:destination_country].present? ||  params[:master_signal][:destination_state].present? ||  params[:master_signal][:destination_postal].present? ||  params[:master_signal][:destination_city].present?
+      if params[:destination_new_location].present?
+        location = Location.new
+        location.address = params[:master_signal][:destination_address]
+        location.country = params[:master_signal][:destination_country]
+        location.state = params[:master_signal][:destination_state]
+        location.city = params[:master_signal][:destination_city]
+        location.postal = params[:master_signal][:destination_postal]
+        location.save
+        @destination_location_id = location.id
+      else
+        @destination_location_id =  params[:master_signal][:destination_location_id]
+      end
+    end
+    params[:master_signal][:destination_location_id] = @destination_location_id
     respond_to do |format|
       if @master_signal.update(master_signal_params)
         format.html { redirect_to @master_signal, notice: 'Master signal was successfully updated.' }
@@ -72,6 +131,6 @@ class MasterSignalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_signal_params
-      params.require(:master_signal).permit(:signal_type, :signal_date, :client_id, :client_contact_id, :rate_id, :origin_city, :origin_state, :origin_country, :destination_city, :destination_state, :destination_country, :start_date, :end_date, :duration, :volume, :uom, :per, :capacity_type, :max_origin, :max_destination, :desired_rate, :notes, :same_hoc)
+      params.require(:master_signal).permit(:signal_type, :signal_date, :client_id, :client_contact_id, :rate_id, :origin_location_id, :destination_location_id, :start_date, :end_date, :duration, :volume, :uom, :per, :capacity_type, :max_origin, :max_destination, :desired_rate, :notes, :same_hoc)
     end
 end

@@ -132,52 +132,19 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title">Origin</h4>
+    <h4 class="panel-title">Location</h4>
   </div>
   <div class="panel-body">
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">City/Town:</label>
+      <label class="col-md-3 col-form-label">Origin:</label>
       <div class="col-md-7">
-        <%= @master_signal.origin_city %>
+        <%= @master_signal.origin_location.nil? ? "" : "#{@master_signal.origin_location.address} #{@master_signal.origin_location.state}, #{@master_signal.origin_location.country} #{@master_signal.origin_location.postal} #{@master_signal.origin_location.city}" %>
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">State / Province:</label>
+      <label class="col-md-3 col-form-label">Destination:</label>
       <div class="col-md-7">
-        <%= @master_signal.origin_state %>
-      </div>
-    </div>
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Country:</label>
-      <div class="col-md-7">
-        <%= @master_signal.origin_country %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="panel panel-inverse">
-  <div class="panel-heading">
-    <div class="panel-heading-btn">
-    </div>
-    <h4 class="panel-title">Destination</h4>
-  </div>
-  <div class="panel-body">
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">City/Town:</label>
-      <div class="col-md-7">
-        <%= @master_signal.destination_city %>
-      </div>
-    </div>
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">State / Province:</label>
-      <div class="col-md-7">
-        <%= @master_signal.destination_state %>
-      </div>
-    </div>
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Country:</label>
-      <div class="col-md-7">
-        <%= @master_signal.destination_country %>
+        <%= @master_signal.destination_location.nil? ? "" : "#{@master_signal.destination_location.address} #{@master_signal.destination_location.state}, #{@master_signal.destination_location.country} #{@master_signal.destination_location.postal} #{@master_signal.destination_location.city}" %>
       </div>
     </div>
   </div>

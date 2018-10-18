@@ -11,7 +11,7 @@
       <div class="panel-heading">
         <div class="panel-heading-btn">
         </div>
-        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Signal' : "Edit Signal ##{generate_alphanumeric_id(rate.rate_type, rate.id)}"%></h4>
+        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Signal' : "Edit Signal ##{generate_alphanumeric_id(master_signal.signal_type, master_signal.id)}"%></h4>
       </div>
       <div class="panel-body">
         <% if master_signal.errors.any? %>
@@ -46,7 +46,7 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :client_contact_id, 'Contact *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :client_contact_id, ClientContact.all.collect {|l| ["#{l.first_name} #{l.last_name}", l.id, {'data-chained'=> "#{l.client_id}"}]},{:include_blank => true, :selected => master_signal.client_contact_id}, class: 'form-control', id: 'client_contact_id', 'data-parsley-required' => true %>
+                  <%= form.select :client_contact_id, ClientContact.all.collect {|l| ["#{l.first_name} #{l.last_name}", l.id, {'data-chained'=> "#{l.client_id}"}]},{:include_blank => true, :selected => master_signal.client_contact_id}, class: 'form-control', id: 'client_contact_id' %>
                   </div>
                 </div>
                   <div class="form-group row m-b-15">
@@ -139,26 +139,8 @@
         <h4 class="panel-title">Origin</h4>
       </div>
       <div class="panel-body">
-                    <div class="form-group row m-b-15">
-                      <%= form.label :origin_country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                        <%= form.select :origin_country, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
-                      </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                        <%= form.label :origin_state, 'State:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                        <div class="col-md-8 col-sm-8">
-                        <%= form.select :origin_state, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
-                        </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                      <%= form.label :origin_city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                        <%= form.select :origin_city, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => master_signal.origin_city}, class: 'form-control'%>
-                      </div>
-                    </div>
-
-                </div>
+        <%= render 'clients/od_address_form', form: form, name: 'origin' %>
+      </div>
     </div>
     <div class="panel panel-inverse">
       <div class="panel-heading">
@@ -167,28 +149,8 @@
         <h4 class="panel-title">Destination</h4>
       </div>
       <div class="panel-body">
-                  <div class="form-group row m-b-15">
-                    <%= form.label :destination_country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                    <div class="col-md-8 col-sm-8">
-                      <%= form.select :destination_country, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
-                    </div>
-                  </div>
-                  <div class="form-group row m-b-15">
-                      <%= form.label :destination_state, 'State:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                      <%= form.select :destination_state, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
-                      </div>
-                  </div>
-                    <div class="form-group row m-b-15">
-                      <%= form.label :destination_city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                      <div class="col-md-8 col-sm-8">
-                        <%= form.select :destination_city, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => master_signal.destination_city}, class: 'form-control'%>
-                      </div>
-                    </div>
-
-
-
-                </div>
+        <%= render 'clients/od_address_form', form: form, name: 'destination' %>
+        </div>
     </div>
     <div class="form-group row m-b-0 text-right">
       <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
@@ -211,18 +173,4 @@
 <script language="javascript">
 
   $("#client_contact_id").chained("#client_id");
-	populateCountries("master_signal_origin_country", "master_signal_origin_state");
-  <% if master_signal.origin_country.present? %>
-    tiggerChangeOnSelectCountry('master_signal_origin_country', '<%= master_signal.origin_country %>')
-  <% end %>
-  <% if master_signal.origin_state.present? %>
-    tiggerChangeOnSelectCountry('master_signal_origin_state', '<%= master_signal.origin_state %>')
-  <% end %>
-  populateCountries("master_signal_destination_country", "master_signal_destination_state");
-  <% if master_signal.destination_country.present? %>
-    tiggerChangeOnSelectCountry('master_signal_destination_country', '<%= master_signal.destination_country %>')
-  <% end %>
-  <% if master_signal.destination_state.present? %>
-    tiggerChangeOnSelectCountry('master_signal_destination_state', '<%= master_signal.destination_state %>')
-  <% end %>
 </script>
