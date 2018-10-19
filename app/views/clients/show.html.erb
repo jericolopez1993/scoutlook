@@ -162,8 +162,8 @@
                               <td><%= attachment_file.filename %></td>
                               <td><%= convert_date(attachment_file.created_at) %></td>
                               <td>
-                                <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file, disposition: 'preview'), :class => 'btn btn-primary' %>
-                                <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_clients_path(:id => @client.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                                <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file, disposition: 'preview'), :class => 'btn btn-primary  btn-xs' %>
+                                <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_clients_path(:id => @client.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
                               </td>
 
                             </tr>
@@ -223,8 +223,8 @@
                           <td><%= client_location.same_ho ? (@client.head_office_location.nil? ? '' : (@client.head_office_location.location.nil? ? '' : "#{@client.head_office_location.location.address} #{@client.head_office_location.location.city} #{@client.head_office_location.location.state}, #{@client.head_office_location.location.country} #{@client.head_office_location.location.postal}")) : (client_location.location.nil? ? '' : "#{client_location.location.address} #{client_location.location.city} #{client_location.location.state}, #{client_location.location.country} #{client_location.location.postal}")%></td>
                           <td><%= client_location.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.phone) : client_location.phone %></td>
                           <td>
-                            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_client_location_path(client_location), :class => 'btn btn-warning' %>
-                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, client_location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_client_location_path(client_location), :class => 'btn btn-warning btn-xs' %>
+                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, client_location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
                           </td>
 
                         </tr>
@@ -266,8 +266,8 @@
                           <td><%= contact.home_phone %></td>
                           <td style="text-align: center;"><%= contact.linkedin_link.nil? ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
                           <td>
-                            <a class="btn btn-warning" href="<%= edit_client_contact_path(contact) %>"><i class="far fa-edit"></i></a>&nbsp;
-                            <a data-confirm="Are you sure?" class="btn btn-danger" rel="nofollow" data-method="delete" href="/client_contacts/<%= contact.id %>"><i class="far fa-trash-alt"></i></a>
+                            <a class="btn btn-warning btn-xs" href="<%= edit_client_contact_path(contact) %>"><i class="far fa-edit"></i></a>&nbsp;
+                            <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href="/client_contacts/<%= contact.id %>"><i class="far fa-trash-alt"></i></a>
                           </td>
 
                         </tr>
@@ -308,9 +308,9 @@
             <td><%= activity.date_opened %></td>
             <td><%= activity.date_closed %></td>
             <td>
-              <%= link_to '<i class="far fa-eye"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-info' %>
-              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-warning' %>
-              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+              <%= link_to '<i class="far fa-eye"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_activity_path(:id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-warning btn-xs' %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
             </td>
 
           </tr>
@@ -347,9 +347,9 @@
             <td><%= rate.rate_type %></td>
             <td><%= rate.parent.nil? ? "" : "#{generate_alphanumeric_id(rate.parent.rate_type, rate.parent_id)}" %></td>
             <td>
-              <%= link_to '<i class="far fa-eye"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-info' %>
-              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-warning' %>
-              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+              <%= link_to '<i class="far fa-eye"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-warning btn-xs' %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
             </td>
           </tr>
         <% end %>

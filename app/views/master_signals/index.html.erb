@@ -30,9 +30,9 @@
                           <td><%= master_signal.client_contact.nil? ? '' : "#{master_signal.client_contact.last_name}" %></td>
                           <td><%= master_signal.rate.nil? ? '' : "#{master_signal.rate.rate_type}" %></td>
                           <td>
-                            <%= link_to '<i class="far fa-eye"></i>'.html_safe, master_signal, :class => 'btn btn-info' %>
-                            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_master_signal_path(master_signal), :class => 'btn btn-warning' %>
-                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, master_signal, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                            <%= link_to '<i class="far fa-eye"></i>'.html_safe, master_signal, :class => 'btn btn-info btn-xs' %>
+                            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_master_signal_path(master_signal), :class => 'btn btn-warning btn-xs' %>
+                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, master_signal, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
                           </td>
                         </tr>
                       <% end %>

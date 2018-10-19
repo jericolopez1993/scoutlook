@@ -29,8 +29,8 @@
                           <td><%= user.email %></td>
                           <td style="text-align: center;"><%= user.admin ? '<i class="text-green fas fa-user-check"></i>'.html_safe : '' %></td>
                           <td>
-                            <a class="btn btn-warning" href="/users/<%= user.id %>/edit"><i class="far fa-edit"></i></a>
-                            <a data-confirm="Are you sure?" class="btn btn-danger" rel="nofollow" data-method="delete" href="/users/<%= user.id %>"><i class="fas fa-trash-alt"></i></a>
+                            <a class="btn btn-warning btn-xs" href="/users/<%= user.id %>/edit"><i class="far fa-edit"></i></a>
+                            <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href="/users/<%= user.id %>"><i class="fas fa-trash-alt"></i></a>
                           </td>
                         </tr>
                       <% end %>
