@@ -202,9 +202,7 @@
     <table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons">
                     <thead>
                       <tr class="odd gradeX">
-                        <th width="1%">Head Office</th>
-                        <th width="1%">Origin</th>
-        								<th width="1%">Destination</th>
+                        <th width="1%">Primary</th>
                         <th width="1%">#</th>
                         <th class="text-nowrap">Name</th>
                         <th class="text-nowrap">Type</th>
@@ -218,9 +216,9 @@
                     <tbody>
                       <% ClientLocation.where(:client_id => @client.id).each do |client_location| %>
                         <tr>
-                          <td style="text-align: center;"><%= (@client.head_office == client_location.id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
-                          <td style="text-align: center;"><%= (@client.origin == client_location.id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
-                          <td style="text-align: center;"><%= (@client.destination == client_location.id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
+                          <td style="text-align: center;"><%= (@client.origin == client_location.id) ? '<span class="label label-warning">Origin</span><br/>'.html_safe : '' %>
+                            <%= (@client.destination == client_location.id) ? '<span class="label label-danger">Destination</span><br/>'.html_safe : '' %>
+                          <%= (@client.head_office == client_location.id) ? '<span class="label label-primary">Head Office</span><br/>'.html_safe : '' %></td>
                           <td><%= generate_alphanumeric_id(client_location.loc_type, client_location.id) %></td>
                           <td><%= client_location.name %></td>
                           <td><%= client_location.loc_type %></td>
@@ -250,8 +248,7 @@
     <table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons">
                     <thead>
                       <tr class="odd gradeX">
-      									<th width="1%">PDM</th>
-        								<th width="1%">POC</th>
+      									<th width="1%">Primary</th>
                         <th class="text-nowrap">Name</th>
                         <th class="text-nowrap">Email</th>
                         <th class="text-nowrap">Address</th>
@@ -264,8 +261,8 @@
                     <tbody>
                       <% ClientContact.where(:client_id => @client.id).each do |contact| %>
                         <tr>
-                          <td style="text-align: center;"><%= (@client.pdm_id == contact.id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
-                          <td style="text-align: center;"><%= (@client.poc_id == contact.id) ? '<i class="text-green fas fa-check"></i>'.html_safe : '' %></td>
+                          <td style="text-align: center;"><%= (@client.pdm_id == contact.id) ? '<span class="label label-success">PDM</span><br/>'.html_safe : '' %>
+                            <%= (@client.poc_id == contact.id) ? '<span class="label label-green">poc_id</span><br/>'.html_safe : '' %></td>
                           <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
                           <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %>" target="_top"><%= contact.email %>&nbsp;<i class="far fa-envelope"></a></i></td>
                           <td><%= contact.same_ho ? (@client.head_office_location.nil? ? '' : (@client.head_office_location.location.nil? ? '' : @client.head_office_location.location.address)) : (contact.location.nil? ? '' : contact.location.address)%></td>
