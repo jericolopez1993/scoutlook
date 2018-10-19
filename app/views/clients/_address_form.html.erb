@@ -17,9 +17,9 @@
     </div>
   </div>
   <div class="form-group row m-b-15 address-fields">
-    <%= form.label :country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
+    <%= form.label :city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
     <div class="col-md-8 col-sm-8">
-    <%= form.select :country, options_for_select([]),{:include_blank => true}, class: 'form-control', :id => 'country' %>
+      <%= form.text_field :city, class: 'form-control', :id => 'city' %>
     </div>
   </div>
   <div class="form-group row m-b-15 address-fields">
@@ -35,11 +35,12 @@
     </div>
   </div>
   <div class="form-group row m-b-15 address-fields">
-    <%= form.label :city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
+    <%= form.label :country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
     <div class="col-md-8 col-sm-8">
-      <%= form.text_field :city, class: 'form-control', :id => 'city' %>
+    <%= form.select :country, options_for_select([]), {}, class: 'form-control', :id => 'country' %>
     </div>
   </div>
+
 
 
   <script language="javascript">
@@ -48,4 +49,6 @@
     <% if params[:action] == 'edit' %>
       locationDetails($("#location_id").val());
     <% end %>
+    console.log($('#country').val());
+    console.log($('#state').val());
   </script>
