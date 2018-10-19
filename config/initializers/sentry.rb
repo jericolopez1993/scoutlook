@@ -1,4 +1,4 @@
 Raven.configure do |config|
-  config.dsn = 'https://15bcde5fc36443089126b284c721c0f3:41e23635bee54f108c612000da03cfd0@sentry.io/1302155'
+  config.dsn = 'https://92b75050203e49b3904fbcb823032b2c:0faf76f6d60044d5929f7d30b3649d71@sentry.io/1304853'
   config.sanitize_fields = Rails.application.config.filter_parameters.map(&:to_s)
 end
