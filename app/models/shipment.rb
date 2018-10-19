@@ -7,7 +7,7 @@ class Shipment < ApplicationRecord
       nil
     end
   end
-  
+
   def destination_location
     if !self.destination_location_id.nil?
       Location.find(self.destination_location_id)
@@ -37,6 +37,19 @@ class Shipment < ApplicationRecord
       MasterInvoice.find(self.header).shipper_location
     else
       nil
+    end
+  end
+
+  def convert_to_lb
+    weight = self.billed_weight.nil? ? 0 : self.billed_weight
+    if !self.unit_of_weight.nil? && self.unit_of_weight != ''
+      if self.unit_of_weight == 'kg'
+        weight * 2.20462
+      else
+        weight
+      end
+    else
+      weight
     end
   end
 end
