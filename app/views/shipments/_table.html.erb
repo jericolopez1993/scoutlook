@@ -19,10 +19,6 @@
                         <th class="text-nowrap">Cost</th>
                         <th class="text-nowrap">Cost Per LB</th>
                         <th class="text-nowrap">Carrier</th>
-                        <th class="text-nowrap">Inter</th>
-                        <th class="text-nowrap">Intra</th>
-                        <th class="text-nowrap">to USA</th>
-                        <th class="text-nowrap">from USA</th>
                         <th class="text-nowrap">Reference #</th>
 										    <th class="text-nowrap" data-orderable="false">Actions</th>
     									</tr>
@@ -36,10 +32,6 @@
                         <td>$ <%= shipment.total_charge.nil? ? 0 : shipment.total_charge %></td>
                         <td>$ <%= number_with_precision ((shipment.total_charge.nil? ? 0 : shipment.total_charge) / shipment.convert_to_lb), :precision => 2 %></td>
                         <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
-                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_inter}" %></td>
-                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_intra}" %></td>
-                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_to_usa}" %></td>
-                        <td><%= shipment.shipper.nil? ? "" : "#{shipment.shipper.volume_from_usa}" %></td>
                         <td><%= shipment.invoice.nil? ? '' : "#{generate_alphanumeric_id(shipment.invoice.shipment_type, shipment.invoice.id)}" %></td>
                         <td>
                           <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipment, :class => 'btn btn-info' %>
