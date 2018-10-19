@@ -15,6 +15,7 @@
     									<tr class="odd gradeX">
     										<th width="1%">#</th>
     										<th class="text-nowrap">Type</th>
+    										<th class="text-nowrap">Client</th>
     										<th class="text-nowrap">Rep</th>
     										<th class="text-nowrap">Annual Value</th>
     										<th class="text-nowrap">Status</th>
@@ -28,6 +29,7 @@
                         <tr>
                           <td><%= generate_alphanumeric_id(activity.activity_type, activity.id) %></td>
                           <td><%= activity.activity_type %></td>
+                          <td><%= activity.client.nil? ? "" : "#{activity.client.company_name}" %></td>
                           <td><%= activity.rep.nil? ? "" : "#{activity.rep.first_name} #{activity.rep.last_name}" %></td>
                           <td><%= activity.annual_value %></td>
                           <td><%= activity.status ? 'Open' : 'Closed' %></td>

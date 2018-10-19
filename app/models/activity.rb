@@ -28,6 +28,14 @@ class Activity < ApplicationRecord
     end
   end
 
+  def client
+    if !self.client_id.nil?
+      Client.find(self.client_id)
+    else
+      nil
+    end
+  end
+
   private
     def remove_children
       ActivityOutcome.where(:id => self.outcome_id).destroy_all
