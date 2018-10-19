@@ -21,6 +21,7 @@
 
 class Client < ApplicationRecord
   has_many_attached :attachment_file
+  after_destroy :remove_children
   # before_create :set_client_id
   #
   # def set_client_id
@@ -98,4 +99,11 @@ class Client < ApplicationRecord
   def is_inbound?(location_id)
     ClientLocation.where(:client_id => self.id, :location_id => location_id).length > 0
   end
+
+
+  private
+    def remove_children
+      ClientContact.where(:client_id => self.id).destroy_all
+      ClientLocation.where(:client_id => self.id).destroy_all
+    end
 end

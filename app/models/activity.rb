@@ -2,6 +2,7 @@ class Activity < ApplicationRecord
   has_many_attached :proposal_pdf
   has_one_attached :credit_application
   before_save :set_open_and_close_date
+  after_destroy :remove_children
 
   def set_open_and_close_date
     if self.status
@@ -26,4 +27,9 @@ class Activity < ApplicationRecord
       nil
     end
   end
+
+  private
+    def remove_children
+      ActivityOutcome.where(:id => self.outcome_id).destroy_all
+    end
 end
