@@ -59,7 +59,7 @@
       dataTable.destroy();
       return dataTable = null;
     }
-    
+
   });
 
 }).call(this);
@@ -164,11 +164,11 @@ $(document).on('turbolinks:load', function(){
           addTotalNumbers('total_charge_with_tax_fields', 'master_invoice_total_charge_with_tax');
       });
 
-      // $("#origin_location_id, #destination_location_id").change(function(){
-      //   var origin = $("#origin_location_id").val();
-      //   var destination = $("#destination_location_id").val();
-      //   getDistance(origin, destination);
-      // });
+      $("#origin_location_id, #destination_location_id").change(function(){
+        var origin = $("#origin_location_id").val();
+        var destination = $("#destination_location_id").val();
+        getDistance(origin, destination);
+      });
 
       $("#location_id").change(function(){
         locationDetails($(this).val());
@@ -370,5 +370,10 @@ function getDistance(origin, destination){
     data: {origin: origin, destination: destination}
   }).done(function(data) {
     $("#distance").val((data.distance / 1000).toFixed(2));
+    var map = $('#map'),
+       cval = data.img_url;
+
+    $('<img id="map" src="'+ cval +'">').insertAfter( map );
+    map.remove();
   })
 }
