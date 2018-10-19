@@ -14,4 +14,8 @@ module ApplicationHelper
       Date.parse(val.to_s).strftime("%d/%m/%Y")
     end
   end
+
+  def location_format(location)
+    "#{location.name}<br/>#{location.address} #{location.city} #{location.state}, #{location.country} #{location.postal}".html_safe
+  end
 end

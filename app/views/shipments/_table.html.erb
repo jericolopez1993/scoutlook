@@ -27,8 +27,8 @@
                       <% shipments.each do |shipment| %>
                       <tr>
                         <td><%= shipment.tracking_number %></td>
-                        <td><%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.name}" %></td>
-                        <td><%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.name}" %></td>
+                        <td><%= shipment.origin_location.nil? ? "" : location_format(shipment.origin_location) %></td>
+                        <td><%= shipment.destination_location.nil? ? "" : location_format(shipment.destination_location) %></td>
                         <td><%= shipment.billed_weight.nil? ? 0 : shipment.billed_weight %> <%= (shipment.unit_of_weight.nil? || shipment.unit_of_weight == '') ? 'lb' : shipment.unit_of_weight %></td>
                         <td>$ <%= shipment.total_charge.nil? ? 0 : shipment.total_charge %></td>
                         <td>$ <%= number_with_precision ((shipment.total_charge.nil? ? 0 : shipment.total_charge) / shipment.convert_to_lb), :precision => 2 %></td>

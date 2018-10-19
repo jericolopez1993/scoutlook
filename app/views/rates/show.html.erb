@@ -112,13 +112,13 @@
     <div class="form-group row m-b-15">
       <label class="col-md-3 col-form-label">Origin:</label>
       <div class="col-md-7">
-        <%= @rate.origin_location.nil? ? "" : "#{@rate.origin_location.address} #{@rate.origin_location.city} #{@rate.origin_location.state}, #{@rate.origin_location.country} #{@rate.origin_location.postal}" %>
+        <%= @rate.origin_location.nil? ? "" : location_format(@rate.origin_location) %>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-3 col-form-label">Destination:</label>
       <div class="col-md-7">
-        <%= @rate.destination_location.nil? ? "" : "#{@rate.destination_location.address} #{@rate.destination_location.city} #{@rate.destination_location.state}, #{@rate.destination_location.country} #{@rate.destination_location.postal}" %>
+        <%= @rate.destination_location.nil? ? "" : location_format(@rate.destination_location) %>
       </div>
     </div>
   </div>
