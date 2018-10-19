@@ -191,7 +191,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :raw_weight, 'Reweigh Weight:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.number_field :raw_weight, class: 'form-control', value: shipment.raw_weight %>
+          <%= form.text_field :raw_weight, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'", value: shipment.raw_weight %>
           </div>
         </div>
         <div class="form-group row m-b-15">
