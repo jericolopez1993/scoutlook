@@ -39,6 +39,12 @@
                       <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce', :value => shipment.notes)  %>
                       </div>
                     </div>
+                    <div class="form-group row m-b-15">
+                      <%= form.label :shipment_attachment_file, 'Attachment:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                      <div class="col-md-8 col-sm-8">
+                      <%= form.file_field :shipment_attachment_file  %>
+                      </div>
+                    </div>
 
                 </div>
     </div>

@@ -1,4 +1,5 @@
 class Shipment < ApplicationRecord
+has_one_attached :shipment_attachment_file
 
   def origin_location
     if !self.origin_location_id.nil?

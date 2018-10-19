@@ -75,6 +75,9 @@ include HTTParty
 
     respond_to do |format|
       if @shipment.save
+        if params[:shipment][:shipment_attachment_file].present?
+          @shipment.shipment_attachment_file.attach(params[:shipment][:shipment_attachment_file])
+        end
         format.html { redirect_to master_invoice_path(:id => @shipment.header), notice: 'Shipment was successfully created.' }
         format.json { render :show, status: :created, location: @shipment }
       else
@@ -131,6 +134,9 @@ include HTTParty
 
     respond_to do |format|
       if @shipment.update(shipment_params)
+        if params[:shipment][:shipment_attachment_file].present?
+          @shipment.shipment_attachment_file.attach(params[:shipment][:shipment_attachment_file])
+        end
         format.html { redirect_to master_invoice_path(:id => @shipment.header), notice: 'Shipment was successfully updated.' }
         format.json { render :show, status: :ok, location: @shipment }
       else

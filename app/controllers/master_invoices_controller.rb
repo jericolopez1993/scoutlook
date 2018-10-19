@@ -82,6 +82,9 @@ class MasterInvoicesController < ApplicationController
             @shipment.total_charge = params[:master_invoice][:total_charge_shipment]
             @shipment.header = @master_invoice.id
             @shipment.save
+            if params[:master_invoice][:shipment_attachment_file].present?
+              @shipment.shipment_attachment_file.attach(params[:master_invoice][:shipment_attachment_file])
+            end
         end
         format.html { redirect_to @master_invoice, notice: 'Master invoice was successfully created.' }
         format.json { render :show, status: :created, location: @master_invoice }
@@ -151,6 +154,9 @@ class MasterInvoicesController < ApplicationController
               @shipment.total_charge = params[:master_invoice][:total_charge_shipment]
               @shipment.header = @master_invoice.id
               @shipment.save
+            end
+            if params[:master_invoice][:shipment_attachment_file].present?
+              @shipment.shipment_attachment_file.attach(params[:master_invoice][:shipment_attachment_file])
             end
         end
         format.html { redirect_to @master_invoice, notice: 'Master invoice was successfully updated.' }

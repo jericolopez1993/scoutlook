@@ -53,6 +53,14 @@
             <%= shipment.notes.nil? ? "" : shipment.notes.html_safe %>
           </div>
         </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Attachment:</label>
+          <div class="col-md-7">
+            <% if shipment.shipment_attachment_file.attached? %>
+              <%= link_to shipment.shipment_attachment_file.filename, rails_blob_path(shipment.shipment_attachment_file, disposition: 'preview') %>
+            <% end %>
+          </div>
+        </div>
 
       </div>
     </div>
