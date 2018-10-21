@@ -36,10 +36,15 @@ module Api
         destination = Location.find(params[:destination])
         @destination = destination.address + " " +destination.state + "," + destination.country
       end
-      str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
-      response = HTTParty.get(str_url)
-      body = JSON.parse(response.body)
-      distance = body['rows'][0]['elements'][0]['distance']['value']
+      begin
+        str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
+        response = HTTParty.get(str_url)
+        body = JSON.parse(response.body)
+        distance = body['rows'][0]['elements'][0]['distance']['value']
+      rescue
+        distance = ''
+        puts 'Google Maps API error'
+      end
       static_map_url = "https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C#{@origin}%7C#{@destination}&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
       render json: {:distance => distance, :img_url => static_map_url}
     end

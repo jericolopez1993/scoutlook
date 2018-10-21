@@ -68,10 +68,14 @@ include HTTParty
     @origin = origin.address + " " + origin.state + "," + origin.country
     destination = Location.find(@destination_location_id)
     @destination = destination.address + " " +destination.state + "," + destination.country
-    str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
-    response = HTTParty.get(str_url)
-    body = JSON.parse(response.body)
-    @shipment.distance = body['rows'][0]['elements'][0]['distance']['value'] / 1000
+    begin
+      str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
+      response = HTTParty.get(str_url)
+      body = JSON.parse(response.body)
+      @shipment.distance = body['rows'][0]['elements'][0]['distance']['value'] / 1000
+    rescue
+      puts 'Google Maps API error'
+    end
 
     respond_to do |format|
       if @shipment.save
@@ -127,10 +131,14 @@ include HTTParty
     @origin = origin.address + " " + origin.state + "," + origin.country
     destination = Location.find(@destination_location_id)
     @destination = destination.address + " " +destination.state + "," + destination.country
-    str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
-    response = HTTParty.get(str_url)
-    body = JSON.parse(response.body)
-    params[:shipment][:distance] = body['rows'][0]['elements'][0]['distance']['value'] / 1000
+    begin
+      str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
+      response = HTTParty.get(str_url)
+      body = JSON.parse(response.body)
+      params[:shipment][:distance] = body['rows'][0]['elements'][0]['distance']['value'] / 1000
+    rescue
+      puts 'Google Maps API error'
+    end
 
     respond_to do |format|
       if @shipment.update(shipment_params)
