@@ -73,11 +73,15 @@ class MasterInvoicesController < ApplicationController
             @origin = origin.address + " " + origin.state + "," + origin.country
             destination = Location.find(@destination_location_id)
             @destination = destination.address + " " +destination.state + "," + destination.country
-            str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
-            response = HTTParty.get(str_url)
-            body = JSON.parse(response.body)
-            distance = body['rows'][0]['elements'][0]['distance']['value'] / 1000
-            @shipment.distance = distance
+            begin
+              str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
+              response = HTTParty.get(str_url)
+              body = JSON.parse(response.body)
+              distance = body['rows'][0]['elements'][0]['distance']['value'] / 1000
+              @shipment.distance = distance
+            rescue
+              puts 'Google Maps API error'
+            end
             @shipment.destination_location_id = @destination_location_id
             @shipment.total_charge = params[:master_invoice][:total_charge_shipment]
             @shipment.header = @master_invoice.id
