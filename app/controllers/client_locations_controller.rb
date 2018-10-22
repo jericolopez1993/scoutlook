@@ -1,4 +1,5 @@
 class ClientLocationsController < ApplicationController
+  include ApplicationHelper
   before_action :set_client_location, only: [:show, :edit, :update, :destroy]
 
   # GET /client_locations
@@ -35,13 +36,14 @@ class ClientLocationsController < ApplicationController
   def create
     @client_location = ClientLocation.new(client_location_params)
     @client_location.same_ho = params[:same_ho].present?
-    if params[:client_location][:location_id].present? || params[:client_location][:address].present? ||  params[:client_location][:city].present? ||  params[:client_location][:state].present? ||  params[:client_location][:postal].present? ||  params[:client_location][:city].present?
-      if params[:new_location].present?
+    if params[:client_location][:location_id].present? && (params[:client_location][:address].present? ||  params[:client_location][:city].present? ||  params[:client_location][:state].present? ||  params[:client_location][:postal].present? ||  params[:client_location][:city].present?)
+      if is_numeric?(params[:client_location][:location_id])
+        @location_id =  params[:client_location][:location_id]
+      else
         @location = Location.new(address_params)
+        @location.name = params[:client_location][:location_id]
         @location.save
         @location_id = @location.id
-      else
-        @location_id =  params[:client_location][:location_id]
       end
       @client_location.location_id = @location_id
     end
@@ -70,14 +72,16 @@ class ClientLocationsController < ApplicationController
   # PATCH/PUT /client_locations/1
   # PATCH/PUT /client_locations/1.json
   def update
-    if params[:client_location][:location_id].present? || params[:client_location][:address].present? ||  params[:client_location][:city].present? ||  params[:client_location][:state].present? ||  params[:client_location][:postal].present? ||  params[:client_location][:city].present?
-      if params[:new_location].present?
+    if params[:client_location][:location_id].present? && (params[:client_location][:address].present? ||  params[:client_location][:city].present? ||  params[:client_location][:state].present? ||  params[:client_location][:postal].present? ||  params[:client_location][:city].present?)
+      if is_numeric?(params[:client_location][:location_id])
+        @location_id =  params[:client_location][:location_id]
+      else
         @location = Location.new(address_params)
+        @location.name = params[:client_location][:location_id]
         @location.save
         @location_id = @location.id
-      else
-        @location_id =  params[:client_location][:location_id]
       end
+      @client_location.location_id = @location_id
     end
     params[:client_location][:location_id] = @location_id
     respond_to do |format|

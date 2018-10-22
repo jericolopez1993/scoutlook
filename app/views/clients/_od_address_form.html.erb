@@ -10,6 +10,7 @@
       <%= form.select "#{name}_location_id", Location.all.collect {|r| [ r.name, r.id ] },{:include_blank => true}, class: 'form-control', :id => "#{name}_location_id" %>
     </div>
   </div>
+
   <div class="form-group row m-b-15 address-fields">
     <%= form.label "#{name}_address", 'Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
     <div class="col-md-8 col-sm-8">

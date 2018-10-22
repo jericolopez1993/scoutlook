@@ -101,20 +101,20 @@ $(document).on('turbolinks:load', function(){
       return $result;
     }
   })
-  $( ".combo-dropdown" ).change(function() {
-    params = $(this).val();
-        $.ajax({
-          method: 'post',
-          url: "/api/locations",
-          data: {location: {name: params}}
-        }).done(function(data) {
-          return {
-            id: data.id,
-            text: data.name,
-            newOption: true
-          }
-        })
-  });
+  // $( ".combo-dropdown" ).change(function() {
+  //   params = $(this).val();
+  //       // $.ajax({
+  //       //   method: 'post',
+  //       //   url: "/api/locations",
+  //       //   data: {location: {name: params}}
+  //       // }).done(function(data) {
+  //       //   return {
+  //       //     id: data.id,
+  //       //     text: data.name,
+  //       //     newOption: true
+  //       //   }
+  //       // })
+  // });
 
   $(function(){
       Inputmask().mask(document.querySelectorAll("input"));
@@ -167,9 +167,15 @@ $(document).on('turbolinks:load', function(){
       });
 
       $("#location_id").change(function(){
-        locationDetails($(this).val());
+        var er = /^-?[0-9]+$/;
+        var isNew = er.test($(this).val());
+        addressCreate(!isNew);
+        if(isNew){
+          locationDetails($(this).val());
+        }
       });
       $("#origin_location_id").change(function(){
+
         locationDetailsOD($(this).val(), 'origin');
       });
       $("#destination_location_id").change(function(){
@@ -216,7 +222,6 @@ function addressCreate(isTrue) {
   $("#postal").val('');
   $("#state").val('').change();
   if (isTrue) {
-    $(".location-fields").hide();
     $("#address").attr("disabled", false);
     $("#city").attr("disabled", false);
     $("#postal").attr("disabled", false);
@@ -225,7 +230,6 @@ function addressCreate(isTrue) {
     $("#country").val('Canada').change();
 
   }else{
-    $(".location-fields").show();
     $("#address").attr("disabled", true);
     $("#city").attr("disabled", true);
     $("#postal").attr("disabled", true);

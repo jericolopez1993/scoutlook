@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+  include ApplicationHelper
   before_action :set_client, only: [:show, :edit, :update, :destroy, :remove_attachment]
 
   # GET /clients
@@ -27,13 +28,14 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-    if params[:client][:location_id].present? || params[:client][:address].present? ||  params[:client][:city].present? ||  params[:client][:state].present? ||  params[:client][:postal].present? ||  params[:client][:city].present?
-      if params[:new_location].present?
+    if params[:client][:location_id].present? && (params[:client][:address].present? ||  params[:client][:city].present? ||  params[:client][:state].present? ||  params[:client][:postal].present? ||  params[:client][:city].present?)
+      if is_numeric?(params[:client][:location_id])
+        @location_id =  params[:client][:location_id]
+      else
         @location = Location.new(address_params)
+        @location.name = params[:client][:location_id]
         @location.save
         @location_id = @location.id
-      else
-        @location_id =  params[:client][:location_id]
       end
       @client_location = ClientLocation.new
       @client_location.location_id = @location_id
