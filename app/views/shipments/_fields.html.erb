@@ -5,7 +5,7 @@
       <div class="panel-heading">
         <div class="panel-heading-btn">
         </div>
-        <h4 class="panel-title">Basic Information</h4>
+        <h4 class="panel-title">Basic Information<%= params[:action] == 'edit' ? ": #{generate_two_alphanumeric_id((shipment.origin_location.nil? ? "" : shipment.origin_location.name), (shipment.destination_location.nil? ? "" : shipment.destination_location.name), shipment.id)}" : ''%></h4>
       </div>
       <div class="panel-body">
               <div class="form-group row m-b-15">

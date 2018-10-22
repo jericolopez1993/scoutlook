@@ -13,7 +13,7 @@
             <%= link_to 'Edit', edit_master_signal_path(@master_signal), :class => 'btn btn-warning btn-xs' %>
             <%= link_to 'Back', master_signals_path, :class => 'btn btn-info btn-xs' %>
           </div>
-          <h4 class="panel-title">  <%= generate_alphanumeric_id(@master_signal.signal_type, @master_signal.id) %></h4>
+          <h4 class="panel-title">  <%= generate_alphanumeric_id((master_signal.client.nil? ? '' : "#{master_signal.client.company_name}"), @master_signal.id) %></h4>
         </div>
         <div class="panel-body">
 

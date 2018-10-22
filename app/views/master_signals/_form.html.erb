@@ -11,7 +11,7 @@
       <div class="panel-heading">
         <div class="panel-heading-btn">
         </div>
-        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Signal' : "Edit Signal ##{generate_alphanumeric_id(master_signal.signal_type, master_signal.id)}"%></h4>
+        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Signal' : "Edit Signal ##{generate_alphanumeric_id((master_signal.client.nil? ? '' : "#{master_signal.client.company_name}"), master_signal.id)}"%></h4>
       </div>
       <div class="panel-body">
         <% if master_signal.errors.any? %>

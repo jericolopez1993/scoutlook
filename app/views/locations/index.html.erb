@@ -22,7 +22,7 @@
     								<tbody>
                       <% @locations.each do |location| %>
                         <tr>
-                          <td><%= generate_alphanumeric_id(location.country, location.id) %></td>
+                          <td><%= generate_alphanumeric_id(location.name, location.id) %></td>
                           <td><%= location.name %></td>
                           <td><%= location.address %> <%= location.city %> <%= location.state %>, <%= location.country %> <%= location.postal %></td>
                           <td>

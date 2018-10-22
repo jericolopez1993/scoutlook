@@ -7,7 +7,7 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Invoice' : "Edit Invoice ##{generate_alphanumeric_id(master_invoice.shipment_type, master_invoice.id)}"%></h4>
+    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Invoice' : "Edit Invoice ##{generate_two_alphanumeric_id((master_invoice.shipper.nil? ? '' : master_invoice.shipper.company_name), (master_invoice.carrier.nil? ? '' : master_invoice.carrier.company_name), master_invoice.id)}"%></h4>
   </div>
   <div class="panel-body">
   <% if master_invoice.errors.any? %>

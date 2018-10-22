@@ -11,7 +11,7 @@
           <%= link_to 'Edit', edit_master_invoice_path(@master_invoice), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
           <%= link_to 'Back', master_invoices_path, :class => 'btn btn-info btn-xs' %>
         </div>
-        <h4 class="panel-title">ID: <%= generate_alphanumeric_id(@master_invoice.shipment_type, @master_invoice.id) %></h4>
+        <h4 class="panel-title">ID: <%= generate_two_alphanumeric_id((@master_invoice.shipper.nil? ? '' : @master_invoice.shipper.company_name), (@master_invoice.carrier.nil? ? '' : @master_invoice.carrier.company_name), @master_invoice.id) %></h4>
       </div>
       <div class="panel-body">
         <div class="form-group row m-b-15">

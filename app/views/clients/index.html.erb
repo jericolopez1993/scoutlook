@@ -25,7 +25,7 @@
     								<tbody>
                       <% @clients.each do |client| %>
                         <tr>
-                          <td><%= generate_alphanumeric_id(client.client_type, client.id) %></td>
+                          <td><%= generate_alphanumeric_id(client.company_name, client.id) %></td>
                           <td><%= client.company_name %></td>
                           <td><%= client.client_type %></td>
                           <td><%= client.origin_location.nil? ? '' : (client.origin_location.location.nil? ? '' : "#{client.origin_location.location.state}, #{client.origin_location.location.country}") %></td>

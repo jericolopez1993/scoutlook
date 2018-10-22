@@ -27,7 +27,7 @@
     								<tbody>
                       <% @activities.each do |activity| %>
                         <tr>
-                          <td><%= generate_alphanumeric_id(activity.activity_type, activity.id) %></td>
+                          <td><%= generate_alphanumeric_id((activity.client.nil? ? "" : "#{activity.client.company_name}"), activity.id) %></td>
                           <td><%= activity.activity_type %></td>
                           <td><%= activity.client.nil? ? "" : "#{activity.client.company_name}" %></td>
                           <td><%= activity.rep.nil? ? "" : "#{activity.rep.first_name} #{activity.rep.last_name}" %></td>

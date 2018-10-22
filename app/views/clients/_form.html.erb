@@ -10,7 +10,7 @@
       <div class="panel-heading">
         <div class="panel-heading-btn">
         </div>
-        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Client' : "Edit Client ##{generate_alphanumeric_id(client.client_type, client.id)}"%></h4>
+        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Client' : "Edit Client ##{generate_alphanumeric_id(client.company_name, client.id)}"%></h4>
       </div>
       <div class="panel-body">
       <% if client.errors.any? %>

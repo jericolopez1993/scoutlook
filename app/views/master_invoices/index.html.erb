@@ -26,7 +26,7 @@
     								<tbody>
                       <% @master_invoices.each do |master_invoice| %>
                         <tr>
-                          <td><%= generate_alphanumeric_id(master_invoice.shipment_type, master_invoice.id) %></td>
+                          <td><%= generate_two_alphanumeric_id((master_invoice.shipper.nil? ? '' : master_invoice.shipper.company_name), (master_invoice.carrier.nil? ? '' : master_invoice.carrier.company_name), master_invoice.id) %></td>
                           <td><%= master_invoice.shipper.nil? ? '' : master_invoice.shipper.company_name %></td>
                           <td><%= master_invoice.carrier.nil? ? '' : master_invoice.carrier.company_name %></td>
                           <td><%= master_invoice.shipment_type %></td>

@@ -11,7 +11,7 @@
       <div class="panel-heading">
         <div class="panel-heading-btn">
         </div>
-        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Rate' : "Edit Rate ##{generate_alphanumeric_id(rate.rate_type, rate.id)}"%></h4>
+        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Rate' : "Edit Rate ##{generate_alphanumeric_id((rate.client.nil? ? "" : rate.client.company_name), rate.id)}"%></h4>
       </div>
       <div class="panel-body">
       <% if rate.errors.any? %>

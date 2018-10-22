@@ -19,7 +19,7 @@
           <div class="form-group row m-b-15">
             <label class="col-md-3 col-form-label">ID:</label>
             <div class="col-md-7">
-              <%= generate_alphanumeric_id(@client.client_type, @client.id) %>
+              <%= generate_alphanumeric_id(@client.company_name, @client.id) %>
             </div>
           </div>
           <div class="form-group row m-b-15">
@@ -217,7 +217,7 @@
                           <td style="text-align: center;"><%= (@client.origin == client_location.id) ? '<span class="label label-warning">Origin</span><br/>'.html_safe : '' %>
                             <%= (@client.destination == client_location.id) ? '<span class="label label-danger">Destination</span><br/>'.html_safe : '' %>
                           <%= (@client.head_office == client_location.id) ? '<span class="label label-primary">Head Office</span><br/>'.html_safe : '' %></td>
-                          <td><%= generate_alphanumeric_id(client_location.loc_type, client_location.id) %></td>
+                          <td><%= generate_alphanumeric_id(client_location.name, client_location.id) %></td>
                           <td><%= client_location.name %></td>
                           <td><%= client_location.loc_type %></td>
                           <td><%= client_location.same_ho ? (@client.head_office_location.nil? ? '' : (@client.head_office_location.location.nil? ? '' : "#{@client.head_office_location.location.address} #{@client.head_office_location.location.city} #{@client.head_office_location.location.state}, #{@client.head_office_location.location.country} #{@client.head_office_location.location.postal}")) : (client_location.location.nil? ? '' : "#{client_location.location.address} #{client_location.location.city} #{client_location.location.state}, #{client_location.location.country} #{client_location.location.postal}")%></td>
@@ -300,7 +300,7 @@
       <tbody>
         <% Activity.where(:client_id => @client.id).each do |activity| %>
           <tr>
-            <td><%= generate_alphanumeric_id(activity.activity_type, activity.id) %></td>
+            <td><%= generate_alphanumeric_id((activity.client.nil? ? "" : "#{activity.client.company_name}"), activity.id) %></td>
             <td><%= activity.activity_type %></td>
             <td><%= activity.rep_id %></td>
             <td><%= activity.annual_value %></td>
