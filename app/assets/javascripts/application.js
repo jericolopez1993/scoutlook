@@ -175,14 +175,28 @@ $(document).on('turbolinks:load', function(){
         }
       });
       $("#origin_location_id").change(function(){
-
-        locationDetailsOD($(this).val(), 'origin');
+        var er = /^-?[0-9]+$/;
+        var isNew = er.test($(this).val());
+          addressCreateOD(!isNew, 'origin');
+        if(isNew){
+          locationDetailsOD($(this).val(), 'origin');
+        }
       });
       $("#destination_location_id").change(function(){
-        locationDetailsOD($(this).val(), 'destination');
+        var er = /^-?[0-9]+$/;
+        var isNew = er.test($(this).val());
+          addressCreateOD(!isNew, 'destination');
+        if(isNew){
+          locationDetailsOD($(this).val(), 'destination');
+        }
       });
       $("#quick_destination_id").change(function(){
-        locationDetailsOD($(this).val(), 'quick_destination');
+        var er = /^-?[0-9]+$/;
+        var isNew = er.test($(this).val());
+          addressCreateQuickS(!isNew, 'quick_destination');
+        if(isNew){
+          locationDetailsOD($(this).val(), 'quick_destination');
+        }
       });
   });
 
@@ -245,7 +259,6 @@ function addressCreateQuickS(isTrue, name) {
   $("#"+ name +"_postal").val('');
   $("#"+ name +"_state").val('').change();
   if (isTrue) {
-    $("#"+ name +"_id").attr("disabled", true);
     $("#"+ name +"_address").attr("disabled", false);
     $("#"+ name +"_city").attr("disabled", false);
     $("#"+ name +"_postal").attr("disabled", false);
@@ -253,7 +266,6 @@ function addressCreateQuickS(isTrue, name) {
     $("#"+ name +"_state").attr("disabled", false);
     $("#"+ name +"_country").val('Canada').change();
   }else{
-    $("#"+ name +"_id").attr("disabled", false);
     $("#"+ name +"_address").attr("disabled", true);
     $("#"+ name +"_city").attr("disabled", true);
     $("#"+ name +"_postal").attr("disabled", true);
@@ -268,7 +280,6 @@ function addressCreateOD(isTrue, name) {
   $("#"+ name +"_postal").val('');
   $("#"+ name +"_state").val('').change();
   if (isTrue) {
-    $("."+ name +"-location-fields").hide();
     $("#"+ name +"_address").attr("disabled", false);
     $("#"+ name +"_city").attr("disabled", false);
     $("#"+ name +"_postal").attr("disabled", false);
@@ -277,7 +288,6 @@ function addressCreateOD(isTrue, name) {
     $("#"+ name +"_country").val('Canada').change();
 
   }else{
-    $("."+ name +"-location-fields").show();
     $("#"+ name +"_address").attr("disabled", true);
     $("#"+ name +"_city").attr("disabled", true);
     $("#"+ name +"_postal").attr("disabled", true);

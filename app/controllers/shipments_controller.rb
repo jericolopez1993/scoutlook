@@ -1,5 +1,6 @@
 class ShipmentsController < ApplicationController
-include HTTParty
+  include HTTParty
+  include ApplicationHelper
   before_action :set_shipment, only: [:show, :edit, :update, :destroy]
 
   # GET /shipments
@@ -34,8 +35,11 @@ include HTTParty
     @origin_location_id = nil
     @destination_location_id = nil
     if params[:shipment][:origin_location_id].present? || params[:shipment][:origin_address].present? || params[:shipment][:origin_country].present? ||  params[:shipment][:origin_state].present? ||  params[:shipment][:origin_postal].present? ||  params[:shipment][:origin_city].present?
-      if params[:origin_new_location].present?
+      if is_numeric?(params[:shipment][:origin_location_id])
+          @origin_location_id = params[:shipment][:origin_location_id]
+      else
         location = Location.new
+        location.name = params[:shipment][:origin_location_id]
         location.address = params[:shipment][:origin_address]
         location.country = params[:shipment][:origin_country]
         location.state = params[:shipment][:origin_state]
@@ -43,14 +47,15 @@ include HTTParty
         location.postal = params[:shipment][:origin_postal]
         location.save
         @origin_location_id = location.id
-      else
-        @origin_location_id =  params[:shipment][:origin_location_id]
       end
     end
     @shipment.origin_location_id = @origin_location_id
-    if params[:shipment][:destination_location_id].present? || params[:shipment][:destination_address].present? ||  params[:shipment][:destination_country].present? ||  params[:shipment][:destination_state].present? ||  params[:shipment][:destination_postal].present? ||  params[:shipment][:destination_city].present?
-      if params[:destination_new_location].present?
+    if params[:shipment][:destination_location_id].present? || params[:shipment][:destination_address].present? || params[:shipment][:destination_country].present? ||  params[:shipment][:destination_state].present? ||  params[:shipment][:destination_postal].present? ||  params[:shipment][:destination_city].present?
+      if is_numeric?(params[:shipment][:destination_location_id])
+          @destination_location_id = params[:shipment][:destination_location_id]
+      else
         location = Location.new
+        location.name = params[:shipment][:destination_location_id]
         location.address = params[:shipment][:destination_address]
         location.country = params[:shipment][:destination_country]
         location.state = params[:shipment][:destination_state]
@@ -58,8 +63,6 @@ include HTTParty
         location.postal = params[:shipment][:destination_postal]
         location.save
         @destination_location_id = location.id
-      else
-        @destination_location_id =  params[:shipment][:destination_location_id]
       end
     end
     @shipment.destination_location_id = @destination_location_id
@@ -96,9 +99,12 @@ include HTTParty
   def update
     @origin_location_id = nil
     @destination_location_id = nil
-    if params[:shipment][:origin_location_id].present? || params[:shipment][:origin_address].present? ||  params[:shipment][:origin_country].present? ||  params[:shipment][:origin_state].present? ||  params[:shipment][:origin_postal].present? ||  params[:client_location][:origin_city].present?
-      if params[:origin_new_location].present?
+    if params[:shipment][:origin_location_id].present? || params[:shipment][:origin_address].present? || params[:shipment][:origin_country].present? ||  params[:shipment][:origin_state].present? ||  params[:shipment][:origin_postal].present? ||  params[:shipment][:origin_city].present?
+      if is_numeric?(params[:shipment][:origin_location_id])
+          @origin_location_id = params[:shipment][:origin_location_id]
+      else
         location = Location.new
+        location.name = params[:shipment][:origin_location_id]
         location.address = params[:shipment][:origin_address]
         location.country = params[:shipment][:origin_country]
         location.state = params[:shipment][:origin_state]
@@ -106,14 +112,15 @@ include HTTParty
         location.postal = params[:shipment][:origin_postal]
         location.save
         @origin_location_id = location.id
-      else
-        @origin_location_id =  params[:shipment][:origin_location_id]
       end
     end
     params[:shipment][:origin_location_id] = @origin_location_id
-    if params[:shipment][:destination_location_id].present? || params[:shipment][:destination_address].present? ||  params[:shipment][:destination_country].present? ||  params[:shipment][:destination_state].present? ||  params[:shipment][:destination_postal].present? ||  params[:client_location][:destination_city].present?
-      if params[:destination_new_location].present?
+    if params[:shipment][:destination_location_id].present? || params[:shipment][:destination_address].present? || params[:shipment][:destination_country].present? ||  params[:shipment][:destination_state].present? ||  params[:shipment][:destination_postal].present? ||  params[:shipment][:destination_city].present?
+      if is_numeric?(params[:shipment][:destination_location_id])
+          @destination_location_id = params[:shipment][:destination_location_id]
+      else
         location = Location.new
+        location.name = params[:shipment][:destination_location_id]
         location.address = params[:shipment][:destination_address]
         location.country = params[:shipment][:destination_country]
         location.state = params[:shipment][:destination_state]
@@ -121,8 +128,6 @@ include HTTParty
         location.postal = params[:shipment][:destination_postal]
         location.save
         @destination_location_id = location.id
-      else
-        @destination_location_id =  params[:shipment][:destination_location_id]
       end
     end
     params[:shipment][:destination_location_id] = @destination_location_id

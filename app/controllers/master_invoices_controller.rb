@@ -1,5 +1,6 @@
 class MasterInvoicesController < ApplicationController
   include HTTParty
+  include ApplicationHelper
   before_action :set_master_invoice, only: [:show, :edit, :update, :destroy]
 
   require 'time'
@@ -41,8 +42,11 @@ class MasterInvoicesController < ApplicationController
             @origin_location_id = nil
             @destination_location_id = nil
             if params[:master_invoice][:origin_location_id].present? || params[:master_invoice][:origin_address].present? || params[:master_invoice][:origin_country].present? ||  params[:master_invoice][:origin_state].present? ||  params[:master_invoice][:origin_postal].present? ||  params[:master_invoice][:origin_city].present?
-              if params[:origin_new_location].present?
+              if is_numeric?(params[:master_invoice][:origin_location_id])
+                  @origin_location_id = params[:master_invoice][:origin_location_id]
+              else
                 location = Location.new
+                location.name = params[:master_invoice][:origin_location_id]
                 location.address = params[:master_invoice][:origin_address]
                 location.country = params[:master_invoice][:origin_country]
                 location.state = params[:master_invoice][:origin_state]
@@ -50,14 +54,15 @@ class MasterInvoicesController < ApplicationController
                 location.postal = params[:master_invoice][:origin_postal]
                 location.save
                 @origin_location_id = location.id
-              else
-                @origin_location_id =  params[:master_invoice][:origin_location_id]
               end
             end
             @shipment.origin_location_id = @origin_location_id
-            if params[:master_invoice][:destination_location_id].present? || params[:master_invoice][:destination_address].present? ||  params[:master_invoice][:destination_country].present? ||  params[:master_invoice][:destination_state].present? ||  params[:master_invoice][:destination_postal].present? ||  params[:master_invoice][:destination_city].present?
-              if params[:destination_new_location].present?
+            if params[:master_invoice][:destination_location_id].present? || params[:master_invoice][:destination_address].present? || params[:master_invoice][:destination_country].present? ||  params[:master_invoice][:destination_state].present? ||  params[:master_invoice][:destination_postal].present? ||  params[:master_invoice][:destination_city].present?
+              if is_numeric?(params[:master_invoice][:destination_location_id])
+                  @destination_location_id = params[:master_invoice][:destination_location_id]
+              else
                 location = Location.new
+                location.name = params[:master_invoice][:destination_location_id]
                 location.address = params[:master_invoice][:destination_address]
                 location.country = params[:master_invoice][:destination_country]
                 location.state = params[:master_invoice][:destination_state]
@@ -65,8 +70,6 @@ class MasterInvoicesController < ApplicationController
                 location.postal = params[:master_invoice][:destination_postal]
                 location.save
                 @destination_location_id = location.id
-              else
-                @destination_location_id =  params[:master_invoice][:destination_location_id]
               end
             end
             origin = Location.find(@origin_location_id)
@@ -112,9 +115,12 @@ class MasterInvoicesController < ApplicationController
             @shipments = Shipment.where(:header => @master_invoice.id)
             @origin_location_id = nil
             @destination_location_id = nil
-            if params[:master_invoice][:origin_location_id].present? || params[:master_invoice][:origin_address].present? ||  params[:master_invoice][:origin_country].present? ||  params[:master_invoice][:origin_state].present? ||  params[:master_invoice][:origin_postal].present? ||  params[:client_location][:origin_city].present?
-              if params[:origin_new_location].present?
+            if params[:master_invoice][:origin_location_id].present? || params[:master_invoice][:origin_address].present? || params[:master_invoice][:origin_country].present? ||  params[:master_invoice][:origin_state].present? ||  params[:master_invoice][:origin_postal].present? ||  params[:master_invoice][:origin_city].present?
+              if is_numeric?(params[:master_invoice][:origin_location_id])
+                  @origin_location_id =  params[:master_invoice][:origin_location_id]
+              else
                 location = Location.new
+                location.name = params[:master_invoice][:origin_location_id]
                 location.address = params[:master_invoice][:origin_address]
                 location.country = params[:master_invoice][:origin_country]
                 location.state = params[:master_invoice][:origin_state]
@@ -122,14 +128,15 @@ class MasterInvoicesController < ApplicationController
                 location.postal = params[:master_invoice][:origin_postal]
                 location.save
                 @origin_location_id = location.id
-              else
-                @origin_location_id =  params[:master_invoice][:origin_location_id]
               end
             end
             params[:master_invoice][:origin_location_id] = @origin_location_id
-            if params[:master_invoice][:destination_location_id].present? || params[:master_invoice][:destination_address].present? ||  params[:master_invoice][:destination_country].present? ||  params[:master_invoice][:destination_state].present? ||  params[:master_invoice][:destination_postal].present? ||  params[:client_location][:destination_city].present?
-              if params[:destination_new_location].present?
+            if params[:master_invoice][:destination_location_id].present? || params[:master_invoice][:destination_address].present? || params[:master_invoice][:destination_country].present? ||  params[:master_invoice][:destination_state].present? ||  params[:master_invoice][:destination_postal].present? ||  params[:master_invoice][:destination_city].present?
+              if is_numeric?(params[:master_invoice][:destination_location_id])
+                  @destination_location_id = params[:master_invoice][:destination_location_id]
+              else
                 location = Location.new
+                location.name = params[:master_invoice][:destination_location_id]
                 location.address = params[:master_invoice][:destination_address]
                 location.country = params[:master_invoice][:destination_country]
                 location.state = params[:master_invoice][:destination_state]
@@ -137,8 +144,6 @@ class MasterInvoicesController < ApplicationController
                 location.postal = params[:master_invoice][:destination_postal]
                 location.save
                 @destination_location_id = location.id
-              else
-                @destination_location_id =  params[:master_invoice][:destination_location_id]
               end
             end
             params[:master_invoice][:destination_location_id] = @destination_location_id
