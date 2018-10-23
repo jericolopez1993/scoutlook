@@ -72,20 +72,26 @@ class MasterInvoicesController < ApplicationController
                 @destination_location_id = location.id
               end
             end
-            origin = Location.find(@origin_location_id)
-            @origin = origin.address + " " + origin.state + "," + origin.country
-            destination = Location.find(@destination_location_id)
-            @destination = destination.address + " " +destination.state + "," + destination.country
-            begin
-              str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
-              response = HTTParty.get(str_url)
-              body = JSON.parse(response.body)
-              distance = body['rows'][0]['elements'][0]['distance']['value'] / 1000
-              @shipment.distance = distance
-            rescue
-              puts 'Google Maps API error'
+              @shipment.destination_location_id = @destination_location_id
+            if !@origin_location_id.nil? && !@destination_location_id.nil?
+              origin = Location.find(@origin_location_id)
+              @origin = origin.address + " " + origin.state + "," + origin.country
+              destination = Location.find(@destination_location_id)
+              @destination = destination.address + " " +destination.state + "," + destination.country
+              begin
+                str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
+                response = HTTParty.get(str_url)
+                body = JSON.parse(response.body)
+                temp_distance =  body['rows'][0]['elements'][0]['distance']['value'].nil? ? 0 :  body['rows'][0]['elements'][0]['distance']['value']
+                distance = temp_distance / 1000
+                @shipment.distance = distance
+              rescue
+                puts 'Google Maps API error'
+              end
+            else
+              @shipment.distance = 0
             end
-            @shipment.destination_location_id = @destination_location_id
+
             @shipment.total_charge = params[:master_invoice][:total_charge_shipment]
             @shipment.header = @master_invoice.id
             @shipment.save
@@ -147,14 +153,20 @@ class MasterInvoicesController < ApplicationController
               end
             end
             params[:master_invoice][:destination_location_id] = @destination_location_id
-            origin = Location.find(@origin_location_id)
-            @origin = origin.address + " " + origin.state + "," + origin.country
-            destination = Location.find(@destination_location_id)
-            @destination = destination.address + " " +destination.state + "," + destination.country
-            str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
-            response = HTTParty.get(str_url)
-            body = JSON.parse(response.body)
-            params[:master_invoice][:distance] = body['rows'][0]['elements'][0]['distance']['value'] / 1000
+            if !@origin_location_id.nil? && !@destination_location_id.nil?
+              origin = Location.find(@origin_location_id)
+              @origin = origin.address + " " + origin.state + "," + origin.country
+              destination = Location.find(@destination_location_id)
+              @destination = destination.address + " " +destination.state + "," + destination.country
+              str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
+              response = HTTParty.get(str_url)
+              body = JSON.parse(response.body)
+              temp_distance =  body['rows'][0]['elements'][0]['distance']['value'].nil? ? 0 :  body['rows'][0]['elements'][0]['distance']['value']
+              params[:master_invoice][:distance] = temp_distance / 1000
+            else
+              params[:master_invoice][:distance] = 0
+            end
+
             if @shipments.present? && !@shipments.nil?
               @shipment = @shipments.first
               @shipment.update(shipment_params)
