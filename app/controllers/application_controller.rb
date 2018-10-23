@@ -14,7 +14,7 @@ before_action :set_raven_context
 
   def user_not_authorized
     flash[:error] = "You are not authorized to perform this action."
-    redirect_to(request.referrer || root_path)
+    redirect_to(request.referrer || authenticated_root_path)
   end
 
   def layout_by_resource
