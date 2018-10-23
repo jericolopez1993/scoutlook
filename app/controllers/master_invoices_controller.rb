@@ -222,7 +222,11 @@ class MasterInvoicesController < ApplicationController
       params[:master_invoice][:gst_hst_tax] = params[:master_invoice][:gst_hst_tax].gsub('$ ', '').gsub(',', '').to_d
       params[:master_invoice][:total_charge] = params[:master_invoice][:total_charge_shipment].gsub('$ ', '').gsub(',', '').to_d
       params[:master_invoice][:total_charge_with_tax] = params[:master_invoice][:total_charge_with_tax].gsub('$ ', '').gsub(',', '').to_d
-      params[:master_invoice][:shipment_date] = Date::strptime(params[:master_invoice][:shipment_date], "%m/%d/%Y")
+      if !params[:master_invoice][:shipment_date].nil? && params[:master_invoice][:shipment_date] != ''
+        params[:master_invoice][:shipment_date] = Date::strptime(params[:master_invoice][:shipment_date], "%m/%d/%Y")
+      else
+        params[:master_invoice].delete :shipment_date
+      end
       params.require(:master_invoice).permit(:header, :account_number, :shipment_date, :tracking_number, :terms, :origin_location_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes)
     end
 end
