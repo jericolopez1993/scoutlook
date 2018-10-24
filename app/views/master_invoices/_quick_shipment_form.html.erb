@@ -2,7 +2,6 @@
     <div class="col-md col-sm-12">
       <div class="form-group">
         <%= form.label :shipment_date, 'Date *:'%>
-        <%= form.text_field :shipment_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", 'data-parsley-required' => true %>
         <%= form.text_field :shipment_date, :value => @master_invoice.single_invoice_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", 'data-parsley-required' => true %>
       </div>
     </div>
