@@ -130,7 +130,7 @@
           <% if !@master_invoice.shipper_location.nil? %>
             <%= form.hidden_field :origin_location_id, :value => @master_invoice.shipper_location.id %>
           <% end %>
-          <%= render 'quick_shipment_form', form: form %>
+          <%= render 'quick_shipment_form', form: form, master_invoice: @master_invoice %>
         </div>
       </div>
     <% end %>
