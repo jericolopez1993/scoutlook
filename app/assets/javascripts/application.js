@@ -81,6 +81,7 @@ $(document).on('turbolinks:load', function(){
 		autoclose: true,
     orientation: 'auto bottom'
 	});
+  $(".static-dropdown").select2();
   $(".combo-dropdown").select2({
     tags: true,
     createTag: function (params) {
