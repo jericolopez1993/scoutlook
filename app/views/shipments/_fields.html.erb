@@ -15,16 +15,33 @@
                 </div>
               </div>
                   <div class="form-group row m-b-15">
-                    <%= form.label :shipment_date, 'Shipment Date *:', class: 'col-md-4 col-sm-4 col-form -label' %>
+                    <%= form.label :shipment_date, 'Shipment Date:', class: 'col-md-4 col-sm-4 col-form -label' %>
                     <div class="col-md-8 col-sm-8">
-                      <%= form.text_field :shipment_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: shipment.shipment_date%>
+                      <%= form.text_field :shipment_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: shipment.shipment_date, :id => "shipment_date"%>
+                    </div>
+                  </div>
+                  <div class="form-group row m-b-15">
+                    <%= form.label :received_date, 'Received Date:', class: 'col-md-4 col-sm-4 col-form -label' %>
+                    <div class="col-md-8 col-sm-8">
+                      <%= form.text_field :received_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: shipment.received_date, :id => "received_date"%>
+                    </div>
+                  </div>
+                  <div class="form-group row m-b-15">
+                    <%= form.label :transit_time, 'Transit Time:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <div class="col-md-8 col-sm-8">
+                    <%= form.text_field :transit_time, class: 'form-control', 'data-parsley-required' => true, value: shipment.transit_time, :id => "transit_time", :readonly => true %>
+                    </div>
+                  </div>
+                  <div class="form-group row m-b-15">
+                    <%= form.label :own_type, 'Shipment Type:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <div class="col-md-8 col-sm-8">
+                    <%= form.select :own_type, options_for_select(['Inbound', 'Outbound', 'Drop-Ship', 'Stock', 'Transfer', 'Customer Return', 'Supplier Return'], shipment.own_type),{:include_blank => true}, class: 'form-control' %>
                     </div>
                   </div>
                     <div class="form-group row m-b-15">
                       <%= form.label :tracking_number, 'Tracking Number *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
                       <%= form.text_field :tracking_number, class: 'form-control', 'data-parsley-required' => true, value: shipment.tracking_number  %>
-
                       </div>
                     </div>
                     <div class="form-group row m-b-15">
@@ -129,6 +146,12 @@
           <%= form.label :total_charge_with_tax, 'Total Charge with Tax:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
           <%= form.text_field :total_charge_with_tax, class: 'form-control', value: shipment.total_charge_with_tax, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :money_currency, 'Currency:', class: 'col-md-4 col-sm-4 col-form-label' %>
+          <div class="col-md-8 col-sm-8">
+          <%= form.select :money_currency, options_for_select(['US', 'CDN'], shipment.money_currency),{:include_blank => true}, class: 'form-control' %>
           </div>
         </div>
       </div>

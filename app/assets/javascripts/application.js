@@ -130,7 +130,6 @@ $(document).on('turbolinks:load', function(){
         isHeadOffice($(this).prop('checked'));
     	});
       $(document).on('change', '[data-change="check-switchery-state-new-location"]', function() {
-
         addressCreate($(this).prop('checked'));
       });
 
@@ -164,6 +163,13 @@ $(document).on('turbolinks:load', function(){
         var origin = $("#origin_location_id").val();
         var destination = $("#destination_location_id").val();
         getDistance(origin, destination);
+      });
+
+      $("#shipment_date, #received_date").change(function(){
+        var shipment_date = $("#shipment_date").val();
+        var received_date = $("#received_date").val();
+        var transit_time = getDateDifference(shipment_date, received_date);
+        $("#transit_time").val(transit_time);
       });
 
       $("#location_id").change(function(){
@@ -220,6 +226,14 @@ function activityOutcomeFields(actype) {
       $(".activity_buttons").show();
 
   }
+}
+
+function getDateDifference(str_date1, str_date2) {
+  var date1 = new Date(str_date1);
+  var date2 = new Date(str_date2);
+  var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+  var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  return diffDays;
 }
 
 function sameHeadOffice(isTrue) {
