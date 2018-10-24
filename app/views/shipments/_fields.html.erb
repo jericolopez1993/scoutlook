@@ -219,7 +219,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :service_mode, 'Service Mode:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.select :service_mode, options_for_select(['Ground', 'Sea', 'Air'], shipment.service_mode),{:include_blank => true}, class: 'form-control' %>
+          <%= form.select :service_mode, options_for_select(['TL', 'LTL', 'Partial TL', 'Intermodal', 'Courier - Ground', 'Courier - Air', '20 CTR', '40 CTR', 'Rail'], shipment.service_mode),{:include_blank => true}, class: 'form-control' %>
           </div>
         </div>
       </div>
