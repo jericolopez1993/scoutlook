@@ -64,7 +64,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :billed_rate_unit, 'Billed Rate Unit:', class: 'col-md-4 col-sm-4 col-form-label' %>
           <div class="col-md-8 col-sm-8">
-          <%= form.select :billed_rate_unit, options_for_select(['CWT', 'TL', 'Pallets'], shipment.billed_rate_unit),{:include_blank => true}, class: 'form-control' %>
+          <%= form.select :billed_rate_unit, options_for_select(['Min Charge', 'Pallet', 'CWT', 'TL', 'Flat Fee', 'Base', '20 CTR', '40 CTR'], shipment.billed_rate_unit),{:include_blank => true}, class: 'form-control' %>
           </div>
         </div>
         <div class="form-group row m-b-15">
