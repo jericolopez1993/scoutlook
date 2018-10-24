@@ -74,6 +74,9 @@
 
 <script language="javascript">
 	populateCountries("location_country", "location_state");
+
+  $("#location_country").val('Canada').change();
+
   <% if location.country.present? %>
     tiggerChangeOnSelectCountry('location_country', '<%= location.country %>')
   <% end %>
