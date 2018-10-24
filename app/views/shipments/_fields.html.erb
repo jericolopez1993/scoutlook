@@ -14,6 +14,12 @@
                 <%= form.text_field :account_number, class: 'form-control', value: shipment.account_number  %>
                 </div>
               </div>
+              <div class="form-group row m-b-15">
+                <%= form.label :shipment_status, 'Shipment Status:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                <div class="col-md-8 col-sm-8">
+                <%= form.select :shipment_status, options_for_select(['Review', 'Approved', 'Dispute', 'Corrected', 'ReBill'], shipment.shipment_status),{}, class: 'form-control' %>
+                </div>
+              </div>
                   <div class="form-group row m-b-15">
                     <%= form.label :shipment_date, 'Shipment Date:', class: 'col-md-4 col-sm-4 col-form -label' %>
                     <div class="col-md-8 col-sm-8">
@@ -62,7 +68,6 @@
                       <%= form.file_field :shipment_attachment_file  %>
                       </div>
                     </div>
-
                 </div>
     </div>
     <div class="panel panel-inverse">

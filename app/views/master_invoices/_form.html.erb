@@ -32,7 +32,12 @@
                   <div class="col-md-8 col-sm-8">
                   <%= form.select :shipment_type, options_for_select(['Broker', 'Process', 'Audit'], master_invoice.shipment_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
-
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :own_status, 'Shipment Status:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <div class="col-md-8 col-sm-8">
+                  <%= form.select :own_status, options_for_select(['Review', 'Approved', 'Dispute', 'Corrected', 'ReBill'], master_invoice.own_status),{}, class: 'form-control' %>
+                  </div>
                 </div>
                 <div class="form-group row m-b-15">
                   <%= form.label :shipper_id, 'Shipper *:', class: 'col-md-4 col-sm-4 col-form-label' %>
