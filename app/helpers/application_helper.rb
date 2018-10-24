@@ -75,7 +75,7 @@ module ApplicationHelper
       @destination = destination.address + " " +destination.state + "," + destination.country
     end
 
-    URI.encode("https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C#{@origin}%7C#{@destination}&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0")
+    URI.parse("https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C#{@origin}%7C#{@destination}&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0")
   end
 
 end
