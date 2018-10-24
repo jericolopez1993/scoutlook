@@ -1,152 +1,157 @@
 <div class="row">
-    <div class="col-3">
+    <div class="col-md col-sm-12">
       <div class="form-group">
         <%= form.label :shipment_date, 'Date *:'%>
         <%= form.text_field :shipment_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", 'data-parsley-required' => true %>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-md col-sm-12">
       <div class="form-group">
         <%= form.label :account_number, 'Account Number :'%>
         <%= form.text_field :account_number, class: 'form-control' %>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-md col-sm-12">
       <div class="form-group">
         <%= form.label :tracking_number, 'Tracking Number *:'%>
         <%= form.text_field :tracking_number, class: 'form-control', 'data-parsley-required' => true %>
       </div>
     </div>
-
-    <div class="col-3">
-      <div class="form-group">
-        <%= form.label :destination_location_id, 'Destination *:'%>
-        <%= form.select :destination_location_id, Location.all.collect {|l| [l.name, l.id]},{:include_blank => true}, class: 'form-control combo-dropdown', id: 'quick_destination_id' %>
-      </div>
-    </div>
-
 </div>
+
 <div class="row">
-    <div class="col-3">
-      <div class="form-group">
-        <%= form.label "destination_address", 'Address:'%>
-        <%= form.text_field "destination_address", class: 'form-control', :id => "quick_destination_address" %>
-      </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :destination_location_id, 'Destination *:'%>
+      <%= form.select :destination_location_id, Location.all.collect {|l| [l.name, l.id]},{:include_blank => true}, class: 'form-control combo-dropdown', id: 'quick_destination_id' %>
     </div>
-    <div class="col-3">
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label "destination_address", 'Address:'%>
+      <%= form.text_field "destination_address", class: 'form-control', :id => "quick_destination_address" %>
+    </div>
+  </div>
+    <div class="col-md col-sm-12">
       <div class="form-group">
         <%= form.label "destination_country", 'Country:'%>
       <%= form.select "destination_country", options_for_select([]),{:include_blank => true}, class: 'form-control', :id => "quick_destination_country" %>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-md col-sm-12">
       <div class="form-group">
         <%= form.label "destination_state", 'Province / State:'%>
         <%= form.select "destination_state", options_for_select([]),{:include_blank => true}, class: 'form-control', :id => "quick_destination_state" %>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-md col-sm-12">
       <div class="form-group">
         <%= form.label  "destination_postal", 'Postal / Zip:'%>
         <%= form.text_field "destination_postal", class: 'form-control', 'data-inputmask' => "'mask': '******'", :id => "quick_destination_postal" %>
       </div>
     </div>
 </div>
-<div class="row">
 
-    <div class="col-2">
-      <div class="form-group">
-        <%= form.label :declared_weight, 'Declared Weight:'%>
-        <%= form.text_field :declared_weight, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'"%>
-      </div>
+<div class="row">
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :unit_of_weight, 'Unit of Weight:'%>
+      <%= form.select :unit_of_weight, options_for_select(['kg', 'lb']),{:include_blank => true}, class: 'form-control' %>
     </div>
-    <div class="col-2">
-      <div class="form-group">
-        <%= form.label :billed_weight, 'Billed Weight:'%>
-        <%= form.text_field :billed_weight, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'"%>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :declared_weight, 'Declared Weight:'%>
+      <%= form.text_field :declared_weight, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'"%>
     </div>
-    <div class="col-2">
-      <div class="form-group">
-        <%= form.label :raw_weight, 'Reweigh Weight:'%>
-        <%= form.text_field :raw_weight, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'"%>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :billed_weight, 'Billed Weight:'%>
+      <%= form.text_field :billed_weight, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'"%>
     </div>
-    <div class="col-1">
-      <div class="form-group">
-        <%= form.label :pieces, 'Piece:'%>
-        <%= form.number_field :pieces, class: 'form-control' %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :raw_weight, 'Reweigh Weight:'%>
+      <%= form.text_field :raw_weight, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'"%>
     </div>
-    <div class="col-1">
-      <div class="form-group">
-        <%= form.label :pallets, 'Pallet:'%>
-        <%= form.number_field :pallets, class: 'form-control' %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :pieces, 'Piece:'%>
+      <%= form.number_field :pieces, class: 'form-control' %>
     </div>
-    <div class="col-2">
-      <div class="form-group">
-        <%= form.label :service_mode, 'Service Mode:'%>
-        <%= form.select :service_mode, options_for_select(['Ground', 'Sea', 'Air']),{:include_blank => true}, class: 'form-control' %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :pallets, 'Pallet:'%>
+      <%= form.number_field :pallets, class: 'form-control' %>
     </div>
-    <div class="col-2">
-      <div class="form-group">
-        <%= form.label :total_charge_with_tax, 'Total Charge with Tax:'%>
-        <%= form.text_field :total_charge_with_tax, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :service_mode, 'Service Mode:'%>
+      <%= form.select :service_mode, options_for_select(['Ground', 'Sea', 'Air']),{:include_blank => true}, class: 'form-control' %>
     </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :total_charge_with_tax, 'Tax:'%>
+      <%= form.text_field :total_charge_with_tax, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
+    </div>
+  </div>
 </div>
-<div class="row">
 
-    <div class="col-3">
-      <div class="form-group">
-        <%= form.label :billed_rate, 'Billed Rate:'%>
-        <%= form.text_field :billed_rate, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
-      </div>
+<div class="row">
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :billed_rate, 'Billed Rate:'%>
+      <%= form.text_field :billed_rate, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
     </div>
-    <div class="col-1">
-      <div class="form-group">
-        <%= form.label :surcharge_weight, 'Sur Weight:' %>
-        <%= form.text_field :surcharge_weight, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :surcharge_weight, 'Sur Weight:' %>
+      <%= form.text_field :surcharge_weight, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
     </div>
-    <div class="col-1">
-      <div class="form-group">
-        <%= form.label :surcharge_fuel, 'Sur Fuel:' %>
-        <%= form.text_field :surcharge_fuel, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :surcharge_fuel, 'Sur Fuel:' %>
+      <%= form.text_field :surcharge_fuel, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
     </div>
-    <div class="col-1">
-      <div class="form-group">
-        <%= form.label :surcharge_ontario, 'Sur Ontario:' %>
-        <%= form.text_field :surcharge_ontario, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :surcharge_ontario, 'Sur Ontario:' %>
+      <%= form.text_field :surcharge_ontario, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
     </div>
-    <div class="col-1">
-      <div class="form-group">
-        <%= form.label :surcharge_non_conveyables, 'Sur Non-Convey:' %>
-        <%= form.text_field :surcharge_non_conveyables, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :surcharge_non_conveyables, 'Sur Non-Convey:' %>
+      <%= form.text_field :surcharge_non_conveyables, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
     </div>
-    <div class="col-1">
-      <div class="form-group">
-        <%= form.label :surcharge_non_vault, 'Sur Non-Vault:' %>
-        <%= form.text_field :surcharge_non_vault, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :surcharge_non_vault, 'Sur Non-Vault:' %>
+      <%= form.text_field :surcharge_non_vault, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
     </div>
-    <div class="col-1">
-      <div class="form-group">
-        <%= form.label :surchange_multi_piece, 'Sur Multi Piece:' %>
-        <%= form.text_field :surchange_multi_piece, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :surchange_multi_piece, 'Sur Multi Piece:' %>
+      <%= form.text_field :surchange_multi_piece, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
     </div>
-    <div class="col-3">
-      <div class="form-group">
-        <%= form.label :gst_hst_tax, 'GST/HST Tax:' %>
-        <%= form.text_field :gst_hst_tax, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :gst_hst_tax, 'GST/HST Tax:' %>
+      <%= form.text_field :gst_hst_tax, class: 'form-control total_charge_fields total_charge_with_tax_fields', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
     </div>
+  </div>
 </div>
 
 <script language="javascript">
