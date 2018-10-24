@@ -162,7 +162,7 @@
                               <td><%= attachment_file.filename %></td>
                               <td><%= convert_date(attachment_file.created_at) %></td>
                               <td>
-                                <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file, disposition: 'preview'), :class => 'btn btn-primary  btn-xs' %>
+                                <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file, disposition: 'attachment'), :class => 'btn btn-primary  btn-xs' %>
                                 <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_clients_path(:id => @client.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
                               </td>
 
