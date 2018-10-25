@@ -30,9 +30,16 @@ module ApplicationHelper
   end
 
   def location_format(location)
-    "<b>#{location.name}</b><br/>#{location.address} #{location.city} #{location.state}, #{location.country} #{location.postal}".html_safe
+    if location.country.upcase == "USA" || location.country.upcase == "CANADA"
+      "<b>#{location.name}</b><br/>#{location.city}, #{location.state}".html_safe
+    else
+      "<b>#{location.name}</b><br/>#{location.city} #{location.state}, #{location.country}".html_safe
+    end
   end
 
+  def location_format_for_us_and_canada(location)
+    "<b>#{location.name}</b><br/>#{location.address} #{location.city} #{location.state}, #{location.country} #{location.postal}".html_safe
+  end
 
   def is_numeric?(obj)
    obj.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
