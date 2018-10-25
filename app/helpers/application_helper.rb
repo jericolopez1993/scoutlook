@@ -48,11 +48,11 @@ module ApplicationHelper
   def get_distance(origin_id, destination_id)
     distance = 0
     if (!origin_id.nil? && !destination_id.nil?) && (origin_id != "" && destination_id != "")
+      begin
       origin = Location.find(origin_id)
       @origin = origin.address + " " + origin.state + "," + origin.country
       destination = Location.find(destination_id)
       @destination = destination.address + " " +destination.state + "," + destination.country
-      begin
         str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
         response = HTTParty.get(str_url)
         body = JSON.parse(response.body)

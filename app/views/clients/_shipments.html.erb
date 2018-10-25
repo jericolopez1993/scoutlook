@@ -2,13 +2,17 @@
                 <thead>
                   <tr class="odd gradeX">
                     <th class="text-nowrap">Status</th>
+                    <th class="text-nowrap">Type</th>
+                    <th class="text-nowrap">Carrier</th>
+                    <th class="text-nowrap">Ship Date</th>
                     <th class="text-nowrap">Tracking #</th>
                     <th class="text-nowrap">Origin</th>
                     <th class="text-nowrap">Destination</th>
+                    <th class="text-nowrap">Distance</th>
                     <th class="text-nowrap">Weight</th>
                     <th class="text-nowrap">Total Charge with Tax</th>
                     <th class="text-nowrap">Cost Per LB</th>
-                    <th class="text-nowrap">Carrier</th>
+                    <th class="text-nowrap">CWT Mile</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -16,13 +20,18 @@
                     <% shipments.each do |shipment| %>
                       <tr>
                         <td><%= shipment.shipment_status %></td>
+                        <td><%= shipment.own_type %></td>
+                        <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
+                        <td><%= shipment.shipment_date %></td>
                         <td><%= shipment.tracking_number %></td>
                         <td><%= shipment.origin_location.nil? ? "" : location_format(shipment.origin_location) %></td>
                         <td><%= shipment.destination_location.nil? ? "" : location_format(shipment.destination_location) %></td>
+                        <td><%= shipment.distance %></td>
                         <td><%= shipment.billed_weight.nil? ? 0 : shipment.billed_weight %> <%= (shipment.unit_of_weight.nil? || shipment.unit_of_weight == '') ? '' : shipment.unit_of_weight %></td>
                         <td><%= get_currency(shipment.money_currency) %> <%= shipment.total_charge_with_tax.nil? ? 0 : shipment.total_charge_with_tax %></td>
                         <td><%= get_currency(shipment.money_currency) %> <%= number_with_precision (get_quotient(shipment.total_charge, shipment.convert_to_lb)), :precision => 2 %></td>
-                        <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
+                        <td><%= get_currency(shipment.money_currency) %> <%= number_with_precision ((get_quotient(((shipment.total_charge.nil? ? 0 : shipment.total_charge) * 100), (shipment.convert_to_lb * get_quotient(shipment.distance, 1.6))))), :precision => 2 %></td>
+
                       <tr>
                     <% end %>
                   <% end %>
