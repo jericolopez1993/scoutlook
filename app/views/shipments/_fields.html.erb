@@ -32,9 +32,9 @@
   </div>
 </div>
 <div class="form-group row m-b-15">
-  <%= form.label :transit_time, 'Transit Time:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-  <div class="col-md-9 col-sm-8">
-  <%= form.text_field :transit_time, class: 'form-control', 'data-parsley-required' => true, value: shipment.transit_time, :id => "transit_time", :readonly => true %>
+  <%= form.label :transit_time, 'Transit Time:', class: 'col-md-4 col-sm-4 col-form-label' %>
+  <div class="col-md-8 col-sm-8">
+  <%= form.text_field :transit_time, class: 'form-control', value: shipment.transit_time, :id => "transit_time" %>
   </div>
 </div>
 <div class="form-group row m-b-15">
