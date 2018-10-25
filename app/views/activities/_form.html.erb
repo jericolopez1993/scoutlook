@@ -114,22 +114,22 @@
 
     <div class="form-group row m-b-15">
       <div class="col-md-2"></div>
-      <div class="col-md-9 col-sm-12 d-flex justify-content-end">
-      <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-      <% if params[:action] == 'edit' %>
-        &nbsp;&nbsp;<%= link_to 'Show', activity, :class => 'btn btn-info' %>
-      <% end %>
-      <% if @previous_controller == "clients"%>
-        <% client = Client.find(activity.client_id)%>
-        <% if params[:action] == 'new' %>
-          &nbsp;&nbsp;<%= link_to 'Back to Client', client, :class => 'btn btn-default' %>
+        <div class="col-md-9 col-sm-12 d-flex justify-content-end">
+        <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+        <% if params[:action] == 'edit' %>
+          &nbsp;&nbsp;<%= link_to 'Show', activity, :class => 'btn btn-info' %>
         <% end %>
-    <% else %>
-      <% if params[:action] == 'new' %>
-        &nbsp;&nbsp;<%= link_to 'Back', activities_path, :class => 'btn btn-default' %>
-      <% end %>
-    <% end %>
-  </div>
+        <% if @previous_controller == "clients"%>
+          <% client = Client.find(activity.client_id)%>
+          <% if params[:action] == 'new' %>
+            &nbsp;&nbsp;<%= link_to 'Back to Client', client, :class => 'btn btn-default' %>
+          <% end %>
+        <% else %>
+          <% if params[:action] == 'new' %>
+            &nbsp;&nbsp;<%= link_to 'Back', activities_path, :class => 'btn btn-default' %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
