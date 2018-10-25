@@ -6,6 +6,8 @@
                     <th class="text-nowrap">Carrier</th>
                     <th class="text-nowrap">Ship Date</th>
                     <th class="text-nowrap">Tracking #</th>
+                    <th class="text-nowrap">Docs</th>
+                    <th class="text-nowrap">Reference</th>
                     <th class="text-nowrap">Origin</th>
                     <th class="text-nowrap">Destination</th>
                     <th class="text-nowrap">Distance</th>
@@ -24,6 +26,14 @@
                         <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
                         <td><%= shipment.shipment_date %></td>
                         <td><%= shipment.tracking_number %></td>
+                        <td style="text-align: center;"><% if shipment.shipment_attachment_file.attached? %>
+                          <%= link_to '<i class="fas fa-file-invoice fa-2x"></i>'.html_safe, rails_blob_path(shipment.shipment_attachment_file), target: :_blank %>
+                        <% end %></td>
+                        <td style="text-align: center;"><% if !shipment.client_reference.nil? && shipment.client_reference != '' %>
+                          <% shipment.client_reference.split(/,/).each do |cr| %>
+                            <span class="badge badge-inverse"><%= cr %></span>
+                          <% end %>
+                        <% end %></td>
                         <td><%= shipment.origin_location.nil? ? "" : location_format(shipment.origin_location) %></td>
                         <td><%= shipment.destination_location.nil? ? "" : location_format(shipment.destination_location) %></td>
                         <td><%= shipment.distance %></td>
