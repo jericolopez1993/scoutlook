@@ -42,7 +42,7 @@
           <label class="col-md-3 col-form-label">Attachment:</label>
           <div class="col-md-7">
             <% if @master_invoice.attachment_file.attached? %>
-              <%= link_to @master_invoice.attachment_file.filename, rails_blob_path(@master_invoice.attachment_file, disposition: 'attachment') %>
+              <%= link_to @master_invoice.attachment_file.filename, rails_blob_path(@master_invoice.attachment_file), target: :_blank %>
             <% end %>
           </div>
         </div>
