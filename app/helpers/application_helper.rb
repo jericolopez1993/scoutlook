@@ -30,8 +30,9 @@ module ApplicationHelper
   end
 
   def location_format(location)
-    "#{location.name}<br/>#{location.address} #{location.city} #{location.state}, #{location.country} #{location.postal}".html_safe
+    "<b>#{location.name}</b><br/>#{location.address} #{location.city} #{location.state}, #{location.country} #{location.postal}".html_safe
   end
+
 
   def is_numeric?(obj)
    obj.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
