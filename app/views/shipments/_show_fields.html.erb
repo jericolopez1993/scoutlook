@@ -162,13 +162,13 @@
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Total Charge:</label>
           <div class="col-md-7">
-            <%= shipment.total_charge.nil? ? '' : number_to_currency(shipment.total_charge) %>
+            <%= get_currency(shipment.money_currency) %> <%= shipment.total_charge.nil? ? '' : number_to_currency(shipment.total_charge) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Total Charge with Tax:</label>
           <div class="col-md-7">
-            <%= shipment.total_charge_with_tax.nil? ? '' : number_to_currency(shipment.total_charge_with_tax) %>
+            <%= get_currency(shipment.money_currency) %> <%= shipment.total_charge_with_tax.nil? ? '' : number_to_currency(shipment.total_charge_with_tax) %>
           </div>
         </div>
       </div>

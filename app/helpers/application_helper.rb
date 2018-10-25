@@ -86,4 +86,16 @@ module ApplicationHelper
     URI.parse("https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C#{@origin}%7C#{@destination}&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0")
   end
 
+  def get_currency(country)
+    currency = ''
+    if !country.nil? && country != ''
+      if country == 'CDN'
+        currency = 'Can$'
+      elsif country == 'US'
+        currency = 'US$'
+      end
+    end
+    currency
+  end
+
 end
