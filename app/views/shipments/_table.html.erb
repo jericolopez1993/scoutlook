@@ -14,6 +14,7 @@
     <table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons">
     								<thead>
     									<tr class="odd gradeX">
+                        <th class="text-nowrap">Status</th>
                         <th class="text-nowrap">Tracking #</th>
                         <th class="text-nowrap">Origin</th>
                         <th class="text-nowrap">Destination</th>
@@ -27,7 +28,7 @@
                     <tbody>
                       <% shipments.each do |shipment| %>
                       <tr>
-
+                        <td><%= shipment.shipment_status %></td>
                         <td><%= shipment.tracking_number %></td>
                         <td><%= shipment.origin_location.nil? ? "" : location_format(shipment.origin_location) %></td>
                         <td><%= shipment.destination_location.nil? ? "" : location_format(shipment.destination_location) %></td>
