@@ -34,7 +34,7 @@ label {
     <ul class="nav nav-pills d-md-none">
   		<li class="nav-items text-center" style="width:100%;">
   			<a href="#company-name" data-toggle="tab" class="nav-link active hide-btn">
-  				<span class="d-sm-none"><%= @client.company_name %></span>
+  				<span class="d-sm-none">General</span>
   			</a>
   		</li>
   		<li class="nav-items text-center" style="width:50%; margin-left:-.5px;">
@@ -83,7 +83,7 @@ label {
         <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
           <li class="nav-items">
             <a href="#company-name" data-toggle="tab" class="nav-link active show hide-btn" style="padding:5px; margin: 0px 10px">
-              <span class="d-sm-block d-none"><h4 class="panel-title"><%= @client.company_name %></h4></span>
+              <span class="d-sm-block d-none"><h4 class="panel-title">General</h4></span>
             </a>
           </li>
           <li class="nav-items">
@@ -123,24 +123,30 @@ label {
         <!-- begin tab-pane -->
           <div class="tab-pane fade active show" id="company-name">
             <div class="panel-body">
-              <div class="form-group row m-b-25">
+                <div class="form-group row m-b-25">
                 <h4 class="text-inverse">Details</h4>
               </div>
               <div class="form-group row m-b-15">
+                <label class="col-md-2 col-form-label">Company Name:</label>
+                <div class="col-md-9" style="padding-top:7px;">
+                  <%= @client.company_name %>
+                </div>
+              </div>
+              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">ID:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= generate_alphanumeric_id(@client.company_name, @client.id) %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Type:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.client_type %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Rep's Name:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <% if @client.relationship_owner.present? && !@client.relationship_owner.nil?%>
                  <%= link_to "#{@client.rep.first_name} #{@client.rep.last_name} (#{generate_alphanumeric_id(@client.rep.last_name, @client.rep.id)})", rep_path(:id => @client.relationship_owner) %>
                  <% end %>
@@ -148,61 +154,61 @@ label {
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Sales priority:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.sales_priority %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Phone:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.phone %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Annual Revenue:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.annual_revenue %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Industry:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.industry %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Primary Industry:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.primary_industry %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Hazardous:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.hazardous %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Food Grade:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.food_grade %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Freight Revenue:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.freight_revenue %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Credit Status:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.credit_status %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Credit Approval:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.credit_approval %>
                </div>
              </div>
@@ -212,31 +218,31 @@ label {
               </div>
               <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Intra:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.volume_intra %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Inter:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.volume_inter %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">to USA:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.volume_to_usa %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">from USA:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.volume_from_usa %>
                </div>
              </div>
              <div class="form-group row m-b-15">
                <label class="col-md-2 col-form-label">Notes:</label>
-               <div class="col-md-7">
+               <div class="col-md-9" style="padding-top:7px;">
                  <%= @client.notes.nil? ? "" : @client.notes.html_safe %>
                </div>
              </div>
