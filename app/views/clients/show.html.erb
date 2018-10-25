@@ -126,25 +126,25 @@ label {
           </div>
           <div class="form-group row m-b-15">
             <label class="col-md-2 col-form-label">Company Name:</label>
-            <div class="col-md-9" style="padding-top:7px;">
+            <div class="col-md-9 lbl-padding-t">
               <%= @client.company_name %>
             </div>
           </div>
           <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">ID:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= generate_alphanumeric_id(@client.company_name, @client.id) %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Type:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.client_type %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Rep's Name:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <% if @client.relationship_owner.present? && !@client.relationship_owner.nil?%>
              <%= link_to "#{@client.rep.first_name} #{@client.rep.last_name} (#{generate_alphanumeric_id(@client.rep.last_name, @client.rep.id)})", rep_path(:id => @client.relationship_owner) %>
              <% end %>
@@ -152,61 +152,61 @@ label {
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Sales priority:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.sales_priority %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Phone:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.phone %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Annual Revenue:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.annual_revenue %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Industry:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.industry %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Primary Industry:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.primary_industry %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Hazardous:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.hazardous %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Food Grade:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.food_grade %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Freight Revenue:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.freight_revenue %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Credit Status:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.credit_status %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Credit Approval:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.credit_approval %>
            </div>
          </div>
@@ -216,31 +216,31 @@ label {
           </div>
           <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Intra:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.volume_intra %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Inter:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.volume_inter %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">to USA:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.volume_to_usa %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">from USA:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.volume_from_usa %>
            </div>
          </div>
          <div class="form-group row m-b-15">
            <label class="col-md-2 col-form-label">Notes:</label>
-           <div class="col-md-9" style="padding-top:7px;">
+           <div class="col-md-9 lbl-padding-t">
              <%= @client.notes.nil? ? "" : @client.notes.html_safe %>
            </div>
          </div>

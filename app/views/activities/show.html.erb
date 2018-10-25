@@ -30,70 +30,70 @@ label {
     <h4 class="text-inverse">Outcome</h4>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">ID:</label>
-      <div class="col-md-9" style="padding-top:7px;">
+      <div class="col-md-9 lbl-padding-t">
         <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Type:</label>
-      <div class="col-md-9" style="padding-top:7px;">
+      <div class="col-md-9 lbl-padding-t">
         <%= @activity.activity_type %>
       </div>
     </div>
     <% if @activity.activity_type == "Engagement" %>
       <div class="form-group row m-b-15">
         <label class="col-md-2 col-form-label">Engagement Type:</label>
-        <div class="col-md-9" style="padding-top:7px;">
+        <div class="col-md-9 lbl-padding-t">
           <%= @activity.engagement_type %>
         </div>
       </div>
     <% end %>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Client:</label>
-      <div class="col-md-9" style="padding-top:7px;">
+      <div class="col-md-9 lbl-padding-t">
       <%= @activity.client.nil? ? "" : "#{@activity.client.company_name}" %>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Rep:</label>
-      <div class="col-md-9" style="padding-top:7px;">
+      <div class="col-md-9 lbl-padding-t">
       <%= @activity.rep.nil? ? "" : "#{@activity.rep.first_name} #{@activity.rep.last_name}" %>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Annual Value:</label>
-      <div class="col-md-9" style="padding-top:7px;">
+      <div class="col-md-9 lbl-padding-t">
         <%= @activity.annual_value %>
       </div>
     </div>
 
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Status:</label>
-      <div class="col-md-9" style="padding-top:7px;">
+      <div class="col-md-9 lbl-padding-t">
       <%= @activity.status ? 'Open' : 'Closed' %>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Date Opened:</label>
-      <div class="col-md-9" style="padding-top:7px;">
+      <div class="col-md-9 lbl-padding-t">
         <%= convert_date(@activity.date_opened) %>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Date Closed:</label>
-      <div class="col-md-9" style="padding-top:7px;">
+      <div class="col-md-9 lbl-padding-t">
         <%= convert_date(@activity.date_closed) %>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Other Notes:</label>
-      <div class="col-md-9" style="padding-top:7px;">
+      <div class="col-md-9 lbl-padding-t">
         <%= @activity.other_notes.nil? ? "" : @activity.other_notes.html_safe %>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Complete Credit Application:</label>
-      <div class="col-md-9" style="padding-top:7px;">
+      <div class="col-md-9 lbl-padding-t">
         <% if @activity.credit_application.attached? %>
           <%= link_to @activity.credit_application.filename, rails_blob_path(@activity.credit_application, disposition: 'attachment') %>
         <% end %>
@@ -105,26 +105,26 @@ label {
         <h4 class="text-inverse">Outcome</h4>
         <div class="form-group row m-b-15">
           <label class="col-md-2 col-form-label">ID:</label>
-          <div class="col-md-9" style="padding-top:7px;">
+          <div class="col-md-9 lbl-padding-t">
             <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-2 col-form-label">Outcome:</label>
-          <div class="col-md-9" style="padding-top:7px;">
+          <div class="col-md-9 lbl-padding-t">
             <%= @activity.outcome.outcome %>
           </div>
         </div>
           <div class="form-group row m-b-15">
             <label class="col-md-2 col-form-label">Reason:</label>
-            <div class="col-md-9" style="padding-top:7px;">
+            <div class="col-md-9 lbl-padding-t">
               <%= @activity.outcome.reason %>
             </div>
           </div>
 
         <div class="form-group row m-b-15">
           <label class="col-md-2 col-form-label">Notes:</label>
-          <div class="col-md-9" style="padding-top:7px;">
+          <div class="col-md-9 lbl-padding-t">
             <%= @activity.outcome.notes.nil? ? "" : @activity.outcome.notes.html_safe %>
           </div>
         </div>
