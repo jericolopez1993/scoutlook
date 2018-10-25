@@ -41,6 +41,7 @@
 //= require vendor/countries
 //= require vendor/jquery.chained
 //= require vendor/bootstrap-datepicker.min
+//= require vendor/bootstrap-tagsinput
 //= require inputmask
 //= require jquery.inputmask
 //= require inputmask.extensions
@@ -75,6 +76,17 @@ $(document).on('turbolinks:load', function(){
 
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
+
+  $('.tags-input').tagsinput({
+    confirmKeys: [13, 188]
+  });
+
+  $('.tags-input input').on('keypress', function(e){
+    if (e.keyCode == 13){
+      e.keyCode = 188;
+      e.preventDefault();
+    };
+  });
 
 	$('.datepicker-autoClose').datepicker({
 		todayHighlight: true,

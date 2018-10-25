@@ -27,6 +27,12 @@
           </div>
         </div>
         <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Status:</label>
+          <div class="col-md-7">
+            <%= @master_invoice.own_status %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Shipper:</label>
           <div class="col-md-7">
             <%= @master_invoice.shipper.nil? ? '' : @master_invoice.shipper.company_name %>

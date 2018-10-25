@@ -24,6 +24,34 @@
           </div>
         </div>
         <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Received Date:</label>
+          <div class="col-md-7">
+            <%= shipment.received_date %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Transit Time:</label>
+          <div class="col-md-7">
+            <%= shipment.transit_time %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Status:</label>
+          <div class="col-md-7">
+            <%= shipment.shipment_status %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Client Reference:</label>
+          <div class="col-md-7">
+            <% if !shipment.client_reference.nil? && shipment.client_reference != '' %>
+              <% shipment.client_reference.split(/,/).each do |cr| %>
+                <span class="badge badge-inverse"><%= cr %></span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Tracking Number:</label>
           <div class="col-md-7">
             <%= shipment.tracking_number %>

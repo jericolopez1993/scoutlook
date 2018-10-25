@@ -102,11 +102,7 @@ class ShipmentsController < ApplicationController
         location.save
         @origin_location_id = location.id
       end
-    endif !params[:master_invoice][:shipment_date].nil? && params[:master_invoice][:shipment_date] != ''
-        params[:master_invoice][:shipment_date] = Date::strptime(params[:master_invoice][:shipment_date], "%m/%d/%Y")
-      else
-        params[:master_invoice].delete :shipment_date
-      end
+    end
     params[:shipment][:origin_location_id] = @origin_location_id
     if params[:shipment][:destination_location_id].present? || params[:shipment][:destination_address].present? || params[:shipment][:destination_country].present? ||  params[:shipment][:destination_state].present? ||  params[:shipment][:destination_postal].present? ||  params[:shipment][:destination_city].present?
       if is_numeric?(params[:shipment][:destination_location_id])
@@ -170,11 +166,11 @@ class ShipmentsController < ApplicationController
       params[:shipment][:gst_hst_tax] = params[:shipment][:gst_hst_tax].gsub('$ ', '').gsub(',', '').to_d
       params[:shipment][:total_charge] = params[:shipment][:total_charge].gsub('$ ', '').gsub(',', '').to_d
       params[:shipment][:total_charge_with_tax] = params[:shipment][:total_charge_with_tax].gsub('$ ', '').gsub(',', '').to_d
-      if !params[:master_invoice][:shipment_date].nil? && params[:master_invoice][:shipment_date] != ''
+      if !params[:shipment][:shipment_date].nil? && params[:shipment][:shipment_date] != ''
         params[:shipment][:shipment_date] = Date::strptime(params[:shipment][:shipment_date], "%m/%d/%Y")
       else
         params[:shipment].delete :shipment_date
       end
-      params.require(:shipment).permit(:header, :account_number, :shipment_date, :tracking_number, :terms, :origin_location_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes, :own_type, :received_date, :transit_date, :money_currency, :shipment_status)
+      params.require(:shipment).permit(:header, :account_number, :shipment_date, :tracking_number, :terms, :origin_location_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes, :own_type, :received_date, :transit_date, :money_currency, :shipment_status, :client_reference)
     end
 end

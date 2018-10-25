@@ -1,14 +1,14 @@
 
   <div class="form-group row m-b-15 location-fields address-fields">
-    <%= form.label :location_id, 'Select Location: ', class: 'col-md-4 col-sm-4 col-form-label' %>
-    <div class="col-md-8 col-sm-8">
+    <%= form.label :location_id, 'Select Location: ', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
       <%= form.select :location_id, Location.all.collect {|r| [ r.name, r.id ] },{:include_blank => true}, class: 'form-control combo-dropdown', :id => 'location_id' %>
     </div>
   </div>
 
   <div class="form-group row m-b-15 address-fields">
-    <%= form.label :address, 'Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
-    <div class="col-md-8 col-sm-8">
+    <%= form.label :address, 'Address:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
     <%= form.text_field :address, class: 'form-control', :id => 'address' %>
     </div>
   </div>
@@ -19,20 +19,20 @@
     </div>
   </div>
   <div class="form-group row m-b-15 address-fields">
-    <%= form.label :state, 'Province / State:', class: 'col-md-4 col-sm-4 col-form-label' %>
-    <div class="col-md-8 col-sm-8">
+    <%= form.label :state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
     <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => 'state' %>
     </div>
   </div>
   <div class="form-group row m-b-15 address-fields">
-    <%= form.label :postal, 'Postal / Zip:', class: 'col-md-4 col-sm-4 col-form-label' %>
-    <div class="col-md-8 col-sm-8">
+    <%= form.label :postal, 'Postal / Zip:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
     <%= form.text_field :postal, class: 'form-control', 'data-inputmask' => "'mask': '******'", :id => 'postal' %>
     </div>
   </div>
   <div class="form-group row m-b-15 address-fields">
-    <%= form.label :country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
-    <div class="col-md-8 col-sm-8">
+    <%= form.label :country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
     <%= form.select :country, options_for_select([]), {}, class: 'form-control static-dropdown', :id => 'country' %>
     </div>
   </div>

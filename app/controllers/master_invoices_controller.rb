@@ -179,7 +179,7 @@ class MasterInvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_invoice_params
-      params.require(:master_invoice).permit(:invoice_number, :master_invoice_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance_approved, :shipment_entry)
+      params.require(:master_invoice).permit(:invoice_number, :master_invoice_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance_approved, :shipment_entry, :own_status)
     end
 
     def shipment_params
@@ -198,6 +198,6 @@ class MasterInvoicesController < ApplicationController
       else
         params[:master_invoice].delete :shipment_date
       end
-      params.require(:master_invoice).permit(:header, :account_number, :shipment_date, :tracking_number, :terms, :origin_location_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes, :own_type, :received_date, :transit_date, :money_currency, :shipment_status)
+      params.require(:master_invoice).permit(:header, :account_number, :shipment_date, :tracking_number, :terms, :origin_location_id, :destination_location_id, :distance, :pieces, :pallets, :unit_of_weight, :declared_weight, :billed_weight, :raw_weight, :service_mode, :billed_rate, :billed_rate_unit, :surcharge_ontario, :surcharge_non_conveyables, :surcharge_non_vault, :surchange_multi_piece, :surcharge_fuel, :surcharge_weight, :gst_hst_tax, :total_charge, :total_charge_with_tax, :notes, :own_type, :received_date, :transit_date, :money_currency, :shipment_status, :client_reference)
     end
 end

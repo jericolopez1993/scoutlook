@@ -44,6 +44,12 @@
                     <%= form.select :own_type, options_for_select(['Inbound', 'Outbound', 'Drop-Ship', 'Stock', 'Transfer', 'Customer Return', 'Supplier Return'], shipment.own_type),{:include_blank => true}, class: 'form-control' %>
                     </div>
                   </div>
+                  <div class="form-group row m-b-15">
+                    <%= form.label :client_reference, 'Client Reference:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                    <div class="col-md-8 col-sm-8">
+                    <%= form.text_field :client_reference, class: 'form-control tags-input', 'data-role' => 'tagsinput', value: shipment.client_reference  %>
+                    </div>
+                  </div>
                     <div class="form-group row m-b-15">
                       <%= form.label :tracking_number, 'Tracking Number *:', class: 'col-md-4 col-sm-4 col-form-label' %>
                       <div class="col-md-8 col-sm-8">
