@@ -52,3 +52,9 @@ body {
 .lbl-padding-t {
   padding-top: 7px!important;
 }
+
+li[aria-disabled="true"] {
+    margin-top:8px;
+    border-top:1px solid #666;
+    padding:0;
+}
