@@ -98,4 +98,37 @@ module ApplicationHelper
     currency
   end
 
+  def get_shipper_locations(id)
+    if id != "" && !id.nil?
+      begin
+        master_invoice = MasterInvoice.find(id)
+        client_location_ids = ClientLocation.where(:client_id => master_invoice.shipper_id).distinct(:location_id).pluck(:location_id).map(&:inspect).join(',')
+        if client_location_ids != ''
+           Location.where("id IN (#{client_location_ids})")
+         else
+           []
+        end
+      rescue
+        []
+      end
+    else
+      []
+    end
+  end
+
+  def get_quotient(num1, num2)
+    if num1.nil?
+      num1 = 0
+    end
+
+    if num2.nil?
+      num2 = 0
+    end
+
+    if num1 != 0 && num2 != 0
+      num1 / num2
+    else
+      0
+    end
+  end
 end

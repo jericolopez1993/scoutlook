@@ -36,7 +36,7 @@ class ClientLocationsController < ApplicationController
   def create
     @client_location = ClientLocation.new(client_location_params)
     @client_location.same_ho = params[:same_ho].present?
-    if params[:client_location][:location_id].present? && (params[:client_location][:address].present? ||  params[:client_location][:city].present? ||  params[:client_location][:state].present? ||  params[:client_location][:postal].present? ||  params[:client_location][:city].present?)
+    if params[:client_location][:location_id].present? || params[:client_location][:address].present? ||  params[:client_location][:city].present? ||  params[:client_location][:state].present? ||  params[:client_location][:postal].present? ||  params[:client_location][:city].present?
       if is_numeric?(params[:client_location][:location_id])
         @location_id =  params[:client_location][:location_id]
       else
@@ -72,7 +72,8 @@ class ClientLocationsController < ApplicationController
   # PATCH/PUT /client_locations/1
   # PATCH/PUT /client_locations/1.json
   def update
-    if params[:client_location][:location_id].present? && (params[:client_location][:address].present? ||  params[:client_location][:city].present? ||  params[:client_location][:state].present? ||  params[:client_location][:postal].present? ||  params[:client_location][:city].present?)
+    if params[:client_location][:location_id].present? || params[:client_location][:address].present? ||  params[:client_location][:city].present? ||  params[:client_location][:state].present? ||  params[:client_location][:postal].present? ||  params[:client_location][:city].present?
+      puts is_numeric?(params[:client_location][:location_id])
       if is_numeric?(params[:client_location][:location_id])
         @location_id =  params[:client_location][:location_id]
       else
@@ -81,7 +82,6 @@ class ClientLocationsController < ApplicationController
         @location.save
         @location_id = @location.id
       end
-      @client_location.location_id = @location_id
     end
     params[:client_location][:location_id] = @location_id
     respond_to do |format|
