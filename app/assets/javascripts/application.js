@@ -344,9 +344,11 @@ function shipmentFields(shipmentEntry) {
   console.log(shipmentEntry);
   if (shipmentEntry == 'single shipment') {
     $(".shipment-fields").show();
+    $(".single-shipment").hide();
   }
   else {
     $(".shipment-fields").hide();
+    $(".single-shipment").show();
   }
 }
 

@@ -72,12 +72,13 @@ label {
 
         <hr>
         <h4 class="text-inverse">Invoices</h4>
-        <div class="form-group row m-b-15">
-          <label class="col-md-3 col-form-label">Single Invoice Date:</label>
-          <div class="col-md-9 lbl-padding-t">
-            <%= @master_invoice.single_invoice_date %>
-          </div>
-        </div>
+        <% if @master_invoice.shipment_entry != 'single shipment'%>
+          <div class="form-group row m-b-15">
+            <label class="col-md-3 col-form-label">Single Invoice Date:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @master_invoice.single_invoice_date %>
+            </div>
+        <% end %>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Invoicing Period Start:</label>
           <div class="col-md-9 lbl-padding-t">
