@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :master_signals, :path => 'signals'
   resources :shipments
-  resources :master_invoices
+  resources :master_invoices, :path => "invoices"
   resources :rates
   resources :activity_outcomes
   resources :activities do
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :locations
   resources :client_contacts
   resources :reps
-  resources :client_locations 
+  resources :client_locations
   resources :clients do
     collection do
       get     'origins'
