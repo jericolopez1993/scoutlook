@@ -1,10 +1,23 @@
-
+<style>
+@media (max-width: 767px) {
+  label {
+    text-align: left!important;
+  }
+}
+label {
+  text-align: right;
+}
+.lbl-padding-t {
+  padding-top: 7px;
+}
+.title-btn-group {
+  padding-bottom: 40px
+}
+</style>
 <!-- begin page-header -->
 <%= render 'layouts/static/header', header_title: 'Master Invoices', sub_header_title: 'Create/Edit/View'%>
 <!-- end page-header -->
 <!-- begin panel -->
-<div class="row">
-  <div class="col-lg-6">
     <div class="panel panel-inverse">
       <div class="panel-heading">
         <div class="panel-heading-btn">
@@ -14,131 +27,120 @@
         <h4 class="panel-title">ID: <%= generate_two_alphanumeric_id((@master_invoice.shipper.nil? ? '' : @master_invoice.shipper.company_name), (@master_invoice.carrier.nil? ? '' : @master_invoice.carrier.company_name), @master_invoice.id) %></h4>
       </div>
       <div class="panel-body">
+          <h4 class="text-inverse">Details</h4>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Invoice Number:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.invoice_number %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Shipment Type:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.shipment_type %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Status:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.own_status %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Shipper:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.shipper.nil? ? '' : @master_invoice.shipper.company_name %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Carrier:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.carrier.nil? ? '' : @master_invoice.carrier.company_name %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Master Account:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.master_account %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Attachment:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <% if @master_invoice.attachment_file.attached? %>
               <%= link_to @master_invoice.attachment_file.filename, rails_blob_path(@master_invoice.attachment_file, disposition: 'attachment') %>
             <% end %>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="col-lg-6">
-    <div class="panel panel-inverse">
-      <div class="panel-heading">
-        <div class="panel-heading-btn">
-
-        </div>
-        <h4 class="panel-title">Invoices</h4>
-      </div>
-      <div class="panel-body">
+        <hr>
+        <h4 class="text-inverse">Invoices</h4>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Single Invoice Date:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.single_invoice_date %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Invoicing Period Start:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.invoicing_period_start %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Invoicing Period End:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.invoicing_period_end %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Total from Shipments:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.child_total_charge_with_tax %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Total Charge:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.total_charge %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Variance:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= (@master_invoice.total_charge.nil? ? 0 : @master_invoice.total_charge) - (@master_invoice.child_total_charge_with_tax.nil? ? 0 : @master_invoice.child_total_charge_with_tax) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Approved:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= @master_invoice.variance_approved ? '<i class="text-green fas fa-check"></i>'.html_safe : '<i class="text-red fas fa-times"></i>'.html_safe %>
           </div>
         </div>
 
+        <% if @master_invoice.shipment_entry == 'single shipment'%>
+          <%= render 'shipments/show_fields', shipment: @master_invoice.shipment %>
+        <% else %>
+            <%= form_with(model: Shipment.new, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+              <hr>
+              <h4 class="text-inverse">Quick Shipment</h4>
+              <%= form.hidden_field :header, :value => @master_invoice.id %>
+              <%= form.hidden_field :total_charge %>
+              <% if !@master_invoice.shipper_location.nil? %>
+                <%= form.hidden_field :origin_location_id, :value => @master_invoice.shipper_location.id %>
+              <% end %>
+              <%= render 'quick_shipment_form', form: form, master_invoice: @master_invoice %>
+
+              <div class="form-group row m-b-15">
+                <div class="col-md-2"></div>
+                <div class="col-md-10 col-sm-12 d-flex justify-content-end">
+                  <%= form.submit 'Submit', :class => 'btn btn-primary btn-xs' %>
+                </div>
+              </div>
+            <% end %>
+          <%= render 'shipments/table', shipments: Shipment.where(:header => @master_invoice.id), master_invoice: @master_invoice %>
+        <% end %>
+
+
       </div>
     </div>
-  </div>
-</div>
-<% if @master_invoice.shipment_entry == 'single shipment'%>
-  <%= render 'shipments/show_fields', shipment: @master_invoice.shipment %>
-<% else %>
-    <%= form_with(model: Shipment.new, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-      <div class="panel panel-inverse">
-        <div class="panel-heading">
-          <div class="panel-heading-btn">
-            <%= form.submit 'Submit', :class => 'btn btn-primary btn-xs' %>
-
-          </div>
-          <h4 class="panel-title">Quick Shipment</h4>
-        </div>
-        <div class="panel-body">
-          <%= form.hidden_field :header, :value => @master_invoice.id %>
-          <%= form.hidden_field :total_charge %>
-          <% if !@master_invoice.shipper_location.nil? %>
-            <%= form.hidden_field :origin_location_id, :value => @master_invoice.shipper_location.id %>
-          <% end %>
-          <%= render 'quick_shipment_form', form: form, master_invoice: @master_invoice %>
-        </div>
-      </div>
-    <% end %>
-  <%= render 'shipments/table', shipments: Shipment.where(:header => @master_invoice.id), master_invoice: @master_invoice %>
-<% end %>
