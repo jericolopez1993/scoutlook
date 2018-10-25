@@ -32,9 +32,9 @@
   </div>
 </div>
 <div class="form-group row m-b-15">
-  <%= form.label :transit_time, 'Transit Time:', class: 'col-md-4 col-sm-4 col-form-label' %>
-  <div class="col-md-8 col-sm-8">
-  <%= form.text_field :transit_time, class: 'form-control', value: shipment.transit_time, :id => "transit_time" %>
+  <%= form.label :transit_time, 'Transit Time:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+  <%= form.text_field :transit_time, class: 'form-control', value: shipment.transit_time, :id => "transit_time", :readonly => true %>
   </div>
 </div>
 <div class="form-group row m-b-15">
@@ -163,7 +163,7 @@
 <h4 class="text-inverse">Origin</h4>
 
 <% shipper_locations = get_shipper_locations(shipment.header) %>
-<%= render 'address_form', form: form, name: 'origin', shipper_locations: (shipper_locations.present? ? shipper_locations : ((params[:action] == 'new' && params[:controller] == 'master_invoices') ? Location.all : []))  %>
+<%= render 'shipments/address_form', form: form, name: 'origin', shipper_locations: (shipper_locations.present? ? shipper_locations : ((params[:action] == 'new' && params[:controller] == 'master_invoices') ? Location.all : []))  %>
 
 <hr>
 <h4 class="text-inverse">Destination</h4>

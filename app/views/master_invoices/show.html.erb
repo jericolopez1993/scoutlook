@@ -12,7 +12,7 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: 'Invoices', sub_header_title: 'Create/Edit/View'%>
+<%= render 'layouts/static/header', header_title: 'Master Invoices', sub_header_title: 'Create/Edit/View'%>
 <!-- end page-header -->
 <!-- begin panel -->
     <div class="panel panel-inverse">
@@ -65,7 +65,7 @@ label {
           <label class="col-md-3 col-form-label">Attachment:</label>
           <div class="col-md-9 lbl-padding-t">
             <% if @master_invoice.attachment_file.attached? %>
-              <%= link_to @master_invoice.attachment_file.filename, rails_blob_path(@master_invoice.attachment_file), target: :_blank  %>
+              <%= link_to @master_invoice.attachment_file.filename, rails_blob_path(@master_invoice.attachment_file, disposition: 'attachment') %>
             <% end %>
           </div>
         </div>
@@ -78,6 +78,7 @@ label {
             <div class="col-md-9 lbl-padding-t">
               <%= @master_invoice.single_invoice_date %>
             </div>
+          </div>
         <% end %>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Invoicing Period Start:</label>
@@ -140,5 +141,5 @@ label {
         <% end %>
 
 
-      </div>
-    </div>
+</div>
+</div>

@@ -3,7 +3,11 @@ has_one_attached :shipment_attachment_file
 
   def origin_location
     if !self.origin_location_id.nil?
-      Location.find(self.origin_location_id)
+      begin
+        Location.find(self.origin_location_id)
+      rescue
+        nil
+      end
     else
       nil
     end
@@ -11,7 +15,11 @@ has_one_attached :shipment_attachment_file
 
   def destination_location
     if !self.destination_location_id.nil?
-      Location.find(self.destination_location_id)
+      begin
+        Location.find(self.destination_location_id)
+      rescue
+        nil
+      end
     else
       nil
     end

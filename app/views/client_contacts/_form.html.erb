@@ -23,43 +23,43 @@
     </div>
   <% end %>
               <div class="form-group row m-b-15">
-                <%= form.label :first_name, 'First Name:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                <%= form.label :first_name, 'First Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                 <div class="col-md-8 col-sm-8">
                 <%= form.text_field :first_name, class: 'form-control', 'data-parsley-required' => true %>
                 </div>
               </div>
               <div class="form-group row m-b-15">
-                <%= form.label :last_name, 'Last Name:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                <%= form.label :last_name, 'Last Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                 <div class="col-md-8 col-sm-8">
                 <%= form.text_field :last_name, class: 'form-control', 'data-parsley-required' => true %>
                 </div>
               </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :title, 'Title:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :title, 'Title:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.text_field :title, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :linkedin_link, 'LinkedIn:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :linkedin_link, 'LinkedIn:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.url_field :linkedin_link, class: 'form-control'%>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :email, 'Email Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :email, 'Email Address:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.email_field :email, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :password, 'Password:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :password, 'Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.password_field :password, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :confirm_password, 'Confirm Password:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :confirm_password, 'Confirm Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.password_field :confirm_password, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
@@ -67,68 +67,68 @@
 
 
                 <div class="form-group row m-b-15">
-                  <%= form.label :home_phone, 'Cell:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :home_phone, 'Cell:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.text_field :home_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <label class="col-md-4 col-sm-4 col-form-label">same as Head Office or Master Client Record? </label>
+                  <label class="text-right col-md-2 col-sm-4 col-form-label">same as Head Office or Master Client Record? </label>
                   <div class="col-md-8 col-sm-8">
                     <input type="checkbox" name="same_ho" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-text"  <%= client_contact.same_ho ? 'checked' : '' %>/>
                   </div>
                 </div>
                 <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :work_phone, 'Work Phone:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :work_phone, 'Work Phone:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.text_field :work_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :address, 'Address:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :address, 'Address:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.text_field :address, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :country, 'Country:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.select :country, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :state, 'Province / State:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :postal, 'Postal / Zip:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :postal, 'Postal / Zip:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                   <%= form.text_field :postal, class: 'form-control', 'data-inputmask' => "'mask': '******'" %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15 address-fields">
-                  <%= form.label :city, 'City/Town:', class: 'col-md-4 col-sm-4 col-form-label' %>
+                  <%= form.label :city, 'City/Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
                     <%= form.select :city, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => client_contact.city}, class: 'form-control combo-dropdown'%>
                   </div>
                 </div>
 
                 <div class="form-group row m-b-15">
-                  <label class="col-md-4 col-sm-4 col-form-label">is it Primary Ops Contact?</label>
+                  <label class="text-right col-md-2 col-sm-4 col-form-label">is it Primary Ops Contact?</label>
                   <div class="col-md-8 col-sm-8">
                     <input type="checkbox" name="pdm"  data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= is_pdm ? 'checked' : '' %> >
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <label class="col-md-4 col-sm-4 col-form-label">is it Primary Decision Maker? </label>
+                  <label class="text-right col-md-2 col-sm-4 col-form-label">is it Primary Decision Maker? </label>
                   <div class="col-md-8 col-sm-8">
                     <input type="checkbox" name="poc"   data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= is_poc ? 'checked' : '' %> >
                   </div>
                 </div>
                 <div class="form-group row m-b-0">
-                  <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
+                  <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
                   <div class="col-md-8 col-sm-8">
                     <%= form.submit 'Submit', :class => 'btn btn-primary' %>
                     <% client = Client.find(client_contact.client_id)%>
