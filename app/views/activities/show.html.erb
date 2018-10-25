@@ -1,5 +1,14 @@
 
-
+<style>
+@media (max-width: 767px) {
+  label {
+    text-align: left!important;
+  }
+}
+label {
+  text-align: right;
+}
+</style>
 <!-- begin page-header -->
 <%= render 'layouts/static/header', header_title: 'Activities', sub_header_title: 'Create/Edit/View'%>
 <!-- end page-header -->
@@ -18,148 +27,136 @@
     <h4 class="panel-title">  Activity #<%= generate_alphanumeric_id((@activity.client.nil? ? "" : "#{@activity.client.company_name}"), @activity.id) %></h4>
   </div>
   <div class="panel-body">
+    <h4 class="text-inverse">Outcome</h4>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">ID:</label>
+      <label class="col-md-2 col-form-label">ID:</label>
       <div class="col-md-7">
         <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %>
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Type:</label>
+      <label class="col-md-2 col-form-label">Type:</label>
       <div class="col-md-7">
         <%= @activity.activity_type %>
       </div>
     </div>
     <% if @activity.activity_type == "Engagement" %>
       <div class="form-group row m-b-15">
-        <label class="col-md-3 col-form-label">Engagement Type:</label>
+        <label class="col-md-2 col-form-label">Engagement Type:</label>
         <div class="col-md-7">
           <%= @activity.engagement_type %>
         </div>
       </div>
     <% end %>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Client:</label>
+      <label class="col-md-2 col-form-label">Client:</label>
       <div class="col-md-7">
       <%= @activity.client.nil? ? "" : "#{@activity.client.company_name}" %>
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Rep:</label>
+      <label class="col-md-2 col-form-label">Rep:</label>
       <div class="col-md-7">
       <%= @activity.rep.nil? ? "" : "#{@activity.rep.first_name} #{@activity.rep.last_name}" %>
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Annual Value:</label>
+      <label class="col-md-2 col-form-label">Annual Value:</label>
       <div class="col-md-7">
         <%= @activity.annual_value %>
       </div>
     </div>
 
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Status:</label>
+      <label class="col-md-2 col-form-label">Status:</label>
       <div class="col-md-7">
       <%= @activity.status ? 'Open' : 'Closed' %>
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Date Opened:</label>
+      <label class="col-md-2 col-form-label">Date Opened:</label>
       <div class="col-md-7">
         <%= convert_date(@activity.date_opened) %>
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Date Closed:</label>
+      <label class="col-md-2 col-form-label">Date Closed:</label>
       <div class="col-md-7">
         <%= convert_date(@activity.date_closed) %>
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Other Notes:</label>
+      <label class="col-md-2 col-form-label">Other Notes:</label>
       <div class="col-md-7">
         <%= @activity.other_notes.nil? ? "" : @activity.other_notes.html_safe %>
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Complete Credit Application:</label>
+      <label class="col-md-2 col-form-label">Complete Credit Application:</label>
       <div class="col-md-7">
         <% if @activity.credit_application.attached? %>
           <%= link_to @activity.credit_application.filename, rails_blob_path(@activity.credit_application, disposition: 'attachment') %>
         <% end %>
       </div>
     </div>
-  </div>
-</div>
-<div class="panel panel-inverse">
-  <div class="panel-heading">
-    <h4 class="panel-title">Proposed PDFs</h4>
-  </div>
-  <div class="panel-body">
-    <table class="table table-striped table-bordered data-table-no-buttons">
-                    <thead>
-                      <tr class="odd gradeX">
-                        <th width="1%"></th>
-                        <th class="text-nowrap">Name</th>
-                        <th class="text-nowrap">Date</th>
-                        <th class="text-nowrap" data-orderable="false"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% @activity.proposal_pdf.each_with_index do |attachment_file, index| %>
-                      <tr>
-                        <td><%= attachment_file.id %></td>
-                        <td><%= attachment_file.filename %></td>
-                        <td><%= convert_date(attachment_file.created_at) %></td>
-                        <td>
-                          <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file, disposition: 'attachment'), :class => 'btn btn-primary' %>
-                          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_activities_path(:id => @activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
-                        </td>
 
-                      </tr>
-                      <% end %>
-
-                    </tbody>
-                  </table>
-
-  </div>
-</div>
-<% if !@activity.outcome_id.nil? %>
-<div class="panel panel-inverse">
-  <div class="panel-heading">
-    <div class="panel-heading-btn">
-    </div>
-    <h4 class="panel-title">Outcome</h4>
-  </div>
-  <div class="panel-body">
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">ID:</label>
-      <div class="col-md-7">
-        <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %>
-      </div>
-    </div>
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Outcome:</label>
-      <div class="col-md-7">
-        <%= @activity.outcome.outcome %>
-      </div>
-    </div>
-      <div class="form-group row m-b-15">
-        <label class="col-md-3 col-form-label">Reason:</label>
-        <div class="col-md-7">
-          <%= @activity.outcome.reason %>
+    <% if !@activity.outcome_id.nil? %>
+        <hr>
+        <h4 class="text-inverse">Outcome</h4>
+        <div class="form-group row m-b-15">
+          <label class="col-md-2 col-form-label">ID:</label>
+          <div class="col-md-7">
+            <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %>
+          </div>
         </div>
-      </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-2 col-form-label">Outcome:</label>
+          <div class="col-md-7">
+            <%= @activity.outcome.outcome %>
+          </div>
+        </div>
+          <div class="form-group row m-b-15">
+            <label class="col-md-2 col-form-label">Reason:</label>
+            <div class="col-md-7">
+              <%= @activity.outcome.reason %>
+            </div>
+          </div>
 
-    <div class="form-group row m-b-15">
-      <label class="col-md-3 col-form-label">Notes:</label>
-      <div class="col-md-7">
-        <%= @activity.outcome.notes.nil? ? "" : @activity.outcome.notes.html_safe %>
-      </div>
-    </div>
+        <div class="form-group row m-b-15">
+          <label class="col-md-2 col-form-label">Notes:</label>
+          <div class="col-md-7">
+            <%= @activity.outcome.notes.nil? ? "" : @activity.outcome.notes.html_safe %>
+          </div>
+        </div>
+    <% end %>
+    <hr>
+    <h4 class="text-inverse">Proposed PDFs</h4>
+    <table class="table table-striped table-bordered data-table-no-buttons">
+      <thead>
+        <tr class="odd gradeX">
+          <th width="1%"></th>
+          <th class="text-nowrap">Name</th>
+          <th class="text-nowrap">Date</th>
+          <th class="text-nowrap" data-orderable="false"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @activity.proposal_pdf.each_with_index do |attachment_file, index| %>
+        <tr>
+          <td><%= attachment_file.id %></td>
+          <td><%= attachment_file.filename %></td>
+          <td><%= convert_date(attachment_file.created_at) %></td>
+          <td>
+            <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file, disposition: 'attachment'), :class => 'btn btn-primary' %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_activities_path(:id => @activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+          </td>
+
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
 
   </div>
 </div>
 
-<% end %>
 <!-- end panel -->
