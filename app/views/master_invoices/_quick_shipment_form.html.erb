@@ -32,22 +32,28 @@
       <%= form.text_field "destination_address", class: 'form-control', :id => "quick_destination_address" %>
     </div>
   </div>
-    <div class="col-md col-sm-12">
-      <div class="form-group">
-        <%= form.label "destination_country", 'Country:'%>
-      <%= form.select "destination_country", options_for_select([]),{:include_blank => true}, class: 'form-control', :id => "quick_destination_country" %>
-      </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label "destination_city", 'City:'%>
+    <%= form.text_field "destination_city", class: 'form-control', :id => "quick_destination_city" %>
     </div>
-    <div class="col-md col-sm-12">
-      <div class="form-group">
-        <%= form.label "destination_state", 'Province / State:'%>
-        <%= form.select "destination_state", options_for_select([]),{:include_blank => true}, class: 'form-control', :id => "quick_destination_state" %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label "destination_state", 'Province / State:'%>
+      <%= form.select "destination_state", options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "quick_destination_state" %>
     </div>
+  </div>
     <div class="col-md col-sm-12">
       <div class="form-group">
         <%= form.label  "destination_postal", 'Postal / Zip:'%>
-        <%= form.text_field "destination_postal", class: 'form-control', 'data-inputmask' => "'mask': '******'", :id => "quick_destination_postal" %>
+        <%= form.text_field "destination_postal", class: 'form-control', :id => "quick_destination_postal" %>
+      </div>
+    </div>
+    <div class="col-md col-sm-12">
+      <div class="form-group">
+        <%= form.label "destination_country", 'Country:'%>
+      <%= form.select "destination_country", options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "quick_destination_country" %>
       </div>
     </div>
 </div>
@@ -156,4 +162,11 @@
 
 <script language="javascript">
   populateCountries("quick_destination_country", "quick_destination_state");
+  setFieldMask('quick_destination_country', 'quick_destination_postal');
+
+  $(function(){
+    $("#quick_destination_country").change(function(){
+      setFieldMask('quick_destination_country', 'quick_destination_postal');
+    });
+  });
 </script>

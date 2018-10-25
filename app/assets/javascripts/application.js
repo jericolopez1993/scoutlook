@@ -280,6 +280,7 @@ function addressCreate(isTrue) {
 
   }
 }
+
 function addressCreateQuickS(isTrue, name) {
   $("#"+ name +"_address").val('');
   $("#"+ name +"_city").val('');
@@ -301,6 +302,7 @@ function addressCreateQuickS(isTrue, name) {
     $("#"+ name +"_country").val('-1').change();
   }
 }
+
 function addressCreateOD(isTrue, name) {
   $("#"+ name +"_address").val('');
   $("#"+ name +"_city").val('');
@@ -421,4 +423,16 @@ function getDistance(origin, destination){
     $('<img id="map" src="'+ cval +'">').insertAfter( map );
     map.remove();
   })
+}
+
+function setFieldMask(country_id, field_mask_id){
+  var str_val = $('#'+country_id).val();
+  var selector = '#'+field_mask_id;
+  if (str_val === "Canada"){
+    $(selector).inputmask({ mask: "A9A9A9"});
+  }else if (str_val === "USA") {
+    $(selector).inputmask({ mask: "99999"});
+  }else{
+    $(selector).inputmask('remove');
+  }
 }
