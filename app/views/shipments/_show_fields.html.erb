@@ -1,49 +1,35 @@
 <% if !shipment.nil? %>
-<div class="row">
-  <div class="col-lg-6">
-    <div class="panel panel-inverse">
-      <div class="panel-heading">
-        <div class="panel-heading-btn">
-          <% if params[:controller] != 'master_invoices'%>
-            <%= link_to 'Edit', edit_shipment_path(shipment), :class => 'btn btn-warning btn-xs' %>
 
-            <% if !shipment.header.nil? %>
-              <%= link_to 'Back to Invoice', master_invoice_path(:id => shipment.header), :class => 'btn btn-info btn-xs' %>
-            <% else %>
-              <%= link_to 'Back to Invoice List', master_invoices_path, :class => 'btn btn-info btn-xs' %>
-            <% end %>
-          <% end %>
-        </div>
-        <h4 class="panel-title">Basic Information</h4>
-      </div>
-      <div class="panel-body">
+
+        <% if params[:controller] == 'master_invoices'%><hr><% end %>
+        <h4 class="text-inverse">Basic Information</h4>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Shipment Date:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.shipment_date %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Received Date:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.received_date %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Transit Time:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.transit_time %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Status:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.shipment_status %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Client Reference:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <% if !shipment.client_reference.nil? && shipment.client_reference != '' %>
               <% shipment.client_reference.split(/,/).each do |cr| %>
                 <span class="badge badge-inverse"><%= cr %></span>
@@ -53,226 +39,220 @@
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Tracking Number:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.tracking_number %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Account Number:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.account_number %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Invoice Number:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.invoice.nil? ? '' : shipment.invoice.invoice_number %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Terms:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.terms %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Notes:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.notes.nil? ? "" : shipment.notes.html_safe %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Attachment:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <% if shipment.shipment_attachment_file.attached? %>
               <%= link_to shipment.shipment_attachment_file.filename, rails_blob_path(shipment.shipment_attachment_file), target: :_blank %>
             <% end %>
           </div>
         </div>
 
-      </div>
-    </div>
-    <div class="panel panel-inverse">
-      <div class="panel-heading">
-        <div class="panel-heading-btn">
-        </div>
-        <h4 class="panel-title">Bill & Surcharges</h4>
-      </div>
-      <div class="panel-body">
+        <hr>
+        <h4 class="text-inverse">Bill & Surcharges</h4>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Billed Rate:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.billed_rate.nil? ? '' : number_to_currency(shipment.billed_rate) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Billed Rate Unit:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.billed_rate_unit %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Ontario:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.surcharge_ontario.nil? ? '' : number_to_currency(shipment.surcharge_ontario) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Non Conveyables:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.surcharge_non_conveyables.nil? ? '' : number_to_currency(shipment.surcharge_non_conveyables) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Non Vault:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.surcharge_non_vault.nil? ? '' : number_to_currency(shipment.surcharge_non_vault) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Multi Piece:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.surchange_multi_piece.nil? ? '' : number_to_currency(shipment.surchange_multi_piece) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Fuel:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.surcharge_fuel.nil? ? '' : number_to_currency(shipment.surcharge_fuel) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Fuel:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.surcharge_fuel.nil? ? '' : number_to_currency(shipment.surcharge_fuel) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Surcharge Weight:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.surcharge_weight.nil? ? '' : number_to_currency(shipment.surcharge_weight) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">GST/HST Tax:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.gst_hst_tax.nil? ? '' : number_to_currency(shipment.gst_hst_tax) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Total Charge:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= get_currency(shipment.money_currency) %> <%= shipment.total_charge.nil? ? '' : number_to_currency(shipment.total_charge) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Total Charge with Tax:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= get_currency(shipment.money_currency) %> <%= shipment.total_charge_with_tax.nil? ? '' : number_to_currency(shipment.total_charge_with_tax) %>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="panel panel-inverse">
-      <div class="panel-heading">
-        <div class="panel-heading-btn">
-        </div>
-        <h4 class="panel-title">Location</h4>
-      </div>
-      <div class="panel-body">
+        <hr>
+        <h4 class="text-inverse">Location</h4>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Origin:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.address} #{shipment.origin_location.city} #{shipment.origin_location.state}, #{shipment.origin_location.country} #{shipment.origin_location.postal}" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Destination:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.address} #{shipment.destination_location.city} #{shipment.destination_location.state}, #{shipment.destination_location.country} #{shipment.destination_location.postal}" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Distance:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.distance %> KM
           </div>
         </div>
-          <img src="https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C<%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.address} #{shipment.origin_location.state},#{shipment.origin_location.country}" %>%7C<%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.address} #{shipment.destination_location.state},#{shipment.destination_location.country}" %>&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0" />
+        <div class="form-group row m-b-15">
+          <label class="col-md-3 col-form-label">Map:</label>
+          <div class="col-md-9 lbl-padding-t">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C<%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.address} #{shipment.origin_location.state},#{shipment.origin_location.country}" %>%7C<%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.address} #{shipment.destination_location.state},#{shipment.destination_location.country}" %>&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0" />
+          </div>
         </div>
-    </div>
-    <div class="panel panel-inverse">
-      <div class="panel-heading">
-        <div class="panel-heading-btn">
-        </div>
-        <h4 class="panel-title">Item Information</h4>
-      </div>
-      <div class="panel-body">
+
+
+        <hr>
+        <h4 class="text-inverse">Item Information</h4>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Pieces:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.pieces %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Pallets:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.pallets %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Unit of Weight:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.unit_of_weight %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Declared Weight:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.declared_weight %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Billed Weight:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.billed_weight %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Reweigh Weight:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.raw_weight %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Service Mode:</label>
-          <div class="col-md-7">
+          <div class="col-md-9 lbl-padding-t">
             <%= shipment.service_mode %>
           </div>
         </div>
-      </div>
-    </div>
 
-  </div>
-</div>
+        <hr>
+        <div class="title-btn-group">
+          <h4 class="text-inverse pull-left">Tracker</h4>
+          <div class="panel-body">
+            <table id="data-table-buttons" class="table table-striped table-bordered data-table-no-buttons  ">
+            								<thead>
+            									<tr class="odd gradeX">
+                                <th class="text-nowrap">Date</th>
+                                <th class="text-nowrap">User</th>
+                                <th class="text-nowrap">Status</th>
+                                <th class="text-nowrap">Notes</th>
+
+            									</tr>
+            								</thead>
+                            <tbody>
+                              <% shipment.audits.each do |audit| %>
+                              <tr>
+                                <td><%= audit.created_at %></td>
+                                <td><%= get_user_full_name(audit.user_id) %></td>
+                                <td><%= get_value(audit.audited_changes['shipment_status']) %></td>
+                                <td><%= get_value_with_html(audit.audited_changes['notes']) %></td>
+                              <% end %>
+                            </tbody>
+                          </table>
+          </div>
+
 <% else %>
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-inverse">
-      <div class="panel-heading">
-        <div class="panel-heading-btn">
-        </div>
-        <h4 class="panel-title">Shipment</h4>
-      </div>
-      <div class="panel-body text-center">
-        <span>
-          <i> No Shipment Available.</i>
-        </span>
-
-      </div>
-    </div>
+<hr>
+  <h4 class="text-inverse">Shipment</h4>
+  <div class="form-group row m-b-15 text-center">
+    <i> No Shipment Available.</i>
   </div>
-</div>
 <% end %>

@@ -46,7 +46,7 @@ gem 'pundit'
 gem "sentry-raven"
 gem 'seed_dump'
 gem 'httparty'
-
+gem "audited", "~> 4.7"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

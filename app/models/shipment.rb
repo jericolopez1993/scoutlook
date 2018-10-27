@@ -1,5 +1,6 @@
 class Shipment < ApplicationRecord
-has_one_attached :shipment_attachment_file
+  audited only: [:shipment_status, :notes]
+  has_one_attached :shipment_attachment_file
 
   def origin_location
     if !self.origin_location_id.nil?

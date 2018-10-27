@@ -131,4 +131,33 @@ module ApplicationHelper
       0
     end
   end
+
+  def get_user_full_name(id)
+    begin
+      user = User.find(id)
+      user.first_name + " " + user.last_name
+    rescue
+      ""
+    end
+  end
+
+  def is_enumerable?(object)
+    object.is_a? Enumerable
+  end
+
+  def get_value(object)
+    if object.present?
+      if is_enumerable?(object)
+        object[1]
+      else
+        object
+      end
+    else
+      ''
+    end
+  end
+
+  def get_value_with_html(object)
+    get_value(object).html_safe
+  end
 end
