@@ -1,8 +1,9 @@
-<table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons" style="width:100%">
+<table id="data-table-buttons" class="table table-striped table-bordered data-table-no-buttons" style="width:100%">
                 <thead>
                   <tr class="odd gradeX">
                     <th class="text-nowrap">Status</th>
                     <th class="text-nowrap">Type</th>
+                    <th class="text-nowrap">Geo</th>
                     <th class="text-nowrap">Carrier</th>
                     <th class="text-nowrap">Ship Date</th>
                     <th class="text-nowrap">Tracking #</th>
@@ -23,6 +24,7 @@
                       <tr>
                         <td><%= shipment.shipment_status %></td>
                         <td><%= shipment.own_type %></td>
+                        <td></td>
                         <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
                         <td><%= shipment.shipment_date %></td>
                         <td><%= shipment.tracking_number %></td>
