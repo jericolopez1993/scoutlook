@@ -181,7 +181,7 @@ class MasterInvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_invoice_params
-      params.require(:master_invoice).permit(:invoice_number, :master_invoice_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance_approved, :shipment_entry, :own_status)
+      params.require(:master_invoice).permit(:invoice_number, :shipment_type, :shipper_id, :carrier_id, :master_account, :single_invoice_date, :invoicing_period_start, :invoicing_period_end, :total_charge, :variance_approved, :shipment_entry, :own_status)
     end
 
     def shipment_params
