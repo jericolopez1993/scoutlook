@@ -4,7 +4,7 @@ class MasterInvoicePolicy < ApplicationPolicy
   end
 
   def show?
-    user.present? && user.has_role?(:admin)
+    user.present? && (user.has_role?(:admin) || user.has_role?(:contact))
   end
 
   def create?

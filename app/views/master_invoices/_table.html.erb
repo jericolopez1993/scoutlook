@@ -1,0 +1,67 @@
+<table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons display nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th rowspan="2">Status</th>
+                    <th rowspan="2">Type</th>
+                    <th rowspan="2">Entry</th>
+                    <th rowspan="2">Number Of Shipment</th>
+                    <th rowspan="2">Invoice #</th>
+                    <th rowspan="2">Docs</th>
+                    <th rowspan="2">Date</th>
+                    <th rowspan="2">Start Date</th>
+                    <th rowspan="2">End Date</th>
+                    <th rowspan="2">Carrier</th>
+                    <th colspan="4" class="text-center">Origin</th>
+                    <th colspan="4" class="text-center">Destination</th>
+                    <th rowspan="2">Total Charges</th>
+                    <% if params[:controller] == "master_invoices" %>
+                      <th rowspan="2" data-orderable="false">Actions</th>
+                    <% end %>
+                  </tr>
+                  <tr>
+                    <th>Origin</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Country</th>
+                    <th>Destination</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Country</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% master_invoices.each do |master_invoice| %>
+                    <tr>
+                      <td><%= (!master_invoice.own_status.nil? && master_invoice.own_status != "") ? "<span class='badge badge-#{get_color_badge(master_invoice.own_status)}'>#{master_invoice.own_status}</span>".html_safe : '' %></td>
+                      <td><%= (!master_invoice.shipment_type.nil? && master_invoice.shipment_type != "") ? "<span class='badge badge-#{get_color_badge(master_invoice.shipment_type)}'>#{master_invoice.shipment_type}</span>".html_safe : '' %></td>
+                      <td><%= (!master_invoice.shipment_entry.nil? && master_invoice.shipment_entry != "") ? "<span class='badge badge-#{get_color_badge(master_invoice.shipment_entry)}'>#{master_invoice.shipment_entry}</span>".html_safe : '' %></td>
+                      <td><%= Shipment.where(:header => master_invoice.id).length %></td>
+                      <td><%= link_to 'master_invoice.invoice_number', master_invoice %></td>
+                      <td><% if master_invoice.attachment_file.attached? %>
+                        <%= link_to '<i class="fas fa-file-invoice fa-2x"></i>'.html_safe, rails_blob_path(master_invoice.attachment_file), target: :_blank %>
+                      <% end %></td>
+                      <td><%= master_invoice.single_invoice_date %></td>
+                      <td><%= master_invoice.invoicing_period_start %></td>
+                      <td><%= master_invoice.invoicing_period_end %></td>
+                      <td><%= master_invoice.carrier.nil? ? '' : master_invoice.carrier.company_name %></td>
+                      <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.origin_location.nil? ? '' : master_invoice.shipment.origin_location.name) %></td>
+                      <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.origin_location.nil? ? '' : master_invoice.shipment.origin_location.city) %></td>
+                      <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.origin_location.nil? ? '' : master_invoice.shipment.origin_location.state) %></td>
+                      <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.origin_location.nil? ? '' : master_invoice.shipment.origin_location.country) %></td>
+                      <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.destination_location.nil? ? '' : master_invoice.shipment.destination_location.name) %></td>
+                      <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.destination_location.nil? ? '' : master_invoice.shipment.destination_location.city) %></td>
+                      <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.destination_location.nil? ? '' : master_invoice.shipment.destination_location.state) %></td>
+                      <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.destination_location.nil? ? '' : master_invoice.shipment.destination_location.country) %></td>
+                      <td><%= master_invoice.total_charge %></td>
+                      <% if params[:controller] == "master_invoices" %>
+                        <td>
+                          <%= link_to '<i class="far fa-eye"></i>'.html_safe, master_invoice, :class => 'btn btn-info btn-xs' %>
+                          <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_master_invoice_path(master_invoice), :class => 'btn btn-warning btn-xs' %>
+                          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, master_invoice, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+                        </td>
+                    <% end %>
+                    </tr>
+                  <% end %>
+
+                </tbody>
+              </table>

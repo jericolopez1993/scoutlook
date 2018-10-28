@@ -90,6 +90,11 @@ label {
         </a>
       </li>
       <li class="nav-items">
+        <a href="#invoices" data-toggle="tab" class="nav-link rate-btn" style="padding:5px; margin: 0px 10px">
+          <span class="d-sm-block d-none"><h4 class="panel-title"></h4>Invoices</span>
+        </a>
+      </li>
+      <li class="nav-items">
         <a href="#shipments" data-toggle="tab" class="nav-link hide-btn" style="padding:5px; margin: 0px 10px">
           <span class="d-sm-block d-none"><h4 class="panel-title"></h4>Shipments</span>
         </a>
@@ -274,6 +279,11 @@ label {
           </table>
         </div>
       </div>
+        <div class="tab-pane fade" id="invoices">
+          <div class="panel-body">
+            <%= render 'master_invoices/table', master_invoices: @client.master_invoices %>
+          </div>
+        </div>
       <div class="tab-pane fade" id="shipments">
         <div class="panel-body">
           <%= render 'shipments', shipments: @client.shipments, client: @client %>

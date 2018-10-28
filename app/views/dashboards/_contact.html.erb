@@ -10,3 +10,12 @@
     <%= render 'clients/shipments', shipments: client.shipments, client: client  %>
   </div>
 </div>
+
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title">Invoices</h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'master_invoices/table', master_invoices: client.master_invoices %>
+  </div>
+</div>

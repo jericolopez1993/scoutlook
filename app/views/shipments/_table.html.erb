@@ -29,7 +29,9 @@
                         <th rowspan="2">Total Charge with Tax</th>
                         <th rowspan="2">Cost Per LB</th>
                         <th rowspan="2">CWT Mile</th>
-										    <th rowspan="2" data-orderable="false">Actions</th>
+                        <% if current_user.has_role?(:admin) %>
+										        <th rowspan="2" data-orderable="false">Actions</th>
+                        <% end %>
     									</tr>
                       <tr>
                         <th>City</th>
@@ -70,8 +72,10 @@
                           <td><%= get_currency(shipment.money_currency) %> <%= number_with_precision ((get_quotient(((shipment.total_charge.nil? ? 0 : shipment.total_charge) * 100), (shipment.convert_to_lb * get_quotient(shipment.distance, 1.6))))), :precision => 2 %></td>
                         <td>
                           <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipment, :class => 'btn btn-info btn-xs' %>
-                          <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipment_path(shipment), :class => 'btn btn-warning btn-xs' %>
-                          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipment, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+                          <% if current_user.has_role?(:admin) %>
+                            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipment_path(shipment), :class => 'btn btn-warning btn-xs' %>
+                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipment, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+                          <% end %>
                         </td>
     									</tr>
                       <% end %>

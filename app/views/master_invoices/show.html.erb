@@ -18,8 +18,12 @@ label {
     <div class="panel panel-inverse">
       <div class="panel-heading">
         <div class="panel-heading-btn">
+        <% if current_user.has_role?(:admin) %>
           <%= link_to 'Edit', edit_master_invoice_path(@master_invoice), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
           <%= link_to 'Back', master_invoices_path, :class => 'btn btn-info btn-xs' %>
+        <% else %>
+          <%= link_to 'Back', authenticated_root_path, :class => 'btn btn-info btn-xs' %>
+        <% end %>
         </div>
         <h4 class="panel-title">ID: <%= generate_two_alphanumeric_id((@master_invoice.shipper.nil? ? '' : @master_invoice.shipper.company_name), (@master_invoice.carrier.nil? ? '' : @master_invoice.carrier.company_name), @master_invoice.id) %></h4>
       </div>
@@ -120,6 +124,8 @@ label {
         <% if @master_invoice.shipment_entry == 'single shipment'%>
           <%= render 'shipments/show_fields', shipment: @master_invoice.shipment %>
         <% else %>
+
+        <% if current_user.has_role?(:admin) %>
             <%= form_with(model: Shipment.new, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
               <hr>
               <h4 class="text-inverse">Quick Shipment</h4>
@@ -137,6 +143,7 @@ label {
                 </div>
               </div>
             <% end %>
+          <% end %>
           <%= render 'shipments/table', shipments: Shipment.where(:header => @master_invoice.id), master_invoice: @master_invoice %>
         <% end %>
 
