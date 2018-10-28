@@ -44,7 +44,7 @@
                         <td><%= get_currency(shipment.money_currency) %> <%= number_with_precision (get_quotient(shipment.total_charge, shipment.convert_to_lb)), :precision => 2 %></td>
                         <td><%= get_currency(shipment.money_currency) %> <%= number_with_precision ((get_quotient(((shipment.total_charge.nil? ? 0 : shipment.total_charge) * 100), (shipment.convert_to_lb * get_quotient(shipment.distance, 1.6))))), :precision => 2 %></td>
 
-                      <tr>
+                      </tr>
                     <% end %>
                   <% end %>
                 </tbody>

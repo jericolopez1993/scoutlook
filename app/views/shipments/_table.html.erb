@@ -34,7 +34,6 @@
     								</thead>
                     <tbody>
                       <% shipments.each do |shipment| %>
-                      <tr>
                         <tr>
                           <td><%= shipment.shipment_status %></td>
                           <td><%= shipment.own_type %></td>
@@ -42,10 +41,10 @@
                           <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
                           <td><%= shipment.shipment_date %></td>
                           <td><%= shipment.tracking_number %></td>
-                          <td style="text-align: center;"><% if shipment.shipment_attachment_file.attached? %>
+                          <td><% if shipment.shipment_attachment_file.attached? %>
                             <%= link_to '<i class="fas fa-file-invoice fa-2x"></i>'.html_safe, rails_blob_path(shipment.shipment_attachment_file), target: :_blank %>
                           <% end %></td>
-                          <td style="text-align: center;"><% if !shipment.client_reference.nil? && shipment.client_reference != '' %>
+                          <td><% if !shipment.client_reference.nil? && shipment.client_reference != '' %>
                             <% shipment.client_reference.split(/,/).each do |cr| %>
                               <span class="badge badge-inverse"><%= cr %></span>
                             <% end %>
@@ -62,6 +61,7 @@
                           <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipment_path(shipment), :class => 'btn btn-warning btn-xs' %>
                           <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipment, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
                         </td>
+    									</tr>
                       <% end %>
                     </tbody>
                   </table>
