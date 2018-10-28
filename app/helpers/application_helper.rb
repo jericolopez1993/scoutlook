@@ -160,4 +160,24 @@ module ApplicationHelper
   def get_value_with_html(object)
     get_value(object).html_safe
   end
+
+  def get_geo(origin, destination)
+    if !origin.nil? || !destination.nil?
+      geo = "Domestic"
+      if !origin.nil?
+        if origin.country != "Canada"
+          geo = "International"
+        end
+      end
+      if !destination.nil?
+        if destination.country != "Canada"
+          geo = "International"
+        end
+      end
+      geo
+    else
+      ""
+    end
+  end
+
 end

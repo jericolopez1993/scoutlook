@@ -37,7 +37,7 @@
                         <tr>
                           <td><%= shipment.shipment_status %></td>
                           <td><%= shipment.own_type %></td>
-                          <td></td>
+                          <td><%= get_geo(shipment.origin_location, shipment.destination_location) %></td>
                           <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
                           <td><%= shipment.shipment_date %></td>
                           <td><%= shipment.tracking_number %></td>
