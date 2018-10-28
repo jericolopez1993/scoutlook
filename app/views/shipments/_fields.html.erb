@@ -163,11 +163,11 @@
 <h4 class="text-inverse">Origin</h4>
 
 <% shipper_locations = get_shipper_locations(shipment.header) %>
-<%= render 'shipments/address_form', form: form, name: 'origin', shipper_locations: (shipper_locations.present? ? shipper_locations : ((params[:action] == 'new' && params[:controller] == 'master_invoices') ? Location.all : []))  %>
+<%= render 'shipments/address_form', form: form, name: 'origin', locations: Location.where(:is_origin => true)  %>
 
 <hr>
 <h4 class="text-inverse">Destination</h4>
-<%= render 'clients/od_address_form', form: form, name: 'destination' %>
+<%= render 'shipments/address_form', form: form, name: 'destination', locations: Location.where(:is_destination => true)  %>
 
 <hr>
 <h4 class="text-inverse">Map</h4>
