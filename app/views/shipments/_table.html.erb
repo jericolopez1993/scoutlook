@@ -11,32 +11,40 @@
     <h4 class="panel-title">Shipments</h4>
   </div>
   <div class="panel-body">
-    <table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons">
+    <table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons display nowrap" style="width:100%">
                   <thead>
-                      <tr class="odd gradeX">
-                        <th class="text-nowrap">Status</th>
-                        <th class="text-nowrap">Type</th>
-                        <th class="text-nowrap">Geo</th>
-                        <th class="text-nowrap">Carrier</th>
-                        <th class="text-nowrap">Ship Date</th>
-                        <th class="text-nowrap">Tracking #</th>
-                        <th class="text-nowrap">Docs</th>
-                        <th class="text-nowrap">Reference</th>
-                        <th class="text-nowrap">Origin</th>
-                        <th class="text-nowrap">Destination</th>
-                        <th class="text-nowrap">Distance</th>
-                        <th class="text-nowrap">Weight</th>
-                        <th class="text-nowrap">Total Charge with Tax</th>
-                        <th class="text-nowrap">Cost Per LB</th>
-                        <th class="text-nowrap">CWT Mile</th>
-										    <th class="text-nowrap" data-orderable="false">Actions</th>
+                      <tr>
+                        <th rowspan="2">Status</th>
+                        <th rowspan="2">Type</th>
+                        <th rowspan="2">Geo</th>
+                        <th rowspan="2">Carrier</th>
+                        <th rowspan="2">Ship Date</th>
+                        <th rowspan="2">Tracking #</th>
+                        <th rowspan="2">Docs</th>
+                        <th rowspan="2">Reference</th>
+                        <th colspan="3" class="text-center">Origin</th>
+                        <th colspan="3" class="text-center">Destination</th>
+                        <th rowspan="2">Distance</th>
+                        <th rowspan="2">Weight</th>
+                        <th rowspan="2">Total Charge with Tax</th>
+                        <th rowspan="2">Cost Per LB</th>
+                        <th rowspan="2">CWT Mile</th>
+										    <th rowspan="2" data-orderable="false">Actions</th>
     									</tr>
+                      <tr>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Country</th>
+                      </tr>
     								</thead>
                     <tbody>
                       <% shipments.each do |shipment| %>
                         <tr>
-                          <td><%= shipment.shipment_status %></td>
-                          <td><%= shipment.own_type %></td>
+                          <td><%= (!shipment.shipment_status.nil? && shipment.shipment_status != "") ? "<span class='badge badge-#{get_color_badge(shipment.shipment_status)}'>#{shipment.shipment_status}</span>".html_safe : '' %></td>
+                          <td><%= (!shipment.own_type.nil? && shipment.own_type != "") ? "<span class='badge badge-#{get_color_badge(shipment.own_type)}'>#{shipment.own_type}</span>".html_safe : '' %></td>
                           <td><%= get_geo(shipment.origin_location, shipment.destination_location) %></td>
                           <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
                           <td><%= shipment.shipment_date %></td>
@@ -49,8 +57,12 @@
                               <span class="badge badge-inverse"><%= cr %></span>
                             <% end %>
                           <% end %></td>
-                          <td><%= shipment.origin_location.nil? ? "" : location_format(shipment.origin_location) %></td>
-                          <td><%= shipment.destination_location.nil? ? "" : location_format(shipment.destination_location) %></td>
+                          <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.city %></td>
+                          <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.state %></td>
+                          <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.country %></td>
+                          <td><%= shipment.destination_location.nil? ? "" : shipment.destination_location.city %></td>
+                          <td><%= shipment.destination_location.nil? ? "" : shipment.destination_location.state %></td>
+                          <td><%= shipment.destination_location.nil? ? "" : shipment.destination_location.country %></td>
                           <td><%= shipment.distance %></td>
                           <td><%= shipment.billed_weight.nil? ? 0 : shipment.billed_weight %> <%= (shipment.unit_of_weight.nil? || shipment.unit_of_weight == '') ? '' : shipment.unit_of_weight %></td>
                           <td><%= get_currency(shipment.money_currency) %> <%= shipment.total_charge_with_tax.nil? ? 0 : shipment.total_charge_with_tax %></td>

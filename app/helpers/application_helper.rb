@@ -174,9 +174,31 @@ module ApplicationHelper
           geo = "International"
         end
       end
-      geo
+      "<span class='badge badge-#{get_color_badge(geo)}'>#{geo}</span>".html_safe
     else
       ""
+    end
+  end
+
+  def get_color_badge(str)
+    if str == "Approved" || str == "Drop-ship"
+      "warning"
+    elsif str == "Review" || str == "Supplier Return"
+      "green"
+    elsif str == "Dispute" || str == "Outbound"
+      "danger"
+    elsif str == "Corrected" || str == "Stock"
+      "yellow"
+    elsif str == "ReBill" || str == "Transfer"
+      "info"
+    elsif str == "Inbound"
+      "success"
+    elsif str == "Customer Return"
+      "lime"
+    elsif str == "Domestic"
+      "secondary"
+    elsif str == "International"
+      "dark"
     end
   end
 
