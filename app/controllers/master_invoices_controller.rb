@@ -68,7 +68,8 @@ class MasterInvoicesController < ApplicationController
                 location.state = params[:master_invoice][:destination_state]
                 location.city = params[:master_invoice][:destination_city]
                 location.postal = params[:master_invoice][:destination_postal]
-                location.save  if @master_invoice.shipment_entry == "single shipment"
+                location.client_id = @master_invoice.shipper_id
+                location.save
                 @destination_location_id = location.id
               end
             end
@@ -130,6 +131,7 @@ class MasterInvoicesController < ApplicationController
                 location.state = params[:master_invoice][:destination_state]
                 location.city = params[:master_invoice][:destination_city]
                 location.postal = params[:master_invoice][:destination_postal]
+                location.client_id = params[:master_invoice][:shipper_id]
                 location.save
                 @destination_location_id = location.id
               end
