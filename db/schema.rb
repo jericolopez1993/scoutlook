@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_183130) do
+ActiveRecord::Schema.define(version: 2018_10_28_075849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,11 @@ ActiveRecord::Schema.define(version: 2018_10_27_183130) do
     t.string "postal"
     t.string "country"
     t.string "name"
+    t.string "loc_type"
+    t.string "phone"
+    t.boolean "is_origin", default: false
+    t.boolean "is_destination", default: false
+    t.integer "client_id"
   end
 
   create_table "master_invoices", force: :cascade do |t|

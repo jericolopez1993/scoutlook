@@ -16,11 +16,16 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
+    if params[:client_id].present?
+      @location.client_id = params[:client_id]
+    end
     authorize @location
   end
 
   # GET /locations/1/edit
   def edit
+    client = Client.find(@location.client_id)
+    @is_head_office = client.head_office == @location.id
   end
 
   # POST /locations
@@ -30,7 +35,11 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to locations_url, notice: 'Location was successfully created.' }
+        if params[:head_office].present? && !params[:location][:client_id].nil? && params[:location][:client_id] != ""
+          client = Client.find(params[:location][:client_id])
+          client.update_attributes(:head_office => @location.id)
+        end
+        format.html { redirect_to client_path(:id => @location.client_id), notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
@@ -44,7 +53,11 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to locations_url, notice: 'Location was successfully updated.' }
+        if params[:head_office].present? && !params[:location][:client_id].nil? && params[:location][:client_id] != ""
+          client = Client.find(params[:location][:client_id])
+          client.update_attributes(:head_office => @location.id)
+        end
+        format.html { redirect_to client_path(:id => @location.client_id), notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, location: @location }
       else
         format.html { render :edit }
@@ -72,6 +85,8 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:name, :address, :country, :state, :city, :postal)
+      params[:location][:is_origin] = params[:origin].present?
+      params[:location][:is_destination] = params[:destination].present?
+      params.require(:location).permit(:name, :address, :country, :state, :city, :postal, :is_origin, :is_destination, :loc_type, :phone)
     end
 end

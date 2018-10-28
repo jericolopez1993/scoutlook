@@ -66,7 +66,7 @@ class Client < ApplicationRecord
 
   def head_office_location
     if !self.head_office.nil?
-      ClientLocation.find(self.head_office)
+      Location.find(self.head_office)
     else
       nil
     end
