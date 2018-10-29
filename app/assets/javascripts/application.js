@@ -132,6 +132,10 @@ $(document).on('turbolinks:load', function(){
   $(function(){
       Inputmask().mask(document.querySelectorAll("input"));
 
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+      });
+
       $("#activity_activity_type").change(function(){
         activityOutcomeFields($(this).val());
       });
