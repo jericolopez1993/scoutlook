@@ -20,7 +20,7 @@ class MasterInvoicesTest < ApplicationSystemTestCase
     fill_in "Master Account", with: @master_invoice.master_account
     fill_in "Shipment Type", with: @master_invoice.shipment_type
     fill_in "Shipper", with: @master_invoice.shipper_id
-    fill_in "Single Invoice Date", with: @master_invoice.single_invoice_date
+    fill_in "Invoice Date", with: @master_invoice.single_invoice_date
     fill_in "Total Charge", with: @master_invoice.total_charge
     fill_in "Variance", with: @master_invoice.variance
     fill_in "Variance Approved", with: @master_invoice.variance_approved
@@ -40,7 +40,7 @@ class MasterInvoicesTest < ApplicationSystemTestCase
     fill_in "Master Account", with: @master_invoice.master_account
     fill_in "Shipment Type", with: @master_invoice.shipment_type
     fill_in "Shipper", with: @master_invoice.shipper_id
-    fill_in "Single Invoice Date", with: @master_invoice.single_invoice_date
+    fill_in "Invoice Date", with: @master_invoice.single_invoice_date
     fill_in "Total Charge", with: @master_invoice.total_charge
     fill_in "Variance", with: @master_invoice.variance
     fill_in "Variance Approved", with: @master_invoice.variance_approved
