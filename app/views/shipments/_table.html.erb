@@ -22,8 +22,8 @@
                         <th rowspan="2">Tracking #</th>
                         <th rowspan="2">Docs</th>
                         <th rowspan="2">Reference</th>
-                        <th colspan="3" class="text-center">Origin</th>
-                        <th colspan="3" class="text-center">Destination</th>
+                        <th colspan="4" class="text-center">Origin</th>
+                        <th colspan="4" class="text-center">Destination</th>
                         <th rowspan="2">Distance</th>
                         <th rowspan="2">Weight</th>
                         <th rowspan="2">Total Charge with Tax</th>
@@ -34,9 +34,11 @@
                         <% end %>
     									</tr>
                       <tr>
+                        <th>Origin</th>
                         <th>City</th>
                         <th>State</th>
                         <th>Country</th>
+                        <th>Destination</th>
                         <th>City</th>
                         <th>State</th>
                         <th>Country</th>
@@ -59,9 +61,11 @@
                               <span class="badge badge-inverse"><%= cr %></span>
                             <% end %>
                           <% end %></td>
+                          <td><%= shipment.origin_location.nil? ? '' : shipment.origin_location.name %></td>
                           <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.city %></td>
                           <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.state %></td>
                           <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.country %></td>
+                          <td><%= shipment.destination_location.nil? ? '' : shipment.destination_location.name %></td>
                           <td><%= shipment.destination_location.nil? ? "" : shipment.destination_location.city %></td>
                           <td><%= shipment.destination_location.nil? ? "" : shipment.destination_location.state %></td>
                           <td><%= shipment.destination_location.nil? ? "" : shipment.destination_location.country %></td>
