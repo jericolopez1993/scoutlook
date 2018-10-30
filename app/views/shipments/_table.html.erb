@@ -52,7 +52,7 @@
                           <td><%= get_geo(shipment.origin_location, shipment.destination_location) %></td>
                           <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.carrier.nil? ? '' : shipment.invoice.carrier.company_name) %></td>
                           <td><%= shipment.shipment_date %></td>
-                          <td><%= shipment.tracking_number %></td>
+                          <td><%= link_to shipment.tracking_number, shipment, target: :_blank %></td>
                           <td><% if shipment.shipment_attachment_file.attached? %>
                             <%= link_to '<i class="fas fa-file-invoice fa-2x"></i>'.html_safe, rails_blob_path(shipment.shipment_attachment_file), target: :_blank %>
                           <% end %></td>
