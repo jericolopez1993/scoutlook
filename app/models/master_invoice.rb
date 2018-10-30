@@ -17,7 +17,7 @@ class MasterInvoice < ApplicationRecord
   end
 
   def shipment
-    if self.shipment_entry == 'single shipment'
+    if self.shipment_entry == 'Single'
       shipments = Shipment.where(:header => self.id)
       if shipments.present? && !shipments.nil?
         shipments.first

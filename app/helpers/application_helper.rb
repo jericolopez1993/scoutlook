@@ -195,9 +195,9 @@ module ApplicationHelper
       "success"
     elsif str == "Customer Return"
       "lime"
-    elsif str == "Domestic" || str == "single shipment"
+    elsif str == "Domestic" || str == "Single"
       "secondary"
-    elsif str == "International" || str == "multiple shipment"
+    elsif str == "International" || str == "Multiple"
       "dark"
     end
   end

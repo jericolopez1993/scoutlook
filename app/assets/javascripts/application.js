@@ -346,7 +346,7 @@ function tiggerChangeOnSelectCountry(id, val) {
 
 function shipmentFields(shipmentEntry) {
   console.log(shipmentEntry);
-  if (shipmentEntry == 'single shipment') {
+  if (shipmentEntry == "Single") {
     $(".shipment-fields").show();
     $(".single-shipment").hide();
   }

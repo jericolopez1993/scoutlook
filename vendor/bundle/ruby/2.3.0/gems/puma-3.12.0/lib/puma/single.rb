@@ -61,7 +61,7 @@ module Puma
         already_daemon = JRubyRestart.daemon_init
       end
 
-      output_header "single"
+      output_header "Single"
 
       if jruby_daemon?
         if already_daemon

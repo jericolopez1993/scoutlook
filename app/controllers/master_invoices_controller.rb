@@ -37,7 +37,7 @@ class MasterInvoicesController < ApplicationController
         if params[:master_invoice][:attachment_file].present?
           @master_invoice.attachment_file.attach(params[:master_invoice][:attachment_file])
         end
-          if @master_invoice.shipment_entry == "single shipment"
+          if @master_invoice.shipment_entry == "Single"
             @shipment = Shipment.new(shipment_params)
             @origin_location_id = nil
             @destination_location_id = nil
@@ -100,7 +100,7 @@ class MasterInvoicesController < ApplicationController
         if params[:master_invoice][:attachment_file].present?
           @master_invoice.attachment_file.attach(params[:master_invoice][:attachment_file])
         end
-        if @master_invoice.shipment_entry == "single shipment"
+        if @master_invoice.shipment_entry == "Single"
             @shipments = Shipment.where(:header => @master_invoice.id)
             @origin_location_id = nil
             @destination_location_id = nil
