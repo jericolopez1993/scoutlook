@@ -86,6 +86,15 @@ class Client < ApplicationRecord
     end
   end
 
+  def location
+    if !self.head_office.nil?
+      Location.find(self.head_office)
+    else
+      nil
+    end
+  end
+
+
   def master_invoices
     MasterInvoice.where("shipper_id = #{self.id} OR carrier_id = #{self.id}")
   end

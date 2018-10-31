@@ -28,36 +28,15 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-    if params[:client][:location_id].present? && (params[:client][:address].present? ||  params[:client][:city].present? ||  params[:client][:state].present? ||  params[:client][:postal].present? ||  params[:client][:city].present?)
-      if is_numeric?(params[:client][:location_id])
-        @location_id =  params[:client][:location_id]
-      else
-        @location = Location.new(address_params)
-        @location.name = params[:client][:location_id]
-        @location.save
-        @location_id = @location.id
-      end
-      @client_location = ClientLocation.new
-      @client_location.location_id = @location_id
-      @client_location.phone = params[:client][:phone]
-      if @client_location.save
-        @client.head_office = @client_location.id
-        if params[:origin].present?
-          @client.origin = @client_location.id
-        end
-        if params[:destination].present?
-          @client.destination = @client_location.id
-        end
-      end
-    end
-
     respond_to do |format|
       if @client.save
-        if params[:new_location].present? || params[:client][:location_id].present?
-          @client_location.update_attributes(:client_id => @client.id)
-          if params[:client][:attachment_file].present?
-            @client.attachment_file.attach(params[:client][:attachment_file])
-          end
+        @location = Location.new(location_params)
+        @location.client_id = @client.id
+        if @location.save
+          @client.update_attributes(:head_office => @location.id)
+        end
+        if params[:client][:attachment_file].present?
+          @client.attachment_file.attach(params[:client][:attachment_file])
         end
 
         format.html { redirect_to @client, notice: 'Client was successfully created.' }
@@ -74,6 +53,7 @@ class ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @client.update(client_params)
+        @client.location.update_attributes(location_params)
         if params[:client][:attachment_file].present?
           @client.attachment_file.attach(params[:client][:attachment_file])
         end
@@ -130,7 +110,10 @@ class ClientsController < ApplicationController
       params.require(:client).permit(:client_type, :relationship_owner, :company_name, :client_id, :parent_id, :sales_priority, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval)
     end
 
-    def address_params
-      params.require(:client).permit(:address, :city, :state, :postal, :country)
+    def location_params
+      params[:client][:is_origin] = params[:origin].present?
+      params[:client][:is_destination] = params[:destination].present?
+      params[:client][:name] = params[:client][:location_name]
+      params.require(:client).permit(:name, :address, :country, :state, :city, :postal, :is_origin, :is_destination, :loc_type, :phone)
     end
 end

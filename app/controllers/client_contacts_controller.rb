@@ -1,4 +1,5 @@
 class ClientContactsController < ApplicationController
+  include ApplicationHelper
   before_action :set_client_contact, only: [:show, :edit, :update, :destroy]
 
   # GET /client_contacts
@@ -40,6 +41,24 @@ class ClientContactsController < ApplicationController
     else
       @client_contact.same_ho = false
     end
+    @location_id = nil
+    if params[:client_contact][:location_id].present? || params[:client_contact][:address].present? || params[:client_contact][:country].present? ||  params[:client_contact][:state].present? ||  params[:client_contact][:postal].present? ||  params[:client_contact][:city].present?
+      if is_numeric?(params[:client_contact][:location_id])
+          @location_id = params[:client_contact][:location_id]
+      else
+        location = Location.new
+        location.name = params[:client_contact][:location_id]
+        location.address = params[:client_contact][:address]
+        location.country = params[:client_contact][:country]
+        location.state = params[:client_contact][:state]
+        location.city = params[:client_contact][:city]
+        location.postal = params[:client_contact][:postal]
+        location.client_id = MasterInvoice.find(params[:client_contact][:header]).shipper_id
+        location.save
+        @location_id = location.id
+      end
+    end
+    @client_contact.location_id =  @location_id
     respond_to do |format|
       if @client_contact.save && @user.save
         @user.update_attributes(:client_contact_id => @client_contact.id)
@@ -64,6 +83,24 @@ class ClientContactsController < ApplicationController
   # PATCH/PUT /client_contacts/1
   # PATCH/PUT /client_contacts/1.json
   def update
+    @location_id = nil
+    if params[:client_contact][:location_id].present? || params[:client_contact][:address].present? || params[:client_contact][:country].present? ||  params[:client_contact][:state].present? ||  params[:client_contact][:postal].present? ||  params[:client_contact][:city].present?
+      if is_numeric?(params[:client_contact][:location_id])
+          @location_id = params[:client_contact][:location_id]
+      else
+        location = Location.new
+        location.name = params[:client_contact][:location_id]
+        location.address = params[:client_contact][:address]
+        location.country = params[:client_contact][:country]
+        location.state = params[:client_contact][:state]
+        location.city = params[:client_contact][:city]
+        location.postal = params[:client_contact][:postal]
+        location.client_id = MasterInvoice.find(params[:client_contact][:header]).shipper_id
+        location.save
+        @location_id = location.id
+      end
+    end
+    params[:client_contact][:location_id]=  @location_id
     respond_to do |format|
       if @client_contact.update(client_contact_params)
         client = Client.find(@client_contact.client_id)
@@ -106,7 +143,7 @@ class ClientContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_contact_params
-      params.require(:client_contact).permit(:title, :first_name, :last_name, :email, :work_phone, :home_phone, :address, :city, :state, :postal, :country, :client_id, :linkedin_link)
+      params.require(:client_contact).permit(:title, :first_name, :last_name, :email, :work_phone, :home_phone, :location_id, :client_id, :linkedin_link)
     end
     def user_params
       params.require(:client_contact).permit(:first_name, :last_name, :email, :password, :password_confirmation)

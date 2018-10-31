@@ -82,30 +82,9 @@
             <%= form.file_field :attachment_file, multiple: true %>
           </div>
         </div>
-
-        <% if params[:action] == 'new'%>
         <hr>
         <h4 class="text-inverse">Address</h4>
-        <%= render 'address_form', form: form %>
-        <div class="form-group row m-b-15">
-          <%= form.label :phone, 'Phone #:', class: 'text-right col-md-2 colVolume-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.text_field :phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <label class="text-right col-md-2 col-sm-4 col-form-label"> is Origin?</label>
-          <div class="col-md-9 col-sm-8">
-            <input type="checkbox" name="origin" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" checked />
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <label class="text-right col-md-2 col-sm-4 col-form-label"> is Destination? </label>
-          <div class="col-md-9 col-sm-8">
-            <input type="checkbox" name="destination" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" checked />
-          </div>
-        </div>
-        <% end %>
+        <%= render 'locations/fields', location: (client.location.nil? ? Location.new : client.location), form: form %>
 
         <hr>
         <h4 class="text-inverse">Credit</h4>

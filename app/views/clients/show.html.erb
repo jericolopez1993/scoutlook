@@ -257,9 +257,9 @@ label {
             <thead>
               <tr class="odd gradeX">
                 <th width="1%"></th>
-                <th class="text-nowrap">Name</th>
-                <th class="text-nowrap">Date</th>
-                <th class="text-nowrap" data-orderable="false"></th>
+                <th>Name</th>
+                <th>Date</th>
+                <th data-orderable="false"></th>
               </tr>
             </thead>
             <tbody>
@@ -300,26 +300,26 @@ label {
             <thead>
               <tr class="odd gradeX">
   							<th width="1%">Primary</th>
-                <th class="text-nowrap">Name</th>
-                <th class="text-nowrap">Email</th>
-                <th class="text-nowrap">Address</th>
-                <th class="text-nowrap">Work Phone</th>
-                <th class="text-nowrap">Cell</th>
-                <th class="text-nowrap">Social</th>
-                <th class="text-nowrap" data-orderable="false">Actions</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Work Phone</th>
+                <th>Cell</th>
+                <th>Social</th>
+                <th data-orderable="false">Actions</th>
               </tr>
             </thead>
             <tbody>
               <% ClientContact.where(:client_id => @client.id).each do |contact| %>
                 <tr>
                   <td style="text-align: center;"><%= (@client.pdm_id == contact.id) ? '<span class="label label-success">PDM</span><br/>'.html_safe : '' %>
-                    <%= (@client.poc_id == contact.id) ? '<span class="label label-green">poc_id</span><br/>'.html_safe : '' %></td>
+                    <%= (@client.poc_id == contact.id) ? '<span class="label label-green">POC</span><br/>'.html_safe : '' %></td>
                   <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
                   <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %>" target="_top"><%= contact.email %>&nbsp;<i class="far fa-envelope"></a></i></td>
                   <td><%= contact.same_ho ? (@client.head_office_location.nil? ? '' : (@client.head_office_location.location.nil? ? '' : "#{@client.head_office_location.location.address} #{@client.head_office_location.location.city} #{@client.head_office_location.location.state}, #{@client.head_office_location.location.country} #{@client.head_office_location.location.postal}")) : (contact.location.nil? ? '' : "#{contact.location.address} #{contact.location.city} #{contact.location.state}, #{contact.location.country} #{contact.location.postal}")%></td>
                   <td><%= contact.same_ho ? (@client.head_office_location.nil? ? '' : @client.head_office_location.phone) : contact.work_phone %></td>
                   <td><%= contact.home_phone %></td>
-                  <td style="text-align: center;"><%= contact.linkedin_link.nil? ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
+                  <td style="text-align: center;"><%= contact.linkedin_link.nil? || contact.linkedin_link == "" ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
                   <td>
                     <a class="btn btn-warning btn-xs" href="<%= edit_client_contact_path(contact) %>"><i class="far fa-edit"></i></a>&nbsp;
                     <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href="/client_contacts/<%= contact.id %>"><i class="far fa-trash-alt"></i></a>
@@ -337,13 +337,13 @@ label {
             <thead>
               <tr class="odd gradeX">
                 <th width="1%">#</th>
-                <th class="text-nowrap">Type</th>
-                <th class="text-nowrap">Rep</th>
-                <th class="text-nowrap">Annual Value</th>
-                <th class="text-nowrap">Status</th>
-                <th class="text-nowrap">Date Opened</th>
-                <th class="text-nowrap">Date Closed</th>
-                <th class="text-nowrap" data-orderable="false">Actions</th>
+                <th>Type</th>
+                <th>Rep</th>
+                <th>Annual Value</th>
+                <th>Status</th>
+                <th>Date Opened</th>
+                <th>Date Closed</th>
+                <th data-orderable="false">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -374,11 +374,11 @@ label {
             <thead>
               <tr class="odd gradeX">
                 <th width="1%">#</th>
-                <th class="text-nowrap">Level</th>
-                <th class="text-nowrap">Rep</th>
-                <th class="text-nowrap">Type</th>
-                <th class="text-nowrap">Parent</th>
-                <th class="text-nowrap" data-orderable="false">Actions</th>
+                <th>Level</th>
+                <th>Rep</th>
+                <th>Type</th>
+                <th>Parent</th>
+                <th data-orderable="false">Actions</th>
               </tr>
             </thead>
             <tbody>
