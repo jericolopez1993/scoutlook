@@ -5,6 +5,9 @@
   }
 }
 </style>
+<script language="javascript">
+  var currentInvoiceStatus = '<%= master_invoice.own_status %>';
+</script>
 <!-- begin page-header -->
 <%= render 'layouts/static/header', header_title: 'Invoices', sub_header_title: 'Create/Edit/View'%>
 <!-- end page-header -->
@@ -44,7 +47,13 @@
         <div class="form-group row m-b-15">
           <%= form.label :own_status, 'Shipment Status:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9  col-sm-8">
-          <%= form.select :own_status, options_for_select(['Review', 'Approved', 'Dispute', 'Corrected', 'ReBill'], master_invoice.own_status),{}, class: 'form-control' %>
+          <%= form.select :own_status, options_for_select(['Review', 'Approved', 'Dispute', 'Corrected', 'ReBill'], master_invoice.own_status),{}, class: 'form-control', :id => 'invoice_status' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15 invoice-audit-comment">
+          <%= form.label :invoice_audit_comment, 'Comment Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.text_field :invoice_audit_comment, class: 'form-control', :id => 'invoice_audit_comment' %>
           </div>
         </div>
         <div class="form-group row m-b-15">

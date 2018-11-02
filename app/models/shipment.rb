@@ -1,5 +1,5 @@
 class Shipment < ApplicationRecord
-  audited only: [:shipment_status, :notes]
+  audited only: [:shipment_status]
   has_one_attached :shipment_attachment_file
 
   def origin_location

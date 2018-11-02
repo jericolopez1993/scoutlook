@@ -1,4 +1,5 @@
 class MasterInvoice < ApplicationRecord
+  audited only: [:own_status]
   has_one_attached :attachment_file
 
   def shipper

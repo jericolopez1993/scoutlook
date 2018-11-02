@@ -73,6 +73,8 @@ $(document).on('turbolinks:load', function(){
   addressCreateOD($('[data-change="check-switchery-state-new-location-origin"]').prop('checked'), 'origin');
   addressCreateOD($('[data-change="check-switchery-state-new-location-destination"]').prop('checked'), 'destination');
   addressCreateQuickS($('[data-change="check-switchery-state-new-location-quick-destination"]').prop('checked'), 'quick_destination');
+  statusNotes(true, 'shipment-audit-comment');
+  statusNotes(true, 'invoice-audit-comment');
 
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
@@ -139,7 +141,6 @@ $(document).on('turbolinks:load', function(){
       $("#activity_activity_type").change(function(){
         activityOutcomeFields($(this).val());
       });
-
       $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
         sameHeadOffice($(this).prop('checked'));
     	});
@@ -149,7 +150,6 @@ $(document).on('turbolinks:load', function(){
       $(document).on('change', '[data-change="check-switchery-state-new-location"]', function() {
         addressCreate($(this).prop('checked'));
       });
-
       $(document).on('change', '[data-change="check-switchery-state-new-location-origin"]', function() {
         addressCreateOD($(this).prop('checked'), 'origin');
       });
@@ -162,11 +162,9 @@ $(document).on('turbolinks:load', function(){
       $('input[type=radio][name="master_invoice[shipment_entry]"]').change(function() {
           shipmentFields(this.value);
       });
-
       $("#master_invoice_shipper_id").change(function(){
         clientLocation($(this).val(), 'origin');
       });
-
       $('.total_charge_fields').keyup(function() {
           addTotalNumbers('total_charge_fields', 'shipment_total_charge');
           addTotalNumbers('total_charge_fields', 'master_invoice_total_charge_shipment');
@@ -175,20 +173,17 @@ $(document).on('turbolinks:load', function(){
           addTotalNumbers('total_charge_with_tax_fields', 'shipment_total_charge_with_tax');
           addTotalNumbers('total_charge_with_tax_fields', 'master_invoice_total_charge_with_tax');
       });
-
       $("#origin_location_id, #destination_location_id").change(function(){
         var origin = $("#origin_location_id").val();
         var destination = $("#destination_location_id").val();
         getDistance(origin, destination);
       });
-
       $("#shipment_date, #received_date").change(function(){
         var shipment_date = $("#shipment_date").val();
         var received_date = $("#received_date").val();
         var transit_time = getDateDifference(shipment_date, received_date);
         $("#transit_time").val(transit_time);
       });
-
       $("#location_id").change(function(){
         var er = /^-?[0-9]+$/;
         var isNew = er.test($(this).val());
@@ -220,6 +215,12 @@ $(document).on('turbolinks:load', function(){
         if(isNew){
           locationDetailsOD($(this).val(), 'quick_destination');
         }
+      });
+      $("#shipment_status").change(function(){
+          statusNotes((currentShipmentStatus === $(this).val()), 'shipment-audit-comment');
+      });
+      $("#invoice_status").change(function(){
+          statusNotes((currentInvoiceStatus === $(this).val()), 'invoice-audit-comment');
       });
   });
 
@@ -258,6 +259,14 @@ function sameHeadOffice(isTrue) {
     $(".address-fields").hide();
   }else{
     $(".address-fields").show();
+  }
+}
+
+function statusNotes(isTrue, className) {
+  if (isTrue) {
+    $("."+className).hide();
+  }else{
+    $("."+className).show();
   }
 }
 
