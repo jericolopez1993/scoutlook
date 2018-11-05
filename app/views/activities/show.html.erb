@@ -24,16 +24,10 @@ label {
         <%= link_to 'Back', activities_path, :class => 'btn btn-default btn-xs' %>
     <% end %>
     </div>
-    <h4 class="panel-title">  Activity #<%= generate_alphanumeric_id((@activity.client.nil? ? "" : "#{@activity.client.company_name}"), @activity.id) %></h4>
+    <h4 class="panel-title">  Activity - <%= @activity.client.company_name %></h4>
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Outcome</h4>
-    <div class="form-group row m-b-15">
-      <label class="col-md-2 col-form-label">ID:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %>
-      </div>
-    </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Type:</label>
       <div class="col-md-9 lbl-padding-t">
@@ -103,12 +97,6 @@ label {
     <% if !@activity.outcome_id.nil? %>
         <hr>
         <h4 class="text-inverse">Outcome</h4>
-        <div class="form-group row m-b-15">
-          <label class="col-md-2 col-form-label">ID:</label>
-          <div class="col-md-9 lbl-padding-t">
-            <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %>
-          </div>
-        </div>
         <div class="form-group row m-b-15">
           <label class="col-md-2 col-form-label">Outcome:</label>
           <div class="col-md-9 lbl-padding-t">

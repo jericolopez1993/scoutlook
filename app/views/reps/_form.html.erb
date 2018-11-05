@@ -6,7 +6,7 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Rep' : "Edit Location ##{generate_alphanumeric_id(((!rep.last_name.nil? && rep.last_name != "") ? rep.last_name : rep.first_name), rep.id)}"%></h4>
+    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Rep' : "Edit Rep - #{rep.first_name} #{rep.last_name}"%></h4>
   </div>
   <div class="panel-body">
   <%= form_with(model: rep, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>

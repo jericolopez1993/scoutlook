@@ -15,7 +15,7 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Activity' : "Edit Activity ##{generate_alphanumeric_id((activity.client.nil? ? "" : "#{activity.client.company_name}"), activity.id)}"%></h4>
+    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Activity' : "Edit Activity - #{activity.client.company_name}"%></h4>
   </div>
   <div class="panel-body">
   <% if activity.errors.any? %>

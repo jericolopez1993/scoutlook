@@ -14,7 +14,6 @@
     <table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons display nowrap" width="100%">
     								<thead>
     									<tr class="odd gradeX">
-    										<th width="1%">#</th>
     										<th>Name</th>
     										<th>Location</th>
     										<th>Hired</th>
@@ -26,7 +25,6 @@
     								<tbody>
                       <% @reps.each do |rep| %>
                         <tr>
-                          <td><%= generate_alphanumeric_id(((!rep.last_name.nil? && rep.last_name != "") ? rep.last_name : rep.first_name), rep.id) %></td>
                           <td><%= rep.first_name %> <%= rep.last_name %></td>
                           <td><%= rep.location %></td>
                           <td><%= rep.date_of_hire %></td>

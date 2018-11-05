@@ -15,7 +15,7 @@
       <div class="panel-heading">
         <div class="panel-heading-btn">
         </div>
-        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Signal' : "Edit Signal ##{generate_alphanumeric_id((master_signal.client.nil? ? '' : "#{master_signal.client.company_name}"), master_signal.id)}"%></h4>
+        <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Signal' : "Edit Signal - #{master_signal.client.nil? ? '' : "#{master_signal.client.company_name}"}"%></h4>
       </div>
       <div class="panel-body">
         <% if master_signal.errors.any? %>
@@ -57,7 +57,7 @@
           <div class="form-group row m-b-15">
             <%= form.label :rate_id, 'Rate:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-            <%= form.select :rate_id, Rate.all.collect {|r| [ generate_alphanumeric_id(r.rate_type, r.id), r.id ] },{:include_blank => true, :selected => master_signal.rate_id}, class: 'form-control' %>
+            <%= form.select :rate_id, Rate.all.collect {|r| [ r.rate_type, r.id ] },{:include_blank => true, :selected => master_signal.rate_id}, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">

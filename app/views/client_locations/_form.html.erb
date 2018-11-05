@@ -6,7 +6,7 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Location' : "Edit Location ##{generate_alphanumeric_id(client_location.loc_type, client_location.id)}"%></h4>
+    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Location' : "Edit Location - #{client_location.name}"%></h4>
   </div>
   <div class="panel-body">
   <%= form_with(model: client_location, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
@@ -58,13 +58,13 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :poc_id, 'Primary Ops Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :poc_id, ClientContact.where(:client_id => client_location.client_id).collect {|r| [ "#{generate_alphanumeric_id('Contact', r.id)} - #{r.title} (#{r.email})", r.id ] },{:include_blank => true, :selected => client_location.poc_id}, class: 'form-control' %>
+                  <%= form.select :poc_id, ClientContact.where(:client_id => client_location.client_id).collect {|r| [ "#{r.first_name} #{r.last_name} - (#{r.email})", r.id ] },{:include_blank => true, :selected => client_location.poc_id}, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
                   <%= form.label :soc_id, 'Secondary Ops Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-8 col-sm-8">
-                  <%= form.select :soc_id, ClientContact.where(:client_id => client_location.client_id).collect {|r| [ "#{generate_alphanumeric_id('Contact', r.id)} - #{r.title} (#{r.email})", r.id ] },{:include_blank => true, :selected => client_location.soc_id}, class: 'form-control' %>
+                  <%= form.select :soc_id, ClientContact.where(:client_id => client_location.client_id).collect {|r| [ "#{r.first_name} #{r.last_name} - (#{r.email})", r.id ] },{:include_blank => true, :selected => client_location.soc_id}, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">

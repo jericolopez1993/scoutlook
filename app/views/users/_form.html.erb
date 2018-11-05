@@ -6,7 +6,7 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Users' : "Edit User ##{generate_alphanumeric_id(((!user.last_name.nil? && user.last_name != "") ? user.last_name : user.first_name), user.id)}"%></h4>
+    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Users' : "Edit User - #{user.first_name} #{user.last_name}"%></h4>
   </div>
   <div class="panel-body">
   <%= form_with(url: ((params[:action] == 'new' || params[:action] == 'create') ? "/users" : "/users/#{user.id}"),model: user, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>

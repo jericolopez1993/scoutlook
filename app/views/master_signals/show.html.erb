@@ -17,7 +17,7 @@ label {
             <%= link_to 'Edit', edit_master_signal_path(@master_signal), :class => 'btn btn-warning btn-xs' %>
             <%= link_to 'Back', master_signals_path, :class => 'btn btn-info btn-xs' %>
           </div>
-          <h4 class="panel-title"> <%= generate_alphanumeric_id((master_signal.client.nil? ? '' : "#{master_signal.client.company_name}"), @master_signal.id) %></h4>
+          <h4 class="panel-title"> <%= master_signal.client.nil? ? '' : "#{master_signal.client.company_name}"%></h4>
         </div>
         <div class="panel-body">
           <h4 class="text-inverse">Details</h4>
@@ -36,19 +36,19 @@ label {
           <div class="form-group row m-b-15">
             <label class="col-md-2 col-form-label">Client:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%=  @master_signal.client.nil? ? "" : "#{generate_alphanumeric_id(@master_signal.client.client_type, @master_signal.client.id)} (#{@master_signal.client.company_name})" %>
+              <%=  @master_signal.client.nil? ? "" : (link_to @master_signal.client.company_name, @master_signal.client) %>
             </div>
           </div>
           <div class="form-group row m-b-15">
             <label class="col-md-2 col-form-label">Contact:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%=  @master_signal.client_contact.nil? ? "" : "#{generate_alphanumeric_id(@master_signal.client_contact.last_name, @master_signal.client_contact.id)} (#{@master_signal.client_contact.last_name})" %>
+              <%=  @master_signal.client_contact.nil? ? "" : (link_to "#{@master_signal.client_contact.first_name} #{@master_signal.client_contact.last_name}", @master_signal.client_contact) %>
             </div>
           </div>
           <div class="form-group row m-b-15">
             <label class="col-md-2 col-form-label">Rate:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%=  @master_signal.rate.nil? ? "" : "#{generate_alphanumeric_id(@master_signal.rate.rate_type, @master_signal.rate.id)} (#{@master_signal.rate.rate_type})" %>
+              <%=  @master_signal.rate.nil? ? "" : (link_to @master_signal.rate.rate_type, @master_signal.rate) %>
             </div>
           </div>
           <div class="form-group row m-b-15">
