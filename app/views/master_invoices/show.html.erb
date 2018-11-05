@@ -50,13 +50,13 @@ label {
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Shipper:</label>
           <div class="col-md-9 lbl-padding-t">
-            <%= @master_invoice.shipper.nil? ? '' : @master_invoice.shipper.company_name %>
+            <%= @master_invoice.shipper.nil? ? '' : (link_to @master_invoice.shipper.company_name, @master_invoice.shipper) %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Carrier:</label>
           <div class="col-md-9 lbl-padding-t">
-            <%= @master_invoice.carrier.nil? ? '' : @master_invoice.carrier.company_name %>
+            <%= @master_invoice.carrier.nil? ? '' : (link_to @master_invoice.carrier.company_name, @master_invoice.carrier) %>
           </div>
         </div>
         <div class="form-group row m-b-15">

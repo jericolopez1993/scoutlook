@@ -72,7 +72,8 @@
         <table id="data-table-buttons" class="table table-striped table-bordered data-table-buttons display nowrap" width="100%">
         								<thead>
         									<tr class="odd gradeX">
-        										<th>Type</th>
+                            <th>Type</th>
+        										<th>Client</th>
         										<th>Rep</th>
         										<th>Annual Value</th>
         										<th>Status</th>
@@ -84,13 +85,12 @@
                           <% Activity.order("updated_at DESC").limit(10).each do |activity| %>
                             <tr>
                               <td><%= activity.activity_type %></td>
-                              <td><%= activity.rep.nil? ? "" : "#{activity.rep.first_name} #{activity.rep.last_name}" %></td>
+                              <td><%= activity.client.nil? ? "" : (link_to activity.client.company_name, activity.client) %></td>
+                              <td><%= activity.rep.nil? ? "" : (link_to "#{activity.rep.first_name} #{activity.rep.last_name}", activity.rep) %></td>
                               <td><%= activity.annual_value %></td>
                               <td><%= activity.status ? 'Open' : 'Closed' %></td>
                               <td><%= convert_date(activity.date_opened) %></td>
                               <td><%= convert_date(activity.date_closed) %></td>
-
-
                             </tr>
                           <% end %>
                         </tbody>

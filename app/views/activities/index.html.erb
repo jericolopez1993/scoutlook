@@ -27,8 +27,8 @@
                       <% @activities.each do |activity| %>
                         <tr>
                           <td><%= activity.activity_type %></td>
-                          <td><%= activity.client.nil? ? "" : "#{activity.client.company_name}" %></td>
-                          <td><%= activity.rep.nil? ? "" : "#{activity.rep.first_name} #{activity.rep.last_name}" %></td>
+                          <td><%= activity.client.nil? ? "" : (link_to activity.client.company_name, activity.client) %></td>
+                          <td><%= activity.rep.nil? ? "" : (link_to "#{activity.rep.first_name} #{activity.rep.last_name}", activity.rep) %></td>
                           <td><%= activity.annual_value %></td>
                           <td><%= activity.status ? 'Open' : 'Closed' %></td>
                           <td><%= convert_date(activity.date_opened) %></td>

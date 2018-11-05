@@ -43,7 +43,7 @@
                       <td><%= master_invoice.single_invoice_date %></td>
                       <td><%= master_invoice.invoicing_period_start %></td>
                       <td><%= master_invoice.invoicing_period_end %></td>
-                      <td><%= master_invoice.carrier.nil? ? '' : master_invoice.carrier.company_name %></td>
+                      <td><%= master_invoice.carrier.nil? ? '' : (link_to master_invoice.carrier.company_name, master_invoice.carrier) %></td>
                       <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.origin_location.nil? ? '' : master_invoice.shipment.origin_location.name) %></td>
                       <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.origin_location.nil? ? '' : master_invoice.shipment.origin_location.city) %></td>
                       <td><%= master_invoice.shipment.nil? ? '' : (master_invoice.shipment.origin_location.nil? ? '' : master_invoice.shipment.origin_location.state) %></td>
