@@ -1,3 +1,10 @@
+<style>
+@media (max-width: 767px) {
+  .text-right {
+    text-align: left!important;
+  }
+}
+</style>
 <!-- begin page-header -->
 <%= render 'layouts/static/header', header_title: 'Reps', sub_header_title: 'Create/Edit/View'%>
 <!-- end page-header -->
@@ -23,45 +30,45 @@
   <% end %>
 
                 <div class="form-group row m-b-15">
-                  <%= form.label :first_name, 'First Name *:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
+                  <%= form.label :first_name, 'First Name *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
                   <%= form.text_field :first_name, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
                 </div>
 
                 <div class="form-group row m-b-15">
-                  <%= form.label :last_name, 'Last Name *:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
+                  <%= form.label :last_name, 'Last Name *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
                   <%= form.text_field :last_name, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :location, 'Location *:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
+                  <%= form.label :location, 'Location *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
                   <%= form.select :location, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => rep.location}, class: 'form-control', 'data-parsley-required' => true %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :date_of_hire, 'Date of Hire:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
+                  <%= form.label :date_of_hire, 'Date of Hire:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
                   <%= form.date_field :date_of_hire, max: Date.today, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :phone, 'Phone #:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
+                  <%= form.label :phone, 'Phone #:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
                   <%= form.text_field :phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :email, 'E-email:', class: 'col-md-4 col-sm-4 col-form-label' %>
-                  <div class="col-md-8 col-sm-8">
+                  <%= form.label :email, 'E-email:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
                   <%= form.email_field :email, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-0">
-                  <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
-                  <div class="col-md-8 col-sm-8">
+                  <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
+                  <div class="col-md-9 col-sm-8">
                     <%= form.submit 'Submit', :class => 'btn btn-primary' %>
                     <% if params[:action] == 'edit' %>
                       &nbsp;&nbsp;<%= link_to 'Show', rep, :class => 'btn btn-info' %>

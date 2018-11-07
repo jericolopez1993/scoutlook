@@ -21,7 +21,7 @@ label {
       <%= link_to 'Back', rates_path, :class => 'btn btn-info btn-xs' %>
     <% end %>
     </div>
-    <h4 class="panel-title">  <%= @rate.client.nil? ? "" : (link_to @rate.client.company_name, @rate.client) %></h4>
+    <h4 class="panel-title">  <%= @rate.client.nil? ? "None" : (link_to @rate.client.company_name, @rate.client) %></h4>
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Details</h4>
@@ -52,7 +52,7 @@ label {
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">Parent:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.parent.nil? ? "" : (link_to @rate.parent.rate_level, @rate.parent)" %>
+        <%= @rate.parent.nil? ? "" : (link_to "@rate.parent.rate_level, @rate.parent") %>
       </div>
     </div>
     <div class="form-group row m-b-15">
