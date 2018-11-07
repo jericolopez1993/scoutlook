@@ -31,19 +31,19 @@
   <% end %>
     <h4 class="text-inverse">Details</h4>
     <div class="form-group row m-b-15">
-      <%= form.label :activity_type, 'Type *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+      <%= form.label :activity_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
       <div class="col-md-9 col-sm-8">
       <%= form.select :activity_type, options_for_select(['Loop', 'Engagement'], activity.activity_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
       </div>
     </div>
     <div class="form-group row m-b-15 engagement-fields"  style="display: none;">
-      <%= form.label :engagement_type, 'Engagement Type *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+      <%= form.label :engagement_type, 'Engagement Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
       <div class="col-md-9 col-sm-8">
       <%= form.select :engagement_type, options_for_select(['Phone', 'In-Person'], activity.engagement_type),{:include_blank => true}, class: 'form-control' %>
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <%= form.label :client_id, 'Client *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+      <%= form.label :client_id, 'Client:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
       <div class="col-md-9 col-sm-8">
       <%= form.select :client_id, Client.all.collect {|r| [ r.company_name, r.id ] },{:include_blank => true, :selected => activity.client_id}, class: 'form-control', 'data-parsley-required' => true %>
       </div>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <%= form.label :annual_value, 'Annual Value *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+      <%= form.label :annual_value, 'Annual Value:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
       <div class="col-md-9 col-sm-8">
       <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+'], activity.annual_value),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
       </div>
@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="form-group row m-b-15">
-      <%= form.label :status, 'Status *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+      <%= form.label :status, 'Status:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
       <div class="col-md-9 col-sm-8">
       <%= form.select :status, options_for_select([['Open', true], ['Closed', false]], activity.status),{}, class: 'form-control', 'data-parsley-required' => true %>
       </div>
