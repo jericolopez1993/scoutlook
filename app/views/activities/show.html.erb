@@ -24,7 +24,7 @@ label {
         <%= link_to 'Back', activities_path, :class => 'btn btn-default btn-xs' %>
     <% end %>
     </div>
-    <h4 class="panel-title">  Activity - <%= @activity.client.company_name %></h4>
+    <h4 class="panel-title">  Activity - <%= @activity.client.nil? ? '' : @activity.client.company_name %></h4>
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Outcome</h4>
