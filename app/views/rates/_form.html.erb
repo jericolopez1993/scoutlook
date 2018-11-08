@@ -39,7 +39,7 @@
       <div class="form-group row m-b-15">
         <%= form.label :rate_level, 'Level:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.select :rate_level, options_for_select(['Master', 'Child'], rate.rate_level),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+        <%= form.select :rate_level, options_for_select(['Master', 'Child'], rate.rate_level),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -51,13 +51,13 @@
       <div class="form-group row m-b-15">
         <%= form.label :rate_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.select :rate_type, options_for_select(['Contract', 'Proposal', 'Spot', 'Quote', 'PB'], rate.rate_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+        <%= form.select :rate_type, options_for_select(['Contract', 'Proposal', 'Spot', 'Quote', 'PB'], rate.rate_type),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :rep_id, 'Rep:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.select :rep_id, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => rate.rep_id}, class: 'form-control', 'data-parsley-required' => true %>
+        <%= form.select :rep_id, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => rate.rep_id}, class: 'form-control' %>
         </div>
       </div>
         <div class="form-group row m-b-15">

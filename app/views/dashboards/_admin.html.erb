@@ -116,7 +116,7 @@
   <div class="form-group row m-b-15">
     <%= form.label :activity_type, 'Type:', class: 'text-right col-md-4 col-sm-4 col-form-label' %>
     <div class="col-md-8 col-sm-8">
-    <%= form.select :activity_type, options_for_select(['Loop', 'Engagement']),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+    <%= form.select :activity_type, options_for_select(['Loop', 'Engagement']),{:include_blank => true}, class: 'form-control' %>
     </div>
   </div>
   <div class="form-group row m-b-15 engagement-fields"  style="display: none;">
@@ -128,19 +128,19 @@
   <div class="form-group row m-b-15">
     <%= form.label :client_id, 'Client:', class: 'text-right col-md-4 col-sm-4 col-form-label' %>
     <div class="col-md-8 col-sm-8">
-    <%= form.select :client_id, Client.all.collect {|r| [ r.company_name, r.id ] },{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+    <%= form.select :client_id, Client.all.collect {|r| [ r.company_name, r.id ] },{:include_blank => true}, class: 'form-control' %>
     </div>
   </div>
   <div class="form-group row m-b-15">
     <%= form.label :rep_id, 'Rep:', class: 'text-right col-md-4 col-sm-4 col-form-label' %>
     <div class="col-md-8 col-sm-8">
-    <%= form.select :rep_id, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+    <%= form.select :rep_id, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true}, class: 'form-control' %>
     </div>
   </div>
   <div class="form-group row m-b-15">
     <%= form.label :annual_value, 'Annual Value:', class: 'text-right col-md-4 col-sm-4 col-form-label' %>
     <div class="col-md-8 col-sm-8">
-    <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+']),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+    <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+']),{:include_blank => true}, class: 'form-control' %>
     </div>
   </div>
   <div class="form-group row m-b-15">

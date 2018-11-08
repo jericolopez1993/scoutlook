@@ -32,20 +32,20 @@
                 <div class="form-group row m-b-15">
                   <%= form.label :first_name, 'First Name *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-9 col-sm-8">
-                  <%= form.text_field :first_name, class: 'form-control', 'data-parsley-required' => true %>
+                  <%= form.text_field :first_name, class: 'form-control' %>
                   </div>
                 </div>
 
                 <div class="form-group row m-b-15">
                   <%= form.label :last_name, 'Last Name *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-9 col-sm-8">
-                  <%= form.text_field :last_name, class: 'form-control', 'data-parsley-required' => true %>
+                  <%= form.text_field :last_name, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
                   <%= form.label :location, 'Location *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-9 col-sm-8">
-                  <%= form.select :location, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => rep.location}, class: 'form-control', 'data-parsley-required' => true %>
+                  <%= form.select :location, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => rep.location}, class: 'form-control' %>
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
