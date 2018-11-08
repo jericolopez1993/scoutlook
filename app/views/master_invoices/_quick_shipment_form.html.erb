@@ -1,19 +1,19 @@
 <div class="row">
     <div class="col-md col-sm-12">
       <div class="form-group">
-        <%= form.label :shipment_date, 'Date :'%>
+        <%= form.label :shipment_date, 'Date:'%>
         <%= form.text_field :shipment_date, :value => @master_invoice.single_invoice_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'" %>
       </div>
     </div>
     <div class="col-md col-sm-12">
       <div class="form-group">
-        <%= form.label :account_number, 'Account Number :'%>
+        <%= form.label :account_number, 'Account Number:'%>
         <%= form.text_field :account_number, class: 'form-control' %>
       </div>
     </div>
     <div class="col-md col-sm-12">
       <div class="form-group">
-        <%= form.label :tracking_number, 'Tracking Number :'%>
+        <%= form.label :tracking_number, 'Tracking Number:'%>
         <%= form.text_field :tracking_number, class: 'form-control' %>
       </div>
     </div>
@@ -22,7 +22,7 @@
 <div class="row">
   <div class="col-md col-sm-12">
     <div class="form-group">
-      <%= form.label :destination_location_id, 'Destination :'%>
+      <%= form.label :destination_location_id, 'Destination:'%>
       <%= form.select :destination_location_id, Location.all.collect {|l| [l.name, l.id]},{:include_blank => true}, class: 'form-control combo-dropdown', id: 'quick_destination_id' %>
     </div>
   </div>
