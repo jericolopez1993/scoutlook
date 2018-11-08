@@ -34,8 +34,12 @@ class ClientContactsController < ApplicationController
   # POST /client_contacts.json
   def create
     @client_contact = ClientContact.new(client_contact_params)
-    @user = User.new(user_params)
-    @user.skip_confirmation!
+    params.require(:client_contact).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    if params[:client_contact][:email].present? && params[:client_contact][:password].present? && params[:client_contact][:password_confirmation].present?
+      @user = User.new(user_params)
+      @user.skip_confirmation!
+      @user.save
+    end
     if params[:same_ho].present?
       @client_contact.same_ho = true
     else
@@ -60,9 +64,11 @@ class ClientContactsController < ApplicationController
     end
     @client_contact.location_id =  @location_id
     respond_to do |format|
-      if @client_contact.save && @user.save
-        @user.update_attributes(:client_contact_id => @client_contact.id)
-        @user.add_role :contact
+      if @client_contact.save
+        if params[:client_contact][:email].present? && params[:client_contact][:password].present? && params[:client_contact][:password_confirmation].present?
+          @user.update_attributes(:client_contact_id => @client_contact.id)
+          @user.add_role :contact
+        end
         client = Client.find(@client_contact.client_id)
 
         if params[:pdm].present?
