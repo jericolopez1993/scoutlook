@@ -31,7 +31,7 @@
         <% end %>
         <h4 class="text-inverse">Details</h4>
         <div class="form-group row m-b-15">
-          <%= form.label :signal_type, 'Type *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :signal_type, 'Type :', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
           <%= form.select :signal_type, options_for_select(['Demand', 'Capacity'], master_signal.signal_type),{:include_blank => true}, class: 'form-control' %>
           </div>
@@ -43,13 +43,13 @@
           </div>
         </div>
         <div class="form-group row m-b-15">
-          <%= form.label :client_id, 'Client *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :client_id, 'Client :', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
           <%= form.select :client_id, Client.all.collect {|l| [l.company_name, l.id]},{:include_blank => true, :selected => master_signal.client_id}, class: 'form-control', id: 'client_id' %>
           </div>
         </div>
         <div class="form-group row m-b-15">
-          <%= form.label :client_contact_id, 'Contact *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :client_contact_id, 'Contact :', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
           <%= form.select :client_contact_id, ClientContact.all.collect {|l| ["#{l.first_name} #{l.last_name}", l.id, {'data-chained'=> "#{l.client_id}"}]},{:include_blank => true, :selected => master_signal.client_contact_id}, class: 'form-control', id: 'client_contact_id' %>
           </div>
