@@ -60,8 +60,13 @@ li[aria-disabled="true"] {
 }
 
 .data-table-buttons {
-  width: 100%;
+  width: 100% !important;
+  max-width: none !important;
 }
 .data-table-no-buttons {
-  width: 100%;
+  width: 100% !important;
+  max-width: none !important;
+}
+table.dataTable {
+  margin-bottom: 0 !important;
 }

@@ -31,6 +31,7 @@
 //= require vendor/buttons.html5.min
 //= require vendor/buttons.print.min.js
 //= require vendor/dataTables.responsive.min
+//= require vendor/dataTables.bootstrap.min
 //= require vendor/table-manage-buttons.demo.min
 //= require vendor/parsley.min
 //= require vendor/highlight.common
@@ -132,12 +133,10 @@ $(document).on('turbolinks:load', function(){
   // });
 
   $(function(){
+        $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+          $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+        } );
       Inputmask().mask(document.querySelectorAll("input"));
-
-      $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-      });
-
       $("#activity_activity_type").change(function(){
         activityOutcomeFields($(this).val());
       });
