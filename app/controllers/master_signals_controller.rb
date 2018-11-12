@@ -131,9 +131,11 @@ class MasterSignalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_signal_params
-      params[:master_signal][:signal_date] = Date::strptime(params[:master_signal][:signal_date], "%m/%d/%Y")
-      params[:master_signal][:start_date] = Date::strptime(params[:master_signal][:start_date], "%m/%d/%Y")
-      params[:master_signal][:end_date] = Date::strptime(params[:master_signal][:end_date], "%m/%d/%Y")
-      params.require(:master_signal).permit(:signal_type, :signal_date, :client_id, :client_contact_id, :rate_id, :origin_location_id, :destination_location_id, :start_date, :end_date, :duration, :volume, :uom, :per, :capacity_type, :max_origin, :max_destination, :desired_rate, :notes, :same_hoc)
+      if params[:master_signal][:signal_date].present? || params[:master_signal][:start_date].present? || params[:master_signal][:end_date].present?
+        params[:master_signal][:signal_date] = Date::strptime(params[:master_signal][:signal_date], "%m/%d/%Y")
+        params[:master_signal][:start_date] = Date::strptime(params[:master_signal][:start_date], "%m/%d/%Y")
+        params[:master_signal][:end_date] = Date::strptime(params[:master_signal][:end_date], "%m/%d/%Y")
+        params.require(:master_signal).permit(:signal_type, :signal_date, :client_id, :client_contact_id, :rate_id, :origin_location_id, :destination_location_id, :start_date, :end_date, :duration, :volume, :uom, :per, :capacity_type, :max_origin, :max_destination, :desired_rate, :notes, :same_hoc)
+      end
     end
 end
