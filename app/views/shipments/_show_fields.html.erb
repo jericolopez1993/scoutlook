@@ -155,13 +155,13 @@
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Origin:</label>
           <div class="col-md-9 lbl-padding-t">
-            <%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.address} #{shipment.origin_location.city} #{shipment.origin_location.state}, #{shipment.origin_location.country} #{shipment.origin_location.postal}" %>
+            <%= shipment.origin_location.nil? ? "" : "#{shipment.origin_location.address} #{shipment.origin_location.city}, #{shipment.origin_location.state}, #{shipment.origin_location.country} #{shipment.origin_location.postal}" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <label class="col-md-3 col-form-label">Destination:</label>
           <div class="col-md-9 lbl-padding-t">
-            <%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.address} #{shipment.destination_location.city} #{shipment.destination_location.state}, #{shipment.destination_location.country} #{shipment.destination_location.postal}" %>
+            <%= shipment.destination_location.nil? ? "" : "#{shipment.destination_location.address} #{shipment.destination_location.city}, #{shipment.destination_location.state}, #{shipment.destination_location.country} #{shipment.destination_location.postal}" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
