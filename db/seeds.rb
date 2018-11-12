@@ -1,3 +1,9 @@
+names = Array[User, Activity, ActivityOutcome, Client, ClientContact, ClientLocation, Location, MasterInvoice, Rep, Shipment]
+
+for name in names
+  name.delete_all
+end
+
 User.create!([
   {id: 1, email: "kevin@marcelo.ph", password: "password", password_confirmation: "password", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, created_at: "2018-09-20 06:09:58", updated_at: "2018-10-26 02:49:48", first_name: "Kevin", middle_name: nil, last_name: "Marcelo", confirmation_token: nil, confirmed_at: "2018-09-24 19:04:36", confirmation_sent_at: nil, admin: true, client_contact_id: nil},
   {id: 4, email: "ballardcr@gmail.com", password: "password", password_confirmation: "password", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, created_at: "2018-09-24 01:15:17", updated_at: "2018-10-26 14:18:51", first_name: "Craig", middle_name: nil, last_name: "Ballard", confirmation_token: nil, confirmed_at: "2018-09-24 19:04:36", confirmation_sent_at: nil, admin: true, client_contact_id: nil},
