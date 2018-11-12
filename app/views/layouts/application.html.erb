@@ -38,7 +38,7 @@
       $(document).ready(function() {
         App.init();
         FormSliderSwitcher.init();
-        <%= (params[:action] == 'index' || params[:action] == 'show') ? 'setTimeout(function() {TableManageButtons.init()}, 1000);' : ''%>
+        <%= (params[:action] == 'index' || params[:action] == 'show') ? 'TableManageButtons.init();' : ''%>
         <%= ((params[:action] == 'new' || params[:action] == 'edit') && params[:controller] != 'dashboards') ? 'Highlight.init();' : ''%>
         <% if flash[:error] %>
         $.gritter.add({
