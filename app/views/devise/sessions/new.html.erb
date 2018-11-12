@@ -24,6 +24,13 @@
             <%= f.password_field :password, autocomplete: "current-password", :class => 'form-control form-control-lg', required: true, placeholder: 'Password' %>
           </div>
 
+          <% if flash.alert %>
+          <div id=”error_explanation”>
+          <ul>
+           <li><%= flash.alert %></li>
+          </ul>
+          </div>
+          <% end %>
 
             <% if devise_mapping.rememberable? -%>
             <div class="checkbox checkbox-css m-b-30">
