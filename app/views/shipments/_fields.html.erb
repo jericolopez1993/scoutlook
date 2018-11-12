@@ -159,6 +159,12 @@
 <hr>
 <h4 class="text-inverse">Bill & Surcharges</h4>
 <div class="form-group row m-b-15">
+  <%= form.label :money_currency, 'Currency:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+  <%= form.select :money_currency, options_for_select(['US', 'CDN'], "#{shipment.money_currency.present? ? shipment.money_currency : 'CDN'}"),{:include_blank => true}, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group row m-b-15">
   <%= form.label :billed_rate, 'Billed Rate:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
   <%= form.text_field :billed_rate, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.billed_rate, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
@@ -232,12 +238,6 @@
   <%= form.label :total_charge_with_tax, 'Total Charge with Tax:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
   <%= form.text_field :total_charge_with_tax, class: 'form-control', value: shipment.total_charge_with_tax, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
-  </div>
-</div>
-<div class="form-group row m-b-15">
-  <%= form.label :money_currency, 'Currency:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-  <div class="col-md-9 col-sm-8">
-  <%= form.select :money_currency, options_for_select(['US', 'CDN'], shipment.money_currency),{:include_blank => true}, class: 'form-control' %>
   </div>
 </div>
 
