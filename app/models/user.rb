@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  audited
   rolify
   has_one_attached :avatar
   # Include default devise modules. Others available are:

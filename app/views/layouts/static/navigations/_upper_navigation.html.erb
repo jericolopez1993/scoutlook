@@ -21,16 +21,33 @@
         </div>
       </form>
     </li>
+
+    <% audits = Audit.today %>
     <li class="dropdown">
       <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
         <i class="fa fa-bell"></i>
-        <!-- <span class="label">0</span> -->
+        <% if audits.length > 0 %>
+          <span class="label"><%= audits.length %></span>
+        <% end %>
       </a>
       <ul class="dropdown-menu media-list dropdown-menu-right">
-        <li class="dropdown-header">NOTIFICATIONS (0)</li>
+        <li class="dropdown-header">NOTIFICATIONS (<%= audits.length %>)</li>
+        <% if audits.length > 0%>
+          <li class="media">
+              <a href="javascript:;">
+                <div class="media-body">
+                  <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
+                  <div class="text-muted f-s-11">3 minutes ago</div>
+                </div>
+              </a>
+            </li>
+
+        <% else %>
         <li class="text-center width-300 p-b-10">
-          No notification found
+          No notification found today. :)
         </li>
+        <% end %>
+
       </ul>
     </li>
     <li class="dropdown navbar-user">

@@ -1,4 +1,5 @@
 class MasterSignal < ApplicationRecord
+  audited
   def client
     if !self.client_id.nil?
       Client.find(self.client_id)

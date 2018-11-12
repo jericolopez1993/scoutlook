@@ -20,6 +20,7 @@
 # t.datetime "updated_at", null: false
 
 class Client < ApplicationRecord
+  audited
   has_many_attached :attachment_file
   after_destroy :remove_children
   # before_create :set_client_id

@@ -1,4 +1,5 @@
 class Rep < ApplicationRecord
+  audited
   # before_create :set_rep_id
   #
   # def set_rep_id

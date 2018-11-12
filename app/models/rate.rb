@@ -1,4 +1,5 @@
 class Rate < ApplicationRecord
+  audited
   has_one_attached :supporting_pdf
 
   def rep
@@ -22,7 +23,7 @@ class Rate < ApplicationRecord
       nil
     end
   end
-  
+
   def origin_location
     if !self.origin_location_id.nil?
       Location.find(self.origin_location_id)
