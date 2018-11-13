@@ -45,12 +45,12 @@
               <span>System Settings</span>
             </a>
             <ul class="sub-menu">
+							<li><a href="<%= logs_path %>"> <span>Logs</span></a></li>
               <% if current_user.admin? %>
                 <li><a href="<%= users_path %>"> <span>Users</span></a></li>
               <% end %>
             </ul>
           </li>
-
         <% end %>
 				<!-- <li class="menu-control menu-control-left">
 					<a href="javascript:;" data-click="prev-menu"><i class="fa fa-angle-left"></i></a>
