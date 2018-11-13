@@ -1,5 +1,12 @@
 class MasterSignal < ApplicationRecord
   audited
+  def display_name
+    if self.client.nil?
+      "Signal to #{self.client.display_name}"
+    else
+      "<a href='/signals/#{self.id}'>Signal</a>)"
+    end
+  end
   def client
     if !self.client_id.nil?
       Client.find(self.client_id)

@@ -5,9 +5,17 @@ class Activity < ApplicationRecord
   before_save :set_open_and_close_date
   after_destroy :remove_children
 
+  def display_name
+    if self.client.nil?
+      "Activity to #{self.client.display_name}"
+    else
+      "<a href='/activities/#{self.id}'>Activity</a>)"
+    end
+  end
+
   def set_open_and_close_date
     if self.status
-      self.date_opened = Time.now.getutc
+      self.date_opened = Time.now.getutcss
     else
       self.date_closed = Time.now.getutc
     end

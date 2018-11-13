@@ -1,7 +1,9 @@
 class MasterInvoice < ApplicationRecord
   audited only: [:own_status]
   has_one_attached :attachment_file
-
+  def display_name
+    "Invoice (<a href='/invoices/#{self.id}'>#{self.invoice_number}</a>)"
+  end
   def shipper
     if !self.shipper_id.nil?
       Client.find(self.shipper_id)

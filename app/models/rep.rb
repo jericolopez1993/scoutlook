@@ -7,4 +7,7 @@ class Rep < ApplicationRecord
   #   str = self.last_name[0, 4].upcase
   #   self.rep_id = str + count
   # end
+  def display_name
+    "<a href='/reps/#{self.id}'>Rep</a>"
+  end
 end

@@ -6,4 +6,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
+
+  def display_name
+    "<a href='/users'>Users</a>)"
+  end
 end

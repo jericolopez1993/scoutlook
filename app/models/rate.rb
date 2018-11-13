@@ -1,7 +1,13 @@
 class Rate < ApplicationRecord
   audited
   has_one_attached :supporting_pdf
-
+  def display_name
+    if self.client.nil?
+      "Rate to #{self.client.display_name}"
+    else
+      "<a href='/rates/#{self.id}'>Rate</a>)"
+    end
+  end
   def rep
     if !self.rep_id.nil?
       Rep.find(self.rep_id)

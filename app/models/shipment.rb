@@ -1,7 +1,13 @@
 class Shipment < ApplicationRecord
   audited only: [:shipment_status]
   has_one_attached :shipment_attachment_file
-
+  def display_name
+    if self.invoice.nil?
+      "Shipment to #{self.invoice.display_name}"
+    else
+      "<a href='/shipments/#{self.id}'>Shipment</a>"
+    end
+  end
   def origin_location
     if !self.origin_location_id.nil?
       begin

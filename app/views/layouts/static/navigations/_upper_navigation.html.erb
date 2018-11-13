@@ -33,15 +33,14 @@
       <ul class="dropdown-menu media-list dropdown-menu-right">
         <li class="dropdown-header">NOTIFICATIONS (<%= audits.length %>)</li>
         <% if audits.length > 0%>
-          <li class="media">
-              <a href="javascript:;">
-                <div class="media-body">
-                  <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
-                  <div class="text-muted f-s-11">3 minutes ago</div>
-                </div>
-              </a>
-            </li>
-
+          <% audits.each do |audit|%>
+            <li class="media">
+                  <div class="media-body notification-padding">
+                    <h6 class="media-heading"><%= audit.on_sentence.html_safe %></h6>
+                    <div class="text-muted f-s-11"><%= audit.created_at %></div>
+                  </div>
+              </li>
+          <% end %>
         <% else %>
         <li class="text-center width-300 p-b-10">
           No notification found today. :)

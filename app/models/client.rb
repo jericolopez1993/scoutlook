@@ -23,12 +23,13 @@ class Client < ApplicationRecord
   audited
   has_many_attached :attachment_file
   after_destroy :remove_children
-  # before_create :set_client_id
-  #
-  # def set_client_id
-  #   count = (Client.all.length + 1).to_s.rjust(5, '0')
-  #   self.client_id = "LOOP" + count
-  # end
+
+
+  def display_name
+    #{link_to self.company_name, url_for([self, only_path: true])}
+    "Client (<a href='/clients/#{self.id}'>#{self.company_name}</a>)"
+  end
+
   def rep
     if !self.relationship_owner.nil?
       Rep.find(self.relationship_owner)

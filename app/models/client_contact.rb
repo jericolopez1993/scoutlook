@@ -7,4 +7,18 @@ class ClientContact < ApplicationRecord
       nil
     end
   end
+  def display_name
+    if self.client.nil?
+      "Contact to #{self.client.display_name}"
+    else
+      "<a href='/client_contacts/#{self.id}'>Contact</a>)"
+    end
+  end
+  def client
+    if !self.client_id.nil?
+      Client.find(self.client_id)
+    else
+      nil
+    end
+  end
 end
