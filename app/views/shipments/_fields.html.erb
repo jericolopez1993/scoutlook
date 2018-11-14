@@ -10,7 +10,7 @@
     var currentShipmentStatus = '<%= shipment.shipment_status %>';
   </script>
 <hr>
-<h4 class="text-inverse">Basic Information - <%= params[:action] == 'edit' ? ": #{shipment.origin_location.nil? ? "" : shipment.origin_location.name} to #{shipment.destination_location.nil? ? "" : shipment.destination_location.name}" : ''%></h4>
+<h4 class="text-inverse">Basic Information</h4>
 <div class="form-group row m-b-15">
   <%= form.label :account_number, 'Account Number:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">

@@ -6,7 +6,7 @@
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: 'Activities', sub_header_title: 'Create/Edit/View'%>
+<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Activity' : "Edit Activity - #{activity.client.nil? ? '' : link_to(activity.client.company_name,  activity.client)}", sub_header_title: ''%>
 <!-- end page-header -->
 <!-- begin panel -->
 
@@ -15,7 +15,7 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Activity' : "Edit Activity - #{activity.client.nil? ? '' : activity.client.company_name}"%></h4>
+    <h4 class="panel-title">Information</h4>
   </div>
   <div class="panel-body">
   <% if activity.errors.any? %>

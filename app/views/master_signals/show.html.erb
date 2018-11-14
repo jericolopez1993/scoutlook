@@ -9,7 +9,7 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: 'Signals', sub_header_title: 'Create/Edit/View'%>
+<%= render 'layouts/static/header', header_title: "#{@master_signal.client.nil? ? '' : link_to(@master_signal.client.company_name, @master_signal.client)}", sub_header_title: ''%>
 <!-- end page-header -->
       <div class="panel panel-inverse">
         <div class="panel-heading">

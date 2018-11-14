@@ -9,7 +9,7 @@
   var currentInvoiceStatus = '<%= master_invoice.own_status %>';
 </script>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: 'Invoices', sub_header_title: 'Create/Edit/View'%>
+<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Invoice' : "#{@master_invoice.shipper.nil? ? '' : link_to(@master_invoice.shipper.company_name, @master_invoice.shipper)} through #{@master_invoice.carrier.nil? ? '' : link_to(@master_invoice.carrier.company_name, @master_invoice.carrier)}", sub_header_title: ''%>
 <!-- end page-header -->
 <!-- begin panel -->
 <%= form_with(model: master_invoice, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
@@ -17,7 +17,7 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Invoice' : "Edit Invoice - #{@master_invoice.shipper.nil? ? '' : @master_invoice.shipper.company_name} through #{@master_invoice.carrier.nil? ? '' : @master_invoice.carrier.company_name}"%></h4>
+    <h4 class="panel-title">Information</h4>
   </div>
   <div class="panel-body">
   <% if master_invoice.errors.any? %>

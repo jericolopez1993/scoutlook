@@ -6,7 +6,7 @@
   }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: 'Clients', sub_header_title: 'Create/Edit/View'%>
+<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Client' : "Edit Client - #{client.company_name}", sub_header_title: ''%>
 <!-- end page-header -->
 <!-- begin panel -->
 
@@ -17,7 +17,7 @@
       <div class="panel-heading">
         <div class="panel-heading-btn"></div>
         <h4 class="panel-title">
-          <%= params[:action] == 'new' ? 'Create New Client' : "Edit Client - #{client.company_name}"%></h4>
+        Information</h4>
       </div>
       <div class="panel-body">
         <% if client.errors.any? %>
