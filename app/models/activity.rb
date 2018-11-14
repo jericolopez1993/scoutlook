@@ -15,7 +15,7 @@ class Activity < ApplicationRecord
 
   def set_open_and_close_date
     if self.status
-      self.date_opened = Time.now.getutcss
+      self.date_opened = Time.now.getutc
     else
       self.date_closed = Time.now.getutc
     end
