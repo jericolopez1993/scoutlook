@@ -9,7 +9,7 @@ class Activity < ApplicationRecord
     if self.client.nil?
       "Activity to #{self.client.display_name}"
     else
-      "<a href='/activities/#{self.id}'>Activity</a>)"
+      "<a href='/activities/#{self.id}'>Activity</a>"
     end
   end
 

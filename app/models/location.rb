@@ -4,7 +4,7 @@ class Location < ApplicationRecord
     if self.client.nil?
       "Location to #{self.client.display_name}"
     else
-      "<a href='/locations/#{self.id}'></a>)"
+      "<a href='/locations/#{self.id}'>Location</a>"
     end
   end
   def client

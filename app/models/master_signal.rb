@@ -4,7 +4,7 @@ class MasterSignal < ApplicationRecord
     if self.client.nil?
       "Signal to #{self.client.display_name}"
     else
-      "<a href='/signals/#{self.id}'>Signal</a>)"
+      "<a href='/signals/#{self.id}'>Signal</a>"
     end
   end
   def client

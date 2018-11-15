@@ -26,8 +26,11 @@ class Client < ApplicationRecord
 
 
   def display_name
-    #{link_to self.company_name, url_for([self, only_path: true])}
-    "Client (<a href='/clients/#{self.id}'>#{self.company_name}</a>)"
+    if self.company_name.present? && self.company_name != "" && !self.company_name.nil?
+      "Client (<a href='/clients/#{self.id}'>#{self.company_name}</a>"
+    else
+      "(<a href='/clients/#{self.id}'>Client</a>"
+    end
   end
 
   def rep

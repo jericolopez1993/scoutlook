@@ -11,7 +11,7 @@ class ClientContact < ApplicationRecord
     if self.client.nil?
       "Contact to #{self.client.display_name}"
     else
-      "<a href='/client_contacts/#{self.id}'>Contact</a>)"
+      "<a href='/client_contacts/#{self.id}'>Contact</a>"
     end
   end
   def client

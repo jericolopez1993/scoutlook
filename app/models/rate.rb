@@ -5,7 +5,7 @@ class Rate < ApplicationRecord
     if self.client.nil?
       "Rate to #{self.client.display_name}"
     else
-      "<a href='/rates/#{self.id}'>Rate</a>)"
+      "<a href='/rates/#{self.id}'>Rate</a>"
     end
   end
   def rep

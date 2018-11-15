@@ -8,6 +8,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def display_name
-    "<a href='/users'>Users</a>)"
+    "<a href='/users'>Users</a>"
   end
 end
