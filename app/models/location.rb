@@ -8,9 +8,9 @@ class Location < ApplicationRecord
     end
   end
   def client
-    if !self.client_id.nil?
+    begin
       Client.find(self.client_id)
-    else
+    rescue
       nil
     end
   end

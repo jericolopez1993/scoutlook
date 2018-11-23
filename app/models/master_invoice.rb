@@ -10,18 +10,20 @@ class MasterInvoice < ApplicationRecord
 
   end
   def shipper
-    if !self.shipper_id.nil?
+    begin
       Client.find(self.shipper_id)
-    else
+    rescue
       nil
     end
+
   end
   def carrier
-    if !self.carrier_id.nil?
+    begin
       Client.find(self.carrier_id)
-    else
+    rescue
       nil
     end
+
   end
 
   def shipment
@@ -46,9 +48,9 @@ class MasterInvoice < ApplicationRecord
   end
 
   def shipper_location
-    if !self.shipper_id.nil?
+    begin
       Client.find(self.shipper_id).default_location
-    else
+    rescue
       nil
     end
   end

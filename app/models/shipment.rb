@@ -9,49 +9,41 @@ class Shipment < ApplicationRecord
     end
   end
   def origin_location
-    if !self.origin_location_id.nil?
-      begin
-        Location.find(self.origin_location_id)
-      rescue
-        nil
-      end
-    else
+    begin
+      Location.find(self.origin_location_id)
+    rescue
       nil
     end
   end
 
   def destination_location
-    if !self.destination_location_id.nil?
-      begin
-        Location.find(self.destination_location_id)
-      rescue
-        nil
-      end
-    else
+    begin
+      Location.find(self.destination_location_id)
+    rescue
       nil
     end
   end
 
   def invoice
-    if !self.header.nil?
+    begin
       MasterInvoice.find(self.header)
-    else
+    rescue
       nil
     end
   end
 
   def shipper
-    if !self.header.nil?
+    begin
       MasterInvoice.find(self.header).shipper
-    else
+    rescue
       nil
     end
   end
 
   def shipper_location
-    if !self.header.nil?
+    begin
       MasterInvoice.find(self.header).shipper_location
-    else
+    rescue
       nil
     end
   end

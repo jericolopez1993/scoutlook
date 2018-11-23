@@ -1,9 +1,9 @@
 class ClientContact < ApplicationRecord
   audited
   def location
-    if !self.location_id.nil?
+    begin
       Location.find(self.location_id)
-    else
+    rescue
       nil
     end
   end
@@ -15,9 +15,9 @@ class ClientContact < ApplicationRecord
     end
   end
   def client
-    if !self.client_id.nil?
+    begin
       Client.find(self.client_id)
-    else
+    rescue
       nil
     end
   end

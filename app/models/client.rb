@@ -34,9 +34,9 @@ class Client < ApplicationRecord
   end
 
   def rep
-    if !self.relationship_owner.nil?
+    begin
       Rep.find(self.relationship_owner)
-    else
+    rescue
       nil
     end
   end
@@ -54,25 +54,25 @@ class Client < ApplicationRecord
   end
 
   def origin_location
-    if !self.origin.nil?
+    begin
       ClientLocation.find(self.origin)
-    else
+    rescue
       nil
     end
   end
 
   def destination_location
-    if !self.destination.nil?
+    begin
       ClientLocation.find(self.destination)
-    else
+    rescue
       nil
     end
   end
 
   def head_office_location
-    if !self.head_office.nil?
+    begin
       Location.find(self.head_office)
-    else
+    rescue
       nil
     end
   end
@@ -92,9 +92,9 @@ class Client < ApplicationRecord
   end
 
   def location
-    if !self.head_office.nil?
+    begin
       Location.find(self.head_office)
-    else
+    rescue
       nil
     end
   end

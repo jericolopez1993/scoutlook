@@ -30,17 +30,17 @@ class Activity < ApplicationRecord
   end
 
   def rep
-    if !self.rep_id.nil?
+    begin
       Rep.find(self.rep_id)
-    else
+    rescue
       nil
     end
   end
 
   def client
-    if !self.client_id.nil?
+    begin
       Client.find(self.client_id)
-    else
+    rescue
       nil
     end
   end

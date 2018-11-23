@@ -8,39 +8,39 @@ class MasterSignal < ApplicationRecord
     end
   end
   def client
-    if !self.client_id.nil?
+    begin
       Client.find(self.client_id)
-    else
+    rescue
       nil
     end
   end
   def client_contact
-    if !self.client_contact_id.nil?
+    begin
       ClientContact.find(self.client_contact_id)
-    else
+    rescue
       nil
     end
   end
   def rate
-    if !self.rate_id.nil?
+    begin
       Rate.find(self.rate_id)
-    else
+    rescue
       nil
     end
   end
 
   def origin_location
-    if !self.origin_location_id.nil?
+    begin
       Location.find(self.origin_location_id)
-    else
+    rescue
       nil
     end
   end
 
   def destination_location
-    if !self.destination_location_id.nil?
+    begin
       Location.find(self.destination_location_id)
-    else
+    rescue
       nil
     end
   end

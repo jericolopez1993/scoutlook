@@ -9,39 +9,39 @@ class Rate < ApplicationRecord
     end
   end
   def rep
-    if !self.rep_id.nil?
+    begin
       Rep.find(self.rep_id)
-    else
+    rescue
       nil
     end
   end
   def client
-    if !self.client_id.nil?
+    begin
       Client.find(self.client_id)
-    else
+    rescue
       nil
     end
   end
   def parent
-    if !self.parent_id.nil?
+    begin
       Rate.find(self.parent_id)
-    else
+    rescue
       nil
     end
   end
 
   def origin_location
-    if !self.origin_location_id.nil?
+    begin
       Location.find(self.origin_location_id)
-    else
+    rescue
       nil
     end
   end
 
   def destination_location
-    if !self.destination_location_id.nil?
+    begin
       Location.find(self.destination_location_id)
-    else
+    rescue
       nil
     end
   end
