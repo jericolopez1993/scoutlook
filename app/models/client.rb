@@ -27,9 +27,9 @@ class Client < ApplicationRecord
 
   def display_name
     if self.company_name.present? && self.company_name != "" && !self.company_name.nil?
-      "Client (<a href='/clients/#{self.id}'>#{self.company_name}</a>"
+      "Client (<a href='/clients/#{self.id}'>#{self.company_name}</a>)"
     else
-      "(<a href='/clients/#{self.id}'>Client</a>"
+      "<a href='/clients/#{self.id}'>Client</a>"
     end
   end
 

@@ -5,7 +5,7 @@ class MasterInvoice < ApplicationRecord
       if self.invoice_number.present? && self.invoice_number != "" && !self.invoice_number.nil?
         "Invoice (<a href='/invoices/#{self.id}'>#{self.invoice_number}</a>)"
       else
-        "<a href='/invoices/#{self.id}'>#{self.invoice_number}</a>"
+        "<a href='/invoices/#{self.id}'>Invoice</a>"
       end
 
   end

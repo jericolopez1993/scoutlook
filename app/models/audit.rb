@@ -13,14 +13,20 @@ class Audit
     rescue
       @to_sentence = "Unknown"
     end
+    class_object_string = self.auditable_type.to_s
+    if class_object_string.starts_with?('A', 'E', 'I', 'O', 'U', 'MasterInvoice')
+      @string_article = "an"
+    else
+      @string_article = "a"
+    end
     if self.action == "destroy"
-      @to_sentence = @to_sentence + " removed an #{self.auditable_type == 'MasterInvoice' ? 'Invoices' : (self.auditable_type == 'MasterSignal' ? 'Signals' : self.auditable_type.titleize)}"
+      @to_sentence = @to_sentence + " removed " + @string_article  + " #{self.auditable_type == 'MasterInvoice' ? 'Invoice' : (self.auditable_type == 'MasterSignal' ? 'Signal' : self.auditable_type.titleize)}"
     else
       begin
         class_object = self.auditable_type.singularize.classify.constantize.find(self.auditable_id)
-        @to_sentence = @to_sentence + " " + self.action + " an #{class_object.display_name})"
+        @to_sentence = @to_sentence + " " + self.action + " " + @string_article + " " + " #{class_object.display_name}"
       rescue
-        @to_sentence = @to_sentence + " " + self.action + " an #{self.auditable_type == 'MasterInvoice' ? 'Invoices' : (self.auditable_type == 'MasterSignal' ? 'Signals' : self.auditable_type.titleize)}"
+        @to_sentence = @to_sentence + " " + self.action + " " + @string_article + " " + " #{self.auditable_type == 'MasterInvoice' ? 'Invoice' : (self.auditable_type == 'MasterSignal' ? 'Signal' : self.auditable_type.titleize)}"
       end
     end
     @to_sentence
