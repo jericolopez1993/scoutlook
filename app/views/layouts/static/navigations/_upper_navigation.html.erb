@@ -33,7 +33,7 @@
       <ul class="dropdown-menu media-list dropdown-menu-right">
         <li class="dropdown-header">NOTIFICATIONS (<%= audits.length %>)</li>
         <% if audits.length > 0%>
-          <% audits.each do |audit|%>
+          <% audits.limit(10).each do |audit|%>
             <li class="media">
                   <div class="media-body notification-padding">
                     <h6 class="media-heading"><%= audit.on_sentence.html_safe %></h6>

@@ -88,6 +88,6 @@ class LocationsController < ApplicationController
       params[:location][:is_origin] = params[:origin].present?
       params[:location][:is_destination] = params[:destination].present?
       params[:location][:name] = params[:location][:location_name]
-      params.require(:location).permit(:name, :address, :country, :state, :city, :postal, :is_origin, :is_destination, :loc_type, :phone)
+      params.require(:location).permit(:name, :address, :country, :state, :city, :postal, :is_origin, :is_destination, :loc_type, :phone, :client_id)
     end
 end
