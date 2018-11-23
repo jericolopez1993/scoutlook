@@ -53,7 +53,9 @@ class ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @client.update(client_params)
-        @client.location.update_attributes(location_params)
+        if params[:origin].present? || params[:destination].present? || params[:client][:location_name].present? || params[:client][:state].present? || params[:client][:city].present?
+          @client.location.update_attributes(location_params)
+        end
         if params[:client][:attachment_file].present?
           @client.attachment_file.attach(params[:client][:attachment_file])
         end
