@@ -18,7 +18,7 @@ class Audit
     else
       begin
         class_object = self.auditable_type.singularize.classify.constantize.find(self.auditable_id)
-        @to_sentence = @to_sentence + " " + self.action + " an #{class_object.display_name}"
+        @to_sentence = @to_sentence + " " + self.action + " an #{class_object.display_name})"
       rescue
         @to_sentence = @to_sentence + " " + self.action + " an #{self.auditable_type == 'MasterInvoice' ? 'Invoices' : (self.auditable_type == 'MasterSignal' ? 'Signals' : self.auditable_type.titleize)}"
       end
