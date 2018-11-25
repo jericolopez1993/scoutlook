@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Carrier Contacts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Email</th>
+      <th>Work phone</th>
+      <th>Home phone</th>
+      <th>Address</th>
+      <th>City/Town</th>
+      <th>State</th>
+      <th>Postal</th>
+      <th>Country</th>
+      <th>Carrier</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @carrier_contacts.each do |carrier_contact| %>
+      <tr>
+        <td><%= carrier_contact.last_name %></td>
+        <td><%= carrier_contact.email %></td>
+        <td><%= carrier_contact.work_phone %></td>
+        <td><%= carrier_contact.home_phone %></td>
+        <td><%= carrier_contact.address %></td>
+        <td><%= carrier_contact.city %></td>
+        <td><%= carrier_contact.state %></td>
+        <td><%= carrier_contact.postal %></td>
+        <td><%= carrier_contact.country %></td>
+        <td><%= carrier_contact.carrier_id %></td>
+        <td><%= link_to 'Show', carrier_contact %></td>
+        <td><%= link_to 'Edit', edit_carrier_contact_path(carrier_contact) %></td>
+        <td><%= link_to 'Delete', carrier_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Carrier Contact', new_carrier_contact_path %>

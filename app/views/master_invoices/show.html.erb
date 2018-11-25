@@ -12,7 +12,7 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: "#{@master_invoice.shipper.nil? ? '' : @master_invoice.shipper.company_name} through #{@master_invoice.carrier.nil? ? '' : @master_invoice.carrier.company_name}", sub_header_title: "#{@master_invoice.shipment_type}"%>
+<%= render 'layouts/static/header', header_title: "#{@master_invoice.shipper.nil? ? '' : @master_invoice.shipper.company_name} through #{@master_invoice.carrier.nil? ? '' : @master_invoice.carrier.company_name}", sub_header_title: "#{@master_invoice.shipment_type}" %>
 <!-- end page-header -->
 <!-- begin panel -->
     <div class="panel panel-inverse">

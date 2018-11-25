@@ -9,7 +9,7 @@
   var currentInvoiceStatus = '<%= master_invoice.own_status %>';
 </script>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Invoice' : "#{@master_invoice.shipper.nil? ? '' : link_to(@master_invoice.shipper.company_name, @master_invoice.shipper)} through #{@master_invoice.carrier.nil? ? '' : link_to(@master_invoice.carrier.company_name, @master_invoice.carrier)}", sub_header_title: ''%>
+<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Invoice' : "#{@master_invoice.shipper.nil? ? '' : link_to(@master_invoice.shipper.company_name, @master_invoice.shipper)} through #{@master_invoice.carrier.nil? ? '' : link_to(@master_invoice.carrier.company_name, @master_invoice.carrier)}" %>
 <!-- end page-header -->
 <!-- begin panel -->
 <%= form_with(model: master_invoice, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>

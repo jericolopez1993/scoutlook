@@ -1,0 +1,2 @@
+module CarrierLocationsHelper
+end

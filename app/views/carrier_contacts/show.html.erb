@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @carrier_contact.title %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @carrier_contact.email %>
+</p>
+
+<p>
+  <strong>Work phone:</strong>
+  <%= @carrier_contact.work_phone %>
+</p>
+
+<p>
+  <strong>Home phone:</strong>
+  <%= @carrier_contact.home_phone %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @carrier_contact.address %>
+</p>
+
+<p>
+  <strong>City/Town:</strong>
+  <%= @carrier_contact.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @carrier_contact.state %>
+</p>
+
+<p>
+  <strong>Postal:</strong>
+  <%= @carrier_contact.postal %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @carrier_contact.country %>
+</p>
+
+<p>
+  <strong>Carrier:</strong>
+  <%= @carrier_contact.carrier_id %>
+</p>
+
+<%= link_to 'Edit', edit_carrier_contact_path(@carrier_contact) %> |
+<%= link_to 'Back', carrier_contacts_path %>

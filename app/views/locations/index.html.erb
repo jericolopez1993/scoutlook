@@ -1,5 +1,5 @@
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: 'Locations', sub_header_title: 'Create/Edit/View'%>
+<%= render 'layouts/static/header', header_title: 'Locations' %>
 <!-- end page-header -->
 <!-- begin panel -->
 <div class="panel panel-inverse">
@@ -10,7 +10,7 @@
     <h4 class="panel-title">List of Locations</h4>
   </div>
   <div class="panel-body">
-  <%= render 'table', locations: @locations, client: nil %>
+  <%= render 'table', locations: @locations, client: nil, carrier: nil %>
   </div>
 </div>
 <!-- end panel -->

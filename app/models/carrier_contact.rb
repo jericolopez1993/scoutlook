@@ -1,0 +1,24 @@
+class CarrierContact < ApplicationRecord
+  audited
+  def location
+    begin
+      Location.find(self.location_id)
+    rescue
+      nil
+    end
+  end
+  def display_name
+    if self.carrier.nil?
+      "<a href='/carrier_contacts/#{self.id}'>Contact</a>"
+    else
+      "Contact to #{self.carrier.display_name}"
+    end
+  end
+  def carrier
+    begin
+      Carrier.find(self.carrier_id)
+    rescue
+      nil
+    end
+  end
+end

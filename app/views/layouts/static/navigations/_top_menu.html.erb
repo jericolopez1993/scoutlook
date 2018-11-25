@@ -1,6 +1,6 @@
 <div id="top-menu" class="top-menu">
-			<!-- begin top-menu nav -->
-			<ul class="nav">
+      <!-- begin top-menu nav -->
+      <ul class="nav">
 
         <li class="<%= (params[:controller] == 'dashboards') ? 'active' : ''%>">
           <a href="<%= authenticated_root_path %>">
@@ -8,7 +8,12 @@
           </a>
         </li>
         <% if current_user.has_role?(:admin) %>
-          <li class="<%= (params[:controller] == 'clients') ? 'active' : ''%>">
+          <li class="<%= (params[:controller] == 'carriers') ? 'active' : ''%>">
+            <a href="<%= carriers_path %>">
+              <span>Carriers</span>
+            </a>
+          </li>
+          <!-- <li class="<%= (params[:controller] == 'clients') ? 'active' : ''%>">
             <a href="<%= clients_path %>">
               <span>Clients</span>
             </a>
@@ -37,7 +42,7 @@
             <a href="<%= reps_path %>">
               <span>Reps</span>
             </a>
-          </li>
+          </li> -->
 
           <li class="has-sub <%= (params[:controller] == 'users') ? 'active' : ''%>">
             <a href="javascript:;">
@@ -45,20 +50,20 @@
               <span>System Settings</span>
             </a>
             <ul class="sub-menu">
-							<li><a href="<%= logs_path %>"> <span>Logs</span></a></li>
+  <li><a href="<%= logs_path %>"> <span>Logs</span></a></li>
               <% if current_user.admin? %>
                 <li><a href="<%= users_path %>"> <span>Users</span></a></li>
               <% end %>
             </ul>
           </li>
         <% end %>
-				<!-- <li class="menu-control menu-control-left">
-					<a href="javascript:;" data-click="prev-menu"><i class="fa fa-angle-left"></i></a>
-				</li>
-				<li class="menu-control menu-control-right">
-					<a href="javascript:;" data-click="next-menu"><i class="fa fa-angle-right"></i></a>
-				</li> -->
-			</ul>
-			<!-- end top-menu nav -->
-		</div>
-		<!-- end #top-menu -->
+  <!-- <li class="menu-control menu-control-left">
+  <a href="javascript:;" data-click="prev-menu"><i class="fa fa-angle-left"></i></a>
+  </li>
+  <li class="menu-control menu-control-right">
+  <a href="javascript:;" data-click="next-menu"><i class="fa fa-angle-right"></i></a>
+  </li> -->
+  </ul>
+  <!-- end top-menu nav -->
+  </div>
+  <!-- end #top-menu -->

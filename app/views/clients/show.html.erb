@@ -26,7 +26,7 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: "#{@client.company_name}", sub_header_title: "#{@client.client_type}"%>
+<%= render 'layouts/static/header', header_title: "#{@client.company_name}", sub_header_title: "#{@client.client_type}" %>
 <!-- end page-header -->
 <!-- begin row -->
 <ul class="nav nav-pills d-md-none">
@@ -289,7 +289,7 @@ Add Attachment
       </div>
       <div class="tab-pane fade" id="locations">
         <div class="panel-body">
-          <%= render 'locations/table', locations: Location.where(:client_id => @client.id), client: @client %>
+          <%= render 'locations/table', locations: Location.where(:client_id => @client.id), client: @client, carrier: nil %>
         </div>
       </div>
       <div class="tab-pane fade" id="contacts">

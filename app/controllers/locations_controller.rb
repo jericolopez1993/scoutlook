@@ -19,13 +19,17 @@ class LocationsController < ApplicationController
     if params[:client_id].present?
       @location.client_id = params[:client_id]
     end
+    if params[:carrier_id].present?
+      @location.carrier_id = params[:carrier_id]
+    end
     authorize @location
   end
 
   # GET /locations/1/edit
   def edit
-    client = Client.find(@location.client_id)
-    @is_head_office = client.head_office == @location.id
+    client = Client.find_by(id: @location.client_id)
+    carrier = Carrier.find_by(id: @location.carrier_id)
+    @is_head_office = client.head_office == @location.id || carrier.head_office == @location.id
   end
 
   # POST /locations
@@ -39,7 +43,11 @@ class LocationsController < ApplicationController
           client = Client.find(params[:location][:client_id])
           client.update_attributes(:head_office => @location.id)
         end
-        format.html { redirect_to client_path(:id => @location.client_id), notice: 'Location was successfully created.' }
+        if @location.client_id
+          format.html { redirect_to client_path(:id => @location.client_id), notice: 'Location was successfully created.' }
+        elsif @location.carrier_id
+          format.html { redirect_to carrier_path(:id => @location.carrier_id), notice: 'Location was successfully created.' }
+        end
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
@@ -57,7 +65,11 @@ class LocationsController < ApplicationController
           client = Client.find(params[:location][:client_id])
           client.update_attributes(:head_office => @location.id)
         end
-        format.html { redirect_to client_path(:id => @location.client_id), notice: 'Location was successfully updated.' }
+        if @location.client_id
+          format.html { redirect_to client_path(:id => @location.client_id), notice: 'Location was successfully updated.' }
+        elsif @location.carrier_id
+          format.html { redirect_to carrier_path(:id => @location.carrier_id), notice: 'Location was successfully updated.' }
+        end
         format.json { render :show, status: :ok, location: @location }
       else
         format.html { render :edit }

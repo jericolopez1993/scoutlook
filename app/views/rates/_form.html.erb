@@ -6,7 +6,7 @@
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate - #{rate.client.nil? ? "" : link_to(rate.client.company_name, rate.client)}", sub_header_title: ''%>
+<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate - #{rate.client.nil? ? "" : link_to(rate.client.company_name, rate.client)}" %>
 <!-- end page-header -->
 <!-- begin panel -->
 

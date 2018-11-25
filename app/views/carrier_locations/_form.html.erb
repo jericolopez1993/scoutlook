@@ -1,0 +1,102 @@
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: 'Locations' %>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title"> <%= params[:action] == 'new' ? 'Create New Location' : "Edit Location - #{carrier_location.name}"%></h4>
+  </div>
+  <div class="panel-body">
+  <%= form_with(model: carrier_location, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+  <%= form.hidden_field :carrier_id %>
+  <% if carrier_location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(carrier.errors.count, "error") %> prohibited this carrier from being saved:</h2>
+
+      <ul>
+      <% carrier.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+                <div class="form-group row m-b-15">
+                  <%= form.label :name, 'Location Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
+                  <%= form.text_field :name, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :loc_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
+                  <%= form.select :loc_type, options_for_select(['Plant', 'Warehouse', 'DC', 'Supplier', 'Customer', 'Third Party'], carrier_location.loc_type),{:include_blank => true}, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <label class="text-right col-md-2 col-sm-4 col-form-label"> is Head Office or MCR? <i>(Need to input address fields)</i></label>
+                  <div class="col-md-9 col-sm-8">
+                    <input type="checkbox" name="head_office" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-same-office"  <%= is_head_office ? 'checked' : '' %>/>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15 head-office-fields">
+                  <label class="text-right col-md-2 col-sm-4 col-form-label">same as Head Office or Master Carrier Record? </label>
+                  <div class="col-md-9 col-sm-8">
+                    <input type="checkbox" name="same_ho" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-text"  <%= carrier_location.same_ho ? 'checked' : '' %>/>
+                  </div>
+                </div>
+
+                <%= render 'carriers/address_form', form: form %>
+                <div class="form-group row m-b-15 address-fields">
+                  <%= form.label :phone, 'Phone #:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
+                  <%= form.text_field :phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :poc_id, 'Primary Ops Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
+                  <%= form.select :poc_id, CarrierContact.where(:carrier_id => carrier_location.carrier_id).collect {|r| [ "#{r.first_name} #{r.last_name} - (#{r.email})", r.id ] },{:include_blank => true, :selected => carrier_location.poc_id}, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <%= form.label :soc_id, 'Secondary Ops Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <div class="col-md-9 col-sm-8">
+                  <%= form.select :soc_id, CarrierContact.where(:carrier_id => carrier_location.carrier_id).collect {|r| [ "#{r.first_name} #{r.last_name} - (#{r.email})", r.id ] },{:include_blank => true, :selected => carrier_location.soc_id}, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <label class="text-right col-md-2 col-sm-4 col-form-label"> is Origin?</label>
+                  <div class="col-md-9 col-sm-8">
+                    <input type="checkbox" name="origin" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" <%= is_origin ? 'checked' : '' %>/>
+                  </div>
+                </div>
+                <div class="form-group row m-b-15">
+                  <label class="text-right col-md-2 col-sm-4 col-form-label"> is Destination? </label>
+                  <div class="col-md-9 col-sm-8">
+                    <input type="checkbox" name="destination" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= is_destination ? 'checked' : '' %>/>
+                  </div>
+                </div>
+                <div class="form-group row m-b-0">
+                  <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
+                  <div class="col-md-9 col-sm-8">
+                    <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+                    <% carrier = Carrier.find(carrier_location.carrier_id)%>
+                    <% if params[:action] == 'edit' %>
+                      &nbsp;&nbsp;<%= link_to 'Show', carrier, :class => 'btn btn-info' %>
+                    <% end %>
+                    <% if params[:action] == 'new' %>
+                      &nbsp;&nbsp;<%= link_to 'Back', carriers_path, :class => 'btn btn-default' %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+</div>
+<!-- end panel -->
+<script language="javascript">
+	populateCountries("carrier_location_country", "carrier_location_state");
+
+</script>
