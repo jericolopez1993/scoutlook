@@ -86,14 +86,14 @@ test:
 #
 production:
   <<: *default
-  database: pb_platform_production
+  database: pb2_production
   username: pb_platform
   password: pb_platform
   host: localhost
 
 staging:
   <<: *default
-  database: pb_platform_staging
+  database: pb2_staging
   username: pb_platform
   password: pb_platform
   host: localhost
