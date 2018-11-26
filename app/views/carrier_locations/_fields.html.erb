@@ -1,0 +1,75 @@
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label :address, 'Address:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+  <%= form.text_field :address, class: 'form-control', :value => carrier_location.address %>
+  </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label :city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+    <%= form.text_field :city, class: 'form-control', :value => carrier_location.city %>
+  </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label :state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+  <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "loc_state" %>
+  </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label :postal, 'Postal / Zip:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+  <%= form.text_field :postal, class: 'form-control', :value => carrier_location.postal, :id => "loc_postal" %>
+  </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label :country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+  <%= form.select :country, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "loc_country" %>
+  </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label :phone, 'Phone #:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+  <%= form.text_field :phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", :value => carrier_location.phone %>
+  </div>
+</div>
+<% if params[:controller] != "clients" && params[:controller] != "carriers" %>
+  <div class="form-group row m-b-15">
+    <label class="text-right col-md-2 col-sm-4 col-form-label"> is Head Office or MCR?</label>
+    <div class="col-md-9 col-sm-8">
+      <input type="checkbox" name="head_office" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-same-office" <%= is_head_office ? 'checked' : '' %> />
+    </div>
+  </div>
+<% end %>
+<div class="form-group row m-b-15">
+  <label class="text-right col-md-2 col-sm-4 col-form-label"> is Origin?</label>
+  <div class="col-md-9 col-sm-8">
+    <input type="checkbox" name="origin" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" <%= carrier_location.is_origin ? 'checked' : '' %>/>
+  </div>
+</div>
+<div class="form-group row m-b-15">
+  <label class="text-right col-md-2 col-sm-4 col-form-label"> is Destination? </label>
+  <div class="col-md-9 col-sm-8">
+    <input type="checkbox" name="destination" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= carrier_location.is_destination ? 'checked' : '' %>/>
+  </div>
+</div>
+
+<script language="javascript">
+	populateCountries("loc_country", "loc_state");
+  setFieldMask('loc_country', 'loc_postal');
+
+  $(function(){
+    $("#loc_country").change(function(){
+      setFieldMask('loc_country', 'loc_postal');
+    });
+  });
+  $("#loc_country").val('Canada').change();
+
+  <% if carrier_location.country.present? %>
+    tiggerChangeOnSelectCountry('loc_country', '<%= carrier_location.country %>')
+  <% end %>
+  <% if carrier_location.state.present? %>
+    tiggerChangeOnSelectCountry('loc_state', '<%= carrier_location.state %>')
+  <% end %>
+</script>

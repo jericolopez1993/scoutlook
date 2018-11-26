@@ -1,15 +1,16 @@
 class CarrierLocation < ApplicationRecord
-  # before_create :set_location_id
-  #
-  # def set_location_id
-  #   count = (CarrierLocation.all.length + 1).to_s.rjust(5, '0')
-  #   self.location_id = "ENG" + count
-  # end
-
-  def location
-    if !self.location_id.nil?
-      Location.find(self.location_id)
+  audited
+  def display_name
+    if self.carrier.nil?
+      "Location"
     else
+      "<a href='/carrier_locations/#{self.id}'>Location</a>"
+    end
+  end
+  def carrier
+    begin
+      Carrier.find(self.carrier_id)
+    rescue
       nil
     end
   end

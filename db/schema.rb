@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_205658) do
+ActiveRecord::Schema.define(version: 2018_11_26_222836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,15 +109,17 @@ ActiveRecord::Schema.define(version: 2018_11_26_205658) do
   end
 
   create_table "carrier_locations", force: :cascade do |t|
-    t.string "carrier_id"
     t.string "name"
+    t.string "city"
+    t.string "address"
+    t.string "state"
+    t.string "postal"
+    t.string "country"
     t.string "loc_type"
-    t.text "special_instructions"
     t.string "phone"
-    t.integer "poc_id"
-    t.integer "soc_id"
-    t.boolean "same_ho", default: false
-    t.integer "location_id"
+    t.boolean "is_origin", default: false
+    t.boolean "is_destination", default: false
+    t.integer "carrier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

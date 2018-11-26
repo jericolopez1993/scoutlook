@@ -1,4 +1,3 @@
-
 <!-- begin page-header -->
 <%= render 'layouts/static/header', header_title: 'Locations' %>
 <!-- end page-header -->
@@ -11,39 +10,7 @@
     <h4 class="panel-title">List of Locations</h4>
   </div>
   <div class="panel-body">
-    <table class="table table-striped table-bordered data-table-buttons display nowrap">
-    								<thead>
-    									<tr class="odd gradeX">
-    										<th width="1%">#</th>
-      									<th width="1%">Carrier</th>
-    										<th>Name</th>
-    										<th>Type</th>
-    										<th>Address</th>
-    										<th>Country</th>
-    										<th>Phone</th>
-										    <th data-orderable="false">Actions</th>
-    									</tr>
-    								</thead>
-    								<tbody>
-                      <% @carrier_locations.each do |carrier_location| %>
-                        <tr>
-                          <td><%= carrier_location.location_id %></td>
-                          <td><%= carrier_location.carrier_id %></td>
-                          <td><%= carrier_location.name %></td>
-                          <td><%= carrier_location.loc_type %></td>
-                          <td><%= carrier_location.address %></td>
-                          <td><%= carrier_location.country %></td>
-                          <td><%= carrier_location.phone %></td>
-                          <td>
-                            <%= link_to 'Show', carrier_location, :class => 'btn btn-info' %>
-                            <%= link_to 'Edit', edit_carrier_location_path(carrier_location), :class => 'btn btn-warning' %>
-                            <%= link_to 'Delete', carrier_location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
-                          </td>
-
-                        </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
+  <%= render 'table', carrier_locations: @carrier_locations, client: nil, carrier: nil %>
   </div>
 </div>
 <!-- end panel -->

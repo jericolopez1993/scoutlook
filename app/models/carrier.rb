@@ -20,6 +20,10 @@ class Carrier < ApplicationRecord
     end
   end
 
+  def locations
+    CarrierLocation.where(:carrier_id => self.id)
+  end
+
   def carrier_lanes
     CarrierLane.where(:carrier_id => self.id)
   end
@@ -66,7 +70,7 @@ class Carrier < ApplicationRecord
 
   def head_office_location
     begin
-      Location.find(self.head_office)
+      CarrierLocation.find(self.head_office)
     rescue
       nil
     end
@@ -74,7 +78,7 @@ class Carrier < ApplicationRecord
 
   def location
     begin
-      Location.find(self.head_office)
+      CarrierLocation.find(self.head_office)
     rescue
       nil
     end

@@ -1,5 +1,4 @@
 class CarrierLocationsController < ApplicationController
-  include ApplicationHelper
   before_action :set_carrier_location, only: [:show, :edit, :update, :destroy]
 
   # GET /carrier_locations
@@ -25,42 +24,24 @@ class CarrierLocationsController < ApplicationController
 
   # GET /carrier_locations/1/edit
   def edit
-    carrier = Carrier.find(@carrier_location.carrier_id)
-    @is_origin = carrier.origin == @carrier_location.id
-    @is_destination = carrier.destination == @carrier_location.id
-    @is_head_office = carrier.head_office == @carrier_location.id
+    carrier = Carrier.find_by(id: @carrier_location.carrier_id)
+    @is_head_office =  carrier.head_office == @carrier_location.id
   end
 
   # POST /carrier_locations
   # POST /carrier_locations.json
   def create
     @carrier_location = CarrierLocation.new(carrier_location_params)
-    @carrier_location.same_ho = params[:same_ho].present?
-    if params[:carrier_location][:location_id].present? || params[:carrier_location][:address].present? ||  params[:carrier_location][:city].present? ||  params[:carrier_location][:state].present? ||  params[:carrier_location][:postal].present? ||  params[:carrier_location][:city].present?
-      if is_numeric?(params[:carrier_location][:location_id])
-        @location_id =  params[:carrier_location][:location_id]
-      else
-        @location = Location.new(address_params)
-        @location.name = params[:carrier_location][:location_id]
-        @location.save
-        @location_id = @location.id
-      end
-      @carrier_location.location_id = @location_id
-    end
 
     respond_to do |format|
       if @carrier_location.save
-        carrier = Carrier.find(@carrier_location.carrier_id)
-        if params[:origin].present?
-          carrier.update_attributes(:origin => @carrier_location.id)
-        end
-        if params[:destination].present?
-          carrier.update_attributes(:destination => @carrier_location.id)
-        end
-        if params[:head_office].present?
+        if params[:head_office].present? && !params[:carrier_location][:carrier_id].nil? && params[:carrier_location][:carrier_id] != ""
+          carrier = Carrier.find(params[:carrier_location][:carrier_id])
           carrier.update_attributes(:head_office => @carrier_location.id)
         end
-        format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Carrier Location was successfully created.' }
+        if @carrier_location.carrier_id
+          format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Location was successfully created.' }
+        end
         format.json { render :show, status: :created, carrier_location: @carrier_location }
       else
         format.html { render :new }
@@ -72,32 +53,15 @@ class CarrierLocationsController < ApplicationController
   # PATCH/PUT /carrier_locations/1
   # PATCH/PUT /carrier_locations/1.json
   def update
-    if params[:carrier_location][:location_id].present? || params[:carrier_location][:address].present? ||  params[:carrier_location][:city].present? ||  params[:carrier_location][:state].present? ||  params[:carrier_location][:postal].present? ||  params[:carrier_location][:city].present?
-      puts is_numeric?(params[:carrier_location][:location_id])
-      if is_numeric?(params[:carrier_location][:location_id])
-        @location_id =  params[:carrier_location][:location_id]
-      else
-        @location = Location.new(address_params)
-        @location.name = params[:carrier_location][:location_id]
-        @location.save
-        @location_id = @location.id
-      end
-    end
-    params[:carrier_location][:location_id] = @location_id
     respond_to do |format|
       if @carrier_location.update(carrier_location_params)
-        @carrier_location.update_attributes(:same_ho => params[:same_ho].present?)
-        carrier = Carrier.find(@carrier_location.carrier_id)
-        if params[:origin].present?
-          carrier.update_attributes(:origin => @carrier_location.id)
-        end
-        if params[:destination].present?
-          carrier.update_attributes(:destination => @carrier_location.id)
-        end
-        if params[:head_office].present?
+        if params[:head_office].present? && !params[:carrier_location][:carrier_id].nil? && params[:carrier_location][:carrier_id] != ""
+          carrier = Carrier.find(params[:carrier_location][:carrier_id])
           carrier.update_attributes(:head_office => @carrier_location.id)
         end
-        format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Carrier Location was successfully updated.' }
+        if @carrier_location.carrier_id
+          format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Location was successfully updated.' }
+        end
         format.json { render :show, status: :ok, carrier_location: @carrier_location }
       else
         format.html { render :edit }
@@ -111,7 +75,7 @@ class CarrierLocationsController < ApplicationController
   def destroy
     @carrier_location.destroy
     respond_to do |format|
-      format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Carrier Location was successfully destroyed.' }
+      format.html { redirect_to carrier_locations_url, notice: 'Location was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -125,9 +89,9 @@ class CarrierLocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_location_params
-      params.require(:carrier_location).permit(:carrier_id, :carrier_location_id, :name, :loc_type, :special_instructions, :phone, :poc_id, :soc_id, :location_id)
-    end
-    def address_params
-      params.require(:carrier_location).permit(:address, :city, :state, :postal, :country)
+      params[:carrier_location][:is_origin] = params[:origin].present?
+      params[:carrier_location][:is_destination] = params[:destination].present?
+      params[:carrier_location][:name] = params[:carrier_location][:carrier_location_name]
+      params.require(:carrier_location).permit(:name, :address, :country, :state, :city, :postal, :is_origin, :is_destination, :loc_type, :phone, :carrier_id)
     end
 end

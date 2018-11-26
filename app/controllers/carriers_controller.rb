@@ -30,7 +30,7 @@ class CarriersController < ApplicationController
     @carrier = Carrier.new(carrier_params)
     respond_to do |format|
       if @carrier.save
-        @location = Location.new(location_params)
+        @location = CarrierLocation.new(location_params)
         @location.carrier_id = @carrier.id
         if @location.save
           @carrier.update_attributes(:head_office => @location.id)
