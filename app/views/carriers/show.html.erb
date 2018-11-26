@@ -108,99 +108,51 @@ Add Attachment
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Rep's Name:</label>
+            <label class="col-md-2 col-form-label">Score Card:</label>
             <div class="col-md-9 lbl-padding-t">
-              <% if @carrier.relationship_owner.present? && !@carrier.relationship_owner.nil?%>
-              <%= link_to "#{@carrier.rep.first_name} #{@carrier.rep.last_name}", rep_path(:id => @carrier.relationship_owner) %>
-              <% end %>
+              <%= @carrier.score_card %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Sales priority:</label>
+            <label class="col-md-2 col-form-label">Freight Guard:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.sales_priority %>
+              <%= @carrier.freight_guard %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Phone:</label>
+            <label class="col-md-2 col-form-label">Years in Business:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.phone %>
+              <%= @carrier.years_in_business %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Annual Revenue:</label>
+            <label class="col-md-2 col-form-label">Owner Operators:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.annual_revenue %>
+              <%= @carrier.owner_operators %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Industry:</label>
+            <label class="col-md-2 col-form-label">Reefers:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.industry %>
+              <%= @carrier.reefers %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Primary Industry:</label>
+            <label class="col-md-2 col-form-label">Dry Vans:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.primary_industry %>
+              <%= @carrier.dry_vans %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Hazardous:</label>
+            <label class="col-md-2 col-form-label">Contact Rates:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.hazardous %>
+              <%= @carrier.contract_rates %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Food Grade:</label>
+            <label class="col-md-2 col-form-label">How do they find loads:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.food_grade %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Freight Revenue:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.freight_revenue %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Credit Status:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.credit_status %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Credit Approval:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.credit_approval %>
-            </div>
-          </div>
-          <hr>
-          <div class="form-group row m-b-25">
-            <h4 class="text-inverse">Volume</h4>
-          </div>
-          <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Intra:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.volume_intra %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">Inter:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.volume_inter %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">to USA:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.volume_to_usa %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <label class="col-md-2 col-form-label">from USA:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @carrier.volume_from_usa %>
+              <%= @carrier.find_loads.nil? ? "" : @carrier.find_loads.html_safe %>
             </div>
           </div>
           <div class="form-group row m-b-15">
