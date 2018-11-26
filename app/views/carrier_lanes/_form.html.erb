@@ -1,4 +1,4 @@
-<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Client' : "Edit Client - #{client.company_name}" %>
+<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Lane' : "Edit Lane " %>
 <!-- end page-header -->
 <!-- begin panel -->
 
@@ -52,7 +52,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :preferred_load_day, 'Preferred Load Day:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.select :preferred_load_day, options_for_select(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], carrier_lane.preferred_load_day),{:include_blank => true}, class: 'form-control' %>
+            <%= form.select :preferred_load_day, options_for_select(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], carrier_lane.preferred_load_day),{}, class: 'form-control', multiple: true %>
           </div>
         </div>
         <div class="form-group row m-b-15">
