@@ -36,13 +36,8 @@ label {
 		</a>
 	</li>
 	<li class="nav-items text-center" style="width:50%; margin-left:-.5px;">
-		<a href="#attachments" data-toggle="tab" class="nav-link attachment-btn">
-			<span class="d-sm-none">Attachments</span>
-		</a>
-	</li>
-	<li class="nav-items text-center" style="width:50%; margin-left:-.5px;">
-		<a href="#shipments" data-toggle="tab" class="nav-link hide-btn">
-			<span class="d-sm-none">Shipments</span>
+		<a href="#lanes" data-toggle="tab" class="nav-link attachment-btn">
+			<span class="d-sm-none">Lanes</span>
 		</a>
 	</li>
 	<li class="nav-items text-center" style="width:50%; margin-left:-.5px;">
@@ -66,6 +61,7 @@ Add Attachment
 </button>
         <%= link_to 'New Location', new_location_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-location-btn' %>
         <%= link_to 'New Contact', new_carrier_contact_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-contact-btn' %>
+        <%= link_to 'New Lane', new_carrier_lane_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
         <%= link_to 'Edit', edit_carrier_path(@carrier), :class => 'btn btn-warning btn-xs' %>
         <%= link_to 'Back', carriers_path, :class => 'btn btn-info btn-xs' %>
       </div>
@@ -81,13 +77,8 @@ Add Attachment
         </a>
       </li>
       <li class="nav-items">
-        <a href="#invoices" data-toggle="tab" class="nav-link rate-btn" style="padding:5px; margin: 0px 10px">
-          <span class="d-sm-block d-none"><h4 class="panel-title"></h4>Invoices</span>
-        </a>
-      </li>
-      <li class="nav-items">
-        <a href="#shipments" data-toggle="tab" class="nav-link hide-btn" style="padding:5px; margin: 0px 10px">
-          <span class="d-sm-block d-none"><h4 class="panel-title"></h4>Shipments</span>
+        <a href="#lanes" data-toggle="tab" class="nav-link lane-btn" style="padding:5px; margin: 0px 10px">
+          <span class="d-sm-block d-none"><h4 class="panel-title">Lanes</h4></span>
         </a>
       </li>
       <li class="nav-items">
@@ -249,16 +240,11 @@ Add Attachment
           </table>
         </div>
       </div>
-        <div class="tab-pane fade" id="invoices">
+        <div class="tab-pane fade" id="lanes">
           <div class="panel-body">
-            <%= render 'master_invoices/table', master_invoices: @carrier.master_invoices %>
+            <%= render 'carrier_lanes/table', carrier_lanes: @carrier.carrier_lanes %>
           </div>
         </div>
-      <div class="tab-pane fade" id="shipments">
-        <div class="panel-body">
-          <%= render 'shipments', shipments: @carrier.shipments, carrier: @carrier %>
-        </div>
-      </div>
       <div class="tab-pane fade" id="locations">
         <div class="panel-body">
           <%= render 'locations/table', locations: Location.where(:carrier_id => @carrier.id), client: nil, carrier: @carrier %>
@@ -307,21 +293,25 @@ Add Attachment
 
 <!-- end panel -->
 <script type="text/javascript">
-$('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-rate-btn, .new-attachment-btn').hide();
+$('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn').hide();
 $('.location-btn').on('click', function(){
-    $('.new-contact-btn, .new-rate-btn, .new-activity-btn, .new-attachment-btn').hide();
+    $('.new-contact-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn').hide();
     $('.new-location-btn').show();
 });
 $('.contact-btn').on('click', function(){
-    $('.new-location-btn, .new-rate-btn, .new-activity-btn, .new-attachment-btn').hide();
+    $('.new-location-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn').hide();
     $('.new-contact-btn').show();
 });
 $('.attachment-btn').on('click', function(){
-    $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-rate-btn').hide();
+    $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn').hide();
     $('.new-attachment-btn').show();
 });
+$('.lane-btn').on('click', function(){
+    $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn').hide();
+    $('.new-lane-btn').show();
+});
 $('.hide-btn').on('click', function(){
-    $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-rate-btn, .new-attachment-btn').hide();
+    $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn').hide();
 });
 
 </script>

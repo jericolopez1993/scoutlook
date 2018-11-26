@@ -31,7 +31,7 @@ class CarrierLanesController < ApplicationController
 
     respond_to do |format|
       if @carrier_lane.save
-        format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier lane was successfully created.' }
+        format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_lane }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class CarrierLanesController < ApplicationController
   def update
     respond_to do |format|
       if @carrier_lane.update(carrier_lane_params)
-        format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier lane was successfully updated.' }
+        format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier_lane }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class CarrierLanesController < ApplicationController
   def destroy
     @carrier_lane.destroy
     respond_to do |format|
-      format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier lane was successfully destroyed.' }
+      format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -72,6 +72,6 @@ class CarrierLanesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_lane_params
-      params.require(:carrier_lane).permit(:lane_priority, :lane_origin, :lane_destination, :truck_per_week, :preferred_load_day, :notes)
+      params.require(:carrier_lane).permit(:lane_priority, :lane_origin, :lane_destination, :truck_per_week, :preferred_load_day, :notes, :carrier_id)
     end
 end

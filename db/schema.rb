@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_25_135925) do
+ActiveRecord::Schema.define(version: 2018_11_26_034937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,18 @@ ActiveRecord::Schema.define(version: 2018_11_25_135925) do
     t.string "first_name"
     t.string "linkedin_link"
     t.integer "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "carrier_lanes", force: :cascade do |t|
+    t.string "lane_priority"
+    t.string "lane_origin"
+    t.string "lane_destination"
+    t.integer "truck_per_week"
+    t.string "preferred_load_day"
+    t.text "notes"
+    t.integer "carrier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

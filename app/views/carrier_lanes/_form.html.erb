@@ -3,6 +3,7 @@
 <!-- begin panel -->
 
 <%= form_with(model: carrier_lane, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+<%= form.hidden_field :carrier_id %>
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-inverse">
@@ -65,12 +66,7 @@
           <div class="col-md-2"></div>
           <div class="col-md-9 col-sm-12 d-flex justify-content-end">
             <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-            <% if params[:action] == 'edit' %>
-              &nbsp;&nbsp;<%= link_to 'Show', client, :class => 'btn btn-info' %>
-            <% end %>
-            <% if params[:action] == 'new' %>
-              &nbsp;&nbsp;<%= link_to 'Back', clients_path, :class => 'btn btn-default' %>
-            <% end %>
+            &nbsp;&nbsp;<%= link_to 'Back', carrier_path(:id => carrier_lane.carrier_id), :class => 'btn btn-info' %>
           </div>
         </div>
       </div>
@@ -81,52 +77,3 @@
 <% end %>
 <%= tinymce %>
 <!-- end panel -->
-
-
-<%= form_with(model: carrier_lane, local: true) do |form| %>
-  <% if carrier_lane.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(carrier_lane.errors.count, "error") %> prohibited this carrier_lane from being saved:</h2>
-
-      <ul>
-      <% carrier_lane.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :lane_priority %>
-    <%= form.text_field :lane_priority %>
-  </div>
-
-  <div class="field">
-    <%= form.label :lane_origin %>
-    <%= form.text_field :lane_origin %>
-  </div>
-
-  <div class="field">
-    <%= form.label :lane_destination %>
-    <%= form.text_field :lane_destination %>
-  </div>
-
-  <div class="field">
-    <%= form.label :truck_per_week %>
-    <%= form.number_field :truck_per_week %>
-  </div>
-
-  <div class="field">
-    <%= form.label :preferred_load_day %>
-    <%= form.text_field :preferred_load_day %>
-  </div>
-
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_area :notes %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

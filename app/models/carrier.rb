@@ -20,6 +20,10 @@ class Carrier < ApplicationRecord
     end
   end
 
+  def carrier_lanes
+    CarrierLane.where(:carrier_id => self.id)
+  end
+
   def default_location
       if !self.origin.nil?
         CarrierLocation.find(self.origin).location
@@ -56,31 +60,12 @@ class Carrier < ApplicationRecord
     end
   end
 
-  def shipments
-    carrier_locations = Location.where(:carrier_id => self.id)
-    if carrier_locations.length > 0
-      carrier_location_ids = carrier_locations.distinct(:id).pluck(:id).map(&:inspect).join(',')
-      if carrier_location_ids != ''
-        Shipment.where("origin_location_id IN (#{carrier_location_ids}) OR destination_location_id IN (#{carrier_location_ids})")
-      else
-        nil
-      end
-    else
-      nil
-    end
-  end
-
   def location
     begin
       Location.find(self.head_office)
     rescue
       nil
     end
-  end
-
-
-  def master_invoices
-    MasterInvoice.where("shipper_id = #{self.id} OR carrier_id = #{self.id}")
   end
 
   def is_inbound?(location_id)
