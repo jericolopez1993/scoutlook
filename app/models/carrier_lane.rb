@@ -1,0 +1,2 @@
+class CarrierLane < ApplicationRecord
+end

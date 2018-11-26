@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lane priority:</strong>
+  <%= @carrier_lane.lane_priority %>
+</p>
+
+<p>
+  <strong>Lane origin:</strong>
+  <%= @carrier_lane.lane_origin %>
+</p>
+
+<p>
+  <strong>Lane destination:</strong>
+  <%= @carrier_lane.lane_destination %>
+</p>
+
+<p>
+  <strong>Truck per week:</strong>
+  <%= @carrier_lane.truck_per_week %>
+</p>
+
+<p>
+  <strong>Preferred load day:</strong>
+  <%= @carrier_lane.preferred_load_day %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @carrier_lane.notes %>
+</p>
+
+<%= link_to 'Edit', edit_carrier_lane_path(@carrier_lane) %> |
+<%= link_to 'Back', carrier_lanes_path %>
