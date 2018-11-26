@@ -15,6 +15,9 @@ class CarrierLanesController < ApplicationController
   # GET /carrier_lanes/new
   def new
     @carrier_lane = CarrierLane.new
+    if params[:carrier_id].present?
+      @carrier_lane.carrier_id = params[:carrier_id]
+    end
   end
 
   # GET /carrier_lanes/1/edit
@@ -28,7 +31,7 @@ class CarrierLanesController < ApplicationController
 
     respond_to do |format|
       if @carrier_lane.save
-        format.html { redirect_to @carrier_lane, notice: 'Carrier lane was successfully created.' }
+        format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier lane was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_lane }
       else
         format.html { render :new }
@@ -42,7 +45,7 @@ class CarrierLanesController < ApplicationController
   def update
     respond_to do |format|
       if @carrier_lane.update(carrier_lane_params)
-        format.html { redirect_to @carrier_lane, notice: 'Carrier lane was successfully updated.' }
+        format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier lane was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier_lane }
       else
         format.html { render :edit }
@@ -56,7 +59,7 @@ class CarrierLanesController < ApplicationController
   def destroy
     @carrier_lane.destroy
     respond_to do |format|
-      format.html { redirect_to carrier_lanes_url, notice: 'Carrier lane was successfully destroyed.' }
+      format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier lane was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
