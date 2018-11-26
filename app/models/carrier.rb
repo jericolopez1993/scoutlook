@@ -24,6 +24,18 @@ class Carrier < ApplicationRecord
     CarrierLane.where(:carrier_id => self.id)
   end
 
+  def lane_1
+    CarrierLane.where(:carrier_id => self.id, :lane_priority => 1).first
+  end
+
+  def lane_2
+    CarrierLane.where(:carrier_id => self.id, :lane_priority => 2).first
+  end
+
+  def lane_3
+    CarrierLane.where(:carrier_id => self.id, :lane_priority => 3).first
+  end
+
   def default_location
       if !self.origin.nil?
         CarrierLocation.find(self.origin).location

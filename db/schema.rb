@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(version: 2018_11_26_205658) do
   end
 
   create_table "carrier_lanes", force: :cascade do |t|
-    t.string "lane_priority"
     t.string "lane_origin"
     t.string "lane_destination"
     t.integer "truck_per_week"
@@ -106,6 +105,7 @@ ActiveRecord::Schema.define(version: 2018_11_26_205658) do
     t.integer "carrier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "lane_priority"
   end
 
   create_table "carrier_locations", force: :cascade do |t|
@@ -154,6 +154,8 @@ ActiveRecord::Schema.define(version: 2018_11_26_205658) do
     t.integer "owner_operators", default: 0
     t.integer "reefers", default: 0
     t.integer "dry_vans", default: 0
+    t.integer "flat_beds", default: 0
+    t.integer "teams", default: 0
     t.string "contract_rates"
     t.text "find_loads"
   end
