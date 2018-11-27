@@ -2,10 +2,10 @@ class Rate < ApplicationRecord
   audited
   has_one_attached :supporting_pdf
   def display_name
-    if self.client.nil?
+    if self.carrier.nil?
       "<a href='/rates/#{self.id}'>Rate</a>"
     else
-      "Rate to #{self.client.display_name}"
+      "Rate to #{self.carrier.display_name}"
     end
   end
   def rep
@@ -15,9 +15,9 @@ class Rate < ApplicationRecord
       nil
     end
   end
-  def client
+  def carrier
     begin
-      Client.find(self.client_id)
+      Carrier.find(self.carrier_id)
     rescue
       nil
     end
@@ -32,7 +32,7 @@ class Rate < ApplicationRecord
 
   def origin_location
     begin
-      Location.find(self.origin_location_id)
+      CarrierLocation.find(self.origin_location_id)
     rescue
       nil
     end
@@ -40,7 +40,7 @@ class Rate < ApplicationRecord
 
   def destination_location
     begin
-      Location.find(self.destination_location_id)
+      CarrierLocation.find(self.destination_location_id)
     rescue
       nil
     end

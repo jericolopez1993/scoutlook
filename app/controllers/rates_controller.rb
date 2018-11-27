@@ -20,6 +20,9 @@ class RatesController < ApplicationController
     if params[:client_id].present?
       @rate.client_id = params[:client_id]
     end
+    if params[:carrier_id].present?
+      @rate.carrier_id = params[:carrier_id]
+    end
     authorize @rate
   end
 
@@ -34,7 +37,7 @@ class RatesController < ApplicationController
 
     if params[:rate][:origin_location_id].present? || params[:rate][:origin_address].present? || params[:rate][:origin_country].present? ||  params[:rate][:origin_state].present? ||  params[:rate][:origin_postal].present? ||  params[:rate][:origin_city].present?
       if params[:origin_new_location].present?
-        location = Location.new
+        location = CarrierLocation.new
         location.address = params[:rate][:origin_address]
         location.country = params[:rate][:origin_country]
         location.state = params[:rate][:origin_state]
@@ -49,7 +52,7 @@ class RatesController < ApplicationController
     @rate.origin_location_id = @origin_location_id
     if params[:rate][:destination_location_id].present? || params[:rate][:destination_address].present? ||  params[:rate][:destination_country].present? ||  params[:rate][:destination_state].present? ||  params[:rate][:destination_postal].present? ||  params[:rate][:destination_city].present?
       if params[:destination_new_location].present?
-        location = Location.new
+        location = CarrierLocation.new
         location.address = params[:rate][:destination_address]
         location.country = params[:rate][:destination_country]
         location.state = params[:rate][:destination_state]
@@ -68,7 +71,8 @@ class RatesController < ApplicationController
         if params[:rate][:supporting_pdf].present?
           @rate.supporting_pdf.attach(params[:rate][:supporting_pdf])
         end
-        format.html { redirect_to @rate, notice: 'Rate was successfully created.' }
+        format.html { redirect_to carrier_path(:id => @rate.carrier_id), notice: 'Rate was successfully created.' }
+        # format.html { redirect_to @rate, notice: 'Rate was successfully created.' }
         format.json { render :show, status: :created, location: @rate }
       else
         format.html { render :new }
@@ -115,7 +119,8 @@ class RatesController < ApplicationController
         if params[:rate][:supporting_pdf].present?
           @rate.supporting_pdf.attach(params[:rate][:supporting_pdf])
         end
-        format.html { redirect_to @rate, notice: 'Rate was successfully updated.' }
+        format.html { redirect_to carrier_path(:id => @rate.carrier_id), notice: 'Rate was successfully updated.' }
+        # format.html { redirect_to @rate, notice: 'Rate was successfully updated.' }
         format.json { render :show, status: :ok, location: @rate }
       else
         format.html { render :edit }
@@ -150,6 +155,6 @@ class RatesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def rate_params
-      params.require(:rate).permit(:client_id, :rate_type, :parent_id, :rate_level, :rep_id, :effective_to, :effective_from, :origin_location_id, :destination_location_id, :freight_desc, :freight_classification, :transit_time, :minimum_density)
+      params.require(:rate).permit(:client_id, :carrier_id, :rate_type, :parent_id, :rate_level, :rep_id, :effective_to, :effective_from, :origin_location_id, :destination_location_id, :freight_desc, :freight_classification, :transit_time, :minimum_density)
     end
 end

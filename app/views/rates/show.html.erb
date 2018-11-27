@@ -9,26 +9,26 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: "#{@rate.client.nil? ? "" : link_to(@rate.client.company_name, @rate.client)}" %>
+<%= render 'layouts/static/header', header_title: "#{@rate.carrier.nil? ? "" : link_to(@rate.carrier.company_name, @rate.carrier)}" %>
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
       <%= link_to 'Edit', edit_rate_path(@rate), :class => 'btn btn-warning btn-xs' %>
-      <% if @previous_controller == "clients"%>
-        <% client = Client.find(@activity.client_id)%>
-        <%= link_to 'Back to Client', client, :class => 'btn btn-info' %>
-    <% else %>
-      <%= link_to 'Back', rates_path, :class => 'btn btn-info btn-xs' %>
-    <% end %>
+      <% if @previous_controller == "carriers"%>
+        <% carrier = Carrier.find(@rate.carrier_id)%>
+        <%= link_to 'Back ', carrier, :class => 'btn btn-info' %>
+      <% else %>
+        <%= link_to 'Back', carriers_path, :class => 'btn btn-info btn-xs' %>
+      <% end %>
     </div>
-    <h4 class="panel-title">  <%= @rate.client.nil? ? "None" : (link_to @rate.client.company_name, @rate.client) %></h4>
+    <h4 class="panel-title">  <%= @rate.carrier.nil? ? "None" : (link_to @rate.carrier.company_name, @rate.carrier) %></h4>
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Details</h4>
     <div class="row">
-      <label class="col-md-2 col-form-label">Client:</label>
+      <label class="col-md-2 col-form-label">Carrier:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.client.nil? ? "" : (link_to @rate.client.company_name, @rate.client) %>
+        <%= @rate.carrier.nil? ? "" : (link_to @rate.carrier.company_name, @rate.carrier) %>
       </div>
     </div>
     <div class="row">
