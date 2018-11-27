@@ -788,7 +788,7 @@ module ActiveRecord
           # +conn.lease+ the returned connection (and to do this in a +synchronized+
           # section). This is not the cleanest implementation, as ideally we would
           # <tt>synchronize { conn.lease }</tt> in this method, but by leaving it to <tt>@available.poll</tt>
-          # and +try_to_checkout_new_connection+ we can piggyback on +synchronize+ sections
+          # and +try_to_checkout_new_connection+ we can scout on +synchronize+ sections
           # of the said methods and avoid an additional +synchronize+ overhead.
           if conn = @available.poll || try_to_checkout_new_connection
             conn
