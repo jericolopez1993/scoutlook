@@ -14,12 +14,12 @@ class CarrierLanesTest < ApplicationSystemTestCase
     visit carrier_lanes_url
     click_on "New Carrier Lane"
 
-    fill_in "Lane Destination", with: @carrier_lane.lane_destination
-    fill_in "Lane Origin", with: @carrier_lane.lane_origin
-    fill_in "Lane Priority", with: @carrier_lane.lane_priority
+    fill_in "Destination", with: @carrier_lane.lane_destination
+    fill_in "Origin", with: @carrier_lane.lane_origin
+    fill_in "Priority", with: @carrier_lane.lane_priority
     fill_in "Notes", with: @carrier_lane.notes
-    fill_in "Preferred Load Day", with: @carrier_lane.preferred_load_day
-    fill_in "Truck Per Week", with: @carrier_lane.truck_per_week
+    fill_in "Preferred Load Days", with: @carrier_lane.preferred_load_day
+    fill_in "Trucks Per Week", with: @carrier_lane.truck_per_week
     click_on "Create Carrier lane"
 
     assert_text "Carrier lane was successfully created"
@@ -30,12 +30,12 @@ class CarrierLanesTest < ApplicationSystemTestCase
     visit carrier_lanes_url
     click_on "Edit", match: :first
 
-    fill_in "Lane Destination", with: @carrier_lane.lane_destination
-    fill_in "Lane Origin", with: @carrier_lane.lane_origin
-    fill_in "Lane Priority", with: @carrier_lane.lane_priority
+    fill_in "Destination", with: @carrier_lane.lane_destination
+    fill_in "Origin", with: @carrier_lane.lane_origin
+    fill_in "Priority", with: @carrier_lane.lane_priority
     fill_in "Notes", with: @carrier_lane.notes
-    fill_in "Preferred Load Day", with: @carrier_lane.preferred_load_day
-    fill_in "Truck Per Week", with: @carrier_lane.truck_per_week
+    fill_in "Preferred Load Days", with: @carrier_lane.preferred_load_day
+    fill_in "Trucks Per Week", with: @carrier_lane.truck_per_week
     click_on "Update Carrier lane"
 
     assert_text "Carrier lane was successfully updated"
