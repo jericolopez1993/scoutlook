@@ -14,15 +14,18 @@
       </div>
       <div class="panel-body">
         <% if carrier_lane.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(carrier_lane.errors.count, "error") %> prohibited this carrier_lane from being saved:</h2>
-
+        <div class="form-group row m-b-15">
+        <div class="col-md-12 col-sm-12">
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading"><%= pluralize(carrier_lane.errors.count, "error") %> prohibited this carrier_lane from being saved:</h4>
             <ul>
-            <% carrier_lane.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
+              <% carrier_lane.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
             </ul>
-          </div>
+        </div>
+    </div>
+      </div>
         <% end %>
         <h4 class="text-inverse">Details</h4>
         <div class="form-group row m-b-15">

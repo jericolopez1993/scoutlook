@@ -28,12 +28,18 @@ class CarrierLanesController < ApplicationController
   # POST /carrier_lanes.json
   def create
     @carrier_lane = CarrierLane.new(carrier_lane_params)
-
+    carrier_lanes = CarrierLane.where(:carrier_id => @carrier_lane.carrier_id, :lane_priority => @carrier_lane.lane_priority)
     respond_to do |format|
-      if @carrier_lane.save
-        format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully created.' }
-        format.json { render :show, status: :created, location: @carrier_lane }
+      if carrier_lanes.length == 0
+        if @carrier_lane.save
+          format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully created.' }
+          format.json { render :show, status: :created, location: @carrier_lane }
+        else
+          format.html { render :new }
+          format.json { render json: @carrier_lane.errors, status: :unprocessable_entity }
+        end
       else
+        @carrier_lane.errors.add(:lane_priority, "already exist.")
         format.html { render :new }
         format.json { render json: @carrier_lane.errors, status: :unprocessable_entity }
       end
@@ -43,11 +49,27 @@ class CarrierLanesController < ApplicationController
   # PATCH/PUT /carrier_lanes/1
   # PATCH/PUT /carrier_lanes/1.json
   def update
-    respond_to do |format|
-      if @carrier_lane.update(carrier_lane_params)
-        format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully updated.' }
-        format.json { render :show, status: :ok, location: @carrier_lane }
+    if params[:carrier_lane][:lane_priority].to_i == @carrier_lane.lane_priority.to_i
+      @doesnt_exist = true
+    else
+      carrier_lanes = CarrierLane.where(:carrier_id => @carrier_lane.carrier_id, :lane_priority => params[:carrier_lane][:lane_priority].to_i)
+      if carrier_lanes.length == 0
+        @doesnt_exist = true
       else
+        @doesnt_exist = false
+      end
+    end
+    respond_to do |format|
+      if @doesnt_exist
+        if @carrier_lane.update(carrier_lane_params)
+          format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully updated.' }
+          format.json { render :show, status: :ok, location: @carrier_lane }
+        else
+          format.html { render :edit }
+          format.json { render json: @carrier_lane.errors, status: :unprocessable_entity }
+        end
+      else
+        @carrier_lane.errors.add(:lane_priority, "already exist.")
         format.html { render :edit }
         format.json { render json: @carrier_lane.errors, status: :unprocessable_entity }
       end
