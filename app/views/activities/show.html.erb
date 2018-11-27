@@ -28,64 +28,64 @@ label {
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Outcome</h4>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Type:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @activity.activity_type %>
       </div>
     </div>
     <% if @activity.activity_type == "Engagement" %>
-      <div class="form-group row m-b-15">
+      <div class="row">
         <label class="col-md-2 col-form-label">Engagement Type:</label>
         <div class="col-md-9 lbl-padding-t">
           <%= @activity.engagement_type %>
         </div>
       </div>
     <% end %>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Client:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @activity.client.nil? ? "" : (link_to @activity.client.company_name, @activity.client) %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Rep:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @activity.rep.nil? ? "" : (link_to "#{@activity.rep.first_name} #{@activity.rep.last_name}", @activity.rep) %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Annual Value:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @activity.annual_value %>
       </div>
     </div>
 
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Status:</label>
       <div class="col-md-9 lbl-padding-t">
       <%= @activity.status ? 'Open' : 'Closed' %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Date Opened:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= convert_date(@activity.date_opened) %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Date Closed:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= convert_date(@activity.date_closed) %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Other Notes:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @activity.other_notes.nil? ? "" : @activity.other_notes.html_safe %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Complete Credit Application:</label>
       <div class="col-md-9 lbl-padding-t">
         <% if @activity.credit_application.attached? %>
@@ -97,20 +97,20 @@ label {
     <% if !@activity.outcome_id.nil? %>
         <hr>
         <h4 class="text-inverse">Outcome</h4>
-        <div class="form-group row m-b-15">
+        <div class="row">
           <label class="col-md-2 col-form-label">Outcome:</label>
           <div class="col-md-9 lbl-padding-t">
             <%= @activity.outcome.outcome %>
           </div>
         </div>
-          <div class="form-group row m-b-15">
+          <div class="row">
             <label class="col-md-2 col-form-label">Reason:</label>
             <div class="col-md-9 lbl-padding-t">
               <%= @activity.outcome.reason %>
             </div>
           </div>
 
-        <div class="form-group row m-b-15">
+        <div class="row">
           <label class="col-md-2 col-form-label">Notes:</label>
           <div class="col-md-9 lbl-padding-t">
             <%= @activity.outcome.notes.nil? ? "" : @activity.outcome.notes.html_safe %>

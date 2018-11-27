@@ -25,43 +25,43 @@ label {
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Details</h4>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Client:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.client.nil? ? "" : (link_to @rate.client.company_name, @rate.client) %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Level:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.rate_level %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Type:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.rate_type %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Rep:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.rep.nil? ? "" : (link_to "#{@rate.rep.first_name} #{@rate.rep.last_name}", @rate.rep) %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Parent:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.parent.nil? ? "" : (link_to "@rate.parent.rate_level, @rate.parent") %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Effective To:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.effective_to %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Effective From:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.effective_from %>
@@ -70,25 +70,25 @@ label {
 
     <hr>
     <h4 class="text-inverse">Other Information</h4>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Freight Description:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.freight_desc %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Freight Classification:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.freight_classification %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Transit Time:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.transit_time %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Minimum Density:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.minimum_density %>
@@ -97,13 +97,13 @@ label {
 
     <hr>
     <h4 class="text-inverse">Location</h4>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Origin:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.origin_location.nil? ? "" : location_format(@rate.origin_location) %>
       </div>
     </div>
-    <div class="form-group row m-b-15">
+    <div class="row">
       <label class="col-md-2 col-form-label">Destination:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.destination_location.nil? ? "" : location_format(@rate.destination_location) %>
