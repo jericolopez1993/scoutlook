@@ -19,7 +19,7 @@
                         <td><%= carrier_lane.lane_destination %></td>
                         <td><%= carrier_lane.truck_per_week %></td>
                         <td><%= carrier_lane.preferred_load_day %></td>
-                        <td><%= carrier_lane.notes %></td>
+                        <td><%= carrier_lane.notes.nil? ? "" : carrier_lane.notes.html_safe %></td>
                         <td>
                           <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_carrier_lane_path(carrier_lane), :class => 'btn btn-warning btn-xs' %>
                           <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, carrier_lane, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
