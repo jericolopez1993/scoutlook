@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_222836) do
+ActiveRecord::Schema.define(version: 2018_11_27_043356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,7 +128,6 @@ ActiveRecord::Schema.define(version: 2018_11_26_222836) do
     t.integer "relationship_owner"
     t.string "company_name"
     t.string "parent_id"
-    t.integer "sales_priority"
     t.string "phone"
     t.string "industry"
     t.string "primary_industry"
@@ -160,6 +159,11 @@ ActiveRecord::Schema.define(version: 2018_11_26_222836) do
     t.integer "teams", default: 0
     t.string "contract_rates"
     t.text "find_loads"
+    t.boolean "complete_record", default: false
+    t.string "total_fleet_size"
+    t.string "website"
+    t.string "linkedin"
+    t.string "sales_priority"
   end
 
   create_table "client_contacts", force: :cascade do |t|
