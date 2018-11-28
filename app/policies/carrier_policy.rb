@@ -19,6 +19,10 @@ class CarrierPolicy < ApplicationPolicy
     return true if user.present? && user.has_role?(:admin)
   end
 
+  def remove_attachment?
+    user.present? && user.has_role?(:admin)
+  end
+
   private
 
     def carrier
