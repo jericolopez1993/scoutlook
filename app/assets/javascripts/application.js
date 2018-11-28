@@ -385,7 +385,6 @@ function tiggerChangeOnSelectCountry(id, val) {
 }
 
 function shipmentFields(shipmentEntry) {
-  console.log(shipmentEntry);
   if (shipmentEntry == "Single") {
     $(".shipment-fields").show();
     $(".single-shipment").hide();
@@ -450,7 +449,6 @@ function clientLocation(id, name) {
     method: 'get',
     url: "/api/clients/"+id
   }).done(function(data) {
-    console.log(data.default_location.id)
     $("#"+ name +"_location_id").val(data.default_location.id).change();
   })
 

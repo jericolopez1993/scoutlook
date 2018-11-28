@@ -53,9 +53,16 @@ class CarriersController < ApplicationController
   def update
     respond_to do |format|
       if @carrier.update(carrier_params)
-        if params[:origin].present? || params[:destination].present? || params[:carrier][:location_name].present? || params[:carrier][:state].present? || params[:carrier][:city].present?
+        if @carrier.location.nil?
+          @location = CarrierLocation.new(location_params)
+          @location.carrier_id = @carrier.id
+          if @location.save
+            @carrier.update_attributes(:head_office => @location.id)
+          end
+        else
           @carrier.location.update_attributes(location_params)
         end
+
         if params[:carrier][:attachment_file].present?
           @carrier.attachment_file.attach(params[:carrier][:attachment_file])
         end

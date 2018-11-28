@@ -56,16 +56,18 @@
 </div>
 
 <script language="javascript">
-	populateCountries("loc_country", "loc_state");
-  setFieldMask('loc_country', 'loc_postal');
-
   $(function(){
+    populateCountries("loc_country", "loc_state");
     $("#loc_country").change(function(){
       setFieldMask('loc_country', 'loc_postal');
     });
+    <% if !carrier_location.country.nil? && carrier_location.country != ""  %>
+      $("#loc_country").val('<%= carrier_location.country %>').change();
+    <% else %>
+      $("#loc_country").val('Canada').change();
+    <% end %>
+    setTimeout(function(){ setFieldMask('loc_country', 'loc_postal'); }, 1000);
   });
-  $("#loc_country").val('Canada').change();
-
   <% if carrier_location.country.present? %>
     tiggerChangeOnSelectCountry('loc_country', '<%= carrier_location.country %>')
   <% end %>

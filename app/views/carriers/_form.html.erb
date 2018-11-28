@@ -142,7 +142,7 @@
         </div>
         <hr>
         <h4 class="text-inverse">Address</h4>
-        <%= render 'locations/fields', location: (carrier.location.nil? ? CarrierLocation.new : carrier.location), form: form %>
+        <%= render 'carrier_locations/fields', carrier_location: (carrier.location.nil? ? CarrierLocation.new : carrier.location), form: form %>
 
         <div class="form-group row m-b-15">
           <div class="col-md-2"></div>
