@@ -1,4 +1,4 @@
-names = Array[User, Activity, ActivityOutcome, Client, ClientContact, ClientLocation, Location, MasterInvoice, Rep, Shipment, Carrier, CarrierContact, CarrierLocation]
+names = Array[User, Activity, ActivityOutcome, Rep, Shipment, Carrier, CarrierContact, CarrierLocation]
 
 for name in names
   name.delete_all
