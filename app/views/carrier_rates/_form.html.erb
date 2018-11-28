@@ -6,11 +6,11 @@
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate - #{rate.client.nil? ? "" : link_to(rate.client.company_name, rate.client)}" %>
+<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate - #{carrier_rate.carrier.nil? ? "" : link_to(carrier_rate.carrier.company_name, carrier_rate.carrier)}" %>
 <!-- end page-header -->
 <!-- begin panel -->
 
-<%= form_with(model: rate, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+<%= form_with(model: carrier_rate, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
     <div class="panel panel-inverse">
       <div class="panel-heading">
         <div class="panel-heading-btn">
@@ -18,12 +18,12 @@
         <h4 class="panel-title">Information</h4>
       </div>
       <div class="panel-body">
-      <% if rate.errors.any? %>
+      <% if carrier_rate.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(rate.errors.count, "error") %> prohibited this rate from being saved:</h2>
+          <h2><%= pluralize(carrier_rate.errors.count, "error") %> prohibited this carrier_rate from being saved:</h2>
 
           <ul>
-          <% rate.errors.full_messages.each do |message| %>
+          <% carrier_rate.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
           </ul>
@@ -33,33 +33,33 @@
 
         <%= form.hidden_field :carrier_id %>
       <!-- <div class="form-group row m-b-15">
-        <%#= form.label :client_id, 'Client:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%#= form.label :carrier_id, 'Carrier:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%#= form.select :client_id, Client.all.collect {|r| [ r.company_name, r.id ] },{:include_blank => true, :selected => rate.client_id}, class: 'form-control' %>
+        <%#= form.select :carrier_id, Carrier.all.collect {|r| [ r.company_name, r.id ] },{:include_blank => true, :selected => carrier_rate.carrier_id}, class: 'form-control' %>
         </div>
       </div> -->
       <div class="form-group row m-b-15">
         <%= form.label :rate_level, 'Level:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.select :rate_level, options_for_select(['Master', 'Child'], rate.rate_level),{:include_blank => true}, class: 'form-control' %>
+        <%= form.select :rate_level, options_for_select(['Master', 'Child'], carrier_rate.rate_level),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :parent_id, 'Parent:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.select :parent_id, Rate.all.collect {|r| [ r.rate_type, r.id ] },{:include_blank => true, :selected => rate.parent_id}, class: 'form-control' %>
+        <%= form.select :parent_id, CarrierRate.all.collect {|r| [ r.rate_type, r.id ] },{:include_blank => true, :selected => carrier_rate.parent_id}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :rate_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.select :rate_type, options_for_select(['Contract', 'Proposal', 'Spot', 'Quote', 'PB'], rate.rate_type),{:include_blank => true}, class: 'form-control' %>
+        <%= form.select :rate_type, options_for_select(['Contract', 'Proposal', 'Spot', 'Quote', 'PB'], carrier_rate.rate_type),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :rep_id, 'Rep:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.select :rep_id, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => rate.rep_id}, class: 'form-control' %>
+        <%= form.select :rep_id, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier_rate.rep_id}, class: 'form-control' %>
         </div>
       </div>
         <div class="form-group row m-b-15">
@@ -106,26 +106,26 @@
         </div>
         <hr>
         <h4 class="text-inverse">Origin</h4>
-        <%= render 'clients/od_address_form', form: form, name: 'origin' %>
+        <%= render 'carriers/od_address_form', form: form, name: 'origin' %>
         <hr>
         <h4 class="text-inverse">Destination</h4>
-        <%= render 'clients/od_address_form', form: form, name: 'destination' %>
+        <%= render 'carriers/od_address_form', form: form, name: 'destination' %>
 
         <div class="form-group row m-b-15">
           <div class="col-md-2"></div>
             <div class="col-md-9 col-sm-12 d-flex justify-content-end">
               <%= form.submit 'Submit', :class => 'btn btn-primary' %>
               <% if params[:action] == 'edit' %>
-                &nbsp;&nbsp;<%= link_to 'Show', rate, :class => 'btn btn-info' %>
+                &nbsp;&nbsp;<%= link_to 'Show', carrier_rate, :class => 'btn btn-info' %>
               <% end %>
-              <% if @previous_controller == "clients"%>
-                <% client = Client.find(rate.client_id)%>
+              <% if @previous_controller == "carriers"%>
+                <% carrier = Carrier.find(carrier_rate.carrier_id)%>
                 <% if params[:action] == 'new' %>
-                  &nbsp;&nbsp;<%= link_to 'Back to Client', client, :class => 'btn btn-default' %>
+                  &nbsp;&nbsp;<%= link_to 'Back to Carrier', carrier, :class => 'btn btn-default' %>
                 <% end %>
             <% else %>
               <% if params[:action] == 'new' %>
-                &nbsp;&nbsp;<%= link_to 'Back', rates_path, :class => 'btn btn-default' %>
+                &nbsp;&nbsp;<%= link_to 'Back', carrier_rates_path, :class => 'btn btn-default' %>
               <% end %>
             <% end %>
           </div>

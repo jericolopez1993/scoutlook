@@ -62,7 +62,7 @@ Add Attachment
         <%= link_to 'New Location', new_carrier_location_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-location-btn' %>
         <%= link_to 'New Contact', new_carrier_contact_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-contact-btn' %>
         <%= link_to 'New Lane', new_carrier_lane_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
-        <%= link_to 'New Rates', new_rate_path(:carrier_id => @carrier.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
+        <%= link_to 'New Rates', new_carrier_rate_path(:carrier_id => @carrier.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
         <%= link_to 'Edit', edit_carrier_path(@carrier), :class => 'btn btn-warning btn-xs' %>
         <%= link_to 'Back', carriers_path, :class => 'btn btn-info btn-xs' %>
         </div>
@@ -292,16 +292,16 @@ Add Attachment
               </tr>
             </thead>
             <tbody>
-              <% Rate.where(:carrier_id => @carrier.id).each do |rate| %>
+              <% CarrierRate.where(:carrier_id => @carrier.id).each do |carrier_rate| %>
                 <tr>
-                  <td><%= rate.rate_level %></td>
-                  <td><%= rate.rep.nil? ? "" : (link_to "#{rate.rep.first_name} #{rate.rep.last_name}", rate.rep) %></td>
-                  <td><%= rate.rate_type %></td>
-                  <td><%= rate.parent.nil? ? "" : (link_to rate.parent.rate_level, rate.parent) %></td>
+                  <td><%= carrier_rate.rate_level %></td>
+                  <td><%= carrier_rate.rep.nil? ? "" : (link_to "#{carrier_rate.rep.first_name} #{carrier_rate.rep.last_name}", carrier_rate.rep) %></td>
+                  <td><%= carrier_rate.rate_type %></td>
+                  <td><%= carrier_rate.parent.nil? ? "" : (link_to carrier_rate.parent.rate_level, carrier_rate.parent) %></td>
                   <td>
-                    <%= link_to '<i class="far fa-eye"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
-                    <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-warning btn-xs' %>
-                    <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+                    <%= link_to '<i class="far fa-eye"></i>'.html_safe, carrier_rate_path(:id => carrier_rate.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
+                    <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_carrier_rate_path(:id => carrier_rate.id, :previous_controller => params[:controller]), :class => 'btn btn-warning btn-xs' %>
+                    <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, carrier_rate_path(:id => carrier_rate.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
                   </td>
                 </tr>
               <% end %>

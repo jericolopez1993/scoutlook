@@ -1,4 +1,4 @@
-class ClientLocationPolicy < ApplicationPolicy
+class CarrierRatePolicy < ApplicationPolicy
   def index?
     true
   end
@@ -21,7 +21,7 @@ class ClientLocationPolicy < ApplicationPolicy
 
   private
 
-    def client_location
+    def rate
       record
     end
 end

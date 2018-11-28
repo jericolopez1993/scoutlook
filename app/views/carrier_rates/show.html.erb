@@ -9,62 +9,62 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: "#{@rate.carrier.nil? ? "" : link_to(@rate.carrier.company_name, @rate.carrier)}" %>
+<%= render 'layouts/static/header', header_title: "#{@carrier_rate.carrier.nil? ? "" : link_to(@carrier_rate.carrier.company_name, @carrier_rate.carrier)}" %>
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
-      <%= link_to 'Edit', edit_rate_path(@rate), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Edit', edit_carrier_rate_path(@carrier_rate), :class => 'btn btn-warning btn-xs' %>
       <% if @previous_controller == "carriers"%>
-        <% carrier = Carrier.find(@rate.carrier_id)%>
+        <% carrier = Carrier.find(@carrier_rate.carrier_id)%>
         <%= link_to 'Back ', carrier, :class => 'btn btn-info' %>
       <% else %>
         <%= link_to 'Back', carriers_path, :class => 'btn btn-info btn-xs' %>
       <% end %>
     </div>
-    <h4 class="panel-title">  <%= @rate.carrier.nil? ? "None" : (link_to @rate.carrier.company_name, @rate.carrier) %></h4>
+    <h4 class="panel-title">  <%= @carrier_rate.carrier.nil? ? "None" : (link_to @carrier_rate.carrier.company_name, @carrier_rate.carrier) %></h4>
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Details</h4>
     <div class="row">
       <label class="col-md-2 col-form-label">Carrier:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.carrier.nil? ? "" : (link_to @rate.carrier.company_name, @rate.carrier) %>
+        <%= @carrier_rate.carrier.nil? ? "" : (link_to @carrier_rate.carrier.company_name, @carrier_rate.carrier) %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Level:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.rate_level %>
+        <%= @carrier_rate.rate_level %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Type:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.rate_type %>
+        <%= @carrier_rate.rate_type %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Rep:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.rep.nil? ? "" : (link_to "#{@rate.rep.first_name} #{@rate.rep.last_name}", @rate.rep) %>
+        <%= @carrier_rate.rep.nil? ? "" : (link_to "#{@carrier_rate.rep.first_name} #{@carrier_rate.rep.last_name}", @carrier_rate.rep) %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Parent:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.parent.nil? ? "" : (link_to "@rate.parent.rate_level, @rate.parent") %>
+        <%= @carrier_rate.parent.nil? ? "" : (link_to "@carrier_rate.parent.rate_level, @carrier_rate.parent") %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Effective To:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.effective_to %>
+        <%= @carrier_rate.effective_to %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Effective From:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.effective_from %>
+        <%= @carrier_rate.effective_from %>
       </div>
     </div>
 
@@ -73,25 +73,25 @@ label {
     <div class="row">
       <label class="col-md-2 col-form-label">Freight Description:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.freight_desc %>
+        <%= @carrier_rate.freight_desc %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Freight Classification:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.freight_classification %>
+        <%= @carrier_rate.freight_classification %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Transit Time:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.transit_time %>
+        <%= @carrier_rate.transit_time %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Minimum Density:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.minimum_density %>
+        <%= @carrier_rate.minimum_density %>
       </div>
     </div>
 
@@ -100,13 +100,13 @@ label {
     <div class="row">
       <label class="col-md-2 col-form-label">Origin:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.origin_location.nil? ? "" : location_format(@rate.origin_location) %>
+        <%= @carrier_rate.origin_location.nil? ? "" : location_format(@carrier_rate.origin_location) %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Destination:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.destination_location.nil? ? "" : location_format(@rate.destination_location) %>
+        <%= @carrier_rate.destination_location.nil? ? "" : location_format(@carrier_rate.destination_location) %>
       </div>
     </div>
     </div>

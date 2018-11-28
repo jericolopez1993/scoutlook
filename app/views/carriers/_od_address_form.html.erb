@@ -1,7 +1,7 @@
   <div class="form-group row m-b-15 <%=name%>-location-fields address-fields">
     <%= form.label "#{name}_location_id", 'Select Existing Location:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-      <%= form.select "#{name}_location_id", Location.all.collect {|r| [ r.name, r.id ] },{:include_blank => true}, class: 'form-control combo-dropdown', :id => "#{name}_location_id" %>
+      <%= form.select "#{name}_location_id", CarrierLocation.all.collect {|r| [ r.name, r.id ] },{:include_blank => true}, class: 'form-control combo-dropdown', :id => "#{name}_location_id" %>
     </div>
   </div>
 

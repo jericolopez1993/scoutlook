@@ -1,11 +1,11 @@
-class Rate < ApplicationRecord
+class CarrierRate < ApplicationRecord
   audited
   has_one_attached :supporting_pdf
   def display_name
     if self.carrier.nil?
       "<a href='/rates/#{self.id}'>Rate</a>"
     else
-      "Rate to #{self.carrier.display_name}"
+      "Carrier Rate to #{self.carrier.display_name}"
     end
   end
   def rep
@@ -24,7 +24,7 @@ class Rate < ApplicationRecord
   end
   def parent
     begin
-      Rate.find(self.parent_id)
+      CarrierRate.find(self.parent_id)
     rescue
       nil
     end

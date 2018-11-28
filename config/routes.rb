@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :master_signals, :path => 'signals'
   resources :shipments
   resources :master_invoices, :path => "invoices"
-  resources :rates
   resources :activity_outcomes
   resources :activities do
     collection do
@@ -11,19 +10,20 @@ Rails.application.routes.draw do
       delete  'remove_attachment'
     end
   end
-  resources :locations
   resources :reps
-  resources :client_contacts
-  resources :client_locations
-  resources :clients do
+  resources :carrier_contacts
+  resources :carrier_locations
+  resources :carrier_rates
+  resources :carriers do
     collection do
       get     'origins'
       delete  'remove_attachment'
     end
   end
-  resources :carrier_contacts
-  resources :carrier_locations
-  resources :carriers do
+  resources :shipper_contacts
+  resources :shipper_locations
+  resources :shipper_rates
+  resources :shippers do
     collection do
       get     'origins'
       delete  'remove_attachment'
