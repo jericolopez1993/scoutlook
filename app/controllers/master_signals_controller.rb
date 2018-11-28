@@ -117,7 +117,7 @@ class MasterSignalsController < ApplicationController
   def destroy
     @master_signal.destroy
     respond_to do |format|
-      format.html { redirect_to master_signals_url, notice: 'Master signal was successfully destroyed.' }
+      format.html { redirect_to master_signals_url, notice: 'Master signal was successfully removed.' }
       format.json { head :no_content }
     end
   end

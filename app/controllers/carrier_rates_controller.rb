@@ -134,7 +134,7 @@ class CarrierRatesController < ApplicationController
   def destroy
     @carrier_rate.destroy
     respond_to do |format|
-      format.html { redirect_to carrier_rates_url, notice: 'Rate was successfully destroyed.' }
+      format.html { redirect_to carrier_path(:id => @carrier_rate.carrier_id), notice: 'Rate was successfully removed.' }
       format.json { head :no_content }
     end
   end

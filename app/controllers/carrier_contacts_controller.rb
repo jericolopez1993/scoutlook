@@ -135,7 +135,7 @@ class CarrierContactsController < ApplicationController
   def destroy
     @carrier_contact.destroy
     respond_to do |format|
-      format.html { redirect_to carrier_path(:id => @carrier_contact.carrier_id), notice: 'Carrier contact was successfully destroyed.' }
+      format.html { redirect_to carrier_path(:id => @carrier_contact.carrier_id), notice: 'Carrier contact was successfully removed.' }
       format.json { head :no_content }
     end
   end

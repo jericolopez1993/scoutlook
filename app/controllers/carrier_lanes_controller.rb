@@ -81,7 +81,7 @@ class CarrierLanesController < ApplicationController
   def destroy
     @carrier_lane.destroy
     respond_to do |format|
-      format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully destroyed.' }
+      format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully removed.' }
       format.json { head :no_content }
     end
   end

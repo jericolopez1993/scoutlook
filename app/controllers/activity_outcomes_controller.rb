@@ -58,7 +58,7 @@ class ActivityOutcomesController < ApplicationController
   def destroy
     @activity_outcome.destroy
     respond_to do |format|
-      format.html { redirect_to activity_outcomes_url, notice: 'Activity outcome was successfully destroyed.' }
+      format.html { redirect_to activity_outcomes_url, notice: 'Activity outcome was successfully removed.' }
       format.json { head :no_content }
     end
   end

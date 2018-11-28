@@ -167,7 +167,7 @@ class MasterInvoicesController < ApplicationController
   def destroy
     @master_invoice.destroy
     respond_to do |format|
-      format.html { redirect_to master_invoices_url, notice: 'Master invoice was successfully destroyed.' }
+      format.html { redirect_to master_invoices_url, notice: 'Master invoice was successfully removed.' }
       format.json { head :no_content }
     end
   end

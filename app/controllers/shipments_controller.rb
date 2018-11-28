@@ -144,7 +144,7 @@ class ShipmentsController < ApplicationController
   def destroy
     @shipment.destroy
     respond_to do |format|
-      format.html { redirect_to master_invoice_path(:id => @shipment.header), notice: 'Shipment was successfully destroyed.' }
+      format.html { redirect_to master_invoice_path(:id => @shipment.header), notice: 'Shipment was successfully removed.' }
       format.json { head :no_content }
     end
   end
