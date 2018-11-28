@@ -1,0 +1,144 @@
+
+<style>
+@media (max-width: 767px) {
+  label {
+    text-align: left!important;
+  }
+}
+label {
+  text-align: right;
+}
+</style>
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: "#{@shipper_activity.shipper.nil? ? '' : link_to(@shipper_activity.shipper.company_name,  @shipper_activity.shipper)}" %>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+      <%= link_to 'Edit', edit_shipper_activity_path(@shipper_activity), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
+      <% if @previous_controller == "shippers"%>
+        <% shipper = Shipper.find(@shipper_activity.shipper_id)%>
+        <%= link_to 'Back to Shipper', shipper, :class => 'btn btn-info btn-xs' %>
+    <% else %>
+        <%= link_to 'Back', shipper_activities_path, :class => 'btn btn-default btn-xs' %>
+    <% end %>
+    </div>
+    <h4 class="panel-title">  Shipper Activity - <%= @shipper_activity.shipper.nil? ? '' : @shipper_activity.shipper.company_name %></h4>
+  </div>
+  <div class="panel-body">
+    <h4 class="text-inverse">Outcome</h4>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Type:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_activity.activity_type %>
+      </div>
+    </div>
+    <% if @shipper_activity.activity_type == "Engagement" %>
+      <div class="row">
+        <label class="col-md-2 col-form-label">Engagement Type:</label>
+        <div class="col-md-9 lbl-padding-t">
+          <%= @shipper_activity.engagement_type %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Rep:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_activity.rep.nil? ? "" : (link_to "#{@shipper_activity.rep.first_name} #{@shipper_activity.rep.last_name}", @shipper_activity.rep) %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Annual Value:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_activity.annual_value %>
+      </div>
+    </div>
+
+    <div class="row">
+      <label class="col-md-2 col-form-label">Status:</label>
+      <div class="col-md-9 lbl-padding-t">
+      <%= @shipper_activity.status ? 'Open' : 'Closed' %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Date Opened:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= convert_date(@shipper_activity.date_opened) %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Date Closed:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= convert_date(@shipper_activity.date_closed) %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Other Notes:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_activity.other_notes.nil? ? "" : @shipper_activity.other_notes.html_safe %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Complete Credit Application:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <% if @shipper_activity.credit_application.attached? %>
+          <%= link_to @shipper_activity.credit_application.filename, rails_blob_path(@shipper_activity.credit_application), target: :_blank %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if !@shipper_activity.outcome_id.nil? %>
+        <hr>
+        <h4 class="text-inverse">Outcome</h4>
+        <div class="row">
+          <label class="col-md-2 col-form-label">Outcome:</label>
+          <div class="col-md-9 lbl-padding-t">
+            <%= @shipper_activity.outcome.outcome %>
+          </div>
+        </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Reason:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @shipper_activity.outcome.reason %>
+            </div>
+          </div>
+
+        <div class="row">
+          <label class="col-md-2 col-form-label">Notes:</label>
+          <div class="col-md-9 lbl-padding-t">
+            <%= @shipper_activity.outcome.notes.nil? ? "" : @shipper_activity.outcome.notes.html_safe %>
+          </div>
+        </div>
+    <% end %>
+    <hr>
+    <h4 class="text-inverse">Proposed PDFs</h4>
+    <table class="table table-striped table-bordered data-table-no-buttons display nowrap">
+      <thead>
+        <tr class="odd gradeX">
+          <th width="1%"></th>
+          <th>Name</th>
+          <th>Date</th>
+          <th data-orderable="false"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shipper_activity.proposal_pdf.each_with_index do |attachment_file, index| %>
+        <tr>
+          <td><%= attachment_file.id %></td>
+          <td><%= attachment_file.filename %></td>
+          <td><%= convert_date(attachment_file.created_at) %></td>
+          <td>
+            <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file), target: :_blank, :class => 'btn btn-primary' %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_shipper_activities_path(:id => @shipper_activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+          </td>
+
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<!-- end panel -->

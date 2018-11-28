@@ -28,6 +28,10 @@ class Carrier < ApplicationRecord
     CarrierLane.where(:carrier_id => self.id)
   end
 
+  def carrier_activities
+    CarrierActivity.where(:carrier_id => self.id)
+  end
+
   def lane_1
     CarrierLane.where(:carrier_id => self.id, :lane_priority => 1).first
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_062310) do
+ActiveRecord::Schema.define(version: 2018_11_28_092235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,31 +36,6 @@ ActiveRecord::Schema.define(version: 2018_11_28_062310) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "activities", force: :cascade do |t|
-    t.string "activity_type"
-    t.string "engagement_type"
-    t.integer "client_id"
-    t.integer "rep_id"
-    t.string "annual_value"
-    t.boolean "status"
-    t.datetime "date_opened"
-    t.datetime "date_closed"
-    t.text "other_notes"
-    t.integer "outcome_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "carrier_id"
-    t.integer "shipper_id"
-  end
-
-  create_table "activity_outcomes", force: :cascade do |t|
-    t.string "outcome"
-    t.string "reason"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
     t.string "auditable_type"
@@ -81,6 +56,29 @@ ActiveRecord::Schema.define(version: 2018_11_28_062310) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "carrier_activities", force: :cascade do |t|
+    t.string "activity_type"
+    t.string "engagement_type"
+    t.integer "rep_id"
+    t.string "annual_value"
+    t.boolean "status"
+    t.datetime "date_opened"
+    t.datetime "date_closed"
+    t.text "other_notes"
+    t.integer "outcome_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "carrier_id"
+  end
+
+  create_table "carrier_activity_outcomes", force: :cascade do |t|
+    t.string "outcome"
+    t.string "reason"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "carrier_contacts", force: :cascade do |t|
@@ -290,6 +288,29 @@ ActiveRecord::Schema.define(version: 2018_11_28_062310) do
     t.string "own_type"
     t.string "shipment_status"
     t.string "client_reference"
+  end
+
+  create_table "shipper_activities", force: :cascade do |t|
+    t.string "activity_type"
+    t.string "engagement_type"
+    t.integer "rep_id"
+    t.string "annual_value"
+    t.boolean "status"
+    t.datetime "date_opened"
+    t.datetime "date_closed"
+    t.text "other_notes"
+    t.integer "outcome_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "shipper_id"
+  end
+
+  create_table "shipper_activity_outcomes", force: :cascade do |t|
+    t.string "outcome"
+    t.string "reason"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "shipper_contacts", force: :cascade do |t|

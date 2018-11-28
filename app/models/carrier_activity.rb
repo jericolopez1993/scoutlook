@@ -1,4 +1,4 @@
-class Activity < ApplicationRecord
+class CarrierActivity < ApplicationRecord
   audited
   has_many_attached :proposal_pdf
   has_one_attached :credit_application
@@ -7,9 +7,9 @@ class Activity < ApplicationRecord
 
   def display_name
     if self.client.nil?
-      "Activity to #{self.client.display_name}"
+      "Carrier Activity to #{self.client.display_name}"
     else
-      "<a href='/activities/#{self.id}'>Activity</a>"
+      "<a href='/activities/#{self.id}'>Carrier Activity</a>"
     end
   end
 
@@ -23,9 +23,9 @@ class Activity < ApplicationRecord
 
   def outcome
     if !self.outcome_id.nil?
-      ActivityOutcome.find(self.outcome_id)
+      CarrierActivityOutcome.find(self.outcome_id)
     else
-      ActivityOutcome.new
+      CarrierActivityOutcome.new
     end
   end
 
@@ -37,9 +37,9 @@ class Activity < ApplicationRecord
     end
   end
 
-  def client
+  def carrier
     begin
-      Client.find(self.client_id)
+      Carrier.find(self.carrier_id)
     rescue
       nil
     end
@@ -47,6 +47,6 @@ class Activity < ApplicationRecord
 
   private
     def remove_children
-      ActivityOutcome.where(:id => self.outcome_id).destroy_all
+      CarrierActivityOutcome.where(:id => self.outcome_id).destroy_all
     end
 end

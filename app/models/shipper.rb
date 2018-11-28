@@ -28,6 +28,10 @@ class Shipper < ApplicationRecord
     ShipperLane.where(:shipper_id => self.id)
   end
 
+  def shipper_activities
+    ShipperActivity.where(:shipper_id => self.id)
+  end
+
   def lane_1
     ShipperLane.where(:shipper_id => self.id, :lane_priority => 1).first
   end

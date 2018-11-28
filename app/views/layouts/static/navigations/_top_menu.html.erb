@@ -1,13 +1,7 @@
 <div id="top-menu" class="top-menu">
       <!-- begin top-menu nav -->
       <ul class="nav">
-
-        <li class="<%= (params[:controller] == 'dashboards') ? 'active' : ''%>">
-          <a href="<%= authenticated_root_path %>">
-            <span>Home</span>
-          </a>
-        </li>
-        <% if current_user.has_role?(:admin) %>
+        <%# if current_user.has_role?(:admin) %>
           <li class="<%= (params[:controller] == 'carriers') ? 'active' : ''%>">
             <a href="<%= carriers_path %>">
               <span>Carriers</span>
@@ -61,7 +55,7 @@
               <% end %>
             </ul>
           </li>
-        <% end %>
+        <%# end %>
   <!-- <li class="menu-control menu-control-left">
   <a href="javascript:;" data-click="prev-menu"><i class="fa fa-angle-left"></i></a>
   </li>

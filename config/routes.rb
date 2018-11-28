@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     end
   end
   resources :reps
+  resources :carrier_activities do
+    collection do
+      post    'quick_create'
+      delete  'remove_attachment'
+    end
+  end
   resources :carrier_lanes
   resources :carrier_contacts
   resources :carrier_locations
@@ -17,6 +23,12 @@ Rails.application.routes.draw do
   resources :carriers do
     collection do
       get     'origins'
+      delete  'remove_attachment'
+    end
+  end
+  resources :shipper_activities do
+    collection do
+      post    'quick_create'
       delete  'remove_attachment'
     end
   end
@@ -34,7 +46,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     authenticated :user do
-      root 'dashboards#index', as: :authenticated_root
+      root 'carriers#index', as: :authenticated_root
     end
 
     unauthenticated do

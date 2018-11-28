@@ -1,4 +1,4 @@
-class AcitivyOutcomePolicy < ApplicationPolicy
+class CarrierActivityOutcomePolicy < ApplicationPolicy
   def index?
     true
   end
@@ -21,7 +21,7 @@ class AcitivyOutcomePolicy < ApplicationPolicy
 
   private
 
-    def activity_outcome
+    def carrier_activity_outcome
       record
     end
 end

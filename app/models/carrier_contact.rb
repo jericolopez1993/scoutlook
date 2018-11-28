@@ -2,7 +2,7 @@ class CarrierContact < ApplicationRecord
   audited
   def location
     begin
-      Location.find(self.location_id)
+      CarrierLocation.find(self.location_id)
     rescue
       nil
     end

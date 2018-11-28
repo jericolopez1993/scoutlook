@@ -50,7 +50,7 @@ class ShipperContactsController < ApplicationController
       if is_numeric?(params[:shipper_contact][:location_id])
           @location_id = params[:shipper_contact][:location_id]
       else
-        location = Location.new
+        location = ShipperLocation.new
         location.name = params[:shipper_contact][:location_id]
         location.address = params[:shipper_contact][:address]
         location.country = params[:shipper_contact][:country]
@@ -94,7 +94,7 @@ class ShipperContactsController < ApplicationController
       if is_numeric?(params[:shipper_contact][:location_id])
           @location_id = params[:shipper_contact][:location_id]
       else
-        location = Location.new
+        location = ShipperLocation.new
         location.name = params[:shipper_contact][:location_id]
         location.address = params[:shipper_contact][:address]
         location.country = params[:shipper_contact][:country]

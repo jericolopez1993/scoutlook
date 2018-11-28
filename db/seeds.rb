@@ -1,4 +1,4 @@
-names = Array[User, Activity, ActivityOutcome, Rep, Shipment, Carrier, CarrierContact, CarrierLocation, Shipper, ShipperContact, ShipperLocation]
+names = Array[User, Rep, Shipment, Carrier, CarrierContact, CarrierLocation, Shipper, ShipperContact, ShipperLocation, CarrierActivity, CarrierActivityOutcome, ShipperActivity, ShipperActivityOutcome]
 
 for name in names
   name.delete_all
@@ -17,11 +17,7 @@ User.all.each do |user|
     user.add_role :admin
   end
 end
-Activity.create!([
-  {id: 1, activity_type: "Loop", engagement_type: "", client_id: nil, rep_id: 1, annual_value: "5-10M", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "", outcome_id: nil, created_at: "2018-09-26 23:03:07", updated_at: "2018-10-10 18:18:05"},
-  {id: 2, activity_type: "Engagement", engagement_type: "In-Person", shipper_id: 1, rep_id: 1, annual_value: "5-10M", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "<p>asdasdasd</p>", outcome_id: 1, created_at: "2018-09-26 23:04:14", updated_at: "2018-10-10 18:18:05"},
-  {id: 3, activity_type: "Loop", engagement_type: "", shipper_id: 1, rep_id: 1, annual_value: "0-5M", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "<p>asdasdad</p>", outcome_id: 2, created_at: "2018-09-27 18:00:38", updated_at: "2018-10-10 18:18:05"},
-  {id: 4, activity_type: "Engagement", engagement_type: "In-Person", shipper_id: 3, rep_id: 2, annual_value: "10-25M", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "", outcome_id: nil, created_at: "2018-09-28 20:00:54", updated_at: "2018-10-10 18:18:05"},
+CarrierActivity.create!([
   {id: 5, activity_type: "Loop", engagement_type: "", carrier_id: 9, rep_id: 2, annual_value: "100M+", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "", outcome_id: nil, created_at: "2018-10-09 12:48:08", updated_at: "2018-10-10 18:18:05"},
   {id: 6, activity_type: "Loop", engagement_type: "", carrier_id: 10, rep_id: 2, annual_value: "100M+", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "", outcome_id: nil, created_at: "2018-10-09 13:01:08", updated_at: "2018-10-10 18:18:05"},
   {id: 8, activity_type: "Loop", engagement_type: "", carrier_id: 12, rep_id: 2, annual_value: "100M+", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "", outcome_id: nil, created_at: "2018-10-09 20:00:40", updated_at: "2018-10-10 18:18:05"},
@@ -30,9 +26,7 @@ Activity.create!([
   {id: 10, activity_type: "Loop", engagement_type: "", carrier_id: 14, rep_id: 2, annual_value: "100M+", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "", outcome_id: nil, created_at: "2018-10-09 20:08:21", updated_at: "2018-10-10 18:18:05"},
   {id: 11, activity_type: "Loop", engagement_type: "", carrier_id: 15, rep_id: 2, annual_value: "100M+", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "", outcome_id: nil, created_at: "2018-10-09 20:12:30", updated_at: "2018-10-10 18:18:05"}
 ])
-ActivityOutcome.create!([
-  {id: 1, outcome: "", reason: "123", notes: "<p>asdasd</p>", created_at: "2018-09-27 17:59:19", updated_at: "2018-09-27 17:59:19"},
-  {id: 2, outcome: "Win", reason: "asdasd", notes: "<p>asda</p>", created_at: "2018-09-27 18:00:38", updated_at: "2018-09-27 18:00:38"},
+CarrierActivityOutcome.create!([
   {id: 3, outcome: "Learn", reason: "No Opportunity", notes: "<p><span style=\"font-family: Helvetica; font-size: 12px;\">Craig,</span><br style=\"font-family: Helvetica; font-size: 12px;\" /><br style=\"font-family: Helvetica; font-size: 12px;\" /><span style=\"font-family: Helvetica; font-size: 12px;\">Thanks for reaching out. Most of what we manage today (95% if FTL); no LTL is</span><br style=\"font-family: Helvetica; font-size: 12px;\" /><span style=\"font-family: Helvetica; font-size: 12px;\">managed through our assets. It would go through and be managed by our</span><br style=\"font-family: Helvetica; font-size: 12px;\" /><span style=\"font-family: Helvetica; font-size: 12px;\">3PL/Logistics Group and Partner Carrier Network.</span><br style=\"font-family: Helvetica; font-size: 12px;\" /><br style=\"font-family: Helvetica; font-size: 12px;\" /><span style=\"font-family: Helvetica; font-size: 12px;\">Not really our forte. I would suggest possibly reaching out to LTL carriers.</span><br style=\"font-family: Helvetica; font-size: 12px;\" /><br style=\"font-family: Helvetica; font-size: 12px;\" /><span style=\"font-family: Helvetica; font-size: 12px;\">Good luck!</span><br style=\"font-family: Helvetica; font-size: 12px;\" /><br style=\"font-family: Helvetica; font-size: 12px;\" /><span style=\"font-family: Helvetica; font-size: 12px;\">Thanks</span><br style=\"font-family: Helvetica; font-size: 12px;\" /><br style=\"font-family: Helvetica; font-size: 12px;\" /><span style=\"font-family: Helvetica; font-size: 12px;\">Luc</span><br style=\"font-family: Helvetica; font-size: 12px;\" /><br style=\"font-family: Helvetica; font-size: 12px;\" /><br style=\"font-family: Helvetica; font-size: 12px;\" /></p>", created_at: "2018-10-09 20:05:31", updated_at: "2018-10-09 20:05:31"}
 ])
 Carrier.create!([
@@ -58,6 +52,15 @@ CarrierContact.create!([
   {id: 9, title: "Business Development Consultant", email: "Andrew.Barber@farrow.com", work_phone: "", home_phone: "(647) 282-1562", carrier_id: 13, created_at: "2018-10-09 20:03:21", updated_at: "2018-10-09 20:03:21", last_name: "Andrew Barber", same_ho: true, first_name: nil, linkedin_link: nil, location_id: nil},
   {id: 10, title: "Trade Management Executive", email: "MMogul@livingstonintl.com", work_phone: "", home_phone: "(416) 627-3966", carrier_id: 14, created_at: "2018-10-09 20:07:56", updated_at: "2018-10-09 20:07:56", last_name: "Matt Mogul", same_ho: true, first_name: nil, linkedin_link: nil, location_id: nil},
   {id: 11, title: "Business Development Representative", email: "service@borderbuddy.com", work_phone: "(604) 757-6650", home_phone: "", carrier_id: 15, created_at: "2018-10-09 20:11:50", updated_at: "2018-10-09 20:11:50", last_name: "Anum Mian", same_ho: false, first_name: nil, linkedin_link: nil, location_id: nil}
+])
+ShipperActivity.create!([
+  {id: 2, activity_type: "Engagement", engagement_type: "In-Person", shipper_id: 1, rep_id: 1, annual_value: "5-10M", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "<p>asdasdasd</p>", outcome_id: 1, created_at: "2018-09-26 23:04:14", updated_at: "2018-10-10 18:18:05"},
+  {id: 3, activity_type: "Loop", engagement_type: "", shipper_id: 1, rep_id: 1, annual_value: "0-5M", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "<p>asdasdad</p>", outcome_id: 2, created_at: "2018-09-27 18:00:38", updated_at: "2018-10-10 18:18:05"},
+  {id: 4, activity_type: "Engagement", engagement_type: "In-Person", shipper_id: 3, rep_id: 2, annual_value: "10-25M", status: true, date_opened: "2018-10-10 18:18:05", date_closed: nil, other_notes: "", outcome_id: nil, created_at: "2018-09-28 20:00:54", updated_at: "2018-10-10 18:18:05"},
+])
+ShipperActivityOutcome.create!([
+  {id: 1, outcome: "", reason: "123", notes: "<p>asdasd</p>", created_at: "2018-09-27 17:59:19", updated_at: "2018-09-27 17:59:19"},
+  {id: 2, outcome: "Win", reason: "asdasd", notes: "<p>asda</p>", created_at: "2018-09-27 18:00:38", updated_at: "2018-09-27 18:00:38"},
 ])
 Shipper.create!([
   {id: 1, relationship_owner: 1, company_name: "Scout Shipper", parent_id: nil, sales_priority: "A", phone: "", industry: "", primary_industry: "", hazardous: "", food_grade: "", freight_revenue: nil, created_at: "2018-09-25 10:42:48", updated_at: "2018-09-26 22:28:06", pdm_id: 1, poc_id: 1, volume_intra: nil, volume_inter: nil, volume_to_usa: nil, volume_from_usa: nil, notes: nil, credit_status: nil, credit_approval: nil, origin: nil, destination: nil, head_office: nil, annual_revenue: nil},

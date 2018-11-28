@@ -2,7 +2,7 @@ class ShipperContact < ApplicationRecord
   audited
   def location
     begin
-      Location.find(self.location_id)
+      ShipperLocation.find(self.location_id)
     rescue
       nil
     end

@@ -50,7 +50,7 @@ class CarrierContactsController < ApplicationController
       if is_numeric?(params[:carrier_contact][:location_id])
           @location_id = params[:carrier_contact][:location_id]
       else
-        location = Location.new
+        location = CarrierLocation.new
         location.name = params[:carrier_contact][:location_id]
         location.address = params[:carrier_contact][:address]
         location.country = params[:carrier_contact][:country]
@@ -94,7 +94,7 @@ class CarrierContactsController < ApplicationController
       if is_numeric?(params[:carrier_contact][:location_id])
           @location_id = params[:carrier_contact][:location_id]
       else
-        location = Location.new
+        location = CarrierLocation.new
         location.name = params[:carrier_contact][:location_id]
         location.address = params[:carrier_contact][:address]
         location.country = params[:carrier_contact][:country]
