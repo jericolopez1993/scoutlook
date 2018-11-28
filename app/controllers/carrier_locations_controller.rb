@@ -39,9 +39,7 @@ class CarrierLocationsController < ApplicationController
           carrier = Carrier.find(params[:carrier_location][:carrier_id])
           carrier.update_attributes(:head_office => @carrier_location.id)
         end
-        if @carrier_location.carrier_id
-          format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Location was successfully created.' }
-        end
+        format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, carrier_location: @carrier_location }
       else
         format.html { render :new }
@@ -59,9 +57,8 @@ class CarrierLocationsController < ApplicationController
           carrier = Carrier.find(params[:carrier_location][:carrier_id])
           carrier.update_attributes(:head_office => @carrier_location.id)
         end
-        if @carrier_location.carrier_id
-          format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Location was successfully updated.' }
-        end
+
+        format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, carrier_location: @carrier_location }
       else
         format.html { render :edit }
@@ -75,7 +72,7 @@ class CarrierLocationsController < ApplicationController
   def destroy
     @carrier_location.destroy
     respond_to do |format|
-      format.html { redirect_to carrier_locations_url, notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Location was successfully removed.' }
       format.json { head :no_content }
     end
   end
