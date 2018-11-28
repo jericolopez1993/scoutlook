@@ -16,7 +16,7 @@ label {
       <%= link_to 'Edit', edit_shipper_rate_path(@shipper_rate), :class => 'btn btn-warning btn-xs' %>
       <% if @previous_controller == "shippers"%>
         <% shipper = Shipper.find(@shipper_rate.shipper_id)%>
-        <%= link_to 'Back ', shipper, :class => 'btn btn-info' %>
+        <%= link_to 'Back ', shipper, :class => 'btn btn-info btn-xs' %>
       <% else %>
         <%= link_to 'Back', shippers_path, :class => 'btn btn-info btn-xs' %>
       <% end %>
