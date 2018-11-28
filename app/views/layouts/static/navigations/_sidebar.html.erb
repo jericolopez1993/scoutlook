@@ -42,7 +42,7 @@
       </li>
       <% if current_user.has_role?(:admin) %>
         <li class="<%= (params[:controller] == 'clients') ? 'active' : ''%>">
-          <a href="<%= clients_path %>">
+          <a href="<%= carriers_path %>">
             <i class="fas fa-users"></i>
             <span>Clients</span>
           </a>

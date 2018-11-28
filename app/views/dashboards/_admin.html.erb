@@ -14,10 +14,10 @@
           <div class="stats-icon"><i class="fas fa-users"></i></div>
           <div class="stats-info">
             <h4>TOTAL CLIENTS</h4>
-            <p><%= Client.all.length %></p>
+            <p><%= Carrier.all.length %></p>
           </div>
           <div class="stats-link">
-            <a href="<%= clients_path %>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+            <a href="<%= carriers_path %>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@
   <div class="form-group row m-b-15">
     <%= form.label :client_id, 'Client:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-    <%= form.select :client_id, Client.all.collect {|r| [ r.company_name, r.id ] },{:include_blank => true}, class: 'form-control' %>
+    <%= form.select :carrier_id, Carrier.all.collect {|r| [ r.company_name, r.id ] },{:include_blank => true}, class: 'form-control' %>
     </div>
   </div>
   <div class="form-group row m-b-15">
