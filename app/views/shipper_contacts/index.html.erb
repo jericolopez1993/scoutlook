@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Shipper Contacts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Email</th>
+      <th>Work phone</th>
+      <th>Home phone</th>
+      <th>Address</th>
+      <th>City/Town</th>
+      <th>State</th>
+      <th>Postal</th>
+      <th>Country</th>
+      <th>Shipper</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shipper_contacts.each do |shipper_contact| %>
+      <tr>
+        <td><%= shipper_contact.last_name %></td>
+        <td><%= shipper_contact.email %></td>
+        <td><%= shipper_contact.work_phone %></td>
+        <td><%= shipper_contact.home_phone %></td>
+        <td><%= shipper_contact.address %></td>
+        <td><%= shipper_contact.city %></td>
+        <td><%= shipper_contact.state %></td>
+        <td><%= shipper_contact.postal %></td>
+        <td><%= shipper_contact.country %></td>
+        <td><%= shipper_contact.shipper_id %></td>
+        <td><%= link_to 'Show', shipper_contact %></td>
+        <td><%= link_to 'Edit', edit_shipper_contact_path(shipper_contact) %></td>
+        <td><%= link_to 'Delete', shipper_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shipper Contact', new_shipper_contact_path %>

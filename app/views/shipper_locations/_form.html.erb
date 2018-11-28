@@ -1,0 +1,43 @@
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Location' : "Edit Location - #{shipper_location.name}" %>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title"> Information</h4>
+  </div>
+  <div class="panel-body">
+  <%= form_with(model: shipper_location, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+  <%= form.hidden_field :client_id %>
+  <%= form.hidden_field :shipper_id %>
+  <% if shipper_location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shipper_location.errors.count, "error") %> prohibited this shipper_location from being saved:</h2>
+
+      <ul>
+      <% shipper_location.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= render 'fields', shipper_location: shipper_location, form: form, is_head_office: is_head_office %>
+    <div class="form-group row m-b-0">
+      <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
+      <div class="col-md-9 col-sm-8">
+        <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+        <% shipper = Shipper.find_by(id: shipper_location.shipper_id)%>
+        <% if params[:action] == 'edit' %>
+          &nbsp;&nbsp;<%= link_to 'Show', shipper, :class => 'btn btn-info' %>
+        <% end %>
+        <% if params[:action] == 'new' %>
+          &nbsp;&nbsp;<%= link_to 'Back', shipper, :class => 'btn btn-info' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
+<!-- end panel -->

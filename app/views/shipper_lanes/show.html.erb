@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @shipper_lane.lane_priority %>
+</p>
+
+<p>
+  <strong>Origin:</strong>
+  <%= @shipper_lane.lane_origin %>
+</p>
+
+<p>
+  <strong>Destination:</strong>
+  <%= @shipper_lane.lane_destination %>
+</p>
+
+<p>
+  <strong>Trucks Per Week:</strong>
+  <%= @shipper_lane.truck_per_week %>
+</p>
+
+<p>
+  <strong>Preferred Load Days:</strong>
+  <%= @shipper_lane.preferred_load_day %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @shipper_lane.notes %>
+</p>
+
+<%= link_to 'Edit', edit_shipper_lane_path(@shipper_lane) %> |
+<%= link_to 'Back', shipper_lanes_path %>

@@ -1,0 +1,113 @@
+<style>
+@media (max-width: 767px) {
+  label {
+    text-align: left!important;
+  }
+}
+label {
+  text-align: right;
+}
+</style>
+<!-- begin page-header -->
+<%= render 'layouts/static/header', header_title: "#{@shipper_rate.shipper.nil? ? "" : link_to(@shipper_rate.shipper.company_name, @shipper_rate.shipper)}" %>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+      <%= link_to 'Edit', edit_shipper_rate_path(@shipper_rate), :class => 'btn btn-warning btn-xs' %>
+      <% if @previous_controller == "shippers"%>
+        <% shipper = Shipper.find(@shipper_rate.shipper_id)%>
+        <%= link_to 'Back ', shipper, :class => 'btn btn-info' %>
+      <% else %>
+        <%= link_to 'Back', shippers_path, :class => 'btn btn-info btn-xs' %>
+      <% end %>
+    </div>
+    <h4 class="panel-title">  <%= @shipper_rate.shipper.nil? ? "None" : (link_to @shipper_rate.shipper.company_name, @shipper_rate.shipper) %></h4>
+  </div>
+  <div class="panel-body">
+    <h4 class="text-inverse">Details</h4>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Shipper:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.shipper.nil? ? "" : (link_to @shipper_rate.shipper.company_name, @shipper_rate.shipper) %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Level:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.rate_level %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Type:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.rate_type %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Rep:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.rep.nil? ? "" : (link_to "#{@shipper_rate.rep.first_name} #{@shipper_rate.rep.last_name}", @shipper_rate.rep) %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Parent:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.parent.nil? ? "" : (link_to "@shipper_rate.parent.rate_level, @shipper_rate.parent") %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Effective To:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.effective_to %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Effective From:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.effective_from %>
+      </div>
+    </div>
+
+    <hr>
+    <h4 class="text-inverse">Other Information</h4>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Freight Description:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.freight_desc %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Freight Classification:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.freight_classification %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Transit Time:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.transit_time %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Minimum Density:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.minimum_density %>
+      </div>
+    </div>
+
+    <hr>
+    <h4 class="text-inverse">Location</h4>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Origin:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.origin_location.nil? ? "" : location_format(@shipper_rate.origin_location) %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Destination:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_rate.destination_location.nil? ? "" : location_format(@shipper_rate.destination_location) %>
+      </div>
+    </div>
+    </div>
+  </div>

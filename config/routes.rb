@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :carrier_lanes
   resources :master_signals, :path => 'signals'
   resources :shipments
   resources :master_invoices, :path => "invoices"
@@ -11,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
   resources :reps
+  resources :carrier_lanes
   resources :carrier_contacts
   resources :carrier_locations
   resources :carrier_rates
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       delete  'remove_attachment'
     end
   end
+  resources :shipper_lanes
   resources :shipper_contacts
   resources :shipper_locations
   resources :shipper_rates

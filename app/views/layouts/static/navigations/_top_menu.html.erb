@@ -13,6 +13,11 @@
               <span>Carriers</span>
             </a>
           </li>
+          <li class="<%= (params[:controller] == 'shippers') ? 'active' : ''%>">
+            <a href="<%= shippers_path %>">
+              <span>Shippers</span>
+            </a>
+          </li>
           <!-- <li class="<%#= (params[:controller] == 'clients') ? 'active' : ''%>">
             <a href="<%#= clients_path %>">
               <span>Clients</span>
