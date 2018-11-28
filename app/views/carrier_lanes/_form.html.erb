@@ -55,7 +55,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :preferred_load_day, 'Preferred Load Days:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.select :preferred_load_day, options_for_select(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], carrier_lane.preferred_load_day),{}, class: 'form-control', multiple: true %>
+            <%= form.select :preferred_load_day, options_for_select(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], carrier_lane.preferred_load_day),{:include_blank => false}, class: 'form-control', multiple: true %>
           </div>
         </div>
         <div class="form-group row m-b-15">
@@ -80,3 +80,7 @@
 <% end %>
 <%= tinymce %>
 <!-- end panel -->
+
+<script>
+  $("#carrier_lane_preferred_load_day").val(<%= raw carrier_lane.preferred_load_day_to_array %>);
+</script>

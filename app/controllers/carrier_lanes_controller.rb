@@ -94,6 +94,7 @@ class CarrierLanesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_lane_params
+      params[:carrier_lane][:preferred_load_day] = params[:carrier_lane][:preferred_load_day].to_s.tr('[]', '').tr('"', '').tr(' ', '')[1..-1].to_s
       params.require(:carrier_lane).permit(:lane_priority, :lane_origin, :lane_destination, :truck_per_week, :preferred_load_day, :notes, :carrier_id)
     end
 end
