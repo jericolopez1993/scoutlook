@@ -37,13 +37,13 @@
         <div class="form-group row m-b-15">
           <%= form.label :lane_origin, 'Origin:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.select :lane_origin, options_for_select(['US-CAL', 'US-FL', 'US-WA', 'US-TX', 'US-AZ'], carrier_lane.lane_origin),{:include_blank => true}, class: 'form-control' %>
+            <%= form.text_field :lane_origin, class: 'form-control', :id => 'lane_origin' %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :lane_destination, 'Destination:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.select :lane_destination, options_for_select(['US-ESB', 'US-MW', 'US-SE', 'US-NW', 'CAN-BC', 'CAN-WEST', 'CAN-ABSK', 'CAN-ON', 'CAN-QC', 'CAN-ATL', 'CAN-NFL'], carrier_lane.lane_destination),{:include_blank => true}, class: 'form-control' %>
+            <%= form.text_field :lane_destination, class: 'form-control', :id => 'lane_destination' %>
           </div>
         </div>
         <div class="form-group row m-b-15">

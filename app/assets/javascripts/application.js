@@ -53,6 +53,26 @@
 //= require tinymce
 //= require select2
 //= require_tree .
+var originTags = [
+  "US-CAL",
+  "US-FL",
+  "US-WA",
+  "US-TX",
+  "US-AZ"
+];
+var destinationTags = [
+  "US-ESB",
+  "US-MW",
+  "US-SE",
+  "US-NW",
+  "CAN-BC",
+  "CAN-WEST",
+  "CAN-ABSK",
+  "CAN-ON",
+  "CAN-QC",
+  "CAN-ATL",
+  "CAN-NFL"
+];
 (function() {
   $(document).on('turbolinks:before-cache', function() {
     var dataTable;
@@ -220,6 +240,18 @@ $(document).on('turbolinks:load', function(){
       });
       $("#invoice_status").change(function(){
           statusNotes((currentInvoiceStatus === $(this).val()), 'invoice-audit-comment');
+      });
+      $( "#lane_origin" ).autocomplete({
+        source: originTags,
+        minLength: 0,
+      }).focus(function () {
+          $(this).autocomplete("search");
+      });
+      $( "#lane_destination" ).autocomplete({
+        source: destinationTags,
+        minLength: 0,
+      }).focus(function () {
+          $(this).autocomplete("search");
       });
   });
 
