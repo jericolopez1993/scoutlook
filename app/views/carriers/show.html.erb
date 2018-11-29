@@ -112,6 +112,13 @@ Add Attachment
       <div class="tab-pane fade active show" id="company-name">
         <div class="panel-body">
           <h4 class="text-inverse">Details</h4>
+
+          <div class="row">
+            <label class="col-md-2 col-form-label">Complete Record:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @carrier.complete_record ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+            </div>
+          </div>
           <div class="row">
             <label class="col-md-2 col-form-label">Company Name:</label>
             <div class="col-md-9 lbl-padding-t">
