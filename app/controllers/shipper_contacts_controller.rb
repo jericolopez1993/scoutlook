@@ -57,7 +57,7 @@ class ShipperContactsController < ApplicationController
         location.state = params[:shipper_contact][:state]
         location.city = params[:shipper_contact][:city]
         location.postal = params[:shipper_contact][:postal]
-        location.shipper_id = MasterInvoice.find(params[:shipper_contact][:header]).shipper_id
+        location.shipper_id = params[:shipper_contact][:shipper_id]
         location.save
         @location_id = location.id
       end
@@ -101,7 +101,7 @@ class ShipperContactsController < ApplicationController
         location.state = params[:shipper_contact][:state]
         location.city = params[:shipper_contact][:city]
         location.postal = params[:shipper_contact][:postal]
-        location.shipper_id = MasterInvoice.find(params[:shipper_contact][:header]).shipper_id
+        location.shipper_id = params[:shipper_contact][:shipper_id]
         location.save
         @location_id = location.id
       end

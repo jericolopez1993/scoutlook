@@ -57,7 +57,7 @@ class CarrierContactsController < ApplicationController
         location.state = params[:carrier_contact][:state]
         location.city = params[:carrier_contact][:city]
         location.postal = params[:carrier_contact][:postal]
-        location.carrier_id = MasterInvoice.find(params[:carrier_contact][:header]).shipper_id
+        location.carrier_id = params[:carrier_contact][:carrier_id]
         location.save
         @location_id = location.id
       end
@@ -101,7 +101,7 @@ class CarrierContactsController < ApplicationController
         location.state = params[:carrier_contact][:state]
         location.city = params[:carrier_contact][:city]
         location.postal = params[:carrier_contact][:postal]
-        location.carrier_id = MasterInvoice.find(params[:carrier_contact][:header]).shipper_id
+        location.carrier_id = params[:carrier_contact][:carrier_id]
         location.save
         @location_id = location.id
       end
