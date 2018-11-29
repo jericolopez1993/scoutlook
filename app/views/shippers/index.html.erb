@@ -28,13 +28,12 @@
           <th>Contact Rates</th>
           <th>How do they find loads</th>
           <th>Notes</th>
-          <th data-orderable="false">Actions</th>
         </tr>
       </thead>
       <tbody>
         <% @shippers.each do |shipper| %>
           <tr>
-            <td><%= link_to shipper.company_name, shipper %></td>
+            <td><%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper %></td>
             <td><%= shipper.score_card %></td>
             <td><%= shipper.freight_guard %></td>
             <td><%= shipper.years_in_business %></td>
@@ -49,11 +48,6 @@
             <td><%= shipper.contract_rates %></td>
             <td><%= shipper.find_loads.nil? ? "" : shipper.find_loads.html_safe %></td>
             <td><%= shipper.notes.nil? ? "" : shipper.notes.html_safe %></td>
-            <td>
-              <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipper, :class => 'btn btn-info btn-xs' %>
-              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipper_path(shipper), :class => 'btn btn-warning btn-xs' %>
-              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipper, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
-            </td>
           </tr>
         <% end %>
       </tbody>

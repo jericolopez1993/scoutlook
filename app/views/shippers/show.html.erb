@@ -66,6 +66,7 @@ Add Attachment
         <%= link_to 'New Rates', new_shipper_rate_path(:shipper_id => @shipper.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
         <%= link_to 'Edit', edit_shipper_path(@shipper), :class => 'btn btn-warning btn-xs' %>
         <%= link_to 'Back', shippers_path, :class => 'btn btn-info btn-xs' %>
+        <%= link_to 'Delete', @shipper, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
         </div>
     <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
       <li class="nav-items">
