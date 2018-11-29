@@ -1,4 +1,5 @@
 class CarrierLane < ApplicationRecord
+  audited
   def display_name
     if self.carrier.nil?
       "Lane"

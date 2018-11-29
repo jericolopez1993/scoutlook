@@ -1,4 +1,5 @@
 class ShipperLane < ApplicationRecord
+  audited
   def display_name
     if self.shipper.nil?
       "Lane"
