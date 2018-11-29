@@ -4,7 +4,7 @@ class ShipperLocation < ApplicationRecord
     if self.shipper.nil?
       "Location"
     else
-      "<a href='/shipper_locations/#{self.id}'>Location</a>"
+      "Location to #{self.shipper.display_name}"
     end
   end
   def shipper

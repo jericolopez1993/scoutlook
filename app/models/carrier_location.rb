@@ -4,7 +4,7 @@ class CarrierLocation < ApplicationRecord
     if self.carrier.nil?
       "Location"
     else
-      "<a href='/carrier_locations/#{self.id}'>Location</a>"
+      "Location to #{self.carrier.display_name}"
     end
   end
   def carrier

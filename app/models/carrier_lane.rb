@@ -1,4 +1,18 @@
 class CarrierLane < ApplicationRecord
+  def display_name
+    if self.carrier.nil?
+      "Lane"
+    else
+      "Lane to #{self.carrier.display_name}"
+    end
+  end
+  def carrier
+    begin
+      Carrier.find(self.carrier_id)
+    rescue
+      nil
+    end
+  end
   def preferred_load_day_to_array
     if self.preferred_load_day.nil?
       []
