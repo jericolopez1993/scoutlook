@@ -56,7 +56,7 @@ label {
   <div class="panel panel-inverse">
     <div class="panel-heading" style="padding: 5px 15px">
       <div class="panel-heading-btn" style="margin-top: 2.5px;">
-        <button type="button" class="btn btn-xs btn-primary new-attachment-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<%= form_with(model: @carrier, local: true, :html => {class: 'form-horizontal text-right'}) do |form| %><%= form.file_field :attachment_file, multiple: true %><%= form.submit 'Submit', :class => 'btn btn-xs btn-success' %><% end %>'>
+        <button type="button" class="btn btn-xs btn-primary new-attachment-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<%= form_with(model: @carrier, local: true, :html => {class: 'form-horizontal text-right'}) do |form| %><%= form.hidden_field :attachment_only, :value => true %><%= form.file_field :attachment_file, multiple: true %><%= form.submit 'Submit', :class => 'btn btn-xs btn-success' %><% end %>'>
 Add Attachment
 </button>
         <%= link_to 'New Location', new_carrier_location_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-location-btn' %>

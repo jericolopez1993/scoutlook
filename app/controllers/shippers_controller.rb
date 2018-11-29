@@ -52,25 +52,34 @@ class ShippersController < ApplicationController
   # PATCH/PUT /shippers/1.json
   def update
     respond_to do |format|
-      if @shipper.update(shipper_params)
-        if @shipper.location.nil?
-          @location = ShipperLocation.new(location_params)
-          @location.shipper_id = @shipper.id
-          if @location.save
-            @shipper.update_attributes(:head_office => @location.id)
-          end
-        else
-          @shipper.location.update_attributes(location_params)
-        end
-
+      if params[:shipper][:attachment_only].present?
         if params[:shipper][:attachment_file].present?
           @shipper.attachment_file.attach(params[:shipper][:attachment_file])
+          @shipper.update_attributes!(audit_comment: "Attachment")
         end
         format.html { redirect_to @shipper, notice: 'Shipper was successfully updated.' }
         format.json { render :show, status: :ok, location: @shipper }
       else
-        format.html { render :edit }
-        format.json { render json: @shipper.errors, status: :unprocessable_entity }
+        if @shipper.update(shipper_params)
+          if @shipper.location.nil?
+            @location = ShipperLocation.new(location_params)
+            @location.shipper_id = @shipper.id
+            if @location.save
+              @shipper.update_attributes(:head_office => @location.id)
+            end
+          else
+            @shipper.location.update_attributes(location_params)
+          end
+
+          if params[:shipper][:attachment_file].present?
+            @shipper.attachment_file.attach(params[:shipper][:attachment_file])
+          end
+          format.html { redirect_to @shipper, notice: 'Shipper was successfully updated.' }
+          format.json { render :show, status: :ok, location: @shipper }
+        else
+          format.html { render :edit }
+          format.json { render json: @shipper.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

@@ -52,28 +52,38 @@ class CarriersController < ApplicationController
   # PATCH/PUT /carriers/1.json
   def update
     respond_to do |format|
-      if @carrier.update(carrier_params)
-        if @carrier.location.nil?
-          @location = CarrierLocation.new(location_params)
-          @location.carrier_id = @carrier.id
-          if @location.save
-            @carrier.update_attributes(:head_office => @location.id)
-          end
-        else
-          @carrier.location.update_attributes(location_params)
-        end
-
+      if params[:carrier][:attachment_only].present?
         if params[:carrier][:attachment_file].present?
           @carrier.attachment_file.attach(params[:carrier][:attachment_file])
+          @carrier.update_attributes!(audit_comment: "Attachment")
         end
         format.html { redirect_to @carrier, notice: 'Carrier was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier }
       else
-        format.html { render :edit }
-        format.json { render json: @carrier.errors, status: :unprocessable_entity }
+        if @carrier.update(carrier_params)
+          if @carrier.location.nil?
+            @location = CarrierLocation.new(location_params)
+            @location.carrier_id = @carrier.id
+            if @location.save
+              @carrier.update_attributes(:head_office => @location.id)
+            end
+          else
+            @carrier.location.update_attributes(location_params)
+          end
+
+          if params[:carrier][:attachment_file].present?
+            @carrier.attachment_file.attach(params[:carrier][:attachment_file])
+          end
+          format.html { redirect_to @carrier, notice: 'Carrier was successfully updated.' }
+          format.json { render :show, status: :ok, location: @carrier }
+        else
+          format.html { render :edit }
+          format.json { render json: @carrier.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
+
 
   # DELETE /carriers/1
   # DELETE /carriers/1.json
