@@ -36,6 +36,9 @@
     		<!-- end #content -->
     <script>
       $(document).ready(function() {
+        $(window).on('popstate', function() {
+              location.reload(true);
+        });
         App.init();
         FormSliderSwitcher.init();
         <%= (params[:action] == 'index' || params[:action] == 'show') ? 'TableManageButtons.init();' : ''%>
