@@ -42,9 +42,9 @@
             <td><%= shipper.dry_vans %></td>
             <td><%= shipper.flat_beds %></td>
             <td><%= shipper.teams %></td>
-            <td><%= shipper.lane_1.nil? ? "" : shipper.lane_1.lane_origin %></td>
-            <td><%= shipper.lane_2.nil? ? "" : shipper.lane_2.lane_origin %></td>
-            <td><%= shipper.lane_3.nil? ? "" : shipper.lane_3.lane_origin %></td>
+            <td><%= shipper.lane_1.nil? ? "" : link_to(shipper.lane_1.lane_origin,  shipper.lane_1) %></td>
+            <td><%= shipper.lane_2.nil? ? "" : link_to(shipper.lane_2.lane_origin,  shipper.lane_2) %></td>
+            <td><%= shipper.lane_3.nil? ? "" : link_to(shipper.lane_3.lane_origin,  shipper.lane_3) %></td>
             <td><%= shipper.contract_rates %></td>
             <td><%= shipper.find_loads.nil? ? "" : shipper.find_loads.html_safe %></td>
             <td><%= shipper.notes.nil? ? "" : shipper.notes.html_safe %></td>

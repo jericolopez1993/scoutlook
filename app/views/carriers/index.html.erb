@@ -42,9 +42,9 @@
             <td><%= carrier.dry_vans %></td>
             <td><%= carrier.flat_beds %></td>
             <td><%= carrier.teams %></td>
-            <td><%= carrier.lane_1.nil? ? "" : carrier.lane_1.lane_origin %></td>
-            <td><%= carrier.lane_2.nil? ? "" : carrier.lane_2.lane_origin %></td>
-            <td><%= carrier.lane_3.nil? ? "" : carrier.lane_3.lane_origin %></td>
+            <td><%= carrier.lane_1.nil? ? "" : link_to(carrier.lane_1.lane_origin,  carrier.lane_1) %></td>
+            <td><%= carrier.lane_2.nil? ? "" : link_to(carrier.lane_2.lane_origin,  carrier.lane_2) %></td>
+            <td><%= carrier.lane_3.nil? ? "" : link_to(carrier.lane_3.lane_origin,  carrier.lane_3) %></td>
             <td><%= carrier.contract_rates %></td>
             <td><%= carrier.find_loads.nil? ? "" : carrier.find_loads.html_safe %></td>
             <td><%= carrier.notes.nil? ? "" : carrier.notes.html_safe %></td>

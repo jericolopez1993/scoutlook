@@ -1,34 +1,54 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/static/header', header_title: "#{@shipper_lane.shipper.nil? ? '' : link_to(@shipper_lane.shipper.company_name,  @shipper_lane.shipper)}" %>
 
-<p>
-  <strong>Priority:</strong>
-  <%= @shipper_lane.lane_priority %>
-</p>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+        <% if current_user.has_role?(:admin) %>
+          <%= link_to 'Edit', edit_shipper_lane_path(@shipper_lane), :class => 'btn btn-warning btn-xs' %>
+          <%= link_to 'Back', shipper_path(:id => @shipper_lane.shipper_id), :class => 'btn btn-info btn-xs' %>
+        <% end %>
+    </div>
+    <h4 class="panel-title">Information</h4>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <label class="col-md-3 col-form-label">Priority:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_lane.lane_priority %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-3 col-form-label">Origin:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_lane.lane_origin %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-3 col-form-label">Destination:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_lane.lane_destination %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-3 col-form-label">Trucks Per Week:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_lane.truck_per_week %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-3 col-form-label">Preferred Load Days:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <% @shipper_lane.preferred_load_day_to_array.each do |cr| %>
+          <span class="badge badge-inverse"><%= cr %></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-3 col-form-label">Notes:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @shipper_lane.notes.nil? ? "" : @shipper_lane.notes.html_safe %>
+      </div>
+    </div>
 
-<p>
-  <strong>Origin:</strong>
-  <%= @shipper_lane.lane_origin %>
-</p>
-
-<p>
-  <strong>Destination:</strong>
-  <%= @shipper_lane.lane_destination %>
-</p>
-
-<p>
-  <strong>Trucks Per Week:</strong>
-  <%= @shipper_lane.truck_per_week %>
-</p>
-
-<p>
-  <strong>Preferred Load Days:</strong>
-  <%= @shipper_lane.preferred_load_day %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @shipper_lane.notes %>
-</p>
-
-<%= link_to 'Edit', edit_shipper_lane_path(@shipper_lane) %> |
-<%= link_to 'Back', shipper_lanes_path %>
+  </div>
+</div>
