@@ -126,7 +126,12 @@ class ShippersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipper_params
       params[:shipper][:complete_record] = params[:complete_record].present?
-      params.require(:shipper).permit(:relationship_owner, :company_name, :shipper_id, :parent_id, :sales_priority, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval, :score_card, :freight_guard, :years_in_business, :owner_operators, :reefers, :dry_vans, :flat_beds, :teams, :contract_rates, :find_loads, :complete_record, :total_fleet_size, :website, :linkedin)
+      params[:shipper][:control_freight] = params[:control_freight].present?
+      params[:shipper][:works_with_brokers] = params[:works_with_brokers].present?
+      params[:shipper][:prefer_teams] = params[:prefer_teams].present?
+      params[:shipper][:commodities] = params[:shipper][:commodities].to_s.tr('[]', '').tr('"', '').gsub(' Comm', 'Comm')[1..-1].to_s
+      p(params[:shipper][:commodities])
+      params.require(:shipper).permit(:relationship_owner, :company_name, :shipper_id, :parent_id, :sales_priority, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval, :shipper_type, :control_freight, :loads_per_month, :spend_per_year, :commodities, :commodities_notes, :blue_book_score, :blue_book_url, :buying_criteria, :works_with_brokers, :price_sensitivity, :challenges, :current_carrier_mix, :prefer_teams, :years_in_business, :complete_record, :website, :linkedin)
     end
 
     def location_params

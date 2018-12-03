@@ -92,6 +92,14 @@ class Shipper < ApplicationRecord
     ShipperLocation.where(:shipper_id => self.id, :location_id => location_id).length > 0
   end
 
+  def commodities_to_array
+    if self.commodities.nil?
+      []
+    else
+      self.commodities.split(',').map(&:to_s)
+    end
+  end
+
 
   private
     def remove_children

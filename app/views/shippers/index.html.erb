@@ -14,40 +14,46 @@
       <thead>
         <tr class="odd gradeX">
           <th>Name</th>
-          <th>Score Card</th>
-          <th>Frieght Guard</th>
-          <th>Years in Business</th>
-          <th>Owner Operators</th>
-          <th>Reefers</th>
-          <th>Dry Vans</th>
-          <th>Flat Beds</th>
-          <th>Teams</th>
-          <th>Lane 1</th>
-          <th>Lane 2</th>
-          <th>Lane 3</th>
-          <th>Contact Rates</th>
-          <th>How do they find loads</th>
-          <th>Notes</th>
+          <th>Shipper Type</th>
+          <th>Sales Priority</th>
+          <th>Control Freight</th>
+          <th>Loads Per Month</th>
+          <th>Spend Per Year</th>
+          <th>Commodities</th>
+          <th>Blue Book Score</th>
+          <th>Buying Criteria</th>
+          <th>Works with Brokers?</th>
+          <th>Price Sensitivity</th>
+          <th>Prefer Teams?</th>
         </tr>
       </thead>
       <tbody>
         <% @shippers.each do |shipper| %>
           <tr>
             <td><%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper %></td>
-            <td><%= shipper.score_card %></td>
-            <td><%= shipper.freight_guard %></td>
-            <td><%= shipper.years_in_business %></td>
-            <td><%= shipper.owner_operators %></td>
-            <td><%= shipper.reefers %></td>
-            <td><%= shipper.dry_vans %></td>
-            <td><%= shipper.flat_beds %></td>
-            <td><%= shipper.teams %></td>
-            <td><%= shipper.lane_1.nil? ? "" : link_to(shipper.lane_1.lane_origin,  shipper.lane_1) %></td>
-            <td><%= shipper.lane_2.nil? ? "" : link_to(shipper.lane_2.lane_origin,  shipper.lane_2) %></td>
-            <td><%= shipper.lane_3.nil? ? "" : link_to(shipper.lane_3.lane_origin,  shipper.lane_3) %></td>
-            <td><%= shipper.contract_rates %></td>
-            <td><%= shipper.find_loads.nil? ? "" : shipper.find_loads.html_safe %></td>
-            <td><%= shipper.notes.nil? ? "" : shipper.notes.html_safe %></td>
+            <td><%= shipper.shipper_type %></td>
+            <td><%= shipper.sales_priority %></td>
+            <td><%= shipper.control_freight %></td>
+            <td><%= shipper.loads_per_month %></td>
+            <td><%= shipper.spend_per_year %></td>
+            <td>
+                <% shipper.commodities_to_array.each do |cr| %>
+                  <span class="badge badge-inverse"><%= cr %></span>
+                <% end %>
+            </td>
+            <td>
+              <% if shipper.blue_book_url %>
+                <a target="_blank" href="<%= shipper.blue_book_url %>">
+                  <%= shipper.blue_book_score %>
+                </a>
+              <% else %>
+                <%= shipper.blue_book_score %>
+              <% end %>
+            </td>
+            <td><%= shipper.buying_criteria %></td>
+            <td><%= shipper.works_with_brokers %></td>
+            <td><%= shipper.price_sensitivity %></td>
+            <td><%= shipper.prefer_teams %></td>
           </tr>
         <% end %>
       </tbody>

@@ -20,9 +20,9 @@ label {
       <% if @previous_controller == "carriers"%>
         <% carrier = Carrier.find(@carrier_activity.carrier_id)%>
         <%= link_to 'Back to Carrier', carrier, :class => 'btn btn-info btn-xs' %>
-    <% else %>
+      <% else %>
         <%= link_to 'Back', carrier_activities_path, :class => 'btn btn-default btn-xs' %>
-    <% end %>
+      <% end %>
     </div>
     <h4 class="panel-title">  Carrier Activity - <%= @carrier_activity.carrier.nil? ? '' : @carrier_activity.carrier.company_name %></h4>
   </div>

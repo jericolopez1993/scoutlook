@@ -101,7 +101,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :contract_rates, 'Contract Rates:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.select :contract_rates, options_for_select(['< 10', '10-25', '25-50', '50+'], carrier.contract_rates),{:include_blank => true}, class: 'form-control' %>
+            <%= form.select :contract_rates, options_for_select(['< 10', '10-25', '25-50', '50-100', '> 100'], carrier.contract_rates),{:include_blank => true}, class: 'form-control' %>
           </div>
         </div>
         <div class="form-group row m-b-15">

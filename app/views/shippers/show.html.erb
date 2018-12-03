@@ -125,81 +125,101 @@ Add Attachment
             </div>
           </div>
           <div class="row">
-            <label class="col-md-2 col-form-label">Score Card:</label>
+            <label class="col-md-2 col-form-label">Shipper Type:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.score_card %>
+              <%= @shipper.shipper_type %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-2 col-form-label">Freight Guard:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.freight_guard %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Years in Business:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.years_in_business %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Owner Operators:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.owner_operators %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Reefers:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.reefers %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Dry Vans:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.dry_vans %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Flat Beds:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.flat_beds %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Teams:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.teams %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Shipper Class:</label>
+            <label class="col-md-2 col-form-label">Sales Priority:</label>
             <div class="col-md-9 lbl-padding-t">
               <%= @shipper.sales_priority %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-2 col-form-label">Contact Rates:</label>
+            <label class="col-md-2 col-form-label">Control Freight:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.contract_rates %>
+              <%= @shipper.control_freight ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-2 col-form-label">Total Fleet Size:</label>
+            <label class="col-md-2 col-form-label">Loads Per Month:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.total_fleet_size %>
+              <%= @shipper.loads_per_month %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-2 col-form-label">How do they find loads:</label>
+            <label class="col-md-2 col-form-label">Spend Per Year:</label>
             <div class="col-md-9 lbl-padding-t">
-              <%= @shipper.find_loads.nil? ? "" : @shipper.find_loads.html_safe %>
+              <%= @shipper.spend_per_year %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Commodities:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <% @shipper.commodities_to_array.each do |cr| %>
+                <span class="badge badge-inverse"><%= cr %></span>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Blue Book Score:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <% if @shipper.blue_book_url %>
+                <a target="_blank" href="<%= @shipper.blue_book_url %>">
+                  <%= @shipper.blue_book_score %>
+                </a>
+              <% else %>
+                <%= @shipper.blue_book_score %>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Buying Criteria:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @shipper.buying_criteria %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Works with Brokers?:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @shipper.works_with_brokers ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Price Sensitivity:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @shipper.price_sensitivity %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Challenges:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @shipper.challenges.nil? ? "" : @shipper.challenges.html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Current Carrier Mix:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @shipper.current_carrier_mix.nil? ? "" : @shipper.current_carrier_mix.html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Prefer Teams?:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @shipper.prefer_teams ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
             </div>
           </div>
           <div class="row">
             <label class="col-md-2 col-form-label">Notes:</label>
             <div class="col-md-9 lbl-padding-t">
               <%= @shipper.notes.nil? ? "" : @shipper.notes.html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Years in Business:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @shipper.years_in_business %>
             </div>
           </div>
           <div class="row">

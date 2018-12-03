@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_092235) do
+ActiveRecord::Schema.define(version: 2018_12_03_065142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -400,21 +400,25 @@ ActiveRecord::Schema.define(version: 2018_11_28_092235) do
     t.string "annual_revenue"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "score_card"
-    t.string "freight_guard"
     t.integer "years_in_business", default: 0
-    t.integer "owner_operators", default: 0
-    t.integer "reefers", default: 0
-    t.integer "dry_vans", default: 0
-    t.integer "flat_beds", default: 0
-    t.integer "teams", default: 0
-    t.string "contract_rates"
-    t.text "find_loads"
     t.boolean "complete_record", default: false
-    t.string "total_fleet_size"
     t.string "website"
     t.string "linkedin"
     t.string "sales_priority"
+    t.string "shipper_type"
+    t.boolean "control_freight", default: false
+    t.string "loads_per_month"
+    t.string "spend_per_year"
+    t.string "commodities"
+    t.text "commodities_notes"
+    t.integer "blue_book_score"
+    t.string "blue_book_url"
+    t.string "buying_criteria"
+    t.boolean "works_with_brokers", default: false
+    t.string "price_sensitivity"
+    t.text "challenges"
+    t.text "current_carrier_mix"
+    t.boolean "prefer_teams", default: false
   end
 
   create_table "users", force: :cascade do |t|
