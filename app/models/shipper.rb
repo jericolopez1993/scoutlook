@@ -33,15 +33,15 @@ class Shipper < ApplicationRecord
   end
 
   def lane_1
-    ShipperLane.where(:shipper_id => self.id, :lane_priority => 1).first
+    ShipperLane.where(:shipper_id => self.id, :lane_priority => 1)
   end
 
   def lane_2
-    ShipperLane.where(:shipper_id => self.id, :lane_priority => 2).first
+    ShipperLane.where(:shipper_id => self.id, :lane_priority => 2)
   end
 
   def lane_3
-    ShipperLane.where(:shipper_id => self.id, :lane_priority => 3).first
+    ShipperLane.where(:shipper_id => self.id, :lane_priority => 3)
   end
 
   def default_location

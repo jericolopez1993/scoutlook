@@ -33,15 +33,15 @@ class Carrier < ApplicationRecord
   end
 
   def lane_1
-    CarrierLane.where(:carrier_id => self.id, :lane_priority => 1).first
+    CarrierLane.where(:carrier_id => self.id, :lane_priority => 1)
   end
 
   def lane_2
-    CarrierLane.where(:carrier_id => self.id, :lane_priority => 2).first
+    CarrierLane.where(:carrier_id => self.id, :lane_priority => 2)
   end
 
   def lane_3
-    CarrierLane.where(:carrier_id => self.id, :lane_priority => 3).first
+    CarrierLane.where(:carrier_id => self.id, :lane_priority => 3)
   end
 
   def default_location

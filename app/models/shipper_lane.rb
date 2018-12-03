@@ -7,6 +7,11 @@ class ShipperLane < ApplicationRecord
       "Lane to #{self.shipper.display_name}"
     end
   end
+
+  def lane_priority_display
+    ['', 'High', 'Medium', 'Low'][self.lane_priority || 0]
+  end
+
   def shipper
     begin
       Shipper.find(self.shipper_id)
@@ -14,6 +19,7 @@ class ShipperLane < ApplicationRecord
       nil
     end
   end
+
   def preferred_load_day_to_array
     if self.preferred_load_day.nil?
       []

@@ -31,7 +31,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :lane_priority, 'Priority:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.number_field :lane_priority, class: 'form-control' %>
+            <%= form.select :lane_priority, options_for_select([['High', 1], ['Medium', 2], ['Low', 3]], carrier_lane.lane_priority), {:include_blank => true}, class: 'form-control' %>
           </div>
         </div>
         <div class="form-group row m-b-15">

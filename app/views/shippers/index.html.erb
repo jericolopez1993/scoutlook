@@ -33,7 +33,7 @@
             <td><%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper %></td>
             <td><%= shipper.shipper_type %></td>
             <td><%= shipper.sales_priority %></td>
-            <td><%= shipper.control_freight %></td>
+            <td><%= shipper.control_freight ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %></td>
             <td><%= shipper.loads_per_month %></td>
             <td><%= shipper.spend_per_year %></td>
             <td>
@@ -51,9 +51,9 @@
               <% end %>
             </td>
             <td><%= shipper.buying_criteria %></td>
-            <td><%= shipper.works_with_brokers %></td>
+            <td><%= shipper.works_with_brokers ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %></td>
             <td><%= shipper.price_sensitivity %></td>
-            <td><%= shipper.prefer_teams %></td>
+            <td><%= shipper.prefer_teams ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %></td>
           </tr>
         <% end %>
       </tbody>

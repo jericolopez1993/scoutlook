@@ -7,6 +7,11 @@ class CarrierLane < ApplicationRecord
       "Lane to #{self.carrier.display_name}"
     end
   end
+  
+  def lane_priority_display
+    ['', 'High', 'Medium', 'Low'][self.lane_priority || 0]
+  end
+
   def carrier
     begin
       Carrier.find(self.carrier_id)
@@ -14,6 +19,7 @@ class CarrierLane < ApplicationRecord
       nil
     end
   end
+
   def preferred_load_day_to_array
     if self.preferred_load_day.nil?
       []

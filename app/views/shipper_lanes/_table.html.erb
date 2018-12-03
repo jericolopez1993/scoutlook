@@ -13,7 +13,7 @@
                   <% if !shipper_lanes.nil? %>
                     <% shipper_lanes.each do |shipper_lane| %>
                       <tr>
-                        <td><%= shipper_lane.lane_priority %></td>
+                        <td><%= shipper_lane.lane_priority_display %></td>
                         <td><%= shipper_lane.lane_origin %></td>
                         <td><%= shipper_lane.lane_destination %></td>
                         <td><%= shipper_lane.truck_per_week %></td>
