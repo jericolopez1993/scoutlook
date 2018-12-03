@@ -24,9 +24,9 @@ class Audit
     else
       begin
         class_object = self.auditable_type.singularize.classify.constantize.find(self.auditable_id)
-        @to_sentence = @to_sentence + " " + self.action + " " + @string_article + " " + " #{class_object.display_name}"
+        @to_sentence = @to_sentence + " " + self.action + "d " + @string_article + " " + " #{class_object.display_name}"
       rescue
-        @to_sentence = @to_sentence + " " + self.action + " " + @string_article + " " + " #{self.auditable_type == 'MasterInvoice' ? 'Invoice' : (self.auditable_type == 'MasterSignal' ? 'Signal' : self.auditable_type.titleize)}"
+        @to_sentence = @to_sentence + " " + self.action + "d " + @string_article + " " + " #{self.auditable_type == 'MasterInvoice' ? 'Invoice' : (self.auditable_type == 'MasterSignal' ? 'Signal' : self.auditable_type.titleize)}"
       end
     end
     @to_sentence
