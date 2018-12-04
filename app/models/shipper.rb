@@ -100,6 +100,21 @@ class Shipper < ApplicationRecord
     end
   end
 
+  def poc
+    if self.poc_id.present? && !self.poc_id.nil?
+      ShipperContact.find(self.poc_id)
+    else
+      nil
+    end
+  end
+
+  def pdm
+    if self.pdm_id.present? && !self.pdm_id.nil?
+      ShipperContact.find(self.pdm_id)
+    else
+      nil
+    end
+  end
 
   private
     def remove_children
