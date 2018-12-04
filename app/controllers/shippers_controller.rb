@@ -129,9 +129,16 @@ class ShippersController < ApplicationController
       params[:shipper][:control_freight] = params[:control_freight].present?
       params[:shipper][:works_with_brokers] = params[:works_with_brokers].present?
       params[:shipper][:prefer_teams] = params[:prefer_teams].present?
-      params[:shipper][:commodities] = params[:shipper][:commodities].to_s.tr('[]', '').tr('"', '')[2..-1].gsub(', ', ',').to_s
-      p(params[:shipper][:commodities])
-      params[:shipper][:last_contact] = Date::strptime(params[:shipper][:last_contact], "%m/%d/%Y")
+      if params[:shipper][:commodities].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
+        params[:shipper].delete :commodities
+      else
+        params[:shipper][:commodities] = params[:shipper][:commodities].to_s.tr('[]', '').tr('"', '')[2..-1].gsub(', ', ',').to_s
+      end
+      if params[:shipper][:last_contact].present?
+        params[:shipper][:last_contact] = Date::strptime(params[:shipper][:last_contact], "%m/%d/%Y")
+      else
+        params[:shipper].delete :last_contact
+      end
       params.require(:shipper).permit(:relationship_owner, :company_name, :shipper_id, :parent_id, :sales_priority, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval, :shipper_type, :control_freight, :loads_per_month, :spend_per_year, :commodities, :commodities_notes, :blue_book_score, :blue_book_url, :buying_criteria, :works_with_brokers, :price_sensitivity, :challenges, :current_carrier_mix, :prefer_teams, :years_in_business, :complete_record, :website, :linkedin, :last_contact, :last_contact_by)
     end
 
