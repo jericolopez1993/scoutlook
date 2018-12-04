@@ -1,0 +1,42 @@
+<% if carrier_lane.present? && !carrier_lane.nil? %>
+<div class="row">
+  <label class="col-md-3 col-form-label">Priority:</label>
+  <div class="col-md-9 lbl-padding-t">
+    <%= carrier_lane.lane_priority_display %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-form-label">Origin:</label>
+  <div class="col-md-9 lbl-padding-t">
+    <%= carrier_lane.lane_origin %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-form-label">Destination:</label>
+  <div class="col-md-9 lbl-padding-t">
+    <%= carrier_lane.lane_destination %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-form-label">Trucks Per Week:</label>
+  <div class="col-md-9 lbl-padding-t">
+    <%= carrier_lane.truck_per_week %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-form-label">Preferred Load Days:</label>
+  <div class="col-md-9 lbl-padding-t">
+    <% carrier_lane.preferred_load_day_to_array.each do |cr| %>
+      <span class="badge badge-inverse"><%= cr %></span>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-form-label">Notes:</label>
+  <div class="col-md-9 lbl-padding-t">
+    <%= carrier_lane.notes.nil? ? "" : carrier_lane.notes.html_safe %>
+  </div>
+</div>
+<% else %>
+<em>No Available</em>
+<% end %>

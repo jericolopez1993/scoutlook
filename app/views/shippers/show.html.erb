@@ -238,7 +238,42 @@ Add Attachment
               </div>
             </div>
             <div class="col-md-4">
-
+              <div class="card bg-light" >
+              <div class="card-body">
+                <h4 class="card-title">Lane 1</h4>
+                <% @shipper.lane_1.each do |lane|  %>
+                  <%= render 'shipper_lanes/show_fields', shipper_lane: lane %>
+                  <br/>
+                <% end %>
+                <% if @shipper.lane_1.length == 0%>
+                  <em>No Available</em>
+                <% end %>
+              </div>
+            </div>
+              <div class="card bg-light" >
+              <div class="card-body">
+                <h4 class="card-title">Lane 2</h4>
+                <% @shipper.lane_2.each do |lane|  %>
+                  <%= render 'shipper_lanes/show_fields', shipper_lane: lane %>
+                  <br/>
+                <% end %>
+                <% if @shipper.lane_2.length == 0%>
+                  <em>No Available</em>
+                <% end %>
+              </div>
+            </div>
+              <div class="card bg-light" >
+              <div class="card-body">
+                <h4 class="card-title">Lane 3</h4>
+                <% @shipper.lane_3.each do |lane|  %>
+                  <%= render 'shipper_lanes/show_fields', shipper_lane: lane %>
+                  <br/>
+                <% end %>
+                <% if @shipper.lane_3.length == 0%>
+                  <em>No Available</em>
+                <% end %>
+              </div>
+            </div>
             </div>
             <div class="col-md-4">
               <div class="card bg-light" >
