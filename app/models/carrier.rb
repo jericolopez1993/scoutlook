@@ -92,6 +92,22 @@ class Carrier < ApplicationRecord
     CarrierLocation.where(:carrier_id => self.id, :location_id => location_id).length > 0
   end
 
+  def poc
+    if self.poc_id.present? && !self.poc_id.nil?
+      CarrierContact.find(self.poc_id)
+    else
+      nil
+    end
+  end
+
+  def pdm
+    if self.pdm_id.present? && !self.pdm_id.nil?
+      CarrierContact.find(self.pdm_id)
+    else
+      nil
+    end
+  end
+
 
   private
     def remove_children
