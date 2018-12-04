@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_065142) do
+ActiveRecord::Schema.define(version: 2018_12_04_040456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,7 +144,6 @@ ActiveRecord::Schema.define(version: 2018_12_03_065142) do
   end
 
   create_table "carriers", force: :cascade do |t|
-    t.integer "relationship_owner"
     t.string "company_name"
     t.string "parent_id"
     t.string "phone"
@@ -183,6 +182,9 @@ ActiveRecord::Schema.define(version: 2018_12_03_065142) do
     t.string "website"
     t.string "linkedin"
     t.string "sales_priority"
+    t.integer "last_contact_by"
+    t.date "last_contact"
+    t.integer "relationship_owner"
   end
 
   create_table "master_invoices", force: :cascade do |t|
@@ -387,7 +389,6 @@ ActiveRecord::Schema.define(version: 2018_12_03_065142) do
   end
 
   create_table "shippers", force: :cascade do |t|
-    t.integer "relationship_owner"
     t.string "company_name"
     t.string "parent_id"
     t.string "phone"
@@ -430,6 +431,9 @@ ActiveRecord::Schema.define(version: 2018_12_03_065142) do
     t.text "challenges"
     t.text "current_carrier_mix"
     t.boolean "prefer_teams", default: false
+    t.integer "last_contact_by"
+    t.date "last_contact"
+    t.integer "relationship_owner"
   end
 
   create_table "users", force: :cascade do |t|

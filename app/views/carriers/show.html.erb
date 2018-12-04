@@ -216,6 +216,12 @@ Add Attachment
               <%= (!@carrier.linkedin.nil? && @carrier.linkedin.present?) ? "<a href='#{@carrier.website}'>#{@carrier.linkedin}</a>" : "" %>
             </div>
           </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Last Contact:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= @carrier.last_contact.to_s + " " + (@carrier.last_contact_by_rep.nil? ? '' : @carrier.last_contact_by_rep.full_name) %>
+            </div>
+          </div>
         </div>
         <div class="col-md-4">
           <div class="card bg-light" >

@@ -10,4 +10,7 @@ class Rep < ApplicationRecord
   def display_name
     "<a href='/reps/#{self.id}'>Rep</a>"
   end
+  def full_name
+    self.first_name + " " + self.last_name
+  end
 end

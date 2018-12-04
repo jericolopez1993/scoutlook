@@ -14,6 +14,8 @@
       <thead>
         <tr class="odd gradeX">
           <th>Name</th>
+          <th>Complete?</th>
+          <th>Last Contact</th>
           <th>Score Card</th>
           <th>Frieght Guard</th>
           <th>Years in Business</th>
@@ -34,6 +36,8 @@
         <% @carriers.each do |carrier| %>
           <tr>
             <td><%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier %></td>
+            <td><%= carrier.complete_record ? "<i class='text-success'>Completed</i>".html_safe : "<i class='text-danger'>Incomplete</i>".html_safe %></td>
+            <td><%= carrier.last_contact.to_s + " " + (carrier.last_contact_by_rep.nil? ? '' : carrier.last_contact_by_rep.full_name) %></td>
             <td><%= carrier.score_card %></td>
             <td><%= carrier.freight_guard %></td>
             <td><%= carrier.years_in_business %></td>

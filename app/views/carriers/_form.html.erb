@@ -135,6 +135,18 @@
           </div>
         </div>
         <div class="form-group row m-b-15">
+          <%= form.label :last_contact_by, 'Last Contact By:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.select :last_contact_by, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier.last_contact_by}, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :last_contact, 'Last Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.text_field :last_contact, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
           <%= form.label :attachment_file, 'Attachements:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.file_field :attachment_file, multiple: true %>

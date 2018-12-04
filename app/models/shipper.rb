@@ -116,6 +116,14 @@ class Shipper < ApplicationRecord
     end
   end
 
+  def last_contact_by_rep
+    if self.last_contact_by.present? && !self.last_contact_by.nil?
+      Rep.find(self.last_contact_by)
+    else
+      nil
+    end
+  end
+
   private
     def remove_children
       ShipperContact.where(:shipper_id => self.id).destroy_all
