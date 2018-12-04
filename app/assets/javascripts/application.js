@@ -97,6 +97,8 @@ $(document).on('turbolinks:load', function(){
   statusNotes(true, 'shipment-audit-comment');
   statusNotes(true, 'invoice-audit-comment');
 
+  $(".multiple-select2").select2({ placeholder: "Select a commodities." });
+
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
 
