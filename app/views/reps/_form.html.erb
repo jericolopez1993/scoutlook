@@ -6,7 +6,7 @@
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rep' : "Edit Rep - #{rep.first_name} #{rep.last_name}" %>
+<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Salesperson' : "Edit Salesperson - #{rep.first_name} #{rep.last_name}" %>
 <!-- end page-header -->
 <!-- begin panel -->
 <div class="panel panel-inverse">
@@ -43,12 +43,6 @@
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :location, 'Location:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-                  <div class="col-md-9 col-sm-8">
-                  <%= form.select :location, Location.all.collect {|l| [l.name, l.name]},{:include_blank => true, :selected => rep.location}, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
                   <%= form.label :date_of_hire, 'Date of Hire:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-9 col-sm-8">
                   <%= form.date_field :date_of_hire, max: Date.today, class: 'form-control' %>
@@ -61,7 +55,7 @@
                   </div>
                 </div>
                 <div class="form-group row m-b-15">
-                  <%= form.label :email, 'E-email:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+                  <%= form.label :email, 'E-mail:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
                   <div class="col-md-9 col-sm-8">
                   <%= form.email_field :email, class: 'form-control' %>
                   </div>

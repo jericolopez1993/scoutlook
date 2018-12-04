@@ -127,6 +127,12 @@ Add Attachment
                 </div>
               </div>
               <div class="row">
+                <label class="col-md-4 col-form-label">Relationship Owner:</label>
+                <div class="col-md-8 lbl-padding-t">
+                  <%= @shipper.rep.nil? ? 'Not Assigned' : link_to(@shipper.rep.full_name, @shipper.rep) %>
+                </div>
+              </div>
+              <div class="row">
                 <label class="col-md-4 col-form-label">Shipper Type:</label>
                 <div class="col-md-8 lbl-padding-t">
                   <%= @shipper.shipper_type %>
@@ -239,7 +245,7 @@ Add Attachment
               <div class="row">
                 <label class="col-md-4 col-form-label">Last Contact:</label>
                 <div class="col-md-8 lbl-padding-t">
-                  <%= @shipper.last_contact.to_s + " " + (@shipper.last_contact_by_rep.nil? ? '' : @shipper.last_contact_by_rep.full_name) %>
+                  <%= (@shipper.last_contact.to_s + " " + (@shipper.last_contact_by_rep.nil? ? '' : link_to(@shipper.last_contact_by_rep.full_name, @shipper.last_contact_by_rep))).html_safe %>
                 </div>
               </div>
             </div>

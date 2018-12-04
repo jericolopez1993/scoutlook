@@ -127,6 +127,12 @@ Add Attachment
             </div>
           </div>
           <div class="row">
+            <label class="col-md-4 col-form-label">Relationship Owner:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= @carrier.rep.nil? ? 'Not Assigned' : link_to(@carrier.rep.full_name, @carrier.rep) %>
+            </div>
+          </div>
+          <div class="row">
             <label class="col-md-4 col-form-label">Score Card:</label>
             <div class="col-md-8 lbl-padding-t">
               <%= @carrier.score_card %>
@@ -219,7 +225,7 @@ Add Attachment
           <div class="row">
             <label class="col-md-4 col-form-label">Last Contact:</label>
             <div class="col-md-8 lbl-padding-t">
-              <%= @carrier.last_contact.to_s + " " + (@carrier.last_contact_by_rep.nil? ? '' : @carrier.last_contact_by_rep.full_name) %>
+              <%= (@carrier.last_contact.to_s + " " + (@carrier.last_contact_by_rep.nil? ? '' : link_to(@carrier.last_contact_by_rep.full_name, @carrier.last_contact_by_rep))).html_safe %>
             </div>
           </div>
         </div>

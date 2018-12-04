@@ -2,6 +2,11 @@
       <!-- begin top-menu nav -->
       <ul class="nav">
         <%# if current_user.has_role?(:admin) %>
+        <li class="<%= (params[:controller] == 'reps') ? 'active' : ''%>">
+          <a href="<%= reps_path %>">
+            <span>Salespeople</span>
+          </a>
+        </li>
           <li class="<%= (params[:controller] == 'carriers') ? 'active' : ''%>">
             <a href="<%= carriers_path %>">
               <span>Carriers</span>

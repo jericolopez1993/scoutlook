@@ -45,6 +45,12 @@
           </div>
         </div>
         <div class="form-group row m-b-15">
+          <%= form.label :relationship_owner, 'Relationship Owner:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.select :relationship_owner, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier.relationship_owner}, class: 'form-control' %>
+        </div>
+      </div>
+        <div class="form-group row m-b-15">
           <%= form.label :score_card, 'Score Card:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.number_field :score_card, class: 'form-control' %>

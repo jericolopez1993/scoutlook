@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       delete  'remove_attachment'
     end
   end
-  resources :reps
+  resources :reps, :path => "salespeople"
   resources :carrier_activities do
     collection do
       post    'quick_create'
