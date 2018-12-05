@@ -29,21 +29,4 @@ class ShipperRate < ApplicationRecord
       nil
     end
   end
-
-  def origin_location
-    begin
-      ShipperLocation.find(self.origin_location_id)
-    rescue
-      nil
-    end
-  end
-
-  def destination_location
-    begin
-      ShipperLocation.find(self.destination_location_id)
-    rescue
-      nil
-    end
-  end
-
 end

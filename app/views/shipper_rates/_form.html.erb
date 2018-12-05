@@ -106,11 +106,44 @@
         </div>
         <hr>
         <h4 class="text-inverse">Origin</h4>
-        <%= render 'shippers/od_address_form', form: form, name: 'origin' %>
+        <div class="form-group row m-b-15">
+          <%= form.label :origin_city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+                <%= form.text_field :origin_city, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :origin_state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+          <%= form.select :origin_state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :origin_country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+          <%= form.select :origin_country, options_for_select([]), {}, class: 'form-control static-dropdown' %>
+          </div>
+        </div>
         <hr>
         <h4 class="text-inverse">Destination</h4>
-        <%= render 'shippers/od_address_form', form: form, name: 'destination' %>
-
+        <div class="form-group row m-b-15">
+          <%= form.label :destination_city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+                <%= form.text_field :destination_city, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :destination_state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+          <%= form.select :destination_state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :destination_country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+          <%= form.select :destination_country, options_for_select([]), {}, class: 'form-control static-dropdown' %>
+          </div>
+        </div>
         <div class="form-group row m-b-15">
           <div class="col-md-2"></div>
             <div class="col-md-9 col-sm-12 d-flex justify-content-end">
@@ -135,3 +168,8 @@
 
 
 <% end %>
+
+  <script language="javascript">
+  	populateCountries("shipper_rate_origin_country", "shipper_rate_origin_state");
+    populateCountries("shipper_rate_destination_country", "shipper_rate_destination_state");
+  </script>

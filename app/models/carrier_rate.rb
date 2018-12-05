@@ -29,21 +29,4 @@ class CarrierRate < ApplicationRecord
       nil
     end
   end
-
-  def origin_location
-    begin
-      CarrierLocation.find(self.origin_location_id)
-    rescue
-      nil
-    end
-  end
-
-  def destination_location
-    begin
-      CarrierLocation.find(self.destination_location_id)
-    rescue
-      nil
-    end
-  end
-
 end

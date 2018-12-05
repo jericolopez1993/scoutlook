@@ -100,13 +100,13 @@ label {
     <div class="row">
       <label class="col-md-2 col-form-label">Origin:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_rate.origin_location.nil? ? "" : location_format(@carrier_rate.origin_location) %>
+        <%= @carrier_rate.origin_city + " " + @carrier_rate.origin_state + ", " + @carrier_rate.origin_country %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Destination:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_rate.destination_location.nil? ? "" : location_format(@carrier_rate.destination_location) %>
+        <%= @carrier_rate.destination_city + " " + @carrier_rate.destination_state + ", " + @carrier_rate.destination_country %>
       </div>
     </div>
     </div>

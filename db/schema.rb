@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_040456) do
+ActiveRecord::Schema.define(version: 2018_12_05_090813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,9 +138,13 @@ ActiveRecord::Schema.define(version: 2018_12_04_040456) do
     t.string "minimum_density"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "origin_location_id"
-    t.integer "destination_location_id"
     t.integer "carrier_id"
+    t.string "origin_city", default: ""
+    t.string "origin_state", default: ""
+    t.string "origin_country", default: ""
+    t.string "destination_city", default: ""
+    t.string "destination_state", default: ""
+    t.string "destination_country", default: ""
   end
 
   create_table "carriers", force: :cascade do |t|
@@ -383,9 +387,13 @@ ActiveRecord::Schema.define(version: 2018_12_04_040456) do
     t.string "minimum_density"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "origin_location_id"
-    t.integer "destination_location_id"
     t.integer "shipper_id"
+    t.string "origin_city", default: ""
+    t.string "origin_state", default: ""
+    t.string "origin_country", default: ""
+    t.string "destination_city", default: ""
+    t.string "destination_state", default: ""
+    t.string "destination_country", default: ""
   end
 
   create_table "shippers", force: :cascade do |t|

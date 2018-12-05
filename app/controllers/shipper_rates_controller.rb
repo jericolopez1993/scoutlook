@@ -34,38 +34,6 @@ class ShipperRatesController < ApplicationController
   # POST /shipper_rates.json
   def create
     @shipper_rate = ShipperRate.new(shipper_rate_params)
-
-    if params[:shipper_rate][:origin_location_id].present? || params[:shipper_rate][:origin_address].present? || params[:shipper_rate][:origin_country].present? ||  params[:shipper_rate][:origin_state].present? ||  params[:shipper_rate][:origin_postal].present? ||  params[:shipper_rate][:origin_city].present?
-      if params[:origin_new_location].present?
-        location = ShipperLocation.new
-        location.address = params[:shipper_rate][:origin_address]
-        location.country = params[:shipper_rate][:origin_country]
-        location.state = params[:shipper_rate][:origin_state]
-        location.city = params[:shipper_rate][:origin_city]
-        location.postal = params[:shipper_rate][:origin_postal]
-        location.save
-        @origin_location_id = location.id
-      else
-        @origin_location_id =  params[:shipper_rate][:origin_location_id]
-      end
-    end
-    @shipper_rate.origin_location_id = @origin_location_id
-    if params[:shipper_rate][:destination_location_id].present? || params[:shipper_rate][:destination_address].present? ||  params[:shipper_rate][:destination_country].present? ||  params[:shipper_rate][:destination_state].present? ||  params[:shipper_rate][:destination_postal].present? ||  params[:shipper_rate][:destination_city].present?
-      if params[:destination_new_location].present?
-        location = ShipperLocation.new
-        location.address = params[:shipper_rate][:destination_address]
-        location.country = params[:shipper_rate][:destination_country]
-        location.state = params[:shipper_rate][:destination_state]
-        location.city = params[:shipper_rate][:destination_city]
-        location.postal = params[:shipper_rate][:destination_postal]
-        location.save
-        @destination_location_id = location.id
-      else
-        @destination_location_id =  params[:shipper_rate][:destination_location_id]
-      end
-    end
-    @shipper_rate.destination_location_id = @destination_location_id
-
     respond_to do |format|
       if @shipper_rate.save
         if params[:shipper_rate][:supporting_pdf].present?
@@ -84,36 +52,6 @@ class ShipperRatesController < ApplicationController
   # PATCH/PUT /shipper_rates/1
   # PATCH/PUT /shipper_rates/1.json
   def update
-    if params[:shipper_rate][:origin_location_id].present? || params[:shipper_rate][:origin_address].present? || params[:shipper_rate][:origin_country].present? ||  params[:shipper_rate][:origin_state].present? ||  params[:shipper_rate][:origin_postal].present? ||  params[:shipper_rate][:origin_city].present?
-      if params[:origin_new_location].present?
-        location = Location.new
-        location.address = params[:shipper_rate][:origin_address]
-        location.country = params[:shipper_rate][:origin_country]
-        location.state = params[:shipper_rate][:origin_state]
-        location.city = params[:shipper_rate][:origin_city]
-        location.postal = params[:shipper_rate][:origin_postal]
-        location.save
-        @origin_location_id = location.id
-      else
-        @origin_location_id =  params[:shipper_rate][:origin_location_id]
-      end
-    end
-    params[:shipper_rate][:origin_location_id] = @origin_location_id
-    if params[:shipper_rate][:destination_location_id].present? || params[:shipper_rate][:destination_address].present? ||  params[:shipper_rate][:destination_country].present? ||  params[:shipper_rate][:destination_state].present? ||  params[:shipper_rate][:destination_postal].present? ||  params[:shipper_rate][:destination_city].present?
-      if params[:destination_new_location].present?
-        location = Location.new
-        location.address = params[:shipper_rate][:destination_address]
-        location.country = params[:shipper_rate][:destination_country]
-        location.state = params[:shipper_rate][:destination_state]
-        location.city = params[:shipper_rate][:destination_city]
-        location.postal = params[:shipper_rate][:destination_postal]
-        location.save
-        @destination_location_id = location.id
-      else
-        @destination_location_id =  params[:shipper_rate][:destination_location_id]
-      end
-    end
-    params[:shipper_rate][:destination_location_id] = @destination_location_id
     respond_to do |format|
       if @shipper_rate.update(shipper_rate_params)
         if params[:shipper_rate][:supporting_pdf].present?
@@ -155,6 +93,6 @@ class ShipperRatesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipper_rate_params
-      params.require(:shipper_rate).permit(:client_id, :shipper_id, :rate_type, :parent_id, :rate_level, :rep_id, :effective_to, :effective_from, :origin_location_id, :destination_location_id, :freight_desc, :freight_classification, :transit_time, :minimum_density)
+      params.require(:shipper_rate).permit(:client_id, :shipper_id, :rate_type, :parent_id, :rate_level, :rep_id, :effective_to, :effective_from, :origin_location_id, :destination_location_id, :freight_desc, :freight_classification, :transit_time, :minimum_density, :origin_city, :origin_state, :origin_country, :destination_city, :destination_state, :destination_country)
     end
 end
