@@ -43,7 +43,7 @@ label {
       </div>
     <% end %>
     <div class="row">
-      <label class="col-md-2 col-form-label">Rep:</label>
+      <label class="col-md-2 col-form-label">Steward:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @shipper_activity.rep.nil? ? "" : (link_to "#{@shipper_activity.rep.first_name} #{@shipper_activity.rep.last_name}", @shipper_activity.rep) %>
       </div>
