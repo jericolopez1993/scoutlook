@@ -1,4 +1,4 @@
-<%= render 'layouts/static/header', header_title: "#{@carrier_lane.carrier.nil? ? '' : link_to(@carrier_lane.carrier.company_name,  @carrier_lane.carrier)}" %>
+<%= render 'layouts/static/header', header_title: "#{@carrier_lane.carrier.nil? ? '' : generate_alphanumeric_id(@carrier_lane.carrier.company_name, @carrier_lane.carrier.id)}", sub_header_title: "#{@carrier_lane.carrier.nil? ? '' : link_to(@carrier_lane.carrier.company_name,  @carrier_lane.carrier)}"  %>
 
 <div class="panel panel-inverse">
   <div class="panel-heading">

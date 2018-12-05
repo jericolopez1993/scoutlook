@@ -26,7 +26,7 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: "#{@carrier.company_name}" %>
+<%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@carrier.company_name, @carrier.id), sub_header_title: @carrier.company_name %>
 <!-- end page-header -->
 <!-- begin row -->
 <ul class="nav nav-pills d-md-none">

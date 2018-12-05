@@ -13,7 +13,6 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require vendor/pace.min
 //= require vendor/jquery-3.3.1.min
 //= require vendor/jquery-ui.min
 //= require vendor/bootstrap.bundle.min

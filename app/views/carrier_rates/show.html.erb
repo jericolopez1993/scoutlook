@@ -9,7 +9,7 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: "#{@carrier_rate.carrier.nil? ? "" : link_to(@carrier_rate.carrier.company_name, @carrier_rate.carrier)}" %>
+<%= render 'layouts/static/header', header_title: "#{@carrier_rate.carrier.nil? ? '' : generate_alphanumeric_id(@carrier_rate.carrier.company_name, @carrier_rate.carrier.id)}", sub_header_title: "#{@carrier_rate.carrier.nil? ? '' : link_to(@carrier_rate.carrier.company_name,  @carrier_rate.carrier)}"  %>
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
