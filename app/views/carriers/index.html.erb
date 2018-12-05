@@ -41,7 +41,7 @@
           <tr>
             <td><%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier %></td>
             <td><%= carrier.complete_record ? "<i class='text-success'>Completed</i>".html_safe : "<i class='text-danger'>Incomplete</i>".html_safe %></td>
-            <td><%= ((carrier.last_contact_date.nil? ? "" : carrier.last_contact_date.date_opened.to_s) + " " + (carrier.last_contact_by_rep.nil? ? '' : link_to(carrier.last_contact_by_rep.full_name, carrier.last_contact_by_rep))).html_safe %></td>
+            <td><%= carrier.last_contact_date.nil? ? "" : (carrier.last_contact_date.date_opened.to_s + " " + (carrier.last_contact_date.rep.nil? ? "" : link_to(carrier.last_contact_date.rep.full_name, carrier.last_contact_date.rep))).html_safe %></td>
             <td><%= carrier.score_card %></td>
             <td><%= carrier.freight_guard %></td>
             <td><%= carrier.years_in_business %></td>

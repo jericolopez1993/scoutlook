@@ -225,7 +225,7 @@ Add Attachment
           <div class="row">
             <label class="col-md-4 col-form-label">Last Contact:</label>
             <div class="col-md-8 lbl-padding-t">
-              <%= ((@carrier.last_contact_date.nil? ? "" : @carrier.last_contact_date.date_opened.to_s) + " " + (@carrier.last_contact_by_rep.nil? ? '' : link_to(@carrier.last_contact_by_rep.full_name, @carrier.last_contact_by_rep))).html_safe %>
+              <%= @carrier.last_contact_date.nil? ? "" : (@carrier.last_contact_date.date_opened.to_s + " " + (@carrier.last_contact_date.rep.nil? ? "" : link_to(@carrier.last_contact_date.rep.full_name, @carrier.last_contact_date.rep))).html_safe %>
             </div>
           </div>
         </div>
