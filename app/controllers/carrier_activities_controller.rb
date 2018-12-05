@@ -5,7 +5,7 @@ class CarrierActivitiesController < ApplicationController
   # GET /carrier_activities
   # GET /carrier_activities.json
   def index
-    @carrier_activities = Carrier Engagement.all
+    @carrier_activities = CarrierActivity.all
     authorize @carrier_activities
   end
 
@@ -16,7 +16,7 @@ class CarrierActivitiesController < ApplicationController
 
   # GET /carrier_activities/new
   def new
-    @carrier_activity = Carrier Engagement.new
+    @carrier_activity = CarrierActivity.new
     if params[:carrier_id].present?
       @carrier_activity.carrier_id = params[:carrier_id]
     end
@@ -30,9 +30,9 @@ class CarrierActivitiesController < ApplicationController
   # POST /carrier_activities
   # POST /carrier_activities.json
   def create
-    @carrier_activity = Carrier Engagement.new(carrier_activity_params)
+    @carrier_activity = CarrierActivity.new(carrier_activity_params)
     if params[:carrier_activity][:outcome].present? || params[:carrier_activity][:reason].present? || params[:carrier_activity][:notes].present?
-      @outcome = Carrier EngagementOutcome.new(carrier_activity_outcome_params)
+      @outcome = CarrierActivityOutcome.new(carrier_activity_outcome_params)
       if @outcome.save
         @carrier_activity.outcome_id = @outcome.id
       end
@@ -59,13 +59,13 @@ class CarrierActivitiesController < ApplicationController
   # PATCH/PUT /carrier_activities/1.json
   def update
     if @carrier_activity.outcome_id.nil? && (params[:carrier_activity][:outcome].present? || params[:carrier_activity][:reason].present? || params[:carrier_activity][:notes].present?)
-      @outcome = Carrier EngagementOutcome.new(carrier_activity_outcome_params)
+      @outcome = CarrierActivityOutcome.new(carrier_activity_outcome_params)
       if @outcome.save
         @carrier_activity.outcome_id = @outcome.id
       end
     else
       begin
-        @outcome = Carrier EngagementOutcome.find(@carrier_activity.outcome_id)
+        @outcome = CarrierActivityOutcome.find(@carrier_activity.outcome_id)
         @outcome.update(carrier_activity_outcome_params)
       rescue
       end
@@ -98,7 +98,7 @@ class CarrierActivitiesController < ApplicationController
   end
 
   def quick_create
-    @carrier_activity = Carrier Engagement.new(carrier_activity_params)
+    @carrier_activity = CarrierActivity.new(carrier_activity_params)
     respond_to do |format|
       if @carrier_activity.save
         if params[:carrier_activity][:proposal_pdf].present?
@@ -131,7 +131,7 @@ class CarrierActivitiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_carrier_activity
-      @carrier_activity = Carrier Engagement.find(params[:id])
+      @carrier_activity = CarrierActivity.find(params[:id])
       authorize @carrier_activity
     end
 
