@@ -9,8 +9,7 @@
     <div class="panel panel-inverse">
       <div class="panel-heading">
         <div class="panel-heading-btn"></div>
-        <h4 class="panel-title">
-        Information</h4>
+        <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(shipper_lane.lane_origin, shipper_lane.id) + " - #{shipper_lane.lane_origin}") : "" %></h4>
       </div>
       <div class="panel-body">
         <% if shipper_lane.errors.any? %>

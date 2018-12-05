@@ -7,6 +7,7 @@
 </style>
 <!-- begin page-header -->
 <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Carrier Activity' : "Edit Carrier Activity - #{carrier_activity.carrier.nil? ? '' : link_to(carrier_activity.carrier.company_name,  carrier_activity.carrier)}" %>
+
 <!-- end page-header -->
 <!-- begin panel -->
 
@@ -16,7 +17,7 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
-    <h4 class="panel-title">Information</h4>
+    <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(carrier_activity.activity_type, carrier_activity.id) + " - " + carrier_activity.activity_type) : "" %></h4>
   </div>
   <div class="panel-body">
   <% if carrier_activity.errors.any? %>

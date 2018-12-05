@@ -21,7 +21,7 @@ label {
         <%= link_to 'Back', carriers_path, :class => 'btn btn-info btn-xs' %>
       <% end %>
     </div>
-    <h4 class="panel-title">  <%= @carrier_rate.carrier.nil? ? "None" : (link_to @carrier_rate.carrier.company_name, @carrier_rate.carrier) %></h4>
+    <h4 class="panel-title">  <%= generate_alphanumeric_id(@carrier_rate.rate_type, @carrier_rate.id) %> - <%= @carrier_rate.rate_type %></h4>
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Details</h4>

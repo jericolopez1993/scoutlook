@@ -15,8 +15,8 @@
       <div class="panel-heading">
         <div class="panel-heading-btn">
         </div>
-        <h4 class="panel-title">Information</h4>
-      </div>
+        <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(shipper_rate.rate_type, shipper_rate.id) + " - #{shipper_rate.rate_type}") : "" %></h4>
+</div>
       <div class="panel-body">
       <% if shipper_rate.errors.any? %>
         <div id="error_explanation">

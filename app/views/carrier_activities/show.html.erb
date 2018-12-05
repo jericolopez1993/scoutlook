@@ -24,7 +24,7 @@ label {
         <%= link_to 'Back', carrier_activities_path, :class => 'btn btn-default btn-xs' %>
       <% end %>
     </div>
-    <h4 class="panel-title">  Carrier Activity - <%= @carrier_activity.carrier.nil? ? '' : @carrier_activity.carrier.company_name %></h4>
+    <h4 class="panel-title">  <%= generate_alphanumeric_id(@carrier_activity.activity_type, @carrier_activity.id) %> - <%= @carrier_activity.activity_type %></h4>
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Outcome</h4>
