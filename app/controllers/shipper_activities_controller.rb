@@ -46,7 +46,7 @@ class ShipperActivitiesController < ApplicationController
         if params[:shipper_activity][:credit_application].present?
           @shipper_activity.credit_application.attach(params[:shipper_activity][:credit_application])
         end
-        format.html { redirect_to shipper_path(:id => @shipper_activity.shipper_id), notice: 'ShipperActivity was successfully created.' }
+        format.html { redirect_to shipper_path(:id => @shipper_activity.shipper_id), notice: 'Shipper Engagement was successfully created.' }
         format.json { render :show, status: :created, location: @shipper_activity }
       else
         format.html { render :new }
@@ -78,7 +78,7 @@ class ShipperActivitiesController < ApplicationController
         if params[:shipper_activity][:credit_application].present?
           @shipper_activity.credit_application.attach(params[:shipper_activity][:credit_application])
         end
-        format.html { redirect_to shipper_path(:id => @shipper_activity.shipper_id), notice: 'ShipperActivity was successfully updated.' }
+        format.html { redirect_to shipper_path(:id => @shipper_activity.shipper_id), notice: 'Shipper Engagement was successfully updated.' }
         format.json { render :show, status: :ok, location: @shipper_activity }
       else
         format.html { render :edit }
@@ -92,7 +92,7 @@ class ShipperActivitiesController < ApplicationController
   def destroy
     @shipper_activity.destroy
     respond_to do |format|
-      format.html { redirect_to shipper_path(:id => @shipper_activity.shipper_id), notice: 'ShipperActivity was successfully removed.' }
+      format.html { redirect_to shipper_path(:id => @shipper_activity.shipper_id), notice: 'Shipper Engagement was successfully removed.' }
       format.json { head :no_content }
     end
   end
@@ -107,7 +107,7 @@ class ShipperActivitiesController < ApplicationController
         if params[:shipper_activity][:credit_application].present?
           @shipper_activity.credit_application.attach(params[:shipper_activity][:credit_application])
         end
-        format.html { redirect_to authenticated_root_path, notice: 'ShipperActivity was successfully created.' }
+        format.html { redirect_to authenticated_root_path, notice: 'Shipper Engagement was successfully created.' }
         format.json { render :show, status: :created, location: @shipper_activity }
       else
         format.html { render :new }

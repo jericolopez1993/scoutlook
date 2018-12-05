@@ -115,6 +115,9 @@ class Carrier < ApplicationRecord
       nil
     end
   end
+  def last_contact_date
+    CarrierActivity.where(:carrier_id => self.id).last
+  end
 
 
   private

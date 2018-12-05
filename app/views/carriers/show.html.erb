@@ -61,7 +61,7 @@ Add Attachment
 </button>
         <%= link_to 'New Location', new_carrier_location_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-location-btn' %>
         <%= link_to 'New Contact', new_carrier_contact_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-contact-btn' %>
-        <%= link_to 'New Sales', new_carrier_activity_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-activity-btn' %>
+        <%= link_to 'New Engagements', new_carrier_activity_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-activity-btn' %>
         <%= link_to 'New Lane', new_carrier_lane_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
         <%= link_to 'New Rates', new_carrier_rate_path(:carrier_id => @carrier.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
         <%= link_to 'Edit', edit_carrier_path(@carrier), :class => 'btn btn-warning btn-xs' %>
@@ -86,7 +86,7 @@ Add Attachment
       </li>
       <li class="nav-items">
         <a href="#activity" data-toggle="tab" class="nav-link activity-btn" style="padding:5px; margin: 0px 10px">
-          <span class="d-sm-block d-none"><h4 class="panel-title">Sales Opportunity</h4></span>
+          <span class="d-sm-block d-none"><h4 class="panel-title">Engagements</h4></span>
         </a>
       </li>
       <li class="nav-items">
@@ -225,7 +225,7 @@ Add Attachment
           <div class="row">
             <label class="col-md-4 col-form-label">Last Contact:</label>
             <div class="col-md-8 lbl-padding-t">
-              <%= (@carrier.last_contact.to_s + " " + (@carrier.last_contact_by_rep.nil? ? '' : link_to(@carrier.last_contact_by_rep.full_name, @carrier.last_contact_by_rep))).html_safe %>
+              <%= ((@carrier.last_contact_date.nil? ? "" : @carrier.last_contact_date.date_opened.to_s) + " " + (@carrier.last_contact_by_rep.nil? ? '' : link_to(@carrier.last_contact_by_rep.full_name, @carrier.last_contact_by_rep))).html_safe %>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ class CarrierActivitiesController < ApplicationController
   # GET /carrier_activities
   # GET /carrier_activities.json
   def index
-    @carrier_activities = CarrierActivity.all
+    @carrier_activities = Carrier Engagement.all
     authorize @carrier_activities
   end
 
@@ -16,7 +16,7 @@ class CarrierActivitiesController < ApplicationController
 
   # GET /carrier_activities/new
   def new
-    @carrier_activity = CarrierActivity.new
+    @carrier_activity = Carrier Engagement.new
     if params[:carrier_id].present?
       @carrier_activity.carrier_id = params[:carrier_id]
     end
@@ -30,9 +30,9 @@ class CarrierActivitiesController < ApplicationController
   # POST /carrier_activities
   # POST /carrier_activities.json
   def create
-    @carrier_activity = CarrierActivity.new(carrier_activity_params)
+    @carrier_activity = Carrier Engagement.new(carrier_activity_params)
     if params[:carrier_activity][:outcome].present? || params[:carrier_activity][:reason].present? || params[:carrier_activity][:notes].present?
-      @outcome = CarrierActivityOutcome.new(carrier_activity_outcome_params)
+      @outcome = Carrier EngagementOutcome.new(carrier_activity_outcome_params)
       if @outcome.save
         @carrier_activity.outcome_id = @outcome.id
       end
@@ -46,7 +46,7 @@ class CarrierActivitiesController < ApplicationController
         if params[:carrier_activity][:credit_application].present?
           @carrier_activity.credit_application.attach(params[:carrier_activity][:credit_application])
         end
-        format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'CarrierActivity was successfully created.' }
+        format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'Carrier Engagement was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_activity }
       else
         format.html { render :new }
@@ -59,13 +59,13 @@ class CarrierActivitiesController < ApplicationController
   # PATCH/PUT /carrier_activities/1.json
   def update
     if @carrier_activity.outcome_id.nil? && (params[:carrier_activity][:outcome].present? || params[:carrier_activity][:reason].present? || params[:carrier_activity][:notes].present?)
-      @outcome = CarrierActivityOutcome.new(carrier_activity_outcome_params)
+      @outcome = Carrier EngagementOutcome.new(carrier_activity_outcome_params)
       if @outcome.save
         @carrier_activity.outcome_id = @outcome.id
       end
     else
       begin
-        @outcome = CarrierActivityOutcome.find(@carrier_activity.outcome_id)
+        @outcome = Carrier EngagementOutcome.find(@carrier_activity.outcome_id)
         @outcome.update(carrier_activity_outcome_params)
       rescue
       end
@@ -78,7 +78,7 @@ class CarrierActivitiesController < ApplicationController
         if params[:carrier_activity][:credit_application].present?
           @carrier_activity.credit_application.attach(params[:carrier_activity][:credit_application])
         end
-        format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'CarrierActivity was successfully updated.' }
+        format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'Carrier Engagement was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier_activity }
       else
         format.html { render :edit }
@@ -92,13 +92,13 @@ class CarrierActivitiesController < ApplicationController
   def destroy
     @carrier_activity.destroy
     respond_to do |format|
-      format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'CarrierActivity was successfully removed.' }
+      format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'Carrier Engagement was successfully removed.' }
       format.json { head :no_content }
     end
   end
 
   def quick_create
-    @carrier_activity = CarrierActivity.new(carrier_activity_params)
+    @carrier_activity = Carrier Engagement.new(carrier_activity_params)
     respond_to do |format|
       if @carrier_activity.save
         if params[:carrier_activity][:proposal_pdf].present?
@@ -107,7 +107,7 @@ class CarrierActivitiesController < ApplicationController
         if params[:carrier_activity][:credit_application].present?
           @carrier_activity.credit_application.attach(params[:carrier_activity][:credit_application])
         end
-        format.html { redirect_to authenticated_root_path, notice: 'CarrierActivity was successfully created.' }
+        format.html { redirect_to authenticated_root_path, notice: 'Carrier Engagement was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_activity }
       else
         format.html { render :new }
@@ -131,7 +131,7 @@ class CarrierActivitiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_carrier_activity
-      @carrier_activity = CarrierActivity.find(params[:id])
+      @carrier_activity = Carrier Engagement.find(params[:id])
       authorize @carrier_activity
     end
 

@@ -125,6 +125,10 @@ class Shipper < ApplicationRecord
     end
   end
 
+  def last_contact_date
+    ShipperActivity.where(:shipper_id => self.id).last
+  end
+
   private
     def remove_children
       ShipperContact.where(:shipper_id => self.id).destroy_all
