@@ -36,13 +36,13 @@
         <div class="form-group row m-b-15">
           <%= form.label :lane_origin, 'Origin:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.text_field :lane_origin, class: 'form-control', :id => 'lane_origin', :placeholder => "Select from list or type custom Origin" %>
+            <%= form.select :lane_origin, CarrierLane::ORIGINS.collect {|r| [ r, r ] },{:include_blank => true, :selected => carrier_lane.lane_origin}, class: 'form-control origin-multiple-select2', multiple: true %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :lane_destination, 'Destination:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.text_field :lane_destination, class: 'form-control', :id => 'lane_destination', :placeholder => "Select from list or type custom Destination" %>
+            <%= form.select :lane_destination, CarrierLane::DESTINATIONS.collect {|r| [ r, r ] },{:include_blank => true, :selected => carrier_lane.lane_destination}, class: 'form-control destination-multiple-select2', multiple: true %>
           </div>
         </div>
         <div class="form-group row m-b-15">
@@ -82,4 +82,6 @@
 
 <script>
   $("#carrier_lane_preferred_load_day").val(<%= raw carrier_lane.preferred_load_day_to_array %>);
+  $("#carrier_lane_lane_origin").val(<%= raw carrier_lane.lane_origin_to_array %>);
+  $("#carrier_lane_lane_destination").val(<%= raw carrier_lane.lane_destination_to_array %>);
 </script>

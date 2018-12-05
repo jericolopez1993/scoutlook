@@ -14,8 +14,16 @@
                     <% shipper_lanes.each do |shipper_lane| %>
                       <tr>
                         <td><%= shipper_lane.lane_priority_display %></td>
-                        <td><%= shipper_lane.lane_origin %></td>
-                        <td><%= shipper_lane.lane_destination %></td>
+                        <td>
+                          <% shipper_lane.lane_origin_to_array.each do |cr| %>
+                            <span class="badge badge-success"><%= cr %></span>
+                          <% end %>
+                        </td>
+                        <td>
+                          <% shipper_lane.lane_destination_to_array.each do |cr| %>
+                            <span class="badge badge-primary"><%= cr %></span>
+                          <% end %>
+                        </td>
                         <td><%= shipper_lane.truck_per_week %></td>
                         <td>
                           <% shipper_lane.preferred_load_day_to_array.each do |cr| %>

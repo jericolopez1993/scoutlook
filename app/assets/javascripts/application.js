@@ -97,6 +97,8 @@ $(document).on('turbolinks:load', function(){
   statusNotes(true, 'invoice-audit-comment');
 
   $(".multiple-select2").select2({ placeholder: "Select commodities" });
+  $(".origin-multiple-select2").select2({ placeholder: "Select origins" });
+  $(".destination-multiple-select2").select2({ placeholder: "Select destinations" });
 
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
@@ -242,18 +244,18 @@ $(document).on('turbolinks:load', function(){
       $("#invoice_status").change(function(){
           statusNotes((currentInvoiceStatus === $(this).val()), 'invoice-audit-comment');
       });
-      $( "#lane_origin" ).autocomplete({
-        source: originTags,
-        minLength: 0,
-      }).focus(function () {
-          $(this).autocomplete("search");
-      });
-      $( "#lane_destination" ).autocomplete({
-        source: destinationTags,
-        minLength: 0,
-      }).focus(function () {
-          $(this).autocomplete("search");
-      });
+      // $( "#lane_origin" ).autocomplete({
+      //   source: originTags,
+      //   minLength: 0,
+      // }).focus(function () {
+      //     $(this).autocomplete("search");
+      // });
+      // $( "#lane_destination" ).autocomplete({
+      //   source: destinationTags,
+      //   minLength: 0,
+      // }).focus(function () {
+      //     $(this).autocomplete("search");
+      // });
   });
 
 });

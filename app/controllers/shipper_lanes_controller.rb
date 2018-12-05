@@ -71,6 +71,16 @@ class ShipperLanesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipper_lane_params
+      if params[:shipper_lane][:lane_origin].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
+        params[:shipper_lane].delete :lane_origin
+      else
+        params[:shipper_lane][:lane_origin] = params[:shipper_lane][:lane_origin].to_s.tr('[]', '').tr('"', '')[2..-1].gsub(', ', ',').to_s
+      end
+      if params[:shipper_lane][:lane_destination].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
+        params[:shipper_lane].delete :lane_destination
+      else
+        params[:shipper_lane][:lane_destination] = params[:shipper_lane][:lane_destination].to_s.tr('[]', '').tr('"', '')[2..-1].gsub(', ', ',').to_s
+      end
       params[:shipper_lane][:preferred_load_day] = params[:shipper_lane][:preferred_load_day].to_s.tr('[]', '').tr('"', '').tr(' ', '')[1..-1].to_s
       params.require(:shipper_lane).permit(:lane_priority, :lane_origin, :lane_destination, :truck_per_week, :preferred_load_day, :notes, :shipper_id)
     end

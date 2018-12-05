@@ -14,8 +14,16 @@
                     <% carrier_lanes.each do |carrier_lane| %>
                       <tr>
                         <td><%= carrier_lane.lane_priority_display %></td>
-                        <td><%= carrier_lane.lane_origin %></td>
-                        <td><%= carrier_lane.lane_destination %></td>
+                        <td>
+                          <% carrier_lane.lane_origin_to_array.each do |cr| %>
+                            <span class="badge badge-success"><%= cr %></span>
+                          <% end %>
+                        </td>
+                        <td>
+                          <% carrier_lane.lane_destination_to_array.each do |cr| %>
+                            <span class="badge badge-primary"><%= cr %></span>
+                          <% end %>
+                        </td>
                         <td><%= carrier_lane.truck_per_week %></td>
                         <td>
                           <% carrier_lane.preferred_load_day_to_array.each do |cr| %>
