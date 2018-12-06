@@ -12,11 +12,13 @@
               <span>Shippers</span>
             </a>
           </li>
-          <li class="<%= (params[:controller] == 'reps') ? 'active' : ''%>">
-            <a href="<%= reps_path %>">
-              <span>Stewards</span>
-            </a>
-          </li>
+          <% if current_user.has_role?(:admin) %>
+            <li class="<%= (params[:controller] == 'reps') ? 'active' : ''%>">
+              <a href="<%= reps_path %>">
+                <span>Stewards</span>
+              </a>
+            </li>
+          <% end %>
           <!-- <li class="<%#= (params[:controller] == 'clients') ? 'active' : ''%>">
             <a href="<%#= clients_path %>">
               <span>Clients</span>
@@ -48,6 +50,7 @@
             </a>
           </li> -->
 
+          <% if current_user.has_role?(:admin) %>
           <li class="has-sub <%= (params[:controller] == 'users') ? 'active' : ''%>">
             <a href="javascript:;">
               <b class="caret"></b>
@@ -60,6 +63,7 @@
               <% end %>
             </ul>
           </li>
+        <% end %>
         <%# end %>
   <!-- <li class="menu-control menu-control-left">
   <a href="javascript:;" data-click="prev-menu"><i class="fa fa-angle-left"></i></a>
