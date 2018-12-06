@@ -65,7 +65,7 @@ label {
   <div class="panel panel-inverse">
     <div class="panel-heading" style="padding: 5px 15px">
       <div class="panel-heading-btn" style="margin-top: 2.5px;">
-        <button type="button" class="btn btn-xs btn-danger new-attachment-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<%= form_with(model: @shipper, local: true, :html => {class: 'form-horizontal text-right'}) do |form| %><%= form.hidden_field :attachment_only, :value => true %><%= form.file_field :attachment_file, multiple: true %><%= form.submit 'Submit', :class => 'btn btn-xs btn-primary' %><% end %>'>
+        <button type="button" class="btn btn-xs btn-primary new-attachment-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<%= form_with(model: @shipper, local: true, :html => {class: 'form-horizontal text-right'}) do |form| %><%= form.hidden_field :attachment_only, :value => true %><%= form.file_field :attachment_file, multiple: true %><%= form.submit 'Submit', :class => 'btn btn-xs btn-primary', disabled: true %><% end %>'>
 Add Attachment
 </button>
         <%= link_to 'New Location', new_shipper_location_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-location-btn' %>
@@ -438,4 +438,14 @@ $('.activity-btn').on('click', function(){
 $('.hide-btn').on('click', function(){
     $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
 });
+
+$('.contact-btn, .lane-btn, .activity-btn, .location-btn, .rate-btn, .hide-btn').popover({ trigger:"manual" }).click(function(){
+  $('.popover').popover('hide');
+})
+$('body').on('change', '#shipper_attachment_file', function(){
+  var file = $('#shipper_attachment_file').val();
+  if(file != null) {
+    $('input[name="commit"]').removeAttr("disabled");
+  }
+})
 </script>
