@@ -15,8 +15,8 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
-
-  <body class="<%= user_signed_in? ? '' : 'pace-top bg-white'%>">
+  
+  <body class="<%= user_signed_in? ? 'bg-white' : 'pace-top bg-white'%>">
     <%= yield %>
     <script>
       $(document).ready(function() {
