@@ -6,15 +6,19 @@
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Steward' : "Edit Steward - #{rep.first_name} #{rep.last_name}" %>
+<div class="header-violet">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Steward' : "Edit Steward - #{rep.first_name} #{rep.last_name}" %>
+  </h1>
+</div>
 <!-- end page-header -->
 <!-- begin panel -->
 <div class="panel panel-inverse">
-  <div class="panel-heading">
+  <!-- <div class="panel-heading">
     <div class="panel-heading-btn">
     </div>
     <h4 class="panel-title">Information</h4>
-  </div>
+  </div> -->
   <div class="panel-body">
   <%= form_with(model: rep, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
   <% if rep.errors.any? %>
