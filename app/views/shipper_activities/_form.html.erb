@@ -6,7 +6,11 @@
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Engagement' : "Edit Engagement - #{shipper_activity.shipper.nil? ? '' : link_to(shipper_activity.shipper.company_name,  shipper_activity.shipper)}" %>
+<div class="header-darkblue">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Engagement' : "Edit Engagement - #{shipper_activity.shipper.nil? ? '' : link_to(shipper_activity.shipper.company_name,  shipper_activity.shipper)}" %>
+  </h1>
+</div>
 <!-- end page-header -->
 <!-- begin panel -->
 

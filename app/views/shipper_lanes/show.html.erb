@@ -1,15 +1,20 @@
-<%= render 'layouts/static/header', header_title: "#{@shipper_lane.shipper.nil? ? '' : generate_alphanumeric_id(@shipper_lane.shipper.company_name, @shipper_lane.shipper.id)}", sub_header_title: "#{@shipper_lane.shipper.nil? ? '' : link_to(@shipper_lane.shipper.company_name,  @shipper_lane.shipper)}"  %>
+
+<div class="header-darkblue">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "#{@shipper_lane.shipper.nil? ? '' : generate_alphanumeric_id(@shipper_lane.shipper.company_name, @shipper_lane.shipper.id)}", sub_header_title: "#{@shipper_lane.shipper.nil? ? '' : link_to(@shipper_lane.shipper.company_name,  @shipper_lane.shipper)}"  %>
+  </h1>
+  <span class="pull-right">
+    <% if current_user.has_role?(:admin) %>
+      <%= link_to 'Edit', edit_shipper_lane_path(@shipper_lane), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Back', shipper_path(:id => @shipper_lane.shipper_id), :class => 'btn btn-info btn-xs' %>
+    <% end %>
+  </span>
+</div>
 
 <div class="panel panel-inverse">
   <div class="panel-heading">
-    <div class="panel-heading-btn">
-        <% if current_user.has_role?(:admin) %>
-          <%= link_to 'Edit', edit_shipper_lane_path(@shipper_lane), :class => 'btn btn-warning btn-xs' %>
-          <%= link_to 'Back', shipper_path(:id => @shipper_lane.shipper_id), :class => 'btn btn-info btn-xs' %>
-        <% end %>
-    </div>
     <h4 class="panel-title"><%= generate_alphanumeric_id(@shipper_lane.lane_origin, @shipper_lane.id) + " - #{@shipper_lane.lane_origin}" %></h4>
-</div>
+  </div>
   <div class="panel-body">
       <%= render 'shipper_lanes/show_fields', shipper_lane: @shipper_lane %>
   </div>

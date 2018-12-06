@@ -26,7 +26,16 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@shipper.company_name, @shipper.id), sub_header_title: @shipper.company_name %>
+<div class="header-darkblue">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@shipper.company_name, @shipper.id), sub_header_title: @shipper.company_name %>
+  </h1>
+  <span class="pull-right">
+    <%= link_to 'Edit', edit_shipper_path(@shipper), :class => 'btn btn-warning btn-xs' %>
+    <%= link_to 'Back', shippers_path, :class => 'btn btn-info btn-xs' %>
+    <%= link_to 'Delete', @shipper, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+  </span>
+</div>
 <!-- end page-header -->
 <!-- begin row -->
 <ul class="nav nav-pills d-md-none">
@@ -64,9 +73,6 @@ Add Attachment
         <%= link_to 'New Engagements', new_shipper_activity_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-activity-btn' %>
         <%= link_to 'New Lane', new_shipper_lane_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
         <%= link_to 'New Rates', new_shipper_rate_path(:shipper_id => @shipper.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
-        <%= link_to 'Edit', edit_shipper_path(@shipper), :class => 'btn btn-warning btn-xs' %>
-        <%= link_to 'Back', shippers_path, :class => 'btn btn-info btn-xs' %>
-        <%= link_to 'Delete', @shipper, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
         </div>
     <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
       <li class="nav-items">

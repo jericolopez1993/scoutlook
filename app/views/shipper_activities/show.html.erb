@@ -10,22 +10,28 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: "#{@shipper_activity.shipper.nil? ? '' : generate_alphanumeric_id(@shipper_activity.shipper.company_name, @shipper_activity.shipper.id)}", sub_header_title: "#{@shipper_activity.shipper.nil? ? '' : link_to(@shipper_activity.shipper.company_name,  @shipper_activity.shipper)}"  %>
+<div class="header-darkblue">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "#{@shipper_activity.shipper.nil? ? '' : generate_alphanumeric_id(@shipper_activity.shipper.company_name, @shipper_activity.shipper.id)}", sub_header_title: "#{@shipper_activity.shipper.nil? ? '' : link_to(@shipper_activity.shipper.company_name,  @shipper_activity.shipper)}"  %>
+  </h1>
+  <span class="pull-right">
+    <%= link_to 'Edit', edit_shipper_activity_path(@shipper_activity), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
+    <% if @previous_controller == "shippers"%>
+      <% shipper = Shipper.find(@shipper_activity.shipper_id)%>
+      <%= link_to 'Back to Shipper', shipper, :class => 'btn btn-info btn-xs' %>
+  <% else %>
+      <%= link_to 'Back', shipper_activities_path, :class => 'btn btn-default btn-xs' %>
+  <% end %>
+  </span>
+</div>
 <!-- end page-header -->
 <!-- begin panel -->
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
-      <%= link_to 'Edit', edit_shipper_activity_path(@shipper_activity), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
-      <% if @previous_controller == "shippers"%>
-        <% shipper = Shipper.find(@shipper_activity.shipper_id)%>
-        <%= link_to 'Back to Shipper', shipper, :class => 'btn btn-info btn-xs' %>
-    <% else %>
-        <%= link_to 'Back', shipper_activities_path, :class => 'btn btn-default btn-xs' %>
-    <% end %>
     </div>
     <h4 class="panel-title">  <%= generate_alphanumeric_id(@shipper_activity.activity_type, @shipper_activity.id) %> - <%= @shipper_activity.activity_type %></h4>
-</div>
+  </div>
   <div class="panel-body">
     <h4 class="text-inverse">Outcome</h4>
     <div class="row">

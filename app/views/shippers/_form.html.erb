@@ -6,7 +6,11 @@
   }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Shipper' : "Edit Shipper - #{shipper.company_name}" %>
+<div class="header-darkblue">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Shipper' : "Edit Shipper - #{shipper.company_name}" %>
+  </h1>
+</div>
 <!-- end page-header -->
 <!-- begin panel -->
 

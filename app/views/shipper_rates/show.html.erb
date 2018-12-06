@@ -9,18 +9,22 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: "#{@shipper_rate.shipper.nil? ? '' : generate_alphanumeric_id(@shipper_rate.shipper.company_name, @shipper_rate.shipper.id)}", sub_header_title: "#{@shipper_rate.shipper.nil? ? '' : link_to(@shipper_rate.shipper.company_name,  @shipper_rate.shipper)}"  %>
+<div class="header-darkblue">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "#{@shipper_rate.shipper.nil? ? '' : generate_alphanumeric_id(@shipper_rate.shipper.company_name, @shipper_rate.shipper.id)}", sub_header_title: "#{@shipper_rate.shipper.nil? ? '' : link_to(@shipper_rate.shipper.company_name,  @shipper_rate.shipper)}"  %>
+  </h1>
+  <span class="pull-right">
+    <%= link_to 'Edit', edit_shipper_rate_path(@shipper_rate), :class => 'btn btn-warning btn-xs' %>
+    <% if @previous_controller == "shippers"%>
+      <% shipper = Shipper.find(@shipper_rate.shipper_id)%>
+      <%= link_to 'Back ', shipper, :class => 'btn btn-info btn-xs' %>
+    <% else %>
+      <%= link_to 'Back', shippers_path, :class => 'btn btn-info btn-xs' %>
+    <% end %>
+  </span>
+</div>
 <div class="panel panel-inverse">
   <div class="panel-heading">
-    <div class="panel-heading-btn">
-      <%= link_to 'Edit', edit_shipper_rate_path(@shipper_rate), :class => 'btn btn-warning btn-xs' %>
-      <% if @previous_controller == "shippers"%>
-        <% shipper = Shipper.find(@shipper_rate.shipper_id)%>
-        <%= link_to 'Back ', shipper, :class => 'btn btn-info btn-xs' %>
-      <% else %>
-        <%= link_to 'Back', shippers_path, :class => 'btn btn-info btn-xs' %>
-      <% end %>
-    </div>
     <h4 class="panel-title">  <%= @shipper_rate.shipper.nil? ? "None" : (link_to @shipper_rate.shipper.company_name, @shipper_rate.shipper) %></h4>
   </div>
   <div class="panel-body">

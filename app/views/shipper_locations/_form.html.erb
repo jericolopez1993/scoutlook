@@ -1,5 +1,9 @@
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Location' : "Edit Location - #{shipper_location.name}" %>
+<div class="header-darkblue">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Location' : "Edit Location - #{shipper_location.name}" %>
+  </h1>
+</div>
 <!-- end page-header -->
 <!-- begin panel -->
 <div class="panel panel-inverse">
