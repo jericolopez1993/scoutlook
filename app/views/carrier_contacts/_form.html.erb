@@ -1,5 +1,9 @@
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title:  params[:action] == 'new' ? 'Create New Contact' : "Edit Contact - #{carrier_contact.first_name} #{carrier_contact.last_name}" %>
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title:  params[:action] == 'new' ? 'Create New Contact' : "Edit Contact - #{carrier_contact.first_name} #{carrier_contact.last_name}" %>
+  </h1>
+</div>
 <!-- end page-header -->
 <!-- begin panel -->
 <div class="panel panel-inverse">

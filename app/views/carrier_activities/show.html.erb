@@ -10,20 +10,24 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: "#{@carrier_activity.carrier.nil? ? '' : generate_alphanumeric_id(@carrier_activity.carrier.company_name, @carrier_activity.carrier.id)}", sub_header_title: "#{@carrier_activity.carrier.nil? ? '' : link_to(@carrier_activity.carrier.company_name,  @carrier_activity.carrier)}"  %>
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "#{@carrier_activity.carrier.nil? ? '' : generate_alphanumeric_id(@carrier_activity.carrier.company_name, @carrier_activity.carrier.id)}", sub_header_title: "#{@carrier_activity.carrier.nil? ? '' : link_to(@carrier_activity.carrier.company_name,  @carrier_activity.carrier)}"  %>
+  </h1>
+  <span class="pull-right">
+    <%= link_to 'Edit', edit_carrier_activity_path(@carrier_activity), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
+    <% if @previous_controller == "carriers"%>
+      <% carrier = Carrier.find(@carrier_activity.carrier_id)%>
+      <%= link_to 'Back to Carrier', carrier, :class => 'btn btn-info btn-xs' %>
+    <% else %>
+      <%= link_to 'Back', carrier_activities_path, :class => 'btn btn-info btn-xs' %>
+    <% end %>
+  </span>
+</div>
 <!-- end page-header -->
 <!-- begin panel -->
 <div class="panel panel-inverse">
   <div class="panel-heading">
-    <div class="panel-heading-btn">
-      <%= link_to 'Edit', edit_carrier_activity_path(@carrier_activity), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
-      <% if @previous_controller == "carriers"%>
-        <% carrier = Carrier.find(@carrier_activity.carrier_id)%>
-        <%= link_to 'Back to Carrier', carrier, :class => 'btn btn-info btn-xs' %>
-      <% else %>
-        <%= link_to 'Back', carrier_activities_path, :class => 'btn btn-default btn-xs' %>
-      <% end %>
-    </div>
     <h4 class="panel-title">  <%= generate_alphanumeric_id(@carrier_activity.activity_type, @carrier_activity.id) %> - <%= @carrier_activity.activity_type %></h4>
   </div>
   <div class="panel-body">

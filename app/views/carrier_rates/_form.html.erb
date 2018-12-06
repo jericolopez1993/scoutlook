@@ -6,7 +6,11 @@
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate - #{carrier_rate.carrier.nil? ? "" : link_to(carrier_rate.carrier.company_name, carrier_rate.carrier)}" %>
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate - #{carrier_rate.carrier.nil? ? "" : link_to(carrier_rate.carrier.company_name, carrier_rate.carrier)}" %>
+  </h1>
+</div>
 <!-- end page-header -->
 <!-- begin panel -->
 

@@ -26,7 +26,16 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@carrier.company_name, @carrier.id), sub_header_title: @carrier.company_name %>
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@carrier.company_name, @carrier.id), sub_header_title: @carrier.company_name %>
+  </h1>
+  <span class="pull-right">
+    <%= link_to 'Edit', edit_carrier_path(@carrier), :class => 'btn btn-warning btn-xs' %>
+    <%= link_to 'Back', carriers_path, :class => 'btn btn-info btn-xs' %>
+    <%= link_to 'Delete', @carrier, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+  </span>
+</div>
 <!-- end page-header -->
 <!-- begin row -->
 <ul class="nav nav-pills d-md-none">
@@ -64,9 +73,6 @@ Add Attachment
         <%= link_to 'New Engagements', new_carrier_activity_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-activity-btn' %>
         <%= link_to 'New Lane', new_carrier_lane_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
         <%= link_to 'New Rates', new_carrier_rate_path(:carrier_id => @carrier.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
-        <%= link_to 'Edit', edit_carrier_path(@carrier), :class => 'btn btn-warning btn-xs' %>
-        <%= link_to 'Back', carriers_path, :class => 'btn btn-info btn-xs' %>
-        <%= link_to 'Delete', @carrier, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
         </div>
     <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
       <li class="nav-items">

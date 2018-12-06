@@ -1,13 +1,17 @@
-<%= render 'layouts/static/header', header_title: "#{@carrier_lane.carrier.nil? ? '' : generate_alphanumeric_id(@carrier_lane.carrier.company_name, @carrier_lane.carrier.id)}", sub_header_title: "#{@carrier_lane.carrier.nil? ? '' : link_to(@carrier_lane.carrier.company_name,  @carrier_lane.carrier)}"  %>
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "#{@carrier_lane.carrier.nil? ? '' : generate_alphanumeric_id(@carrier_lane.carrier.company_name, @carrier_lane.carrier.id)}", sub_header_title: "#{@carrier_lane.carrier.nil? ? '' : link_to(@carrier_lane.carrier.company_name,  @carrier_lane.carrier)}"  %>
+  </h1>
+  <span class="pull-right">
+    <% if current_user.has_role?(:admin) %>
+      <%= link_to 'Edit', edit_carrier_lane_path(@carrier_lane), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Back', carrier_path(:id => @carrier_lane.carrier_id), :class => 'btn btn-info btn-xs' %>
+    <% end %>
+  </span>
+</div>
 
 <div class="panel panel-inverse">
   <div class="panel-heading">
-    <div class="panel-heading-btn">
-        <% if current_user.has_role?(:admin) %>
-          <%= link_to 'Edit', edit_carrier_lane_path(@carrier_lane), :class => 'btn btn-warning btn-xs' %>
-          <%= link_to 'Back', carrier_path(:id => @carrier_lane.carrier_id), :class => 'btn btn-info btn-xs' %>
-        <% end %>
-    </div>
     <h4 class="panel-title"><%= generate_alphanumeric_id(@carrier_lane.lane_origin, @carrier_lane.id) + " - #{@carrier_lane.lane_origin}" %></h4>
   </div>
   <div class="panel-body">
