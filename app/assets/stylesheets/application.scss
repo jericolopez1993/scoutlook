@@ -32,9 +32,8 @@
  */
 
 body {
-  background: url(asset_path('squared_metal.png'));
+  // background: url(asset_path('squared_metal.png'));
 }
-
 .extend_image img {
   height: 40px !important;
   object-fit: cover;
@@ -75,3 +74,55 @@ table.dataTable {
 }
 .hlc { width:100%; text-align:center; border-bottom: 1px solid #000; line-height:0.1em; margin:10px 0 20px; }
 .hlc span { padding:0 10px; font-size: 14px; font-weight: bolder;}
+.text-scout {
+  color: #dd2c35!important;
+}
+.btn-scout {
+  background-color: #A6181F!important;
+  border-color: #A6181F!important;
+  color: #fff;
+  transition: .1s;
+}
+.btn-scout:hover {
+  background-color: #6f060b!important;
+  border-color: #6f060b!important;
+}
+.checkbox.checkbox-css input:checked+label:before {
+    background: #A6181F!important;
+    border-color: #A6181F!important;
+}
+#file-selected {
+  overflow: hidden;
+  white-space: nowrap;
+}
+#file-upload {
+  cursor: pointer;
+}
+.custom-file {
+  margin-bottom: 5px;
+}
+.form-control:focus {
+  border-color: #dd2c35!important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(221, 44, 53, .8)!important;
+}
+.custom-file-label::after {
+  height: 100%!important;
+  line-height: 2!important;
+}
+.custom-file label {
+  font-weight: normal!important;
+  line-height: 1.7!important;
+}
+.custom-file-label::after {
+  background-color: #A6181F;
+  color: #fff;
+  border-left: 1px solid #A6181F;
+}
+.custom-file-input:focus ~ .custom-file-label {
+  border-color: #dd2c35!important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(219, 135, 185, .8)!important;
+}
+.custom-file-input:focus ~ .custom-file-label::after {
+  border-color: #dd2c35!important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(219, 135, 185, .8)!important;
+}
