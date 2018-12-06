@@ -30,7 +30,15 @@ class RepsController < ApplicationController
 
     respond_to do |format|
       if @rep.save
-        format.html { redirect_to @rep, notice: 'Salesperson was successfully created.' }
+        if params[:rep][:email].present? && params[:rep][:password].present? && params[:rep][:password_confirmation].present?
+          @user = User.new(user_params)
+          @user.skip_confirmation!
+          if @user.save
+            @user.add_role :steward
+            @rep.update_attributes(:user_id => @user.id)
+          end
+        end
+        format.html { redirect_to @rep, notice: 'Steward was successfully created.' }
         format.json { render :show, status: :created, location: @rep }
       else
         format.html { render :new }
@@ -44,7 +52,19 @@ class RepsController < ApplicationController
   def update
     respond_to do |format|
       if @rep.update(rep_params)
-        format.html { redirect_to @rep, notice: 'Salesperson was successfully updated.' }
+        if params[:rep][:email].present? || (params[:rep][:password].present? && params[:rep][:password_confirmation].present?)
+          if @rep.user.nil?
+            @user = User.new(user_params)
+            @user.skip_confirmation!
+            if @user.save
+              @user.add_role :steward
+              @rep.update_attributes(:user_id => @user.id)
+            end
+          else
+            @rep.user.update(user_params)
+          end
+        end
+        format.html { redirect_to @rep, notice: 'Steward was successfully updated.' }
         format.json { render :show, status: :ok, location: @rep }
       else
         format.html { render :edit }
@@ -58,7 +78,7 @@ class RepsController < ApplicationController
   def destroy
     @rep.destroy
     respond_to do |format|
-      format.html { redirect_to reps_url, notice: 'Salesperson was successfully removed.' }
+      format.html { redirect_to reps_url, notice: 'Steward was successfully removed.' }
       format.json { head :no_content }
     end
   end
@@ -73,5 +93,9 @@ class RepsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def rep_params
       params.require(:rep).permit(:first_name, :last_name, :location, :date_of_hire, :rep_id, :parent_id, :phone, :email)
+    end
+
+    def user_params
+      params.require(:rep).permit(:first_name, :last_name, :email, :password)
     end
 end

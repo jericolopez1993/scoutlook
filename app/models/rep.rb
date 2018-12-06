@@ -13,4 +13,11 @@ class Rep < ApplicationRecord
   def full_name
     (self.first_name.nil? ? '' : self.first_name) + " " + (self.last_name.nil? ? '' : self.last_name)
   end
+  def user
+    begin
+      User.find(self.user_id)
+    rescue
+      nil
+    end
+  end
 end
