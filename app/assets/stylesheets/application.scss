@@ -31,8 +31,8 @@
  *= require_self
  */
 
-body {
-  // background: url(asset_path('squared_metal.png'));
+body.pattern-white{
+  background: url(asset_path('pattern-bg-white.png'));
 }
 .extend_image img {
   height: 40px !important;
@@ -125,4 +125,106 @@ table.dataTable {
 .custom-file-input:focus ~ .custom-file-label::after {
   border-color: #dd2c35!important;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(219, 135, 185, .8)!important;
+}
+.header.navbar-default {
+  background: #131c24!important;
+}
+.header.navbar-default .brand, .header.navbar-default .navbar-brand {
+  color: #fff;
+  font-family: 'Poppins', sans-serif!important;
+  font-size: 24px;
+}
+.boxed-layout .page-container {
+  box-shadow: 0 0 30px rgba(2,2,2,.6);
+}
+.boxed-layout .page-container, .header.navbar-default .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+/*.login.login-v2 {
+  margin-top: 130px!important;
+}*/
+.boxed-layout .page-container, .boxed-layout .page-container #header {
+  width: 90vw!important;
+
+}
+.boxed-layout .pace, .boxed-layout .top-menu {
+  width: 90vw!important;
+  left: 0;
+  margin: 0;
+}
+.content {
+  padding: 0;
+}
+.header .navbar-nav>li .dropdown-toggle .label, .header .navbar-nav>li>a .label {
+  background-color: #dd2c35!important;
+}
+.active.carrier {
+  background-color: #A6181F!important;
+  color: #fff!important;
+  font-weight: bold;
+}
+.active.carrier:hover {
+  background-color: #A6181F!important;
+  color: #fff!important;
+  font-weight: bold;
+  opacity: .8;
+}
+.active.shipper {
+  background-color: #005a58!important;
+  color: #fff!important;
+  font-weight: bold;
+}
+.active.shipper:hover {
+  background-color: #005a58!important;
+  color: #fff!important;
+  font-weight: bold;
+  opacity: .8;
+}
+.active.steward {
+  background-color: #7e1d7e!important;
+  color: #fff!important;
+  font-weight: bold;
+}
+.active.steward:hover {
+  background-color: #7e1d7e!important;
+  color: #fff!important;
+  font-weight: bold;
+  opacity: .8;
+}
+.bg-inverse {
+  background-color: #1a2229!important;
+}
+.top-nav-icon {
+    width: 100px;
+  }
+.content-table {
+  padding: 0!important;
+}
+.panel-title {
+  font-size: 20px;
+}
+.panel-scout>.panel-heading {
+  background-color: #6f060b;
+  color: #fff;
+}
+.panel-darkblue>.panel-heading {
+  background-color: #013a38;
+  color: #fff;
+}
+.panel-violet>.panel-heading {
+  background-color: #530254;
+  color: #fff;
+}
+.login-cover-bg {
+  background-color: rgba(255,255,255, .4);
+}
+.panel-heading {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.lp-header {
+  padding-left: 5px;
+  font-family: 'Poppins', sans-serif!important;
+  font-weight: 500;
+  font-size: 18px;
 }

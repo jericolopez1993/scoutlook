@@ -1,77 +1,30 @@
 <div id="top-menu" class="top-menu">
-      <!-- begin top-menu nav -->
-      <ul class="nav">
-        <%# if current_user.has_role?(:admin) %>
-          <li class="<%= (params[:controller] == 'carriers') ? 'active' : ''%>">
-            <a href="<%= carriers_path %>">
-              <span>Carriers</span>
-            </a>
-          </li>
-          <li class="<%= (params[:controller] == 'shippers') ? 'active' : ''%>">
-            <a href="<%= shippers_path %>">
-              <span>Shippers</span>
-            </a>
-          </li>
-          <% if current_user.has_role?(:admin) %>
-            <li class="<%= (params[:controller] == 'reps') ? 'active' : ''%>">
-              <a href="<%= reps_path %>">
-                <span>Stewards</span>
-              </a>
-            </li>
-          <% end %>
-          <!-- <li class="<%#= (params[:controller] == 'clients') ? 'active' : ''%>">
-            <a href="<%#= clients_path %>">
-              <span>Clients</span>
-            </a>
-          </li>
-          <li class="<%= (params[:controller] == 'activities') ? 'active' : ''%>">
-            <a href="<%= activities_path %>">
-              <span>Activities</span>
-            </a>
-          </li>
-          <li class="<%= (params[:controller] == 'master_invoices') ? 'active' : ''%>">
-            <a href="<%= master_invoices_path %>">
-              <span>Invoices</span>
-            </a>
-          </li>
-          <li class="<%#= (params[:controller] == 'rates') ? 'active' : ''%>">
-            <a href="<%#= rates_path %>">
-              <span>Rates</span>
-            </a>
-          </li>
-          <li class="<%= (params[:controller] == 'master_signals') ? 'active' : ''%>">
-            <a href="<%= master_signals_path %>">
-              <span>Signals</span>
-            </a>
-          </li>
-          <li class="<%= (params[:controller] == 'reps') ? 'active' : ''%>">
-            <a href="<%= reps_path %>">
-              <span>Stewards</span>
-            </a>
-          </li> -->
+    <!-- begin top-menu nav -->
+    <ul class="nav bg-inverse">
+      <li><a href="<%= carriers_path %>" class="<%= (params[:controller] == 'carriers') ? 'active' : ''%> carrier"><i class="fa fa-user"></i> <span>Carriers</span></a></li>
+      <li><a href="<%= shippers_path %>" class="<%= (params[:controller] == 'shippers') ? 'active' : ''%> shipper"><i class="fa fa-truck"></i> <span>Shippers</span></a></li>
 
-          <% if current_user.has_role?(:admin) %>
-          <li class="has-sub <%= (params[:controller] == 'users') ? 'active' : ''%>">
-            <a href="javascript:;">
-              <b class="caret"></b>
-              <span>System Settings</span>
-            </a>
-            <ul class="sub-menu">
-  <li><a href="<%= logs_path %>"> <span>Logs</span></a></li>
-              <% if current_user.admin? %>
-                <li><a href="<%= users_path %>"> <span>Users</span></a></li>
-              <% end %>
-            </ul>
-          </li>
-        <% end %>
-        <%# end %>
-  <!-- <li class="menu-control menu-control-left">
-  <a href="javascript:;" data-click="prev-menu"><i class="fa fa-angle-left"></i></a>
-  </li>
-  <li class="menu-control menu-control-right">
-  <a href="javascript:;" data-click="next-menu"><i class="fa fa-angle-right"></i></a>
-  </li> -->
-  </ul>
-  <!-- end top-menu nav -->
-  </div>
-  <!-- end #top-menu -->
+      <% if current_user.has_role?(:admin) %>
+      <li><a href="<%= reps_path %>" class="<%= (params[:controller] == 'reps') ? 'active' : ''%> steward"><i class="fa fa-users"></i> <span>Stewards</span></a></li>
+      <li class="has-sub">
+        <a href="javascript:;">
+          <b class="caret"></b>
+          <i class="fa fa-cog"></i>
+          <span>System Settings</span>
+        </a>
+        <ul class="sub-menu">
+          <li><a href="<%= logs_path %>">Logs</a></li>
+          <% if current_user.admin? %>
+            <li><a href="<%= users_path %>">User</a></li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+      <li class="menu-control menu-control-left show">
+        <a href="javascript:;" data-click="prev-menu"><i class="fa fa-angle-left"></i></a>
+      </li>
+      <li class="menu-control menu-control-right show">
+        <a href="javascript:;" data-click="next-menu"><i class="fa fa-angle-right"></i></a>
+      </li>
+    </ul>
+</div>
