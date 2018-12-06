@@ -200,9 +200,6 @@ table.dataTable {
 .content-table {
   padding: 0!important;
 }
-.panel-title {
-  font-size: 20px;
-}
 .panel-scout>.panel-heading {
   background-color: #6f060b;
   color: #fff;
@@ -219,6 +216,7 @@ table.dataTable {
   background-color: rgba(255,255,255, .4);
 }
 .panel-heading {
+  padding: 15px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 }
@@ -226,5 +224,36 @@ table.dataTable {
   padding-left: 5px;
   font-family: 'Poppins', sans-serif!important;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 20px;
+}
+.header-scout {
+  padding: 15px;
+  width: 100%;
+  height: 50px;
+  background-color: #6f060b;
+}
+.header-darkblue {
+  padding: 15px;
+  width: 100%;
+  height: 50px;
+  background-color: #013a38;
+}
+.header-violet {
+  padding: 15px;
+  width: 100%;
+  height: 50px;
+  background-color: #530254;
+}
+.header-scout h1, .header-darkblue h1, .header-violet h1, {
+  color: #fff;
+  font-family: 'Poppins', sans-serif!important;
+  font-size: 20px;
+}
+.header-scout small, .header-violet small, .header-darkblue small {
+  color: #fff;
+  font-family: 'Poppins', sans-serif!important;
+  font-size: 15px;
+}
+.header-scout a, .header-violet a, .header-darkblue a {
+  color: #fff!important;
 }

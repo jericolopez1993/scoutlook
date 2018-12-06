@@ -3,7 +3,6 @@
     <ul class="nav bg-inverse">
       <li><a href="<%= carriers_path %>" class="<%= (params[:controller] == 'carriers') ? 'active' : ''%> carrier"><i class="fa fa-user"></i> <span>Carriers</span></a></li>
       <li><a href="<%= shippers_path %>" class="<%= (params[:controller] == 'shippers') ? 'active' : ''%> shipper"><i class="fa fa-truck"></i> <span>Shippers</span></a></li>
-
       <% if current_user.has_role?(:admin) %>
       <li><a href="<%= reps_path %>" class="<%= (params[:controller] == 'reps') ? 'active' : ''%> steward"><i class="fa fa-users"></i> <span>Stewards</span></a></li>
       <li class="has-sub">
