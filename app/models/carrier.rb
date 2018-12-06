@@ -108,6 +108,10 @@ class Carrier < ApplicationRecord
     end
   end
 
+  def adm
+    CarrierContact.where(:carrier_id => self.id, :adm => true).order("id DESC")
+  end
+
   def last_contact_by_rep
     if self.last_contact_by.present? && !self.last_contact_by.nil?
       Rep.find(self.last_contact_by)

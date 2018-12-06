@@ -117,6 +117,10 @@ class Shipper < ApplicationRecord
     end
   end
 
+  def adm
+    ShipperContact.where(:shipper_id => self.id, :adm => true).order("id DESC")
+  end
+
   def last_contact_by_rep
     if self.last_contact_by.present? && !self.last_contact_by.nil?
       Rep.find(self.last_contact_by)
