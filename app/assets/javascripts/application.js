@@ -12,7 +12,6 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require vendor/jquery-3.3.1.min
 //= require vendor/jquery-ui.min
 //= require vendor/bootstrap.bundle.min
@@ -72,19 +71,19 @@ var destinationTags = [
   "CAN-ATL",
   "CAN-NFL"
 ];
-(function() {
-  $(document).on('turbolinks:before-cache', function() {
-    var dataTable;
-    dataTable = $($.fn.dataTable.tables(true)).DataTable();
-    if (dataTable !== null) {
-      dataTable.destroy();
-      return dataTable = null;
-    }
-
-  });
-
-}).call(this);
-$(document).on('turbolinks:load', function(){
+// (function() {
+//   $(document).on('turbolinks:before-cache', function() {
+//     var dataTable;
+//     dataTable = $($.fn.dataTable.tables(true)).DataTable();
+//     if (dataTable !== null) {
+//       dataTable.destroy();
+//       return dataTable = null;
+//     }
+//
+//   });
+//
+// }).call(this);
+$(document).ready(function() {
   activityOutcomeFields($("#activity_activity_type").val());
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
   isHeadOffice($('[data-change="check-switchery-state-same-office"]').prop('checked'));
