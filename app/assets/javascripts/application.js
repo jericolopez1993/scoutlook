@@ -84,7 +84,7 @@ var destinationTags = [
 //
 // }).call(this);
 $(document).ready(function() {
-  activityOutcomeFields($("#engagement_type").val());
+  activityOutcomeFields($("#engagement_type").val(), $("#engagement_status").val());
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
   isHeadOffice($('[data-change="check-switchery-state-same-office"]').prop('checked'));
   shipmentFields($('input[type=radio][name="master_invoice[shipment_entry]"]:checked').val());
@@ -160,7 +160,10 @@ $(document).ready(function() {
         } );
       Inputmask().mask(document.querySelectorAll("input"));
       $("#engagement_type").change(function(){
-        activityOutcomeFields($(this).val());
+        activityOutcomeFields($(this).val(), $("#engagement_status").val());
+      });
+      $("#engagement_status").change(function(){
+        activityOutcomeFields($("#engagement_type").val(), $(this).val());
       });
       $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
         sameHeadOffice($(this).prop('checked'));
@@ -261,18 +264,20 @@ $(document).ready(function() {
 
 
 
-function activityOutcomeFields(actype) {
-  if (actype === 'Engagement') {
+function activityOutcomeFields(actype, stat) {
+  if (actype === 'Engagement' && stat === "false") {
       $(".outcome-fields").show();
       $(".activity_buttons").hide();
       $(".engagement-fields").show();
       $(".loop-fields").hide();
-  }else if (actype === 'Loop') {
+  }else if (actype === 'Loop' && stat === "false") {
       $(".outcome-fields").show();
       $(".activity_buttons").hide();
       $(".engagement-fields").hide();
       $(".loop-fields").show();
   }else{
+      $(".engagement-fields").hide();
+      $(".loop-fields").hide();
       $(".outcome-fields").hide();
       $(".activity_buttons").show();
 

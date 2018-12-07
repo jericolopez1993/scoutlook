@@ -65,7 +65,7 @@
     <div class="form-group row m-b-15">
       <%= form.label :status, 'Status:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
       <div class="col-md-9 col-sm-8">
-      <%= form.select :status, options_for_select([['Open', true], ['Closed', false]], shipper_activity.status),{}, class: 'form-control' %>
+      <%= form.select :status, options_for_select([['Open', true], ['Closed', false]], shipper_activity.status),{}, class: 'form-control', id: "engagement_status" %>
       </div>
     </div>
     <div class="form-group row m-b-15">
