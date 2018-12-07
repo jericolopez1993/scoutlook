@@ -73,41 +73,7 @@
             <td><%= carrier.find_loads.nil? ? "" : carrier.find_loads.html_safe %></td>
             <td><%= carrier.notes.nil? ? "" : carrier.notes.html_safe %></td>
           </tr>
-        </thead>
-        <tbody>
-          <% @carriers.each do |carrier| %>
-            <tr>
-              <td><%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier %></td>
-              <td><%= carrier.complete_record ? "<i class='text-success'>Completed</i>".html_safe : "<i class='text-danger'>Incomplete</i>".html_safe %></td>
-              <td><%= carrier.last_contact_date.nil? ? "" : (carrier.last_contact_date.date_opened.to_s + " " + (carrier.last_contact_date.rep.nil? ? "" : link_to(carrier.last_contact_date.rep.full_name, carrier.last_contact_date.rep))).html_safe %></td>
-              <td><%= carrier.score_card %></td>
-              <td><%= carrier.freight_guard %></td>
-              <td><%= carrier.years_in_business %></td>
-              <td><%= carrier.owner_operators %></td>
-              <td><%= carrier.reefers %></td>
-              <td><%= carrier.dry_vans %></td>
-              <td><%= carrier.flat_beds %></td>
-              <td><%= carrier.teams %></td>
-              <td>
-                <% carrier.lane_1.each do |lane| %>
-                  <%= link_to(lane.lane_origin, lane, class: 'badge') %>
-                <% end %>
-              </td>
-              <td>
-                <% carrier.lane_2.each do |lane| %>
-                  <%= link_to(lane.lane_origin, lane, class: 'badge') %>
-                <% end %>
-              </td>
-              <td>
-                <% carrier.lane_3.each do |lane| %>
-                  <%= link_to(lane.lane_origin, lane, class: 'badge') %>
-                <% end %>
-              </td>
-              <td><%= carrier.contract_rates %></td>
-              <td><%= carrier.find_loads.nil? ? "" : carrier.find_loads.html_safe %></td>
-              <td><%= carrier.notes.nil? ? "" : carrier.notes.html_safe %></td>
-            </tr>
-          <% end %>
+        <% end %>
         </tbody>
       </table>
     </div>
