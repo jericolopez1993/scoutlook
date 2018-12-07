@@ -267,17 +267,17 @@ Add Attachment
             <div class="card bg-light" >
             <div class="card-body">
               <h4 class="card-title">Decision Maker</h4>
-              <% if @shipper.pdm.nil? && @shipper.adm.length > 0 %>
-              <% else %>
                 <%= render 'shipper_contacts/show_fields', shipper_contact: @shipper.pdm %>
-              <% end %>
-              <% if @shipper.adm.length > 0 %>
-                <br/>
-                <div class="hlc"><span class="bg-light">ALTERNATE</span></div>
-                <% @shipper.adm.each do |contact| %>
-                  <%= render 'shipper_contacts/show_fields', shipper_contact: contact %>
-                <% end %>
-              <% end %>
+              <%# if @shipper.pdm.nil? && @shipper.adm.length > 0 %>
+              <%# else %>
+              <%# end %>
+              <%# if @shipper.adm.length > 0 %>
+                <!-- <br/>
+                <div class="hlc"><span class="bg-light">ALTERNATE</span></div> -->
+                <%# @shipper.adm.each do |contact| %>
+                  <%#= render 'shipper_contacts/show_fields', shipper_contact: contact %>
+                <%# end %>
+              <%# end %>
             </div>
           </div>
             </div>
