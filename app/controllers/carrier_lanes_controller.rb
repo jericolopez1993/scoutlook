@@ -71,6 +71,7 @@ class CarrierLanesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_lane_params
+      params[:carrier_lane][:prefer_team] = params[:prefer_team].present?
       if params[:carrier_lane][:lane_origin].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
         params[:carrier_lane].delete :lane_origin
       else
@@ -82,6 +83,6 @@ class CarrierLanesController < ApplicationController
         params[:carrier_lane][:lane_destination] = params[:carrier_lane][:lane_destination].to_s.tr('[]', '').tr('"', '')[2..-1].gsub(', ', ',').to_s
       end
       params[:carrier_lane][:preferred_load_day] = params[:carrier_lane][:preferred_load_day].to_s.tr('[]', '').tr('"', '').tr(' ', '')[1..-1].to_s
-      params.require(:carrier_lane).permit(:lane_priority, :lane_origin, :lane_destination, :truck_per_week, :preferred_load_day, :notes, :carrier_id)
+      params.require(:carrier_lane).permit(:lane_priority, :lane_origin, :lane_destination, :truck_per_week, :preferred_load_day, :notes, :carrier_id, :prefer_team)
     end
 end

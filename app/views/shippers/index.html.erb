@@ -33,7 +33,7 @@
         <% @shippers.each do |shipper| %>
           <tr>
             <td><%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper %></td>
-            <td><%= shipper.complete_record ? "<i class='text-success'>Completed</i>".html_safe : "<i class='text-danger'>Incomplete</i>".html_safe %></td>
+            <td><%= shipper.complete_record ? "<b class='text-success'>Completed</b>".html_safe : "<i class='text-danger'>Incomplete</i>".html_safe %></td>
             <td><%= shipper.last_contact_date.nil? ? "" : (shipper.last_contact_date.date_opened.to_s + " " + (shipper.last_contact_date.rep.nil? ? "" : link_to(shipper.last_contact_date.rep.full_name, shipper.last_contact_date.rep))).html_safe %></td>
             <td><%= shipper.shipper_type %></td>
             <td><%= shipper.sales_priority %></td>

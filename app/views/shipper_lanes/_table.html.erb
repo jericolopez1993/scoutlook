@@ -2,6 +2,7 @@
               <thead>
                 <tr>
                   <th>Priority</th>
+                  <th>Prefer Team</th>
                   <th>Origin</th>
                   <th>Destination</th>
                   <th>Trucks Per Week</th>
@@ -14,6 +15,7 @@
                     <% shipper_lanes.each do |shipper_lane| %>
                       <tr>
                         <td><%= shipper_lane.lane_priority_display %></td>
+                        <td><%= shipper_lane.prefer_team ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
                         <td>
                           <% shipper_lane.lane_origin_to_array.each do |cr| %>
                             <span class="badge badge-success"><%= cr %></span>
