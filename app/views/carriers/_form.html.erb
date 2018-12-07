@@ -69,6 +69,18 @@
           </div>
         </div>
         <div class="form-group row m-b-15">
+          <%= form.label :power_units, 'Power Units:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.number_field :power_units, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :company_drivers, 'Company Drivers:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.number_field :company_drivers, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
           <%= form.label :owner_operators, 'Owner Operators:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.number_field :owner_operators, class: 'form-control' %>
