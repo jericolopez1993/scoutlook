@@ -84,7 +84,7 @@ var destinationTags = [
 //
 // }).call(this);
 $(document).ready(function() {
-  activityOutcomeFields($("#activity_activity_type").val());
+  activityOutcomeFields($("#engagement_type").val());
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
   isHeadOffice($('[data-change="check-switchery-state-same-office"]').prop('checked'));
   shipmentFields($('input[type=radio][name="master_invoice[shipment_entry]"]:checked').val());
@@ -159,7 +159,7 @@ $(document).ready(function() {
           $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
         } );
       Inputmask().mask(document.querySelectorAll("input"));
-      $("#activity_activity_type").change(function(){
+      $("#engagement_type").change(function(){
         activityOutcomeFields($(this).val());
       });
       $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
