@@ -253,21 +253,7 @@ Add Attachment
               <div class="card bg-light" >
               <div class="card-body">
                 <h4 class="card-title">Lane</h4>
-                <% @shipper.lane_1.each do |lane|  %>
-                  <%= render 'shipper_lanes/show_fields', shipper_lane: lane %>
-                  <br/>
-                <% end %>
-                <% @shipper.lane_2.each do |lane|  %>
-                  <%= render 'shipper_lanes/show_fields', shipper_lane: lane %>
-                  <br/>
-                <% end %>
-                <% @shipper.lane_3.each do |lane|  %>
-                  <%= render 'shipper_lanes/show_fields', shipper_lane: lane %>
-                  <br/>
-                <% end %>
-                <% if @shipper.lane_1.length == 0 && @shipper.lane_2.length == 0 && @shipper.lane_3.length == 0%>
-                  <em>No Available</em>
-                <% end %>
+                <%= render 'shipper_lanes/table_ordered', lane_1: @shipper.lane_1, lane_2: @shipper.lane_2, lane_3: @shipper.lane_3  %>
               </div>
               </div>
             </div>

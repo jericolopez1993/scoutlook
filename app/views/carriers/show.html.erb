@@ -245,21 +245,7 @@ Add Attachment
           <div class="card bg-light" >
           <div class="card-body">
             <h4 class="card-title">Lane</h4>
-            <% @carrier.lane_1.each do |lane|  %>
-              <%= render 'carrier_lanes/show_fields', carrier_lane: lane %>
-              <br/>
-            <% end %>
-            <% @carrier.lane_2.each do |lane|  %>
-              <%= render 'carrier_lanes/show_fields', carrier_lane: lane %>
-              <br/>
-            <% end %>
-            <% @carrier.lane_3.each do |lane|  %>
-              <%= render 'carrier_lanes/show_fields', carrier_lane: lane %>
-              <br/>
-            <% end %>
-            <% if @carrier.lane_1.length == 0 && @carrier.lane_2.length == 0 && @carrier.lane_3.length == 0%>
-              <em>No Available</em>
-            <% end %>
+            <%= render 'carrier_lanes/table_ordered', lane_1: @carrier.lane_1, lane_2: @carrier.lane_2, lane_3: @carrier.lane_3  %>
           </div>
         </div>
         </div>
