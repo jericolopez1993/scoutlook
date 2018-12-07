@@ -54,7 +54,9 @@ Rails.application.routes.draw do
     end
   end
   match '/users',   to: 'users#index',   via: 'get'
+  match '/users/new',   to: 'users#new',   via: 'get'
   match '/users/:id/edit',   to: 'users#edit',   via: 'get'
+  match '/users/create',   to: 'users#create',   via: 'post'
   match '/users/:id',   to: 'users#show',   via: 'get'
   match '/users/:id',   to: 'users#update',   via: 'patch'
   match '/users/:id',   to: 'users#update',   via: 'put'
