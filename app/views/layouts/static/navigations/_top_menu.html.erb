@@ -5,19 +5,6 @@
       <li><a href="<%= shippers_path %>" class="<%= (params[:controller] == 'shippers') ? 'active' : ''%> shipper"><i class="fa fa-truck"></i> <span>Shippers</span></a></li>
       <% if current_user.has_role?(:admin) %>
       <li><a href="<%= reps_path %>" class="<%= (params[:controller] == 'reps') ? 'active' : ''%> steward"><i class="fa fa-users"></i> <span>Stewards</span></a></li>
-      <li class="has-sub">
-        <a href="javascript:;">
-          <b class="caret"></b>
-          <i class="fa fa-cog"></i>
-          <span>System Settings</span>
-        </a>
-        <ul class="sub-menu">
-          <li><a href="<%= logs_path %>">Logs</a></li>
-          <% if current_user.admin? %>
-            <li><a href="<%= users_path %>">User</a></li>
-          <% end %>
-        </ul>
-      </li>
     <% end %>
       <li class="menu-control menu-control-left show">
         <a href="javascript:;" data-click="prev-menu"><i class="fa fa-angle-left"></i></a>
