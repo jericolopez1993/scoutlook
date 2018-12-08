@@ -52,25 +52,72 @@
 //= require select2
 //= require_tree .
 var originTags = [
-  "US-CAL",
-  "US-FL",
-  "US-WA",
-  "US-TX",
-  "US-AZ"
-];
-var destinationTags = [
-  "US-ESB",
-  "US-MW",
-  "US-SE",
-  "US-NW",
   "CAN-BC",
-  "CAN-WEST",
-  "CAN-ABSK",
+  "CAN-AB",
+  "CAN-SK",
+  "CAN-MB",
   "CAN-ON",
   "CAN-QC",
-  "CAN-ATL",
-  "CAN-NFL"
+  "CAN-NB",
+  "CAN-NS",
+  "CAN-PEI",
+  "CAN-NL",
+  "CAN-NU",
+  "CAN-NT",
+  "CAN-YK",
+  "US-AL",
+  "US-AK",
+  "US-AZ",
+  "US-AR",
+  "US-CA",
+  "US-CO",
+  "US-CT",
+  "US-DE",
+  "US-FL",
+  "US-GA",
+  "US-HI",
+  "US-ID",
+  "US-IL",
+  "US-IN",
+  "US-IA",
+  "US-KS",
+  "US-KY",
+  "US-LA",
+  "US-ME",
+  "US-MD",
+  "US-MA",
+  "US-MI",
+  "US-MN",
+  "US-MS",
+  "US-MO",
+  "US-MT",
+  "US-NE",
+  "US-NV",
+  "US-NC",
+  "US-ND",
+  "US-OH",
+  "US-OK",
+  "US-OR",
+  "US-PA",
+  "US-RI",
+  "US-SC",
+  "US-SD",
+  "US-TN",
+  "US-TX",
+  "US-UT",
+  "US-VT",
+  "US-VA",
+  "US-WA",
+  "US-WV",
+  "US-WI",
+  "US-WY",
+  "US-Northeast",
+  "US-Northeast (No Bronx)",
+  "US-Southeast",
+  "US-Northwest",
+  "US-Midwest",
 ];
+var destinationTags = originTags;
 // (function() {
 //   $(document).on('turbolinks:before-cache', function() {
 //     var dataTable;
@@ -84,7 +131,7 @@ var destinationTags = [
 //
 // }).call(this);
 $(document).ready(function() {
-  activityOutcomeFields($("#engagement_type").val(), $("#engagement_status").val());
+  activityOutcomeFields($("#engagement_type").val(), $("#engagement_status").val(), $("#engagement_outcome").val());
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
   isHeadOffice($('[data-change="check-switchery-state-same-office"]').prop('checked'));
   shipmentFields($('input[type=radio][name="master_invoice[shipment_entry]"]:checked').val());
@@ -160,10 +207,13 @@ $(document).ready(function() {
         } );
       Inputmask().mask(document.querySelectorAll("input"));
       $("#engagement_type").change(function(){
-        activityOutcomeFields($(this).val(), $("#engagement_status").val());
+        activityOutcomeFields($(this).val(), $("#engagement_status").val(), $("#engagement_outcome").val());
       });
       $("#engagement_status").change(function(){
-        activityOutcomeFields($("#engagement_type").val(), $(this).val());
+        activityOutcomeFields($("#engagement_type").val(), $(this).val(), $("#engagement_outcome").val());
+      });
+      $("#engagement_outcome").change(function(){
+        activityOutcomeFields($("#engagement_type").val(), $("#engagement_status").val(), $(this).val());
       });
       $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
         sameHeadOffice($(this).prop('checked'));
@@ -262,25 +312,21 @@ $(document).ready(function() {
 
 });
 
-
-
-function activityOutcomeFields(actype, stat) {
-  if (actype === 'Engagement' && stat === "false") {
+function activityOutcomeFields(actype, stat, outcome) {
+  if (actype === 'Loop' && stat === "false") {
       $(".outcome-fields").show();
-      $(".activity_buttons").hide();
-      $(".engagement-fields").show();
-      $(".loop-fields").hide();
-  }else if (actype === 'Loop' && stat === "false") {
-      $(".outcome-fields").show();
-      $(".activity_buttons").hide();
-      $(".engagement-fields").hide();
       $(".loop-fields").show();
-  }else{
-      $(".engagement-fields").hide();
-      $(".loop-fields").hide();
+      $(".activity_buttons").hide();
+      if (outcome === 'Win') {
+        $(".win-fields").show();
+      } else {
+        $(".win-fields").hide();
+      }
+  } else {
       $(".outcome-fields").hide();
+      $(".loop-fields").hide();
       $(".activity_buttons").show();
-
+      $(".win-fields").hide();
   }
 }
 

@@ -127,6 +127,18 @@ Add Attachment
                 </div>
               </div>
               <div class="row">
+                <label class="col-md-4 col-form-label">Last Contact:</label>
+                <div class="col-md-8 lbl-padding-t">
+                  <%= @shipper.last_contact_date.nil? ? "" : (@shipper.last_contact_date.date_opened.to_s + " " + (@shipper.last_contact_date.rep.nil? ? "" : link_to(@shipper.last_contact_date.rep.full_name, @shipper.last_contact_date.rep))).html_safe %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-4 col-form-label">Sales Priority:</label>
+                <div class="col-md-8 lbl-padding-t">
+                  <%= @shipper.sales_priority %>
+                </div>
+              </div>
+              <div class="row">
                 <label class="col-md-4 col-form-label">Company Name:</label>
                 <div class="col-md-8 lbl-padding-t">
                   <%= @shipper.company_name %>
@@ -142,12 +154,6 @@ Add Attachment
                 <label class="col-md-4 col-form-label">Shipper Type:</label>
                 <div class="col-md-8 lbl-padding-t">
                   <%= @shipper.shipper_type %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-md-4 col-form-label">Sales Priority:</label>
-                <div class="col-md-8 lbl-padding-t">
-                  <%= @shipper.sales_priority %>
                 </div>
               </div>
               <div class="row">
@@ -248,17 +254,11 @@ Add Attachment
                   <%= (!@shipper.linkedin.nil? && @shipper.linkedin.present?) ? "<a href='#{@shipper.website}'>#{@shipper.linkedin}</a>" : "" %>
                 </div>
               </div>
-              <div class="row">
-                <label class="col-md-4 col-form-label">Last Contact:</label>
-                <div class="col-md-8 lbl-padding-t">
-                  <%= @shipper.last_contact_date.nil? ? "" : (@shipper.last_contact_date.date_opened.to_s + " " + (@shipper.last_contact_date.rep.nil? ? "" : link_to(@shipper.last_contact_date.rep.full_name, @shipper.last_contact_date.rep))).html_safe %>
-                </div>
-              </div>
             </div>
             <div class="col-md-4">
               <div class="card bg-light" >
               <div class="card-body">
-                <h4 class="card-title">Lane</h4>
+                <h4 class="card-title">Priority Lanes</h4>
                 <%= render 'shipper_lanes/table_ordered', lane_1: @shipper.lane_1, lane_2: @shipper.lane_2, lane_3: @shipper.lane_3  %>
               </div>
               </div>

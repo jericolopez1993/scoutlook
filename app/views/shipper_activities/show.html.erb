@@ -85,14 +85,6 @@ label {
         <%= @shipper_activity.other_notes.nil? ? "" : @shipper_activity.other_notes.html_safe %>
       </div>
     </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Complete Credit Application:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <% if @shipper_activity.credit_application.attached? %>
-          <%= link_to @shipper_activity.credit_application.filename, rails_blob_path(@shipper_activity.credit_application), target: :_blank %>
-        <% end %>
-      </div>
-    </div>
 
     <% if !@shipper_activity.outcome_id.nil? %>
         <hr>
@@ -103,13 +95,20 @@ label {
             <%= @shipper_activity.outcome.outcome %>
           </div>
         </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Reason:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @shipper_activity.outcome.reason %>
-            </div>
+        <div class="row">
+          <label class="col-md-2 col-form-label">Complete Credit Application:</label>
+          <div class="col-md-9 lbl-padding-t">
+            <% if @shipper_activity.credit_application.attached? %>
+              <%= link_to @shipper_activity.credit_application.filename, rails_blob_path(@shipper_activity.credit_application), target: :_blank %>
+            <% end %>
           </div>
-
+        </div>
+        <div class="row">
+          <label class="col-md-2 col-form-label">Reason:</label>
+          <div class="col-md-9 lbl-padding-t">
+            <%= @shipper_activity.outcome.reason %>
+          </div>
+        </div>
         <div class="row">
           <label class="col-md-2 col-form-label">Notes:</label>
           <div class="col-md-9 lbl-padding-t">

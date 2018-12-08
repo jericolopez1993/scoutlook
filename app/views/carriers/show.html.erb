@@ -127,6 +127,18 @@ Add Attachment
             </div>
           </div>
           <div class="row">
+            <label class="col-md-4 col-form-label">Last Contact:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= @carrier.last_contact_date.nil? ? "" : (@carrier.last_contact_date.date_opened.to_s + " " + (@carrier.last_contact_date.rep.nil? ? "" : link_to(@carrier.last_contact_date.rep.full_name, @carrier.last_contact_date.rep))).html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Carrier Class:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= @carrier.sales_priority %>
+            </div>
+          </div>
+          <div class="row">
             <label class="col-md-4 col-form-label">Company Name:</label>
             <div class="col-md-8 lbl-padding-t">
               <%= @carrier.company_name %>
@@ -199,12 +211,6 @@ Add Attachment
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Carrier Class:</label>
-            <div class="col-md-8 lbl-padding-t">
-              <%= @carrier.sales_priority %>
-            </div>
-          </div>
-          <div class="row">
             <label class="col-md-4 col-form-label">Contact Rates:</label>
             <div class="col-md-8 lbl-padding-t">
               <%= @carrier.contract_rates %>
@@ -240,17 +246,11 @@ Add Attachment
               <%= (!@carrier.linkedin.nil? && @carrier.linkedin.present?) ? "<a href='#{@carrier.website}'>#{@carrier.linkedin}</a>" : "" %>
             </div>
           </div>
-          <div class="row">
-            <label class="col-md-4 col-form-label">Last Contact:</label>
-            <div class="col-md-8 lbl-padding-t">
-              <%= @carrier.last_contact_date.nil? ? "" : (@carrier.last_contact_date.date_opened.to_s + " " + (@carrier.last_contact_date.rep.nil? ? "" : link_to(@carrier.last_contact_date.rep.full_name, @carrier.last_contact_date.rep))).html_safe %>
-            </div>
-          </div>
         </div>
         <div class="col-md-4">
           <div class="card bg-light" >
           <div class="card-body">
-            <h4 class="card-title">Lane</h4>
+            <h4 class="card-title">Priority Lanes</h4>
             <%= render 'carrier_lanes/table_ordered', lane_1: @carrier.lane_1, lane_2: @carrier.lane_2, lane_3: @carrier.lane_3  %>
           </div>
         </div>

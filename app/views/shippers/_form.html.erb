@@ -43,6 +43,12 @@
           </div>
         </div>
         <div class="form-group row m-b-15">
+          <%= form.label :sales_priority, 'Sales Priority:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.select :sales_priority, options_for_select(['A', 'B', 'C', 'D', 'U'], shipper.sales_priority), {:include_blank => true}, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
           <%= form.label :company_name, 'Company Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.text_field :company_name, class: 'form-control' %>
@@ -58,12 +64,6 @@
           <%= form.label :shipper_type, 'Shipper Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.select :shipper_type, options_for_select(['Broker', 'Shipper', 'Receiver', 'Wholesaler'], shipper.shipper_type), {:include_blank => true}, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :sales_priority, 'Sales Priority:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :sales_priority, options_for_select(['A', 'B', 'C', 'D', 'U'], shipper.sales_priority), {:include_blank => true}, class: 'form-control' %>
           </div>
         </div>
         <div class="form-group row m-b-15">
