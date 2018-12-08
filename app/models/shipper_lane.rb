@@ -97,7 +97,7 @@ class ShipperLane < ApplicationRecord
     if self.preferred_load_day.nil?
       ''
     else
-      self.preferred_load_day.split(',').map(&:first).join(', ')
+      self.preferred_load_day.split(',').map { |day| ['T', 'S'].include?(day[0]) ? day[0..1] : day[0] }.join(', ')
     end
   end
   def lane_origin_to_array
