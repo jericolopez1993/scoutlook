@@ -28,7 +28,6 @@
           <div id="error_explanation">
             <h2><%= pluralize(carrier.errors.count, "error") %>
               prohibited this carrier from being saved:</h2>
-
             <ul>
               <% carrier.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
@@ -58,8 +57,8 @@
           <%= form.label :relationship_owner, 'Relationship Owner:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.select :relationship_owner, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier.relationship_owner}, class: 'form-control' %>
+          </div>
         </div>
-      </div>
         <div class="form-group row m-b-15">
           <%= form.label :score_card, 'Score Card:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">

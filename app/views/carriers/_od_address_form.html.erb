@@ -20,19 +20,19 @@
   <div class="form-group row m-b-15 address-fields">
     <%= form.label "#{name}_state", 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-    <%= form.select "#{name}_state", options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "#{name}_state" %>
+      <%= form.select "#{name}_state", options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "#{name}_state" %>
     </div>
   </div>
   <div class="form-group row m-b-15 address-fields">
     <%= form.label  "#{name}_postal", 'Postal / Zip:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-    <%= form.text_field "#{name}_postal", class: 'form-control', :id => "#{name}_postal" %>
+      <%= form.text_field "#{name}_postal", class: 'form-control', :id => "#{name}_postal" %>
     </div>
   </div>
   <div class="form-group row m-b-15 address-fields">
     <%= form.label "#{name}_country", 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-    <%= form.select "#{name}_country", options_for_select([]),{}, class: 'form-control static-dropdown', :id => "#{name}_country" %>
+      <%= form.select "#{name}_country", options_for_select([]),{}, class: 'form-control static-dropdown', :id => "#{name}_country" %>
     </div>
   </div>
 
