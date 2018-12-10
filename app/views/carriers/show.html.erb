@@ -347,9 +347,9 @@ Add Attachment
             <tbody>
               <% CarrierContact.where(:carrier_id => @carrier.id).each do |contact| %>
                 <tr>
-                  <td style="text-align: center;"><%= (@carrier.pdm_id == contact.id) ? '<span class="label label-success">PDM</span><br/>'.html_safe : '' %>
-                    <%= (@carrier.poc_id == contact.id) ? '<span class="label label-green">POC</span><br/>'.html_safe : '' %>
-                  <%= contact.adm ? '<span class="label label-lime">ADM</span><br/>'.html_safe : '' %></td>
+                  <td style="text-align: center;"><%= (@carrier.pdm_id == contact.id) ? '<div class="mr-0 tags"><span class="label label-success">PDM</span></div>'.html_safe : '' %>
+                    <%= (@carrier.poc_id == contact.id) ? '<div class="mr-0 tags"><span class="label label-green">POC</span></div>'.html_safe : '' %>
+                  <%= contact.adm ? '<div class="mr-0 tags"><span class="label label-lime">ADM</span></div>'.html_safe : '' %></td>
                   <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
                   <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %>" target="_top"><%= contact.email %>&nbsp;<i class="far fa-envelope"></a></i></td>
                   <td><%= contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "#{@carrier.head_office_location.address} #{@carrier.head_office_location.city}, #{@carrier.head_office_location.state}, #{@carrier.head_office_location.country} #{@carrier.head_office_location.postal}") : (contact.location.nil? ? '' : "#{contact.location.address} #{contact.location.city} #{contact.location.state}, #{contact.location.country} #{contact.location.postal}")%></td>

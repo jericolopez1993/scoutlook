@@ -1,48 +1,48 @@
 <% if !carrier_contact.nil? %>
-<% @carrier = Carrier.find(carrier_contact.carrier_id) %>
-<div class="row">
-  <label class="col-md-3 col-form-label">Type:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= carrier_contact.contact_type %>
+  <% @carrier = Carrier.find(carrier_contact.carrier_id) %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Type:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_contact.contact_type %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Name:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= carrier_contact.full_name %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Name:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_contact.full_name %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Position/Title:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= carrier_contact.title %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Position/Title:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_contact.title %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">LinkedIn:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= carrier_contact.linkedin_link.nil? || carrier_contact.linkedin_link == "" ? "" : (link_to carrier_contact.linkedin_link, carrier_contact.linkedin_link, :target => "_blank") %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">LinkedIn:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_contact.linkedin_link.nil? || carrier_contact.linkedin_link == "" ? "" : (link_to carrier_contact.linkedin_link, carrier_contact.linkedin_link, :target => "_blank") %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">E-mail Address:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <a href="mailto:<%= carrier_contact.email %>?Subject=Hello%20<%= carrier_contact.first_name.nil? ? '' :  carrier_contact.first_name + " " + carrier_contact.last_name  %>" target="_top"><%= carrier_contact.email %>&nbsp;<i class="far fa-envelope"></i></a>
+  <div class="row">
+    <label class="col-md-3 col-form-label">E-mail Address:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <a href="mailto:<%= carrier_contact.email %>?Subject=Hello%20<%= carrier_contact.first_name.nil? ? '' :  carrier_contact.first_name + " " + carrier_contact.last_name  %>" target="_top"><%= carrier_contact.email %>&nbsp;<i class="far fa-envelope"></i></a>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Phone:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= carrier_contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "<i>(Work)</i> <b>#{@carrier.head_office_location.phone}</b>, ".html_safe) : (carrier_contact.work_phone.nil? ? '' : "<i>(Work)</i> <b>#{carrier_contact.work_phone}</b>, ".html_safe) %>
-    <%= carrier_contact.home_phone.nil? ? '' : "<i>(Home)</i> <b>#{carrier_contact.home_phone}</b> ".html_safe %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Phone:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "<i>(Work)</i> <b>#{@carrier.head_office_location.phone}</b>, ".html_safe) : (carrier_contact.work_phone.nil? ? '' : "<i>(Work)</i> <b>#{carrier_contact.work_phone}</b>, ".html_safe) %>
+      <%= carrier_contact.home_phone.nil? ? '' : "<i>(Home)</i> <b>#{carrier_contact.home_phone}</b> ".html_safe %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Address:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= carrier_contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "#{@carrier.head_office_location.address} #{@carrier.head_office_location.city}, #{@carrier.head_office_location.state}, #{@carrier.head_office_location.country} #{@carrier.head_office_location.postal}") : (carrier_contact.location.nil? ? '' : "#{carrier_contact.location.address} #{carrier_contact.location.city} #{carrier_contact.location.state}, #{carrier_contact.location.country} #{carrier_contact.location.postal}")%>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Address:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "#{@carrier.head_office_location.address} #{@carrier.head_office_location.city}, #{@carrier.head_office_location.state}, #{@carrier.head_office_location.country} #{@carrier.head_office_location.postal}") : (carrier_contact.location.nil? ? '' : "#{carrier_contact.location.address} #{carrier_contact.location.city} #{carrier_contact.location.state}, #{carrier_contact.location.country} #{carrier_contact.location.postal}")%>
+    </div>
   </div>
-</div>
 <% else %>
-<em>No Available</em>
+  <em>No Available</em>
 <% end %>
