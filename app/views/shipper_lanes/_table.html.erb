@@ -1,44 +1,44 @@
 <table  class="table table-striped table-bordered data-table-no-buttons display nowrap">
-              <thead>
-                <tr>
-                  <th>Priority</th>
-                  <th>Prefer Teams?</th>
-                  <th>Origin</th>
-                  <th>Destination</th>
-                  <th>Trucks Per Week</th>
-                  <th>Preferred Load Days</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                  <% if !shipper_lanes.nil? %>
-                    <% shipper_lanes.each do |shipper_lane| %>
-                      <tr>
-                        <td><%= shipper_lane.lane_priority_display %></td>
-                        <td><%= shipper_lane.prefer_team ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
-                        <td>
-                          <% shipper_lane.lane_origin_to_array.each do |cr| %>
-                            <span class="badge badge-success"><%= cr %></span>
-                          <% end %>
-                        </td>
-                        <td>
-                          <% shipper_lane.lane_destination_to_array.each do |cr| %>
-                            <span class="badge badge-primary"><%= cr %></span>
-                          <% end %>
-                        </td>
-                        <td><%= shipper_lane.truck_per_week %></td>
-                        <td>
-                          <% shipper_lane.preferred_load_day_to_array.each do |cr| %>
-                            <span class="badge badge-inverse"><%= cr %></span>
-                          <% end %>
-                        </td>
-                        <td>
-                          <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipper_lane, :class => 'btn btn-info btn-xs' %>
-                          <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipper_lane_path(shipper_lane), :class => 'btn btn-warning btn-xs' %>
-                          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipper_lane, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
-                        </td>
-                      </tr>
-                    <% end %>
-                  <% end %>
-                </tbody>
-              </table>
+  <thead>
+    <tr>
+      <th>Priority</th>
+      <th>Prefer Teams?</th>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Trucks Per Week</th>
+      <th>Preferred Load Days</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if !shipper_lanes.nil? %>
+      <% shipper_lanes.each do |shipper_lane| %>
+        <tr>
+          <td><%= shipper_lane.lane_priority_display %></td>
+          <td><%= shipper_lane.prefer_team ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
+          <td>
+            <% shipper_lane.lane_origin_to_array.each do |cr| %>
+              <span class="badge badge-success"><%= cr %></span>
+            <% end %>
+          </td>
+          <td>
+            <% shipper_lane.lane_destination_to_array.each do |cr| %>
+              <span class="badge badge-primary"><%= cr %></span>
+            <% end %>
+          </td>
+          <td><%= shipper_lane.truck_per_week %></td>
+          <td>
+            <% shipper_lane.preferred_load_day_to_array.each do |cr| %>
+              <span class="badge badge-inverse"><%= cr %></span>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipper_lane, :class => 'btn btn-info btn-xs' %>
+            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipper_lane_path(shipper_lane), :class => 'btn btn-warning btn-xs' %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipper_lane, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
