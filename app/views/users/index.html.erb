@@ -11,32 +11,32 @@
   </div>
   <div class="panel-body">
     <table class="table table-striped table-bordered data-table-buttons display nowrap">
-    								<thead>
-    									<tr class="odd gradeX">
-    										<th>Name</th>
-    										<th>Email</th>
-    										<th width="1%">Access</th>
-										    <th data-orderable="false">Actions</th>
-    									</tr>
-    								</thead>
-    								<tbody>
-                      <% @users.each do |user| %>
-                        <tr>
-                          <td><%= user.first_name %> <%= user.last_name %></td>
-                          <td><%= user.email %></td>
-                          <td style="text-align: center;">
-                              <%= user.has_role?(:admin) ? "<span class='badge badge-dark'>ADMIN</span>".html_safe : ""%>
-                              <%= user.has_role?(:contact) ? "<span class='badge badge-indigo'>CONTACT</span>".html_safe : ""%>
-                              <%= user.has_role?(:steward) ? "<span class='badge badge-purple'>STEWARD</span>".html_safe : ""%>
-                          </td>
-                          <td>
-                            <a class="btn btn-warning btn-xs" href="/users/<%= user.id %>/edit"><i class="far fa-edit"></i></a>
-                            <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href="/users/<%= user.id %>"><i class="fas fa-trash-alt"></i></a>
-                          </td>
-                        </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
+			<thead>
+				<tr class="odd gradeX">
+					<th>Name</th>
+					<th>Email</th>
+					<th width="1%">Access</th>
+			    <th data-orderable="false">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.first_name %> <%= user.last_name %></td>
+            <td><%= user.email %></td>
+            <td style="text-align: center;">
+                <%= user.has_role?(:admin) ? "<span class='badge badge-dark'>ADMIN</span>".html_safe : ""%>
+                <%= user.has_role?(:contact) ? "<span class='badge badge-indigo'>CONTACT</span>".html_safe : ""%>
+                <%= user.has_role?(:steward) ? "<span class='badge badge-purple'>STEWARD</span>".html_safe : ""%>
+            </td>
+            <td>
+              <a class="btn btn-warning btn-xs" href="/users/<%= user.id %>/edit"><i class="far fa-edit"></i></a>
+              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href="/users/<%= user.id %>"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
 <!-- end panel -->

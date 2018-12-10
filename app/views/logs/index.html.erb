@@ -7,19 +7,19 @@
   </div>
   <div class="panel-body">
     <table class="table table-striped table-bordered data-table-no-buttons display nowrap">
-    								<thead>
-    									<tr class="odd gradeX">
-    										<th>Notifications</th>
-    									</tr>
-    								</thead>
-    								<tbody>
-                      <% Audited::Audit.order("created_at DESC").each do |audit| %>
-                        <tr>
-                          <td><%= audit.on_sentence.html_safe %></td>
-                        </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
+			<thead>
+				<tr class="odd gradeX">
+					<th>Notifications</th>
+				</tr>
+			</thead>
+			<tbody>
+        <% Audited::Audit.order("created_at DESC").each do |audit| %>
+          <tr>
+            <td><%= audit.on_sentence.html_safe %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
 <!-- end panel -->

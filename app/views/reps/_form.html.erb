@@ -20,75 +20,74 @@
     <h4 class="panel-title">Information</h4>
   </div> -->
   <div class="panel-body">
-  <%= form_with(model: rep, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-  <% if rep.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(rep.errors.count, "error") %> prohibited this client from being saved:</h2>
-
-      <ul>
-      <% rep.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+    <%= form_with(model: rep, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+      <% if rep.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(rep.errors.count, "error") %> prohibited this client from being saved:</h2>
+          <ul>
+          <% rep.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-                <div class="form-group row m-b-15">
-                  <%= form.label :first_name, 'First Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-                  <div class="col-md-9 col-sm-8">
-                  <%= form.text_field :first_name, class: 'form-control' %>
-                  </div>
-                </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :first_name, 'First Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :first_name, class: 'form-control' %>
+        </div>
+      </div>
 
-                <div class="form-group row m-b-15">
-                  <%= form.label :last_name, 'Last Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-                  <div class="col-md-9 col-sm-8">
-                  <%= form.text_field :last_name, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :date_of_hire, 'Date of Hire:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-                  <div class="col-md-9 col-sm-8">
-                  <%= form.date_field :date_of_hire, max: Date.today, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :phone, 'Phone #:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-                  <div class="col-md-9 col-sm-8">
-                  <%= form.text_field :phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :email, 'E-mail:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-                  <div class="col-md-9 col-sm-8">
-                  <%= form.email_field :email, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :password, 'Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-                  <div class="col-md-9 col-sm-8">
-                  <%= form.password_field :password, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-15">
-                  <%= form.label :password_confirmation, 'Confirm Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-                  <div class="col-md-9 col-sm-8">
-                  <%= form.password_field :password_confirmation, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row m-b-0">
-                  <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
-                  <div class="col-md-9 col-sm-8">
-                    <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-                    <% if params[:action] == 'edit' %>
-                      &nbsp;&nbsp;<%= link_to 'Show', rep, :class => 'btn btn-info' %>
-                    <% end %>
-                    <% if params[:action] == 'new' %>
-                      &nbsp;&nbsp;<%= link_to 'Back', reps_path, :class => 'btn btn-default' %>
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :last_name, 'Last Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :last_name, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :date_of_hire, 'Date of Hire:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.date_field :date_of_hire, max: Date.today, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :phone, 'Phone #:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :email, 'E-mail:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.email_field :email, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :password, 'Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.password_field :password, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :password_confirmation, 'Confirm Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.password_field :password_confirmation, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-0">
+        <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
+        <div class="col-md-9 col-sm-8">
+          <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+          <% if params[:action] == 'edit' %>
+            &nbsp;&nbsp;<%= link_to 'Show', rep, :class => 'btn btn-info' %>
+          <% end %>
+          <% if params[:action] == 'new' %>
+            &nbsp;&nbsp;<%= link_to 'Back', reps_path, :class => 'btn btn-default' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 <!-- end panel -->
