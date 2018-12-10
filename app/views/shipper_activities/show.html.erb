@@ -19,9 +19,9 @@ label {
     <% if @previous_controller == "shippers"%>
       <% shipper = Shipper.find(@shipper_activity.shipper_id)%>
       <%= link_to 'Back to Shipper', shipper, :class => 'btn btn-info btn-xs' %>
-  <% else %>
-      <%= link_to 'Back', shipper_activities_path, :class => 'btn btn-default btn-xs' %>
-  <% end %>
+    <% else %>
+        <%= link_to 'Back', shipper_activities_path, :class => 'btn btn-default btn-xs' %>
+    <% end %>
   </span>
 </div>
 <!-- end page-header -->
@@ -64,7 +64,7 @@ label {
     <div class="row">
       <label class="col-md-2 col-form-label">Status:</label>
       <div class="col-md-9 lbl-padding-t">
-      <%= @shipper_activity.status ? 'Open' : 'Closed' %>
+        <%= @shipper_activity.status ? 'Open' : 'Closed' %>
       </div>
     </div>
     <div class="row">
@@ -87,34 +87,34 @@ label {
     </div>
 
     <% if !@shipper_activity.outcome_id.nil? %>
-        <hr>
-        <h4 class="text-inverse">Outcome</h4>
-        <div class="row">
-          <label class="col-md-2 col-form-label">Outcome:</label>
-          <div class="col-md-9 lbl-padding-t">
-            <%= @shipper_activity.outcome.outcome %>
-          </div>
+      <hr>
+      <h4 class="text-inverse">Outcome</h4>
+      <div class="row">
+        <label class="col-md-2 col-form-label">Outcome:</label>
+        <div class="col-md-9 lbl-padding-t">
+          <%= @shipper_activity.outcome.outcome %>
         </div>
-        <div class="row">
-          <label class="col-md-2 col-form-label">Complete Credit Application:</label>
-          <div class="col-md-9 lbl-padding-t">
-            <% if @shipper_activity.credit_application.attached? %>
-              <%= link_to @shipper_activity.credit_application.filename, rails_blob_path(@shipper_activity.credit_application), target: :_blank %>
-            <% end %>
-          </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label">Complete Credit Application:</label>
+        <div class="col-md-9 lbl-padding-t">
+          <% if @shipper_activity.credit_application.attached? %>
+            <%= link_to @shipper_activity.credit_application.filename, rails_blob_path(@shipper_activity.credit_application), target: :_blank %>
+          <% end %>
         </div>
-        <div class="row">
-          <label class="col-md-2 col-form-label">Reason:</label>
-          <div class="col-md-9 lbl-padding-t">
-            <%= @shipper_activity.outcome.reason %>
-          </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label">Reason:</label>
+        <div class="col-md-9 lbl-padding-t">
+          <%= @shipper_activity.outcome.reason %>
         </div>
-        <div class="row">
-          <label class="col-md-2 col-form-label">Notes:</label>
-          <div class="col-md-9 lbl-padding-t">
-            <%= @shipper_activity.outcome.notes.nil? ? "" : @shipper_activity.outcome.notes.html_safe %>
-          </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label">Notes:</label>
+        <div class="col-md-9 lbl-padding-t">
+          <%= @shipper_activity.outcome.notes.nil? ? "" : @shipper_activity.outcome.notes.html_safe %>
         </div>
+      </div>
     <% end %>
     <hr>
     <h4 class="text-inverse">Proposed PDFs</h4>
@@ -129,20 +129,18 @@ label {
       </thead>
       <tbody>
         <% @shipper_activity.proposal_pdf.each_with_index do |attachment_file, index| %>
-        <tr>
-          <td><%= attachment_file.id %></td>
-          <td><%= attachment_file.filename %></td>
-          <td><%= convert_date(attachment_file.created_at) %></td>
-          <td>
-            <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file), target: :_blank, :class => 'btn btn-primary' %>
-            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_shipper_activities_path(:id => @shipper_activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
-          </td>
-
-        </tr>
+          <tr>
+            <td><%= attachment_file.id %></td>
+            <td><%= attachment_file.filename %></td>
+            <td><%= convert_date(attachment_file.created_at) %></td>
+            <td>
+              <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file), target: :_blank, :class => 'btn btn-primary' %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_shipper_activities_path(:id => @shipper_activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+            </td>
+          </tr>
         <% end %>
       </tbody>
     </table>
-
   </div>
 </div>
 
