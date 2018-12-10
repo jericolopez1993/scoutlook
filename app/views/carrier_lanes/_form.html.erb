@@ -7,85 +7,83 @@
 <!-- begin panel -->
 
 <%= form_with(model: carrier_lane, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-<%= form.hidden_field :carrier_id %>
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-inverse">
-      <div class="panel-heading">
-        <div class="panel-heading-btn"></div>
-        <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(carrier_lane.lane_origin, carrier_lane.id) + " - #{carrier_lane.lane_origin}") : "" %></h4>
-      </div>
-      <div class="panel-body">
-        <% if carrier_lane.errors.any? %>
-        <div class="form-group row m-b-15">
-        <div class="col-md-12 col-sm-12">
-        <div class="alert alert-danger" role="alert">
-          <h4 class="alert-heading"><%= pluralize(carrier_lane.errors.count, "error") %> prohibited this carrier_lane from being saved:</h4>
-            <ul>
-              <% carrier_lane.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
+  <%= form.hidden_field :carrier_id %>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <div class="panel-heading-btn"></div>
+          <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(carrier_lane.lane_origin, carrier_lane.id) + " - #{carrier_lane.lane_origin}") : "" %></h4>
         </div>
-    </div>
-      </div>
-        <% end %>
-        <h4 class="text-inverse">Details</h4>
-        <div class="form-group row m-b-15">
-          <%= form.label :lane_priority, 'Priority:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :lane_priority, options_for_select([['High', 1], ['Medium', 2], ['Low', 3]], carrier_lane.lane_priority), {:include_blank => true}, class: 'form-control' %>
+        <div class="panel-body">
+          <% if carrier_lane.errors.any? %>
+            <div class="form-group row m-b-15">
+              <div class="col-md-12 col-sm-12">
+                <div class="alert alert-danger" role="alert">
+                  <h4 class="alert-heading"><%= pluralize(carrier_lane.errors.count, "error") %> prohibited this carrier_lane from being saved:</h4>
+                  <ul>
+                    <% carrier_lane.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <h4 class="text-inverse">Details</h4>
+          <div class="form-group row m-b-15">
+            <%= form.label :lane_priority, 'Priority:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :lane_priority, options_for_select([['High', 1], ['Medium', 2], ['Low', 3]], carrier_lane.lane_priority), {:include_blank => true}, class: 'form-control' %>
+            </div>
           </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <label class="text-right col-md-2 col-sm-4 col-form-label">Prefer Teams? </label>
-          <div class="col-md-9 col-sm-8">
-            <input type="checkbox" name="prefer_team" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= carrier_lane.prefer_team ? 'checked' : '' %> >
+          <div class="form-group row m-b-15">
+            <label class="text-right col-md-2 col-sm-4 col-form-label">Prefer Teams? </label>
+            <div class="col-md-9 col-sm-8">
+              <input type="checkbox" name="prefer_team" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= carrier_lane.prefer_team ? 'checked' : '' %> >
+            </div>
           </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :lane_origin, 'Origin:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :lane_origin, grouped_options_for_select(CarrierLane::ORIGINS), {:include_blank => true, :selected => carrier_lane.lane_origin}, class: 'form-control origin-multiple-select2', multiple: true %>
+          <div class="form-group row m-b-15">
+            <%= form.label :lane_origin, 'Origin:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :lane_origin, grouped_options_for_select(CarrierLane::ORIGINS), {:include_blank => true, :selected => carrier_lane.lane_origin}, class: 'form-control origin-multiple-select2', multiple: true %>
+            </div>
           </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :lane_destination, 'Destination:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :lane_destination, grouped_options_for_select(CarrierLane::DESTINATIONS), {:include_blank => true, :selected => carrier_lane.lane_destination}, class: 'form-control destination-multiple-select2', multiple: true %>
+          <div class="form-group row m-b-15">
+            <%= form.label :lane_destination, 'Destination:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :lane_destination, grouped_options_for_select(CarrierLane::DESTINATIONS), {:include_blank => true, :selected => carrier_lane.lane_destination}, class: 'form-control destination-multiple-select2', multiple: true %>
+            </div>
           </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :truck_per_week, 'Trucks Per Week:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.number_field :truck_per_week, class: 'form-control' %>
+          <div class="form-group row m-b-15">
+            <%= form.label :truck_per_week, 'Trucks Per Week:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.number_field :truck_per_week, class: 'form-control' %>
+            </div>
           </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :preferred_load_day, 'Preferred Load Days:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :preferred_load_day, options_for_select(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], carrier_lane.preferred_load_day),{:include_blank => false}, class: 'form-control', multiple: true %>
+          <div class="form-group row m-b-15">
+            <%= form.label :preferred_load_day, 'Preferred Load Days:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :preferred_load_day, options_for_select(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], carrier_lane.preferred_load_day),{:include_blank => false}, class: 'form-control', multiple: true %>
+            </div>
           </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.text_area(:notes, cols: 20, rows: 15, class: 'tinymce') %>
+          <div class="form-group row m-b-15">
+            <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.text_area(:notes, cols: 20, rows: 15, class: 'tinymce') %>
+            </div>
           </div>
-        </div>
-
-        <div class="form-group row m-b-15">
-          <div class="col-md-2"></div>
-          <div class="col-md-9 col-sm-12 d-flex justify-content-end">
-            <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-            &nbsp;&nbsp;<%= link_to 'Back', carrier_path(:id => carrier_lane.carrier_id), :class => 'btn btn-info' %>
+          <div class="form-group row m-b-15">
+            <div class="col-md-2"></div>
+            <div class="col-md-9 col-sm-12 d-flex justify-content-end">
+              <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+              &nbsp;&nbsp;<%= link_to 'Back', carrier_path(:id => carrier_lane.carrier_id), :class => 'btn btn-info' %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
 <% end %>
 <%= tinymce %>
 <!-- end panel -->

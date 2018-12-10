@@ -8,10 +8,10 @@
 <div class="title-btn-group">
   <h4 class="text-inverse pull-left">Carrier Lanes</h4>
   <span class="pull-right">
-    <%= link_to 'New Lane', new_carrier_lane_path, :class => 'btn btn-primary btn-xs' %>
-    </div>
-    <h4 class="panel-title">Carrier lanes</h4>
-  </div>
-  <div class="panel-body">
-    <%= render 'table', carrier_lanes: @carrier_lanes %>
-  </div>
+  <%= link_to 'New Lane', new_carrier_lane_path, :class => 'btn btn-primary btn-xs' %>
+</div>
+<h4 class="panel-title">Carrier lanes</h4>
+
+<div class="panel-body">
+  <%= render 'table', carrier_lanes: @carrier_lanes %>
+</div>
