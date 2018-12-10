@@ -5,7 +5,7 @@
   <div class="panel panel-darkblue">
     <div class="panel-heading">
       <div class="panel-heading-btn">
-      <%= link_to 'New Shipper', new_shipper_path, :class => 'btn btn-success btn-xs' %>
+        <%= link_to 'New Shipper', new_shipper_path, :class => 'btn btn-success btn-xs' %>
       </div>
       <h4 class="panel-title lp-header">Shippers</h4>
     </div>
@@ -41,9 +41,9 @@
               <td><%= shipper.loads_per_month %></td>
               <td><%= shipper.spend_per_year %></td>
               <td>
-                  <% shipper.commodities_to_array.each do |cr| %>
-                    <span class="badge badge-inverse"><%= cr %></span>
-                  <% end %>
+                <% shipper.commodities_to_array.each do |cr| %>
+                  <span class="badge badge-inverse"><%= cr %></span>
+                <% end %>
               </td>
               <td>
                 <% if shipper.blue_book_url %>

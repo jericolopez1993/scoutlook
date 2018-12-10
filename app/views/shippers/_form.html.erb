@@ -15,186 +15,184 @@
 <!-- begin panel -->
 
 <%= form_with(model: shipper, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-inverse">
-      <div class="panel-heading">
-        <div class="panel-heading-btn"></div>
-        <h4 class="panel-title">
-        Information</h4>
-      </div>
-      <div class="panel-body">
-        <% if shipper.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(shipper.errors.count, "error") %>
-              prohibited this shipper from being saved:</h2>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <div class="panel-heading-btn"></div>
+          <h4 class="panel-title">
+          Information</h4>
+        </div>
+        <div class="panel-body">
+          <% if shipper.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(shipper.errors.count, "error") %>
+                prohibited this shipper from being saved:</h2>
+              <ul>
+                <% shipper.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="form-group row m-b-15">
+            <label class="text-right col-md-2 col-sm-4 col-form-label" style="font-size: 16px;">Complete Record *:</label>
+            <div class="col-md-9 col-sm-8">
+              <input type="checkbox" name="complete_record" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" <%= shipper.complete_record ? 'checked' : '' %>/>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :sales_priority, 'Sales Priority:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :sales_priority, options_for_select(['A', 'B', 'C', 'D', 'U'], shipper.sales_priority), {:include_blank => true}, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :company_name, 'Company Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.text_field :company_name, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :relationship_owner, 'Relationship Owner:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :relationship_owner, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => shipper.relationship_owner}, class: 'form-control' %>
+          </div>
+        </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :shipper_type, 'Shipper Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :shipper_type, options_for_select(['Broker', 'Shipper', 'Receiver', 'Wholesaler'], shipper.shipper_type), {:include_blank => true}, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="text-right col-md-2 col-sm-4 col-form-label">Control Freight:</label>
+            <div class="col-md-9 col-sm-8">
+              <input type="checkbox" name="control_freight" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-text"  <%= shipper.control_freight ? 'checked' : '' %>/>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :loads_per_month, 'Loads Per Month:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :loads_per_month, options_for_select(['0-10', '11-50', '51-100', '> 100'], shipper.loads_per_month), {:include_blank => true}, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :spend_per_year, 'Spend Per Year:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :spend_per_year, options_for_select(['< 1M', '1M-5M', '5M-10M', '10M-25M', '> 25M'], shipper.spend_per_year), {:include_blank => true}, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :commodities, 'Commodities:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :commodities, Shipper::COMMODITY.collect {|r| [ r, r ] },{:include_blank => true, :selected => shipper.commodities}, class: 'form-control multiple-select2', multiple: true %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :commodities_notes, 'Commodities Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.text_area(:commodities_notes, cols: 20, rows: 15, class: 'tinymce') %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :blue_book_score, 'Blue Book Score:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.number_field :blue_book_score, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :blue_book_url, 'Blue Book Page URL:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+            <%= form.url_field :blue_book_url, class: 'form-control'%>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :buying_criteria, 'Buying Criteria:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :buying_criteria, options_for_select(['Price', 'Communication', 'Service', 'Transit Time'], shipper.buying_criteria), {:include_blank => true}, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="text-right col-md-2 col-sm-4 col-form-label">Works with Brokers?:</label>
+            <div class="col-md-9 col-sm-8">
+              <input type="checkbox" name="works_with_brokers" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-text"  <%= shipper.works_with_brokers ? 'checked' : '' %>/>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :price_sensitivity, 'Price Sensitivity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :price_sensitivity, options_for_select(['Above Market', 'Market', 'Below Market', 'Stinky'], shipper.price_sensitivity), {:include_blank => true}, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :challenges, 'Challenges:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.text_area(:challenges, cols: 20, rows: 15, class: 'tinymce') %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :current_carrier_mix, 'Current Carrier Mix:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.text_area(:current_carrier_mix, cols: 20, rows: 15, class: 'tinymce') %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="text-right col-md-2 col-sm-4 col-form-label">Prefer Teams?:</label>
+            <div class="col-md-9 col-sm-8">
+              <input type="checkbox" name="prefer_teams" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-text"  <%= shipper.prefer_teams ? 'checked' : '' %>/>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.text_area(:notes, cols: 20, rows: 15, class: 'tinymce') %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :years_in_business, 'Years in Business:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.number_field :years_in_business, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :website, 'Website:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+            <%= form.url_field :website, class: 'form-control'%>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :linkedin, 'LinkedIn:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+            <%= form.url_field :linkedin, class: 'form-control'%>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :attachment_file, 'Attachements:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.file_field :attachment_file, multiple: true %>
+            </div>
+          </div>
+          <hr>
+          <h4 class="text-inverse">Address</h4>
+          <%= render 'shipper_locations/fields', shipper_location: (shipper.location.nil? ? ShipperLocation.new : shipper.location), form: form %>
 
-            <ul>
-              <% shipper.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
+          <div class="form-group row m-b-15">
+            <div class="col-md-2"></div>
+            <div class="col-md-9 col-sm-12 d-flex justify-content-end">
+              <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+              <% if params[:action] == 'edit' %>
+                &nbsp;&nbsp;<%= link_to 'Show', shipper, :class => 'btn btn-info' %>
               <% end %>
-            </ul>
-          </div>
-        <% end %>
-        <div class="form-group row m-b-15">
-          <label class="text-right col-md-2 col-sm-4 col-form-label" style="font-size: 16px;">Complete Record *:</label>
-          <div class="col-md-9 col-sm-8">
-            <input type="checkbox" name="complete_record" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" <%= shipper.complete_record ? 'checked' : '' %>/>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :sales_priority, 'Sales Priority:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :sales_priority, options_for_select(['A', 'B', 'C', 'D', 'U'], shipper.sales_priority), {:include_blank => true}, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :company_name, 'Company Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.text_field :company_name, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :relationship_owner, 'Relationship Owner:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :relationship_owner, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => shipper.relationship_owner}, class: 'form-control' %>
-        </div>
-      </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :shipper_type, 'Shipper Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :shipper_type, options_for_select(['Broker', 'Shipper', 'Receiver', 'Wholesaler'], shipper.shipper_type), {:include_blank => true}, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <label class="text-right col-md-2 col-sm-4 col-form-label">Control Freight:</label>
-          <div class="col-md-9 col-sm-8">
-            <input type="checkbox" name="control_freight" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-text"  <%= shipper.control_freight ? 'checked' : '' %>/>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :loads_per_month, 'Loads Per Month:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :loads_per_month, options_for_select(['0-10', '11-50', '51-100', '> 100'], shipper.loads_per_month), {:include_blank => true}, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :spend_per_year, 'Spend Per Year:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :spend_per_year, options_for_select(['< 1M', '1M-5M', '5M-10M', '10M-25M', '> 25M'], shipper.spend_per_year), {:include_blank => true}, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :commodities, 'Commodities:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :commodities, Shipper::COMMODITY.collect {|r| [ r, r ] },{:include_blank => true, :selected => shipper.commodities}, class: 'form-control multiple-select2', multiple: true %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :commodities_notes, 'Commodities Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.text_area(:commodities_notes, cols: 20, rows: 15, class: 'tinymce') %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :blue_book_score, 'Blue Book Score:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.number_field :blue_book_score, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :blue_book_url, 'Blue Book Page URL:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-          <%= form.url_field :blue_book_url, class: 'form-control'%>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :buying_criteria, 'Buying Criteria:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :buying_criteria, options_for_select(['Price', 'Communication', 'Service', 'Transit Time'], shipper.buying_criteria), {:include_blank => true}, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <label class="text-right col-md-2 col-sm-4 col-form-label">Works with Brokers?:</label>
-          <div class="col-md-9 col-sm-8">
-            <input type="checkbox" name="works_with_brokers" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-text"  <%= shipper.works_with_brokers ? 'checked' : '' %>/>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :price_sensitivity, 'Price Sensitivity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.select :price_sensitivity, options_for_select(['Above Market', 'Market', 'Below Market', 'Stinky'], shipper.price_sensitivity), {:include_blank => true}, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :challenges, 'Challenges:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.text_area(:challenges, cols: 20, rows: 15, class: 'tinymce') %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :current_carrier_mix, 'Current Carrier Mix:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.text_area(:current_carrier_mix, cols: 20, rows: 15, class: 'tinymce') %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <label class="text-right col-md-2 col-sm-4 col-form-label">Prefer Teams?:</label>
-          <div class="col-md-9 col-sm-8">
-            <input type="checkbox" name="prefer_teams" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-text"  <%= shipper.prefer_teams ? 'checked' : '' %>/>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.text_area(:notes, cols: 20, rows: 15, class: 'tinymce') %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :years_in_business, 'Years in Business:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.number_field :years_in_business, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :website, 'Website:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-          <%= form.url_field :website, class: 'form-control'%>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :linkedin, 'LinkedIn:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-          <%= form.url_field :linkedin, class: 'form-control'%>
-          </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :attachment_file, 'Attachements:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.file_field :attachment_file, multiple: true %>
-          </div>
-        </div>
-        <hr>
-        <h4 class="text-inverse">Address</h4>
-        <%= render 'shipper_locations/fields', shipper_location: (shipper.location.nil? ? ShipperLocation.new : shipper.location), form: form %>
-
-        <div class="form-group row m-b-15">
-          <div class="col-md-2"></div>
-          <div class="col-md-9 col-sm-12 d-flex justify-content-end">
-            <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-            <% if params[:action] == 'edit' %>
-              &nbsp;&nbsp;<%= link_to 'Show', shipper, :class => 'btn btn-info' %>
-            <% end %>
-            <% if params[:action] == 'new' %>
-              &nbsp;&nbsp;<%= link_to 'Back', shippers_path, :class => 'btn btn-default' %>
-            <% end %>
+              <% if params[:action] == 'new' %>
+                &nbsp;&nbsp;<%= link_to 'Back', shippers_path, :class => 'btn btn-default' %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
 <% end %>
 <%= tinymce %>
 <!-- end panel -->
