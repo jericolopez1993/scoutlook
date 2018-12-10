@@ -11,37 +11,36 @@
     <div class="panel-heading-btn">
     </div>
     <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(carrier_location.country, carrier_location.id) + " - #{carrier_location.address}") : "" %></h4>
-</div>
+  </div>
   <div class="panel-body">
-  <%= form_with(model: carrier_location, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-  <%= form.hidden_field :client_id %>
-  <%= form.hidden_field :carrier_id %>
-  <% if carrier_location.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(carrier_location.errors.count, "error") %> prohibited this carrier_location from being saved:</h2>
-
-      <ul>
-      <% carrier_location.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= render 'fields', carrier_location: carrier_location, form: form, is_head_office: is_head_office %>
-    <div class="form-group row m-b-0">
-      <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
-      <div class="col-md-9 col-sm-8">
-        <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-        <% carrier = Carrier.find_by(id: carrier_location.carrier_id)%>
-        <% if params[:action] == 'edit' %>
-          &nbsp;&nbsp;<%= link_to 'Show', carrier, :class => 'btn btn-info' %>
-        <% end %>
-        <% if params[:action] == 'new' %>
-          &nbsp;&nbsp;<%= link_to 'Back', carrier, :class => 'btn btn-info' %>
-        <% end %>
+    <%= form_with(model: carrier_location, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+    <%= form.hidden_field :client_id %>
+    <%= form.hidden_field :carrier_id %>
+    <% if carrier_location.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(carrier_location.errors.count, "error") %> prohibited this carrier_location from being saved:</h2>
+        <ul>
+          <% carrier_location.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+    <%= render 'fields', carrier_location: carrier_location, form: form, is_head_office: is_head_office %>
+      <div class="form-group row m-b-0">
+        <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
+        <div class="col-md-9 col-sm-8">
+          <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+          <% carrier = Carrier.find_by(id: carrier_location.carrier_id)%>
+          <% if params[:action] == 'edit' %>
+            &nbsp;&nbsp;<%= link_to 'Show', carrier, :class => 'btn btn-info' %>
+          <% end %>
+          <% if params[:action] == 'new' %>
+            &nbsp;&nbsp;<%= link_to 'Back', carrier, :class => 'btn btn-info' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 <!-- end panel -->

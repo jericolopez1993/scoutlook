@@ -5,12 +5,12 @@
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
-    <%= link_to 'New Location', new_carrier_location_path, :class => 'btn btn-primary btn-xs' %>
+      <%= link_to 'New Location', new_carrier_location_path, :class => 'btn btn-primary btn-xs' %>
     </div>
     <h4 class="panel-title">List of Locations</h4>
   </div>
   <div class="panel-body">
-  <%= render 'table', carrier_locations: @carrier_locations, client: nil, carrier: nil %>
+    <%= render 'table', carrier_locations: @carrier_locations, client: nil, carrier: nil %>
   </div>
 </div>
 <!-- end panel -->
