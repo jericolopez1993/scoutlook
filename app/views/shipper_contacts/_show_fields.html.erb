@@ -1,48 +1,48 @@
 <% if !shipper_contact.nil? %>
-<% @shipper = Shipper.find(shipper_contact.shipper_id) %>
-<div class="row">
-  <label class="col-md-3 col-form-label">Type:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= shipper_contact.contact_type %>
+  <% @shipper = Shipper.find(shipper_contact.shipper_id) %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Type:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= shipper_contact.contact_type %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Name:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= shipper_contact.full_name %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Name:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= shipper_contact.full_name %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Position/Title:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= shipper_contact.title %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Position/Title:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= shipper_contact.title %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">LinkedIn:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= shipper_contact.linkedin_link.nil? || shipper_contact.linkedin_link == "" ? "" : (link_to shipper_contact.linkedin_link, shipper_contact.linkedin_link, :target => "_blank") %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">LinkedIn:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= shipper_contact.linkedin_link.nil? || shipper_contact.linkedin_link == "" ? "" : (link_to shipper_contact.linkedin_link, shipper_contact.linkedin_link, :target => "_blank") %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">E-mail Address:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <a href="mailto:<%= shipper_contact.email %>?Subject=Hello%20<%= shipper_contact.first_name.nil? ? '' :  shipper_contact.first_name + " " + shipper_contact.last_name  %>" target="_top"><%= shipper_contact.email %>&nbsp;<i class="far fa-envelope"></i></a>
+  <div class="row">
+    <label class="col-md-3 col-form-label">E-mail Address:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <a href="mailto:<%= shipper_contact.email %>?Subject=Hello%20<%= shipper_contact.first_name.nil? ? '' :  shipper_contact.first_name + " " + shipper_contact.last_name  %>" target="_top"><%= shipper_contact.email %>&nbsp;<i class="far fa-envelope"></i></a>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Phone:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= shipper_contact.same_ho ? (@shipper.head_office_location.nil? ? '' : "<i>(Work)</i> <b>#{@shipper.head_office_location.phone}</b>, ".html_safe) : (shipper_contact.work_phone.nil? ? '' : "<i>(Work)</i> <b>#{shipper_contact.work_phone}</b>, ".html_safe) %>
-    <%= shipper_contact.home_phone.nil? ? '' : "<i>(Home)</i> <b>#{shipper_contact.home_phone}</b> ".html_safe %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Phone:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= shipper_contact.same_ho ? (@shipper.head_office_location.nil? ? '' : "<i>(Work)</i> <b>#{@shipper.head_office_location.phone}</b>, ".html_safe) : (shipper_contact.work_phone.nil? ? '' : "<i>(Work)</i> <b>#{shipper_contact.work_phone}</b>, ".html_safe) %>
+      <%= shipper_contact.home_phone.nil? ? '' : "<i>(Home)</i> <b>#{shipper_contact.home_phone}</b> ".html_safe %>
+    </div>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Address:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= shipper_contact.same_ho ? (@shipper.head_office_location.nil? ? '' : "#{@shipper.head_office_location.address} #{@shipper.head_office_location.city}, #{@shipper.head_office_location.state}, #{@shipper.head_office_location.country} #{@shipper.head_office_location.postal}") : (shipper_contact.location.nil? ? '' : "#{shipper_contact.location.address} #{shipper_contact.location.city} #{shipper_contact.location.state}, #{shipper_contact.location.country} #{shipper_contact.location.postal}")%>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Address:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= shipper_contact.same_ho ? (@shipper.head_office_location.nil? ? '' : "#{@shipper.head_office_location.address} #{@shipper.head_office_location.city}, #{@shipper.head_office_location.state}, #{@shipper.head_office_location.country} #{@shipper.head_office_location.postal}") : (shipper_contact.location.nil? ? '' : "#{shipper_contact.location.address} #{shipper_contact.location.city} #{shipper_contact.location.state}, #{shipper_contact.location.country} #{shipper_contact.location.postal}")%>
+    </div>
   </div>
-</div>
 <% else %>
-<em>No Available</em>
+  <em>No Available</em>
 <% end %>
