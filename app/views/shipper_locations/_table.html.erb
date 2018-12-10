@@ -26,12 +26,10 @@
           <td><%= shipper_location.state %></td>
           <td><%= shipper_location.country %></td>
           <td><%= shipper_location.phone %></td>
-
           <td>
             <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipper_location_path(shipper_location), :class => 'btn btn-warning btn-xs' %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipper_location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
           </td>
-
         </tr>
       <% end %>
     <% end %>

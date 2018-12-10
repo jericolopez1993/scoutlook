@@ -12,18 +12,17 @@
     </div>
     <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(shipper_location.country, shipper_location.id) + " - #{shipper_location.address}") : "" %></h4>
 </div>
-  <div class="panel-body">
+<div class="panel-body">
   <%= form_with(model: shipper_location, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
   <%= form.hidden_field :client_id %>
   <%= form.hidden_field :shipper_id %>
   <% if shipper_location.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(shipper_location.errors.count, "error") %> prohibited this shipper_location from being saved:</h2>
-
       <ul>
-      <% shipper_location.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% shipper_location.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>

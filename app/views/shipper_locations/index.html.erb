@@ -5,12 +5,12 @@
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
-    <%= link_to 'New Location', new_shipper_location_path, :class => 'btn btn-primary btn-xs' %>
+      <%= link_to 'New Location', new_shipper_location_path, :class => 'btn btn-primary btn-xs' %>
     </div>
     <h4 class="panel-title">List of Locations</h4>
   </div>
   <div class="panel-body">
-  <%= render 'table', shipper_locations: @shipper_locations, client: nil, shipper: nil %>
+    <%= render 'table', shipper_locations: @shipper_locations, client: nil, shipper: nil %>
   </div>
 </div>
 <!-- end panel -->
