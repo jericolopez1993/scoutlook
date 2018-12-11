@@ -19,7 +19,7 @@ And(/^there should be these items on my menu$/) do |table|
   end
 end
 
-Given(/^I am login as administrator$/) do
+Given(/^I login as administrator$/) do
   visit "/"
   page.has_content?('Please sign in your account')
   fill_in 'user_email', :with => 'admin@test.com'
