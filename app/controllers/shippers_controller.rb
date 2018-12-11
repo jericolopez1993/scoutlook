@@ -5,8 +5,24 @@ class ShippersController < ApplicationController
   # GET /shippers
   # GET /shippers.json
   def index
-    @shippers = Shipper.all
-    authorize @shippers
+    if current_user.has_role?(:admin)
+      @shippers = Shipper.all
+      authorize @shippers
+    elsif current_user.has_role?(:steward)
+      if current_user.steward.nil?
+        @shippers = []
+      else
+      @shippers = Shipper.where(:relationship_owner => current_user.steward.id)
+      authorize @shippers
+      end
+    elsif current_user.has_role?(:contact)
+      begin
+        @shipper = Shipper.find(current_user.shipper_contact.shipper.id)
+        redirect_to @shipper
+      rescue
+        @shippers = nil
+      end
+    end
   end
 
   # GET /shippers/1
@@ -17,6 +33,9 @@ class ShippersController < ApplicationController
   # GET /shippers/new
   def new
     @shipper = Shipper.new
+    if current_user.has_role?(:steward) && !current_user.steward.nil?
+      @carrier.relationship_owner = current_user.steward.id
+    end
     authorize @shipper
   end
 

@@ -20,6 +20,9 @@ class CarrierActivitiesController < ApplicationController
     if params[:carrier_id].present?
       @carrier_activity.carrier_id = params[:carrier_id]
     end
+    if current_user.has_role?(:steward) && !current_user.steward.nil?
+      @carrier_activity.rep_id = current_user.steward.id
+    end
     authorize @carrier_activity
   end
 

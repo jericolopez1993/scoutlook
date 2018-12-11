@@ -1,10 +1,10 @@
 class CarrierPolicy < ApplicationPolicy
   def index?
-    true
+    return true  && (user.has_role?(:admin) || user.has_role?(:steward))
   end
 
   def show?
-    user.present? && (user.has_role?(:admin) || user.has_role?(:steward))
+    user.present?
   end
 
   def create?
@@ -12,7 +12,7 @@ class CarrierPolicy < ApplicationPolicy
   end
 
   def update?
-    return true if user.present? && (user.has_role?(:admin) || user.has_role?(:steward))
+    return true
   end
 
   def destroy?

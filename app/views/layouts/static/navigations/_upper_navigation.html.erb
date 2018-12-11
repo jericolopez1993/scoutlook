@@ -24,37 +24,40 @@
       </form>
     </li>
 
-    <% audits = Audit.today %>
-    <li class="dropdown">
-      <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
-        <i class="fa fa-bell"></i>
-        <% if audits.length > 0 %>
-          <span class="label"><%= audits.length %></span>
-        <% end %>
-      </a>
-      <ul class="dropdown-menu media-list dropdown-menu-right">
-        <li class="dropdown-header">NOTIFICATIONS (<%= audits.length %>)</li>
-        <% if audits.length > 0%>
-          <% audits.limit(10).each do |audit|%>
-            <li class="media">
-                  <div class="media-body notification-padding">
-                    <h6 class="media-heading"><%= audit.on_sentence.html_safe %></h6>
-                    <div class="text-muted f-s-11"><%= audit.created_at %></div>
-                  </div>
-              </li>
+
+    <% if current_user.admin? %>
+      <% audits = Audit.today %>
+      <li class="dropdown">
+        <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
+          <i class="fa fa-bell"></i>
+          <% if audits.length > 0 %>
+            <span class="label"><%= audits.length %></span>
           <% end %>
-        <% else %>
-        <li class="text-center width-300 p-b-10">
-          No notification found today. :)
-        </li>
-        <% end %>
-        <li class="media">
-              <div class="media-body notification-padding text-center">
-                <h6 class="media-heading"><%= link_to "See all notifications", logs_path%></h6>
-              </div>
+        </a>
+        <ul class="dropdown-menu media-list dropdown-menu-right">
+          <li class="dropdown-header">NOTIFICATIONS (<%= audits.length %>)</li>
+          <% if audits.length > 0%>
+            <% audits.limit(10).each do |audit|%>
+              <li class="media">
+                    <div class="media-body notification-padding">
+                      <h6 class="media-heading"><%= audit.on_sentence.html_safe %></h6>
+                      <div class="text-muted f-s-11"><%= audit.created_at %></div>
+                    </div>
+                </li>
+            <% end %>
+          <% else %>
+          <li class="text-center width-300 p-b-10">
+            No notification found today. :)
           </li>
-      </ul>
-    </li>
+          <% end %>
+          <li class="media">
+                <div class="media-body notification-padding text-center">
+                  <h6 class="media-heading"><%= link_to "See all notifications", logs_path%></h6>
+                </div>
+            </li>
+        </ul>
+      </li>
+    <% end %>
     <li class="dropdown navbar-user">
       <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 
@@ -79,9 +82,9 @@
       <div class="dropdown-menu dropdown-menu-right">
         <%= link_to('Edit Profile', edit_user_registration_path, class: "dropdown-item") %>
         <div class="dropdown-divider"></div>
-        <h6 class="dropdown-header">System Settings</h6>
-        <a class="dropdown-item" href="<%= logs_path %>">Logs</a>
         <% if current_user.admin? %>
+          <h6 class="dropdown-header">System Settings</h6>
+          <a class="dropdown-item" href="<%= logs_path %>">Logs</a>
           <a class="dropdown-item" href="<%= users_path %>">User</a>
         <% end %>
         <div class="dropdown-divider"></div>

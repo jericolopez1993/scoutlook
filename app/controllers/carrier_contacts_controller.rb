@@ -153,6 +153,6 @@ class CarrierContactsController < ApplicationController
       params.require(:carrier_contact).permit(:title, :first_name, :last_name, :email, :work_phone, :home_phone, :location_id, :carrier_id, :linkedin_link, :adm)
     end
     def user_params
-      params.require(:carrier_contact).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:carrier_contact).permit(:first_name, :last_name, :email, :password)
     end
 end

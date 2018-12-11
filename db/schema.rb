@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_07_034145) do
+ActiveRecord::Schema.define(version: 2018_12_11_010609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,6 +239,17 @@ ActiveRecord::Schema.define(version: 2018_12_07_034145) do
     t.integer "destination_location_id"
   end
 
+  create_table "read_marks", id: :serial, force: :cascade do |t|
+    t.string "readable_type", null: false
+    t.integer "readable_id"
+    t.string "reader_type", null: false
+    t.integer "reader_id"
+    t.datetime "timestamp"
+    t.index ["readable_type", "readable_id"], name: "index_read_marks_on_readable_type_and_readable_id"
+    t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", unique: true
+    t.index ["reader_type", "reader_id"], name: "index_read_marks_on_reader_type_and_reader_id"
+  end
+
   create_table "reps", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -455,7 +466,8 @@ ActiveRecord::Schema.define(version: 2018_12_07_034145) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.boolean "admin", default: false
-    t.integer "client_contact_id"
+    t.integer "carrier_contact_id"
+    t.integer "shipper_contact_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
