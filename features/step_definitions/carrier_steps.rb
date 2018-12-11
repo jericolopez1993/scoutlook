@@ -47,3 +47,9 @@ And(/^edit the carrier with these data$/) do |table|
     end
   end
 end
+When(/^I clicked the delete button$/) do
+  click_link('Delete')
+end
+Then(/^there should not have "([^"]*)" on the table$/) do |name|
+  expect(page).to have_no_content(name)
+end
