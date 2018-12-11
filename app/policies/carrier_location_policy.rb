@@ -4,19 +4,19 @@ class CarrierLocationPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present? && (user.has_role?(:admin) || user.has_role?(:steward))
+    user.present?
   end
 
   def create?
-    user.present? && (user.has_role?(:admin) || user.has_role?(:steward))
+    user.present?
   end
 
   def update?
-    return true if (user.has_role?(:admin) || user.has_role?(:steward))
+    return true
   end
 
   def destroy?
-    return true if (user.has_role?(:admin) || user.has_role?(:steward))
+    return true
   end
 
   private
