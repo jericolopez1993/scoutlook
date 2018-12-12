@@ -118,18 +118,6 @@ var originTags = [
   "US-Midwest",
 ];
 var destinationTags = originTags;
-// (function() {
-//   $(document).on('turbolinks:before-cache', function() {
-//     var dataTable;
-//     dataTable = $($.fn.dataTable.tables(true)).DataTable();
-//     if (dataTable !== null) {
-//       dataTable.destroy();
-//       return dataTable = null;
-//     }
-//
-//   });
-//
-// }).call(this);
 $(document).ready(function() {
   activityOutcomeFields($("#engagement_type").val(), $("#engagement_status").val(), $("#engagement_outcome").val());
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
@@ -185,131 +173,100 @@ $(document).ready(function() {
 
       return $result;
     }
-  })
-  // $( ".combo-dropdown" ).change(function() {
-  //   params = $(this).val();
-  //       // $.ajax({
-  //       //   method: 'post',
-  //       //   url: "/api/locations",
-  //       //   data: {location: {name: params}}
-  //       // }).done(function(data) {
-  //       //   return {
-  //       //     id: data.id,
-  //       //     text: data.name,
-  //       //     newOption: true
-  //       //   }
-  //       // })
-  // });
-
-  $(function(){
-        $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
-          $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-        } );
-      Inputmask().mask(document.querySelectorAll("input"));
-      $("#engagement_type").change(function(){
-        activityOutcomeFields($(this).val(), $("#engagement_status").val(), $("#engagement_outcome").val());
-      });
-      $("#engagement_status").change(function(){
-        activityOutcomeFields($("#engagement_type").val(), $(this).val(), $("#engagement_outcome").val());
-      });
-      $("#engagement_outcome").change(function(){
-        activityOutcomeFields($("#engagement_type").val(), $("#engagement_status").val(), $(this).val());
-      });
-      $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
-        sameHeadOffice($(this).prop('checked'));
-    	});
-      $(document).on('change', '[data-change="check-switchery-state-same-office"]', function() {
-        isHeadOffice($(this).prop('checked'));
-    	});
-      $(document).on('change', '[data-change="check-switchery-state-new-location"]', function() {
-        addressCreate($(this).prop('checked'));
-      });
-      $(document).on('change', '[data-change="check-switchery-state-new-location-origin"]', function() {
-        addressCreateOD($(this).prop('checked'), 'origin');
-      });
-      $(document).on('change', '[data-change="check-switchery-state-new-location-destination"]', function() {
-        addressCreateOD($(this).prop('checked'), 'destination');
-      });
-      $(document).on('change', '[data-change="check-switchery-state-new-location-quick-destination"]', function() {
-        addressCreateQuickS($(this).prop('checked'), 'quick_destination');
-      });
-      $('input[type=radio][name="master_invoice[shipment_entry]"]').change(function() {
-          shipmentFields(this.value);
-      });
-      $("#master_invoice_shipper_id").change(function(){
-        clientLocation($(this).val(), 'origin');
-      });
-      $('.total_charge_fields').keyup(function() {
-          addTotalNumbers('total_charge_fields', 'shipment_total_charge');
-          addTotalNumbers('total_charge_fields', 'master_invoice_total_charge_shipment');
-      });
-      $('.total_charge_with_tax_fields').keyup(function() {
-          addTotalNumbers('total_charge_with_tax_fields', 'shipment_total_charge_with_tax');
-          addTotalNumbers('total_charge_with_tax_fields', 'master_invoice_total_charge_with_tax');
-      });
-      $("#origin_location_id, #destination_location_id").change(function(){
-        var origin = $("#origin_location_id").val();
-        var destination = $("#destination_location_id").val();
-        getDistance(origin, destination);
-      });
-      $("#shipment_date, #received_date").change(function(){
-        var shipment_date = $("#shipment_date").val();
-        var received_date = $("#received_date").val();
-        var transit_time = getDateDifference(shipment_date, received_date);
-        $("#transit_time").val(transit_time);
-      });
-      $("#location_id").change(function(){
-        var er = /^-?[0-9]+$/;
-        var isNew = er.test($(this).val());
-        addressCreate(!isNew);
-        if(isNew){
-          locationDetails($(this).val());
-        }
-      });
-      $("#origin_location_id").change(function(){
-        var er = /^-?[0-9]+$/;
-        var isNew = er.test($(this).val());
-          addressCreateOD(!isNew, 'origin');
-        if(isNew){
-          locationDetailsOD($(this).val(), 'origin');
-        }
-      });
-      $("#destination_location_id").change(function(){
-        var er = /^-?[0-9]+$/;
-        var isNew = er.test($(this).val());
-          addressCreateOD(!isNew, 'destination');
-        if(isNew){
-          locationDetailsOD($(this).val(), 'destination');
-        }
-      });
-      $("#quick_destination_id").change(function(){
-        var er = /^-?[0-9]+$/;
-        var isNew = er.test($(this).val());
-          addressCreateQuickS(!isNew, 'quick_destination');
-        if(isNew){
-          locationDetailsOD($(this).val(), 'quick_destination');
-        }
-      });
-      $("#shipment_status").change(function(){
-          statusNotes((currentShipmentStatus === $(this).val()), 'shipment-audit-comment');
-      });
-      $("#invoice_status").change(function(){
-          statusNotes((currentInvoiceStatus === $(this).val()), 'invoice-audit-comment');
-      });
-      // $( "#lane_origin" ).autocomplete({
-      //   source: originTags,
-      //   minLength: 0,
-      // }).focus(function () {
-      //     $(this).autocomplete("search");
-      // });
-      // $( "#lane_destination" ).autocomplete({
-      //   source: destinationTags,
-      //   minLength: 0,
-      // }).focus(function () {
-      //     $(this).autocomplete("search");
-      // });
-  });
-
+    $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+      $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+    });
+    Inputmask().mask(document.querySelectorAll("input"));
+    $("#engagement_type").change(function(){
+      activityOutcomeFields($(this).val(), $("#engagement_status").val(), $("#engagement_outcome").val());
+    });
+    $("#engagement_status").change(function(){
+      activityOutcomeFields($("#engagement_type").val(), $(this).val(), $("#engagement_outcome").val());
+    });
+    $("#engagement_outcome").change(function(){
+      activityOutcomeFields($("#engagement_type").val(), $("#engagement_status").val(), $(this).val());
+    });
+    $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
+      sameHeadOffice($(this).prop('checked'));
+    });
+    $(document).on('change', '[data-change="check-switchery-state-same-office"]', function() {
+      isHeadOffice($(this).prop('checked'));
+    });
+    $(document).on('change', '[data-change="check-switchery-state-new-location"]', function() {
+      addressCreate($(this).prop('checked'));
+    });
+    $(document).on('change', '[data-change="check-switchery-state-new-location-origin"]', function() {
+      addressCreateOD($(this).prop('checked'), 'origin');
+    });
+    $(document).on('change', '[data-change="check-switchery-state-new-location-destination"]', function() {
+      addressCreateOD($(this).prop('checked'), 'destination');
+    });
+    $(document).on('change', '[data-change="check-switchery-state-new-location-quick-destination"]', function() {
+      addressCreateQuickS($(this).prop('checked'), 'quick_destination');
+    });
+    $('input[type=radio][name="master_invoice[shipment_entry]"]').change(function() {
+      shipmentFields(this.value);
+    });
+    $("#master_invoice_shipper_id").change(function(){
+      clientLocation($(this).val(), 'origin');
+    });
+    $('.total_charge_fields').keyup(function() {
+      addTotalNumbers('total_charge_fields', 'shipment_total_charge');
+      addTotalNumbers('total_charge_fields', 'master_invoice_total_charge_shipment');
+    });
+    $('.total_charge_with_tax_fields').keyup(function() {
+      addTotalNumbers('total_charge_with_tax_fields', 'shipment_total_charge_with_tax');
+      addTotalNumbers('total_charge_with_tax_fields', 'master_invoice_total_charge_with_tax');
+    });
+    $("#origin_location_id, #destination_location_id").change(function(){
+      var origin = $("#origin_location_id").val();
+      var destination = $("#destination_location_id").val();
+      getDistance(origin, destination);
+    });
+    $("#shipment_date, #received_date").change(function(){
+      var shipment_date = $("#shipment_date").val();
+      var received_date = $("#received_date").val();
+      var transit_time = getDateDifference(shipment_date, received_date);
+      $("#transit_time").val(transit_time);
+    });
+    $("#location_id").change(function(){
+      var er = /^-?[0-9]+$/;
+      var isNew = er.test($(this).val());
+      addressCreate(!isNew);
+      if(isNew){
+        locationDetails($(this).val());
+      }
+    });
+    $("#origin_location_id").change(function(){
+      var er = /^-?[0-9]+$/;
+      var isNew = er.test($(this).val());
+      addressCreateOD(!isNew, 'origin');
+      if(isNew){
+        locationDetailsOD($(this).val(), 'origin');
+      }
+    });
+    $("#destination_location_id").change(function(){
+      var er = /^-?[0-9]+$/;
+      var isNew = er.test($(this).val());
+        addressCreateOD(!isNew, 'destination');
+      if(isNew){
+        locationDetailsOD($(this).val(), 'destination');
+      }
+    });
+    $("#quick_destination_id").change(function(){
+      var er = /^-?[0-9]+$/;
+      var isNew = er.test($(this).val());
+        addressCreateQuickS(!isNew, 'quick_destination');
+      if(isNew){
+        locationDetailsOD($(this).val(), 'quick_destination');
+      }
+    });
+    $("#shipment_status").change(function(){
+      statusNotes((currentShipmentStatus === $(this).val()), 'shipment-audit-comment');
+    });
+    $("#invoice_status").change(function(){
+      statusNotes((currentInvoiceStatus === $(this).val()), 'invoice-audit-comment');
+    });
 });
 
 function activityOutcomeFields(actype, stat, outcome) {
