@@ -35,11 +35,6 @@ class CarrierContactsController < ApplicationController
   def create
     @carrier_contact = CarrierContact.new(carrier_contact_params)
     params.require(:carrier_contact).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-    if params[:carrier_contact][:email].present? && params[:carrier_contact][:password].present? && params[:carrier_contact][:password_confirmation].present?
-      @user = User.new(user_params)
-      @user.skip_confirmation!
-      @user.save
-    end
     if params[:same_ho].present?
       @carrier_contact.same_ho = true
     else
@@ -66,11 +61,14 @@ class CarrierContactsController < ApplicationController
     respond_to do |format|
       if @carrier_contact.save
         if params[:carrier_contact][:email].present? && params[:carrier_contact][:password].present? && params[:carrier_contact][:password_confirmation].present?
-          @user.update_attributes(:carrier_contact_id => @carrier_contact.id)
-          @user.add_role :contact
+          @user = User.new(user_params)
+          @user.carrier_contact_id = @carrier_contact.id
+          @user.skip_confirmation!
+          if @user.save
+            @user.add_role :contact
+          end
         end
         carrier = Carrier.find(@carrier_contact.carrier_id)
-
         if params[:pdm].present?
           carrier.update_attributes(:pdm_id => @carrier_contact.id)
         end
@@ -109,6 +107,18 @@ class CarrierContactsController < ApplicationController
     params[:carrier_contact][:location_id]=  @location_id
     respond_to do |format|
       if @carrier_contact.update(carrier_contact_params)
+        if params[:carrier_contact][:email].present? || (params[:carrier_contact][:password].present? && params[:carrier_contact][:password_confirmation].present?)
+          if @carrier_contact.user.nil?
+            @user = User.new(user_params)
+            @user.carrier_contact_id = @carrier_contact.id
+            @user.skip_confirmation!
+            if @user.save
+              @user.add_role :contact
+            end
+          else
+            @carrier_contact.user.update(user_params)
+          end
+        end
         carrier = Carrier.find(@carrier_contact.carrier_id)
         if params[:pdm].present?
           carrier.update_attributes(:pdm_id => @carrier_contact.id)

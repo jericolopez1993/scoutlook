@@ -24,4 +24,11 @@ class ShipperContact < ApplicationRecord
   def full_name
     (self.first_name.nil? ? '' : self.first_name) + " " + (self.last_name.nil? ? '' : self.last_name)
   end
+  def user
+    begin
+      User.where(:shipper_contact_id => self.id).first
+    rescue
+      nil
+    end
+  end
 end

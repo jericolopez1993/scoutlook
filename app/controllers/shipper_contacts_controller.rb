@@ -35,11 +35,6 @@ class ShipperContactsController < ApplicationController
   def create
     @shipper_contact = ShipperContact.new(shipper_contact_params)
     params.require(:shipper_contact).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-    if params[:shipper_contact][:email].present? && params[:shipper_contact][:password].present? && params[:shipper_contact][:password_confirmation].present?
-      @user = User.new(user_params)
-      @user.skip_confirmation!
-      @user.save
-    end
     if params[:same_ho].present?
       @shipper_contact.same_ho = true
     else
@@ -66,8 +61,12 @@ class ShipperContactsController < ApplicationController
     respond_to do |format|
       if @shipper_contact.save
         if params[:shipper_contact][:email].present? && params[:shipper_contact][:password].present? && params[:shipper_contact][:password_confirmation].present?
-          @user.update_attributes(:shipper_contact_id => @shipper_contact.id)
-          @user.add_role :contact
+          @user = User.new(user_params)
+          @user.shipper_contact_id = @shipper_contact.id
+          @user.skip_confirmation!
+          if @user.save
+            @user.add_role :contact
+          end
         end
         shipper = Shipper.find(@shipper_contact.shipper_id)
 
@@ -109,6 +108,18 @@ class ShipperContactsController < ApplicationController
     params[:shipper_contact][:location_id]=  @location_id
     respond_to do |format|
       if @shipper_contact.update(shipper_contact_params)
+        if params[:shipper_contact][:email].present? || (params[:shipper_contact][:password].present? && params[:shipper_contact][:password_confirmation].present?)
+          if @shipper_contact.user.nil?
+            @user = User.new(user_params)
+            @user.shipper_contact_id = @shipper_contact.id
+            @user.skip_confirmation!
+            if @user.save
+              @user.add_role :contact
+            end
+          else
+            @shipper_contact.user.update(user_params)
+          end
+        end
         shipper = Shipper.find(@shipper_contact.shipper_id)
         if params[:pdm].present?
           shipper.update_attributes(:pdm_id => @shipper_contact.id)
