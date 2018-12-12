@@ -2,7 +2,7 @@ Then(/^go to the "([^"]*)" page$/) do |menu|
  visit "/#{menu.downcase}"
 end
 And(/^there should be "([^"]*)" header title$/) do |header_title|
-  within("/html/body/div/div[3]/div/div/div[1]/h4") do
+  within(:xpath, "/html/body/div/div[3]/div/div/div[1]/h4") do
       expect(page).to have_content(header_title)
   end
 end

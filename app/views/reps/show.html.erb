@@ -13,6 +13,7 @@
   <span class="pull-right">
     <%= link_to 'Edit', edit_rep_path(@rep), :class => 'btn btn-warning btn-xs' %>
     <%= link_to 'Back', reps_path, :class => 'btn btn-info btn-xs' %>
+    <%= link_to 'Delete', @rep, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
   </span>
 </div>
 <!-- end page-header -->
