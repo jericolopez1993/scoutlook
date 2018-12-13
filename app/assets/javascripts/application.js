@@ -118,7 +118,7 @@ var originTags = [
   "US-Midwest",
 ];
 var destinationTags = originTags;
-$(document).ready(function() {
+$(function(){
   activityOutcomeFields($("#engagement_type").val(), $("#engagement_status").val(), $("#engagement_outcome").val());
   sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
   isHeadOffice($('[data-change="check-switchery-state-same-office"]').prop('checked'));
@@ -154,25 +154,25 @@ $(document).ready(function() {
     orientation: 'auto bottom'
 	});
   $(".static-dropdown").select2();
-  $(".combo-dropdown").select2({
-    tags: true,
-    createTag: function (params) {
-      return {
-        id: params.term,
-        text: params.term,
-        newOption: true
-      }
-    },
-     templateResult: function (data) {
-      var $result = $("<span>a</span>");
-      $result.text(data.text);
-
-      if (data.newOption) {
-        $result.append(" <em>(new)</em>");
-      }
-
-      return $result;
-    }
+  // $(".combo-dropdown").select2({
+  //   tags: true,
+  //   createTag: function (params) {
+  //     return {
+  //       id: params.term,
+  //       text: params.term,
+  //       newOption: true
+  //     }
+  //   },
+  //    templateResult: function (data) {
+  //     var $result = $("<span>a</span>");
+  //     $result.text(data.text);
+  //
+  //     if (data.newOption) {
+  //       $result.append(" <em>(new)</em>");
+  //     }
+  //
+  //     return $result;
+  //   });
     $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
       $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
     });

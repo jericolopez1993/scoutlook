@@ -12,52 +12,56 @@
     <div class="panel-body">
       <table class="table table-striped table-bordered data-table-buttons display nowrap">
         <thead>
-          <tr class="odd gradeX">
+          <tr>
+            <th>RO</th>
+            <th>Class</th>
+            <th>CR</th>
+            <th>LstDateCon</th>
+            <th>1Mo Loads</th>
+            <th>6Mo Loads</th>
             <th>Name</th>
-            <th>Complete?</th>
-            <th>Last Contact</th>
-            <th>Shipper Type</th>
-            <th>Sales Priority</th>
-            <th>Control Freight</th>
-            <th>Loads Per Month</th>
-            <th>Spend Per Year</th>
+            <th>City</th>
+            <th>ST/PV</th>
+            <th>LPM</th>
+            <th>Lane 1</th>
+            <th>Lane 2</th>
             <th>Commodities</th>
-            <th>Blue Book Score</th>
-            <th>Buying Criteria</th>
-            <th>Works with Brokers?</th>
-            <th>Price Sensitivity</th>
-            <th>Prefer Teams?</th>
+            <th>DM Name</th>
+            <th>DM Phone</th>
+            <th>DM Email</th>
           </tr>
         </thead>
         <tbody>
           <% @shippers.each do |shipper| %>
             <tr>
+              <td class="text-center"><%= shipper.rep.nil? ? '' : "#{link_to("#{shipper.rep.first_name[0]}#{shipper.rep.last_name[0]}", shipper.rep)}".html_safe %></td>
+              <td class="text-center"><%= shipper.sales_priority %></td>
+              <td class="text-center"><%= shipper.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
+              <td><%= shipper.last_contact_date.nil? ? "" : shipper.last_contact_date.date_opened.to_s %></td>
+              <td></td>
+              <td></td>
               <td><%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper %></td>
-              <td><%= shipper.complete_record ? "<b class='text-success'>Completed</b>".html_safe : "<i class='text-danger'>Incomplete</i>".html_safe %></td>
-              <td><%= shipper.last_contact_date.nil? ? "" : (shipper.last_contact_date.date_opened.to_s + " " + (shipper.last_contact_date.rep.nil? ? "" : link_to(shipper.last_contact_date.rep.full_name, shipper.last_contact_date.rep))).html_safe %></td>
-              <td><%= shipper.shipper_type %></td>
-              <td><%= shipper.sales_priority %></td>
-              <td><%= shipper.control_freight ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %></td>
-              <td><%= shipper.loads_per_month %></td>
-              <td><%= shipper.spend_per_year %></td>
+              <td><%= shipper.head_office_location.nil? ? '' : shipper.head_office_location.state %></td>
+              <td><%= shipper.head_office_location.nil? ? '' : shipper.head_office_location.country %></td>
+              <td></td>
+              <td>
+                <% shipper.lane_1.each do |lane| %>
+                  <%= link_to(lane.lane_origin, lane, class: 'badge') %>
+                <% end %>
+              </td>
+              <td>
+                <% shipper.lane_2.each do |lane| %>
+                  <%= link_to(lane.lane_origin, lane, class: 'badge') %>
+                <% end %>
+              </td>
               <td>
                 <% shipper.commodities_to_array.each do |cr| %>
                   <span class="badge badge-inverse"><%= cr %></span>
                 <% end %>
               </td>
-              <td>
-                <% if shipper.blue_book_url %>
-                  <a target="_blank" href="<%= shipper.blue_book_url %>">
-                    <%= shipper.blue_book_score %>
-                  </a>
-                <% else %>
-                  <%= shipper.blue_book_score %>
-                <% end %>
-              </td>
-              <td><%= shipper.buying_criteria %></td>
-              <td><%= shipper.works_with_brokers ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %></td>
-              <td><%= shipper.price_sensitivity %></td>
-              <td><%= shipper.prefer_teams ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %></td>
+              <td><%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %></td>
+              <td><%= shipper.pdm.nil? ? '' : shipper.pdm.work_phone %></td>
+              <td><% if !shipper.pdm.nil?  %><a href="mailto:<%= shipper.pdm.email %>?Subject=Hello%20<%= shipper.pdm.first_name.nil? ? '' :  shipper.pdm.first_name + " " + shipper.pdm.last_name  %>" target="_top"><%= shipper.pdm.email %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
             </tr>
           <% end %>
         </tbody>
