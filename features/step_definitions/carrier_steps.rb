@@ -9,19 +9,6 @@ end
 When(/^I go to the new carrier page$/) do
   visit "/carriers/new"
 end
-And(/^add a carrier with these data$/) do |table|
-  headers = table.headers
-  tables = table.hashes
-  tables.each do |tbl|
-    headers.each do |hdr|
-      if hdr == "sales_priority" || hdr == "contract_rates" || hdr == "total_fleet_size"
-        select(tbl[hdr], :from => "carrier_#{hdr}")
-      else
-        fill_in "carrier_#{hdr}", :with => tbl[hdr]
-      end
-    end
-  end
-end
 Then(/^there should be an success message "([^"]*)"$/) do |message|
   expect(page).to have_content(message)
 end
@@ -34,22 +21,57 @@ end
 When(/^I clicked the edit button$/) do
   click_link('Edit')
 end
-And(/^edit the carrier with these data$/) do |table|
+When(/^I clicked the delete button$/) do
+  click_link('Delete')
+end
+When(/^I click the first edit button on the present table$/) do
+  find(:css, '#DataTables_Table_0 > tbody > tr > td:nth-child(7) > a.btn.btn-warning.btn-xs').click
+end
+Then(/^there should have "([^"]*)" on the table$/) do |name|
+  expect(page).to have_content(name)
+end
+Then(/^there should not have "([^"]*)" on the table$/) do |name|
+  expect(page).to have_no_content(name)
+end
+Then(/^click the "([^"]*)" tab$/) do |tab|
+  find(:css, ".#{tab}-btn").click
+end
+And(/^click the new "([^"]*)" button$/) do |btn|
+  find(:css, ".new-#{btn}-btn").click
+end
+And(/^add a "([^"]*)" with these data$/) do |model, table|
+  if model == "steward"
+    model = "rep"
+  end
   headers = table.headers
   tables = table.hashes
   tables.each do |tbl|
     headers.each do |hdr|
-      if hdr == "sales_priority" || hdr == "contract_rates" || hdr == "total_fleet_size"
-        select(tbl[hdr], :from => "carrier_#{hdr}")
+      if hdr == "sales_priority" || hdr == "contract_rates" || hdr == "total_fleet_size" || hdr == "sales_priority" || hdr == "shipper_type" || hdr == "loads_per_month" || hdr == "spend_per_year" || hdr == "buying_criteria" || hdr == "price_sensitivity" || hdr == "rep_id" || hdr == "annual_value"
+        select(tbl[hdr], :from => "#{model}_#{hdr}")
+      elsif hdr == "engagement_type"
+        select(tbl[hdr], :from => "#{hdr}")
       else
-        fill_in "carrier_#{hdr}", :with => tbl[hdr]
+        fill_in "#{model}_#{hdr}", :with => tbl[hdr]
       end
     end
   end
 end
-When(/^I clicked the delete button$/) do
-  click_link('Delete')
-end
-Then(/^there should not have "([^"]*)" on the table$/) do |name|
-  expect(page).to have_no_content(name)
+And(/^edit the "([^"]*)" with these data$/) do |model,table|
+  if model == "steward"
+    model = "rep"
+  end
+  headers = table.headers
+  tables = table.hashes
+  tables.each do |tbl|
+    headers.each do |hdr|
+      if hdr == "sales_priority" || hdr == "contract_rates" || hdr == "total_fleet_size" || hdr == "sales_priority" || hdr == "shipper_type" || hdr == "loads_per_month" || hdr == "spend_per_year" || hdr == "buying_criteria" || hdr == "price_sensitivity" || hdr == "rep_id" || hdr == "annual_value"
+        select(tbl[hdr], :from => "#{model}_#{hdr}")
+      elsif hdr == "engagement_type"
+        select(tbl[hdr], :from => "#{hdr}")
+      else
+        fill_in "#{model}_#{hdr}", :with => tbl[hdr]
+      end
+    end
+  end
 end

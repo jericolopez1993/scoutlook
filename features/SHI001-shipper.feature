@@ -18,7 +18,7 @@ Feature: Shippers
   Scenario: Create a New Shipper
     Then go to the "Shippers" page
     When I go to the new shipper page
-    And add a shipper with these data
+    And add a "shipper" with these data
       | sales_priority | company_name  | shipper_type  | loads_per_month | spend_per_year  | blue_book_score  | blue_book_url      | buying_criteria | price_sensitivity | years_in_business |
       | A              | test1234      | Broker        | 11-50           | 1M-5M           | 0                | http://sample.com  | Price           | Above Market      | 1                 |
     Then submit the form
@@ -27,13 +27,13 @@ Feature: Shippers
   Scenario: Edit a Shipper
     Then go to the "Shippers" page
     When I go to the new shipper page
-    And add a shipper with these data
+    And add a "shipper" with these data
       | sales_priority | company_name  | shipper_type  | loads_per_month | spend_per_year  | blue_book_score  | blue_book_url      | buying_criteria | price_sensitivity | years_in_business |
       | A              | test1234      | Broker        | 11-50           | 1M-5M           | 0                | http://sample.com  | Price           | Above Market      | 1                 |
     Then submit the form
     And the shipper "test1234" should be on the show page
     When I clicked the edit button
-    And edit the shipper with these data
+    And edit the "shipper" with these data
       | sales_priority |  company_name |
       | B              |  testedit1234 |
     Then submit the form
@@ -42,7 +42,7 @@ Feature: Shippers
   Scenario: Delete a Shipper
     Then go to the "Shippers" page
     When I go to the new shipper page
-    And add a shipper with these data
+    And add a "shipper" with these data
       | sales_priority | company_name  | shipper_type  | loads_per_month | spend_per_year  | blue_book_score  | blue_book_url      | buying_criteria | price_sensitivity | years_in_business |
       | A              | test1234      | Broker        | 11-50           | 1M-5M           | 0                | http://sample.com  | Price           | Above Market      | 1                 |
     Then submit the form

@@ -17,7 +17,7 @@ Feature: Stewards
   Scenario: Create a New Steward
     Then go to the "Stewards" page
     When I go to the new steward page
-    And add a steward with these data
+    And add a "steward" with these data
       | first_name |  last_name  |  date_of_hire  | phone       | email                   | password  | password_confirmation |
       | test       |  sample     |  12/12/2018    | 2122222222  | test@sample80@gmail.com | password  | password              |
     Then submit the form
@@ -26,13 +26,13 @@ Feature: Stewards
   Scenario: Edit a Steward
     Then go to the "Stewards" page
     When I go to the new steward page
-    And add a steward with these data
+    And add a "steward" with these data
       | first_name |  last_name  |  date_of_hire  | phone       | email                   | password  | password_confirmation |
       | test       |  sample     |  12/12/2018    | 2122222222  | test@sample80@gmail.com | password  | password              |
     Then submit the form
     And the steward "test sample" should be on the show page
     When I clicked the edit button
-    And edit the steward with these data
+    And edit the "steward" with these data
       | first_name  |  last_name   |  password  |
       | tests       |  samples     |  password  |
     Then submit the form
@@ -41,7 +41,7 @@ Feature: Stewards
   Scenario: Delete a Steward
     Then go to the "Stewards" page
     When I go to the new steward page
-    And add a steward with these data
+    And add a "steward" with these data
       | first_name |  last_name  |  date_of_hire  | phone       | email                   | password  | password_confirmation |
       | test       |  sample     |  12/12/2018    | 2122222222  | test@sample80@gmail.com | password  | password              |
     Then submit the form
