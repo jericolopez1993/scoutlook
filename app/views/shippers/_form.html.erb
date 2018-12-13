@@ -59,6 +59,18 @@
               <%= form.select :relationship_owner, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => shipper.relationship_owner}, class: 'form-control' %>
           </div>
         </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :load_last_month, 'Loads Last Month:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.number_field :load_last_month, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :load_last_6_month, 'Loads Last 6 Months:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.number_field :load_last_6_month, class: 'form-control' %>
+          </div>
+        </div>
           <div class="form-group row m-b-15">
             <%= form.label :shipper_type, 'Shipper Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">

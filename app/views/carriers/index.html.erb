@@ -36,8 +36,8 @@
             <td class="text-center"><%= carrier.sales_priority %></td>
             <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
             <td><%= carrier.last_contact_date.nil? ? "" : carrier.last_contact_date.date_opened.to_s %></td>
-            <td></td>
-            <td></td>
+            <td><%= carrier.load_last_month %></td>
+            <td><%= carrier.load_last_6_month %></td>
             <td><%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier %></td>
             <td><%= carrier.head_office_location.nil? ? '' : carrier.head_office_location.country %></td>
             <td class="text-center"><%= carrier.reefers %></td>

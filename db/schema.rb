@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_010609) do
+ActiveRecord::Schema.define(version: 2018_12_13_001907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,8 @@ ActiveRecord::Schema.define(version: 2018_12_11_010609) do
     t.integer "relationship_owner"
     t.integer "power_units", default: 0
     t.integer "company_drivers", default: 0
+    t.integer "load_last_month", default: 0
+    t.integer "load_last_6_month", default: 0
   end
 
   create_table "master_invoices", force: :cascade do |t|
@@ -449,6 +451,8 @@ ActiveRecord::Schema.define(version: 2018_12_11_010609) do
     t.integer "last_contact_by"
     t.date "last_contact"
     t.integer "relationship_owner"
+    t.integer "load_last_month", default: 0
+    t.integer "load_last_6_month", default: 0
   end
 
   create_table "users", force: :cascade do |t|

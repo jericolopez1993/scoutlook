@@ -153,6 +153,18 @@ label {
                     </div>
                   </div>
                   <div class="row">
+                    <label class="col-md-4 col-form-label">Last Last Month:</label>
+                    <div class="col-md-8 lbl-padding-t">
+                      <%= @carrier.load_last_month %>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-md-4 col-form-label">Last Last 6 Months:</label>
+                    <div class="col-md-8 lbl-padding-t">
+                      <%= @carrier.load_last_6_month %>
+                    </div>
+                  </div>
+                  <div class="row">
                     <label class="col-md-4 col-form-label">Score Card:</label>
                     <div class="col-md-8 lbl-padding-t">
                       <%= @carrier.score_card %>

@@ -38,12 +38,12 @@
               <td class="text-center"><%= shipper.sales_priority %></td>
               <td class="text-center"><%= shipper.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
               <td><%= shipper.last_contact_date.nil? ? "" : shipper.last_contact_date.date_opened.to_s %></td>
-              <td></td>
-              <td></td>
+              <td><%= shipper.load_last_month %></td>
+              <td><%= shipper.load_last_6_month %></td>
               <td><%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper %></td>
               <td><%= shipper.head_office_location.nil? ? '' : shipper.head_office_location.state %></td>
               <td><%= shipper.head_office_location.nil? ? '' : shipper.head_office_location.country %></td>
-              <td></td>
+              <td><%= shipper.loads_per_month %></td>
               <td>
                 <% shipper.lane_1.each do |lane| %>
                   <%= link_to(lane.lane_origin, lane, class: 'badge') %>
