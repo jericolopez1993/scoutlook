@@ -24,11 +24,11 @@ end
 When(/^I clicked the delete button$/) do
   click_link('Delete')
 end
-When(/^I click the first edit button on the present table$/) do
-  find(:xpath, "//*[@id='engagement_table']/tbody/tr[1]/td[7]/a[2]").click
+When(/^I click the first edit button on the "([^"]*)" table$/) do |tbl|
+  find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[7]/a[2]").click
 end
-When(/^I click the first delete button on the present table$/) do
-  find(:xpath, "//*[@id='engagement_table']/tbody/tr[1]/td[7]/a[3]").click
+When(/^I click the first delete button on the "([^"]*)" table$/) do |tbl|
+  find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[7]/a[3]").click
 end
 Then(/^there should have "([^"]*)" on the table$/) do |name|
   expect(page).to have_content(name)
@@ -52,7 +52,7 @@ And(/^add a "([^"]*)" with these data$/) do |model, table|
   tables = table.hashes
   tables.each do |tbl|
     headers.each do |hdr|
-      if hdr == "sales_priority" || hdr == "contract_rates" || hdr == "total_fleet_size" || hdr == "sales_priority" || hdr == "shipper_type" || hdr == "loads_per_month" || hdr == "spend_per_year" || hdr == "buying_criteria" || hdr == "price_sensitivity" || hdr == "rep_id" || hdr == "annual_value"
+      if hdr == "sales_priority" || hdr == "contract_rates" || hdr == "total_fleet_size" || hdr == "sales_priority" || hdr == "shipper_type" || hdr == "loads_per_month" || hdr == "spend_per_year" || hdr == "buying_criteria" || hdr == "price_sensitivity" || hdr == "rep_id" || hdr == "annual_value" || hdr == "lane_priority"
         select(tbl[hdr], :from => "#{model}_#{hdr}")
       elsif hdr == "engagement_type"
         select(tbl[hdr], :from => "#{hdr}")
@@ -70,7 +70,7 @@ And(/^edit the "([^"]*)" with these data$/) do |model,table|
   tables = table.hashes
   tables.each do |tbl|
     headers.each do |hdr|
-      if hdr == "sales_priority" || hdr == "contract_rates" || hdr == "total_fleet_size" || hdr == "sales_priority" || hdr == "shipper_type" || hdr == "loads_per_month" || hdr == "spend_per_year" || hdr == "buying_criteria" || hdr == "price_sensitivity" || hdr == "rep_id" || hdr == "annual_value"
+      if hdr == "sales_priority" || hdr == "contract_rates" || hdr == "total_fleet_size" || hdr == "sales_priority" || hdr == "shipper_type" || hdr == "loads_per_month" || hdr == "spend_per_year" || hdr == "buying_criteria" || hdr == "price_sensitivity" || hdr == "rep_id" || hdr == "annual_value" || hdr == "lane_priority"
         select(tbl[hdr], :from => "#{model}_#{hdr}")
       elsif hdr == "engagement_type"
         select(tbl[hdr], :from => "#{hdr}")

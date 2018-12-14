@@ -1,7 +1,7 @@
 Feature: Carrier Activities
-  Able to access the list of Carriers
+  Able to access the list of Activity
   As a Administrator
-  Be able to add, edit, delete carriers
+  Be able to add, edit, delete activities
 
   Background:
     Given I login as administrator
@@ -33,7 +33,7 @@ Feature: Carrier Activities
     And the carrier "test1234" should be on the show page
     Then click the "activity" tab
     Then there should have "Engagement" on the table
-    When I click the first edit button on the present table
+    When I click the first edit button on the "engagement" table
     And edit the "carrier_activity" with these data
       | engagement_type |  annual_value |
       | Loop            |  10-25M       |
@@ -49,5 +49,5 @@ Feature: Carrier Activities
     Then submit the form
     Then click the "activity" tab
     Then there should have "Engagement" on the table
-    When I click the first delete button on the present table
+    When I click the first delete button on the "engagement" table
     Then click the "activity" tab
