@@ -25,7 +25,10 @@ When(/^I clicked the delete button$/) do
   click_link('Delete')
 end
 When(/^I click the first edit button on the present table$/) do
-  find(:css, '#DataTables_Table_0 > tbody > tr > td:nth-child(7) > a.btn.btn-warning.btn-xs').click
+  find(:xpath, "//*[@id='engagement_table']/tbody/tr[1]/td[7]/a[2]").click
+end
+When(/^I click the first delete button on the present table$/) do
+  find(:xpath, "//*[@id='engagement_table']/tbody/tr[1]/td[7]/a[3]").click
 end
 Then(/^there should have "([^"]*)" on the table$/) do |name|
   expect(page).to have_content(name)
@@ -34,7 +37,9 @@ Then(/^there should not have "([^"]*)" on the table$/) do |name|
   expect(page).to have_no_content(name)
 end
 Then(/^click the "([^"]*)" tab$/) do |tab|
-  find(:css, ".#{tab}-btn").click
+  page.all(:css, ".#{tab}-btn").each do |elem|
+    elem.click
+  end
 end
 And(/^click the new "([^"]*)" button$/) do |btn|
   find(:css, ".new-#{btn}-btn").click

@@ -23,3 +23,31 @@ Feature: Carrier Activities
     Then submit the form
     Then click the "activity" tab
     Then there should have "Engagement" on the table
+
+  Scenario: Edit a Activity
+    Then click the new "activity" button
+    And add a "carrier_activity" with these data
+      | engagement_type | rep_id        | annual_value |
+      | Engagement      | Kevin Marcelo | 5-10M        |
+    Then submit the form
+    And the carrier "test1234" should be on the show page
+    Then click the "activity" tab
+    Then there should have "Engagement" on the table
+    When I click the first edit button on the present table
+    And edit the "carrier_activity" with these data
+      | engagement_type |  annual_value |
+      | Loop            |  10-25M       |
+    Then submit the form
+    Then click the "activity" tab
+    Then there should have "Loop" on the table
+
+  Scenario: Delete a Activity
+    Then click the new "activity" button
+    And add a "carrier_activity" with these data
+      | engagement_type | rep_id        | annual_value |
+      | Engagement      | Kevin Marcelo | 5-10M        |
+    Then submit the form
+    Then click the "activity" tab
+    Then there should have "Engagement" on the table
+    When I click the first delete button on the present table
+    Then click the "activity" tab
