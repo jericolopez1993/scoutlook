@@ -34,6 +34,7 @@
     <%= form.text_field :phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", :value => shipper_location.phone %>
   </div>
 </div>
+
 <% if params[:controller] != "clients" && params[:controller] != "shippers" %>
   <div class="form-group row m-b-15">
     <label class="text-right col-md-2 col-sm-4 col-form-label"> is Head Office or MCR?</label>
@@ -42,6 +43,7 @@
     </div>
   </div>
 <% end %>
+
 <div class="form-group row m-b-15">
   <label class="text-right col-md-2 col-sm-4 col-form-label"> is Origin?</label>
   <div class="col-md-9 col-sm-8">

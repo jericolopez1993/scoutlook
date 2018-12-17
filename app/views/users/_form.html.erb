@@ -13,22 +13,19 @@
       <% if user.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(user.errors.count, "error") %> prohibited this client from being saved:</h2>
-
           <ul>
-          <% user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
+            <% user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
           </ul>
         </div>
       <% end %>
-
       <div class="form-group row m-b-15">
         <%= form.label :first_name, 'First Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :first_name, class: 'form-control' %>
         </div>
       </div>
-
       <div class="form-group row m-b-15">
         <%= form.label :last_name, 'Last Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
@@ -50,7 +47,7 @@
       <div class="form-group row m-b-15">
         <%= form.label :password, 'Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.password_field :password, class: 'form-control' %>
+          <%= form.password_field :password, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -59,7 +56,6 @@
           <%= form.password_field :password_confirmation, class: 'form-control' %>
         </div>
       </div>
-
       <div class="form-group row m-b-0">
         <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
         <div class="col-md-9 col-sm-8">

@@ -11,151 +11,147 @@
 <!-- begin panel -->
 
 <%= form_with(model: master_signal, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-    <div class="panel panel-inverse">
-      <div class="panel-heading">
-        <div class="panel-heading-btn">
-        </div>
-        <h4 class="panel-title">Information</h4>
+  <div class="panel panel-inverse">
+    <div class="panel-heading">
+      <div class="panel-heading-btn">
       </div>
-      <div class="panel-body">
-        <% if master_signal.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(master_signal.errors.count, "error") %> prohibited this master_signal from being saved:</h2>
-
-            <ul>
+      <h4 class="panel-title">Information</h4>
+    </div>
+    <div class="panel-body">
+      <% if master_signal.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(master_signal.errors.count, "error") %> prohibited this master_signal from being saved:</h2>
+          <ul>
             <% master_signal.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
-            </ul>
-          </div>
-        <% end %>
-        <h4 class="text-inverse">Details</h4>
-        <div class="form-group row m-b-15">
-          <%= form.label :signal_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
+          </ul>
+        </div>
+      <% end %>
+      <h4 class="text-inverse">Details</h4>
+      <div class="form-group row m-b-15">
+        <%= form.label :signal_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
           <%= form.select :signal_type, options_for_select(['Demand', 'Capacity'], master_signal.signal_type),{:include_blank => true}, class: 'form-control' %>
-          </div>
         </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :signal_date, 'Signal Date:', class: 'text-right col-md-2 col-sm-4 col-form -label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.text_field :signal_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
-          </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :signal_date, 'Signal Date:', class: 'text-right col-md-2 col-sm-4 col-form -label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :signal_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
         </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :client_id, 'Client:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :client_id, 'Client:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
           <%= form.select :client_id, Client.all.collect {|l| [l.company_name, l.id]},{:include_blank => true, :selected => master_signal.client_id}, class: 'form-control', id: 'client_id' %>
-          </div>
         </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :client_contact_id, 'Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :client_contact_id, 'Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
           <%= form.select :client_contact_id, ClientContact.all.collect {|l| ["#{l.first_name} #{l.last_name}", l.id, {'data-chained'=> "#{l.client_id}"}]},{:include_blank => true, :selected => master_signal.client_contact_id}, class: 'form-control', id: 'client_contact_id' %>
-          </div>
         </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :rate_id, 'Rate:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.select :rate_id, Rate.all.collect {|r| [ r.rate_type, r.id ] },{:include_blank => true, :selected => master_signal.rate_id}, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :start_date, 'Start Date:', class: 'text-right col-md-2 col-sm-4 col-form -label' %>
-            <div class="col-md-9 col-sm-8">
-              <%= form.text_field :start_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :end_date, 'End Date:', class: 'text-right col-md-2 col-sm-4 col-form -label' %>
-            <div class="col-md-9 col-sm-8">
-              <%= form.text_field :end_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :duration, 'Duration:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.select :duration, options_for_select(['Now', 'Temporary', 'Ongoing'], master_signal.duration),{:include_blank => true}, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :volume, 'Volume:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.number_field :volume, class: 'form-control'%>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :uom, 'UOM:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.select :uom, options_for_select(['LBS', 'Loads', 'Pallets'], master_signal.uom),{:include_blank => true}, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :per, 'Per:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.select :per, options_for_select(['Day', 'Week', 'Month', 'Year'], master_signal.per),{:include_blank => true}, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :capacity_type, 'Capacity Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.select :capacity_type, options_for_select(['Front Haul', 'Back Haul'], master_signal.per),{:include_blank => true}, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :max_origin, 'Max Origin Diversion (in Miles):', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.select :max_origin, options_for_select(['0-50', '50-100', '100-250', '250-500', '>500'], master_signal.per),{:include_blank => true}, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :max_destination, 'Max Destination Diversion (in Miles):', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.select :max_destination, options_for_select(['0-50', '50-100', '100-250', '250-500', '>500'], master_signal.per),{:include_blank => true}, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :desired_rate, 'Surcharge Non Vault:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.text_field :desired_rate, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :desired_rate, 'Surcharge Non Vault:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.text_field :desired_rate, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-            <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce')  %>
-            </div>
-          </div>
-
-          <hr>
-          <h4 class="text-inverse">Origin</h4>
-          <%= render 'clients/od_address_form', form: form, name: 'origin' %>
-          <hr>
-          <h4 class="text-inverse">Destination</h4>
-          <%= render 'clients/od_address_form', form: form, name: 'destination' %>
-
-          <div class="form-group row m-b-15">
-            <div class="col-md-2"></div>
-              <div class="col-md-9 col-sm-12 d-flex justify-content-end">
-                <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-                <% if params[:action] == 'edit' %>
-                  &nbsp;&nbsp;<%= link_to 'Show', master_signal, :class => 'btn btn-info' %>
-                <% end %>
-                <% if params[:action] == 'new' %>
-                  &nbsp;&nbsp;<%= link_to 'Back', master_signals_path, :class => 'btn btn-default' %>
-                <% end %>
-            </div>
-          </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :rate_id, 'Rate:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :rate_id, Rate.all.collect {|r| [ r.rate_type, r.id ] },{:include_blank => true, :selected => master_signal.rate_id}, class: 'form-control' %>
         </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :start_date, 'Start Date:', class: 'text-right col-md-2 col-sm-4 col-form -label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :start_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :end_date, 'End Date:', class: 'text-right col-md-2 col-sm-4 col-form -label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :end_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :duration, 'Duration:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :duration, options_for_select(['Now', 'Temporary', 'Ongoing'], master_signal.duration),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :volume, 'Volume:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.number_field :volume, class: 'form-control'%>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :uom, 'UOM:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :uom, options_for_select(['LBS', 'Loads', 'Pallets'], master_signal.uom),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :per, 'Per:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :per, options_for_select(['Day', 'Week', 'Month', 'Year'], master_signal.per),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :capacity_type, 'Capacity Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :capacity_type, options_for_select(['Front Haul', 'Back Haul'], master_signal.per),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :max_origin, 'Max Origin Diversion (in Miles):', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :max_origin, options_for_select(['0-50', '50-100', '100-250', '250-500', '>500'], master_signal.per),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :max_destination, 'Max Destination Diversion (in Miles):', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :max_destination, options_for_select(['0-50', '50-100', '100-250', '250-500', '>500'], master_signal.per),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :desired_rate, 'Surcharge Non Vault:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :desired_rate, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :desired_rate, 'Surcharge Non Vault:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :desired_rate, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce')  %>
+        </div>
+      </div>
+
+      <hr>
+      <h4 class="text-inverse">Origin</h4>
+      <%= render 'clients/od_address_form', form: form, name: 'origin' %>
+      <hr>
+      <h4 class="text-inverse">Destination</h4>
+      <%= render 'clients/od_address_form', form: form, name: 'destination' %>
+      <div class="form-group row m-b-15">
+        <div class="col-md-2"></div>
+          <div class="col-md-9 col-sm-12 d-flex justify-content-end">
+            <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+            <% if params[:action] == 'edit' %>
+              &nbsp;&nbsp;<%= link_to 'Show', master_signal, :class => 'btn btn-info' %>
+            <% end %>
+            <% if params[:action] == 'new' %>
+              &nbsp;&nbsp;<%= link_to 'Back', master_signals_path, :class => 'btn btn-default' %>
+            <% end %>
+        </div>
+      </div>
     </div>
-
-
+  </div>
 <% end %>
 <!-- end panel -->
 <%= tinymce %>

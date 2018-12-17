@@ -6,21 +6,21 @@
   <div class="panel-body">
 <% end %>
 
-  <script language="javascript">
-    var currentShipmentStatus = '<%= shipment.shipment_status %>';
-  </script>
+<script language="javascript">
+  var currentShipmentStatus = '<%= shipment.shipment_status %>';
+</script>
 <hr>
 <h4 class="text-inverse">Basic Information</h4>
 <div class="form-group row m-b-15">
   <%= form.label :account_number, 'Account Number:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :account_number, class: 'form-control', value: shipment.account_number  %>
+    <%= form.text_field :account_number, class: 'form-control', value: shipment.account_number  %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :shipment_status, 'Shipment Status:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.select :shipment_status, options_for_select(['Review', 'Approved', 'Dispute', 'Corrected', 'ReBill'], shipment.shipment_status),{}, class: 'form-control', :id => "shipment_status" %>
+    <%= form.select :shipment_status, options_for_select(['Review', 'Approved', 'Dispute', 'Corrected', 'ReBill'], shipment.shipment_status),{}, class: 'form-control', :id => "shipment_status" %>
   </div>
 </div>
 <div class="form-group row m-b-15 shipment-audit-comment">
@@ -44,43 +44,43 @@
 <div class="form-group row m-b-15">
   <%= form.label :transit_time, 'Transit Time:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :transit_time, class: 'form-control', value: shipment.transit_time, :id => "transit_time", :readonly => true %>
+    <%= form.text_field :transit_time, class: 'form-control', value: shipment.transit_time, :id => "transit_time", :readonly => true %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :own_type, 'Shipment Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.select :own_type, options_for_select(['Inbound', 'Outbound', 'Drop-Ship', 'Stock', 'Transfer', 'Customer Return', 'Supplier Return'], shipment.own_type),{:include_blank => true}, class: 'form-control' %>
+    <%= form.select :own_type, options_for_select(['Inbound', 'Outbound', 'Drop-Ship', 'Stock', 'Transfer', 'Customer Return', 'Supplier Return'], shipment.own_type),{:include_blank => true}, class: 'form-control' %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :client_reference, 'Client Reference:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :client_reference, class: 'form-control tags-input', 'data-role' => 'tagsinput', value: shipment.client_reference  %>
+    <%= form.text_field :client_reference, class: 'form-control tags-input', 'data-role' => 'tagsinput', value: shipment.client_reference  %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :tracking_number, 'Tracking Number:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :tracking_number, class: 'form-control', value: shipment.tracking_number  %>
+    <%= form.text_field :tracking_number, class: 'form-control', value: shipment.tracking_number  %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :terms, 'Terms:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.select :terms, options_for_select(['Prepaid', 'Collect'], shipment.terms),{:include_blank => true}, class: 'form-control' %>
+    <%= form.select :terms, options_for_select(['Prepaid', 'Collect'], shipment.terms),{:include_blank => true}, class: 'form-control' %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce', :value => shipment.notes)  %>
+    <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce', :value => shipment.notes)  %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :shipment_attachment_file, 'Attachment:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.file_field :shipment_attachment_file  %>
+    <%= form.file_field :shipment_attachment_file  %>
   </div>
 </div>
 <hr>
@@ -115,44 +115,43 @@
 <div class="form-group row m-b-15">
   <%= form.label :pieces, 'Piece:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.number_field :pieces, class: 'form-control', value: shipment.pieces %>
+    <%= form.number_field :pieces, class: 'form-control', value: shipment.pieces %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :pallets, 'Pallet:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.number_field :pallets, class: 'form-control', value: shipment.pallets %>
+    <%= form.number_field :pallets, class: 'form-control', value: shipment.pallets %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :unit_of_weight, 'Unit of Weight:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.select :unit_of_weight, options_for_select(['kg', 'lb'], shipment.unit_of_weight),{:include_blank => true}, class: 'form-control' %>
+    <%= form.select :unit_of_weight, options_for_select(['kg', 'lb'], shipment.unit_of_weight),{:include_blank => true}, class: 'form-control' %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :declared_weight, 'Declared Weight:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :declared_weight, class: 'form-control', value: shipment.declared_weight, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'" %>
+    <%= form.text_field :declared_weight, class: 'form-control', value: shipment.declared_weight, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'" %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :billed_weight, 'Billed Weight:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :billed_weight, class: 'form-control', value: shipment.billed_weight, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'"%>
-
+    <%= form.text_field :billed_weight, class: 'form-control', value: shipment.billed_weight, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'"%>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :raw_weight, 'Reweigh Weight:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :raw_weight, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'", value: shipment.raw_weight %>
+    <%= form.text_field :raw_weight, class: 'form-control', 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '', 'placeholder': '0'", value: shipment.raw_weight %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :service_mode, 'Service Mode:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.select :service_mode, options_for_select(['TL', 'LTL', 'Partial TL', 'Intermodal', 'Courier - Ground', 'Courier - Air', '20 CTR', '40 CTR', 'Rail'], shipment.service_mode),{:include_blank => true}, class: 'form-control' %>
+    <%= form.select :service_mode, options_for_select(['TL', 'LTL', 'Partial TL', 'Intermodal', 'Courier - Ground', 'Courier - Air', '20 CTR', '40 CTR', 'Rail'], shipment.service_mode),{:include_blank => true}, class: 'form-control' %>
   </div>
 </div>
 
@@ -161,101 +160,98 @@
 <div class="form-group row m-b-15">
   <%= form.label :money_currency, 'Currency:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.select :money_currency, options_for_select(['US', 'CDN'], "#{shipment.money_currency.present? ? shipment.money_currency : 'CDN'}"),{:include_blank => true}, class: 'form-control' %>
+    <%= form.select :money_currency, options_for_select(['US', 'CDN'], "#{shipment.money_currency.present? ? shipment.money_currency : 'CDN'}"),{:include_blank => true}, class: 'form-control' %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :billed_rate, 'Billed Rate:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :billed_rate, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.billed_rate, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+    <%= form.text_field :billed_rate, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.billed_rate, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :billed_rate_unit, 'Billed Rate Unit:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.select :billed_rate_unit, options_for_select(['Min Charge', 'Pallet', 'CWT', 'TL', 'Flat Fee', 'Base', '20 CTR', '40 CTR'], shipment.billed_rate_unit),{:include_blank => true}, class: 'form-control' %>
+    <%= form.select :billed_rate_unit, options_for_select(['Min Charge', 'Pallet', 'CWT', 'TL', 'Flat Fee', 'Base', '20 CTR', '40 CTR'], shipment.billed_rate_unit),{:include_blank => true}, class: 'form-control' %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :surcharge_ontario, 'Surcharge Ontario:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :surcharge_ontario, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_ontario, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+    <%= form.text_field :surcharge_ontario, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_ontario, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :surcharge_non_conveyables, 'Surcharge Non Conveyables:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :surcharge_non_conveyables, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_non_conveyables, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+    <%= form.text_field :surcharge_non_conveyables, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_non_conveyables, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :surcharge_non_vault, 'Surcharge Non Vault:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :surcharge_non_vault, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_non_vault, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+    <%= form.text_field :surcharge_non_vault, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_non_vault, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :surchange_multi_piece, 'Surcharge Multi Piece:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :surchange_multi_piece, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surchange_multi_piece, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+    <%= form.text_field :surchange_multi_piece, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surchange_multi_piece, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :surcharge_fuel, 'Surcharge Fuel:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :surcharge_fuel, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_fuel, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+    <%= form.text_field :surcharge_fuel, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_fuel, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :surcharge_weight, 'Surcharge Weight:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :surcharge_weight, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_weight, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+    <%= form.text_field :surcharge_weight, class: 'form-control total_charge_fields total_charge_with_tax_fields', value: shipment.surcharge_weight, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
   </div>
 </div>
 <div class="form-group row m-b-15">
   <%= form.label :gst_hst_tax, 'GST/HST Tax:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :gst_hst_tax, class: 'form-control total_charge_with_tax_fields', value: shipment.gst_hst_tax, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+    <%= form.text_field :gst_hst_tax, class: 'form-control total_charge_with_tax_fields', value: shipment.gst_hst_tax, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
   </div>
 </div>
 <% if params[:controller] != 'master_invoices'%>
-<div class="form-group row m-b-15">
-  <%= form.label :total_charge, 'Total Charge:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-  <div class="col-md-9 col-sm-8">
-  <%= form.text_field :total_charge, class: 'form-control', value: shipment.total_charge, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
+  <div class="form-group row m-b-15">
+    <%= form.label :total_charge, 'Total Charge:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.text_field :total_charge, class: 'form-control', value: shipment.total_charge, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
+    </div>
   </div>
-</div>
 <% else %>
-<div class="form-group row m-b-15">
-  <%= form.label :total_charge_shipment, 'Total Charge:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-  <div class="col-md-9 col-sm-8">
-  <%= form.text_field :total_charge_shipment, class: 'form-control', value: shipment.total_charge, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
+  <div class="form-group row m-b-15">
+    <%= form.label :total_charge_shipment, 'Total Charge:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.text_field :total_charge_shipment, class: 'form-control', value: shipment.total_charge, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
+    </div>
   </div>
-</div>
-
 <% end %>
 <div class="form-group row m-b-15">
   <%= form.label :total_charge_with_tax, 'Total Charge with Tax:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-  <%= form.text_field :total_charge_with_tax, class: 'form-control', value: shipment.total_charge_with_tax, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
+    <%= form.text_field :total_charge_with_tax, class: 'form-control', value: shipment.total_charge_with_tax, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'", :readonly => true %>
   </div>
 </div>
 
-
-  <% if params[:controller] != 'master_invoices'%>
-
-    <div class="form-group row m-b-15">
+<% if params[:controller] != 'master_invoices'%>
+  <div class="form-group row m-b-15">
     <div class="col-md-2"></div>
-      <div class="col-md-9 col-sm-12 d-flex justify-content-end">
-          <%= form.submit 'Submit', :class => 'btn btn-primary' %>
-          <% if params[:action] == 'edit' %>
-            &nbsp;&nbsp;<%= link_to 'Show', shipment, :class => 'btn btn-info' %>
-          <% end %>
-            <% if shipment.header.nil? %>
-              &nbsp;&nbsp;<%= link_to 'Back', shipments_path, :class => 'btn btn-default' %>
-            <% else %>
-              &nbsp;&nbsp;<%= link_to 'Back to Invoice', master_invoice_path(:id => shipment.header), :class => 'btn btn-default' %>
-            <% end %>
+    <div class="col-md-9 col-sm-12 d-flex justify-content-end">
+        <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+        <% if params[:action] == 'edit' %>
+          &nbsp;&nbsp;<%= link_to 'Show', shipment, :class => 'btn btn-info' %>
+        <% end %>
+        <% if shipment.header.nil? %>
+          &nbsp;&nbsp;<%= link_to 'Back', shipments_path, :class => 'btn btn-default' %>
+        <% else %>
+          &nbsp;&nbsp;<%= link_to 'Back to Invoice', master_invoice_path(:id => shipment.header), :class => 'btn btn-default' %>
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,11 +1,10 @@
-
 <!-- begin page-header -->
 <!-- end page-header -->
 <!-- begin panel -->
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
-    <%= link_to 'New Users', users_new_path, :class => 'btn btn-light btn-xs' %>
+      <%= link_to 'New Users', users_new_path, :class => 'btn btn-light btn-xs' %>
     </div>
     <h4 class="panel-title lp-header">Users</h4>
   </div>
@@ -25,9 +24,9 @@
             <td><%= user.first_name %> <%= user.last_name %></td>
             <td><%= user.email %></td>
             <td style="text-align: center;">
-                <%= user.has_role?(:admin) ? "<span class='badge badge-dark'>ADMIN</span>".html_safe : ""%>
-                <%= user.has_role?(:contact) ? "<span class='badge badge-indigo'>CONTACT</span>".html_safe : ""%>
-                <%= user.has_role?(:steward) ? "<span class='badge badge-purple'>STEWARD</span>".html_safe : ""%>
+              <%= user.has_role?(:admin) ? "<span class='badge badge-dark'>ADMIN</span>".html_safe : ""%>
+              <%= user.has_role?(:contact) ? "<span class='badge badge-indigo'>CONTACT</span>".html_safe : ""%>
+              <%= user.has_role?(:steward) ? "<span class='badge badge-purple'>STEWARD</span>".html_safe : ""%>
             </td>
             <td>
               <a class="btn btn-warning btn-xs" href="/users/<%= user.id %>/edit"><i class="far fa-edit"></i></a>

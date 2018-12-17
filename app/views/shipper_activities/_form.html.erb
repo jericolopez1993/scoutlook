@@ -13,9 +13,8 @@
 </div>
 <!-- end page-header -->
 <!-- begin panel -->
-
 <%= form_with(model: shipper_activity, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-<%= form.hidden_field :shipper_id %>
+  <%= form.hidden_field :shipper_id %>
   <div class="panel panel-inverse">
     <div class="panel-heading">
       <div class="panel-heading-btn">
@@ -58,7 +57,6 @@
           <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+'], shipper_activity.annual_value),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
-
       <div class="form-group row m-b-15">
         <%= form.label :proposal_pdf, 'Proposal PDF:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
@@ -105,7 +103,6 @@
           </div>
         </div>
       </div>
-
       <div class="form-group row m-b-15">
         <div class="col-md-2"></div>
           <div class="col-md-9 col-sm-12 d-flex justify-content-end">
@@ -127,8 +124,6 @@
       </div>
     </div>
   </div>
-
 <% end %>
-
-<%= tinymce %>
 <!-- end panel -->
+<%= tinymce %>

@@ -20,7 +20,7 @@ label {
       <% shipper = Shipper.find(@shipper_activity.shipper_id)%>
       <%= link_to 'Back to Shipper', shipper, :class => 'btn btn-info btn-xs' %>
     <% else %>
-        <%= link_to 'Back', shipper_activities_path, :class => 'btn btn-default btn-xs' %>
+      <%= link_to 'Back', shipper_activities_path, :class => 'btn btn-default btn-xs' %>
     <% end %>
   </span>
 </div>
@@ -60,7 +60,6 @@ label {
         <%= @shipper_activity.annual_value %>
       </div>
     </div>
-
     <div class="row">
       <label class="col-md-2 col-form-label">Status:</label>
       <div class="col-md-9 lbl-padding-t">
@@ -143,5 +142,4 @@ label {
     </table>
   </div>
 </div>
-
 <!-- end panel -->

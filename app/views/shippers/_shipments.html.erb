@@ -38,14 +38,18 @@
           <td><%= shipment.invoice.nil? ? '' : (shipment.invoice.shipper.nil? ? '' : shipment.invoice.shipper.company_name) %></td>
           <td><%= shipment.shipment_date %></td>
           <td><%= link_to shipment.tracking_number, shipment, target: :_blank %></td>
-          <td><% if shipment.shipment_attachment_file.attached? %>
-            <%= link_to '<i class="fas fa-file-invoice fa-2x"></i>'.html_safe, rails_blob_path(shipment.shipment_attachment_file), target: :_blank %>
-          <% end %></td>
-          <td><% if !shipment.shipper_reference.nil? && shipment.shipper_reference != '' %>
-            <% shipment.shipper_reference.split(/,/).each do |cr| %>
-              <span class="badge badge-inverse"><%= cr %></span>
+          <td>
+            <% if shipment.shipment_attachment_file.attached? %>
+              <%= link_to '<i class="fas fa-file-invoice fa-2x"></i>'.html_safe, rails_blob_path(shipment.shipment_attachment_file), target: :_blank %>
             <% end %>
-          <% end %></td>
+          </td>
+          <td>
+            <% if !shipment.shipper_reference.nil? && shipment.shipper_reference != '' %>
+              <% shipment.shipper_reference.split(/,/).each do |cr| %>
+                <span class="badge badge-inverse"><%= cr %></span>
+              <% end %>
+            <% end %>
+          </td>
           <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.name %></td>
           <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.city %></td>
           <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.state %></td>
@@ -59,7 +63,6 @@
           <td><%= get_currency(shipment.money_currency) %> <%= shipment.total_charge_with_tax.nil? ? 0 : shipment.total_charge_with_tax %></td>
           <td><%= get_currency(shipment.money_currency) %> <%= number_with_precision (get_quotient(shipment.total_charge, shipment.convert_to_lb)), :precision => 2 %></td>
           <td><%= get_currency(shipment.money_currency) %> <%= number_with_precision ((get_quotient(((shipment.total_charge.nil? ? 0 : shipment.total_charge) * 100), (shipment.convert_to_lb * get_quotient(shipment.distance, 1.6))))), :precision => 2 %></td>
-
         </tr>
       <% end %>
     <% end %>

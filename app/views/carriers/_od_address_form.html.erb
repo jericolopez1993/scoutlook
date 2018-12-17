@@ -1,52 +1,51 @@
-  <div class="form-group row m-b-15 <%=name%>-location-fields address-fields">
-    <%= form.label "#{name}_location_id", 'Select Existing Location:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-    <div class="col-md-9 col-sm-8">
-      <%= form.select "#{name}_location_id", CarrierLocation.all.collect {|r| [ r.name, r.id ] },{:include_blank => true}, class: 'form-control combo-dropdown', :id => "#{name}_location_id" %>
-    </div>
+<div class="form-group row m-b-15 <%=name%>-location-fields address-fields">
+  <%= form.label "#{name}_location_id", 'Select Existing Location:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+    <%= form.select "#{name}_location_id", CarrierLocation.all.collect {|r| [ r.name, r.id ] },{:include_blank => true}, class: 'form-control combo-dropdown', :id => "#{name}_location_id" %>
   </div>
-
-  <div class="form-group row m-b-15 address-fields">
-    <%= form.label "#{name}_address", 'Address:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-    <div class="col-md-9 col-sm-8">
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label "#{name}_address", 'Address:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
     <%= form.text_field "#{name}_address", class: 'form-control', :id => "#{name}_address" %>
-    </div>
   </div>
-  <div class="form-group row m-b-15 address-fields">
-    <%= form.label "#{name}_city", 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-    <div class="col-md-9 col-sm-8">
-      <%= form.text_field "#{name}_city", class: 'form-control', :id => "#{name}_city" %>
-    </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label "#{name}_city", 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+    <%= form.text_field "#{name}_city", class: 'form-control', :id => "#{name}_city" %>
   </div>
-  <div class="form-group row m-b-15 address-fields">
-    <%= form.label "#{name}_state", 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-    <div class="col-md-9 col-sm-8">
-      <%= form.select "#{name}_state", options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "#{name}_state" %>
-    </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label "#{name}_state", 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+    <%= form.select "#{name}_state", options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "#{name}_state" %>
   </div>
-  <div class="form-group row m-b-15 address-fields">
-    <%= form.label  "#{name}_postal", 'Postal / Zip:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-    <div class="col-md-9 col-sm-8">
-      <%= form.text_field "#{name}_postal", class: 'form-control', :id => "#{name}_postal" %>
-    </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label  "#{name}_postal", 'Postal / Zip:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+    <%= form.text_field "#{name}_postal", class: 'form-control', :id => "#{name}_postal" %>
   </div>
-  <div class="form-group row m-b-15 address-fields">
-    <%= form.label "#{name}_country", 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-    <div class="col-md-9 col-sm-8">
-      <%= form.select "#{name}_country", options_for_select([]),{}, class: 'form-control static-dropdown', :id => "#{name}_country" %>
-    </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label "#{name}_country", 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+    <%= form.select "#{name}_country", options_for_select([]),{}, class: 'form-control static-dropdown', :id => "#{name}_country" %>
   </div>
+</div>
 
-  <script language="javascript">
-  	populateCountries("<%=name%>_country", "<%=name%>_state");
-    setFieldMask('<%=name%>_country', '<%=name%>_postal');
+<script language="javascript">
+	populateCountries("<%=name%>_country", "<%=name%>_state");
+  setFieldMask('<%=name%>_country', '<%=name%>_postal');
 
-    $(function(){
-      $("#<%=name%>_country").change(function(){
-        setFieldMask('<%=name%>_country', '<%=name%>_postal');
-      });
+  $(function(){
+    $("#<%=name%>_country").change(function(){
+      setFieldMask('<%=name%>_country', '<%=name%>_postal');
     });
+  });
 
-    <% if params[:action] == 'edit' %>
-      locationDetailsOD($("#<%=name%>_location_id").val(), '<%=name%>');
-    <% end %>
-  </script>
+  <% if params[:action] == 'edit' %>
+    locationDetailsOD($("#<%=name%>_location_id").val(), '<%=name%>');
+  <% end %>
+</script>

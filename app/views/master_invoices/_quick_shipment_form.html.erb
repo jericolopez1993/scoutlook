@@ -1,22 +1,22 @@
 <div class="row">
-    <div class="col-md col-sm-12">
-      <div class="form-group">
-        <%= form.label :shipment_date, 'Date:'%>
-        <%= form.text_field :shipment_date, :value => @master_invoice.single_invoice_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'" %>
-      </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :shipment_date, 'Date:'%>
+      <%= form.text_field :shipment_date, :value => @master_invoice.single_invoice_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'" %>
     </div>
-    <div class="col-md col-sm-12">
-      <div class="form-group">
-        <%= form.label :account_number, 'Account Number:'%>
-        <%= form.text_field :account_number, class: 'form-control' %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :account_number, 'Account Number:'%>
+      <%= form.text_field :account_number, class: 'form-control' %>
     </div>
-    <div class="col-md col-sm-12">
-      <div class="form-group">
-        <%= form.label :tracking_number, 'Tracking Number:'%>
-        <%= form.text_field :tracking_number, class: 'form-control' %>
-      </div>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label :tracking_number, 'Tracking Number:'%>
+      <%= form.text_field :tracking_number, class: 'form-control' %>
     </div>
+  </div>
 </div>
 
 <div class="row">
@@ -44,18 +44,18 @@
       <%= form.select "destination_state", options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "quick_destination_state" %>
     </div>
   </div>
-    <div class="col-md col-sm-12">
-      <div class="form-group">
-        <%= form.label  "destination_postal", 'Postal / Zip:'%>
-        <%= form.text_field "destination_postal", class: 'form-control', :id => "quick_destination_postal" %>
-      </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label  "destination_postal", 'Postal / Zip:'%>
+      <%= form.text_field "destination_postal", class: 'form-control', :id => "quick_destination_postal" %>
     </div>
-    <div class="col-md col-sm-12">
-      <div class="form-group">
-        <%= form.label "destination_country", 'Country:'%>
+  </div>
+  <div class="col-md col-sm-12">
+    <div class="form-group">
+      <%= form.label "destination_country", 'Country:'%>
       <%= form.select "destination_country", options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "quick_destination_country" %>
-      </div>
     </div>
+  </div>
 </div>
 
 <div class="row">

@@ -53,7 +53,13 @@
             </td>
             <td><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
             <td><%= carrier.poc.nil? ? '' : carrier.poc.work_phone %></td>
-            <td><% if !carrier.poc.nil?  %><a href="mailto:<%= carrier.poc.email %>?Subject=Hello%20<%= carrier.poc.first_name.nil? ? '' :  carrier.poc.first_name + " " + carrier.poc.last_name  %>" target="_top"><%= carrier.poc.email %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
+            <td>
+              <% if !carrier.poc.nil?  %>
+                <a href="mailto:<%= carrier.poc.email %>?Subject=Hello%20<%= carrier.poc.first_name.nil? ? '' :  carrier.poc.first_name + " " + carrier.poc.last_name  %>" target="_top">
+                  <%= carrier.poc.email %>&nbsp;<i class="far fa-envelope"></i>
+                </a>
+              <% end %>
+            </td>
           </tr>
         <% end %>
         </tbody>

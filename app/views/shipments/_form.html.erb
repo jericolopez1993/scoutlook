@@ -3,19 +3,19 @@
 <!-- end page-header -->
 <!-- begin panel -->
 <%= form_with(model: shipment, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-<%= form.hidden_field :header %>
-<% if !shipment.header.nil? && (shipment.origin_location_id.nil? || shipment.origin_location_id == '') %>
-  <% master_invoice = MasterInvoice.find(shipment.header)%>
-  <% if !master_invoice.shipper_id.nil? %>
-    <% client = Client.find(master_invoice.shipper_id)%>
-    <input id="shipper_id" value="<%= client.id %>"  type="hidden">
+  <%= form.hidden_field :header %>
+  <% if !shipment.header.nil? && (shipment.origin_location_id.nil? || shipment.origin_location_id == '') %>
+    <% master_invoice = MasterInvoice.find(shipment.header)%>
+    <% if !master_invoice.shipper_id.nil? %>
+      <% client = Client.find(master_invoice.shipper_id)%>
+      <input id="shipper_id" value="<%= client.id %>"  type="hidden">
 
-    <script language="javascript">
-        $( document ).ready(function() {
-          clientLocation($("#shipper_id").val(), 'origin');
-        });
-    </script>
+      <script language="javascript">
+          $( document ).ready(function() {
+            clientLocation($("#shipper_id").val(), 'origin');
+          });
+      </script>
+    <% end %>
   <% end %>
-<% end %>
-<%= render 'fields', shipment: shipment, form: form %>
+  <%= render 'fields', shipment: shipment, form: form %>
 <% end %>

@@ -39,10 +39,10 @@
         <!-- begin login-content -->
         <div class="login-content">
           <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, :class => 'margin-bottom-0' }) do |f| %>
-          <%= devise_error_messages! %>
-          <div class="form-group m-b-15">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), :class => 'form-control form-control-lg', required: true, placeholder: 'E-mail' %>
-          </div>
+	          <%= devise_error_messages! %>
+	          <div class="form-group m-b-15">
+	            <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), :class => 'form-control form-control-lg', required: true, placeholder: 'E-mail' %>
+	          </div>
 
             <div class="login-buttons">
               <%= f.submit "Resend confirmation instructions", :class => 'btn btn-success btn-block btn-lg' %>

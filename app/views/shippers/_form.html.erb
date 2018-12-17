@@ -20,8 +20,7 @@
       <div class="panel panel-inverse">
         <div class="panel-heading">
           <div class="panel-heading-btn"></div>
-          <h4 class="panel-title">
-          Information</h4>
+          <h4 class="panel-title">Information</h4>
         </div>
         <div class="panel-body">
           <% if shipper.errors.any? %>
@@ -57,20 +56,20 @@
             <%= form.label :relationship_owner, 'Relationship Owner:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :relationship_owner, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => shipper.relationship_owner}, class: 'form-control' %>
+            </div>
           </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :load_last_month, 'Loads Last Month:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.number_field :load_last_month, class: 'form-control' %>
+          <div class="form-group row m-b-15">
+            <%= form.label :load_last_month, 'Loads Last Month:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.number_field :load_last_month, class: 'form-control' %>
+            </div>
           </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :load_last_6_month, 'Loads Last 6 Months:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
-            <%= form.number_field :load_last_6_month, class: 'form-control' %>
+          <div class="form-group row m-b-15">
+            <%= form.label :load_last_6_month, 'Loads Last 6 Months:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.number_field :load_last_6_month, class: 'form-control' %>
+            </div>
           </div>
-        </div>
           <div class="form-group row m-b-15">
             <%= form.label :shipper_type, 'Shipper Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
@@ -116,7 +115,7 @@
           <div class="form-group row m-b-15">
             <%= form.label :blue_book_url, 'Blue Book Page URL:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-            <%= form.url_field :blue_book_url, class: 'form-control'%>
+              <%= form.url_field :blue_book_url, class: 'form-control'%>
             </div>
           </div>
           <div class="form-group row m-b-15">
@@ -170,13 +169,13 @@
           <div class="form-group row m-b-15">
             <%= form.label :website, 'Website:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-            <%= form.url_field :website, class: 'form-control'%>
+              <%= form.url_field :website, class: 'form-control'%>
             </div>
           </div>
           <div class="form-group row m-b-15">
             <%= form.label :linkedin, 'LinkedIn:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-            <%= form.url_field :linkedin, class: 'form-control'%>
+              <%= form.url_field :linkedin, class: 'form-control'%>
             </div>
           </div>
           <div class="form-group row m-b-15">
@@ -188,7 +187,6 @@
           <hr>
           <h4 class="text-inverse">Address</h4>
           <%= render 'shipper_locations/fields', shipper_location: (shipper.location.nil? ? ShipperLocation.new : shipper.location), form: form %>
-
           <div class="form-group row m-b-15">
             <div class="col-md-2"></div>
             <div class="col-md-9 col-sm-12 d-flex justify-content-end">
@@ -206,8 +204,8 @@
     </div>
   </div>
 <% end %>
-<%= tinymce %>
 <!-- end panel -->
+<%= tinymce %>
 
 <script>
   $("#shipper_commodities").val(<%= raw shipper.commodities_to_array %>);

@@ -18,11 +18,10 @@
       <% if carrier_contact.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(carrier_contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
-
           <ul>
-          <% carrier_contact.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
+            <% carrier_contact.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
           </ul>
         </div>
       <% end %>
@@ -53,49 +52,49 @@
       <div class="form-group row m-b-15">
         <%= form.label :first_name, 'First Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.text_field :first_name, class: 'form-control' %>
+          <%= form.text_field :first_name, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :last_name, 'Last Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.text_field :last_name, class: 'form-control' %>
+          <%= form.text_field :last_name, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :title, 'Title:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.text_field :title, class: 'form-control' %>
+          <%= form.text_field :title, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :linkedin_link, 'LinkedIn:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.url_field :linkedin_link, class: 'form-control'%>
+          <%= form.url_field :linkedin_link, class: 'form-control'%>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :email, 'Email Address:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.email_field :email, class: 'form-control' %>
+          <%= form.email_field :email, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :password, 'Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.password_field :password, class: 'form-control' %>
+          <%= form.password_field :password, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :password_confirmation, 'Confirm Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.password_field :password_confirmation, class: 'form-control' %>
+          <%= form.password_field :password_confirmation, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :home_phone, 'Cell:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.text_field :home_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
+          <%= form.text_field :home_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -107,7 +106,7 @@
       <div class="form-group row m-b-15 address-fields">
         <%= form.label :work_phone, 'Work Phone:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-        <%= form.text_field :work_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
+          <%= form.text_field :work_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
         </div>
       </div>
       <%= render 'carriers/address_form', form: form %>

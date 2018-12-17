@@ -4,14 +4,13 @@
   <div class="panel-heading">
     <div class="panel-heading-btn">
       <% if params[:controller] != 'master_invoices'%>
-
         <% if current_user.has_role?(:admin) %>
-            <%= link_to 'Edit', edit_shipment_path(@shipment), :class => 'btn btn-warning btn-xs' %>
-            <% if !@shipment.header.nil? %>
-              <%= link_to 'Back to Invoice', master_invoice_path(:id => @shipment.header), :class => 'btn btn-info btn-xs' %>
-            <% else %>
-              <%= link_to 'Back to Invoice List', master_invoices_path, :class => 'btn btn-info btn-xs' %>
-            <% end %>
+          <%= link_to 'Edit', edit_shipment_path(@shipment), :class => 'btn btn-warning btn-xs' %>
+          <% if !@shipment.header.nil? %>
+            <%= link_to 'Back to Invoice', master_invoice_path(:id => @shipment.header), :class => 'btn btn-info btn-xs' %>
+          <% else %>
+            <%= link_to 'Back to Invoice List', master_invoices_path, :class => 'btn btn-info btn-xs' %>
+          <% end %>
         <% else %>
           <%= link_to 'Back', authenticated_root_path, :class => 'btn btn-info btn-xs' %>
         <% end %>

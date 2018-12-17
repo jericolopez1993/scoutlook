@@ -1,29 +1,29 @@
 
 <style>
-p {
-  display: inline-block!important;
-}
-.hide {
-  visibility: hidden;
-}
-@media (max-width: 767px) {
-  .panel-inverse > .panel-heading {
-    background: 0 0;
+  p {
+    display: inline-block!important;
   }
-  .md-nav {
-    display: none;
+  .hide {
+    visibility: hidden;
   }
-  .nav-pills .nav-link, .nav-pills > li > a {
-    background-color: #fff;
-    margin: 5px;
+  @media (max-width: 767px) {
+    .panel-inverse > .panel-heading {
+      background: 0 0;
+    }
+    .md-nav {
+      display: none;
+    }
+    .nav-pills .nav-link, .nav-pills > li > a {
+      background-color: #fff;
+      margin: 5px;
+    }
+    label {
+      text-align: left!important;
+    }
   }
   label {
-    text-align: left!important;
+    text-align: right;
   }
-}
-label {
-  text-align: right;
-}
 </style>
 <!-- begin page-header -->
 <div class="header-darkblue">
@@ -60,8 +60,7 @@ label {
     </a>
   </li>
 </ul>
-    <!-- begin panel -->
-
+<!-- begin panel -->
 <div class="panel panel-inverse">
   <div class="panel-heading" style="padding: 5px 15px">
     <div class="panel-heading-btn" style="margin-top: 2.5px;">
@@ -123,7 +122,7 @@ label {
             <div class="card bg-light" >
               <div class="card-body">
                 <div class="row">
-                <label class="col-md-4 col-form-label">Complete Record:</label>
+                  <label class="col-md-4 col-form-label">Complete Record:</label>
                   <div class="col-md-8 lbl-padding-t">
                     <%= @shipper.complete_record ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
                   </div>
@@ -271,12 +270,11 @@ label {
               </div>
             </div>
           </div>
-
           <div class="col-md-4">
             <div class="card bg-light" >
               <div class="card-body">
-              <h4 class="card-title">Priority Lanes</h4>
-              <%= render 'shipper_lanes/table_ordered', lane_1: @shipper.lane_1, lane_2: @shipper.lane_2, lane_3: @shipper.lane_3  %>
+                <h4 class="card-title">Priority Lanes</h4>
+                <%= render 'shipper_lanes/table_ordered', lane_1: @shipper.lane_1, lane_2: @shipper.lane_2, lane_3: @shipper.lane_3  %>
               </div>
             </div>
           </div>
@@ -287,25 +285,25 @@ label {
                 <%= render 'shipper_contacts/show_fields', shipper_contact: @shipper.poc %>
               </div>
             </div>
-          <div class="card bg-light" >
-            <div class="card-body">
-              <h4 class="card-title">Decision Maker</h4>
-              <%= render 'shipper_contacts/show_fields', shipper_contact: @shipper.pdm %>
-              <%# if @shipper.pdm.nil? && @shipper.adm.length > 0 %>
-              <%# else %>
-              <%# end %>
-              <%# if @shipper.adm.length > 0 %>
-              <!-- <br/>
-              <div class="hlc"><span class="bg-light">ALTERNATE</span></div> -->
-              <%# @shipper.adm.each do |contact| %>
-              <%#= render 'shipper_contacts/show_fields', shipper_contact: contact %>
-              <%# end %>
-              <%# end %>
+            <div class="card bg-light" >
+              <div class="card-body">
+                <h4 class="card-title">Decision Maker</h4>
+                <%= render 'shipper_contacts/show_fields', shipper_contact: @shipper.pdm %>
+                <%# if @shipper.pdm.nil? && @shipper.adm.length > 0 %>
+                <%# else %>
+                <%# end %>
+                <%# if @shipper.adm.length > 0 %>
+                <!-- <br/>
+                <div class="hlc"><span class="bg-light">ALTERNATE</span></div> -->
+                <%# @shipper.adm.each do |contact| %>
+                <%#= render 'shipper_contacts/show_fields', shipper_contact: contact %>
+                <%# end %>
+                <%# end %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
     <div class="tab-pane fade" id="attachments">
       <div class="panel-body">
@@ -320,15 +318,15 @@ label {
           </thead>
           <tbody>
             <% @shipper.attachment_file.each_with_index do |attachment_file, index| %>
-            <tr>
-              <td><%= attachment_file.id %></td>
-              <td><%= attachment_file.filename %></td>
-              <td><%= convert_date(attachment_file.created_at) %></td>
-              <td>
-                <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file), target: :_blank, :class => 'btn btn-primary  btn-xs' %>
-                <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_shippers_path(:id => @shipper.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
-              </td>
-            </tr>
+              <tr>
+                <td><%= attachment_file.id %></td>
+                <td><%= attachment_file.filename %></td>
+                <td><%= convert_date(attachment_file.created_at) %></td>
+                <td>
+                  <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file), target: :_blank, :class => 'btn btn-primary  btn-xs' %>
+                  <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_shippers_path(:id => @shipper.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+                </td>
+              </tr>
             <% end %>
           </tbody>
         </table>
@@ -419,45 +417,44 @@ label {
     <!-- end tab-pane -->
   </div>
 </div>
-
 <!-- end panel -->
 <script type="text/javascript">
-$('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
-$('.location-btn').on('click', function(){
-    $('.new-contact-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
-    $('.new-location-btn').show();
-});
-$('.contact-btn').on('click', function(){
-    $('.new-location-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
-    $('.new-contact-btn').show();
-});
-$('.attachment-btn').on('click', function(){
-    $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-rate-btn, .new-activity-btn').hide();
-    $('.new-attachment-btn').show();
-});
-$('.lane-btn').on('click', function(){
-    $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
-    $('.new-lane-btn').show();
-});
-$('.rate-btn').on('click', function(){
-    $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-activity-btn').hide();
-    $('.new-rate-btn').show();
-});
-$('.activity-btn').on('click', function(){
-    $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-rate-btn').hide();
-    $('.new-activity-btn').show();
-});
-$('.hide-btn').on('click', function(){
-    $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
-});
+  $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
+  $('.location-btn').on('click', function(){
+      $('.new-contact-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-location-btn').show();
+  });
+  $('.contact-btn').on('click', function(){
+      $('.new-location-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-contact-btn').show();
+  });
+  $('.attachment-btn').on('click', function(){
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-attachment-btn').show();
+  });
+  $('.lane-btn').on('click', function(){
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-lane-btn').show();
+  });
+  $('.rate-btn').on('click', function(){
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-activity-btn').hide();
+      $('.new-rate-btn').show();
+  });
+  $('.activity-btn').on('click', function(){
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-rate-btn').hide();
+      $('.new-activity-btn').show();
+  });
+  $('.hide-btn').on('click', function(){
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
+  });
 
-$('.contact-btn, .lane-btn, .activity-btn, .location-btn, .rate-btn, .hide-btn').popover({ trigger:"manual" }).click(function(){
-  $('.popover').popover('hide');
-})
-$('body').on('change', '#shipper_attachment_file', function(){
-  var file = $('#shipper_attachment_file').val();
-  if(file != null) {
-    $('input[name="commit"]').removeAttr("disabled");
-  }
-})
+  $('.contact-btn, .lane-btn, .activity-btn, .location-btn, .rate-btn, .hide-btn').popover({ trigger:"manual" }).click(function(){
+    $('.popover').popover('hide');
+  })
+  $('body').on('change', '#shipper_attachment_file', function(){
+    var file = $('#shipper_attachment_file').val();
+    if(file != null) {
+      $('input[name="commit"]').removeAttr("disabled");
+    }
+  })
 </script>

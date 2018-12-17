@@ -38,6 +38,7 @@ label {
         <%= @carrier_activity.activity_type %>
       </div>
     </div>
+
     <% if @carrier_activity.activity_type == "Engagement" %>
       <div class="row">
         <label class="col-md-2 col-form-label">Engagement Type:</label>
@@ -46,6 +47,7 @@ label {
         </div>
       </div>
     <% end %>
+
     <div class="row">
       <label class="col-md-2 col-form-label">Steward:</label>
       <div class="col-md-9 lbl-padding-t">
@@ -114,6 +116,7 @@ label {
         </div>
       </div>
     <% end %>
+
     <hr>
     <h4 class="text-inverse">Proposed PDFs</h4>
     <table class="table table-striped table-bordered data-table-no-buttons display nowrap">
@@ -127,15 +130,15 @@ label {
       </thead>
       <tbody>
         <% @carrier_activity.proposal_pdf.each_with_index do |attachment_file, index| %>
-        <tr>
-          <td><%= attachment_file.id %></td>
-          <td><%= attachment_file.filename %></td>
-          <td><%= convert_date(attachment_file.created_at) %></td>
-          <td>
-            <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file), target: :_blank, :class => 'btn btn-primary' %>
-            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_carrier_activities_path(:id => @carrier_activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
-          </td>
-        </tr>
+          <tr>
+            <td><%= attachment_file.id %></td>
+            <td><%= attachment_file.filename %></td>
+            <td><%= convert_date(attachment_file.created_at) %></td>
+            <td>
+              <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file), target: :_blank, :class => 'btn btn-primary' %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_carrier_activities_path(:id => @carrier_activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+            </td>
+          </tr>
         <% end %>
       </tbody>
     </table>

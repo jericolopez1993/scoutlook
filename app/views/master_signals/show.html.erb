@@ -11,133 +11,127 @@ label {
 <!-- begin page-header -->
 <%= render 'layouts/static/header', header_title: "#{@master_signal.client.nil? ? '' : link_to(@master_signal.client.company_name, @master_signal.client)}" %>
 <!-- end page-header -->
-      <div class="panel panel-inverse">
-        <div class="panel-heading">
-          <div class="panel-heading-btn">
-            <%= link_to 'Edit', edit_master_signal_path(@master_signal), :class => 'btn btn-warning btn-xs' %>
-            <%= link_to 'Back', master_signals_path, :class => 'btn btn-info btn-xs' %>
-          </div>
-          <h4 class="panel-title"> <%= @master_signal.client.nil? ? '' : "#{@master_signal.client.company_name}"%></h4>
-        </div>
-        <div class="panel-body">
-          <h4 class="text-inverse">Details</h4>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Type:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.signal_type %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Signal Date:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.signal_date %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Client:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.client.nil? ? '' : (link_to @master_signal.client.company_name, @master_signal.client) %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Contact:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%=  @master_signal.client_contact.nil? ? "" : (link_to "#{@master_signal.client_contact.first_name} #{@master_signal.client_contact.last_name}", @master_signal.client_contact) %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Rate:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%=  @master_signal.rate.nil? ? "" : (link_to @master_signal.rate.rate_type, @master_signal.rate) %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Start Date:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.start_date %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">End Date:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.end_date %>
-            </div>
-          </div>
-
-          <h4 class="text-inverse">Other Information</h4>
-
-          <div class="row">
-            <label class="col-md-2 col-form-label">Duration:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.duration %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Volume:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.volume %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">UOM:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.uom %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Per:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.per %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Capacity Type:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.capacity_type %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Max Origin Diversion (in Miles):</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.max_origin %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Max Destination Diversion (in Miles):</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.max_destination %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Desired Rate:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.desired_rate %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Notes:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.notes.nil? ? "" : @master_signal.notes.html_safe %>
-            </div>
-          </div>
-
-          <hr>
-          <h4 class="text-inverse">Location</h4>
-
-          <div class="row">
-            <label class="col-md-2 col-form-label">Origin:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.origin_location.nil? ? "" : location_format(@master_signal.origin_location) %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-2 col-form-label">Destination:</label>
-            <div class="col-md-9 lbl-padding-t">
-              <%= @master_signal.destination_location.nil? ? "" : location_format(@master_signal.destination_location) %>
-            </div>
-          </div>
-
-          </div>
-        </div>
-
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+      <%= link_to 'Edit', edit_master_signal_path(@master_signal), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Back', master_signals_path, :class => 'btn btn-info btn-xs' %>
+    </div>
+    <h4 class="panel-title"> <%= @master_signal.client.nil? ? '' : "#{@master_signal.client.company_name}"%></h4>
+  </div>
+  <div class="panel-body">
+    <h4 class="text-inverse">Details</h4>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Type:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.signal_type %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Signal Date:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.signal_date %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Client:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.client.nil? ? '' : (link_to @master_signal.client.company_name, @master_signal.client) %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Contact:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%=  @master_signal.client_contact.nil? ? "" : (link_to "#{@master_signal.client_contact.first_name} #{@master_signal.client_contact.last_name}", @master_signal.client_contact) %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Rate:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%=  @master_signal.rate.nil? ? "" : (link_to @master_signal.rate.rate_type, @master_signal.rate) %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Start Date:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.start_date %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">End Date:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.end_date %>
+      </div>
+    </div>
+    <h4 class="text-inverse">Other Information</h4>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Duration:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.duration %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Volume:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.volume %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">UOM:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.uom %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Per:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.per %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Capacity Type:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.capacity_type %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Max Origin Diversion (in Miles):</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.max_origin %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Max Destination Diversion (in Miles):</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.max_destination %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Desired Rate:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.desired_rate %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Notes:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.notes.nil? ? "" : @master_signal.notes.html_safe %>
+      </div>
+    </div>
+    <hr>
+    <h4 class="text-inverse">Location</h4>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Origin:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.origin_location.nil? ? "" : location_format(@master_signal.origin_location) %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Destination:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @master_signal.destination_location.nil? ? "" : location_format(@master_signal.destination_location) %>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- end panel -->

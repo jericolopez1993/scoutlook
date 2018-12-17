@@ -3,8 +3,7 @@
   <div class="navbar-header">
     <!-- <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>PB</b> Platform</a> -->
     <a href="<%= authenticated_root_path %>" class="navbar-brand"><img src="<%= asset_path('scout_fav.png') %>" />
-    <b>Scout</b><%= user_signed_in? ? (current_user.has_role?(:admin) ? ' Admin' : ' User') : ''%>
-
+      <b>Scout</b><%= user_signed_in? ? (current_user.has_role?(:admin) ? ' Admin' : ' User') : ''%>
     </a>
     <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
       <span class="icon-bar"></span>
@@ -25,7 +24,6 @@
       </form>
     </li>
 
-
     <% if current_user.admin? %>
       <% audits = Audit.today %>
       <li class="dropdown">
@@ -40,28 +38,27 @@
           <% if audits.length > 0%>
             <% audits.limit(10).each do |audit|%>
               <li class="media">
-                    <div class="media-body notification-padding">
-                      <h6 class="media-heading"><%= audit.on_sentence.html_safe %></h6>
-                      <div class="text-muted f-s-11"><%= audit.created_at %></div>
-                    </div>
-                </li>
+                <div class="media-body notification-padding">
+                  <h6 class="media-heading"><%= audit.on_sentence.html_safe %></h6>
+                  <div class="text-muted f-s-11"><%= audit.created_at %></div>
+                </div>
+              </li>
             <% end %>
           <% else %>
-          <li class="text-center width-300 p-b-10">
-            No notification found today. :)
-          </li>
+            <li class="text-center width-300 p-b-10">
+              No notification found today. :)
+            </li>
           <% end %>
           <li class="media">
-                <div class="media-body notification-padding text-center">
-                  <h6 class="media-heading"><%= link_to "See all notifications", logs_path%></h6>
-                </div>
-            </li>
+            <div class="media-body notification-padding text-center">
+              <h6 class="media-heading"><%= link_to "See all notifications", logs_path%></h6>
+            </div>
+          </li>
         </ul>
       </li>
     <% end %>
     <li class="dropdown navbar-user">
       <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-
         <% if !current_user.avatar.nil?  %>
           <% if current_user.avatar.attached? %>
             <div class="image extend_image">
@@ -78,7 +75,7 @@
           </div>
         <% end %>
         <span class="d-none d-md-inline">
-      <%= (!current_user.first_name.nil? && !current_user.last_name.nil?) ? (current_user.first_name + " " + current_user.last_name) : current_user.email %></span> <b class="caret"></b>
+        <%= (!current_user.first_name.nil? && !current_user.last_name.nil?) ? (current_user.first_name + " " + current_user.last_name) : current_user.email %></span> <b class="caret"></b>
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <%= link_to('Edit Profile', edit_user_registration_path, class: "dropdown-item") %>

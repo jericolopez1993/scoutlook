@@ -11,34 +11,33 @@
   </div>
   <div class="panel-body">
     <table class="table table-striped table-bordered data-table-buttons display nowrap">
-    								<thead>
-    									<tr class="odd gradeX">
-    										<th>Type</th>
-    										<th>Date</th>
-    										<th>Client</th>
-    										<th>Contact</th>
-    										<th>Rate</th>
-										    <th data-orderable="false">Actions</th>
-    									</tr>
-    								</thead>
-    								<tbody>
-                      <% @master_signals.each do |master_signal| %>
-                        <tr>
-                          <td><%= master_signal.signal_type %></td>
-                          <td><%= master_signal.signal_date %></td>
-                          <td><%= master_signal.client.nil? ? '' : (link_to master_signal.client.company_name, master_signal.client) %></td>
-                          <td><%= master_signal.client_contact.nil? ? '' : (link_to "#{master_signal.client_contact.first_name} #{master_signal.client_contact.last_name}", master_signal.client_contact) %></td>
-                          <td><%= master_signal.rate.nil? ? '' : "#{master_signal.rate.rate_type}" %></td>
-                          <td>
-                            <%= link_to '<i class="far fa-eye"></i>'.html_safe, master_signal, :class => 'btn btn-info btn-xs' %>
-                            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_master_signal_path(master_signal), :class => 'btn btn-warning btn-xs' %>
-                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, master_signal, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
-                          </td>
-                        </tr>
-                      <% end %>
-
-                    </tbody>
-                  </table>
+			<thead>
+				<tr class="odd gradeX">
+					<th>Type</th>
+					<th>Date</th>
+					<th>Client</th>
+					<th>Contact</th>
+					<th>Rate</th>
+			    <th data-orderable="false">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+        <% @master_signals.each do |master_signal| %>
+          <tr>
+            <td><%= master_signal.signal_type %></td>
+            <td><%= master_signal.signal_date %></td>
+            <td><%= master_signal.client.nil? ? '' : (link_to master_signal.client.company_name, master_signal.client) %></td>
+            <td><%= master_signal.client_contact.nil? ? '' : (link_to "#{master_signal.client_contact.first_name} #{master_signal.client_contact.last_name}", master_signal.client_contact) %></td>
+            <td><%= master_signal.rate.nil? ? '' : "#{master_signal.rate.rate_type}" %></td>
+            <td>
+              <%= link_to '<i class="far fa-eye"></i>'.html_safe, master_signal, :class => 'btn btn-info btn-xs' %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_master_signal_path(master_signal), :class => 'btn btn-warning btn-xs' %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, master_signal, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
 <!-- end panel -->

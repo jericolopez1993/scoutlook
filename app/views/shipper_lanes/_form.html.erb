@@ -6,7 +6,6 @@
 </div>
 <!-- end page-header -->
 <!-- begin panel -->
-
 <%= form_with(model: shipper_lane, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
   <%= form.hidden_field :shipper_id %>
   <div class="row">
@@ -16,6 +15,7 @@
           <div class="panel-heading-btn"></div>
         </div>
         <div class="panel-body">
+
           <% if shipper_lane.errors.any? %>
             <div class="form-group row m-b-15">
               <div class="col-md-12 col-sm-12">
@@ -23,13 +23,14 @@
                   <h4 class="alert-heading"><%= pluralize(shipper_lane.errors.count, "error") %> prohibited this shipper_lane from being saved:</h4>
                   <ul>
                     <% shipper_lane.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
+                      <li><%= message %></li>
                     <% end %>
                   </ul>
                 </div>
               </div>
             </div>
           <% end %>
+
           <h4 class="text-inverse">Details</h4>
           <div class="form-group row m-b-15">
             <%= form.label :lane_priority, 'Priority:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
@@ -73,7 +74,6 @@
               <%= form.text_area(:notes, cols: 20, rows: 15, class: 'tinymce') %>
             </div>
           </div>
-
           <div class="form-group row m-b-15">
             <div class="col-md-2"></div>
             <div class="col-md-9 col-sm-12 d-flex justify-content-end">
@@ -85,7 +85,6 @@
       </div>
     </div>
   </div>
-
 <% end %>
 <%= tinymce %>
 <!-- end panel -->
