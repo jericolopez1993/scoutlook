@@ -100,6 +100,12 @@
             <div class="card bg-light" >
               <div class="card-body">
                 <div class="row">
+                  <label class="col-md-4 col-form-label">is this Carrier approved to do business?</label>
+                  <div class="col-md-8 lbl-padding-t">
+                    <%= @carrier.approved ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+                  </div>
+                </div>
+                <div class="row">
                   <label class="col-md-4 col-form-label">Complete Record:</label>
                   <div class="col-md-8 lbl-padding-t">
                     <%= @carrier.complete_record ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
@@ -124,21 +130,27 @@
                   </div>
                 </div>
                 <div class="row">
+                  <label class="col-md-4 col-form-label">MC Number:</label>
+                  <div class="col-md-8 lbl-padding-t">
+                    <%= @carrier.mc_number %>
+                  </div>
+                </div>
+                <div class="row">
                   <label class="col-md-4 col-form-label">Relationship Owner:</label>
                   <div class="col-md-8 lbl-padding-t">
                     <%= @carrier.rep.nil? ? 'Not Assigned' : link_to(@carrier.rep.full_name, @carrier.rep) %>
                   </div>
                 </div>
                 <div class="row">
-                  <label class="col-md-4 col-form-label">Last Last Month:</label>
-                  <div class="col-md-8 lbl-padding-t">
-                    <%= @carrier.load_last_month %>
-                  </div>
-                </div>
-                <div class="row">
                   <label class="col-md-4 col-form-label">Last Last 6 Months:</label>
                   <div class="col-md-8 lbl-padding-t">
                     <%= @carrier.load_last_6_month %>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-md-4 col-form-label">Last Last Month:</label>
+                  <div class="col-md-8 lbl-padding-t">
+                    <%= @carrier.load_last_month %>
                   </div>
                 </div>
                 <div class="row">

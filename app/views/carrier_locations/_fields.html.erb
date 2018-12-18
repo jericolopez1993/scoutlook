@@ -41,7 +41,6 @@
       <input type="checkbox" name="head_office" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-same-office" <%= is_head_office ? 'checked' : '' %> />
     </div>
   </div>
-<% end %>
 <div class="form-group row m-b-15">
   <label class="text-right col-md-2 col-sm-4 col-form-label"> is Origin?</label>
   <div class="col-md-9 col-sm-8">
@@ -54,7 +53,7 @@
     <input type="checkbox" name="destination" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= carrier_location.is_destination ? 'checked' : '' %>/>
   </div>
 </div>
-
+<% end %>
 <script language="javascript">
   $(function(){
     populateCountries("loc_country", "loc_state");
