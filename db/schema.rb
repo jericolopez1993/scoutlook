@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_005721) do
+ActiveRecord::Schema.define(version: 2018_12_18_025845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,8 +84,6 @@ ActiveRecord::Schema.define(version: 2018_12_18_005721) do
   create_table "carrier_contacts", force: :cascade do |t|
     t.string "title"
     t.string "email"
-    t.string "work_phone"
-    t.string "home_phone"
     t.integer "carrier_id"
     t.string "last_name"
     t.boolean "same_ho", default: false
@@ -96,6 +94,10 @@ ActiveRecord::Schema.define(version: 2018_12_18_005721) do
     t.datetime "updated_at", null: false
     t.string "contact_type"
     t.boolean "adm", default: false
+    t.string "primary_phone", default: ""
+    t.string "primary_phone_type", default: ""
+    t.string "secondary_phone", default: ""
+    t.string "secondary_phone_type", default: ""
   end
 
   create_table "carrier_lanes", force: :cascade do |t|
@@ -197,6 +199,8 @@ ActiveRecord::Schema.define(version: 2018_12_18_005721) do
     t.integer "load_last_6_month", default: 0
     t.boolean "approved", default: false
     t.string "mc_number"
+    t.integer "carrier_setup"
+    t.date "date_approved"
   end
 
   create_table "master_invoices", force: :cascade do |t|
@@ -342,8 +346,6 @@ ActiveRecord::Schema.define(version: 2018_12_18_005721) do
   create_table "shipper_contacts", force: :cascade do |t|
     t.string "title"
     t.string "email"
-    t.string "work_phone"
-    t.string "home_phone"
     t.integer "shipper_id"
     t.string "last_name"
     t.boolean "same_ho", default: false
@@ -354,6 +356,10 @@ ActiveRecord::Schema.define(version: 2018_12_18_005721) do
     t.datetime "updated_at", null: false
     t.string "contact_type"
     t.boolean "adm", default: false
+    t.string "primary_phone", default: ""
+    t.string "primary_phone_type", default: ""
+    t.string "secondary_phone", default: ""
+    t.string "secondary_phone_type", default: ""
   end
 
   create_table "shipper_lanes", force: :cascade do |t|
@@ -456,6 +462,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_005721) do
     t.integer "load_last_month", default: 0
     t.integer "load_last_6_month", default: 0
     t.boolean "approved", default: false
+    t.date "date_approved"
   end
 
   create_table "users", force: :cascade do |t|

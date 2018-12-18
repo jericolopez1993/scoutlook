@@ -122,7 +122,7 @@
             <div class="card bg-light" >
               <div class="card-body">
               <div class="row">
-                <label class="col-md-4 col-form-label">is this Shipper approved to do business?</label>
+                <label class="col-md-4 col-form-label">Approved to do business?</label>
                 <div class="col-md-8 lbl-padding-t">
                   <%= @shipper.approved ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
                 </div>
@@ -362,8 +362,8 @@
               <th>Name</th>
               <th>Email</th>
               <th>Address</th>
-              <th>Work Phone</th>
-              <th>Cell</th>
+              <th>Primary Phone</th>
+              <th>Secondary Phone</th>
               <th>Social</th>
               <th data-orderable="false">Actions</th>
             </tr>
@@ -377,8 +377,8 @@
                 <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
                 <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %>" target="_top"><%= contact.email %>&nbsp;<i class="far fa-envelope"></a></i></td>
                 <td><%= contact.same_ho ? (@shipper.head_office_location.nil? ? '' : "#{@shipper.head_office_location.address} #{@shipper.head_office_location.city}, #{@shipper.head_office_location.state}, #{@shipper.head_office_location.country} #{@shipper.head_office_location.postal}") : (contact.location.nil? ? '' : "#{contact.location.address} #{contact.location.city} #{contact.location.state}, #{contact.location.country} #{contact.location.postal}")%></td>
-                <td><%= contact.same_ho ? (@shipper.head_office_location.nil? ? '' : @shipper.head_office_location.phone) : contact.work_phone %></td>
-                <td><%= contact.home_phone %></td>
+                <td><%= contact.same_ho ? (@shipper.head_office_location.nil? ? '' : "#{@shipper.head_office_location.address} #{@shipper.head_office_location.city}, #{@shipper.head_office_location.state}, #{@shipper.head_office_location.country} #{@shipper.head_office_location.postal}") : contact.primary_phone %>&nbsp;<%= (!contact.primary_phone_type.nil? && contact.primary_phone_type != "") ? "(#{contact.primary_phone_type})" : ""%></td>
+                <td><%= contact.same_ho ? (@shipper.head_office_location.nil? ? '' : @shipper.head_office_location.phone) : contact.secondary_phone %>&nbsp;<%= (!contact.secondary_phone_type.nil? && contact.secondary_phone_type != "") ? "(#{contact.secondary_phone_type})" : ""%></td>
                 <td style="text-align: center;"><%= contact.linkedin_link.nil? || contact.linkedin_link == "" ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
                 <td>
                   <a class="btn btn-warning btn-xs" href="<%= edit_shipper_contact_path(contact) %>"><i class="far fa-edit"></i></a>&nbsp;

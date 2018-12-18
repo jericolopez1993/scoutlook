@@ -1,5 +1,6 @@
 class Carrier < ApplicationRecord
   audited
+  before_save :approved?
   has_many_attached :attachment_file
   after_destroy :remove_children
 
@@ -15,6 +16,14 @@ class Carrier < ApplicationRecord
   def rep
     begin
       Rep.find(self.relationship_owner)
+    rescue
+      nil
+    end
+  end
+
+  def carrier_setup_rep
+    begin
+      Rep.find(self.carrier_setup)
     rescue
       nil
     end
@@ -128,5 +137,11 @@ class Carrier < ApplicationRecord
     def remove_children
       CarrierContact.where(:carrier_id => self.id).destroy_all
       CarrierLocation.where(:carrier_id => self.id).destroy_all
+    end
+
+    def approved?
+      if self.approved
+        self.date_approved = Date.today
+      end
     end
 end

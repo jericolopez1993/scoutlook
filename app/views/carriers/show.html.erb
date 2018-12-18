@@ -100,7 +100,7 @@
             <div class="card bg-light" >
               <div class="card-body">
                 <div class="row">
-                  <label class="col-md-4 col-form-label">is this Carrier approved to do business?</label>
+                  <label class="col-md-4 col-form-label">Approved to do business?</label>
                   <div class="col-md-8 lbl-padding-t">
                     <%= @carrier.approved ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
                   </div>
@@ -139,6 +139,12 @@
                   <label class="col-md-4 col-form-label">Relationship Owner:</label>
                   <div class="col-md-8 lbl-padding-t">
                     <%= @carrier.rep.nil? ? 'Not Assigned' : link_to(@carrier.rep.full_name, @carrier.rep) %>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-md-4 col-form-label">Carrier Setup:</label>
+                  <div class="col-md-8 lbl-padding-t">
+                    <%= @carrier.carrier_setup_rep.nil? ? 'Not Assigned' : link_to(@carrier.carrier_setup_rep.full_name, @carrier.carrier_setup_rep) %>
                   </div>
                 </div>
                 <div class="row">
@@ -339,8 +345,8 @@
               <th>Name</th>
               <th>Email</th>
               <th>Address</th>
-              <th>Work Phone</th>
-              <th>Cell</th>
+              <th>Primary Phone</th>
+              <th>Secondary Phone</th>
               <th>Social</th>
               <th data-orderable="false">Actions</th>
             </tr>
@@ -354,8 +360,8 @@
                 <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
                 <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %>" target="_top"><%= contact.email %>&nbsp;<i class="far fa-envelope"></a></i></td>
                 <td><%= contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "#{@carrier.head_office_location.address} #{@carrier.head_office_location.city}, #{@carrier.head_office_location.state}, #{@carrier.head_office_location.country} #{@carrier.head_office_location.postal}") : (contact.location.nil? ? '' : "#{contact.location.address} #{contact.location.city} #{contact.location.state}, #{contact.location.country} #{contact.location.postal}")%></td>
-                <td><%= contact.same_ho ? (@carrier.head_office_location.nil? ? '' : @carrier.head_office_location.phone) : contact.work_phone %></td>
-                <td><%= contact.home_phone %></td>
+                <td><%= contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "#{@carrier.head_office_location.address} #{@carrier.head_office_location.city}, #{@carrier.head_office_location.state}, #{@carrier.head_office_location.country} #{@carrier.head_office_location.postal}") : contact.primary_phone %>&nbsp;<%= (!contact.primary_phone_type.nil? && contact.primary_phone_type != "") ? "(#{contact.primary_phone_type})" : ""%></td>
+                <td><%= contact.same_ho ? (@carrier.head_office_location.nil? ? '' : @carrier.head_office_location.phone) : contact.secondary_phone %>&nbsp;<%= (!contact.secondary_phone_type.nil? && contact.secondary_phone_type != "") ? "(#{contact.secondary_phone_type})" : ""%></td>
                 <td style="text-align: center;"><%= contact.linkedin_link.nil? || contact.linkedin_link == "" ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
                 <td>
                   <a class="btn btn-warning btn-xs" href="<%= edit_carrier_contact_path(contact) %>"><i class="far fa-edit"></i></a>&nbsp;

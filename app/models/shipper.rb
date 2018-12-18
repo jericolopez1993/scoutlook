@@ -1,5 +1,6 @@
 class Shipper < ApplicationRecord
   audited
+  before_save :approved?
   has_many_attached :attachment_file
   after_destroy :remove_children
 
@@ -137,5 +138,10 @@ class Shipper < ApplicationRecord
     def remove_children
       ShipperContact.where(:shipper_id => self.id).destroy_all
       ShipperLocation.where(:shipper_id => self.id).destroy_all
+    end
+    def approved?
+      if self.approved
+        self.date_approved = Date.today
+      end
     end
 end
