@@ -5,23 +5,27 @@ class CarriersController < ApplicationController
   # GET /carriers
   # GET /carriers.json
   def index
-    if current_user.has_role?(:admin)
-      @carriers = Carrier.all
-      authorize @carriers
-    elsif current_user.has_role?(:steward)
-      if current_user.steward.nil?
-        @carriers = []
-      else
-      @carriers = Carrier.where(:relationship_owner => current_user.steward.id)
-      authorize @carriers
+    begin
+      if current_user.has_role?(:admin)
+        @carriers = Carrier.all
+        authorize @carriers
+      elsif current_user.has_role?(:steward)
+        if current_user.steward.nil?
+          @carriers = []
+        else
+        @carriers = Carrier.where(:relationship_owner => current_user.steward.id)
+        authorize @carriers
+        end
+      elsif current_user.has_role?(:contact)
+        begin
+          @carrier = Carrier.find(current_user.carrier_contact.carrier.id)
+          redirect_to @carrier
+        rescue
+          @carriers = nil
+        end
       end
-    elsif current_user.has_role?(:contact)
-      begin
-        @carrier = Carrier.find(current_user.carrier_contact.carrier.id)
-        redirect_to @carrier
-      rescue
-        @carriers = nil
-      end
+    rescue
+      @carriers = nil
     end
   end
 
@@ -33,8 +37,11 @@ class CarriersController < ApplicationController
   # GET /carriers/new
   def new
     @carrier = Carrier.new
-    if current_user.has_role?(:steward) && !current_user.steward.nil?
-      @carrier.relationship_owner = current_user.steward.id
+    begin
+      if current_user.has_role?(:steward) && !current_user.steward.nil?
+        @carrier.relationship_owner = current_user.steward.id
+      end
+    rescue
     end
     authorize @carrier
   end

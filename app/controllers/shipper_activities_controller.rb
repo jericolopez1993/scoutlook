@@ -20,8 +20,10 @@ class ShipperActivitiesController < ApplicationController
     if params[:shipper_id].present?
       @shipper_activity.shipper_id = params[:shipper_id]
     end
-    if current_user.has_role?(:steward) && !current_user.steward.nil?
-      @shipper_activity.rep_id = current_user.steward.id
+    if user_signed_in?
+      if current_user.has_role?(:steward) && !current_user.steward.nil?
+        @shipper_activity.rep_id = current_user.steward.id
+      end
     end
     authorize @shipper_activity
   end
