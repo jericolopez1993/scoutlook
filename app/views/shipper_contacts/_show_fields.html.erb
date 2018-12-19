@@ -1,12 +1,6 @@
 <% if !shipper_contact.nil? %>
   <% @shipper = Shipper.find(shipper_contact.shipper_id) %>
   <div class="row">
-    <label class="col-md-3 col-form-label">Type:</label>
-    <div class="col-md-9 lbl-padding-t">
-      <%= shipper_contact.contact_type %>
-    </div>
-  </div>
-  <div class="row">
     <label class="col-md-3 col-form-label">Name:</label>
     <div class="col-md-9 lbl-padding-t">
       <%= shipper_contact.full_name %>
@@ -40,7 +34,7 @@
   <div class="row">
     <label class="col-md-3 col-form-label">Address:</label>
     <div class="col-md-9 lbl-padding-t">
-      <%= shipper_contact.same_ho ? (@shipper.head_office_location.nil? ? '' : "#{@shipper.head_office_location.address} #{@shipper.head_office_location.city}, #{@shipper.head_office_location.state}, #{@shipper.head_office_location.country} #{@shipper.head_office_location.postal}") : (shipper_contact.nil? ? '' : "#{shipper_contact.address} #{shipper_contact.city} #{shipper_contact.state}, #{shipper_contact.country} #{shipper_contact.postal}")%>
+      <%= shipper_contact.same_ho ? (@shipper.head_office_location.nil? ? '' : "#{format_address(@shipper.head_office_location.address, @shipper.head_office_location.city, @shipper.head_office_location.state, @shipper.head_office_location.country, @shipper.head_office_location.postal)}") : (shipper_contact.nil? ? '' : "#{format_address(shipper_contact.address, shipper_contact.city, shipper_contact.state, shipper_contact.country, shipper_contact.postal)}")%>
     </div>
   </div>
 <% else %>

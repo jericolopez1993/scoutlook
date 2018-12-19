@@ -202,4 +202,24 @@ module ApplicationHelper
     end
   end
 
+  def format_address(address=nil, city=nil, state=nil, country=nil, postal=nil)
+    str = ""
+    if !address.nil? && address != ""
+      str += address.titleize + ", "
+    end
+    if !city.nil? && city != ""
+      str += city.titleize + ", "
+    end
+    if !state.nil? && state != ""
+      str += state.titleize + ", "
+    end
+    if !country.nil? && country != ""
+      str += country.titleize + " "
+    end
+    if !postal.nil? && postal != ""
+      str += postal.titleize
+    end
+    str
+  end
+
 end
