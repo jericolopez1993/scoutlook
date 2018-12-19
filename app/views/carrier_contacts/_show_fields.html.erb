@@ -40,7 +40,7 @@
   <div class="row">
     <label class="col-md-3 col-form-label">Address:</label>
     <div class="col-md-9 lbl-padding-t">
-      <%= carrier_contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "#{@carrier.head_office_location.address} #{@carrier.head_office_location.city}, #{@carrier.head_office_location.state}, #{@carrier.head_office_location.country} #{@carrier.head_office_location.postal}") : (carrier_contact.nil? ? '' : "#{carrier_contact.address} #{carrier_contact.city} #{carrier_contact.state}, #{carrier_contact.location.country} #{carrier_contact.postal}")%>
+      <%= carrier_contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "#{@carrier.head_office_location.address} #{@carrier.head_office_location.city}, #{@carrier.head_office_location.state}, #{@carrier.head_office_location.country} #{@carrier.head_office_location.postal}") : (carrier_contact.nil? ? '' : "#{carrier_contact.address} #{carrier_contact.city} #{carrier_contact.state}, #{carrier_contact.country} #{carrier_contact.postal}")%>
     </div>
   </div>
 <% else %>
