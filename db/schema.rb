@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_19_004421) do
+ActiveRecord::Schema.define(version: 2018_12_19_025501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,11 +121,11 @@ ActiveRecord::Schema.define(version: 2018_12_19_004421) do
 
   create_table "carrier_locations", force: :cascade do |t|
     t.string "name"
-    t.string "city"
-    t.string "address"
-    t.string "state"
-    t.string "postal"
-    t.string "country"
+    t.string "city", default: ""
+    t.string "address", default: ""
+    t.string "state", default: ""
+    t.string "postal", default: ""
+    t.string "country", default: ""
     t.string "loc_type"
     t.string "phone"
     t.boolean "is_origin", default: false
@@ -389,11 +389,11 @@ ActiveRecord::Schema.define(version: 2018_12_19_004421) do
 
   create_table "shipper_locations", force: :cascade do |t|
     t.string "name"
-    t.string "city"
-    t.string "address"
-    t.string "state"
-    t.string "postal"
-    t.string "country"
+    t.string "city", default: ""
+    t.string "address", default: ""
+    t.string "state", default: ""
+    t.string "postal", default: ""
+    t.string "country", default: ""
     t.string "loc_type"
     t.string "phone"
     t.boolean "is_origin", default: false
