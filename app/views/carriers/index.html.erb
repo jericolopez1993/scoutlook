@@ -47,12 +47,13 @@
             <td class="text-center"><%= carrier.reefers %></td>
             <td>
               <% carrier.lane_1.each do |lane| %>
-                <%= link_to(lane.lane_origin, lane, class: 'badge') %>
+                <%= link_to(((!lane.lane_origin.nil? && lane.lane_origin != "") ? "#{lane.lane_origin},#{lane.lane_destination}" : "#{lane.lane_destination}"), lane, class: 'badge') %>
+
               <% end %>
             </td>
             <td>
               <% carrier.lane_2.each do |lane| %>
-                <%= link_to(lane.lane_origin, lane, class: 'badge') %>
+                <%= link_to(((!lane.lane_origin.nil? && lane.lane_origin != "") ? "#{lane.lane_origin},#{lane.lane_destination}" : "#{lane.lane_destination}"), lane, class: 'badge') %>
               <% end %>
             </td>
             <td><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
