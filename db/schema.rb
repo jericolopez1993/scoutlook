@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_232156) do
+ActiveRecord::Schema.define(version: 2018_12_19_004421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,11 @@ ActiveRecord::Schema.define(version: 2018_12_18_232156) do
     t.string "primary_phone_type", default: ""
     t.string "secondary_phone", default: ""
     t.string "secondary_phone_type", default: ""
+    t.string "city", default: ""
+    t.string "address", default: ""
+    t.string "state", default: ""
+    t.string "postal", default: ""
+    t.string "country", default: ""
   end
 
   create_table "carrier_lanes", force: :cascade do |t|
@@ -362,6 +367,11 @@ ActiveRecord::Schema.define(version: 2018_12_18_232156) do
     t.string "primary_phone_type", default: ""
     t.string "secondary_phone", default: ""
     t.string "secondary_phone_type", default: ""
+    t.string "city", default: ""
+    t.string "address", default: ""
+    t.string "state", default: ""
+    t.string "postal", default: ""
+    t.string "country", default: ""
   end
 
   create_table "shipper_lanes", force: :cascade do |t|

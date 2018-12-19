@@ -160,7 +160,7 @@ class CarrierContactsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_contact_params
       params[:carrier_contact][:adm] = params[:adm].present?
-      params.require(:carrier_contact).permit(:title, :first_name, :last_name, :email, :work_phone, :home_phone, :location_id, :carrier_id, :linkedin_link, :adm)
+      params.require(:carrier_contact).permit(:title, :first_name, :last_name, :email, :location_id, :carrier_id, :linkedin_link, :adm, :contact_type, :primary_phone, :primary_phone_type, :secondary_phone, :secondary_phone_type, :address, :city, :postal, :country, :state)
     end
     def user_params
       params.require(:carrier_contact).permit(:first_name, :last_name, :email, :password)

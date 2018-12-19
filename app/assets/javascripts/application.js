@@ -118,12 +118,11 @@ var originTags = [
   "US-Midwest",
 ];
 var destinationTags = originTags;
-$(function(){
+$(document).ready(function() {
   activityOutcomeFields($("#engagement_type").val(), $("#engagement_status").val(), $("#engagement_outcome").val());
-  sameHeadOffice($('[data-change="check-switchery-state-text"]').prop('checked'));
   isHeadOffice($('[data-change="check-switchery-state-same-office"]').prop('checked'));
   shipmentFields($('input[type=radio][name="master_invoice[shipment_entry]"]:checked').val());
-  addressCreate($('[data-change="check-switchery-state-new-location"]').prop('checked'));
+  // addressCreate($('[data-change="check-switchery-state-new-location"]').prop('checked'));
   addressCreateOD($('[data-change="check-switchery-state-new-location-origin"]').prop('checked'), 'origin');
   addressCreateOD($('[data-change="check-switchery-state-new-location-destination"]').prop('checked'), 'destination');
   addressCreateQuickS($('[data-change="check-switchery-state-new-location-quick-destination"]').prop('checked'), 'quick_destination');
@@ -133,7 +132,6 @@ $(function(){
   $(".multiple-select2").select2({ placeholder: "Select commodities" });
   $(".origin-multiple-select2").select2({ placeholder: "Select origins" });
   $(".destination-multiple-select2").select2({ placeholder: "Select destinations" });
-
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
 
