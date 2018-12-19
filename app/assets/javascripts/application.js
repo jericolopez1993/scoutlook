@@ -488,3 +488,27 @@ function setFieldMask(country_id, field_mask_id){
     $(selector).inputmask('remove');
   }
 }
+
+function filterTable(id){
+  $('#' + id + ' tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+
+    // DataTable
+    var table = $('#' + id).DataTable({
+            		"scrollX": true});
+
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+}

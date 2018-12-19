@@ -1,3 +1,8 @@
+<style>
+  .dataTables_scroll{position:relative}
+  .dataTables_scrollHead{margin-bottom:40px;}
+  .dataTables_scrollFoot{position:absolute; top:38px}
+</style>
 <!-- begin page-header -->
 <!-- end page-header -->
 <!-- begin panel -->
@@ -10,7 +15,7 @@
       <h4 class="panel-title lp-header">Carriers</h4>
     </div>
     <div class="panel-body">
-      <table class="table table-striped table-bordered data-table-buttons display nowrap"  data-order="[[7, &quot;asc&quot;]]">
+      <table class="table table-striped table-bordered display nowrap"  data-order="[[7, &quot;asc&quot;]]" id="carrier_table">
         <thead>
           <tr>
             <th>Approved</th>
@@ -31,6 +36,26 @@
             <th>Ops Email</th>
           </tr>
         </thead>
+        <tfoot>
+          <tr>
+            <th>Approved</th>
+            <th>RO</th>
+            <th>Class</th>
+            <th>CR</th>
+            <th>LstDateCon</th>
+            <th>6M</th>
+            <th>1M</th>
+            <th>Name</th>
+            <th>MC</th>
+            <th>ST/PV</th>
+            <th>Reef</th>
+            <th>Lane 1</th>
+            <th>Lane 2</th>
+            <th>Ops Name</th>
+            <th>Ops Phone</th>
+            <th>Ops Email</th>
+          </tr>
+        </tfoot>
       <tbody>
         <% @carriers.each do |carrier| %>
           <tr>
@@ -72,4 +97,9 @@
     </div>
   </div>
 </div>
-<!-- end panel -->
+
+<script language="javascript">
+  $(document).ready(function() {
+    filterTable("carrier_table");
+  });
+</script>

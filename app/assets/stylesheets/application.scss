@@ -269,3 +269,6 @@ table.dataTable {
 .tags {
   display: inline-block;
 }
+tfoot {
+     display: table-header-group;
+}
