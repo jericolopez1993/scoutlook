@@ -150,7 +150,12 @@ class ShipperActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipper_activity_params
-      params.require(:shipper_activity).permit(:activity_type, :engagement_type, :shipper_id, :rep_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id)
+      if !params[:shipper_activity][:date_stamp].nil? && params[:shipper_activity][:date_stamp] != ''
+        params[:shipper_activity][:date_stamp] = Date::strptime(params[:shipper_activity][:date_stamp], "%m/%d/%Y")
+      else
+        params[:shipper_activity].delete :date_stamp
+      end
+      params.require(:shipper_activity).permit(:date_stamp, :activity_type, :engagement_type, :shipper_id, :rep_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id)
     end
     def shipper_activity_outcome_params
       params.require(:shipper_activity).permit(:outcome, :reason, :notes)

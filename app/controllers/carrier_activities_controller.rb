@@ -151,7 +151,12 @@ class CarrierActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_activity_params
-      params.require(:carrier_activity).permit(:activity_type, :engagement_type, :carrier_id, :rep_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id)
+      if !params[:carrier_activity][:date_stamp].nil? && params[:carrier_activity][:date_stamp] != ''
+        params[:carrier_activity][:date_stamp] = Date::strptime(params[:carrier_activity][:date_stamp], "%m/%d/%Y")
+      else
+        params[:carrier_activity].delete :date_stamp
+      end
+      params.require(:carrier_activity).permit(:date_stamp, :activity_type, :engagement_type, :carrier_id, :rep_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id)
     end
     def carrier_activity_outcome_params
       params.require(:carrier_activity).permit(:outcome, :reason, :notes)

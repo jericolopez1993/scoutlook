@@ -35,6 +35,12 @@ label {
   <div class="panel-body">
     <h4 class="text-inverse">Outcome</h4>
     <div class="row">
+      <label class="col-md-2 col-form-label">Date Stamp:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= convert_date(@shipper_activity.date_stamp) %>
+      </div>
+    </div>
+    <div class="row">
       <label class="col-md-2 col-form-label">Type:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @shipper_activity.activity_type %>

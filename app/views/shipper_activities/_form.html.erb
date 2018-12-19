@@ -8,7 +8,7 @@
 <!-- begin page-header -->
 <div class="header-darkblue">
   <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Engagement' : "Edit Engagement - #{shipper_activity.shipper.nil? ? '' : link_to(shipper_activity.shipper.company_name,  shipper_activity.shipper)}" %>
+    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Activity' : "Edit Activity - #{shipper_activity.shipper.nil? ? '' : link_to(shipper_activity.shipper.company_name,  shipper_activity.shipper)}" %>
   </h1>
 </div>
 <!-- end page-header -->
@@ -34,15 +34,21 @@
       <% end %>
       <h4 class="text-inverse">Details</h4>
       <div class="form-group row m-b-15">
+        <%= form.label :date_stamp, 'Date Stamp:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :date_stamp, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: shipper_activity.date_stamp, :id => "date_stamp"%>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
         <%= form.label :activity_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :activity_type, options_for_select(['Engagement', 'Loop', 'Courtesy', 'Prospecting'], shipper_activity.activity_type), {:include_blank => false}, class: 'form-control', id: 'engagement_type' %>
+          <%= form.select :activity_type, options_for_select(['Initial Prespecting', 'Follow-up Prospecting', 'Update Information', 'Courtesy', 'Schedule, Rates, Booking', 'Loop'], shipper_activity.activity_type), {:include_blank => false}, class: 'form-control', id: 'engagement_type' %>
         </div>
       </div>
       <div class="form-group row m-b-15 engagement-fields"  style="display: none;">
         <%= form.label :engagement_type, 'Engagement Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :engagement_type, options_for_select(['Phone', 'In-Person'], shipper_activity.engagement_type),{:include_blank => true}, class: 'form-control' %>
+          <%= form.select :engagement_type, options_for_select(['Phone', 'In-Person', 'E-mail'], shipper_activity.engagement_type),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_025845) do
+ActiveRecord::Schema.define(version: 2018_12_18_232156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_025845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "carrier_id"
+    t.date "date_stamp"
   end
 
   create_table "carrier_activity_outcomes", force: :cascade do |t|
@@ -333,6 +334,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_025845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "shipper_id"
+    t.date "date_stamp"
   end
 
   create_table "shipper_activity_outcomes", force: :cascade do |t|

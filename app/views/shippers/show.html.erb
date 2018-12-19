@@ -69,7 +69,7 @@
       </button>
       <%= link_to 'New Location', new_shipper_location_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-location-btn' %>
       <%= link_to 'New Contact', new_shipper_contact_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-contact-btn' %>
-      <%= link_to 'New Engagements', new_shipper_activity_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-activity-btn' %>
+      <%= link_to 'New Activities', new_shipper_activity_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-activity-btn' %>
       <%= link_to 'New Lane', new_shipper_lane_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
       <%= link_to 'New Rates', new_shipper_rate_path(:shipper_id => @shipper.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
     </div>
@@ -91,7 +91,7 @@
       </li>
       <li class="nav-items">
         <a href="#activity" data-toggle="tab" class="nav-link activity-btn" style="padding:5px; margin: 0px 10px">
-          <span class="d-sm-block d-none"><h4 class="panel-title">Engagements</h4></span>
+          <span class="d-sm-block d-none"><h4 class="panel-title">Activities</h4></span>
         </a>
       </li>
       <li class="nav-items">

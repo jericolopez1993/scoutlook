@@ -34,15 +34,21 @@
     <% end %>
       <h4 class="text-inverse">Details</h4>
       <div class="form-group row m-b-15">
+        <%= form.label :date_stamp, 'Date Stamp:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :date_stamp, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: carrier_activity.date_stamp, :id => "date_stamp"%>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
         <%= form.label :activity_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :activity_type, options_for_select(['Engagement', 'Loop', 'Courtesy', 'Prospecting'], carrier_activity.activity_type), {:include_blank => false}, class: 'form-control', id: 'engagement_type' %>
+          <%= form.select :activity_type, options_for_select(['Initial Prespecting', 'Follow-up Prospecting', 'Initial Set-Up', 'Update Information', 'Courtesy', 'Schedule, Rates, Booking', 'RFP or Contacts', 'Loop'], carrier_activity.activity_type), {:include_blank => false}, class: 'form-control', id: 'engagement_type' %>
         </div>
       </div>
       <div class="form-group row m-b-15 engagement-fields"  style="display: none;">
         <%= form.label :engagement_type, 'Engagement Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :engagement_type, options_for_select(['Phone', 'In-Person'], carrier_activity.engagement_type),{:include_blank => true}, class: 'form-control' %>
+          <%= form.select :engagement_type, options_for_select(['Phone', 'In-Person', 'E-mail'], carrier_activity.engagement_type),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
