@@ -13,6 +13,7 @@
   </div>
   <!-- end navbar-header -->
 
+  <% if user_signed_in? %>
   <!-- begin header-nav -->
   <ul class="navbar-nav navbar-right">
     <li>
@@ -23,7 +24,6 @@
         </div>
       </form>
     </li>
-
     <% if current_user.admin? %>
       <% audits = Audit.today %>
       <li class="dropdown">
@@ -90,5 +90,6 @@
       </div>
     </li>
   </ul>
+  <% end %>
   <!-- end header navigation right -->
 </div>

@@ -74,12 +74,12 @@
               <td><%= shipper.loads_per_month %></td>
               <td>
                 <% shipper.lane_1.each do |lane| %>
-                  <%= link_to(((!lane.lane_origin.nil? && lane.lane_origin != "") ? "#{lane.lane_origin},#{lane.lane_destination}" : "#{lane.lane_destination}"), lane, class: 'badge') %>
+                  <%= link_to(((!lane.lane_origin.nil? && lane.lane_origin != "") ? "#{lane.lane_origin} -> #{lane.lane_destination}" : "#{lane.lane_destination}"), lane, class: 'badge') %>
                 <% end %>
               </td>
               <td>
                 <% shipper.lane_2.each do |lane| %>
-                  <%= link_to(((!lane.lane_origin.nil? && lane.lane_origin != "") ? "#{lane.lane_origin},#{lane.lane_destination}" : "#{lane.lane_destination}"), lane, class: 'badge') %>
+                  <%= link_to(((!lane.lane_origin.nil? && lane.lane_origin != "") ? "#{lane.lane_origin} -> #{lane.lane_destination}" : "#{lane.lane_destination}"), lane, class: 'badge') %>
                 <% end %>
               </td>
               <td>

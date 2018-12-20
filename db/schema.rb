@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_19_235252) do
+ActiveRecord::Schema.define(version: 2018_12_20_030634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_235252) do
     t.integer "carrier_id"
     t.date "date_stamp"
     t.integer "user_id"
+    t.string "campaign_name", default: ""
   end
 
   create_table "carrier_activity_outcomes", force: :cascade do |t|
@@ -207,6 +208,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_235252) do
     t.string "mc_number"
     t.integer "carrier_setup"
     t.date "date_approved"
+    t.date "last_load_date"
   end
 
   create_table "master_invoices", force: :cascade do |t|
@@ -340,6 +342,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_235252) do
     t.integer "shipper_id"
     t.date "date_stamp"
     t.integer "user_id"
+    t.string "campaign_name", default: ""
   end
 
   create_table "shipper_activity_outcomes", force: :cascade do |t|

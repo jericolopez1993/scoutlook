@@ -4,21 +4,35 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if !user_signed_in?
+      redirect_to(unauthenticated_root_path)
+    else
+      @users = User.all
+    end
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    if !user_signed_in?
+      redirect_to(unauthenticated_root_path)
+    end
   end
 
   # GET /users/new
   def new
-    @user = User.new
+    if !user_signed_in?
+      redirect_to(unauthenticated_root_path)
+    else
+      @user = User.new
+    end
   end
 
   # GET /users/1/edit
   def edit
+    if !user_signed_in?
+      redirect_to(unauthenticated_root_path)
+    end
   end
 
   # POST /users
