@@ -22,7 +22,7 @@ class CarrierActivitiesController < ApplicationController
     end
     if user_signed_in?
       if current_user.has_role?(:steward) && !current_user.steward.nil?
-        @carrier_activity.rep_id = current_user.steward.id
+        @carrier_activity.user_id = current_user.steward.id
       end
     end
 
@@ -156,7 +156,7 @@ class CarrierActivitiesController < ApplicationController
       else
         params[:carrier_activity].delete :date_stamp
       end
-      params.require(:carrier_activity).permit(:date_stamp, :activity_type, :engagement_type, :carrier_id, :rep_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id)
+      params.require(:carrier_activity).permit(:date_stamp, :activity_type, :engagement_type, :carrier_id, :user_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id)
     end
     def carrier_activity_outcome_params
       params.require(:carrier_activity).permit(:outcome, :reason, :notes)

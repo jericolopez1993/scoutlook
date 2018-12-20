@@ -16,7 +16,7 @@
       <tr>
         <td><%= carrier_activity.date_stamp %></td>
         <td><%= carrier_activity.activity_type %></td>
-        <td><%= carrier_activity.rep.nil? ? "" : (link_to "#{carrier_activity.rep.first_name} #{carrier_activity.rep.last_name}", carrier_activity.rep) %></td>
+        <td><%= carrier_activity.user.nil? ? "" : (link_to "#{carrier_activity.user.first_name} #{carrier_activity.user.last_name}", carrier_activity.user) %></td>
         <td><%= carrier_activity.annual_value %></td>
         <td><%= carrier_activity.status ? 'Open' : 'Closed' %></td>
         <td><%= convert_date(carrier_activity.date_opened) %></td>

@@ -66,13 +66,13 @@
           <div class="form-group row m-b-15">
             <%= form.label :relationship_owner, 'Relationship Owner:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.select :relationship_owner, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier.relationship_owner}, class: 'form-control' %>
+              <%= form.select :relationship_owner, User.where(:ro => true).collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier.relationship_owner}, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
             <%= form.label :carrier_setup, 'Carrier Setup:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.select :carrier_setup, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier.carrier_setup}, class: 'form-control' %>
+              <%= form.select :carrier_setup, User.where(:cs => true).collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier.carrier_setup}, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">

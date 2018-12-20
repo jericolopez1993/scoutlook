@@ -57,7 +57,7 @@ label {
     <div class="row">
       <label class="col-md-2 col-form-label">Steward:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.rep.nil? ? "" : (link_to "#{@carrier_activity.rep.first_name} #{@carrier_activity.rep.last_name}", @carrier_activity.rep) %>
+        <%= @carrier_activity.user.nil? ? "" : (link_to "#{@carrier_activity.user.first_name} #{@carrier_activity.user.last_name}", @carrier_activity.user) %>
       </div>
     </div>
     <div class="row">

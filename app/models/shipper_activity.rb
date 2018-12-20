@@ -29,9 +29,9 @@ class ShipperActivity < ApplicationRecord
     end
   end
 
-  def rep
+  def user
     begin
-      Rep.find(self.rep_id)
+      User.find(self.user_id)
     rescue
       nil
     end

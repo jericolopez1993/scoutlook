@@ -8,9 +8,9 @@ class CarrierRate < ApplicationRecord
       "Carrier Rate to #{self.carrier.display_name}"
     end
   end
-  def rep
+  def user
     begin
-      Rep.find(self.rep_id)
+      User.find(self.user_id)
     rescue
       nil
     end

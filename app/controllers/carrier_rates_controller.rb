@@ -93,6 +93,6 @@ class CarrierRatesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_rate_params
-      params.require(:carrier_rate).permit(:client_id, :carrier_id, :rate_type, :parent_id, :rate_level, :rep_id, :effective_to, :effective_from, :origin_location_id, :destination_location_id, :freight_desc, :freight_classification, :transit_time, :minimum_density, :origin_city, :origin_state, :origin_country, :destination_city, :destination_state, :destination_country)
+      params.require(:carrier_rate).permit(:client_id, :carrier_id, :rate_type, :parent_id, :rate_level, :user_id, :effective_to, :effective_from, :origin_location_id, :destination_location_id, :freight_desc, :freight_classification, :transit_time, :minimum_density, :origin_city, :origin_state, :origin_country, :destination_city, :destination_state, :destination_country)
     end
 end

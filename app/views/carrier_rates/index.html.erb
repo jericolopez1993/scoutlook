@@ -26,7 +26,7 @@
           <tr>
             <td><%= carrier_rate.carrier.nil? ? "" : (link_to carrier_rate.carrier.company_name, carrier_rate.carrier) %></td>
             <td><%= carrier_rate.rate_level %></td>
-            <td><%= carrier_rate.rep.nil? ? "" : (link_to "#{carrier_rate.rep.first_name} #{carrier_rate.rep.last_name}", carrier_rate.rep) %></td>
+            <td><%= carrier_rate.user.nil? ? "" : (link_to "#{carrier_rate.user.first_name} #{carrier_rate.user.last_name}", carrier_rate.user) %></td>
             <td><%= carrier_rate.rate_type %></td>
             <td><%= carrier_rate.parent.nil? ? "" : (link_to carrier_rate.parent.rate_level, carrier_rate.parent) %></td>
             <td>

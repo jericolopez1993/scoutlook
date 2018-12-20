@@ -16,7 +16,7 @@
       <tr>
         <td><%= shipper_activity.date_stamp %></td>
         <td><%= shipper_activity.activity_type %></td>
-        <td><%= shipper_activity.rep.nil? ? "" : (link_to "#{shipper_activity.rep.first_name} #{shipper_activity.rep.last_name}", shipper_activity.rep) %></td>
+        <td><%= shipper_activity.user.nil? ? "" : (link_to "#{shipper_activity.user.first_name} #{shipper_activity.user.last_name}", shipper_activity.user) %></td>
         <td><%= shipper_activity.annual_value %></td>
         <td><%= shipper_activity.status ? 'Open' : 'Closed' %></td>
         <td><%= convert_date(shipper_activity.date_opened) %></td>

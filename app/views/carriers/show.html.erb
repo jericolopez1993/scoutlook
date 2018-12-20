@@ -114,7 +114,7 @@
                 <div class="row">
                   <label class="col-md-4 col-form-label">Last Contact:</label>
                   <div class="col-md-8 lbl-padding-t">
-                    <%= @carrier.last_contact_date.nil? ? "" : (@carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s + " " + (@carrier.last_contact_date.rep.nil? ? "" : link_to(@carrier.last_contact_date.rep.full_name, @carrier.last_contact_date.rep))).html_safe %>
+                    <%= @carrier.last_contact_date.nil? ? "" : (@carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s + " " + (@carrier.last_contact_date.user.nil? ? "" : link_to(@carrier.last_contact_date.user.full_name, @carrier.last_contact_date.user))).html_safe %>
                   </div>
                 </div>
                 <div class="row">
@@ -138,13 +138,13 @@
                 <div class="row">
                   <label class="col-md-4 col-form-label">Relationship Owner:</label>
                   <div class="col-md-8 lbl-padding-t">
-                    <%= @carrier.rep.nil? ? 'Not Assigned' : link_to(@carrier.rep.full_name, @carrier.rep) %>
+                    <%= @carrier.relationship_owner_user.nil? ? 'Not Assigned' : link_to(@carrier.relationship_owner_user.full_name, @carrier.relationship_owner_user) %>
                   </div>
                 </div>
                 <div class="row">
                   <label class="col-md-4 col-form-label">Carrier Setup:</label>
                   <div class="col-md-8 lbl-padding-t">
-                    <%= @carrier.carrier_setup_rep.nil? ? 'Not Assigned' : link_to(@carrier.carrier_setup_rep.full_name, @carrier.carrier_setup_rep) %>
+                    <%= @carrier.carrier_setup_user.nil? ? 'Not Assigned' : link_to(@carrier.carrier_setup_user.full_name, @carrier.carrier_setup_user) %>
                   </div>
                 </div>
                 <div class="row">
@@ -393,7 +393,7 @@
             <% CarrierRate.where(:carrier_id => @carrier.id).each do |carrier_rate| %>
               <tr>
                 <td><%= carrier_rate.rate_level %></td>
-                <td><%= carrier_rate.rep.nil? ? "" : (link_to "#{carrier_rate.rep.first_name} #{carrier_rate.rep.last_name}", carrier_rate.rep) %></td>
+                <td><%= carrier_rate.user.nil? ? "" : (link_to "#{carrier_rate.user.first_name} #{carrier_rate.user.last_name}", carrier_rate.user) %></td>
                 <td><%= carrier_rate.rate_type %></td>
                 <td><%= carrier_rate.parent.nil? ? "" : (link_to carrier_rate.parent.rate_level, carrier_rate.parent) %></td>
                 <td>

@@ -22,7 +22,7 @@ class ShipperActivitiesController < ApplicationController
     end
     if user_signed_in?
       if current_user.has_role?(:steward) && !current_user.steward.nil?
-        @shipper_activity.rep_id = current_user.steward.id
+        @shipper_activity.user_id = current_user.steward.id
       end
     end
     authorize @shipper_activity
@@ -155,7 +155,7 @@ class ShipperActivitiesController < ApplicationController
       else
         params[:shipper_activity].delete :date_stamp
       end
-      params.require(:shipper_activity).permit(:date_stamp, :activity_type, :engagement_type, :shipper_id, :rep_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id)
+      params.require(:shipper_activity).permit(:date_stamp, :activity_type, :engagement_type, :shipper_id, :user_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id)
     end
     def shipper_activity_outcome_params
       params.require(:shipper_activity).permit(:outcome, :reason, :notes)

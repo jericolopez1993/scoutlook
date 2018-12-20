@@ -7,9 +7,9 @@
       <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || (!current_user.shipper_contact.nil? && current_user.has_role?(:contact)) %>
         <li><a href="<%= shippers_path %>" class="<%= (params[:controller] == 'shippers') ? 'active' : ''%> shipper"><i class="fa fa-truck"></i> <span>Shippers</span></a></li>
       <% end %>
-      <% if current_user.has_role?(:admin) %>
-        <li><a href="<%= reps_path %>" class="<%= (params[:controller] == 'reps') ? 'active' : ''%> steward"><i class="fa fa-users"></i> <span>Stewards</span></a></li>
-      <% end %>
+      <%# <% if current_user.has_role?(:admin) %>
+        <!-- <li><a href="<%#= reps_path %>" class="<%#= (params[:controller] == 'reps') ? 'active' : ''%> steward"><i class="fa fa-users"></i> <span>Stewards</span></a></li> -->
+      <%# end %>
       <li class="menu-control menu-control-left show">
         <a href="javascript:;" data-click="prev-menu"><i class="fa fa-angle-left"></i></a>
       </li>

@@ -14,9 +14,9 @@ class Shipper < ApplicationRecord
     end
   end
 
-  def rep
+  def relationship_owner_user
     begin
-      Rep.find(self.relationship_owner)
+      User.find(self.relationship_owner)
     rescue
       nil
     end

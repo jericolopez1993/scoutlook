@@ -60,7 +60,7 @@
         <% @carriers.each do |carrier| %>
           <tr>
             <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-            <td class="text-center"><%= carrier.rep.nil? ? '' : "#{link_to("#{carrier.rep.first_name[0]}#{carrier.rep.last_name[0]}", carrier.rep)}".html_safe %></td>
+            <td class="text-center"><%= carrier.relationship_owner_user.nil? ? '' : "#{link_to("#{carrier.relationship_owner_user.first_name[0]}#{carrier.relationship_owner_user.last_name[0]}", carrier.relationship_owner_user)}".html_safe %></td>
             <td class="text-center"><%= carrier.sales_priority %></td>
             <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
             <td><%= carrier.last_contact_date.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>

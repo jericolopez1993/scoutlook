@@ -62,7 +62,7 @@
           <% @shippers.each do |shipper| %>
             <tr>
               <td class="text-center"><%= shipper.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= shipper.rep.nil? ? '' : "#{link_to("#{shipper.rep.first_name[0]}#{shipper.rep.last_name[0]}", shipper.rep)}".html_safe %></td>
+              <td class="text-center"><%= shipper.relationship_owner_user.nil? ? '' : "#{link_to("#{shipper.relationship_owner_user.first_name[0]}#{shipper.relationship_owner_user.last_name[0]}", shipper.relationship_owner_user)}".html_safe %></td>
               <td class="text-center"><%= shipper.sales_priority %></td>
               <td class="text-center"><%= shipper.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
               <td><%= shipper.last_contact_date.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>

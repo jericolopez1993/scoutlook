@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_19_025501) do
+ActiveRecord::Schema.define(version: 2018_12_19_235252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 2018_12_19_025501) do
   create_table "carrier_activities", force: :cascade do |t|
     t.string "activity_type"
     t.string "engagement_type"
-    t.integer "rep_id"
     t.string "annual_value"
     t.boolean "status"
     t.datetime "date_opened"
@@ -72,6 +71,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_025501) do
     t.datetime "updated_at", null: false
     t.integer "carrier_id"
     t.date "date_stamp"
+    t.integer "user_id"
   end
 
   create_table "carrier_activity_outcomes", force: :cascade do |t|
@@ -139,7 +139,6 @@ ActiveRecord::Schema.define(version: 2018_12_19_025501) do
     t.string "rate_type"
     t.integer "parent_id"
     t.string "rate_level"
-    t.integer "rep_id"
     t.string "effective_to"
     t.string "effective_from"
     t.string "freight_desc"
@@ -155,6 +154,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_025501) do
     t.string "destination_city", default: ""
     t.string "destination_state", default: ""
     t.string "destination_country", default: ""
+    t.integer "user_id"
   end
 
   create_table "carriers", force: :cascade do |t|
@@ -329,7 +329,6 @@ ActiveRecord::Schema.define(version: 2018_12_19_025501) do
   create_table "shipper_activities", force: :cascade do |t|
     t.string "activity_type"
     t.string "engagement_type"
-    t.integer "rep_id"
     t.string "annual_value"
     t.boolean "status"
     t.datetime "date_opened"
@@ -340,6 +339,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_025501) do
     t.datetime "updated_at", null: false
     t.integer "shipper_id"
     t.date "date_stamp"
+    t.integer "user_id"
   end
 
   create_table "shipper_activity_outcomes", force: :cascade do |t|
@@ -407,7 +407,6 @@ ActiveRecord::Schema.define(version: 2018_12_19_025501) do
     t.string "rate_type"
     t.integer "parent_id"
     t.string "rate_level"
-    t.integer "rep_id"
     t.string "effective_to"
     t.string "effective_from"
     t.string "freight_desc"
@@ -423,6 +422,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_025501) do
     t.string "destination_city", default: ""
     t.string "destination_state", default: ""
     t.string "destination_country", default: ""
+    t.integer "user_id"
   end
 
   create_table "shippers", force: :cascade do |t|
@@ -494,6 +494,8 @@ ActiveRecord::Schema.define(version: 2018_12_19_025501) do
     t.boolean "admin", default: false
     t.integer "carrier_contact_id"
     t.integer "shipper_contact_id"
+    t.boolean "ro", default: false
+    t.boolean "cs", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

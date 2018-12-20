@@ -1,6 +1,63 @@
-<p id="notice"><%= notice %></p>
+<style>
+@media (max-width: 767px) {
+  .text-right {
+    text-align: left!important;
+  }
+}
+</style>
+<!-- begin page-header -->
+<div class="header-violet">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: generate_alphanumeric_id("#{@user.first_name} #{@user.last_name}", @user.id), sub_header_title: "#{@user.first_name} #{@user.last_name}" %>
+  </h1>
+  <span class="pull-right">
+    <%= link_to 'Edit', edit_user_path(@user), :class => 'btn btn-warning btn-xs' %>
+    <%= link_to 'Back', users_path, :class => 'btn btn-info btn-xs' %>
+    <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+  </span>
+</div>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <!-- <div class="panel-heading">
+    <div class="panel-heading-btn">
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-<a class="btn btn-info" href="/users/1">Show</a>
-<a class="btn btn-warning" href="/users/1/edit">Edit</a>
+    </div>
+  </div> -->
+  <div class="panel-body">
+    <h4 class="text-inverse">Details</h4>
+    <div class="row">
+      <label class="col-md-2 text-right col-form-label">Administrator:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @user.has_role?(:admin) ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 text-right col-form-label">in Relationship Owner choices?</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @user.ro ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 text-right col-form-label">in Carrier Setup choices?</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @user.cs ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 text-right col-form-label">Name:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @user.first_name %>&nbsp;<%= @user.last_name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <label class="col-md-2 text-right col-form-label">E-mail:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @user.email %>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end panel -->

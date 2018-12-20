@@ -10,7 +10,9 @@ class User < ApplicationRecord
   def display_name
     "<a href='/users'>Users</a>"
   end
-
+  def full_name
+    (self.first_name.nil? ? '' : self.first_name) + " " + (self.last_name.nil? ? '' : self.last_name)
+  end
   def steward
     begin
       Rep.where(:user_id => self.id).first

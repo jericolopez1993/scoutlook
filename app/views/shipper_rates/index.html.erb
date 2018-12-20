@@ -26,7 +26,7 @@
           <tr>
             <td><%= shipper_rate.shipper.nil? ? "" : (link_to shipper_rate.shipper.company_name, shipper_rate.shipper) %></td>
             <td><%= shipper_rate.rate_level %></td>
-            <td><%= shipper_rate.rep.nil? ? "" : (link_to "#{shipper_rate.rep.first_name} #{shipper_rate.rep.last_name}", shipper_rate.rep) %></td>
+            <td><%= shipper_rate.user.nil? ? "" : (link_to "#{shipper_rate.user.first_name} #{shipper_rate.user.last_name}", shipper_rate.user) %></td>
             <td><%= shipper_rate.rate_type %></td>
             <td><%= shipper_rate.parent.nil? ? "" : (link_to shipper_rate.parent.rate_level, shipper_rate.parent) %></td>
             <td>

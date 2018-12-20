@@ -13,17 +13,17 @@ class Carrier < ApplicationRecord
     end
   end
 
-  def rep
+  def relationship_owner_user
     begin
-      Rep.find(self.relationship_owner)
+      User.find(self.relationship_owner)
     rescue
       nil
     end
   end
 
-  def carrier_setup_rep
+  def carrier_setup_user
     begin
-      Rep.find(self.carrier_setup)
+      User.find(self.carrier_setup)
     rescue
       nil
     end

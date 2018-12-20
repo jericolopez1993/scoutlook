@@ -59,9 +59,9 @@
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :rep_id, 'Steward:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :user_id, 'Steward:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :rep_id, Rep.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier_rate.rep_id}, class: 'form-control' %>
+          <%= form.select :user_id, User.all.collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier_rate.user_id}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
