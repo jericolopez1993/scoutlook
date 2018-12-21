@@ -5,24 +5,22 @@ class ShippersController < ApplicationController
   # GET /shippers
   # GET /shippers.json
   def index
-    if user_signed_in?
+    if !user_signed_in?
+      redirect_to(unauthenticated_root_path)
+    else
+      @shippers = []
       if current_user.has_role?(:admin)
         @shippers = Shipper.all
         authorize @shippers
-      elsif current_user.has_role?(:steward)
-        if current_user.steward.nil?
-          @shippers = []
-        else
-        @shippers = Shipper.where(:relationship_owner => current_user.steward.id)
+      elsif current_user.has_role?(:steward) || current_user.ro || current_user.cs
+        @shippers = Shipper.where(:relationship_owner => current_user.id)
         authorize @shippers
-        end
       elsif current_user.has_role?(:contact)
         begin
           @shipper = Shipper.find(current_user.shipper_contact.shipper.id)
           redirect_to @shipper
         rescue
-          @shippers = nil
-        end
+          @shippers = [] end
       end
     end
   end
@@ -37,7 +35,7 @@ class ShippersController < ApplicationController
     @shipper = Shipper.new
     if user_signed_in?
       if current_user.has_role?(:steward) && !current_user.steward.nil?
-        @carrier.relationship_owner = current_user.steward.id
+        @shipper.relationship_owner = current_user.steward.id
       end
     end
     authorize @shipper

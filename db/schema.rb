@@ -190,7 +190,7 @@ ActiveRecord::Schema.define(version: 2018_12_20_030634) do
     t.integer "dry_vans", default: 0
     t.integer "flat_beds", default: 0
     t.integer "teams", default: 0
-    t.string "contract_rates"
+    t.boolean "contract_rates", default: false
     t.text "find_loads"
     t.boolean "complete_record", default: false
     t.string "total_fleet_size"

@@ -114,7 +114,7 @@
                 <div class="row">
                   <label class="col-md-4 col-form-label">Last Contact:</label>
                   <div class="col-md-8 lbl-padding-t">
-                    <%= @carrier.last_contact_date.nil? ? "" : (@carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s + " " + (@carrier.last_contact_date.user.nil? ? "" : link_to(@carrier.last_contact_date.user.full_name, @carrier.last_contact_date.user))).html_safe %>
+                    <%= @carrier.last_contact_date.nil? || @carrier.last_contact_date.date_opened.nil? ? "" : (@carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s + " " + (@carrier.last_contact_date.user.nil? ? "" : link_to(@carrier.last_contact_date.user.full_name, @carrier.last_contact_date.user))).html_safe %>
                   </div>
                 </div>
                 <div class="row">
@@ -238,9 +238,9 @@
                   </div>
                 </div>
                 <div class="row">
-                  <label class="col-md-4 col-form-label">Contact Rates:</label>
+                  <label class="col-md-4 col-form-label">Contract Rates:</label>
                   <div class="col-md-8 lbl-padding-t">
-                    <%= @carrier.contract_rates %>
+                    <%= @carrier.contract_rates ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
                   </div>
                 </div>
                 <div class="row">
@@ -288,7 +288,7 @@
             <div class="card bg-light">
               <div class="card-body">
                 <h4 class="card-title">Ops Contact</h4>
-                  <%= render 'carrier_contacts/show_fields', carrier_contact: @carrier.poc %>
+                <%= render 'carrier_contacts/show_fields', carrier_contact: @carrier.poc %>
               </div>
             </div>
             <div class="card bg-light">
@@ -382,7 +382,7 @@
                 <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
                 <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %>" target="_top"><%= contact.email %>&nbsp;<i class="far fa-envelope"></a></i></td>
                 <td><%= contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "#{format_address(@carrier.head_office_location.address, @carrier.head_office_location.city, @carrier.head_office_location.state, @carrier.head_office_location.country, @carrier.head_office_location.postal)}") : ("#{format_address(contact.address, contact.city, contact.state, contact.country, contact.postal)}")%></td>
-                <td><%= contact.primary_phone %>&nbsp;<%= (!contact.primary_phone_type.nil? && contact.primary_phone_type != "") ? "(#{contact.primary_phone_type})" : ""%></td>
+                <td><b><%= contact.primary_phone %>&nbsp;<%= (!contact.primary_phone_type.nil? && contact.primary_phone_type != "") ? "(#{contact.primary_phone_type})" : ""%></b></td>
                 <td><%= contact.secondary_phone %>&nbsp;<%= (!contact.secondary_phone_type.nil? && contact.secondary_phone_type != "") ? "(#{contact.secondary_phone_type})" : ""%></td>
                 <td style="text-align: center;"><%= contact.linkedin_link.nil? || contact.linkedin_link == "" ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
                 <td>

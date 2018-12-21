@@ -27,8 +27,8 @@
   <div class="row">
     <label class="col-md-3 col-form-label">Phone Numbers:</label>
     <div class="col-md-9 lbl-padding-t">
-      <%= (!carrier_contact.primary_phone.nil? && carrier_contact.primary_phone != "") ? ("P1: " + carrier_contact.primary_phone + " " + carrier_contact.primary_phone_type + "<br/>").html_safe : ""  %>
-      <%= (!carrier_contact.secondary_phone.nil? && carrier_contact.secondary_phone != "") ? ("P2: " + carrier_contact.secondary_phone + " " + carrier_contact.secondary_phone_type).html_safe : ""  %>
+      <b><%= (!carrier_contact.primary_phone.nil? && carrier_contact.primary_phone != "") ? ("P1: " + carrier_contact.primary_phone + " " + carrier_contact.primary_phone_type + "<br/>").html_safe : ""  %></b>
+      <b><%= (!carrier_contact.secondary_phone.nil? && carrier_contact.secondary_phone != "") ? ("P2: " + carrier_contact.secondary_phone + " " + carrier_contact.secondary_phone_type).html_safe : ""  %></b>
     </div>
   </div>
   <div class="row">

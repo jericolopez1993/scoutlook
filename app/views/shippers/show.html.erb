@@ -136,7 +136,7 @@
                 <div class="row">
                   <label class="col-md-4 col-form-label">Last Contact:</label>
                   <div class="col-md-8 lbl-padding-t">
-                    <%= @shipper.last_contact_date.nil? ? "" : (@shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s + " " + (@shipper.last_contact_date.user.nil? ? "" : link_to(@shipper.last_contact_date.user.full_name, @shipper.last_contact_date.user))).html_safe %>
+                    <%= @shipper.last_contact_date.nil? || @shipper.last_contact_date.date_opened.nil? ? "" : (@shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s + " " + (@shipper.last_contact_date.user.nil? ? "" : link_to(@shipper.last_contact_date.user.full_name, @shipper.last_contact_date.user))).html_safe %>
                   </div>
                 </div>
                 <div class="row">
@@ -393,7 +393,7 @@
                 <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
                 <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %>" target="_top"><%= contact.email %>&nbsp;<i class="far fa-envelope"></a></i></td>
                 <td><%= contact.same_ho ? (@shipper.head_office_location.nil? ? '' : "#{format_address(@shipper.head_office_location.address, @shipper.head_office_location.city, @shipper.head_office_location.state, @shipper.head_office_location.country, @shipper.head_office_location.postal)}") : ("#{format_address(contact.address, contact.city, contact.state, contact.country, contact.postal)}")%></td>
-                <td><%= contact.same_ho ? (@shipper.head_office_location.nil? ? '' : @shipper.head_office_location.phone) : contact.primary_phone %>&nbsp;<%= (!contact.primary_phone_type.nil? && contact.primary_phone_type != "") ? "(#{contact.primary_phone_type})" : ""%></td>
+                <td><b><%= contact.same_ho ? (@shipper.head_office_location.nil? ? '' : @shipper.head_office_location.phone) : contact.primary_phone %>&nbsp;<%= (!contact.primary_phone_type.nil? && contact.primary_phone_type != "") ? "(#{contact.primary_phone_type})" : ""%></b></td>
                 <td><%= contact.same_ho ? (@shipper.head_office_location.nil? ? '' : @shipper.head_office_location.phone) : contact.secondary_phone %>&nbsp;<%= (!contact.secondary_phone_type.nil? && contact.secondary_phone_type != "") ? "(#{contact.secondary_phone_type})" : ""%></td>
                 <td style="text-align: center;"><%= contact.linkedin_link.nil? || contact.linkedin_link == "" ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
                 <td>

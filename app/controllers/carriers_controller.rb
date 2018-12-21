@@ -5,27 +5,28 @@ class CarriersController < ApplicationController
   # GET /carriers
   # GET /carriers.json
   def index
-    begin
-      if current_user.has_role?(:admin)
-        @carriers = Carrier.all
-        authorize @carriers
-      elsif current_user.has_role?(:steward)
-        if current_user.steward.nil?
-          @carriers = []
-        else
-        @carriers = Carrier.where(:relationship_owner => current_user.steward.id)
-        authorize @carriers
+    if !user_signed_in?
+      redirect_to(unauthenticated_root_path)
+    else
+      @carriers = []
+      begin
+        if current_user.has_role?(:admin)
+          @carriers = Carrier.all
+          authorize @carriers
+        elsif current_user.has_role?(:steward) || current_user.ro || current_user.cs
+          @carriers = Carrier.where(:relationship_owner => current_user.id)
+          authorize @carriers
+        elsif current_user.has_role?(:contact)
+          begin
+            @carrier = Carrier.find(current_user.carrier_contact.carrier.id)
+            redirect_to @carrier
+          rescue
+            @carriers = []
+          end
         end
-      elsif current_user.has_role?(:contact)
-        begin
-          @carrier = Carrier.find(current_user.carrier_contact.carrier.id)
-          redirect_to @carrier
-        rescue
-          @carriers = nil
-        end
+      rescue
+        @carriers = []
       end
-    rescue
-      @carriers = nil
     end
   end
 
@@ -154,6 +155,7 @@ class CarriersController < ApplicationController
     def carrier_params
       params[:carrier][:complete_record] = params[:complete_record].present?
       params[:carrier][:approved] = params[:approved].present?
+      params[:carrier][:contract_rates] = params[:contract_rates].present?
       if params[:carrier][:last_contact].present?
         params[:carrier][:last_contact] = Date::strptime(params[:carrier][:last_contact], "%m/%d/%Y")
       else
