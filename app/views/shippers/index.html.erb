@@ -70,8 +70,8 @@
               <td><%= shipper.load_last_month %></td>
               <td><%= shipper.load_last_6_month %></td>
               <td><%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper %></td>
+              <td><%= shipper.head_office_location.nil? ? '' : shipper.head_office_location.city %></td>
               <td><%= shipper.head_office_location.nil? ? '' : shipper.head_office_location.state %></td>
-              <td><%= shipper.head_office_location.nil? ? '' : shipper.head_office_location.country %></td>
               <td><%= shipper.loads_per_month %></td>
               <td>
                 <% shipper.lane_1.each do |lane| %>

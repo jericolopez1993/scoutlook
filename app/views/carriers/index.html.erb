@@ -69,7 +69,7 @@
               <td><%= carrier.load_last_month %></td>
               <td><%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier %></td>
               <td><%= carrier.mc_number %></td>
-              <td><%= carrier.head_office_location.nil? ? '' : carrier.head_office_location.country %></td>
+              <td><%= carrier.head_office_location.nil? ? '' : carrier.head_office_location.state %></td>
               <td class="text-center"><%= carrier.reefers %></td>
               <td>
                 <% carrier.lane_1.each do |lane| %>
