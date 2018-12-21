@@ -490,25 +490,22 @@ function setFieldMask(country_id, field_mask_id){
 }
 
 function filterTable(id){
-  $('#' + id + ' tfoot th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    } );
+  $('#' + id + ' tfoot th').each(function () {
+    var title = $(this).text();
+    $(this).html('<input type="text" placeholder="Search '+title+'" style="width: 100%;"/>');
+  });
 
-    // DataTable
-    var table = $('#' + id).DataTable({
-            		"scrollX": true});
+  // DataTable
+  var table = $('#' + id).DataTable({"scrollX": true});
 
-    // Apply the search
-    table.columns().every( function () {
-        var that = this;
+  // Apply the search
+  table.columns().every(function () {
+    var that = this;
 
-        $( 'input', this.footer() ).on( 'keyup change', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );
+    $('input', this.footer()).on('keyup change', function () {
+      if (that.search() !== this.value) {
+        that.search( this.value ).draw();
+      }
+    });
+  });
 }

@@ -6,22 +6,22 @@ up:
 		@docker-compose up -d
 
 req:
-		bundle install
+		@docker-compose exec web bundle install
 
 shell:
-		@docker-compose run web rails console
+		@docker-compose exec web rails console
 
 seed:
-		@docker-compose run web rake db:seed
+		@docker-compose exec web rake db:seed
 
 stop:
 		@docker-compose stop
 
 flush:
-		@docker-compose run web rake db:reset
+		@docker-compose exec web rake db:reset
 
 drop:
-		@docker-compose run web rake db:drop
+		@docker-compose exec web rake db:drop
 
 rm:
 		@docker-compose stop
@@ -29,8 +29,8 @@ rm:
 		@docker volume prune -f
 
 create_db:
-		@docker-compose run web rake db:create
-		@docker-compose run web rake db:migrate
+		@docker-compose exec web rake db:create
+		@docker-compose exec web rake db:migrate
 
 init:
 		$(MAKE) up

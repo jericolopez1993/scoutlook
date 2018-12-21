@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<meta charset="utf-8" />
-  	<title>Scout<%= user_signed_in? ? (current_user.has_role?(:admin) ? ' Admin' : ' User') : ''%> | <%= params[:controller] == 'reps' ? 'Stewards' : (params[:controller] == 'master_invoices' ? 'Invoices' : (params[:controller] == 'master_signals' ? 'Signals' : (params[:controller] == 'dashboards' ? 'Dashboard' : params[:controller].titleize))) %></title>
-  	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-  	<meta content="" name="description" />
-  	<meta content="" name="author" />
+    <meta charset="utf-8" />
+    <title>Scout<%= user_signed_in? ? (current_user.has_role?(:admin) ? ' Admin' : ' User') : ''%> | <%= params[:controller] == 'reps' ? 'Stewards' : (params[:controller] == 'master_invoices' ? 'Invoices' : (params[:controller] == 'master_signals' ? 'Signals' : (params[:controller] == 'dashboards' ? 'Dashboard' : params[:controller].titleize))) %></title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
     <%= favicon_link_tag 'scout_fav.png', type: 'image/png' %>
 
     <%= csrf_meta_tags %>
@@ -15,56 +15,56 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-
   </head>
 
   <body class="<%= user_signed_in? ? '' : 'pace-top bg-white'%> pattern-white boxed-layout">
     <!-- begin #page-loader -->
-    	<!-- end #page-loader -->
-    	<!-- begin #page-container -->
-    	<div id="page-container" class="page-container show fade page-without-sidebar page-header-fixed page-with-top-menu">
-    		<!-- begin #header -->
-        <%= render 'layouts/static/navigations/upper_navigation'%>
-    		<!-- end #header -->
-    		<!-- begin #sidebar -->
-        <%#= render 'layouts/static/navigations/sidebar'%>
-        <%= render 'layouts/static/navigations/top_menu'%>
-    		<!-- end #sidebar -->
-    		<!-- begin #content -->
-    		<div id="content" class="content">
-            <%= yield %>
-    		</div>
-    		<!-- end #content -->
-    <script>
-      $(document).ready(function() {
-        $(window).on('popstate', function() {
-              location.reload(true);
+    <!-- end #page-loader -->
+    <!-- begin #page-container -->
+    <div id="page-container" class="page-container show fade page-without-sidebar page-header-fixed page-with-top-menu">
+      <!-- begin #header -->
+      <%= render 'layouts/static/navigations/upper_navigation'%>
+      <!-- end #header -->
+      <!-- begin #sidebar -->
+      <%#= render 'layouts/static/navigations/sidebar'%>
+      <%= render 'layouts/static/navigations/top_menu'%>
+      <!-- end #sidebar -->
+      <!-- begin #content -->
+      <div id="content" class="content">
+        <%= yield %>
+      </div>
+      <!-- end #content -->
+      <script>
+        $(document).ready(function() {
+          $(window).on('popstate', function() {
+                location.reload(true);
+          });
+          App.init();
+          FormSliderSwitcher.init();
+          <%= (params[:action] == 'index' || params[:action] == 'show') ? 'TableManageButtons.init();' : ''%>
+          <%= ((params[:action] == 'new' || params[:action] == 'edit') && params[:controller] != 'dashboards') ? 'Highlight.init();' : ''%>
+          <% if flash[:error] %>
+            $.gritter.add({
+                title: 'ERROR',
+                text: '<%= flash[:error] %>',
+                sticky: false,
+                time: 8000,
+                class_name: 'my-sticky-class'
+            });
+            return false;
+          <% end %>
+          <% if flash[:notice] %>
+            $.gritter.add({
+                title: 'NOTICE',
+                text: '<%= flash[:notice] %>',
+                sticky: false,
+                time: 8000,
+                class_name: 'my-sticky-class'
+            });
+            return false;
+          <% end %>
         });
-        App.init();
-        FormSliderSwitcher.init();
-        <%= (params[:action] == 'index' || params[:action] == 'show') ? 'TableManageButtons.init();' : ''%>
-        <%= ((params[:action] == 'new' || params[:action] == 'edit') && params[:controller] != 'dashboards') ? 'Highlight.init();' : ''%>
-        <% if flash[:error] %>
-          $.gritter.add({
-              title: 'ERROR',
-              text: '<%= flash[:error] %>',
-              sticky: false,
-              time: 8000,
-              class_name: 'my-sticky-class'
-          });
-          return false;
-        <% end %>
-        <% if flash[:notice] %>
-          $.gritter.add({
-              title: 'NOTICE',
-              text: '<%= flash[:notice] %>',
-              sticky: false,
-              time: 8000,
-              class_name: 'my-sticky-class'
-          });
-          return false;
-        <% end %>
-      });
-    </script>
+      </script>
+    </div>
   </body>
 </html>
