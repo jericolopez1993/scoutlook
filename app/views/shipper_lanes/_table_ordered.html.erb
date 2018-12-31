@@ -47,6 +47,11 @@
               <span class="badge badge-primary"><%= cr %></span>
             <% end %>
           </td>
+          <td>
+            <% shipper_lane.commodities_to_array.each do |cr| %>
+              <span class="badge badge-inverse"><%= cr %></span>
+            <% end %>
+          </td>
           <td><%= shipper_lane.truck_per_week %></td>
           <td><%= shipper_lane.preferred_load_day_initials %></td>
           <td><%= shipper_lane.prefer_team ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
@@ -64,6 +69,11 @@
           <td>
             <% shipper_lane.lane_destination_to_array.each do |cr| %>
               <span class="badge badge-primary"><%= cr %></span>
+            <% end %>
+          </td>
+          <td>
+            <% shipper_lane.commodities_to_array.each do |cr| %>
+              <span class="badge badge-inverse"><%= cr %></span>
             <% end %>
           </td>
           <td><%= shipper_lane.truck_per_week %></td>
