@@ -20,11 +20,11 @@ class CarrierActivitiesController < ApplicationController
     if params[:carrier_id].present?
       @carrier_activity.carrier_id = params[:carrier_id]
     end
-    if user_signed_in?
-      if current_user.has_role?(:steward) && !current_user.steward.nil?
-        @carrier_activity.user_id = current_user.steward.id
-      end
-    end
+    # if user_signed_in?
+    #   if current_user.has_role?(:steward) && !current_user.steward.nil?
+    #     @carrier_activity.user_id = current_user.steward.id
+    #   end
+    # end
 
     authorize @carrier_activity
   end
@@ -44,6 +44,7 @@ class CarrierActivitiesController < ApplicationController
       end
     end
 
+    @carrier_activity.user_id = current_user.id
     respond_to do |format|
       if @carrier_activity.save
         if params[:carrier_activity][:proposal_pdf].present?
