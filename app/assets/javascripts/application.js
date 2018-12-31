@@ -132,6 +132,7 @@ $(document).ready(function() {
   $(".multiple-select2").select2({ placeholder: "Select commodities" });
   $(".origin-multiple-select2").select2({ placeholder: "Select origins" });
   $(".destination-multiple-select2").select2({ placeholder: "Select destinations" });
+  $(".shipper-type-multiple-select2").select2({ placeholder: "Select shipper types" });
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
 

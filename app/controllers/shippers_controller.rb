@@ -151,6 +151,11 @@ class ShippersController < ApplicationController
       params[:shipper][:control_freight] = params[:control_freight].present?
       params[:shipper][:works_with_brokers] = params[:works_with_brokers].present?
       params[:shipper][:prefer_teams] = params[:prefer_teams].present?
+      if params[:shipper][:shipper_type].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
+        params[:shipper].delete :shipper_type
+      else
+        params[:shipper][:shipper_type] = params[:shipper][:shipper_type].to_s.tr('[]', '').tr('"', '')[2..-1].gsub(', ', ',').to_s
+      end
       if params[:shipper][:commodities].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
         params[:shipper].delete :commodities
       else

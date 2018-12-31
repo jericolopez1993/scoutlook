@@ -94,6 +94,14 @@ class Shipper < ApplicationRecord
     ShipperLocation.where(:shipper_id => self.id, :location_id => location_id).length > 0
   end
 
+  def shipper_type_to_array
+    if self.shipper_type.nil?
+      []
+    else
+      self.shipper_type.split(',').map(&:to_s)
+    end
+  end
+
   def commodities_to_array
     if self.commodities.nil?
       []

@@ -184,7 +184,9 @@
                 <div class="row">
                   <label class="col-md-4 col-form-label">Shipper Type:</label>
                   <div class="col-md-8 lbl-padding-t">
-                    <%= @shipper.shipper_type %>
+                    <% @shipper.shipper_type_to_array.each do |cr| %>
+                      <span class="badge badge-inverse"><%= cr %></span>
+                    <% end %>
                   </div>
                 </div>
                 <div class="row">
