@@ -61,4 +61,11 @@ class CarrierLane < ApplicationRecord
       self.lane_destination.split(',').map(&:to_s)
     end
   end
+  def commodities_to_array
+    if self.commodities.nil?
+      []
+    else
+      self.commodities.split(',').map(&:to_s)
+    end
+  end
 end

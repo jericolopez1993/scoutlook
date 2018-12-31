@@ -82,7 +82,12 @@ class CarrierLanesController < ApplicationController
       else
         params[:carrier_lane][:lane_destination] = params[:carrier_lane][:lane_destination].to_s.tr('[]', '').tr('"', '')[2..-1].gsub(', ', ',').to_s
       end
+      if params[:carrier_lane][:commodities].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
+        params[:carrier_lane].delete :commodities
+      else
+        params[:carrier_lane][:commodities] = params[:carrier_lane][:commodities].to_s.tr('[]', '').tr('"', '')[2..-1].gsub(', ', ',').to_s
+      end
       params[:carrier_lane][:preferred_load_day] = params[:carrier_lane][:preferred_load_day].to_s.tr('[]', '').tr('"', '').tr(' ', '')[1..-1].to_s
-      params.require(:carrier_lane).permit(:lane_priority, :lane_origin, :lane_destination, :truck_per_week, :preferred_load_day, :notes, :carrier_id, :prefer_team)
+      params.require(:carrier_lane).permit(:lane_priority, :lane_origin, :lane_destination, :truck_per_week, :preferred_load_day, :notes, :carrier_id, :prefer_team, :commodities)
     end
 end

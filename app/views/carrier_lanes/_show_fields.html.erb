@@ -28,6 +28,14 @@
     </div>
   </div>
   <div class="row">
+    <label class="col-md-3 col-form-label">Commodities:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <% carrier_lane.commodities_to_array.each do |cr| %>
+        <span class="badge badge-inverse"><%= cr %></span>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
     <label class="col-md-3 col-form-label">Trucks Per Week:</label>
     <div class="col-md-9 lbl-padding-t">
       <%= carrier_lane.truck_per_week %>

@@ -5,6 +5,7 @@
       <th>Prefer Teams?</th>
       <th>Origin</th>
       <th>Destination</th>
+      <th>Commodities</th>
       <th>Trucks Per Week</th>
       <th>Preferred Load Days</th>
       <th></th>
@@ -24,6 +25,11 @@
           <td>
             <% carrier_lane.lane_destination_to_array.each do |cr| %>
               <span class="badge badge-primary"><%= cr %></span>
+            <% end %>
+          </td>
+          <td>
+            <% carrier_lane.commodities_to_array.each do |cr| %>
+              <span class="badge badge-inverse"><%= cr %></span>
             <% end %>
           </td>
           <td><%= carrier_lane.truck_per_week %></td>

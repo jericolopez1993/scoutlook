@@ -28,9 +28,12 @@ rm:
 		@docker-compose rm -f
 		@docker volume prune -f
 
+migrate:
+		@docker-compose exec web rake db:migrate
+
 create_db:
 		@docker-compose exec web rake db:create
-		@docker-compose exec web rake db:migrate
+		$(MAKE) migrate
 
 init:
 		$(MAKE) up

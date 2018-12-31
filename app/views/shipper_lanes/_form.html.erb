@@ -57,6 +57,12 @@
             </div>
           </div>
           <div class="form-group row m-b-15">
+            <%= form.label :commodities, 'Commodities:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :commodities, Shipper::COMMODITY.collect {|r| [ r, r ] },{:include_blank => true, :selected => shipper_lane.commodities}, class: 'form-control multiple-select2', multiple: true %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
             <%= form.label :truck_per_week, 'Trucks Per Week:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.number_field :truck_per_week, class: 'form-control' %>
@@ -93,4 +99,5 @@
   $("#shipper_lane_preferred_load_day").val(<%= raw shipper_lane.preferred_load_day_to_array %>);
   $("#shipper_lane_lane_origin").val(<%= raw shipper_lane.lane_origin_to_array %>);
   $("#shipper_lane_lane_destination").val(<%= raw shipper_lane.lane_destination_to_array %>);
+  $("#shipper_lane_commodities").val(<%= raw shipper_lane.commodities_to_array %>);
 </script>
