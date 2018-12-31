@@ -16,8 +16,6 @@ module Api
           render json: nil
         end
       end
-
-
     end
 
     def show
