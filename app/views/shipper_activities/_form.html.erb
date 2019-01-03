@@ -93,7 +93,7 @@
         <div class="form-group row m-b-15 loop-fields" style="display: none;">
           <%= form.label :outcome, 'Outcome:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.select :outcome, options_for_select(['Win', 'Learn'], shipper_activity.outcome.outcome), {:include_blank => true}, class: 'form-control', id: "engagement_outcome"%>
+            <%= form.select :outcome, options_for_select(['Win', 'Win - Forfeit', 'Win - Customer Drop', 'Learn'], shipper_activity.outcome.outcome), {:include_blank => true}, class: 'form-control', id: "engagement_outcome"%>
           </div>
         </div>
         <div class="form-group row m-b-15 win-fields" style="display: none;">
