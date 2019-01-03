@@ -61,20 +61,38 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update_without_password(user_params)
-        if params[:is_admin].present? && !@user.has_role?(:admin)
-          @user.add_role :admin
-        elsif !params[:is_admin].present? && @user.has_role?(:admin)
-          @user.remove_role :admin
+      if user_params[:password]
+        if @user.update(user_params)
+          if params[:is_admin].present? && !@user.has_role?(:admin)
+            @user.add_role :admin
+          elsif !params[:is_admin].present? && @user.has_role?(:admin)
+            @user.remove_role :admin
+          end
+          if params[:user][:avatar].present?
+            user.avatar.attach(params[:user][:avatar])
+          end
+          format.html { redirect_to users_path, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-        if params[:user][:avatar].present?
-          user.avatar.attach(params[:user][:avatar])
-        end
-        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        if @user.update_without_password(user_params)
+          if params[:is_admin].present? && !@user.has_role?(:admin)
+            @user.add_role :admin
+          elsif !params[:is_admin].present? && @user.has_role?(:admin)
+            @user.remove_role :admin
+          end
+          if params[:user][:avatar].present?
+            user.avatar.attach(params[:user][:avatar])
+          end
+          format.html { redirect_to users_path, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
