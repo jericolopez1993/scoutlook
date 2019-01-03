@@ -14,7 +14,7 @@ class CarriersController < ApplicationController
           @carriers = Carrier.all
           authorize @carriers
         elsif current_user.has_role?(:steward) || current_user.ro || current_user.cs
-          @carriers = Carrier.where(:relationship_owner => current_user.id)
+          @carriers = Carrier.where("relationship_owner = ? OR carrier_setup = ?", current_user.id, current_user.id)
           authorize @carriers
         elsif current_user.has_role?(:contact)
           begin
@@ -39,8 +39,11 @@ class CarriersController < ApplicationController
   def new
     @carrier = Carrier.new
     begin
-      if current_user.has_role?(:steward) && !current_user.steward.nil?
-        @carrier.relationship_owner = current_user.steward.id
+      if current_user.ro
+        @carrier.relationship_owner = current_user.id
+      end
+      if current_user.cs
+        @carrier.carrier_setup = current_user.id
       end
     rescue
     end
@@ -166,7 +169,7 @@ class CarriersController < ApplicationController
       else
         params[:carrier].delete :last_load_date
       end
-      params.require(:carrier).permit(:relationship_owner, :company_name, :carrier_id, :parent_id, :sales_priority, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval, :score_card, :freight_guard, :years_in_business, :owner_operators, :reefers, :dry_vans, :flat_beds, :teams, :contract_rates, :find_loads, :complete_record, :total_fleet_size, :website, :linkedin, :last_contact, :last_contact_by, :power_units, :company_drivers, :load_last_month, :load_last_6_month, :approved, :mc_number, :last_load_date)
+      params.require(:carrier).permit(:relationship_owner, :carrier_setup, :company_name, :carrier_id, :parent_id, :sales_priority, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval, :score_card, :freight_guard, :years_in_business, :owner_operators, :reefers, :dry_vans, :flat_beds, :teams, :contract_rates, :find_loads, :complete_record, :total_fleet_size, :website, :linkedin, :last_contact, :last_contact_by, :power_units, :company_drivers, :load_last_month, :load_last_6_month, :approved, :mc_number, :last_load_date)
     end
 
     def location_params

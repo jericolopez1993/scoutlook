@@ -1,6 +1,6 @@
 class ShipperPolicy < ApplicationPolicy
   def index?
-    return true && (user.has_role?(:admin) || user.has_role?(:steward))
+    return true && (user.has_role?(:admin) || user.has_role?(:steward) || user.ro || user.cs)
   end
 
   def show?
@@ -8,19 +8,19 @@ class ShipperPolicy < ApplicationPolicy
   end
 
   def create?
-    user.present? && (user.has_role?(:admin) || user.has_role?(:steward))
+    user.present? && (user.has_role?(:admin) || user.has_role?(:steward) || user.ro || user.cs)
   end
 
   def update?
-    return true 
+    return true
   end
 
   def destroy?
-    return true if user.present? && (user.has_role?(:admin) || user.has_role?(:steward))
+    return true if user.present? && (user.has_role?(:admin) || user.has_role?(:steward) || user.ro || user.cs)
   end
 
   def remove_attachment?
-    user.present? && (user.has_role?(:admin) || user.has_role?(:steward))
+    user.present? && (user.has_role?(:admin) || user.has_role?(:steward) || user.ro || user.cs)
   end
 
   private

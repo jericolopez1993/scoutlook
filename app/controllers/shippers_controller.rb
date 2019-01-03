@@ -20,7 +20,8 @@ class ShippersController < ApplicationController
           @shipper = Shipper.find(current_user.shipper_contact.shipper.id)
           redirect_to @shipper
         rescue
-          @shippers = [] end
+          @shippers = []
+        end
       end
     end
   end
@@ -34,8 +35,8 @@ class ShippersController < ApplicationController
   def new
     @shipper = Shipper.new
     if user_signed_in?
-      if current_user.has_role?(:steward) && !current_user.steward.nil?
-        @shipper.relationship_owner = current_user.steward.id
+      if current_user.ro
+        @shipper.relationship_owner = current_user.id
       end
     end
     authorize @shipper
