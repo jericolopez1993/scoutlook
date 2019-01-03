@@ -61,11 +61,19 @@ label {
     <% end %>
 
     <div class="row">
+      <label class="col-md-2 col-form-label">Contact:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @carrier_activity.carrier_contact.nil? ? "" : (link_to "#{@carrier_activity.carrier_contact.full_name}", edit_carrier_contact_path(@carrier_activity.carrier_contact)) %></td>
+      </div>
+    </div>
+
+    <div class="row">
       <label class="col-md-2 col-form-label">Steward:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @carrier_activity.user.nil? ? "" : (link_to "#{@carrier_activity.user.first_name} #{@carrier_activity.user.last_name}", @carrier_activity.user) %>
       </div>
     </div>
+
     <div class="row">
       <label class="col-md-2 col-form-label">Annual Value:</label>
       <div class="col-md-9 lbl-padding-t">

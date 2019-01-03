@@ -4,6 +4,7 @@ class CarrierActivity < ApplicationRecord
   has_one_attached :credit_application
   before_save :set_open_and_close_date
   after_destroy :remove_children
+  belongs_to :carrier_contact, optional: true
 
   def display_name
     if self.client.nil?

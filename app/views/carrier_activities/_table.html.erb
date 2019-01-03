@@ -4,6 +4,7 @@
       <th>Campaign</th>
       <th>Open Date</th>
       <th>Type</th>
+      <th>Contact</th>
       <th>Steward</th>
       <th>Annual Value</th>
       <th>Status</th>
@@ -18,6 +19,7 @@
         <td><%= carrier_activity.campaign_name %></td>
         <td><%= carrier_activity.date_stamp %></td>
         <td><%= carrier_activity.activity_type %></td>
+        <td><%= carrier_activity.carrier_contact.nil? ? "" : (link_to "#{carrier_activity.carrier_contact.full_name}", edit_carrier_contact_path(carrier_activity.carrier_contact)) %></td>
         <td><%= carrier_activity.user.nil? ? "" : (link_to "#{carrier_activity.user.first_name} #{carrier_activity.user.last_name}", carrier_activity.user) %></td>
         <td><%= carrier_activity.annual_value %></td>
         <td><%= carrier_activity.status ? 'Open' : 'Closed' %></td>

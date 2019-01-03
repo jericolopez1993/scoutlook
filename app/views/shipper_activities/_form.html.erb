@@ -58,6 +58,12 @@
         </div>
       </div>
       <div class="form-group row m-b-15">
+        <%= form.label :user_id, 'Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= collection_select :shipper_activity, :shipper_contact_id, ShipperContact.where(shipper_id: shipper_activity.shipper_id), :id, :full_name, {prompt: true}, {class: 'form-control'} %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
         <%= form.label :annual_value, 'Annual Value:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+'], shipper_activity.annual_value),{:include_blank => true}, class: 'form-control' %>

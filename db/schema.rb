@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_31_115531) do
+ActiveRecord::Schema.define(version: 2019_01_03_032231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 2018_12_31_115531) do
     t.date "date_stamp"
     t.integer "user_id"
     t.string "campaign_name", default: ""
+    t.bigint "carrier_contact_id"
+    t.index ["carrier_contact_id"], name: "index_carrier_activities_on_carrier_contact_id"
   end
 
   create_table "carrier_activity_outcomes", force: :cascade do |t|
@@ -333,6 +335,8 @@ ActiveRecord::Schema.define(version: 2018_12_31_115531) do
     t.date "date_stamp"
     t.integer "user_id"
     t.string "campaign_name", default: ""
+    t.bigint "shipper_contact_id"
+    t.index ["shipper_contact_id"], name: "index_shipper_activities_on_shipper_contact_id"
   end
 
   create_table "shipper_activity_outcomes", force: :cascade do |t|
