@@ -30,8 +30,8 @@ class Shipper < ApplicationRecord
     ShipperLane.where(:shipper_id => self.id)
   end
 
-  def shipper_activities
-    ShipperActivity.where(:shipper_id => self.id)
+  def activities
+    Activity.where(:shipper_id => self.id)
   end
 
   def lane_1
@@ -139,7 +139,7 @@ class Shipper < ApplicationRecord
   end
 
   def last_contact_date
-    ShipperActivity.where(:shipper_id => self.id).last
+    Activity.where(:shipper_id => self.id).last
   end
 
   private

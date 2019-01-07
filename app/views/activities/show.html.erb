@@ -11,13 +11,16 @@ label {
 <!-- begin page-header -->
 <div class="header-scout">
   <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: "#{@carrier_activity.carrier.nil? ? '' : generate_alphanumeric_id(@carrier_activity.carrier.company_name, @carrier_activity.carrier.id)}", sub_header_title: "#{@carrier_activity.carrier.nil? ? '' : link_to(@carrier_activity.carrier.company_name,  @carrier_activity.carrier)}"  %>
+    <%= render 'layouts/static/header', header_title: "#{@activity.carrier.nil? ? '' : generate_alphanumeric_id(@activity.carrier.company_name, @activity.carrier.id)}", sub_header_title: "#{@activity.carrier.nil? ? '' : link_to(@activity.carrier.company_name,  @activity.carrier)}"  %>
   </h1>
   <span class="pull-right">
-    <%= link_to 'Edit', edit_carrier_activity_path(@carrier_activity), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
-    <% if @previous_controller == "carriers"%>
-      <% carrier = Carrier.find(@carrier_activity.carrier_id)%>
+    <%= link_to 'Edit', edit_activity_path(@activity), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
+    <% if !@activity.carrier.nil? %>
+      <% carrier = Carrier.find(@activity.carrier_id)%>
       <%= link_to 'Back to Carrier', carrier, :class => 'btn btn-info btn-xs' %>
+    <% elsif !@activity.shipper.nil? %>
+      <% shipper = Shipper.find(@activity.shipper_id)%>
+      <%= link_to 'Back to Shipper', shipper, :class => 'btn btn-info btn-xs' %>
     <% else %>
       <%= link_to 'Back', carrier_activities_path, :class => 'btn btn-info btn-xs' %>
     <% end %>
@@ -27,34 +30,34 @@ label {
 <!-- begin panel -->
 <div class="panel panel-inverse">
   <div class="panel-heading">
-    <h4 class="panel-title">  <%= generate_alphanumeric_id(@carrier_activity.activity_type, @carrier_activity.id) %> - <%= @carrier_activity.activity_type %></h4>
+    <h4 class="panel-title">  <%= generate_alphanumeric_id(@activity.activity_type, @activity.id) %> - <%= @activity.activity_type %></h4>
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Outcome</h4>
     <div class="row">
       <label class="col-md-2 col-form-label">Campaign:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.campaign_name %>
+        <%= @activity.campaign_name %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Open Date:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.date_stamp %>
+        <%= @activity.date_stamp %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Type:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.activity_type %>
+        <%= @activity.activity_type %>
       </div>
     </div>
 
-    <% if @carrier_activity.activity_type == "Engagement" %>
+    <% if @activity.activity_type == "Engagement" %>
       <div class="row">
         <label class="col-md-2 col-form-label">Engagement Type:</label>
         <div class="col-md-9 lbl-padding-t">
-          <%= @carrier_activity.engagement_type %>
+          <%= @activity.engagement_type %>
         </div>
       </div>
     <% end %>
@@ -62,89 +65,86 @@ label {
     <div class="row">
       <label class="col-md-2 col-form-label">Contact:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.carrier_contact.nil? ? "" : (link_to "#{@carrier_activity.carrier_contact.full_name}", edit_carrier_contact_path(@carrier_activity.carrier_contact)) %>
+        <%= @activity.carrier_contact.nil? ? "" : (link_to "#{@activity.carrier_contact.full_name}", edit_carrier_contact_path(@activity.carrier_contact)) %>
       </div>
     </div>
 
     <div class="row">
       <label class="col-md-2 col-form-label">Steward:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.user.nil? ? "" : (link_to "#{@carrier_activity.user.first_name} #{@carrier_activity.user.last_name}", @carrier_activity.user) %>
+        <%= @activity.user.nil? ? "" : (link_to "#{@activity.user.first_name} #{@activity.user.last_name}", @activity.user) %>
       </div>
     </div>
 
     <div class="row">
       <label class="col-md-2 col-form-label">Annual Value:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.annual_value %>
+        <%= @activity.annual_value %>
       </div>
     </div>
 
     <div class="row">
       <label class="col-md-2 col-form-label">Loads Per Week:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.loads_per_week %>
+        <%= @activity.loads_per_week %>
       </div>
     </div>
 
     <div class="row">
       <label class="col-md-2 col-form-label">Status:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.status ? 'Open' : 'Closed' %>
+        <%= @activity.status ? 'Open' : 'Closed' %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Date Opened:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= convert_date(@carrier_activity.date_opened) %>
+        <%= convert_date(@activity.date_opened) %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Date Closed:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= convert_date(@carrier_activity.date_closed) %>
+        <%= convert_date(@activity.date_closed) %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Other Notes:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.other_notes.nil? ? "" : @carrier_activity.other_notes.html_safe %>
+        <%= @activity.other_notes.nil? ? "" : @activity.other_notes.html_safe %>
       </div>
     </div>
-
-    <% if !@carrier_activity.outcome_id.nil? %>
       <hr>
       <h4 class="text-inverse">Outcome</h4>
       <div class="row">
         <label class="col-md-2 col-form-label">Outcome:</label>
         <div class="col-md-9 lbl-padding-t">
-          <%= @carrier_activity.outcome.outcome %>
+          <%= @activity.outcome %>
         </div>
       </div>
       <div class="row">
         <label class="col-md-2 col-form-label">Complete Credit Application:</label>
         <div class="col-md-9 lbl-padding-t">
-          <% if @carrier_activity.credit_application.attached? %>
-            <%= link_to @carrier_activity.credit_application.filename, rails_blob_path(@carrier_activity.credit_application), target: :_blank %>
+          <% if @activity.credit_application.attached? %>
+            <%= link_to @activity.credit_application.filename, rails_blob_path(@activity.credit_application), target: :_blank %>
           <% end %>
         </div>
       </div>
       <div class="row">
         <label class="col-md-2 col-form-label">Reason:</label>
         <div class="col-md-9 lbl-padding-t">
-          <%= @carrier_activity.outcome.reason %>
-          <% if @carrier_activity.outcome.reason == 'Other' %>
-            - <%= @carrier_activity.outcome.reason_other %>
+          <%= @activity.reason %>
+          <% if @activity.reason == 'Other' %>
+            - <%= @activity.reason_other %>
           <% end %>
         </div>
       </div>
       <div class="row">
         <label class="col-md-2 col-form-label">Notes:</label>
         <div class="col-md-9 lbl-padding-t">
-          <%= @carrier_activity.outcome.notes.nil? ? "" : @carrier_activity.outcome.notes.html_safe %>
+          <%= @activity.notes.nil? ? "" : @activity.notes.html_safe %>
         </div>
       </div>
-    <% end %>
 
     <hr>
     <h4 class="text-inverse">Proposed PDFs</h4>
@@ -158,14 +158,14 @@ label {
         </tr>
       </thead>
       <tbody>
-        <% @carrier_activity.proposal_pdf.each_with_index do |attachment_file, index| %>
+        <% @activity.proposal_pdf.each_with_index do |attachment_file, index| %>
           <tr>
             <td><%= attachment_file.id %></td>
             <td><%= attachment_file.filename %></td>
             <td><%= convert_date(attachment_file.created_at) %></td>
             <td>
               <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file), target: :_blank, :class => 'btn btn-primary' %>
-              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_carrier_activities_path(:id => @carrier_activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_carrier_activities_path(:id => @activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
             </td>
           </tr>
         <% end %>

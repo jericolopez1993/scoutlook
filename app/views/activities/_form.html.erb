@@ -8,25 +8,25 @@
 <!-- begin page-header -->
 <div class="header-scout">
   <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Activity' : "Edit Activity - #{carrier_activity.carrier.nil? ? '' : link_to(carrier_activity.carrier.company_name,  carrier_activity.carrier)}" %>
+    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Activity' : "Edit Activity - #{activity.carrier.nil? ? '' : link_to(activity.carrier.company_name,  activity.carrier)}" %>
   </h1>
 </div>
 <!-- end page-header -->
 <!-- begin panel -->
-<%= form_with(model: carrier_activity, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+<%= form_with(model: activity, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
   <%= form.hidden_field :carrier_id %>
   <div class="panel panel-inverse">
     <div class="panel-heading">
       <div class="panel-heading-btn">
       </div>
-      <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(carrier_activity.activity_type, carrier_activity.id) + " - " + carrier_activity.activity_type) : "" %></h4>
+      <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(activity.activity_type, activity.id) + " - " + activity.activity_type) : "" %></h4>
     </div>
     <div class="panel-body">
-    <% if carrier_activity.errors.any? %>
+    <% if activity.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(carrier_activity.errors.count, "error") %> prohibited this carrier_activity from being saved:</h2>
+        <h2><%= pluralize(activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
         <ul>
-          <% carrier_activity.errors.full_messages.each do |message| %>
+          <% activity.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
         </ul>
@@ -42,31 +42,31 @@
       <div class="form-group row m-b-15">
         <%= form.label :date_stamp, 'Open Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.text_field :date_stamp, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: carrier_activity.date_stamp, :id => "date_stamp"%>
+          <%= form.text_field :date_stamp, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: activity.date_stamp, :id => "date_stamp"%>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :activity_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :activity_type, options_for_select(['Initial Prospecting', 'Follow-up Prospecting', 'Initial Set-Up', 'Update Information', 'Courtesy', 'Schedule, Rates, Booking', 'RFP or Contacts', 'Proposal'], carrier_activity.activity_type), {:include_blank => false}, class: 'form-control', id: 'engagement_type' %>
+          <%= form.select :activity_type, options_for_select(['Initial Prospecting', 'Follow-up Prospecting', 'Initial Set-Up', 'Update Information', 'Courtesy', 'Schedule, Rates, Booking', 'RFP or Contacts', 'Proposal'], activity.activity_type), {:include_blank => false}, class: 'form-control', id: 'engagement_type' %>
         </div>
       </div>
       <div class="form-group row m-b-15 engagement-fields"  style="display: none;">
         <%= form.label :engagement_type, 'Engagement Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :engagement_type, options_for_select(['Phone', 'In-Person', 'E-mail'], carrier_activity.engagement_type),{:include_blank => true}, class: 'form-control' %>
+          <%= form.select :engagement_type, options_for_select(['Phone', 'In-Person', 'E-mail'], activity.engagement_type),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :user_id, 'Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= collection_select :carrier_activity, :carrier_contact_id, CarrierContact.where(carrier_id: carrier_activity.carrier_id), :id, :full_name, {prompt: true}, {class: 'form-control'} %>
+          <%= collection_select :activity, :carrier_contact_id, CarrierContact.where(carrier_id: activity.carrier_id), :id, :full_name, {prompt: true}, {class: 'form-control'} %>
         </div>
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :annual_value, 'Annual Value:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+'], carrier_activity.annual_value),{:include_blank => true}, class: 'form-control' %>
+          <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+'], activity.annual_value),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -84,7 +84,7 @@
       <div class="form-group row m-b-15">
         <%= form.label :status, 'Status:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :status, options_for_select([['Open', true], ['Closed', false]], carrier_activity.status),{}, class: 'form-control', id: "engagement_status" %>
+          <%= form.select :status, options_for_select([['Open', true], ['Closed', false]], activity.status),{}, class: 'form-control', id: "engagement_status" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -99,7 +99,7 @@
         <div class="form-group row m-b-15 proposal-fields"  style="display: none;">
           <%= form.label :outcome, 'Outcome:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.select :outcome, options_for_select(['Win', 'Win - Forfeit', 'Win - Customer Drop', 'Learn'], carrier_activity.outcome.outcome), {:include_blank => true}, class: 'form-control', id: "engagement_outcome"%>
+            <%= form.select :outcome, options_for_select(['Win', 'Win - Forfeit', 'Win - Customer Drop', 'Learn'], activity.outcome), {:include_blank => true}, class: 'form-control', id: "engagement_outcome"%>
           </div>
         </div>
         <div class="form-group row m-b-15 win-fields" style="display: none;">
@@ -111,14 +111,14 @@
         <div class="form-group row m-b-15">
           <%= form.label :reason, 'Reason:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.select :reason, options_for_select(['Price', 'Availability', 'Service', 'Relationship', 'Timing', 'Satisfied', 'Other'], carrier_activity.outcome.reason), {:include_blank => true}, class: 'form-control', id: 'engagement_reason' %>
-            <%= form.text_field :reason_other, value: carrier_activity.outcome.reason_other, "data-depends-on" => "#engagement_reason", "data-depends-on-value" => "Other", class: 'form-control', placeholder: 'Please specify the reason...' %>
+            <%= form.select :reason, options_for_select(['Price', 'Availability', 'Service', 'Relationship', 'Timing', 'Satisfied', 'Other'], activity.reason), {:include_blank => true}, class: 'form-control', id: 'engagement_reason' %>
+            <%= form.text_field :reason_other, value: activity.reason_other, "data-depends-on" => "#engagement_reason", "data-depends-on-value" => "Other", class: 'form-control', placeholder: 'Please specify the reason...' %>
           </div>
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce', :value => carrier_activity.outcome.notes)  %>
+            <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce', :value => activity.notes)  %>
           </div>
         </div>
       </div>
@@ -127,10 +127,10 @@
           <div class="col-md-9 col-sm-12 d-flex justify-content-end">
           <%= form.submit 'Submit', :class => 'btn btn-primary' %>
           <% if params[:action] == 'edit' %>
-            &nbsp;&nbsp;<%= link_to 'Show', carrier_activity, :class => 'btn btn-info' %>
+            &nbsp;&nbsp;<%= link_to 'Show', activity, :class => 'btn btn-info' %>
           <% end %>
           <% if @previous_controller == "carriers"%>
-            <% carrier = Carrier.find(carrier_activity.carrier_id)%>
+            <% carrier = Carrier.find(activity.carrier_id)%>
             <% if params[:action] == 'new' %>
               &nbsp;&nbsp;<%= link_to 'Back to Carrier', carrier, :class => 'btn btn-default' %>
             <% end %>

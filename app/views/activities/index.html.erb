@@ -1,33 +1,16 @@
+<!-- begin page-header -->
+<%#= render 'layouts/static/header', header_title: 'Activities' %>
+<!-- end page-header -->
 <!-- begin panel -->
-<div class="panel panel-scout">
+<div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
-      <%= link_to 'New Carrier Activity', new_carrier_activity_path, :class => 'btn btn-danger btn-xs' %>
+      <%#= link_to 'New Activity', new_activity_path, :class => 'btn btn-primary btn-xs' %>
     </div>
-    <h4 class="panel-title lp-header">Carrier Activities</h4>
+    <h4 class="panel-title">List of Activities</h4>
   </div>
   <div class="panel-body">
-    <%= render 'carrier_activities/table', show_carrier: true, carrier_activities: @carrier_activities  %>
+      <%= render 'table', activities: @activities, show_carrier: true, show_shipper: true %>
   </div>
 </div>
 <!-- end panel -->
-<!-- begin panel -->
-<div class="panel panel-darkblue">
-  <div class="panel-heading">
-    <div class="panel-heading-btn">
-      <%= link_to 'New Shipper Activity', new_shipper_activity_path, :class => 'btn btn-success btn-xs' %>
-    </div>
-    <h4 class="panel-title lp-header">Shipper Activities</h4>
-  </div>
-  <div class="panel-body">
-    <%= render 'shipper_activities/table', show_shipper: true, shipper_activities: @shipper_activities  %>
-  </div>
-</div>
-<!-- end panel -->
-
-<script language="javascript">
-  $(document).ready(function() {
-    filterTable("carrier_activities_table");
-    filterTable("shipper_activities_table");
-  });
-</script>

@@ -37,8 +37,8 @@ class Carrier < ApplicationRecord
     CarrierLane.where(:carrier_id => self.id)
   end
 
-  def carrier_activities
-    CarrierActivity.where(:carrier_id => self.id)
+  def activities
+    Activity.where(:carrier_id => self.id)
   end
 
   def lane_1
@@ -129,7 +129,7 @@ class Carrier < ApplicationRecord
     end
   end
   def last_contact_date
-    CarrierActivity.where(:carrier_id => self.id).last
+    Activity.where(:carrier_id => self.id).last
   end
 
 

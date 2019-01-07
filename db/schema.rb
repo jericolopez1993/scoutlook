@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_075020) do
+ActiveRecord::Schema.define(version: 2019_01_07_193026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,30 @@ ActiveRecord::Schema.define(version: 2019_01_07_075020) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "activities", force: :cascade do |t|
+    t.string "activity_type"
+    t.string "engagement_type"
+    t.string "annual_value"
+    t.boolean "status"
+    t.datetime "date_opened"
+    t.datetime "date_closed"
+    t.text "other_notes"
+    t.integer "carrier_id"
+    t.integer "shipper_id"
+    t.date "date_stamp"
+    t.integer "user_id"
+    t.string "campaign_name", default: ""
+    t.bigint "carrier_contact_id"
+    t.bigint "shipper_contact_id"
+    t.string "loads_per_week"
+    t.string "outcome"
+    t.string "reason"
+    t.text "notes"
+    t.string "reason_other"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
     t.string "auditable_type"
@@ -56,35 +80,6 @@ ActiveRecord::Schema.define(version: 2019_01_07_075020) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
-  end
-
-  create_table "carrier_activities", force: :cascade do |t|
-    t.string "activity_type"
-    t.string "engagement_type"
-    t.string "annual_value"
-    t.boolean "status"
-    t.datetime "date_opened"
-    t.datetime "date_closed"
-    t.text "other_notes"
-    t.integer "outcome_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "carrier_id"
-    t.date "date_stamp"
-    t.integer "user_id"
-    t.string "campaign_name", default: ""
-    t.bigint "carrier_contact_id"
-    t.string "loads_per_week"
-    t.index ["carrier_contact_id"], name: "index_carrier_activities_on_carrier_contact_id"
-  end
-
-  create_table "carrier_activity_outcomes", force: :cascade do |t|
-    t.string "outcome"
-    t.string "reason"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "reason_other"
   end
 
   create_table "carrier_contacts", force: :cascade do |t|
@@ -260,6 +255,17 @@ ActiveRecord::Schema.define(version: 2019_01_07_075020) do
     t.integer "destination_location_id"
   end
 
+  create_table "read_marks", id: :serial, force: :cascade do |t|
+    t.string "readable_type", null: false
+    t.integer "readable_id"
+    t.string "reader_type", null: false
+    t.integer "reader_id"
+    t.datetime "timestamp"
+    t.index ["readable_type", "readable_id"], name: "index_read_marks_on_readable_type_and_readable_id"
+    t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", unique: true
+    t.index ["reader_type", "reader_id"], name: "index_read_marks_on_reader_type_and_reader_id"
+  end
+
   create_table "reps", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -320,35 +326,6 @@ ActiveRecord::Schema.define(version: 2019_01_07_075020) do
     t.string "own_type"
     t.string "shipment_status"
     t.string "client_reference"
-  end
-
-  create_table "shipper_activities", force: :cascade do |t|
-    t.string "activity_type"
-    t.string "engagement_type"
-    t.string "annual_value"
-    t.boolean "status"
-    t.datetime "date_opened"
-    t.datetime "date_closed"
-    t.text "other_notes"
-    t.integer "outcome_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "shipper_id"
-    t.date "date_stamp"
-    t.integer "user_id"
-    t.string "campaign_name", default: ""
-    t.bigint "shipper_contact_id"
-    t.string "loads_per_week"
-    t.index ["shipper_contact_id"], name: "index_shipper_activities_on_shipper_contact_id"
-  end
-
-  create_table "shipper_activity_outcomes", force: :cascade do |t|
-    t.string "outcome"
-    t.string "reason"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "reason_other"
   end
 
   create_table "shipper_contacts", force: :cascade do |t|
