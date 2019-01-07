@@ -111,7 +111,8 @@
         <div class="form-group row m-b-15">
           <%= form.label :reason, 'Reason:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.text_field :reason, class: 'form-control', value: shipper_activity.outcome.reason %>
+            <%= form.select :reason, options_for_select(['Price', 'Availability', 'Service', 'Relationship', 'Timing', 'Satisfied', 'Other'], shipper_activity.outcome.reason), {:include_blank => true}, class: 'form-control', id: 'engagement_reason' %>
+            <%= form.text_field :reason_other, value: shipper_activity.outcome.reason_other, "data-depends-on" => "#engagement_reason", "data-depends-on-value" => "Other", class: 'form-control', placeholder: 'Please specify the reason...' %>
           </div>
         </div>
         <div class="form-group row m-b-15">

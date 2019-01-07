@@ -41,6 +41,7 @@
 //= require vendor/jquery.chained
 //= require vendor/bootstrap-datepicker.min
 //= require vendor/bootstrap-tagsinput
+//= require vendor/depends_on
 //= require inputmask
 //= require jquery.inputmask
 //= require inputmask.extensions

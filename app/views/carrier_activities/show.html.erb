@@ -134,6 +134,9 @@ label {
         <label class="col-md-2 col-form-label">Reason:</label>
         <div class="col-md-9 lbl-padding-t">
           <%= @carrier_activity.outcome.reason %>
+          <% if @carrier_activity.outcome.reason == 'Other' %>
+            - <%= @carrier_activity.outcome.reason_other %>
+          <% end %>
         </div>
       </div>
       <div class="row">
