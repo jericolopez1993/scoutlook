@@ -271,9 +271,9 @@ $(document).ready(function() {
 });
 
 function activityOutcomeFields(actype, stat, outcome) {
-  if (actype === 'Loop' && stat === "false") {
+  if (actype === 'Proposal' && stat === "false") {
       $(".outcome-fields").show();
-      $(".loop-fields").show();
+      $(".proposal-fields").show();
       $(".activity_buttons").hide();
       if (outcome === 'Win') {
         $(".win-fields").show();
@@ -282,7 +282,7 @@ function activityOutcomeFields(actype, stat, outcome) {
       }
   } else {
       $(".outcome-fields").hide();
-      $(".loop-fields").hide();
+      $(".proposal-fields").hide();
       $(".activity_buttons").show();
       $(".win-fields").hide();
   }

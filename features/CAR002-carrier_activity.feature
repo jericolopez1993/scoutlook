@@ -36,10 +36,10 @@ Feature: Carrier Activities
     When I click the first edit button on the "engagement" table
     And edit the "carrier_activity" with these data
       | engagement_type |  annual_value |
-      | Loop            |  10-25M       |
+      | Proposal            |  10-25M       |
     Then submit the form
     Then click the "activity" tab
-    Then there should have "Loop" on the table
+    Then there should have "Proposal" on the table
 
   Scenario: Delete a Activity
     Then click the new "activity" button

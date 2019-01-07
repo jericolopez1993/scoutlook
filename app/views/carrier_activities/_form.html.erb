@@ -48,7 +48,7 @@
       <div class="form-group row m-b-15">
         <%= form.label :activity_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :activity_type, options_for_select(['Initial Prospecting', 'Follow-up Prospecting', 'Initial Set-Up', 'Update Information', 'Courtesy', 'Schedule, Rates, Booking', 'RFP or Contacts', 'Loop'], carrier_activity.activity_type), {:include_blank => false}, class: 'form-control', id: 'engagement_type' %>
+          <%= form.select :activity_type, options_for_select(['Initial Prospecting', 'Follow-up Prospecting', 'Initial Set-Up', 'Update Information', 'Courtesy', 'Schedule, Rates, Booking', 'RFP or Contacts', 'Proposal'], carrier_activity.activity_type), {:include_blank => false}, class: 'form-control', id: 'engagement_type' %>
         </div>
       </div>
       <div class="form-group row m-b-15 engagement-fields"  style="display: none;">
@@ -96,7 +96,7 @@
       <div class="outcome-fields" style="display: none;">
         <hr>
         <h4 class="text-inverse">Outcome</h4>
-        <div class="form-group row m-b-15 loop-fields"  style="display: none;">
+        <div class="form-group row m-b-15 proposal-fields"  style="display: none;">
           <%= form.label :outcome, 'Outcome:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.select :outcome, options_for_select(['Win', 'Win - Forfeit', 'Win - Customer Drop', 'Learn'], carrier_activity.outcome.outcome), {:include_blank => true}, class: 'form-control', id: "engagement_outcome"%>
