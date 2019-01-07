@@ -61,9 +61,9 @@
             <%= shipper_activity.shipper && link_to(shipper_activity.shipper.company_name.blank? ? "(no name)" : shipper_activity.shipper.company_name, shipper_activity.shipper) %>
           </td>
           <td><%= shipper_activity.shipper_contact.nil? ? "" : (link_to "#{shipper_activity.shipper_contact.full_name}", edit_shipper_contact_path(shipper_activity.shipper_contact)) %></td>
-          <td><%= shipper_activity.shipper.sales_priority.blank? ? "" : shipper_activity.shipper.sales_priority %></td>
-          <td><%= shipper_activity.shipper.head_office_location.nil? ? "" : shipper_activity.shipper.head_office_location.city %></td>
-          <td><%= shipper_activity.shipper.head_office_location.nil? ? "" : shipper_activity.shipper.head_office_location.state %></td>
+          <td><%= shipper_activity.shipper.nil? || shipper_activity.shipper.sales_priority.blank? ? "" : shipper_activity.shipper.sales_priority %></td>
+          <td><%= shipper_activity.shipper.nil? || shipper_activity.shipper.head_office_location.nil? ? "" : shipper_activity.shipper.head_office_location.city %></td>
+          <td><%= shipper_activity.shipper.nil? || shipper_activity.shipper.head_office_location.nil? ? "" : shipper_activity.shipper.head_office_location.state %></td>
         <% end %>
         <td>
           <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipper_activity_path(:id => shipper_activity.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>

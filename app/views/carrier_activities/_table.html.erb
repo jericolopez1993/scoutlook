@@ -61,9 +61,9 @@
             <%= carrier_activity.carrier && link_to(carrier_activity.carrier.company_name.blank? ? "(no name)" : carrier_activity.carrier.company_name, carrier_activity.carrier) %>
           </td>
           <td><%= carrier_activity.carrier_contact.nil? ? "" : (link_to "#{carrier_activity.carrier_contact.full_name}", edit_carrier_contact_path(carrier_activity.carrier_contact)) %></td>
-          <td><%= carrier_activity.carrier.sales_priority.blank? ? "" : carrier_activity.carrier.sales_priority %></td>
-          <td><%= carrier_activity.carrier.head_office_location.nil? ? "" : carrier_activity.carrier.head_office_location.city %></td>
-          <td><%= carrier_activity.carrier.head_office_location.nil? ? "" : carrier_activity.carrier.head_office_location.state %></td>
+          <td><%= carrier_activity.carrier.nil? || carrier_activity.carrier.sales_priority.blank? ? "" : carrier_activity.carrier.sales_priority %></td>
+          <td><%= carrier_activity.carrier.nil? || carrier_activity.carrier.head_office_location.nil? ? "" : carrier_activity.carrier.head_office_location.city %></td>
+          <td><%= carrier_activity.carrier.nil? || carrier_activity.carrier.head_office_location.nil? ? "" : carrier_activity.carrier.head_office_location.state %></td>
         <% end %>
         <td>
           <%= link_to '<i class="far fa-eye"></i>'.html_safe, carrier_activity_path(:id => carrier_activity.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
