@@ -359,7 +359,7 @@
     </div>
     <div class="tab-pane fade" id="activity">
       <div class="panel-body">
-        <%= render 'shipper_activities/table', shipper_activities: @shipper.shipper_activities %>
+        <%= render 'shipper_activities/table', show_shipper: false, shipper_activities: @shipper.shipper_activities %>
       </div>
     </div>
     <div class="tab-pane fade" id="locations">
@@ -481,4 +481,7 @@
       $('input[name="commit"]').removeAttr("disabled");
     }
   })
+  $(document).ready(function() {
+    filterTable("shipper_activities_table");
+  });
 </script>

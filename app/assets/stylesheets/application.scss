@@ -275,3 +275,8 @@ tfoot {
 small.version {
   font-size: 50%;
 }
+
+.dataTables_scroll {position: relative;}
+.dataTables_scrollHead {margin-bottom: 20px;}
+.dataTables_scrollFoot {position: absolute; top: 38px;}
+.table > tfoot > tr > th {padding: 0;}

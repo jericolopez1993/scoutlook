@@ -1,6 +1,7 @@
-<table class="table table-striped table-bordered data-table-buttons display nowrap" id="engagement_table">
+<table class="table table-striped table-bordered display nowrap" id="shipper_activities_table">
   <thead>
     <tr class="odd gradeX">
+      <% if show_shipper %><th>Shipper</th><% end %>
       <th>Campaign</th>
       <th>Open Date</th>
       <th>Type</th>
@@ -14,9 +15,30 @@
       <th data-orderable="false">Actions</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <% if show_shipper %><th>Shipper</th><% end %>
+      <th>Campaign</th>
+      <th>Open Date</th>
+      <th>Type</th>
+      <th>Contact</th>
+      <th>Steward</th>
+      <th>Annual Value</th>
+      <th>Loads Per Week</th>
+      <th>Status</th>
+      <th>Date Opened</th>
+      <th>Date Closed</th>
+      <th data-orderable="false">Actions</th>
+    </tr>
+  </tfoot>
   <tbody>
     <% shipper_activities.each do |shipper_activity| %>
       <tr>
+        <% if show_shipper %>
+          <td>
+            <%= link_to shipper_activity.shipper.company_name.blank? ? "(no name)" : shipper_activity.shipper.company_name, shipper_activity.shipper %>
+          </td>
+        <% end %>
         <td><%= shipper_activity.campaign_name %></td>
         <td><%= shipper_activity.date_stamp %></td>
         <td><%= shipper_activity.activity_type %></td>
