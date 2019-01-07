@@ -16,7 +16,7 @@ class CarrierContactPolicy < ApplicationPolicy
   end
 
   def destroy?
-    return true 
+    return true
   end
 
   private

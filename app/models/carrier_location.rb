@@ -1,7 +1,7 @@
 class CarrierLocation < ApplicationRecord
   audited
   belongs_to :carrier, optional: true
-  
+
   def display_name
     if self.carrier.nil?
       "Location"

@@ -14,7 +14,7 @@ class CarrierLane < ApplicationRecord
     ]]
   ]
   DESTINATIONS = ORIGINS
-  
+
   def display_name
     if self.carrier.nil?
       "Lane"
