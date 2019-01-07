@@ -48,7 +48,7 @@ class CarrierActivitiesController < ApplicationController
         if params[:carrier_activity][:credit_application].present?
           @carrier_activity.credit_application.attach(params[:carrier_activity][:credit_application])
         end
-        format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'Carrier Engagement was successfully created.' }
+        format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'Carrier Activity was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_activity }
       else
         format.html { render :new }
@@ -80,7 +80,7 @@ class CarrierActivitiesController < ApplicationController
         if params[:carrier_activity][:credit_application].present?
           @carrier_activity.credit_application.attach(params[:carrier_activity][:credit_application])
         end
-        format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'Carrier Engagement was successfully updated.' }
+        format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'Carrier Activity was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier_activity }
       else
         format.html { render :edit }
@@ -94,7 +94,7 @@ class CarrierActivitiesController < ApplicationController
   def destroy
     @carrier_activity.destroy
     respond_to do |format|
-      format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'Carrier Engagement was successfully removed.' }
+      format.html { redirect_to carrier_path(:id => @carrier_activity.carrier_id), notice: 'Carrier Activity was successfully removed.' }
       format.json { head :no_content }
     end
   end
@@ -109,7 +109,7 @@ class CarrierActivitiesController < ApplicationController
         if params[:carrier_activity][:credit_application].present?
           @carrier_activity.credit_application.attach(params[:carrier_activity][:credit_application])
         end
-        format.html { redirect_to authenticated_root_path, notice: 'Carrier Engagement was successfully created.' }
+        format.html { redirect_to authenticated_root_path, notice: 'Carrier Activity was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_activity }
       else
         format.html { render :new }

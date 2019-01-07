@@ -8,7 +8,7 @@
 <!-- begin page-header -->
 <div class="header-scout">
   <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Engagement' : "Edit Engagement - #{carrier_activity.carrier.nil? ? '' : link_to(carrier_activity.carrier.company_name,  carrier_activity.carrier)}" %>
+    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Activity' : "Edit Activity - #{carrier_activity.carrier.nil? ? '' : link_to(carrier_activity.carrier.company_name,  carrier_activity.carrier)}" %>
   </h1>
 </div>
 <!-- end page-header -->
@@ -67,6 +67,12 @@
         <%= form.label :annual_value, 'Annual Value:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+'], carrier_activity.annual_value),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :loads_per_week, 'Loads Per Week:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :loads_per_week, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
