@@ -36,7 +36,7 @@
       <tr>
         <% if show_carrier %>
           <td>
-            <%= link_to carrier_activity.carrier.company_name.blank? ? "(no name)" : carrier_activity.carrier.company_name, carrier_activity.carrier %>
+            <%= carrier_activity.carrier && link_to(carrier_activity.carrier.company_name.blank? ? "(no name)" : carrier_activity.carrier.company_name, carrier_activity.carrier) %>
           </td>
         <% end %>
         <td><%= carrier_activity.campaign_name %></td>

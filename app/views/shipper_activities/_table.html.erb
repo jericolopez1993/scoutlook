@@ -36,7 +36,7 @@
       <tr>
         <% if show_shipper %>
           <td>
-            <%= link_to shipper_activity.shipper.company_name.blank? ? "(no name)" : shipper_activity.shipper.company_name, shipper_activity.shipper %>
+            <%= shipper_activity.shipper && link_to(shipper_activity.shipper.company_name.blank? ? "(no name)" : shipper_activity.shipper.company_name, shipper_activity.shipper) %>
           </td>
         <% end %>
         <td><%= shipper_activity.campaign_name %></td>
