@@ -7,6 +7,7 @@
       <th>Contact</th>
       <th>Steward</th>
       <th>Annual Value</th>
+      <th>Loads Per Week</th>
       <th>Status</th>
       <th>Date Opened</th>
       <th>Date Closed</th>
@@ -22,6 +23,7 @@
         <td><%= carrier_activity.carrier_contact.nil? ? "" : (link_to "#{carrier_activity.carrier_contact.full_name}", edit_carrier_contact_path(carrier_activity.carrier_contact)) %></td>
         <td><%= carrier_activity.user.nil? ? "" : (link_to "#{carrier_activity.user.first_name} #{carrier_activity.user.last_name}", carrier_activity.user) %></td>
         <td><%= carrier_activity.annual_value %></td>
+        <td><%= carrier_activity.loads_per_week %></td>
         <td><%= carrier_activity.status ? 'Open' : 'Closed' %></td>
         <td><%= convert_date(carrier_activity.date_opened) %></td>
         <td><%= convert_date(carrier_activity.date_closed) %></td>

@@ -152,7 +152,7 @@ class CarrierActivitiesController < ApplicationController
       else
         params[:carrier_activity].delete :date_stamp
       end
-      params.require(:carrier_activity).permit(:date_stamp, :activity_type, :engagement_type, :carrier_id, :carrier_contact_id, :user_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id, :campaign_name)
+      params.require(:carrier_activity).permit(:date_stamp, :activity_type, :engagement_type, :carrier_id, :carrier_contact_id, :user_id, :annual_value, :loads_per_week, :status, :date_opened, :date_closed, :other_notes, :outcome_id, :campaign_name)
     end
     def carrier_activity_outcome_params
       params.require(:carrier_activity).permit(:outcome, :reason, :notes)

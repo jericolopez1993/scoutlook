@@ -70,6 +70,12 @@
         </div>
       </div>
       <div class="form-group row m-b-15">
+        <%= form.label :loads_per_week, 'Loads Per Week:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :loads_per_week, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
         <%= form.label :proposal_pdf, 'Proposal PDF:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.file_field :proposal_pdf, multiple: true  %>

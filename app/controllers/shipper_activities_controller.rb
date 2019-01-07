@@ -151,7 +151,7 @@ class ShipperActivitiesController < ApplicationController
       else
         params[:shipper_activity].delete :date_stamp
       end
-      params.require(:shipper_activity).permit(:date_stamp, :activity_type, :engagement_type, :shipper_id, :shipper_contact_id, :user_id, :annual_value, :status, :date_opened, :date_closed, :other_notes, :outcome_id, :campaign_name)
+      params.require(:shipper_activity).permit(:date_stamp, :activity_type, :engagement_type, :shipper_id, :shipper_contact_id, :user_id, :annual_value, :loads_per_week, :status, :date_opened, :date_closed, :other_notes, :outcome_id, :campaign_name)
     end
     def shipper_activity_outcome_params
       params.require(:shipper_activity).permit(:outcome, :reason, :notes)
