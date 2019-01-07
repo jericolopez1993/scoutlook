@@ -11,11 +11,13 @@
       <th>Outcome</th>
       <th>Reason</th>
       <th>Learned</th>
-      <% if show_shipper %><th>Shipper</th><% end %>
-      <th>Contact</th>
-      <th>Priority</th>
-      <th>City</th>
-      <th>State</th>
+      <% if show_shipper %>
+        <th>Shipper</th>
+        <th>Contact</th>
+        <th>Priority</th>
+        <th>City</th>
+        <th>State</th>
+      <% end %>
       <th data-orderable="false">Actions</th>
     </tr>
   </thead>
@@ -31,11 +33,13 @@
       <th>Outcome</th>
       <th>Reason</th>
       <th>Learned</th>
-      <% if show_shipper %><th>Shipper</th><% end %>
-      <th>Contact</th>
-      <th>Priority</th>
-      <th>City</th>
-      <th>State</th>
+      <% if show_shipper %>
+        <th>Shipper</th>
+        <th>Contact</th>
+        <th>Priority</th>
+        <th>City</th>
+        <th>State</th>
+      <% end %>
       <th data-orderable="false">Actions</th>
     </tr>
   </tfoot>
@@ -53,12 +57,14 @@
         <td><%= shipper_activity.outcome.reason %></td>
         <td><%= shipper_activity.outcome.notes.nil? ? "" : shipper_activity.outcome.notes.html_safe %></td>
         <% if show_shipper %>
-          <td><%= shipper_activity.shipper.company_name.blank? ? "(no name)" : shipper_activity.shipper.company_name %></td>
+          <td>
+            <%= shipper_activity.shipper && link_to(shipper_activity.shipper.company_name.blank? ? "(no name)" : shipper_activity.shipper.company_name, shipper_activity.shipper) %>
+          </td>
+          <td><%= shipper_activity.shipper_contact.nil? ? "" : (link_to "#{shipper_activity.shipper_contact.full_name}", edit_shipper_contact_path(shipper_activity.shipper_contact)) %></td>
+          <td><%= shipper_activity.shipper.sales_priority.blank? ? "" : shipper_activity.shipper.sales_priority %></td>
+          <td><%= shipper_activity.shipper.head_office_location.nil? ? "" : shipper_activity.shipper.head_office_location.city %></td>
+          <td><%= shipper_activity.shipper.head_office_location.nil? ? "" : shipper_activity.shipper.head_office_location.state %></td>
         <% end %>
-        <td><%= shipper_activity.shipper_contact.nil? ? "" : (link_to "#{shipper_activity.shipper_contact.full_name}", edit_shipper_contact_path(shipper_activity.shipper_contact)) %></td>
-        <td><%= shipper_activity.shipper.sales_priority.blank? ? "" : shipper_activity.shipper.sales_priority %></td>
-        <td><%= shipper_activity.shipper.head_office_location.nil? ? "" : shipper_activity.shipper.head_office_location.city %></td>
-        <td><%= shipper_activity.shipper.head_office_location.nil? ? "" : shipper_activity.shipper.head_office_location.state %></td>
         <td>
           <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipper_activity_path(:id => shipper_activity.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
           <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipper_activity_path(:id => shipper_activity.id, :previous_controller => params[:controller]), :class => 'btn btn-warning btn-xs' %>

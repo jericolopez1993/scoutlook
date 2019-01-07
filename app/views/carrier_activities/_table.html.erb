@@ -11,11 +11,13 @@
       <th>Outcome</th>
       <th>Reason</th>
       <th>Learned</th>
-      <% if show_carrier %><th>Carrier</th><% end %>
-      <th>Contact</th>
-      <th>Priority</th>
-      <th>City</th>
-      <th>State</th>
+      <% if show_carrier %>
+        <th>Carrier</th>
+        <th>Contact</th>
+        <th>Priority</th>
+        <th>City</th>
+        <th>State</th>
+      <% end %>
       <th data-orderable="false">Actions</th>
     </tr>
   </thead>
@@ -31,11 +33,13 @@
       <th>Outcome</th>
       <th>Reason</th>
       <th>Learned</th>
-      <% if show_carrier %><th>Carrier</th><% end %>
-      <th>Contact</th>
-      <th>Priority</th>
-      <th>City</th>
-      <th>State</th>
+      <% if show_carrier %>
+        <th>Carrier</th>
+        <th>Contact</th>
+        <th>Priority</th>
+        <th>City</th>
+        <th>State</th>
+      <% end %>
       <th data-orderable="false">Actions</th>
     </tr>
   </tfoot>
@@ -53,12 +57,14 @@
         <td><%= carrier_activity.outcome.reason %></td>
         <td><%= carrier_activity.outcome.notes.nil? ? "" : carrier_activity.outcome.notes.html_safe %></td>
         <% if show_carrier %>
-          <td><%= carrier_activity.carrier.company_name.blank? ? "(no name)" : carrier_activity.carrier.company_name %></td>
+          <td>
+            <%= carrier_activity.carrier && link_to(carrier_activity.carrier.company_name.blank? ? "(no name)" : carrier_activity.carrier.company_name, carrier_activity.carrier) %>
+          </td>
+          <td><%= carrier_activity.carrier_contact.nil? ? "" : (link_to "#{carrier_activity.carrier_contact.full_name}", edit_carrier_contact_path(carrier_activity.carrier_contact)) %></td>
+          <td><%= carrier_activity.carrier.sales_priority.blank? ? "" : carrier_activity.carrier.sales_priority %></td>
+          <td><%= carrier_activity.carrier.head_office_location.nil? ? "" : carrier_activity.carrier.head_office_location.city %></td>
+          <td><%= carrier_activity.carrier.head_office_location.nil? ? "" : carrier_activity.carrier.head_office_location.state %></td>
         <% end %>
-        <td><%= carrier_activity.carrier_contact.nil? ? "" : (link_to "#{carrier_activity.carrier_contact.full_name}", edit_carrier_contact_path(carrier_activity.carrier_contact)) %></td>
-        <td><%= carrier_activity.carrier.sales_priority.blank? ? "" : carrier_activity.carrier.sales_priority %></td>
-        <td><%= carrier_activity.carrier.head_office_location.nil? ? "" : carrier_activity.carrier.head_office_location.city %></td>
-        <td><%= carrier_activity.carrier.head_office_location.nil? ? "" : carrier_activity.carrier.head_office_location.state %></td>
         <td>
           <%= link_to '<i class="far fa-eye"></i>'.html_safe, carrier_activity_path(:id => carrier_activity.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
           <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_carrier_activity_path(:id => carrier_activity.id, :previous_controller => params[:controller]), :class => 'btn btn-warning btn-xs' %>
