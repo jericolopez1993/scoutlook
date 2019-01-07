@@ -35,6 +35,11 @@ create_db:
 		@docker-compose exec web rake db:create
 		$(MAKE) migrate
 
+tests:
+		@docker-compose exec web rake db:migrate RAILS_ENV=test
+		@docker-compose exec web rake db:seed RAILS_ENV=test
+		@docker-compose exec web cucumber
+
 init:
 		$(MAKE) up
 		$(MAKE) req
