@@ -5,6 +5,8 @@ class ShipperActivity < ApplicationRecord
   before_save :set_open_and_close_date
   after_destroy :remove_children
   belongs_to :shipper_contact, optional: true
+  belongs_to :user, optional: true
+  belongs_to :shipper, optional: true
 
   def display_name
     if self.client.nil?
@@ -30,17 +32,9 @@ class ShipperActivity < ApplicationRecord
     end
   end
 
-  def user
+  def head_office_location
     begin
-      User.find(self.user_id)
-    rescue
-      nil
-    end
-  end
-
-  def shipper
-    begin
-      Shipper.find(self.shipper_id)
+      ShipperLocation.find(self.head_office)
     rescue
       nil
     end

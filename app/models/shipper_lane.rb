@@ -1,5 +1,7 @@
 class ShipperLane < ApplicationRecord
   audited
+  belongs_to :shipper, optional: true
+
   ORIGINS = [
     ['Canada', [
       "CAN-BC", "CAN-AB", "CAN-SK", "CAN-MB", "CAN-ON", "CAN-QC", "CAN-NB", "CAN-NS", "CAN-PEI", "CAN-NL", "CAN-NU",
@@ -24,14 +26,6 @@ class ShipperLane < ApplicationRecord
 
   def lane_priority_display
     ['', 'High', 'Medium', 'Low'][self.lane_priority || 0]
-  end
-
-  def shipper
-    begin
-      Shipper.find(self.shipper_id)
-    rescue
-      nil
-    end
   end
 
   def preferred_load_day_to_array

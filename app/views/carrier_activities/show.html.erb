@@ -1,4 +1,3 @@
-
 <style>
 @media (max-width: 767px) {
   label {
@@ -63,7 +62,7 @@ label {
     <div class="row">
       <label class="col-md-2 col-form-label">Contact:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @carrier_activity.carrier_contact.nil? ? "" : (link_to "#{@carrier_activity.carrier_contact.full_name}", edit_carrier_contact_path(@carrier_activity.carrier_contact)) %></td>
+        <%= @carrier_activity.carrier_contact.nil? ? "" : (link_to "#{@carrier_activity.carrier_contact.full_name}", edit_carrier_contact_path(@carrier_activity.carrier_contact)) %>
       </div>
     </div>
 

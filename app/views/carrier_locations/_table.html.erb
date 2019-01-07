@@ -14,12 +14,12 @@
     <% if !carrier_locations.nil? %>
       <% carrier_locations.each do |carrier_location| %>
         <tr>
-          <td style="text-align: center;"><%= carrier_location.is_origin ? '<span class="label label-warning">Origin</span><br/>'.html_safe : '' %>
-            <%= carrier_location.is_destination ? '<span class="label label-danger">Destination</span><br/>'.html_safe : '' %>
+          <td style="text-align: center;"><%= carrier_location.is_origin ? '<div class="mr-0 tags"><span class="label label-warning">Origin</span></div>'.html_safe : '' %>
+            <%= carrier_location.is_destination ? '<div class="mr-0 tags"><span class="label label-danger">Destination</span></div>'.html_safe : '' %>
           <% if client %>
-            <%= (!client.nil? && client.head_office == carrier_location.id) ? '<span class="label label-primary">Head Office</span><br/>'.html_safe : '' %></td>
+            <%= (!client.nil? && client.head_office == carrier_location.id) ? '<div class="mr-0 tags"><span class="label label-primary">Head Office</span></div>'.html_safe : '' %></td>
           <% elsif carrier %>
-            <%= (!carrier.nil? && carrier.head_office == carrier_location.id) ? '<span class="label label-primary">Head Office</span><br/>'.html_safe : '' %></td>
+            <%= (!carrier.nil? && carrier.head_office == carrier_location.id) ? '<div class="mr-0 tags"><span class="label label-primary">Head Office</span></div>'.html_safe : '' %></td>
           <% end %>
           <td><%= carrier_location.address %></td>
           <td><%= carrier_location.city %></td>
