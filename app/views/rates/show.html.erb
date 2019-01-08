@@ -11,7 +11,7 @@ label {
 <!-- begin page-header -->
 <div class="header-scout">
   <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: "#{@rate.carrier.nil? ? '' : generate_alphanumeric_id(@rate.carrier.company_name, @rate.carrier.id)}", sub_header_title: "#{@rate.carrier.nil? ? '' : link_to(@rate.carrier.company_name,  @rate.carrier)}"  %>
+    <%= render 'layouts/static/header', header_title: "#{@rate.activity.carrier.nil? ? '' : generate_alphanumeric_id(@rate.activity.carrier.company_name, @rate.activity.carrier.id)}", sub_header_title: "#{@rate.activity.carrier.nil? ? '' : link_to(@rate.activity.carrier.company_name,  @rate.activity.carrier)}"  %>
   </h1>
   <span class="pull-right">
     <%= link_to 'Edit', edit_rate_path(@rate), :class => 'btn btn-warning btn-xs' %>
@@ -26,7 +26,7 @@ label {
 
 <div class="panel panel-inverse">
   <div class="panel-heading">
-    <h4 class="panel-title">  <%= generate_alphanumeric_id(@rate.rate_type, @rate.id) %> - <%= @rate.rate_type %></h4>
+    <h4 class="panel-title">  <%= generate_alphanumeric_id(@rate.activity.activity_type, @rate.id) %> - <%= @rate.activity.activity_type %></h4>
   </div>
   <div class="panel-body">
     <h4 class="text-inverse">Details</h4>
