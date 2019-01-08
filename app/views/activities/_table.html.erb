@@ -37,7 +37,7 @@
       <th>Close</th>
       <th>Outcome</th>
       <th>Reason</th>
-      <th>Learned</th>
+      <th width="250px">Learned</th>
       <% if show_carrier || show_shipper %>
         <% if show_carrier %>
           <th>Carrier</th>
@@ -58,41 +58,41 @@
       <% activities.each do |activity| %>
         <tr>
           <td nowrap><%= activity.user.nil? ? "" : (link_to "#{activity.user.first_name} #{activity.user.last_name}", activity.user) %></td>
-          <td nowrap><%= activity.status ? 'Open' : 'Closed' %></td>
+          <td><%= activity.status ? 'Open' : 'Closed' %></td>
           <td nowrap><%= activity.activity_type %></td>
-          <td nowrap><%= activity.loads_per_week %></td>
-          <td nowrap><%= activity.annual_value %></td>
+          <td><%= activity.loads_per_week %></td>
+          <td><%= activity.annual_value %></td>
           <td nowrap><%= convert_date(activity.date_opened) %></td>
           <td nowrap><%= convert_date(activity.date_closed) %></td>
-          <td nowrap><%= activity.outcome %></td>
-          <td nowrap><%= activity.reason %></td>
+          <td><%= activity.outcome %></td>
+          <td><%= activity.reason %></td>
           <td><%= activity.notes.nil? ? "" : activity.notes.html_safe %></td>
           <% if show_carrier || show_shipper %>
             <% if show_carrier %>
-            <td nowrap>
+            <td>
               <%= activity.carrier && link_to(activity.carrier.company_name.blank? ? "(no name)" : activity.carrier.company_name, activity.carrier) %>
             </td>
             <% end %>
             <% if show_shipper %>
-              <td nowrap>
+              <td>
                 <%= activity.shipper && link_to(activity.shipper.company_name.blank? ? "(no name)" : activity.shipper.company_name, activity.shipper) %>
               </td>
             <% end %>
             <% if show_carrier && !activity.carrier.nil? %>
-              <td nowrap><%= activity.carrier_contact.nil? ? "" : (link_to "#{activity.carrier_contact.full_name}", edit_carrier_contact_path(activity.carrier_contact)) %></td>
-              <td nowrap><%= activity.carrier.nil? || activity.carrier.sales_priority.blank? ? "" : activity.carrier.sales_priority %></td>
-              <td nowrap><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.city %></td>
-              <td nowrap><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.state %></td>
+              <td><%= activity.carrier_contact.nil? ? "" : (link_to "#{activity.carrier_contact.full_name}", edit_carrier_contact_path(activity.carrier_contact)) %></td>
+              <td><%= activity.carrier.nil? || activity.carrier.sales_priority.blank? ? "" : activity.carrier.sales_priority %></td>
+              <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.city %></td>
+              <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.state %></td>
             <% elsif show_shipper && !activity.shipper.nil? %>
-              <td nowrap><%= activity.shipper_contact.nil? ? "" : (link_to "#{activity.shipper_contact.full_name}", edit_shipper_contact_path(activity.shipper_contact)) %></td>
-              <td nowrap><%= activity.shipper.nil? || activity.shipper.sales_priority.blank? ? "" : activity.shipper.sales_priority %></td>
-              <td nowrap><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.city %></td>
-              <td nowrap><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.state %></td>
+              <td><%= activity.shipper_contact.nil? ? "" : (link_to "#{activity.shipper_contact.full_name}", edit_shipper_contact_path(activity.shipper_contact)) %></td>
+              <td><%= activity.shipper.nil? || activity.shipper.sales_priority.blank? ? "" : activity.shipper.sales_priority %></td>
+              <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.city %></td>
+              <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.state %></td>
             <% else %>
-              <td nowrap></td>
-              <td nowrap></td>
-              <td nowrap></td>
-              <td nowrap></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
             <% end %>
           <% end %>
           <td nowrap>
