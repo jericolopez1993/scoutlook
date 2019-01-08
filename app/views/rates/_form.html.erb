@@ -6,7 +6,7 @@
 }
 </style>
 <!-- begin page-header -->
-<div class="header-scout">
+<div class="<% if @rate.activity.carrier %> header-scout <% elsif @rate.activity.shipper  %> header-darkblue <% end %>">
   <h1 class="pull-left">
     <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate " %>
   </h1>

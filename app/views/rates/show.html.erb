@@ -9,17 +9,22 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<div class="header-scout">
+<div class="<% if @rate.activity.carrier %>header-scout <% elsif @rate.activity.shipper %> header-darkblue <% end %>">
   <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: "#{@rate.activity.carrier.nil? ? '' : generate_alphanumeric_id(@rate.activity.carrier.company_name, @rate.activity.carrier.id)}", sub_header_title: "#{@rate.activity.carrier.nil? ? '' : link_to(@rate.activity.carrier.company_name,  @rate.activity.carrier)}"  %>
+    <% if @rate.activity.carrier %>
+      <%= render 'layouts/static/header', header_title: "#{@rate.activity.carrier.nil? ? '' : generate_alphanumeric_id(@rate.activity.carrier.company_name, @rate.activity.carrier.id)}", sub_header_title: "#{@rate.activity.carrier.nil? ? '' : link_to(@rate.activity.carrier.company_name,  @rate.activity.carrier)}"  %>
+    <% elsif @rate.activity.shipper %>
+      <%= render 'layouts/static/header', header_title: "#{@rate.activity.shipper.nil? ? '' : generate_alphanumeric_id(@rate.activity.shipper.company_name, @rate.activity.shipper.id)}", sub_header_title: "#{@rate.activity.shipper.nil? ? '' : link_to(@rate.activity.shipper.company_name,  @rate.activity.shipper)}"  %>
+    <% end %>
   </h1>
   <span class="pull-right">
     <%= link_to 'Edit', edit_rate_path(@rate), :class => 'btn btn-warning btn-xs' %>
-    <% if @previous_controller == "carriers"%>
-      <% carrier = Carrier.find(@rate.carrier_id)%>
+    <% if @rate.activity.carrier %>
+      <% carrier = Carrier.find(@rate.activity.carrier_id)%>
       <%= link_to 'Back ', carrier, :class => 'btn btn-info btn-xs' %>
-    <% else %>
-      <%= link_to 'Back', carriers_path, :class => 'btn btn-info btn-xs' %>
+    <% elsif @rate.activity.shipper %>
+      <% carrier = Shipper.find(@rate.activity.shipper_id)%>
+      <%= link_to 'Back ', carrier, :class => 'btn btn-info btn-xs' %>
     <% end %>
   </span>
 </div>
@@ -67,7 +72,7 @@ label {
       </div>
     </div>
     <div class="row">
-      <label class="col-md-3 col-form-label">Commodities:</label>
+      <label class="col-md-2 col-form-label">Commodities:</label>
       <div class="col-md-9 lbl-padding-t">
         <% @rate.commodities_to_array.each do |cr| %>
           <span class="badge badge-inverse"><%= cr %></span>
@@ -105,7 +110,7 @@ label {
       </div>
     </div>
     <div class="row">
-      <label class="col-md-4 col-form-label">Notes:</label>
+      <label class="col-md-2 col-form-label">Notes:</label>
       <div class="col-md-8 lbl-padding-t">
         <%= @rate.notes.nil? ? "" : @rate.notes.html_safe %>
       </div>
