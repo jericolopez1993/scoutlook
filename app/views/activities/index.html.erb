@@ -5,12 +5,14 @@
 <div class="panel panel-inverse">
   <div class="panel-heading">
     <div class="panel-heading-btn">
-      <%#= link_to 'New Activity', new_activity_path, :class => 'btn btn-primary btn-xs' %>
+      <%= link_to 'New Carrier Activity', new_activity_path(:previous_controller => params[:controller], :client_type => "carrier"), :class => 'btn btn-danger btn-xs' %>
+      <%= link_to 'New Shipper Activity', new_activity_path(:previous_controller => params[:controller], :client_type => "shipper"), :class => 'btn btn-success btn-xs' %>
+
     </div>
     <h4 class="panel-title">List of Activities</h4>
   </div>
   <div class="panel-body">
-      <%= render 'table', activities: @activities, show_carrier: true, show_shipper: true %>
+      <%= render 'table', activities: @activities, show_carrier: true, show_shipper: true, current_controller: params[:controller] %>
   </div>
 </div>
 <!-- end panel -->

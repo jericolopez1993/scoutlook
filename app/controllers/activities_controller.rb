@@ -68,6 +68,7 @@ class ActivitiesController < ApplicationController
         end
         if params[:activity][:credit_application].present?
           @activity.credit_application.attach(params[:activity][:credit_application])
+
         end
         if !@activity.carrier.nil?
           format.html { redirect_to carrier_path(:id => @activity.carrier_id), notice: 'Activity was successfully updated.' }
@@ -143,6 +144,10 @@ class ActivitiesController < ApplicationController
         @previous_controller = params[:previous_controller]
       else
         @previous_controller = 'activities'
+      end
+
+      if @previous_controller == "activities"
+        @client_type = params[:client_type]
       end
     end
 

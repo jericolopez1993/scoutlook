@@ -512,3 +512,27 @@ function filterTable(id){
     });
   });
 }
+
+function loadContacts(client_type, value, selected){
+  var this_id = "#activity_" + client_type + "_contact_id"
+  var url = "/api/"+ client_type +"_contacts"
+  if (value) {
+    url = url + "?"+ client_type + "_id="+value
+  }
+      $(this_id).empty().append('<option>Select Contact</option>');
+      $.ajax({
+        method: 'get',
+        url: url
+      }).done(function(data) {
+        var array = data;
+        if (array != ''){
+          for (i in array) {
+            if (array[i].id.toString() == selected.toString()) {
+              $(this_id).append("<option value='"+ array[i].id +"' selected>"+array[i].full_name+"</option>");
+            }else{
+              $(this_id).append("<option value='"+ array[i].id +"'>"+array[i].full_name+"</option>");
+            }
+         }
+        }
+      })
+}
