@@ -275,10 +275,12 @@ function activityOutcomeFields(actype, stat, outcome) {
       $(".outcome-fields").show();
       $(".proposal-fields").show();
       $(".activity_buttons").hide();
-      if (outcome === 'Win') {
+      if (outcome.includes("Win")) {
         $(".win-fields").show();
+        $("#activity_load_numbers").attr('data-parsley-required', 'true');
       } else {
         $(".win-fields").hide();
+        $("#activity_load_numbers").removeAttr("data-parsley-required");
       }
   } else {
       $(".outcome-fields").hide();

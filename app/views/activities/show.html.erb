@@ -150,6 +150,16 @@ label {
           <%= @activity.notes.nil? ? "" : @activity.notes.html_safe %>
         </div>
       </div>
+    <% if @activity.outcome.include? "Win" %>
+      <hr>
+      <h4 class="text-inverse">Load Details</h4>
+      <div class="row">
+        <label class="col-md-2 col-form-label">Load Numbers:</label>
+        <div class="col-md-9 lbl-padding-t">
+          <%= @activity.load_numbers %>
+        </div>
+      </div>
+    <% end %>
     <hr>
     <h4 class="text-inverse">Rates</h4>
     <%= link_to 'New Rate', new_rate_path(:activity_id => @activity.id), :class => 'btn btn-primary btn-xs' %>
