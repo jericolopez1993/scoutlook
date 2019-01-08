@@ -32,12 +32,7 @@
         <div class="col-md-9 col-sm-8">
           <%= form.submit 'Submit', :class => 'btn btn-primary' %>
           <% carrier = Carrier.find_by(id: carrier_location.carrier_id)%>
-          <% if params[:action] == 'edit' %>
-            &nbsp;&nbsp;<%= link_to 'Show', carrier, :class => 'btn btn-info' %>
-          <% end %>
-          <% if params[:action] == 'new' %>
-            &nbsp;&nbsp;<%= link_to 'Back', carrier, :class => 'btn btn-info' %>
-          <% end %>
+          &nbsp;&nbsp;<%= link_to 'Back', carrier, :class => 'btn btn-info' %>
         </div>
       </div>
     <% end %>
