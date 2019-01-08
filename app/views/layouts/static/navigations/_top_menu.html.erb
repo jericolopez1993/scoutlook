@@ -10,6 +10,9 @@
       <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || current_user.ro || current_user.cs %>
         <li><a href="<%= activities_path %>" class="<%= (params[:controller] == 'activities') ? 'active' : ''%> activity"><i class="fa fa-list"></i> <span>Activities</span></a></li>
       <% end %>
+      <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || current_user.ro || current_user.cs %>
+        <li><a href="<%= rates_path %>" class="<%= (params[:controller] == 'rates') ? 'active' : ''%> activity"><i class="fas fa-hand-holding-usd"></i> <span>Rates</span></a></li>
+      <% end %>
       <%# <% if current_user.has_role?(:admin) %>
         <!-- <li><a href="<%#= reps_path %>" class="<%#= (params[:controller] == 'reps') ? 'active' : ''%> steward"><i class="fa fa-users"></i> <span>Stewards</span></a></li> -->
       <%# end %>

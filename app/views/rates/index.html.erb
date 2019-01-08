@@ -1,0 +1,16 @@
+<!-- begin page-header -->
+<%#= render 'layouts/static/header', header_title: 'Rates' %>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+      <%#= link_to 'New Rate', new_rate_path, :class => 'btn btn-primary btn-xs' %>
+    </div>
+    <h4 class="panel-title">List of Rates</h4>
+  </div>
+  <div class="panel-body">
+      <%= render 'table', rates: @rates, with_actions: false %>
+  </div>
+</div>
+<!-- end panel -->

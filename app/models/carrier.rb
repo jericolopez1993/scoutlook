@@ -132,6 +132,15 @@ class Carrier < ApplicationRecord
     Activity.where(:carrier_id => self.id).last
   end
 
+  def rates
+    activity_ids = self.activities.distinct(:id).pluck(:id).map(&:inspect).join(',')
+    if activity_ids != ''
+       Rate.where("activity_id IN (#{activity_ids})")
+     else
+       []
+    end
+  end
+
 
   private
     def remove_children

@@ -1,0 +1,186 @@
+<style>
+@media (max-width: 767px) {
+  .text-right {
+    text-align: left!important;
+  }
+}
+</style>
+<!-- begin page-header -->
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate " %>
+  </h1>
+</div>
+<!-- end page-header -->
+
+<!-- begin panel -->
+<%= form_with(model: rate, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+  <div class="panel panel-inverse">
+    <div class="panel-heading">
+      <div class="panel-heading-btn">
+      </div>
+      <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(rate.rate_type, rate.id) + " - #{rate.rate_type}") : "" %></h4>
+    </div>
+    <div class="panel-body">
+      <% if rate.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(rate.errors.count, "error") %> prohibited this rate from being saved:</h2>
+          <ul>
+            <% rate.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <hr>
+      <h4 class="text-inverse">Origin</h4>
+      <div class="form-group row m-b-15">
+        <%= form.label :origin_city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :origin_city, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :origin_state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :origin_state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :origin_country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :origin_country, options_for_select([]), {}, class: 'form-control static-dropdown' %>
+        </div>
+      </div>
+      <hr>
+      <h4 class="text-inverse">Destination</h4>
+      <div class="form-group row m-b-15">
+        <%= form.label :destination_city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :destination_city, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :destination_state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :destination_state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :destination_country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :destination_country, options_for_select([]), {}, class: 'form-control static-dropdown' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :miles, 'Miles:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :miles, class: 'form-control' %>
+        </div>
+      </div>
+      <h4 class="text-inverse">Details</h4>
+      <%= form.hidden_field :activity_id %>
+      <div class="form-group row m-b-15">
+        <%= form.label :picks, 'Picks:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :picks, options_for_select(['1', '2', '3', '4', '5'], rate.picks),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :drops, 'Drops:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :drops, options_for_select(['1', '2', '3', '4', '5'], rate.drops),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <label class="text-right col-md-2 col-sm-4 col-form-label">Team:</label>
+        <div class="col-md-9 col-sm-8">
+          <input type="checkbox" name="team" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" <%= rate.team ? 'checked' : '' %>/>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :commodities, 'Commodities:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :commodities, Shipper::COMMODITY.collect {|r| [ r, r ] },{:include_blank => true, :selected => rate.commodities}, class: 'form-control multiple-select2', multiple: true %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :bid, 'Bid:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :bid, class: 'form-control', value: rate.bid, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :ask, 'Ask:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :ask, class: 'form-control', value: rate.ask, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :cost, 'Cost:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :cost, class: 'form-control', value: rate.cost, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :money_currency, 'Currency:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :money_currency, options_for_select(['US', 'CDN'], "#{rate.money_currency.present? ? rate.money_currency : 'CDN'}"),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :mc_number, 'MC Number:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_field :mc_number, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_area(:notes, cols: 20, rows: 15,  class: 'tinymce', :value => rate.notes)  %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <div class="col-md-2"></div>
+          <div class="col-md-9 col-sm-12 d-flex justify-content-end">
+          <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+          <% if params[:action] == 'edit' %>
+            &nbsp;&nbsp;<%= link_to 'Show', rate, :class => 'btn btn-info' %>
+          <% end %>
+          <% if @previous_controller == "carriers"%>
+            <% carrier = Carrier.find(rate.carrier_id)%>
+            <% if params[:action] == 'new' %>
+              &nbsp;&nbsp;<%= link_to 'Back to Carrier', carrier, :class => 'btn btn-default' %>
+            <% end %>
+          <% else %>
+            <% if params[:action] == 'new' %>
+              &nbsp;&nbsp;<%= link_to 'Back', rates_path, :class => 'btn btn-default' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= tinymce %>
+<!-- end panel -->
+<script language="javascript">
+
+  $("#rate_commodities").val(<%= raw rate.commodities_to_array %>);
+    $(function(){
+  populateCountries("rate_origin_country", "rate_origin_state");
+  populateCountries("rate_destination_country", "rate_destination_state");
+  <% if rate.origin_country.present? %>
+    tiggerChangeOnSelectCountry('rate_origin_country', '<%= rate.origin_country %>')
+  <% end %>
+  <% if rate.destination_country.present? %>
+    tiggerChangeOnSelectCountry('rate_destination_country', '<%= rate.destination_country %>')
+  <% end %>
+  <% if rate.origin_state.present? %>
+    tiggerChangeOnSelectCountry('rate_origin_state', '<%= rate.origin_state %>')
+  <% end %>
+  <% if rate.destination_state.present? %>
+    tiggerChangeOnSelectCountry('rate_destination_state', '<%= rate.destination_state %>')
+  <% end %>
+  });
+</script>

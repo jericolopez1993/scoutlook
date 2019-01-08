@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_193026) do
+ActiveRecord::Schema.define(version: 2019_01_07_214253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,28 +136,6 @@ ActiveRecord::Schema.define(version: 2019_01_07_193026) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "carrier_rates", force: :cascade do |t|
-    t.string "rate_type"
-    t.integer "parent_id"
-    t.string "rate_level"
-    t.string "effective_to"
-    t.string "effective_from"
-    t.string "freight_desc"
-    t.string "freight_classification"
-    t.string "transit_time"
-    t.string "minimum_density"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "carrier_id"
-    t.string "origin_city", default: ""
-    t.string "origin_state", default: ""
-    t.string "origin_country", default: ""
-    t.string "destination_city", default: ""
-    t.string "destination_state", default: ""
-    t.string "destination_country", default: ""
-    t.integer "user_id"
-  end
-
   create_table "carriers", force: :cascade do |t|
     t.string "company_name"
     t.string "parent_id"
@@ -253,6 +231,39 @@ ActiveRecord::Schema.define(version: 2019_01_07_193026) do
     t.datetime "updated_at", null: false
     t.integer "origin_location_id"
     t.integer "destination_location_id"
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.string "rate_type"
+    t.integer "parent_id"
+    t.string "rate_level"
+    t.string "effective_to"
+    t.string "effective_from"
+    t.string "freight_desc"
+    t.string "freight_classification"
+    t.string "transit_time"
+    t.string "minimum_density"
+    t.integer "activity_id"
+    t.string "origin_city", default: ""
+    t.string "origin_state", default: ""
+    t.string "origin_country", default: ""
+    t.string "destination_city", default: ""
+    t.string "destination_state", default: ""
+    t.string "destination_country", default: ""
+    t.integer "user_id"
+    t.string "miles"
+    t.integer "picks"
+    t.integer "drops"
+    t.boolean "team"
+    t.string "commodities"
+    t.decimal "bid"
+    t.decimal "ask"
+    t.decimal "cost"
+    t.string "money_currency"
+    t.text "notes"
+    t.string "mc_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "read_marks", id: :serial, force: :cascade do |t|
@@ -380,28 +391,6 @@ ActiveRecord::Schema.define(version: 2019_01_07_193026) do
     t.integer "shipper_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "shipper_rates", force: :cascade do |t|
-    t.string "rate_type"
-    t.integer "parent_id"
-    t.string "rate_level"
-    t.string "effective_to"
-    t.string "effective_from"
-    t.string "freight_desc"
-    t.string "freight_classification"
-    t.string "transit_time"
-    t.string "minimum_density"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "shipper_id"
-    t.string "origin_city", default: ""
-    t.string "origin_state", default: ""
-    t.string "origin_country", default: ""
-    t.string "destination_city", default: ""
-    t.string "destination_state", default: ""
-    t.string "destination_country", default: ""
-    t.integer "user_id"
   end
 
   create_table "shippers", force: :cascade do |t|

@@ -1,0 +1,88 @@
+<table table class="table table-striped table-bordered display nowrap"  id="rates_table">
+  <thead>
+    <tr class="odd gradeX">
+      <th>Origin City</th>
+      <th>Origin ST/PV</th>
+      <th>Destination City</th>
+      <th>Destination ST/PV</th>
+      <th>Miles</th>
+      <th>Picks</th>
+      <th>Drops</th>
+      <th>Team</th>
+      <th>Commodities</th>
+      <th>Bid</th>
+      <th>Ask</th>
+      <th>Cost</th>
+      <th>Currency</th>
+      <th>MC #</th>
+      <th>Carrier</th>
+      <th>Shipper</th>
+      <% if with_actions %>
+        <th data-orderable="false">Actions</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th>Origin City</th>
+      <th>Origin ST/PV</th>
+      <th>Destination City</th>
+      <th>Destination ST/PV</th>
+      <th>Miles</th>
+      <th>Picks</th>
+      <th>Drops</th>
+      <th>Team</th>
+      <th>Commodities</th>
+      <th>Bid</th>
+      <th>Ask</th>
+      <th>Cost</th>
+      <th>Currency</th>
+      <th>MC #</th>
+      <th>Carrier</th>
+      <th>Shipper</th>
+      <% if with_actions %>
+        <th data-orderable="false">Actions</th>
+      <% end %>
+    </tr>
+  </tfoot>
+  <tbody>
+    <% rates.each do |rate| %>
+      <tr>
+        <td><%= rate.origin_city %></td>
+        <td><%= rate.origin_state %></td>
+        <td><%= rate.destination_city %></td>
+        <td><%= rate.destination_state %></td>
+        <td><%= rate.miles %></td>
+        <td><%= rate.picks %></td>
+        <td><%= rate.drops %></td>
+        <td><%= rate.team ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
+        <td>
+          <% rate.commodities_to_array.each do |cr| %>
+            <span class="badge badge-inverse"><%= cr %></span>
+          <% end %>
+        </td>
+        <td><%= rate.bid %></td>
+        <td><%= rate.ask %></td>
+        <td><%= rate.cost %></td>
+        <td><%= rate.money_currency %></td>
+        <td><%= rate.mc_number %></td>
+        <td><%= rate.activity.carrier && link_to(rate.activity.carrier.company_name.blank? ? "(no name)" : rate.activity.carrier.company_name, rate.activity.carrier) %></td>
+        <td><%= rate.activity.shipper && link_to(rate.activity.shipper.company_name.blank? ? "(no name)" : rate.activity.shipper.company_name, rate.activity.shipper) %></td>
+
+        <% if with_actions %>
+          <td>
+            <%= link_to '<i class="far fa-eye"></i>'.html_safe, rate, :class => 'btn btn-info btn-xs' %>
+            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_rate_path(rate), :class => 'btn btn-warning btn-xs' %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, rate, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+          </td>
+      <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script language="javascript">
+  $(document).ready(function() {
+    filterTable("rates_table");
+  });
+</script>

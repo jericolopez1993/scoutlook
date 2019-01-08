@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   resources :master_signals, :path => 'signals'
   resources :shipments
   resources :master_invoices, :path => 'invoices'
-  resources :activity_outcomes
   resources :activities do
     collection do
       post    'quick_create'
       delete  'remove_attachment'
     end
   end
+  resources :rates
   resources :reps, :path => 'stewards'
   resources :carrier_activities do
     collection do

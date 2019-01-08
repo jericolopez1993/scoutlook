@@ -141,7 +141,15 @@ class Shipper < ApplicationRecord
   def last_contact_date
     Activity.where(:shipper_id => self.id).last
   end
-
+  
+  def rates
+    activity_ids = self.activities.distinct(:id).pluck(:id).map(&:inspect).join(',')
+    if activity_ids != ''
+       Rate.where("activity_id IN (#{activity_ids})")
+     else
+       []
+    end
+  end
   private
     def remove_children
       ShipperContact.where(:shipper_id => self.id).destroy_all

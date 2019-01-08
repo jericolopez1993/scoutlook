@@ -145,7 +145,10 @@ label {
           <%= @activity.notes.nil? ? "" : @activity.notes.html_safe %>
         </div>
       </div>
-
+    <hr>
+    <h4 class="text-inverse">Rates</h4>
+    <%= link_to 'New Rate', new_rate_path(:activity_id => @activity.id), :class => 'btn btn-primary btn-xs' %>
+      <%= render 'rates/table', rates: Rate.where(:activity_id => @activity.id), with_actions: true %>
     <hr>
     <h4 class="text-inverse">Proposed PDFs</h4>
     <table class="table table-striped table-bordered data-table-no-buttons display nowrap">
