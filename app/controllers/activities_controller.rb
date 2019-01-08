@@ -19,6 +19,8 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new
     if params[:carrier_id].present?
       @activity.carrier_id = params[:carrier_id]
+    elsif params[:shipper_id].present?
+      @activity.shipper_id = params[:shipper_id]
     end
 
     authorize @activity
@@ -151,7 +153,7 @@ class ActivitiesController < ApplicationController
       else
         params[:activity].delete :date_stamp
       end
-      params.require(:activity).permit(:outcome, :reason, :reason_other, :notes, :date_stamp, :activity_type, :engagement_type, :carrier_id, :carrier_contact_id, :user_id, :annual_value, :loads_per_week, :status, :date_opened, :date_closed, :other_notes, :outcome_id, :campaign_name)
+      params.require(:activity).permit(:outcome, :reason, :reason_other, :notes, :date_stamp, :activity_type, :engagement_type, :carrier_id, :carrier_contact_id, :shipper_id, :shipper_contact_id, :user_id, :annual_value, :loads_per_week, :status, :date_opened, :date_closed, :other_notes, :outcome_id, :campaign_name)
     end
 
 end

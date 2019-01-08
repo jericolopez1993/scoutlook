@@ -9,9 +9,13 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<div class="header-scout">
+<div class="<% if @activity.carrier %> header-scout <% elsif @activity.shipper %> header-darkblue <% end %>">
   <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: "#{@activity.carrier.nil? ? '' : generate_alphanumeric_id(@activity.carrier.company_name, @activity.carrier.id)}", sub_header_title: "#{@activity.carrier.nil? ? '' : link_to(@activity.carrier.company_name,  @activity.carrier)}"  %>
+    <% if @activity.carrier %>
+      <%= render 'layouts/static/header', header_title: "#{@activity.carrier.nil? ? '' : generate_alphanumeric_id(@activity.carrier.company_name, @activity.carrier.id)}", sub_header_title: "#{@activity.carrier.nil? ? '' : link_to(@activity.carrier.company_name,  @activity.carrier)}"  %>
+    <% elsif @activity.shipper %>
+      <%= render 'layouts/static/header', header_title: "#{@activity.shipper.nil? ? '' : generate_alphanumeric_id(@activity.shipper.company_name, @activity.shipper.id)}", sub_header_title: "#{@activity.shipper.nil? ? '' : link_to(@activity.shipper.company_name,  @activity.shipper)}"  %>
+    <% end %>
   </h1>
   <span class="pull-right">
     <%= link_to 'Edit', edit_activity_path(@activity), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
