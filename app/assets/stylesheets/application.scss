@@ -180,6 +180,28 @@ table.dataTable {
   font-weight: bold;
   opacity: .8;
 }
+.active.activity {
+  background-color: #ee9c10!important;
+  color: #fff!important;
+  font-weight: bold;
+}
+.active.activity:hover {
+  background-color: #ee9c10!important;
+  color: #fff!important;
+  font-weight: bold;
+  opacity: .8;
+}
+.active.rate {
+  background-color: #014b0a!important;
+  color: #fff!important;
+  font-weight: bold;
+}
+.active.rate:hover {
+  background-color: #014b0a!important;
+  color: #fff!important;
+  font-weight: bold;
+  opacity: .8;
+}
 .active.steward {
   background-color: #7e1d7e!important;
   color: #fff!important;
@@ -206,6 +228,14 @@ table.dataTable {
 }
 .panel-darkblue>.panel-heading {
   background-color: #013a38;
+  color: #fff;
+}
+.panel-yelloworange>.panel-heading {
+  background-color: #dd8b00;
+  color: #fff;
+}
+.panel-emerald>.panel-heading {
+  background-color: #033309;
   color: #fff;
 }
 .panel-violet>.panel-heading {
