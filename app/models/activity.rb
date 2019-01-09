@@ -8,6 +8,7 @@ class Activity < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :carrier, optional: true
   belongs_to :shipper, optional: true
+  has_many :rate, :dependent => :delete_all
 
   def display_name
     if self.carrier.nil?
