@@ -45,7 +45,7 @@
         <% if show_shipper %>
           <th>Shipper</th>
         <% end %>
-        <th>Contact</th>
+        <th width="150px">Contact Activity</th>
         <th>Priority</th>
         <th>City</th>
         <th>State</th>
@@ -79,12 +79,12 @@
               </td>
             <% end %>
             <% if show_carrier && !activity.carrier.nil? %>
-              <td><%= activity.carrier_contact.nil? ? "" : (link_to "#{activity.carrier_contact.full_name}", edit_carrier_contact_path(activity.carrier_contact)) %></td>
+              <td nowrap><%= activity.carrier_contact.nil? ? "" : (link_to "#{activity.carrier_contact.full_name}", edit_carrier_contact_path(activity.carrier_contact)) %></td>
               <td><%= activity.carrier.nil? || activity.carrier.sales_priority.blank? ? "" : activity.carrier.sales_priority %></td>
               <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.city %></td>
               <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.state %></td>
             <% elsif show_shipper && !activity.shipper.nil? %>
-              <td><%= activity.shipper_contact.nil? ? "" : (link_to "#{activity.shipper_contact.full_name}", edit_shipper_contact_path(activity.shipper_contact)) %></td>
+              <td nowrap><%= activity.shipper_contact.nil? ? "" : (link_to "#{activity.shipper_contact.full_name}", edit_shipper_contact_path(activity.shipper_contact)) %></td>
               <td><%= activity.shipper.nil? || activity.shipper.sales_priority.blank? ? "" : activity.shipper.sales_priority %></td>
               <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.city %></td>
               <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.state %></td>
@@ -100,7 +100,7 @@
             <% if !activity.carrier.nil? %>
               <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_activity_path(:id => activity.id, :previous_controller => current_controller, :client_type => "carrier"), :class => 'btn btn-warning btn-xs' %>
             <% elsif !activity.shipper.nil? %>
-              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_activity_path(:id => activity.id, :previous_controller => current_controller), :client_type => "shipper", :class => 'btn btn-warning btn-xs' %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_activity_path(:id => activity.id, :previous_controller => current_controller, :client_type => "shipper"), :class => 'btn btn-warning btn-xs' %>
             <% end %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => current_controller), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
           </td>

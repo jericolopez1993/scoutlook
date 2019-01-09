@@ -70,7 +70,11 @@ label {
     <div class="row">
       <label class="col-md-2 col-form-label">Contact:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @activity.carrier_contact.nil? ? "" : (link_to "#{@activity.carrier_contact.full_name}", edit_carrier_contact_path(@activity.carrier_contact)) %>
+        <% if @activity.carrier_contact %>
+          <%= @activity.carrier_contact.nil? ? "" : (link_to "#{@activity.carrier_contact.full_name}", edit_carrier_contact_path(@activity.carrier_contact)) %>
+        <% elsif @activity.shipper_contact %>
+          <%= @activity.shipper_contact.nil? ? "" : (link_to "#{@activity.shipper_contact.full_name}", edit_shipper_contact_path(@activity.shipper_contact)) %>  
+        <% end %>
       </div>
     </div>
 
