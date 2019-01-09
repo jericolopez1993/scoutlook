@@ -22,7 +22,7 @@
 <!-- end page-header -->
 <!-- begin panel -->
 <%= form_with(model: activity, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
-
+  <%= form.hidden_field :previous_params, value: @previous_controller %>
   <div class="panel panel-inverse">
     <div class="panel-heading">
       <div class="panel-heading-btn">
