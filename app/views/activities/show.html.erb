@@ -27,7 +27,7 @@ label {
       <% shipper = Shipper.find(@activity.shipper_id)%>
       <%= link_to 'Back to Shipper', shipper, :class => 'btn btn-info btn-xs' %>
     <% else %>
-      <%= link_to 'Back', carrier_activities_path, :class => 'btn btn-info btn-xs' %>
+      <%= link_to 'Back', activities_path, :class => 'btn btn-info btn-xs' %>
     <% end %>
   </span>
 </div>
@@ -73,7 +73,7 @@ label {
         <% if @activity.carrier_contact %>
           <%= @activity.carrier_contact.nil? ? "" : (link_to "#{@activity.carrier_contact.full_name}", edit_carrier_contact_path(@activity.carrier_contact)) %>
         <% elsif @activity.shipper_contact %>
-          <%= @activity.shipper_contact.nil? ? "" : (link_to "#{@activity.shipper_contact.full_name}", edit_shipper_contact_path(@activity.shipper_contact)) %>  
+          <%= @activity.shipper_contact.nil? ? "" : (link_to "#{@activity.shipper_contact.full_name}", edit_shipper_contact_path(@activity.shipper_contact)) %>
         <% end %>
       </div>
     </div>
@@ -166,7 +166,7 @@ label {
     <% end %>
     <hr>
     <h4 class="text-inverse">Rates</h4>
-    <%= link_to 'New Rate', new_rate_path(:activity_id => @activity.id), :class => 'btn btn-primary btn-xs' %>
+    <%= link_to 'New Rate', new_rate_path(:activity_id => @activity.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs' %>
       <%= render 'rates/table', rates: Rate.where(:activity_id => @activity.id), with_actions: true %>
     <hr>
     <h4 class="text-inverse">Proposed PDFs</h4>
@@ -187,7 +187,7 @@ label {
             <td><%= convert_date(attachment_file.created_at) %></td>
             <td>
               <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file), target: :_blank, :class => 'btn btn-primary' %>
-              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_carrier_activities_path(:id => @activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_activities_path(:id => @activity.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
             </td>
           </tr>
         <% end %>

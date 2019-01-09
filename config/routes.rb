@@ -10,32 +10,18 @@ Rails.application.routes.draw do
   end
   resources :rates
   resources :reps, :path => 'stewards'
-  resources :carrier_activities do
-    collection do
-      post    'quick_create'
-      delete  'remove_attachment'
-    end
-  end
   resources :carrier_lanes
   resources :carrier_contacts
   resources :carrier_locations
-  resources :carrier_rates
   resources :carriers do
     collection do
       get     'origins'
       delete  'remove_attachment'
     end
   end
-  resources :shipper_activities do
-    collection do
-      post    'quick_create'
-      delete  'remove_attachment'
-    end
-  end
   resources :shipper_lanes
   resources :shipper_contacts
   resources :shipper_locations
-  resources :shipper_rates
   resources :shippers do
     collection do
       get     'origins'
@@ -45,6 +31,7 @@ Rails.application.routes.draw do
   resources :logs
   devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
+    get '/sign-in' => "devise/sessions#new", :as => :login
     authenticated :user do
       root 'carriers#index', as: :authenticated_root
     end

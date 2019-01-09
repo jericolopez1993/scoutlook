@@ -69,7 +69,7 @@ class RatesController < ApplicationController
   def destroy
     @rate.destroy
     respond_to do |format|
-      format.html { redirect_to activities_path, notice: 'Rate was successfully removed.' }
+      format.html { redirect_to activity_path(:id => @rate.activity_id), notice: 'Rate was successfully removed.' }
       format.json { head :no_content }
     end
   end

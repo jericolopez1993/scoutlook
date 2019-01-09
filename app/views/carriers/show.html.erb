@@ -49,7 +49,7 @@
       <%= link_to 'New Contact', new_carrier_contact_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-contact-btn' %>
       <%= link_to 'New Activities', new_activity_path(:carrier_id => @carrier.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-activity-btn' %>
       <%= link_to 'New Lane', new_carrier_lane_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
-      <%#= link_to 'New Rates', new_carrier_rate_path(:carrier_id => @carrier.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
+      <%#= link_to 'New Rates', new_rate_path(:carrier_id => @carrier.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
     </div>
     <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
       <li class="nav-items">
@@ -444,6 +444,6 @@
     }
   })
   $(document).ready(function() {
-    filterTable("carrier_activities_table");
+    filterTable("activities_table");
   });
 </script>
