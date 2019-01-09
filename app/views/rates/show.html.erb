@@ -92,6 +92,12 @@ label {
       </div>
     </div>
     <div class="row">
+      <label class="col-md-2 col-form-label">Accepted:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= @rate.accepted ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+      </div>
+    </div>
+    <div class="row">
       <label class="col-md-2 col-form-label">Cost:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @rate.cost %>

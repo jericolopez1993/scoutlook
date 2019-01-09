@@ -12,6 +12,7 @@
       <th>Commodities</th>
       <th>Bid</th>
       <th>Ask</th>
+      <th>Accepted</th>
       <th>Cost</th>
       <th>Currency</th>
       <th>MC #</th>
@@ -35,6 +36,7 @@
       <th>Commodities</th>
       <th>Bid</th>
       <th>Ask</th>
+      <th>Accepted</th>
       <th>Cost</th>
       <th>Currency</th>
       <th>MC #</th>
@@ -63,6 +65,7 @@
         </td>
         <td><%= rate.bid %></td>
         <td><%= rate.ask %></td>
+        <td><%= rate.accepted ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
         <td><%= rate.cost %></td>
         <td><%= rate.money_currency %></td>
         <td><%= rate.mc_number %></td>
