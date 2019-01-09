@@ -19,8 +19,8 @@ Feature: Carriers
     Then go to the "Carriers" page
     When I go to the new carrier page
     And add a "carrier" with these data
-      | sales_priority | company_name  | score_card  | freight_guard | years_in_business | power_units | company_drivers | owner_operators | reefers | dry_vans  | flat_beds | teams | contract_rates  | total_fleet_size  |
-      | A              | test1234      | 0           | 0             | 0                 | 0           | 0               | 0               | 0       | 0         | 0         | 0     | 25-50           | 26-50             |
+      | sales_priority | company_name  | score_card  | freight_guard | years_in_business | power_units | company_drivers | owner_operators | reefers | dry_vans  | flat_beds | teams | total_fleet_size  |
+      | A              | test1234      | 0           | 0             | 0                 | 0           | 0               | 0               | 0       | 0         | 0         | 0     | 26-50             |
     Then submit the form
     And the carrier "test1234" should be on the show page
 
@@ -28,8 +28,8 @@ Feature: Carriers
     Then go to the "Carriers" page
     When I go to the new carrier page
     And add a "carrier" with these data
-      | sales_priority | company_name  | score_card  | freight_guard | years_in_business | power_units | company_drivers | owner_operators | reefers | dry_vans  | flat_beds | teams | contract_rates  | total_fleet_size  |
-      | A              | test1234      | 0           | 0             | 0                 | 0           | 0               | 0               | 0       | 0         | 0         | 0     | 25-50           | 26-50             |
+      | sales_priority | company_name  | score_card  | freight_guard | years_in_business | power_units | company_drivers | owner_operators | reefers | dry_vans  | flat_beds | teams | total_fleet_size  |
+      | A              | test1234      | 0           | 0             | 0                 | 0           | 0               | 0               | 0       | 0         | 0         | 0     | 26-50             |
     Then submit the form
     And the carrier "test1234" should be on the show page
     When I clicked the edit button
@@ -43,8 +43,8 @@ Feature: Carriers
     Then go to the "Carriers" page
     When I go to the new carrier page
     And add a "carrier" with these data
-      | sales_priority | company_name  | score_card  | freight_guard | years_in_business | power_units | company_drivers | owner_operators | reefers | dry_vans  | flat_beds | teams | contract_rates  | total_fleet_size  |
-      | A              | test1234      | 0           | 0             | 0                 | 0           | 0               | 0               | 0       | 0         | 0         | 0     | 25-50           | 26-50             |
+      | sales_priority | company_name  | score_card  | freight_guard | years_in_business | power_units | company_drivers | owner_operators | reefers | dry_vans  | flat_beds | teams | total_fleet_size  |
+      | A              | test1234      | 0           | 0             | 0                 | 0           | 0               | 0               | 0       | 0         | 0         | 0     | 26-50             |
     Then submit the form
     And the carrier "test1234" should be on the show page
     When I clicked the delete button
