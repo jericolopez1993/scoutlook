@@ -28,9 +28,11 @@ When(/^I click the first show button on the "([^"]*)" table$/) do |tbl|
   if tbl == "location"
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[7]/a[1]").click
   elsif tbl == "contact"
-    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[8]/a[1]").click
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[9]/a[1]").click
   elsif tbl == "rates"
-    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[18]/a[2]").click
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[18]/a[1]").click
+  elsif tbl == "lane"
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[8]/a[1]").click
   else
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[11]/a[1]").click
   end
@@ -39,9 +41,11 @@ When(/^I click the first edit button on the "([^"]*)" table$/) do |tbl|
   if tbl == "location"
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[7]/a[1]").click
   elsif tbl == "contact"
-    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[8]/a[1]").click
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[9]/a[1]").click
   elsif tbl == "rates"
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[18]/a[2]").click
+  elsif tbl == "lane"
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[8]/a[2]").click
   else
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[11]/a[2]").click
   end
@@ -50,9 +54,11 @@ When(/^I click the first delete button on the "([^"]*)" table$/) do |tbl|
   if tbl == "location"
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[7]/a[2]").click
   elsif tbl == "contact"
-    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[8]/a[2]").click
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[9]/a[2]").click
   elsif tbl == "rates"
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[18]/a[3]").click
+  elsif tbl == "lane"
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[8]/a[3]").click
   else
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[11]/a[3]").click
   end

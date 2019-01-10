@@ -18,8 +18,8 @@ Feature: Shipper Contact
   Scenario: Create a New Contact
     Then click the new "contact" button
     And add a "shipper_contact" with these data
-      | contact_type | first_name | last_name | title   | email             | password  | password_confirmation |
-      | Owner        | ftest      | ltest     | Tester  | tester@ltest.com  | password  | password              |
+      | contact_type | first_name | last_name | title   | email             |
+      | Owner        | ftest      | ltest     | Tester  | tester@ltest.com  |
     Then submit the form
     Then click the "contact" tab
     Then there should have "ftest ltest" on the table
@@ -27,16 +27,16 @@ Feature: Shipper Contact
   Scenario: Edit a Contact
     Then click the new "contact" button
     And add a "shipper_contact" with these data
-      | contact_type | first_name | last_name | title   | email             | password  | password_confirmation |
-      | Owner        | ftest      | ltest     | Tester  | tester@ltest.com  | password  | password              |
+      | contact_type | first_name | last_name | title   | email             |
+      | Owner        | ftest      | ltest     | Tester  | tester@ltest.com  |
     Then submit the form
     And the shipper "test1234" should be on the show page
     Then click the "contact" tab
     Then there should have "ftest ltest" on the table
     When I click the first edit button on the "contact" table
     And edit the "shipper_contact" with these data
-      | contact_type | first_name | last_name | title   | password  |
-      | Sales        | fltest     | lftest    | Tester  | password  |
+      | contact_type | first_name | last_name | title   |
+      | Sales        | fltest     | lftest    | Tester  |
     Then submit the form
     Then click the "contact" tab
     Then there should have "fltest lftest" on the table
@@ -44,8 +44,8 @@ Feature: Shipper Contact
   Scenario: Delete a Contact
     Then click the new "contact" button
     And add a "shipper_contact" with these data
-      | contact_type | first_name | last_name | title   | email             | password  | password_confirmation |
-      | Owner        | ftest      | ltest     | Tester  | tester@ltest.com  | password  | password              |
+      | contact_type | first_name | last_name | title   | email             |
+      | Owner        | ftest      | ltest     | Tester  | tester@ltest.com  |
     Then submit the form
     Then click the "contact" tab
     Then there should have "ftest ltest" on the table
