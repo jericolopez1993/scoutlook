@@ -3,8 +3,25 @@ class Carrier < ApplicationRecord
   before_save :approved?
   has_many_attached :attachment_file
   after_destroy :remove_children
+
   belongs_to :relationship_owner_user, class_name: "User", foreign_key: "relationship_owner", optional: true
   belongs_to :carrier_setup_user, class_name: "User", foreign_key: "carrier_setup", optional: true
+
+  has_many :locations, primary_key: "id", foreign_key: 'carrier_id', class_name: "CarrierLocation"
+  has_many :carrier_lanes, :dependent => :delete_all
+  has_many :lane_1, -> { where(lane_priority: 1)}, primary_key: "id", foreign_key: 'carrier_id', class_name: "CarrierLane"
+  has_many :lane_2, -> { where(lane_priority: 2)}, primary_key: "id", foreign_key: 'carrier_id', class_name: "CarrierLane"
+  has_many :lane_3, -> { where(lane_priority: 3)}, primary_key: "id", foreign_key: 'carrier_id', class_name: "CarrierLane"
+  has_many :activities, :dependent => :delete_all
+  has_many :adm, -> { where(adm: true).order("id DESC")}, primary_key: "id", foreign_key: 'carrier_id', class_name: "CarrierContact"
+
+  has_one :origin_location, primary_key: "origin", foreign_key: 'id', class_name: "CarrierLocation"
+  has_one :destination_location, primary_key: "destination", foreign_key: 'id', class_name: "CarrierLocation"
+  has_one :head_office_location, primary_key: "head_office", foreign_key: 'id', class_name: "CarrierLocation"
+  has_one :location, primary_key: "head_office", foreign_key: 'id', class_name: "CarrierLocation"
+  has_one :poc, primary_key: "poc_id", foreign_key: 'id', class_name: "CarrierContact"
+  has_one :pdm, primary_key: "pdm_id", foreign_key: 'id', class_name: "CarrierContact"
+
 
   def display_name
     if self.company_name.present? && self.company_name != "" && !self.company_name.nil?
@@ -14,105 +31,10 @@ class Carrier < ApplicationRecord
     end
   end
 
-  def locations
-    CarrierLocation.where(:carrier_id => self.id)
-  end
-
-  def carrier_lanes
-    CarrierLane.where(:carrier_id => self.id)
-  end
-
-  def activities
-    Activity.where(:carrier_id => self.id)
-  end
-
-  def lane_1
-    CarrierLane.where(:carrier_id => self.id, :lane_priority => 1)
-  end
-
-  def lane_2
-    CarrierLane.where(:carrier_id => self.id, :lane_priority => 2)
-  end
-
-  def lane_3
-    CarrierLane.where(:carrier_id => self.id, :lane_priority => 3)
-  end
-
-  def default_location
-      if !self.origin.nil?
-        CarrierLocation.find(self.origin).location
-      elsif !self.head_office.nil?
-        CarrierLocation.find(self.head_office).location
-      elsif CarrierLocation.all.length > 0
-        CarrierLocation.first.location
-      else
-        nil
-      end
-  end
-
-  def origin_location
-    begin
-      CarrierLocation.find(self.origin)
-    rescue
-      nil
-    end
-  end
-
-  def destination_location
-    begin
-      CarrierLocation.find(self.destination)
-    rescue
-      nil
-    end
-  end
-
-  def head_office_location
-    begin
-      CarrierLocation.find(self.head_office)
-    rescue
-      nil
-    end
-  end
-
-  def location
-    begin
-      CarrierLocation.find(self.head_office)
-    rescue
-      nil
-    end
-  end
-
   def is_inbound?(location_id)
     CarrierLocation.where(:carrier_id => self.id, :location_id => location_id).length > 0
   end
 
-  def poc
-    if self.poc_id.present? && !self.poc_id.nil?
-      CarrierContact.find(self.poc_id)
-    else
-      nil
-    end
-  end
-
-  def pdm
-    if self.pdm_id.present? && !self.pdm_id.nil?
-      CarrierContact.find(self.pdm_id)
-    else
-      nil
-    end
-  end
-
-  def adm
-    CarrierContact.where(:carrier_id => self.id, :adm => true).order("id DESC")
-  end
-
-  def last_contact_by_rep
-    if self.last_contact_by.present? && !self.last_contact_by.nil?
-      Rep.find(self.last_contact_by)
-    else
-      nil
-    end
-  end
   def last_contact_date
     Activity.where(:carrier_id => self.id).last
   end

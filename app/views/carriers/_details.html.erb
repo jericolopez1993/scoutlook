@@ -1,0 +1,207 @@
+<div class="panel-body">
+  <h3 class="text-inverse"><strong>Details:</strong></h3>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card bg-light" >
+        <div class="card-body">
+          <div class="row">
+            <label class="col-md-4 col-form-label">Approved to do business?</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.approved ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Complete Record:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.complete_record ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Last Contact:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : (carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s + " " + (carrier.last_contact_date.user.nil? ? "" : link_to(carrier.last_contact_date.user.full_name, carrier.last_contact_date.user))).html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Carrier Class:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.sales_priority %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Company Name:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.company_name %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">MC Number:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.mc_number %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Relationship Owner:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.relationship_owner_user.nil? ? 'Not Assigned' : link_to(carrier.relationship_owner_user.full_name, carrier.relationship_owner_user) %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Carrier Setup:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.carrier_setup_user.nil? ? 'Not Assigned' : link_to(carrier.carrier_setup_user.full_name, carrier.carrier_setup_user) %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Load Last Month:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.load_last_month %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Last Last 6 Months:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.load_last_6_month %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Last Load Date:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.last_load_date %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Date Approved:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.date_approved %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Date Created:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.created_at.strftime('%d/%m/%Y') %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Score Card:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.score_card %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Freight Guard:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.freight_guard %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Years in Business:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.years_in_business %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Power Units:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.power_units %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Company Drivers:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.company_drivers %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Owner Operators:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.owner_operators %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Reefers:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.reefers %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Dry Vans:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.dry_vans %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Flat Beds:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.flat_beds %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Teams:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.teams %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Contract Rates:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.contract_rates ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Total Fleet Size:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.total_fleet_size %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">How do they find loads:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.find_loads.nil? ? "" : carrier.find_loads.html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Notes:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.notes.nil? ? "" : carrier.notes.html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Website:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= (!carrier.website.nil? && carrier.website.present?) ? "<a href='#{carrier.website}'>#{carrier.website}</a>" : "" %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">LinkedIn:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= (!carrier.linkedin.nil? && carrier.linkedin.present?) ? "<a href='#{carrier.website}'>#{carrier.linkedin}</a>" : "" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h4 class="card-title">Priority Lanes</h4>
+          <%= render 'carrier_lanes/table_ordered', lane_1: carrier.lane_1, lane_2: carrier.lane_2, lane_3: carrier.lane_3  %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h4 class="card-title">Ops Contact</h4>
+          <%= render 'carrier_contacts/show_fields', carrier_contact: carrier.poc %>
+        </div>
+      </div>
+      <div class="card bg-light">
+        <div class="card-body">
+          <h4 class="card-title">Decision Maker</h4>
+          <%= render 'carrier_contacts/show_fields', carrier_contact: carrier.pdm %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

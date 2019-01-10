@@ -1,0 +1,23 @@
+<table class="table table-striped table-bordered data-table-no-buttons display nowrap">
+  <thead>
+    <tr class="odd gradeX">
+      <th width="1%"></th>
+      <th>Name</th>
+      <th>Date</th>
+      <th data-orderable="false"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% carrier.attachment_file.each_with_index do |attachment_file, index| %>
+      <tr>
+        <td><%= attachment_file.id %></td>
+        <td><%= attachment_file.filename %></td>
+        <td><%= convert_date(attachment_file.created_at) %></td>
+        <td>
+          <%= link_to '<i class="fas fa-download"></i>'.html_safe, rails_blob_path(attachment_file), target: :_blank, :class => 'btn btn-primary  btn-xs' %>
+          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, remove_attachment_carriers_path(:id => carrier.id, :attachment_id => attachment_file.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
