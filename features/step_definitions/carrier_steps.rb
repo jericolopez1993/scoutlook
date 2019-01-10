@@ -24,15 +24,26 @@ end
 When(/^I clicked the delete button$/) do
   click_link('Delete')
 end
+When(/^I click the first show button on the "([^"]*)" table$/) do |tbl|
+  if tbl == "location"
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[7]/a[1]").click
+  elsif tbl == "contact"
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[8]/a[1]").click
+  elsif tbl == "rates"
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[18]/a[2]").click
+  else
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[11]/a[1]").click
+  end
+end
 When(/^I click the first edit button on the "([^"]*)" table$/) do |tbl|
   if tbl == "location"
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[7]/a[1]").click
   elsif tbl == "contact"
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[8]/a[1]").click
-  elsif tbl == "rate"
-    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[5]/a[2]").click
+  elsif tbl == "rates"
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[18]/a[2]").click
   else
-    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[7]/a[2]").click
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[11]/a[2]").click
   end
 end
 When(/^I click the first delete button on the "([^"]*)" table$/) do |tbl|
@@ -40,10 +51,10 @@ When(/^I click the first delete button on the "([^"]*)" table$/) do |tbl|
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[7]/a[2]").click
   elsif tbl == "contact"
     find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[8]/a[2]").click
-  elsif tbl == "rate"
-    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[5]/a[3]").click
+  elsif tbl == "rates"
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr/td[18]/a[3]").click
   else
-    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[7]/a[3]").click
+    find(:xpath, "//*[@id='#{tbl}_table']/tbody/tr[1]/td[11]/a[3]").click
   end
 end
 Then(/^there should have "([^"]*)" on the table$/) do |name|
@@ -68,7 +79,7 @@ And(/^add a "([^"]*)" with these data$/) do |model, table|
   tables = table.hashes
   tables.each do |tbl|
     headers.each do |hdr|
-      if hdr == "sales_priority" || hdr == "contract_rates" || hdr == "total_fleet_size" || hdr == "sales_priority" || hdr == "shipper_type" || hdr == "loads_per_month" || hdr == "spend_per_year" || hdr == "buying_criteria" || hdr == "price_sensitivity" || hdr == "rep_id" || hdr == "annual_value" || hdr == "lane_priority" || hdr == "contact_type" || hdr == "rate_level" || hdr == "rate_type" || hdr == "shipper_type" || hdr == "loads_per_month" || hdr == "spend_per_year" || hdr == "buying_criteria" || hdr == "price_sensitivity"
+      if hdr == "sales_priority" || hdr == "contract_rates" || hdr == "total_fleet_size" || hdr == "sales_priority" || hdr == "shipper_type" || hdr == "loads_per_month" || hdr == "spend_per_year" || hdr == "buying_criteria" || hdr == "price_sensitivity" || hdr == "rep_id" || hdr == "annual_value" || hdr == "lane_priority" || hdr == "contact_type" || hdr == "rate_level" || hdr == "rate_type" || hdr == "shipper_type" || hdr == "loads_per_month" || hdr == "spend_per_year" || hdr == "buying_criteria" || hdr == "price_sensitivity" || hdr == "picks" || hdr == "drops"
         select(tbl[hdr], :from => "#{model}_#{hdr}")
       elsif hdr == "engagement_type"
         select(tbl[hdr], :from => "#{hdr}")

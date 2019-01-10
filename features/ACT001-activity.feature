@@ -17,37 +17,37 @@ Feature: Carrier Activities
 
   Scenario: Create a New Activity
     Then click the new "activity" button
-    And add a "carrier_activity" with these data
-      | engagement_type | rep_id        | annual_value |
-      | Engagement      | Kevin Marcelo | 5-10M        |
-    Then submit the form
-    Then click the "activity" tab
-    Then there should have "Engagement" on the table
-
-  Scenario: Edit a Activity
-    Then click the new "activity" button
-    And add a "carrier_activity" with these data
-      | engagement_type | rep_id        | annual_value |
-      | Engagement      | Kevin Marcelo | 5-10M        |
-    Then submit the form
-    And the carrier "test1234" should be on the show page
-    Then click the "activity" tab
-    Then there should have "Engagement" on the table
-    When I click the first edit button on the "engagement" table
-    And edit the "carrier_activity" with these data
-      | engagement_type |  annual_value |
-      | Proposal            |  10-25M       |
+    And add a "activity" with these data
+      | engagement_type | annual_value |
+      | Proposal        | 5-10M        |
     Then submit the form
     Then click the "activity" tab
     Then there should have "Proposal" on the table
 
-  Scenario: Delete a Activity
+  Scenario: Edit a Activity
     Then click the new "activity" button
-    And add a "carrier_activity" with these data
-      | engagement_type | rep_id        | annual_value |
-      | Engagement      | Kevin Marcelo | 5-10M        |
+    And add a "activity" with these data
+      | engagement_type | annual_value |
+      | Proposal        | 5-10M        |
+    Then submit the form
+    And the carrier "test1234" should be on the show page
+    Then click the "activity" tab
+    Then there should have "Proposal" on the table
+    When I click the first edit button on the "activities" table
+    And edit the "activity" with these data
+      | engagement_type |  annual_value |
+      | Courtesy        |  10-25M       |
     Then submit the form
     Then click the "activity" tab
-    Then there should have "Engagement" on the table
-    When I click the first delete button on the "engagement" table
+    Then there should have "Courtesy" on the table
+
+  Scenario: Delete a Activity
+    Then click the new "activity" button
+    And add a "activity" with these data
+      | engagement_type | annual_value |
+      | Proposal        | 5-10M        |
+    Then submit the form
+    Then click the "activity" tab
+    Then there should have "Proposal" on the table
+    When I click the first delete button on the "activities" table
     Then click the "activity" tab

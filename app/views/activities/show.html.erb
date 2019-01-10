@@ -154,19 +154,21 @@ label {
           <%= @activity.notes.nil? ? "" : @activity.notes.html_safe %>
         </div>
       </div>
-    <% if @activity.outcome.include? "Win" %>
-      <hr>
-      <h4 class="text-inverse">Load Details</h4>
-      <div class="row">
-        <label class="col-md-2 col-form-label">Load Numbers:</label>
-        <div class="col-md-9 lbl-padding-t">
-          <%= @activity.load_numbers %>
-        </div>
-      </div>
-    <% end %>
+      <% if !@activity.outcome.nil? %>
+        <% if @activity.outcome.include? "Win" %>
+          <hr>
+          <h4 class="text-inverse">Load Details</h4>
+          <div class="row">
+            <label class="col-md-2 col-form-label">Load Numbers:</label>
+            <div class="col-md-9 lbl-padding-t">
+              <%= @activity.load_numbers %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     <hr>
     <h4 class="text-inverse">Rates</h4>
-    <%= link_to 'New Rate', new_rate_path(:activity_id => @activity.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs' %>
+    <%= link_to 'New Rate', new_rate_path(:activity_id => @activity.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
       <%= render 'rates/table', rates: Rate.where(:activity_id => @activity.id), with_actions: true %>
     <hr>
     <h4 class="text-inverse">Proposed PDFs</h4>
