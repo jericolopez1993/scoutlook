@@ -35,11 +35,6 @@ class ShipperContactsController < ApplicationController
   def create
     @shipper_contact = ShipperContact.new(shipper_contact_params)
     params.require(:shipper_contact).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-    if params[:same_ho].present?
-      @shipper_contact.same_ho = true
-    else
-      @shipper_contact.same_ho = false
-    end
     @location_id = nil
     if params[:shipper_contact][:location_id].present? || params[:shipper_contact][:address].present? || params[:shipper_contact][:country].present? ||  params[:shipper_contact][:state].present? ||  params[:shipper_contact][:postal].present? ||  params[:shipper_contact][:city].present?
       if is_numeric?(params[:shipper_contact][:location_id])
@@ -127,11 +122,7 @@ class ShipperContactsController < ApplicationController
         if params[:poc].present?
           shipper.update_attributes(:poc_id => @shipper_contact.id)
         end
-        if params[:same_ho].present?
-          @shipper_contact.update_attributes(:same_ho => true)
-        else
-          @shipper_contact.update_attributes(:same_ho => false)
-        end
+
         format.html { redirect_to shipper_path(:id => shipper.id), notice: 'Shipper contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @shipper_contact }
       else
@@ -160,8 +151,7 @@ class ShipperContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipper_contact_params
-      params[:shipper_contact][:adm] = params[:adm].present?
-      params.require(:shipper_contact).permit(:title, :first_name, :last_name, :email, :location_id, :shipper_id, :linkedin_link, :adm, :contact_type, :primary_phone, :primary_phone_type, :secondary_phone, :secondary_phone_type, :address, :city, :postal, :country, :state)
+      params.require(:shipper_contact).permit(:title, :first_name, :last_name, :email, :location_id, :shipper_id, :linkedin_link, :adm, :same_ho, :contact_type, :primary_phone, :primary_phone_type, :secondary_phone, :secondary_phone_type, :address, :city, :postal, :country, :state)
     end
     def user_params
       params.require(:shipper_contact).permit(:first_name, :last_name, :email, :password)

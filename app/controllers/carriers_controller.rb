@@ -156,9 +156,6 @@ class CarriersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_params
-      params[:carrier][:complete_record] = params[:complete_record].present?
-      params[:carrier][:approved] = params[:approved].present?
-      params[:carrier][:contract_rates] = params[:contract_rates].present?
       if params[:carrier][:last_contact].present?
         params[:carrier][:last_contact] = Date::strptime(params[:carrier][:last_contact], "%m/%d/%Y")
       else

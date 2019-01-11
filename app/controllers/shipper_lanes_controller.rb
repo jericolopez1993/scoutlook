@@ -71,7 +71,6 @@ class ShipperLanesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipper_lane_params
-      params[:shipper_lane][:prefer_team] = params[:prefer_team].present?
       if params[:shipper_lane][:lane_origin].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
         params[:shipper_lane].delete :lane_origin
       else

@@ -95,7 +95,7 @@
       <div class="form-group row m-b-15">
         <label class="text-right col-md-2 col-sm-4 col-form-label">Team:</label>
         <div class="col-md-9 col-sm-8">
-          <input type="checkbox" name="team" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" <%= rate.team ? 'checked' : '' %>/>
+          <%= form.check_box :team, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: rate.team %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -119,7 +119,7 @@
       <div class="form-group row m-b-15">
         <label class="text-right col-md-2 col-sm-4 col-form-label">Accepted:</label>
         <div class="col-md-9 col-sm-8">
-          <input type="checkbox" name="accepted" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" <%= rate.accepted ? 'checked' : '' %>/>
+          <%= form.check_box :accepted, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: rate.accepted %>
         </div>
       </div>
       <div class="form-group row m-b-15">

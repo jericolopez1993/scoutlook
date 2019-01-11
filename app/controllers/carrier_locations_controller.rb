@@ -86,8 +86,6 @@ class CarrierLocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_location_params
-      params[:carrier_location][:is_origin] = params[:origin].present?
-      params[:carrier_location][:is_destination] = params[:destination].present?
       params[:carrier_location][:name] = params[:carrier_location][:carrier_location_name]
       params.require(:carrier_location).permit(:name, :address, :country, :state, :city, :postal, :is_origin, :is_destination, :loc_type, :phone, :carrier_id)
     end

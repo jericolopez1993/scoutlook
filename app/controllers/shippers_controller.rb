@@ -147,11 +147,6 @@ class ShippersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipper_params
-      params[:shipper][:approved] = params[:approved].present?
-      params[:shipper][:complete_record] = params[:complete_record].present?
-      params[:shipper][:control_freight] = params[:control_freight].present?
-      params[:shipper][:works_with_brokers] = params[:works_with_brokers].present?
-      params[:shipper][:prefer_teams] = params[:prefer_teams].present?
       if params[:shipper][:shipper_type].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
         params[:shipper].delete :shipper_type
       else

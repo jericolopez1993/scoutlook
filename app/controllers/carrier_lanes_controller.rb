@@ -71,7 +71,6 @@ class CarrierLanesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_lane_params
-      params[:carrier_lane][:prefer_team] = params[:prefer_team].present?
       if params[:carrier_lane][:lane_origin].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
         params[:carrier_lane].delete :lane_origin
       else

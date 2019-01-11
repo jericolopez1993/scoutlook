@@ -86,8 +86,6 @@ class ShipperLocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipper_location_params
-      params[:shipper_location][:is_origin] = params[:origin].present?
-      params[:shipper_location][:is_destination] = params[:destination].present?
       params[:shipper_location][:name] = params[:shipper_location][:shipper_location_name]
       params.require(:shipper_location).permit(:name, :address, :country, :state, :city, :postal, :is_origin, :is_destination, :loc_type, :phone, :shipper_id)
     end

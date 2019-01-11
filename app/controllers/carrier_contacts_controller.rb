@@ -35,11 +35,6 @@ class CarrierContactsController < ApplicationController
   def create
     @carrier_contact = CarrierContact.new(carrier_contact_params)
     params.require(:carrier_contact).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-    if params[:same_ho].present?
-      @carrier_contact.same_ho = true
-    else
-      @carrier_contact.same_ho = false
-    end
     @location_id = nil
     if params[:carrier_contact][:location_id].present? || params[:carrier_contact][:address].present? || params[:carrier_contact][:country].present? ||  params[:carrier_contact][:state].present? ||  params[:carrier_contact][:postal].present? ||  params[:carrier_contact][:city].present?
       if is_numeric?(params[:carrier_contact][:location_id])
@@ -126,11 +121,6 @@ class CarrierContactsController < ApplicationController
         if params[:poc].present?
           carrier.update_attributes(:poc_id => @carrier_contact.id)
         end
-        if params[:same_ho].present?
-          @carrier_contact.update_attributes(:same_ho => true)
-        else
-          @carrier_contact.update_attributes(:same_ho => false)
-        end
         format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier_contact }
       else
@@ -159,8 +149,7 @@ class CarrierContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_contact_params
-      params[:carrier_contact][:adm] = params[:adm].present?
-      params.require(:carrier_contact).permit(:title, :first_name, :last_name, :email, :location_id, :carrier_id, :linkedin_link, :adm, :contact_type, :primary_phone, :primary_phone_type, :secondary_phone, :secondary_phone_type, :address, :city, :postal, :country, :state)
+      params.require(:carrier_contact).permit(:title, :first_name, :last_name, :email, :location_id, :carrier_id, :linkedin_link, :adm, :same_ho, :contact_type, :primary_phone, :primary_phone_type, :secondary_phone, :secondary_phone_type, :address, :city, :postal, :country, :state)
     end
     def user_params
       params.require(:carrier_contact).permit(:first_name, :last_name, :email, :password)
