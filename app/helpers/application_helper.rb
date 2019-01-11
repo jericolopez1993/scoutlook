@@ -222,4 +222,12 @@ module ApplicationHelper
     str
   end
 
+  def convert_array(arr)
+    begin
+      arr.to_s.tr('[]', '').tr('"', '')[2..-1].gsub(', ', ',').to_s
+    rescue
+      ""
+    end
+  end
+
 end

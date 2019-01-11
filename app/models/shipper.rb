@@ -50,7 +50,7 @@ class Shipper < ApplicationRecord
       self.commodities.split(',').map(&:to_s)
     end
   end
-  
+
   def last_contact_date
     Activity.where(:shipper_id => self.id).last
   end

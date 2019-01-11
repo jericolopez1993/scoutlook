@@ -160,11 +160,6 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      if !params[:activity][:date_stamp].nil? && params[:activity][:date_stamp] != ''
-        params[:activity][:date_stamp] = Date::strptime(params[:activity][:date_stamp], "%m/%d/%Y")
-      else
-        params[:activity].delete :date_stamp
-      end
       params.require(:activity).permit(:outcome, :reason, :reason_other, :notes, :date_stamp, :activity_type, :engagement_type, :carrier_id, :carrier_contact_id, :shipper_id, :shipper_contact_id, :user_id, :annual_value, :loads_per_week, :status, :date_opened, :date_closed, :other_notes, :outcome_id, :campaign_name, :load_numbers)
     end
 

@@ -93,13 +93,7 @@ class RatesController < ApplicationController
       params[:rate][:bid] = params[:rate][:bid].gsub('$ ', '').gsub(',', '').to_d
       params[:rate][:ask] = params[:rate][:ask].gsub('$ ', '').gsub(',', '').to_d
       params[:rate][:cost] = params[:rate][:cost].gsub('$ ', '').gsub(',', '').to_d
-      params[:rate][:team] = params[:team].present?
-      params[:rate][:accepted] = params[:accepted].present?
-      if params[:rate][:commodities].to_s.tr('[]', '').tr('"', '')[2..-1].nil?
-        params[:rate].delete :commodities
-      else
-        params[:rate][:commodities] = params[:rate][:commodities].to_s.tr('[]', '').tr('"', '')[2..-1].gsub(', ', ',').to_s
-      end
+      params[:rate][:commodities] = convert_array(params[:rate][:commodities])
       params.require(:rate).permit(:client_id, :activity_id, :rate_type, :parent_id, :rate_level, :user_id, :effective_to, :effective_from, :origin_location_id, :destination_location_id, :freight_desc, :freight_classification, :transit_time, :minimum_density, :origin_city, :origin_state, :origin_country, :destination_city, :destination_state, :destination_country, :miles, :picks, :drops, :team, :commodities, :bid, :ask, :cost, :money_currency, :mc_number, :notes, :accepted)
     end
 end
