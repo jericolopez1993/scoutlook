@@ -1,5 +1,4 @@
 class ShippersController < ApplicationController
-  include ApplicationHelper
   before_action :set_shipper, only: [:show, :edit, :update, :destroy, :remove_attachment]
 
   # GET /shippers

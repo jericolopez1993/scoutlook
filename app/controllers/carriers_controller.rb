@@ -1,5 +1,4 @@
 class CarriersController < ApplicationController
-  include ApplicationHelper
   before_action :set_carrier, only: [:show, :edit, :update, :destroy, :remove_attachment]
 
   # GET /carriers

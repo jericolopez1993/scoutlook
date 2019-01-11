@@ -90,9 +90,9 @@ class RatesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def rate_params
-      params[:rate][:bid] = params[:rate][:bid].gsub('$ ', '').gsub(',', '').to_d
-      params[:rate][:ask] = params[:rate][:ask].gsub('$ ', '').gsub(',', '').to_d
-      params[:rate][:cost] = params[:rate][:cost].gsub('$ ', '').gsub(',', '').to_d
+      params[:rate][:bid] = convert_decimal(params[:rate][:bid])
+      params[:rate][:ask] = convert_decimal(params[:rate][:ask])
+      params[:rate][:cost] = convert_decimal(params[:rate][:cost])
       params[:rate][:commodities] = convert_array(params[:rate][:commodities])
       params.require(:rate).permit(:client_id, :activity_id, :rate_type, :parent_id, :rate_level, :user_id, :effective_to, :effective_from, :origin_location_id, :destination_location_id, :freight_desc, :freight_classification, :transit_time, :minimum_density, :origin_city, :origin_state, :origin_country, :destination_city, :destination_state, :destination_country, :miles, :picks, :drops, :team, :commodities, :bid, :ask, :cost, :money_currency, :mc_number, :notes, :accepted)
     end

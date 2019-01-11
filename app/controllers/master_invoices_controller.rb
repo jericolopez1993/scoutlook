@@ -1,6 +1,5 @@
 class MasterInvoicesController < ApplicationController
   include HTTParty
-  include ApplicationHelper
   before_action :set_master_invoice, only: [:show, :edit, :update, :destroy]
 
   require 'time'

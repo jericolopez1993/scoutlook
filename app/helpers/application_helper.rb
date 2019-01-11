@@ -230,4 +230,12 @@ module ApplicationHelper
     end
   end
 
+  def convert_decimal(num)
+    begin
+      num.gsub('$ ', '').gsub(',', '').to_d
+    rescue
+      0
+    end
+  end
+
 end

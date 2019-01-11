@@ -1,5 +1,4 @@
 class CarrierContactsController < ApplicationController
-  include ApplicationHelper
   before_action :set_carrier_contact, only: [:show, :edit, :update, :destroy]
 
   # GET /carrier_contacts

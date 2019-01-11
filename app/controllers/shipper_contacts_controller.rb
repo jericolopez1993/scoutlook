@@ -1,5 +1,4 @@
 class ShipperContactsController < ApplicationController
-  include ApplicationHelper
   before_action :set_shipper_contact, only: [:show, :edit, :update, :destroy]
 
   # GET /shipper_contacts

@@ -27,7 +27,6 @@
             <td style="text-align: center;">
               <%= user.has_role?(:admin) ? "<span class='badge badge-dark'>ADMIN</span>".html_safe : ""%>
               <%= user.has_role?(:contact) ? "<span class='badge badge-indigo'>CONTACT</span>".html_safe : ""%>
-              <%= user.has_role?(:steward) ? "<span class='badge badge-purple'>STEWARD</span>".html_safe : ""%>
             </td>
             <td style="text-align: center;">
               <%= user.ro ? "<span class='badge badge-green'>RO</span>".html_safe : ""%>
