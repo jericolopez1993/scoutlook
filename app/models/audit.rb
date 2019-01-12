@@ -5,11 +5,19 @@ class Audit
     where("created_at >= ?", Time.zone.today.midnight).reorder('created_at DESC')
   end
 
-  def on_sentence
+  def on_sentence(current_user=nil)
     @to_sentence = ""
     begin
       user = User.find(self.user_id)
-      @to_sentence = user.first_name + " " + user.last_name
+      if !current_user.nil?
+        if self.user_id == current_user.id
+          @to_sentence = "You"
+        else
+          @to_sentence = user.first_name + " " + user.last_name
+        end
+      else
+        @to_sentence = user.first_name + " " + user.last_name
+      end
     rescue
       @to_sentence = "Unknown"
     end

@@ -1,4 +1,4 @@
-class CarrierLocationPolicy < ApplicationPolicy
+class CarrierLanePolicy < ApplicationPolicy
   def index?
     true
   end
@@ -20,7 +20,7 @@ class CarrierLocationPolicy < ApplicationPolicy
   end
   private
 
-    def carrier_location
+    def carrier_lane
       record
     end
 end

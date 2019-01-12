@@ -40,7 +40,7 @@
             <% audits.limit(10).each do |audit|%>
               <li class="media">
                 <div class="media-body notification-padding">
-                  <h6 class="media-heading"><%= audit.on_sentence.html_safe %></h6>
+                  <h6 class="media-heading"><%= audit.on_sentence(current_user).html_safe %></h6>
                   <div class="text-muted f-s-11"><%= audit.created_at %></div>
                 </div>
               </li>
