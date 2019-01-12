@@ -160,14 +160,23 @@
           </div>
         </div>
       </div>
-      <hr>
-      <h4 class="text-inverse win-fields">Load Details</h4>
-      <div class="form-group row m-b-15 win-fields">
-        <%= form.label :load_numbers, 'Load Numbers:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-        <div class="col-md-9 col-sm-8">
-          <%= form.number_field :load_numbers, class: 'form-control' %>
+      <div class="win-fields">
+        <hr>
+        <h4 class="text-inverse ">Load Details</h4>
+        <div class="form-group row m-b-15 win-fields">
+          <%= form.label :load_numbers, 'Load Numbers:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.number_field :load_numbers, class: 'form-control' %>
+          </div>
         </div>
       </div>
+      <% if params[:action] == 'edit' %>
+        <hr>
+        <h4 class="text-inverse">Rates</h4>
+        <%= link_to 'New Rate', new_rate_path(:activity_id => activity.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-rate-btn' %>
+        <%= render 'rates/table', rates: Rate.where(:activity_id => activity.id), with_actions: true %>
+      <% end %>
+      <hr>
       <div class="form-group row m-b-15">
         <div class="col-md-2"></div>
           <div class="col-md-9 col-sm-12 d-flex justify-content-end">
@@ -177,7 +186,7 @@
           <% end %>
           <% if @previous_controller == "carriers" %>
             <% carrier = Carrier.find(activity.carrier_id)%>
-            <% if params[:action] == 'new' %>
+            <% if params[:action] == 'new'  %>
               &nbsp;&nbsp;<%= link_to 'Back to Carrier', carrier, :class => 'btn btn-default' %>
             <% end %>
           <% elsif @previous_controller == "shippers" %>
