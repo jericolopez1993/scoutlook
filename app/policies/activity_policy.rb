@@ -4,7 +4,7 @@ class ActivityPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present? && (user.has_role?(:admin) || user.ro || user.cs)
+    user.present?
   end
 
   def create?

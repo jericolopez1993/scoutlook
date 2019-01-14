@@ -1,6 +1,6 @@
 class ShipperPolicy < ApplicationPolicy
   def index?
-    return true && (user.has_role?(:admin)  || user.ro || user.cs)
+    return true
   end
 
   def show?
