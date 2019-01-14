@@ -325,7 +325,7 @@ function addressCreate(isTrue) {
     $("#postal").attr("disabled", false);
     $("#country").attr("disabled", false);
     $("#state").attr("disabled", false);
-    $("#country").val('Canada').change();
+    $("#country").val('USA').change();
 
   }else{
     $("#address").attr("disabled", true);
@@ -349,7 +349,7 @@ function addressCreateQuickS(isTrue, name) {
     $("#"+ name +"_postal").attr("disabled", false);
     $("#"+ name +"_country").attr("disabled", false);
     $("#"+ name +"_state").attr("disabled", false);
-    $("#"+ name +"_country").val('Canada').change();
+    $("#"+ name +"_country").val('USA').change();
   }else{
     $("#"+ name +"_address").attr("disabled", true);
     $("#"+ name +"_city").attr("disabled", true);
@@ -371,7 +371,7 @@ function addressCreateOD(isTrue, name) {
     $("#"+ name +"_postal").attr("disabled", false);
     $("#"+ name +"_country").attr("disabled", false);
     $("#"+ name +"_state").attr("disabled", false);
-    $("#"+ name +"_country").val('Canada').change();
+    $("#"+ name +"_country").val('USA').change();
 
   }else{
     $("#"+ name +"_address").attr("disabled", true);

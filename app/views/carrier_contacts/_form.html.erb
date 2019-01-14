@@ -140,6 +140,11 @@
   $(document).ready(function() {
       sameHeadOffice(<%= carrier_contact.same_ho ? 'true' : 'false' %>);
   });
+  <% if !carrier_contact.country.nil? && carrier_contact.country != ""  %>
+    $("#country").val('<%= carrier_contact.country %>').change();
+  <% else %>
+    $("#country").val('USA').change();
+  <% end %>
   <%# if carrier_contact.country.present? %>
     // tiggerChangeOnSelectCountry('carrier_contact_country', '<%# carrier_contact.country %>')
   <%# end %>

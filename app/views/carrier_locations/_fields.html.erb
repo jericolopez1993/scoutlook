@@ -63,7 +63,7 @@
     <% if !carrier_location.country.nil? && carrier_location.country != ""  %>
       $("#loc_country").val('<%= carrier_location.country %>').change();
     <% else %>
-      $("#loc_country").val('Canada').change();
+      $("#loc_country").val('USA').change();
     <% end %>
     setTimeout(function(){ setFieldMask('loc_country', 'loc_postal'); }, 1000);
   });
