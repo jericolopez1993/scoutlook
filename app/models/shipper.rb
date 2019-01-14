@@ -11,7 +11,7 @@ class Shipper < ApplicationRecord
   has_many :lane_1, -> { where(lane_priority: 1)}, primary_key: "id", foreign_key: 'shipper_id', class_name: "ShipperLane"
   has_many :lane_2, -> { where(lane_priority: 2)}, primary_key: "id", foreign_key: 'shipper_id', class_name: "ShipperLane"
   has_many :lane_3, -> { where(lane_priority: 3)}, primary_key: "id", foreign_key: 'shipper_id', class_name: "ShipperLane"
-  has_many :activities, :dependent => :delete_all
+  has_many :activities, :dependent => :destroy
   has_many :adm, -> { where(adm: true).order("id DESC")}, primary_key: "id", foreign_key: 'shipper_id', class_name: "ShipperContact"
 
   has_one :origin_location, primary_key: "origin", foreign_key: 'id', class_name: "ShipperLocation"
