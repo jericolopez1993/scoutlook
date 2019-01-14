@@ -16,6 +16,7 @@
       <th>Cost</th>
       <th>Currency</th>
       <th>MC #</th>
+      <th>Notes</th>
       <th>Carrier</th>
       <th>Shipper</th>
       <% if with_actions %>
@@ -40,6 +41,7 @@
       <th>Cost</th>
       <th>Currency</th>
       <th>MC #</th>
+      <th>Notes</th>
       <th>Carrier</th>
       <th>Shipper</th>
       <% if with_actions %>
@@ -75,6 +77,7 @@
         <td><%= rate.cost %></td>
         <td><%= rate.money_currency %></td>
         <td><%= rate.mc_number %></td>
+        <td><%= rate.notes %></td>
         <td><%= rate.activity.carrier && link_to(rate.activity.carrier.company_name.blank? ? "(no name)" : rate.activity.carrier.company_name, rate.activity.carrier) %></td>
         <td><%= rate.activity.shipper && link_to(rate.activity.shipper.company_name.blank? ? "(no name)" : rate.activity.shipper.company_name, rate.activity.shipper) %></td>
 
