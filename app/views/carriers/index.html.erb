@@ -49,7 +49,7 @@
             <th>Ops Email</th>
           </tr>
         </tfoot>
-        <tbody>
+        <tbody class="spacer">
           <% @carriers.each do |carrier| %>
             <tr>
               <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>

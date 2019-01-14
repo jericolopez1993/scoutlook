@@ -51,7 +51,7 @@
             <th>DM Email</th>
           </tr>
         </tfoot>
-        <tbody>
+        <tbody class="spacer">
           <% @shippers.each do |shipper| %>
             <tr>
               <td class="text-center"><%= shipper.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
