@@ -68,7 +68,11 @@ label {
     <div class="row">
       <label class="col-md-2 col-form-label">Team:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.team ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+        <% if @rate.team == "Yes" %>
+          <b class="text-success"><%= @rate.team %></b>
+        <% else %>
+          <b class="text-danger"><%= @rate.team %></b>
+        <% end %>
       </div>
     </div>
     <div class="row">

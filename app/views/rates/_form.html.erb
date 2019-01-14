@@ -37,7 +37,7 @@
       <div class="form-group row m-b-15">
         <%= form.label :origin_city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.text_field :origin_city, class: 'form-control' %>
+          <%= form.text_field :origin_city, class: 'form-control', :autocomplete => "none" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -57,7 +57,7 @@
       <div class="form-group row m-b-15">
         <%= form.label :destination_city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.text_field :destination_city, class: 'form-control' %>
+          <%= form.text_field :destination_city, class: 'form-control', :autocomplete => "none" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -95,7 +95,7 @@
       <div class="form-group row m-b-15">
         <label class="text-right col-md-2 col-sm-4 col-form-label">Team:</label>
         <div class="col-md-9 col-sm-8">
-          <%= form.check_box :team, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: rate.team %>
+          <%= form.select :team, options_for_select(['Yes', 'No'], rate.team),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">

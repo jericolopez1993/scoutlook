@@ -57,7 +57,13 @@
         <td><%= rate.miles %></td>
         <td><%= rate.picks %></td>
         <td><%= rate.drops %></td>
-        <td><%= rate.team ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
+        <td>
+          <% if rate.team == "Yes" %>
+            <b class="text-success"><%= rate.team %></b>
+          <% else %>
+            <b class="text-danger"><%= rate.team %></b>
+          <% end %>
+        </td>
         <td>
           <% rate.commodities_to_array.each do |cr| %>
             <span class="badge badge-inverse"><%= cr %></span>

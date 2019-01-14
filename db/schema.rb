@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_14_071840) do
+ActiveRecord::Schema.define(version: 2019_01_14_095756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -253,7 +253,7 @@ ActiveRecord::Schema.define(version: 2019_01_14_071840) do
     t.string "miles"
     t.integer "picks"
     t.integer "drops"
-    t.boolean "team"
+    t.string "team"
     t.string "commodities"
     t.decimal "bid"
     t.decimal "ask"
