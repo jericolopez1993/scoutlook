@@ -47,7 +47,6 @@ init:
 reset:
 		$(MAKE) stop
 		$(MAKE) rm
-		$(MAKE) drop
 		$(MAKE) init
 		$(MAKE) create_db
 		$(MAKE) seed

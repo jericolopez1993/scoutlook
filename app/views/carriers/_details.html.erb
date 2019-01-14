@@ -166,18 +166,6 @@
               <%= carrier.notes.nil? ? "" : carrier.notes.html_safe %>
             </div>
           </div>
-          <div class="row">
-            <label class="col-md-4 col-form-label">Website:</label>
-            <div class="col-md-8 lbl-padding-t">
-              <%= (!carrier.website.nil? && carrier.website.present?) ? "<a href='#{carrier.website}'>#{carrier.website}</a>" : "" %>
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-md-4 col-form-label">LinkedIn:</label>
-            <div class="col-md-8 lbl-padding-t">
-              <%= (!carrier.linkedin.nil? && carrier.linkedin.present?) ? "<a href='#{carrier.website}'>#{carrier.linkedin}</a>" : "" %>
-            </div>
-          </div>
         </div>
       </div>
     </div>
