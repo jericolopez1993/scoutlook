@@ -65,8 +65,8 @@
               <td><%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>
               <td><%= shipper.load_last_month %></td>
               <td><%= shipper.load_last_6_month %></td>
-              <td><%= shipper.head_office_location.nil? ? '' : shipper.head_office_location.city %></td>
-              <td><%= shipper.head_office_location.nil? ? '' : shipper.head_office_location.state %></td>
+              <td><%= shipper.location.nil? ? '' : shipper.location.city %></td>
+              <td><%= shipper.location.nil? ? '' : shipper.location.state %></td>
               <td><%= shipper.loads_per_month %></td>
               <td>
                 <% shipper.lane_1.each do |lane| %>

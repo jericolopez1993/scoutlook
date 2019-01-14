@@ -70,7 +70,7 @@
               <td><%= carrier.load_last_6_month %></td>
               <td><%= carrier.load_last_month %></td>
               <td><%= carrier.mc_number %></td>
-              <td><%= carrier.head_office_location.nil? ? '' : carrier.head_office_location.state %></td>
+              <td><%= carrier.location.nil? ? '' : carrier.location.state %></td>
               <td class="text-center"><%= carrier.reefers %></td>
               <td>
                 <% carrier.lane_1.each do |lane| %>

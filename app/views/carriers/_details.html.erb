@@ -166,6 +166,11 @@
               <%= carrier.notes.nil? ? "" : carrier.notes.html_safe %>
             </div>
           </div>
+          <% if !carrier.location.nil? %>
+            <hr>
+            <h4 class="text-inverse">Address</h4>
+            <%= render 'global_subforms/address_fields', location: carrier.location %>
+          <% end %>
         </div>
       </div>
     </div>

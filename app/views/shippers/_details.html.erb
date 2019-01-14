@@ -170,6 +170,11 @@
               <%= (!shipper.linkedin.nil? && shipper.linkedin.present?) ? "<a href='#{shipper.website}'>#{shipper.linkedin}</a>" : "" %>
             </div>
           </div>
+          <% if !shipper.location.nil? %>
+            <hr>
+            <h4 class="text-inverse">Address</h4>
+            <%= render 'global_subforms/address_fields', location: shipper.location %>
+          <% end %>
         </div>
       </div>
     </div>
