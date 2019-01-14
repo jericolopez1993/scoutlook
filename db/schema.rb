@@ -266,6 +266,20 @@ ActiveRecord::Schema.define(version: 2019_01_14_095756) do
     t.boolean "accepted", default: false
   end
 
+  create_table "reps", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "location"
+    t.date "date_of_hire"
+    t.string "rep_id"
+    t.string "parent_id"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
