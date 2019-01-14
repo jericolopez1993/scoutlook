@@ -1,6 +1,7 @@
 <table class="table table-striped table-bordered data-table-buttons display nowrap" id="contact_table">
   <thead>
     <tr class="odd gradeX">
+      <th data-orderable="false" width="5%">Actions</th>
       <th width="1%">Primary</th>
       <th>Type</th>
       <th>Name</th>
@@ -9,12 +10,15 @@
       <th>Primary Phone</th>
       <th>Secondary Phone</th>
       <th>Social</th>
-      <th data-orderable="false">Actions</th>
     </tr>
   </thead>
   <tbody>
     <% ShipperContact.where(:shipper_id => shipper.id).each do |contact| %>
       <tr>
+        <td>
+          <a class="btn btn-warning btn-xs" href="<%= edit_shipper_contact_path(contact) %>"><i class="far fa-edit"></i></a>&nbsp;
+          <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href="/shipper_contacts/<%= contact.id %>"><i class="far fa-trash-alt"></i></a>
+        </td>
         <td style="text-align: center;">
           <%= (contact.same_ho) ? '<div class="mr-0 tags"><span class="label label-primary">SHO</span></div>'.html_safe : '' %>
           <%= (shipper.pdm_id == contact.id) ? '<div class="mr-0 tags"><span class="label label-success">PDM</span></div>'.html_safe : '' %>
@@ -27,10 +31,6 @@
         <td><b><%= contact.same_ho ? (shipper.head_office_location.nil? ? '' : shipper.head_office_location.phone) : contact.primary_phone %>&nbsp;<%= (!contact.primary_phone_type.nil? && contact.primary_phone_type != "") ? "(#{contact.primary_phone_type})" : ""%></b></td>
         <td><%= contact.same_ho ? (shipper.head_office_location.nil? ? '' : shipper.head_office_location.phone) : contact.secondary_phone %>&nbsp;<%= (!contact.secondary_phone_type.nil? && contact.secondary_phone_type != "") ? "(#{contact.secondary_phone_type})" : ""%></td>
         <td style="text-align: center;"><%= contact.linkedin_link.nil? || contact.linkedin_link == "" ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
-        <td>
-          <a class="btn btn-warning btn-xs" href="<%= edit_shipper_contact_path(contact) %>"><i class="far fa-edit"></i></a>&nbsp;
-          <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href="/shipper_contacts/<%= contact.id %>"><i class="far fa-trash-alt"></i></a>
-        </td>
       </tr>
     <% end %>
   </tbody>
