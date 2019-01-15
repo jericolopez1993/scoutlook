@@ -219,10 +219,11 @@ $(document).ready(function() {
     addTotalNumbers('total_charge_with_tax_fields', 'shipment_total_charge_with_tax');
     addTotalNumbers('total_charge_with_tax_fields', 'master_invoice_total_charge_with_tax');
   });
-  $("#origin_location_id, #destination_location_id").change(function(){
-    var origin = $("#origin_location_id").val();
-    var destination = $("#destination_location_id").val();
-    getDistance(origin, destination);
+  $("#rate_origin_city, #rate_destination_city").keyup(function() {
+    getDistance();
+  });
+  $("#rate_origin_state, #rate_origin_country, #rate_destination_state, #rate_destination_country").change(function(){
+    getDistance();
   });
   $("#shipment_date, #received_date").change(function(){
     var shipment_date = $("#shipment_date").val();
@@ -467,18 +468,20 @@ function clientLocation(id, name) {
 
 }
 
-function getDistance(origin, destination){
+function getDistance(){
+  var origin = $("#rate_origin_city").val() + " " + $("#rate_origin_state").val() + "," + $("#rate_origin_country").val();
+  var destination = $("#rate_destination_city").val() + " " + $("#rate_destination_state").val() + "," + $("#rate_destination_country").val();
   $.ajax({
     method: 'get',
     url: "/api/locations/distance",
     data: {origin: origin, destination: destination}
   }).done(function(data) {
-    $("#distance").val((data.distance / 1000).toFixed(2));
-    var map = $('#map'),
-       cval = data.img_url;
-
-    $('<img id="map" src="'+ cval +'">').insertAfter( map );
-    map.remove();
+    $("#rate_miles").val((data.distance / 1000).toFixed(2));
+    // var map = $('#map'),
+    //    cval = data.img_url;
+    //
+    // $('<img id="map" src="'+ cval +'">').insertAfter( map );
+    // map.remove();
   })
 }
 
