@@ -322,3 +322,10 @@ tbody.spacer:before {
   background-color: #06027a!important;
   color: #fff;
 }
+.tooltip-inner {
+  max-width: 500px!important;
+  max-height: 500px;
+  text-align: left;
+  font-size: 14px;
+  opacity: .85;
+}

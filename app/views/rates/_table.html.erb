@@ -1,3 +1,13 @@
+<% if params[:controller] == "rates" %>
+  <style>
+    .tooltip-inner {
+      background-color: #033309!important;
+    }
+    .tooltip .arrow::before{
+      border-right-color: #033309!important;
+    }
+  </style>
+<% end %>
 <table table class="table table-striped table-bordered display nowrap"  id="rates_table">
   <thead>
     <tr class="odd gradeX">
@@ -78,9 +88,43 @@
         <td><%= rate.money_currency %></td>
         <td><%= rate.mc_number %></td>
         <td><%= rate.notes %></td>
-        <td><%= rate.activity.carrier && link_to(rate.activity.carrier.company_name.blank? ? "(no name)" : rate.activity.carrier.company_name, rate.activity.carrier) %></td>
-        <td><%= rate.activity.shipper && link_to(rate.activity.shipper.company_name.blank? ? "(no name)" : rate.activity.shipper.company_name, rate.activity.shipper) %></td>
 
+        <td>
+          <span
+            data-toggle="tooltip"
+            data-placement="right"
+            data-html="true"
+            title="
+              <b>Name</b>: <%= rate.activity.carrier && (rate.activity.carrier.company_name.blank? ? "(no name)" : rate.activity.carrier.company_name) %><br>
+              <b>Ops Name</b>: <%= rate.activity.carrier && (rate.activity.carrier.poc.nil? ? '' : rate.activity.carrier.poc.full_name) %><br>
+              <b>Ops Phone</b>: <%= rate.activity.carrier && (rate.activity.carrier.poc.nil? ? '' : ((!rate.activity.carrier.poc.primary_phone.nil? && rate.activity.carrier.poc.primary_phone != "") ? (rate.activity.carrier.poc.primary_phone + " (#{rate.activity.carrier.poc.primary_phone_type})") : "")) %><br>
+              <b>Ops Email</b>: <%= rate.activity.carrier && (rate.activity.carrier.poc.nil? ? '' : rate.activity.carrier.poc.email) %><br>
+              <b>Class</b>: <%= rate.activity.carrier && (rate.activity.carrier.sales_priority) %><br>
+              <b>MC Number</b>: <%= rate.activity.carrier && (rate.activity.carrier.mc_number) %><br>
+              <b>Sate/Province</b>: <%= rate.activity.carrier && (rate.activity.carrier.location.nil? ? '' : rate.activity.carrier.location.state) %><br>
+              <b>Last Contact Date</b>: <%= rate.activity.carrier && (rate.activity.carrier.last_contact_date.nil? || rate.activity.carrier.last_contact_date.date_opened.nil? ? "" : rate.activity.carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
+            ">
+          <%= rate.activity.carrier && link_to(rate.activity.carrier.company_name.blank? ? "(no name)" : rate.activity.carrier.company_name, rate.activity.carrier) %>
+          </span>
+        </td>
+        <td>
+          <span
+            data-toggle="tooltip"
+            data-placement="right"
+            data-html="true"
+            title="
+              <b>Name</b>: <%= rate.activity.shipper && (rate.activity.shipper.company_name.blank? ? "(no name)" : rate.activity.shipper.company_name) %><br>
+              <b>DM Name</b>: <%= rate.activity.shipper && (rate.activity.shipper.pdm.nil? ? '' : rate.activity.shipper.pdm.full_name) %><br>
+              <b>DM Phone</b>: <%= rate.activity.shipper && (rate.activity.shipper.pdm.nil? ? '' : ((!rate.activity.shipper.pdm.primary_phone.nil? && rate.activity.shipper.pdm.primary_phone != "") ? (rate.activity.shipper.pdm.primary_phone + " (#{rate.activity.shipper.pdm.primary_phone_type})") : "")) %><br>
+              <b>DM Email</b>: <%= rate.activity.shipper && (rate.activity.shipper.pdm.nil? ? '' : rate.activity.shipper.pdm.email) %><br>
+              <b>Class</b>: <%= rate.activity.shipper && (rate.activity.shipper.sales_priority) %><br>
+              <b>City</b>: <%= rate.activity.shipper && (rate.activity.shipper.location.nil? ? '' : rate.activity.shipper.location.city) %><br>
+              <b>Sate/Province</b>: <%= rate.activity.shipper && (rate.activity.shipper.location.nil? ? '' : rate.activity.shipper.location.state) %><br>
+              <b>Last Contact Date</b>: <%= rate.activity.shipper && (rate.activity.shipper.last_contact_date.nil? || rate.activity.shipper.last_contact_date.date_opened.nil? ? "" : rate.activity.shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
+            ">
+          <%= rate.activity.shipper && link_to(rate.activity.shipper.company_name.blank? ? "(no name)" : rate.activity.shipper.company_name, rate.activity.shipper) %>
+          </span>
+        </td>
         <% if with_actions %>
           <td>
             <%= link_to '<i class="far fa-eye"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
