@@ -1,3 +1,8 @@
+<style>
+  .badge a {
+    color: #fff!important;
+  }
+</style>
 <!-- begin panel -->
 <div style="width: 100%">
   <div class="panel panel-scout">
@@ -74,12 +79,94 @@
               <td class="text-center"><%= carrier.reefers %></td>
               <td>
                 <% carrier.lane_1.each do |lane| %>
-                  <%= link_to(((!lane.lane_origin.nil? && lane.lane_origin != "") ? "#{lane.lane_origin} &rarr; #{lane.lane_destination}".html_safe : "#{lane.lane_destination}"), lane, class: 'badge') %>
+                  <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
+                    <% lane.lane_origin_to_array.each do |origin| %>
+                      <% if Carrier::LIGHT_BLUE.include?(origin) %>
+                        <span class="badge badge-primary"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::DARK_BLUE.include?(origin) %>
+                        <span class="badge badge-drakblue"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::BLUE.include?(origin) %>
+                        <span class="badge badge-info"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::RED.include?(origin) %>
+                      <span class="badge badge-danger"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::BROWN.include?(origin) %>
+                        <span class="badge badge-brown"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::YELLOW.include?(origin) %>
+                        <span class="badge badge-yellow"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::ORANGE.include?(origin) %>
+                        <span class="badge badge-warning"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::GREEN.include?(origin) %>
+                        <span class="badge badge-green"><%= link_to(origin, lane) %></span>
+                      <% end %>
+                    <% end %>
+                    &rarr;
+                  <% end %>
+                  <% lane.lane_destination_to_array.each do |destination| %>
+                    <% if Carrier::LIGHT_BLUE.include?(destination) %>
+                      <span class="badge badge-primary"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::DARK_BLUE.include?(destination) %>
+                      <span class="badge badge-drakblue"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::BLUE.include?(destination) %>
+                      <span class="badge badge-info"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::RED.include?(destination) %>
+                    <span class="badge badge-danger"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::BROWN.include?(destination) %>
+                      <span class="badge badge-brown"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::YELLOW.include?(destination) %>
+                      <span class="badge badge-yellow"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::ORANGE.include?(destination) %>
+                      <span class="badge badge-warning"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::GREEN.include?(destination) %>
+                      <span class="badge badge-green"><%= link_to(destination, lane) %></span>
+                    <% end %>
+                  <% end %>
+                  <br>
                 <% end %>
               </td>
               <td>
                 <% carrier.lane_2.each do |lane| %>
-                  <%= link_to(((!lane.lane_origin.nil? && lane.lane_origin != "") ? "#{lane.lane_origin} &rarr; #{lane.lane_destination}".html_safe : "#{lane.lane_destination}"), lane, class: 'badge') %>
+                  <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
+                    <% lane.lane_origin_to_array.each do |origin| %>
+                      <% if Carrier::LIGHT_BLUE.include?(origin) %>
+                        <span class="badge badge-primary"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::DARK_BLUE.include?(origin) %>
+                        <span class="badge badge-drakblue"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::BLUE.include?(origin) %>
+                        <span class="badge badge-info"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::RED.include?(origin) %>
+                      <span class="badge badge-danger"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::BROWN.include?(origin) %>
+                        <span class="badge badge-brown"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::YELLOW.include?(origin) %>
+                        <span class="badge badge-yellow"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::ORANGE.include?(origin) %>
+                        <span class="badge badge-warning"><%= link_to(origin, lane) %></span>
+                      <% elsif Carrier::GREEN.include?(origin) %>
+                        <span class="badge badge-green"><%= link_to(origin, lane) %></span>
+                      <% end %>
+                    <% end %>
+                    &rarr;
+                  <% end %>
+                  <% lane.lane_destination_to_array.each do |destination| %>
+                    <% if Carrier::LIGHT_BLUE.include?(destination) %>
+                      <span class="badge badge-primary"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::DARK_BLUE.include?(destination) %>
+                      <span class="badge badge-drakblue"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::BLUE.include?(destination) %>
+                      <span class="badge badge-info"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::RED.include?(destination) %>
+                    <span class="badge badge-danger"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::BROWN.include?(destination) %>
+                      <span class="badge badge-brown"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::YELLOW.include?(destination) %>
+                      <span class="badge badge-yellow"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::ORANGE.include?(destination) %>
+                      <span class="badge badge-warning"><%= link_to(destination, lane) %></span>
+                    <% elsif Carrier::GREEN.include?(destination) %>
+                      <span class="badge badge-green"><%= link_to(destination, lane) %></span>
+                    <% end %>
+                  <% end %>
+                  <br>
                 <% end %>
               </td>
             </tr>

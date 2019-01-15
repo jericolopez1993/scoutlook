@@ -20,12 +20,44 @@
         <tr class="lane-priority-<%= shipper_lane.lane_priority %>">
           <td>
             <% shipper_lane.lane_origin_to_array.each do |cr| %>
-              <span class="badge badge-success"><%= cr %></span>
+              <% if Shipper::LIGHT_BLUE.include?(cr) %>
+                <span class="badge badge-primary"><%= cr %></span>
+              <% elsif Shipper::DARK_BLUE.include?(cr) %>
+                <span class="badge badge-drakblue"><%= cr %></span>
+              <% elsif Shipper::BLUE.include?(cr) %>
+                <span class="badge badge-info"><%= cr %></span>
+              <% elsif Shipper::RED.include?(cr) %>
+              <span class="badge badge-danger"><%= cr %></span>
+              <% elsif Shipper::BROWN.include?(cr) %>
+                <span class="badge badge-brown"><%= cr %></span>
+              <% elsif Shipper::YELLOW.include?(cr) %>
+                <span class="badge badge-yellow"><%= cr %></span>
+              <% elsif Shipper::ORANGE.include?(cr) %>
+                <span class="badge badge-warning"><%= cr %></span>
+              <% elsif Shipper::GREEN.include?(cr) %>
+                <span class="badge badge-green"><%= cr %></span>
+              <% end %>
             <% end %>
           </td>
           <td>
             <% shipper_lane.lane_destination_to_array.each do |cr| %>
-              <span class="badge badge-primary"><%= cr %></span>
+              <% if Shipper::LIGHT_BLUE.include?(cr) %>
+                <span class="badge badge-primary"><%= cr %></span>
+              <% elsif Shipper::DARK_BLUE.include?(cr) %>
+                <span class="badge badge-drakblue"><%= cr %></span>
+              <% elsif Shipper::BLUE.include?(cr) %>
+                <span class="badge badge-info"><%= cr %></span>
+              <% elsif Shipper::RED.include?(cr) %>
+              <span class="badge badge-danger"><%= cr %></span>
+              <% elsif Shipper::BROWN.include?(cr) %>
+                <span class="badge badge-brown"><%= cr %></span>
+              <% elsif Shipper::YELLOW.include?(cr) %>
+                <span class="badge badge-yellow"><%= cr %></span>
+              <% elsif Shipper::ORANGE.include?(cr) %>
+                <span class="badge badge-warning"><%= cr %></span>
+              <% elsif Shipper::GREEN.include?(cr) %>
+                <span class="badge badge-green"><%= cr %></span>
+              <% end %>
             <% end %>
           </td>
           <td>
@@ -44,12 +76,44 @@
         <tr class="lane-priority-<%= shipper_lane.lane_priority %>">
           <td>
             <% shipper_lane.lane_origin_to_array.each do |cr| %>
-              <span class="badge badge-success"><%= cr %></span>
+              <% if Shipper::LIGHT_BLUE.include?(cr) %>
+                <span class="badge badge-primary"><%= cr %></span>
+              <% elsif Shipper::DARK_BLUE.include?(cr) %>
+                <span class="badge badge-drakblue"><%= cr %></span>
+              <% elsif Shipper::BLUE.include?(cr) %>
+                <span class="badge badge-info"><%= cr %></span>
+              <% elsif Shipper::RED.include?(cr) %>
+              <span class="badge badge-danger"><%= cr %></span>
+              <% elsif Shipper::BROWN.include?(cr) %>
+                <span class="badge badge-brown"><%= cr %></span>
+              <% elsif Shipper::YELLOW.include?(cr) %>
+                <span class="badge badge-yellow"><%= cr %></span>
+              <% elsif Shipper::ORANGE.include?(cr) %>
+                <span class="badge badge-warning"><%= cr %></span>
+              <% elsif Shipper::GREEN.include?(cr) %>
+                <span class="badge badge-green"><%= cr %></span>
+              <% end %>
             <% end %>
           </td>
           <td>
             <% shipper_lane.lane_destination_to_array.each do |cr| %>
-              <span class="badge badge-primary"><%= cr %></span>
+              <% if Shipper::LIGHT_BLUE.include?(cr) %>
+                <span class="badge badge-primary"><%= cr %></span>
+              <% elsif Shipper::DARK_BLUE.include?(cr) %>
+                <span class="badge badge-drakblue"><%= cr %></span>
+              <% elsif Shipper::BLUE.include?(cr) %>
+                <span class="badge badge-info"><%= cr %></span>
+              <% elsif Shipper::RED.include?(cr) %>
+              <span class="badge badge-danger"><%= cr %></span>
+              <% elsif Shipper::BROWN.include?(cr) %>
+                <span class="badge badge-brown"><%= cr %></span>
+              <% elsif Shipper::YELLOW.include?(cr) %>
+                <span class="badge badge-yellow"><%= cr %></span>
+              <% elsif Shipper::ORANGE.include?(cr) %>
+                <span class="badge badge-warning"><%= cr %></span>
+              <% elsif Shipper::GREEN.include?(cr) %>
+                <span class="badge badge-green"><%= cr %></span>
+              <% end %>
             <% end %>
           </td>
           <td>
@@ -68,12 +132,44 @@
         <tr class="lane-priority-<%= shipper_lane.lane_priority %>">
           <td>
             <% shipper_lane.lane_origin_to_array.each do |cr| %>
-              <span class="badge badge-success"><%= cr %></span>
+              <% if Shipper::LIGHT_BLUE.include?(cr) %>
+                <span class="badge badge-primary"><%= cr %></span>
+              <% elsif Shipper::DARK_BLUE.include?(cr) %>
+                <span class="badge badge-drakblue"><%= cr %></span>
+              <% elsif Shipper::BLUE.include?(cr) %>
+                <span class="badge badge-info"><%= cr %></span>
+              <% elsif Shipper::RED.include?(cr) %>
+              <span class="badge badge-danger"><%= cr %></span>
+              <% elsif Shipper::BROWN.include?(cr) %>
+                <span class="badge badge-brown"><%= cr %></span>
+              <% elsif Shipper::YELLOW.include?(cr) %>
+                <span class="badge badge-yellow"><%= cr %></span>
+              <% elsif Shipper::ORANGE.include?(cr) %>
+                <span class="badge badge-warning"><%= cr %></span>
+              <% elsif Shipper::GREEN.include?(cr) %>
+                <span class="badge badge-green"><%= cr %></span>
+              <% end %>
             <% end %>
           </td>
           <td>
             <% shipper_lane.lane_destination_to_array.each do |cr| %>
-              <span class="badge badge-primary"><%= cr %></span>
+              <% if Shipper::LIGHT_BLUE.include?(cr) %>
+                <span class="badge badge-primary"><%= cr %></span>
+              <% elsif Shipper::DARK_BLUE.include?(cr) %>
+                <span class="badge badge-drakblue"><%= cr %></span>
+              <% elsif Shipper::BLUE.include?(cr) %>
+                <span class="badge badge-info"><%= cr %></span>
+              <% elsif Shipper::RED.include?(cr) %>
+              <span class="badge badge-danger"><%= cr %></span>
+              <% elsif Shipper::BROWN.include?(cr) %>
+                <span class="badge badge-brown"><%= cr %></span>
+              <% elsif Shipper::YELLOW.include?(cr) %>
+                <span class="badge badge-yellow"><%= cr %></span>
+              <% elsif Shipper::ORANGE.include?(cr) %>
+                <span class="badge badge-warning"><%= cr %></span>
+              <% elsif Shipper::GREEN.include?(cr) %>
+                <span class="badge badge-green"><%= cr %></span>
+              <% end %>
             <% end %>
           </td>
           <td>

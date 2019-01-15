@@ -24,12 +24,44 @@
           <td><%= carrier_lane.prefer_team ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
           <td>
             <% carrier_lane.lane_origin_to_array.each do |cr| %>
-              <span class="badge badge-success"><%= cr %></span>
+              <% if Carrier::LIGHT_BLUE.include?(cr) %>
+                <span class="badge badge-primary"><%= cr %></span>
+              <% elsif Carrier::DARK_BLUE.include?(cr) %>
+                <span class="badge badge-drakblue"><%= cr %></span>
+              <% elsif Carrier::BLUE.include?(cr) %>
+                <span class="badge badge-info"><%= cr %></span>
+              <% elsif Carrier::RED.include?(cr) %>
+              <span class="badge badge-danger"><%= cr %></span>
+              <% elsif Carrier::BROWN.include?(cr) %>
+                <span class="badge badge-brown"><%= cr %></span>
+              <% elsif Carrier::YELLOW.include?(cr) %>
+                <span class="badge badge-yellow"><%= cr %></span>
+              <% elsif Carrier::ORANGE.include?(cr) %>
+                <span class="badge badge-warning"><%= cr %></span>
+              <% elsif Carrier::GREEN.include?(cr) %>
+                <span class="badge badge-green"><%= cr %></span>
+              <% end %>
             <% end %>
           </td>
           <td>
             <% carrier_lane.lane_destination_to_array.each do |cr| %>
-              <span class="badge badge-primary"><%= cr %></span>
+              <% if Carrier::LIGHT_BLUE.include?(cr) %>
+                <span class="badge badge-primary"><%= cr %></span>
+              <% elsif Carrier::DARK_BLUE.include?(cr) %>
+                <span class="badge badge-drakblue"><%= cr %></span>
+              <% elsif Carrier::BLUE.include?(cr) %>
+                <span class="badge badge-info"><%= cr %></span>
+              <% elsif Carrier::RED.include?(cr) %>
+              <span class="badge badge-danger"><%= cr %></span>
+              <% elsif Carrier::BROWN.include?(cr) %>
+                <span class="badge badge-brown"><%= cr %></span>
+              <% elsif Carrier::YELLOW.include?(cr) %>
+                <span class="badge badge-yellow"><%= cr %></span>
+              <% elsif Carrier::ORANGE.include?(cr) %>
+                <span class="badge badge-warning"><%= cr %></span>
+              <% elsif Carrier::GREEN.include?(cr) %>
+                <span class="badge badge-green"><%= cr %></span>
+              <% end %>
             <% end %>
           </td>
           <td>
