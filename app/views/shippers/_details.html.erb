@@ -159,6 +159,22 @@
             </div>
           </div>
           <div class="row">
+            <label class="col-md-4 col-form-label">Shipping Days:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <% shipper.location.shipping_day_to_array.each do |days| %>
+                <span class="badge badge-inverse"><%= days %></span>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-4 col-form-label">Receiving Days:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <% shipper.location.receiving_day_to_array.each do |days| %>
+                <span class="badge badge-inverse"><%= days %></span>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
             <label class="col-md-4 col-form-label">Website:</label>
             <div class="col-md-8 lbl-padding-t">
               <%= (!shipper.website.nil? && shipper.website.present?) ? "<a href='#{shipper.website}'>#{shipper.website}</a>" : "" %>

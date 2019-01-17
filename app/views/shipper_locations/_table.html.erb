@@ -1,13 +1,15 @@
-<table class="table table-striped table-bordered data-table-buttons display nowrap" data-order="[[0, &quot;desc&quot;]]" id="location_table">
+<table class="table table-striped table-bordered data-table-buttons display" data-order="[[0, &quot;desc&quot;]]" id="location_table">
   <thead>
     <tr class="odd gradeX">
       <th data-orderable="false" width="5%">Actions</th>
-      <th width="1%">Primary</th>
+      <th nowrap>Primary</th>
       <th>Address</th>
       <th>City</th>
       <th>State</th>
       <th>Country</th>
       <th>Phone</th>
+      <th width="250px">Shipping Days</th>
+      <th width="250px">Receiving Days</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +32,16 @@
           <td><%= shipper_location.state %></td>
           <td><%= shipper_location.country %></td>
           <td><%= shipper_location.phone %></td>
+          <td>
+            <% shipper_location.shipping_day_to_array.each do |days| %>
+              <span class="badge badge-inverse"><%= days %></span>
+            <% end %>
+          </td>
+          <td>
+            <% shipper_location.receiving_day_to_array.each do |days| %>
+              <span class="badge badge-inverse"><%= days %></span>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     <% end %>

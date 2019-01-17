@@ -57,6 +57,31 @@
   </div>
 </div>
 
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label :phone, 'Shipping Days:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+    <%= form.select :shipping_day, options_for_select(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], shipper_location.shipping_day),{:include_blank => false}, class: 'form-control', multiple: true %>
+  </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label :phone, 'Shipping Hours:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+    <%= form.number_field :shipping_hour, class: 'form-control', :value => shipper_location.shipping_hour %>
+  </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label :phone, 'Receiving Days:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+    <%= form.select :receiving_day, options_for_select(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], shipper_location.receiving_day),{:include_blank => false}, class: 'form-control', multiple: true %>
+  </div>
+</div>
+<div class="form-group row m-b-15 address-fields">
+  <%= form.label :phone, 'Receiving Hours:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <div class="col-md-9 col-sm-8">
+    <%= form.number_field :receiving_hour, class: 'form-control', :value => shipper_location.receiving_hour %>
+  </div>
+</div>
+
 <script language="javascript">
   $(function(){
     populateCountries("loc_country", "loc_state");
@@ -76,4 +101,6 @@
   <% if shipper_location.state.present? %>
     tiggerChangeOnSelectCountry('loc_state', '<%= shipper_location.state %>')
   <% end %>
+  $("#shipper_location_shipping_day").val(<%= raw shipper_location.shipping_day_to_array %>);
+  $("#shipper_location_receiving_day").val(<%= raw shipper_location.receiving_day_to_array %>);
 </script>
