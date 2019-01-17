@@ -6,7 +6,7 @@
 }
 </style>
 <!-- begin page-header -->
-<div class="<% if @rate.activity.carrier %> header-scout <% elsif @rate.activity.shipper  %> header-darkblue <% end %>">
+<div class="<% if params[:action] != 'new' %><% if @rate.activity.carrier %> header-scout <% elsif @rate.activity.shipper  %> header-darkblue <% end %><% else %><% end %>">
   <h1 class="pull-left">
     <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate " %>
   </h1>
@@ -79,7 +79,38 @@
         </div>
       </div>
       <h4 class="text-inverse">Details</h4>
-      <%= form.hidden_field :activity_id %>
+      <% if @previous_controller == "activities" %>
+        <%= form.hidden_field :activity_id %>
+      <% elsif @previous_controller == "rates" %>
+        <% if @client_type == "carrier"%>
+          <div class="form-group row m-b-15">
+            <%= form.label :carrier_id, 'Carrier:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= collection_select :rate, :carrier_id, Carrier.all.order("company_name ASC"), :id, :company_name, {prompt: true, :selected => @rate_carrier_id}, {class: 'form-control'} %>
+            </div>
+          </div>
+        <% elsif @client_type == "shipper" %>
+          <div class="form-group row m-b-15">
+            <%= form.label :shipper_id, 'Shipper:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= collection_select :rate, :shipper_id, Shipper.all, :id, :company_name, {prompt: true, :selected => @rate_shipper_id}, {class: 'form-control'} %>
+            </div>
+          </div>
+        <% end %>
+        <div class="form-group row m-b-15">
+          <%= form.label :activity_id, 'Activity *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.select :activity_id, options_for_select([]),{}, class: 'form-control', 'data-parsley-validate' => true, :required => true %>
+          </div>
+        </div>
+      <% else %>
+        <div class="form-group row m-b-15">
+          <%= form.label :activity_id, 'Activity *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= collection_select :rate, :activity_id, @activities, :id, :campaign_name, {prompt: true}, {class: 'form-control', 'data-parsley-validate' => true, :required => true} %>
+          </div>
+        </div>
+      <% end %>
       <div class="form-group row m-b-15">
         <%= form.label :picks, 'Picks:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
@@ -186,3 +217,21 @@
   <% end %>
   });
 </script>
+
+<% if @previous_controller == "rates" %>
+<script language="javascript">
+  $(document).ready(function() {
+    <% if @client_type == "carrier"%>
+      loadActivities('carrier', "<%= @rate_carrier_id %>", "<%= rate.activity_id%>")
+      $("#rate_carrier_id").change(function() {
+        loadActivities('carrier', $(this).val(), "<%= rate.activity_id%>")
+      });
+    <% elsif @client_type == "shipper" %>
+      loadActivities('shipper', "<%= @rate_shipper_id %>", "<%= rate.activity_id%>")
+      $("#rate_shipper_id").change(function() {
+        loadActivities('shipper', $(this).val(), "<%= rate.activity_id%>")
+      });
+    <% end %>
+  });
+</script>
+<% end %>

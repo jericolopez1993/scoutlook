@@ -524,7 +524,7 @@ function loadContacts(client_type, value, selected){
   if (value) {
     url = url + "?"+ client_type + "_id="+value
   }
-      $(this_id).empty().append('<option>Select Contact</option>');
+      $(this_id).empty().append('<option value="">Select Contact</option>');
       $.ajax({
         method: 'get',
         url: url
@@ -536,6 +536,30 @@ function loadContacts(client_type, value, selected){
               $(this_id).append("<option value='"+ array[i].id +"' selected>"+array[i].full_name+"</option>");
             }else{
               $(this_id).append("<option value='"+ array[i].id +"'>"+array[i].full_name+"</option>");
+            }
+         }
+        }
+      })
+}
+
+function loadActivities(client_type, value, selected){
+  var this_id = "#rate_activity_id"
+  var url = "/api/activities"
+  if (value) {
+    url = url + "?"+ client_type + "_id="+value
+  }
+      $(this_id).empty().append('<option value="">Select Activity</option>');
+      $.ajax({
+        method: 'get',
+        url: url
+      }).done(function(data) {
+        var array = data;
+        if (array != ''){
+          for (i in array) {
+            if (array[i].id.toString() == selected.toString()) {
+              $(this_id).append("<option value='"+ array[i].id +"' selected>"+array[i].campaign_name+"</option>");
+            }else{
+              $(this_id).append("<option value='"+ array[i].id +"'>"+array[i].campaign_name+"</option>");
             }
          }
         }

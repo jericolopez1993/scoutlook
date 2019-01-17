@@ -8,7 +8,7 @@ module Api
       else
         @activities = []
       end
-      render json: @activities, methods: [:full_name]
+      render json: @activities
     end
   end
 end

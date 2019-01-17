@@ -6,12 +6,13 @@
   <div class="panel panel-emerald">
     <div class="panel-heading">
       <div class="panel-heading-btn">
-        <%#= link_to 'New Rate', new_rate_path, :class => 'btn btn-primary btn-xs' %>
+        <%= link_to 'New Carrier Rate', new_rate_path(:previous_controller => params[:controller], :client_type => "carrier"), :class => 'btn btn-green btn-xs' %>
+        <%= link_to 'New Shipper Rate', new_rate_path(:previous_controller => params[:controller], :client_type => "shipper"), :class => 'btn btn-green btn-xs' %>
       </div>
       <h4 class="panel-title lp-header">Rates</h4>
     </div>
     <div class="panel-body">
-        <%= render 'table', rates: @rates, with_actions: false %>
+        <%= render 'table', rates: Rate.all, with_actions: true %>
     </div>
   </div>
 </div>

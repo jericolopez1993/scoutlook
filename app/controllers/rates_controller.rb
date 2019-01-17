@@ -20,11 +20,26 @@ class RatesController < ApplicationController
     if params[:activity_id].present?
       @rate.activity_id = params[:activity_id]
     end
+    if @previous_controller == "carriers"
+      @activities = Activity.where(:carrier_id => params[:carrier_id])
+      @rate_carrier_id = ""
+    elsif @previous_controller == "shippers"
+      @activities = Activity.where(:shipper_id => params[:shipper_id])
+      @rate_carrier_id = ""
+    end
     authorize @rate
   end
 
   # GET /rates/1/edit
   def edit
+    if @previous_controller == "carriers" || @client_type == "carrier"
+      @activities = Activity.where(:carrier_id => params[:carrier_id])
+      @rate_carrier_id = @rate.activity.carrier_id
+    elsif @previous_controller == "shippers" || @client_type == "shipper"
+      @activities = Activity.where(:shipper_id => params[:shipper_id])
+      @rate_shipper_id = @rate.activity.shipper_id
+    end
+    authorize @rate
   end
 
   # POST /rates
@@ -86,6 +101,10 @@ class RatesController < ApplicationController
         @previous_controller = params[:previous_controller]
       else
         @previous_controller = 'rates'
+      end
+
+      if @previous_controller == "rates"
+        @client_type = params[:client_type]
       end
     end
     # Never trust parameters from the scary internet, only allow the white list through.
