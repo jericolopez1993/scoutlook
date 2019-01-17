@@ -1,1 +1,1 @@
-# Scout Platform
+# ScoutCRM
