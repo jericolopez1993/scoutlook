@@ -504,7 +504,24 @@ function filterTable(id){
   });
 
   // DataTable
-  var table = $('#' + id).DataTable({"scrollX": true});
+  var table = $('#' + id).DataTable({
+    "scrollX": true,
+    "drawCallback": function( settings ) {
+      $('[data-toggle="tooltip"]').tooltip({
+          trigger: 'hover',
+          html: true
+      });
+    }});
+  var table = $('#example').DataTable( {
+"drawCallback": function( settings ) {
+
+$('[data-toggle="tooltip1"]').tooltip();
+$('[data-toggle="tooltip2"]').tooltip();
+
+// add as many tooltips you want
+
+},
+});
 
   // Apply the search
   table.columns().every(function () {
