@@ -1,129 +1,180 @@
 <style>
-@media (max-width: 767px) {
-  label {
-    text-align: left!important;
+  @media (max-width: 767px) {
+    label {
+      text-align: left!important;
+    }
   }
-}
-label {
-  text-align: right;
-}
+  label {
+    text-align: right;
+  }
 </style>
 <!-- begin page-header -->
 <div class="<% if @rate.activity.carrier %>header-scout <% elsif @rate.activity.shipper %> header-darkblue <% end %>">
   <h1 class="pull-left">
     <% if @rate.activity.carrier %>
-      <%= render 'layouts/static/header', header_title: "#{@rate.activity.carrier.nil? ? '' : generate_alphanumeric_id(@rate.activity.carrier.company_name, @rate.activity.carrier.id)}", sub_header_title: "#{@rate.activity.carrier.nil? ? '' : link_to(@rate.activity.carrier.company_name,  @rate.activity.carrier)}"  %>
-    <% elsif @rate.activity.shipper %>
-      <%= render 'layouts/static/header', header_title: "#{@rate.activity.shipper.nil? ? '' : generate_alphanumeric_id(@rate.activity.shipper.company_name, @rate.activity.shipper.id)}", sub_header_title: "#{@rate.activity.shipper.nil? ? '' : link_to(@rate.activity.shipper.company_name,  @rate.activity.shipper)}"  %>
-    <% end %>
-  </h1>
-  <span class="pull-right">
-    <%= link_to 'Edit', edit_rate_path(@rate), :class => 'btn btn-warning btn-xs' %>
-    <% if @rate.activity.carrier %>
-      <% carrier = Carrier.find(@rate.activity.carrier_id)%>
-      <%= link_to 'Back ', carrier, :class => 'btn btn-info btn-xs' %>
-    <% elsif @rate.activity.shipper %>
-      <% carrier = Shipper.find(@rate.activity.shipper_id)%>
-      <%= link_to 'Back ', carrier, :class => 'btn btn-info btn-xs' %>
-    <% end %>
-  </span>
-</div>
+      <%= render 'layouts/static/header', header_title: "#{@rate.activity.carrier.nil? ? '' : generate_alphanumeric_id(@rate.activity.carrier.company_name, @rate.activity.carrier.id)}", sub_header_title: "#{@rate.activity.carrier.nil? ? '' :
+      link_to(@rate.activity.carrier.company_name, @rate.activity.carrier)}" %>
+      <% elsif @rate.activity.shipper %>
+        <%= render 'layouts/static/header', header_title: "#{@rate.activity.shipper.nil? ? '' : generate_alphanumeric_id(@rate.activity.shipper.company_name, @rate.activity.shipper.id)}", sub_header_title: "#{@rate.activity.shipper.nil? ? '' :
+        link_to(@rate.activity.shipper.company_name, @rate.activity.shipper)}" %>
+      <% end %>
+    </h1>
+    <span class="pull-right">
+      <%= link_to 'Edit', edit_rate_path(@rate), :class => 'btn btn-warning btn-xs' %>
+      <% if @rate.activity.carrier %>
+        <% carrier = Carrier.find(@rate.activity.carrier_id)%>
+          <%= link_to 'Back ', carrier, :class => 'btn btn-info btn-xs' %>
+          <% elsif @rate.activity.shipper %>
+            <% carrier = Shipper.find(@rate.activity.shipper_id)%>
+              <%= link_to 'Back ', carrier, :class => 'btn btn-info btn-xs' %>
+            <% end %>
+          </span>
+        </div>
 
-<div class="panel panel-inverse">
-  <div class="panel-heading">
-    <h4 class="panel-title">  <%= generate_alphanumeric_id(@rate.activity.activity_type, @rate.id) %> - <%= @rate.activity.activity_type %></h4>
-  </div>
-  <div class="panel-body">
-    <h4 class="text-inverse">Details</h4>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Origin:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.origin_city + ", " + @rate.origin_state %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Destination:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.destination_city + ", " + @rate.destination_state %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Miles:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.miles %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Picks:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.picks %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Drops:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.drops %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Team:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <% if @rate.team == "Yes" %>
-          <b class="text-success"><%= @rate.team %></b>
-        <% else %>
-          <b class="text-danger"><%= @rate.team %></b>
-        <% end %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Commodities:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <% @rate.commodities_to_array.each do |cr| %>
-          <span class="badge badge-inverse"><%= cr %></span>
-        <% end %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Bid:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.bid %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Ask:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.ask %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Accepted:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.accepted ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Cost:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.cost %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Currency:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.money_currency %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">MC Number:</label>
-      <div class="col-md-9 lbl-padding-t">
-        <%= @rate.mc_number %>
-      </div>
-    </div>
-    <div class="row">
-      <label class="col-md-2 col-form-label">Notes:</label>
-      <div class="col-md-8 lbl-padding-t">
-        <%= @rate.notes.nil? ? "" : @rate.notes.html_safe %>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="panel panel-inverse">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <%= generate_alphanumeric_id(@rate.activity.activity_type, @rate.id) %>
+              -
+              <%= @rate.activity.activity_type %></h4>
+          </div>
+          <div class="panel-body">
+            <h4 class="text-inverse">Details</h4>
+            <div class="row">
+              <label class="col-md-2 col-form-label">Origin:</label>
+              <div class="col-md-9 lbl-padding-t">
+                <%= @rate.origin_city + ", " + @rate.origin_state %>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-md-2 col-form-label">Destination:</label>
+              <div class="col-md-9 lbl-padding-t">
+                <%= @rate.destination_city + ", " + @rate.destination_state %>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-md-2 col-form-label">Miles:</label>
+              <div class="col-md-9 lbl-padding-t">
+                <%= @rate.miles %>
+              </div>
+            </div>
+            <% if @rate.carrier %>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Carrier:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.carrier.nil? ? "" : (link_to "#{@rate.carrier.company_name}", @rate.carrier) %>
+                </div>
+              </div>
+            <% end %>
+            <% if @rate.shipper %>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Shipper:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.shipper.nil? ? "" : (link_to "#{@rate.shipper.company_name}", @rate.shipper) %>
+                </div>
+              </div>
+            <% end %>
+            <div class="row">
+              <label class="col-md-2 col-form-label">Contact:</label>
+              <div class="col-md-9 lbl-padding-t">
+                <% if @rate.carrier_contact %>
+                  <%= @rate.carrier_contact.nil? ? "" : (link_to "#{@rate.carrier_contact.full_name}", edit_carrier_contact_path(@rate.carrier_contact)) %>
+                  <% elsif @rate.shipper_contact %>
+                    <%= @rate.shipper_contact.nil? ? "" : (link_to "#{@rate.shipper_contact.full_name}", edit_shipper_contact_path(@rate.shipper_contact)) %>
+                  <% end %>
+                </div>
+              </div>
+              <% if @rate.activity %>
+                <div class="row">
+                  <label class="col-md-2 col-form-label">Activity:</label>
+                  <div class="col-md-9 lbl-padding-t">
+                    <%= @rate.activity.nil? ? "" : (link_to "#{@rate.activity.campaign_name}", @rate.activity) %>
+                  </div>
+                </div>
+              <% end %>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Type:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.rate_type %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Picks:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.picks %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Drops:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.drops %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Team:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <% if @rate.team == "Yes" %>
+                    <b class="text-success"><%= @rate.team %></b>
+                  <% else %>
+                    <b class="text-danger"><%= @rate.team %></b>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Commodities:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <% @rate.commodities_to_array.each do |cr| %>
+                    <span class="badge badge-inverse"><%= cr %></span>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Bid:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.bid %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Ask:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.ask %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Accepted:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.accepted ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Cost:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.cost %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Currency:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.money_currency %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">MC Number:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.mc_number %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Notes:</label>
+                <div class="col-md-8 lbl-padding-t">
+                  <%= @rate.notes.nil? ? "" : @rate.notes.html_safe %>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-2 col-form-label">Date Created:</label>
+                <div class="col-md-9 lbl-padding-t">
+                  <%= @rate.created_at %>
+                </div>
+              </div>
+            </div>
+          </div>

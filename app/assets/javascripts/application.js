@@ -535,8 +535,8 @@ $('[data-toggle="tooltip2"]').tooltip();
   });
 }
 
-function loadContacts(client_type, value, selected){
-  var this_id = "#activity_" + client_type + "_contact_id"
+function loadContacts(client_type, controller, value, selected){
+  var this_id = "#" + controller + "_" + client_type + "_contact_id"
   var url = "/api/"+ client_type +"_contacts"
   if (value) {
     url = url + "?"+ client_type + "_id="+value

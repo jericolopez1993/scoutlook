@@ -16,6 +16,7 @@
       <th>Destination City</th>
       <th>Destination ST/PV</th>
       <th>Miles</th>
+      <th>Type</th>
       <th>Picks</th>
       <th>Drops</th>
       <th>Team</th>
@@ -27,6 +28,7 @@
       <th>Currency</th>
       <th>MC #</th>
       <th>Notes</th>
+      <th>Date Created</th>
       <th>Carrier</th>
       <th>Shipper</th>
       <% if with_actions %>
@@ -41,6 +43,7 @@
       <th>Destination City</th>
       <th>Destination ST/PV</th>
       <th>Miles</th>
+      <th>Type</th>
       <th>Picks</th>
       <th>Drops</th>
       <th>Team</th>
@@ -52,6 +55,7 @@
       <th>Currency</th>
       <th>MC #</th>
       <th>Notes</th>
+      <th>Date Created</th>
       <th>Carrier</th>
       <th>Shipper</th>
       <% if with_actions %>
@@ -67,6 +71,7 @@
         <td><%= rate.destination_city %></td>
         <td><%= rate.destination_state %></td>
         <td><%= rate.miles %></td>
+        <td><%= rate.rate_type %></td>
         <td><%= rate.picks %></td>
         <td><%= rate.drops %></td>
         <td>
@@ -88,41 +93,43 @@
         <td><%= rate.money_currency %></td>
         <td><%= rate.mc_number %></td>
         <td><%= rate.notes %></td>
-
+        <td><%= rate.created_at %></td>
         <td>
+          <% carrier = rate.carrier ? rate.carrier : rate.activity.carrier%>
           <span
             data-toggle="tooltip"
             data-placement="right"
             data-html="true"
             title="
-              <b>Name</b>: <%= rate.activity.carrier && (rate.activity.carrier.company_name.blank? ? "(no name)" : rate.activity.carrier.company_name) %><br>
-              <b>Ops Name</b>: <%= rate.activity.carrier && (rate.activity.carrier.poc.nil? ? '' : rate.activity.carrier.poc.full_name) %><br>
-              <b>Ops Phone</b>: <%= rate.activity.carrier && (rate.activity.carrier.poc.nil? ? '' : ((!rate.activity.carrier.poc.primary_phone.nil? && rate.activity.carrier.poc.primary_phone != "") ? (rate.activity.carrier.poc.primary_phone + " (#{rate.activity.carrier.poc.primary_phone_type})") : "")) %><br>
-              <b>Ops Email</b>: <%= rate.activity.carrier && (rate.activity.carrier.poc.nil? ? '' : rate.activity.carrier.poc.email) %><br>
-              <b>Class</b>: <%= rate.activity.carrier && (rate.activity.carrier.sales_priority) %><br>
-              <b>MC Number</b>: <%= rate.activity.carrier && (rate.activity.carrier.mc_number) %><br>
-              <b>Sate/Province</b>: <%= rate.activity.carrier && (rate.activity.carrier.location.nil? ? '' : rate.activity.carrier.location.state) %><br>
-              <b>Last Contact Date</b>: <%= rate.activity.carrier && (rate.activity.carrier.last_contact_date.nil? || rate.activity.carrier.last_contact_date.date_opened.nil? ? "" : rate.activity.carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
+              <b>Name</b>: <%= carrier && (carrier.company_name.blank? ? "(no name)" : carrier.company_name) %><br>
+              <b>Ops Name</b>: <%= carrier && (carrier.poc.nil? ? '' : carrier.poc.full_name) %><br>
+              <b>Ops Phone</b>: <%= carrier && (carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + " (#{carrier.poc.primary_phone_type})") : "")) %><br>
+              <b>Ops Email</b>: <%= carrier && (carrier.poc.nil? ? '' : carrier.poc.email) %><br>
+              <b>Class</b>: <%= carrier && (carrier.sales_priority) %><br>
+              <b>MC Number</b>: <%= carrier && (carrier.mc_number) %><br>
+              <b>Sate/Province</b>: <%= carrier && (carrier.location.nil? ? '' : carrier.location.state) %><br>
+              <b>Last Contact Date</b>: <%= carrier && (carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
             ">
-          <%= rate.activity.carrier && link_to(rate.activity.carrier.company_name.blank? ? "(no name)" : rate.activity.carrier.company_name, rate.activity.carrier) %>
+          <%= carrier && link_to(carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier) %>
           </span>
         </td>
         <td>
+          <% shipper = rate.shipper ? rate.shipper : rate.activity.shipper %>
           <span
             data-toggle="tooltip"
             data-placement="right"
             data-html="true"
             title="
-              <b>Name</b>: <%= rate.activity.shipper && (rate.activity.shipper.company_name.blank? ? "(no name)" : rate.activity.shipper.company_name) %><br>
-              <b>DM Name</b>: <%= rate.activity.shipper && (rate.activity.shipper.pdm.nil? ? '' : rate.activity.shipper.pdm.full_name) %><br>
-              <b>DM Phone</b>: <%= rate.activity.shipper && (rate.activity.shipper.pdm.nil? ? '' : ((!rate.activity.shipper.pdm.primary_phone.nil? && rate.activity.shipper.pdm.primary_phone != "") ? (rate.activity.shipper.pdm.primary_phone + " (#{rate.activity.shipper.pdm.primary_phone_type})") : "")) %><br>
-              <b>DM Email</b>: <%= rate.activity.shipper && (rate.activity.shipper.pdm.nil? ? '' : rate.activity.shipper.pdm.email) %><br>
-              <b>Class</b>: <%= rate.activity.shipper && (rate.activity.shipper.sales_priority) %><br>
-              <b>City</b>: <%= rate.activity.shipper && (rate.activity.shipper.location.nil? ? '' : rate.activity.shipper.location.city) %><br>
-              <b>Sate/Province</b>: <%= rate.activity.shipper && (rate.activity.shipper.location.nil? ? '' : rate.activity.shipper.location.state) %><br>
-              <b>Last Contact Date</b>: <%= rate.activity.shipper && (rate.activity.shipper.last_contact_date.nil? || rate.activity.shipper.last_contact_date.date_opened.nil? ? "" : rate.activity.shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
+              <b>Name</b>: <%= shipper && (shipper.company_name.blank? ? "(no name)" : shipper.company_name) %><br>
+              <b>DM Name</b>: <%= shipper && (shipper.pdm.nil? ? '' : shipper.pdm.full_name) %><br>
+              <b>DM Phone</b>: <%= shipper && (shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + " (#{shipper.pdm.primary_phone_type})") : "")) %><br>
+              <b>DM Email</b>: <%= shipper && (shipper.pdm.nil? ? '' : shipper.pdm.email) %><br>
+              <b>Class</b>: <%= shipper && (shipper.sales_priority) %><br>
+              <b>City</b>: <%= shipper && (shipper.location.nil? ? '' : shipper.location.city) %><br>
+              <b>Sate/Province</b>: <%= shipper && (shipper.location.nil? ? '' : shipper.location.state) %><br>
+              <b>Last Contact Date</b>: <%= shipper && (shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
             ">
-          <%= rate.activity.shipper && link_to(rate.activity.shipper.company_name.blank? ? "(no name)" : rate.activity.shipper.company_name, rate.activity.shipper) %>
+          <%= shipper && link_to(shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper) %>
           </span>
         </td>
         <% if with_actions %>

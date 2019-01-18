@@ -110,7 +110,7 @@
       <div class="form-group row m-b-15">
         <%= form.label :loads_per_week, 'Loads Per Week:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.text_field :loads_per_week, class: 'form-control' %>
+          <%= form.select :loads_per_week, options_for_select(['1', '2-5', '6-10', '11-25', '26-50', '>50'], activity.loads_per_week),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -212,16 +212,16 @@
 <script language="javascript">
   $(document).ready(function() {
     <% if @client_type == "carrier"%>
-      loadContacts('carrier', "<%= activity.carrier_id%>", "<%= activity.carrier_contact_id%>")
+      loadContacts('carrier', 'activity', "<%= activity.carrier_id%>", "<%= activity.carrier_contact_id%>")
       $("#activity_shipper_contact_id").hide();
       $("#activity_carrier_id").change(function() {
-        loadContacts('carrier', $(this).val(), "<%= activity.carrier_contact_id%>")
+        loadContacts('carrier', 'activity', $(this).val(), "<%= activity.carrier_contact_id%>")
       });
     <% elsif @client_type == "shipper" %>
-      loadContacts('shipper', "<%= activity.shipper_id%>", "<%= activity.shipper_contact_id%>")
+      loadContacts('shipper', 'activity', "<%= activity.shipper_id%>", "<%= activity.shipper_contact_id%>")
       $("#activity_carrier_contact_id").hide();
       $("#activity_shipper_id").change(function() {
-        loadContacts('shipper', $(this).val(), "<%= activity.shipper_contact_id%>")
+        loadContacts('shipper', 'activity', $(this).val(), "<%= activity.shipper_contact_id%>")
       });
     <% end %>
   });

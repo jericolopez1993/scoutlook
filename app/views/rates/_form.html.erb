@@ -111,6 +111,29 @@
           </div>
         </div>
       <% end %>
+      <% if @previous_controller != "activities" %>
+        <div class="form-group row m-b-15">
+          <%= form.label :contact, 'Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <% if @previous_controller == "carriers" %>
+              <%= collection_select :rate, :carrier_contact_id, CarrierContact.where(carrier_id: rate.carrier_id), :id, :full_name, {prompt: true}, {class: 'form-control'} %>
+            <% end %>
+            <% if @previous_controller == "shippers" %>
+              <%= collection_select :rate, :shipper_contact_id, ShipperContact.where(shipper_id: rate.shipper_id), :id, :full_name, {prompt: true}, {class: 'form-control'} %>
+            <% end %>
+            <% if @previous_controller == "rates" %>
+                <%= form.select :carrier_contact_id, options_for_select([]),{}, class: 'form-control' %>
+                <%= form.select :shipper_contact_id, options_for_select([]),{}, class: 'form-control' %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="form-group row m-b-15">
+        <%= form.label :rate_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.select :rate_type, options_for_select(['Spot', 'Signal'], rate.rate_type),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
       <div class="form-group row m-b-15">
         <%= form.label :picks, 'Picks:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
@@ -226,10 +249,20 @@
       $("#rate_carrier_id").change(function() {
         loadActivities('carrier', $(this).val(), "<%= rate.activity_id%>")
       });
+      loadContacts('carrier', 'rate', "<%= rate.carrier_id%>", "<%= rate.carrier_contact_id%>")
+      $("#rate_shipper_contact_id").hide();
+      $("#rate_carrier_id").change(function() {
+        loadContacts('carrier', 'rate', $(this).val(), "<%= rate.carrier_contact_id%>")
+      });
     <% elsif @client_type == "shipper" %>
       loadActivities('shipper', "<%= @rate_shipper_id %>", "<%= rate.activity_id%>")
       $("#rate_shipper_id").change(function() {
         loadActivities('shipper', $(this).val(), "<%= rate.activity_id%>")
+      });
+      loadContacts('shipper', 'rate', "<%= rate.shipper_id%>", "<%= rate.shipper_contact_id%>")
+      $("#rate_carrier_contact_id").hide();
+      $("#rate_shipper_id").change(function() {
+        loadContacts('shipper', 'rate', $(this).val(), "<%= rate.shipper_contact_id%>")
       });
     <% end %>
   });

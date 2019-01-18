@@ -4,6 +4,10 @@ class Rate < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :activity, optional: true
   belongs_to :parent, class_name: "Rate", foreign_key: "parent_id", optional: true
+  belongs_to :carrier, optional: true
+  belongs_to :shipper, optional: true
+  belongs_to :carrier_contact, optional: true
+  belongs_to :shipper_contact, optional: true
 
   def display_name
     if self.carrier.nil?
