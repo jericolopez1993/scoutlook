@@ -86,10 +86,10 @@ test:
 #
 production:
   <<: *default
-  database: scoutv1_production
-  username: pb_platform
-  password: pb_platform
-  host: localhost
+  database: scoutcrm
+  username: scoutcrm
+  password: Vb8eC4MqhoUjBa
+  host: scoutcrm.cvdfnojggqav.ca-central-1.rds.amazonaws.com
 
 staging:
   <<: *default
