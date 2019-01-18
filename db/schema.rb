@@ -273,6 +273,18 @@ ActiveRecord::Schema.define(version: 2019_01_18_161655) do
     t.integer "shipper_contact_id"
   end
 
+  create_table "reminders", force: :cascade do |t|
+    t.integer "carrier_id"
+    t.integer "shipper_id"
+    t.integer "activity_id"
+    t.integer "user_id"
+    t.date "reminder_date"
+    t.integer "reminder_interval"
+    t.boolean "recurring"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reps", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"

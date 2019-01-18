@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Carrier:</strong>
+  <%= @reminder.carrier_id %>
+</p>
+
+<p>
+  <strong>Shipper:</strong>
+  <%= @reminder.shipper_id %>
+</p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @reminder.activity_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @reminder.user_id %>
+</p>
+
+<p>
+  <strong>Reminder date:</strong>
+  <%= @reminder.reminder_date %>
+</p>
+
+<p>
+  <strong>Reminder interval:</strong>
+  <%= @reminder.reminder_interval %>
+</p>
+
+<p>
+  <strong>Recurring:</strong>
+  <%= @reminder.recurring %>
+</p>
+
+<%= link_to 'Edit', edit_reminder_path(@reminder) %> |
+<%= link_to 'Back', reminders_path %>

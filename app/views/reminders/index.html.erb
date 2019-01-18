@@ -1,0 +1,19 @@
+<!-- begin page-header -->
+<%#= render 'layouts/static/header', header_title: 'Rates' %>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="panel-heading-btn">
+        <%= link_to 'New Carrier Reminder', new_rate_path(:previous_controller => params[:controller], :client_type => "carrier"), :class => 'btn btn-green btn-xs' %>
+        <%= link_to 'New Shipper Reminder', new_rate_path(:previous_controller => params[:controller], :client_type => "shipper"), :class => 'btn btn-green btn-xs' %>
+      </div>
+      <h4 class="panel-title lp-header">Reminder</h4>
+    </div>
+    <div class="panel-body">
+        <%= render 'table', reminder: Reminder.all, with_actions: true %>
+    </div>
+  </div>
+</div>
+<!-- end panel -->
