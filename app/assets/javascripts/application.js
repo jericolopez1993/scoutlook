@@ -131,10 +131,10 @@ $(document).ready(function() {
   statusNotes(true, 'shipment-audit-comment');
   statusNotes(true, 'invoice-audit-comment');
 
-  $(".multiple-select2").select2({ placeholder: "Select commodities" });
-  $(".origin-multiple-select2").select2({ placeholder: "Select origins" });
-  $(".destination-multiple-select2").select2({ placeholder: "Select destinations" });
-  $(".shipper-type-multiple-select2").select2({ placeholder: "Select shipper types" });
+  $(".multiple-select2").select2({ placeholder: "Select commodities", allowClear: true });
+  $(".origin-multiple-select2").select2({ placeholder: "Select origins", allowClear: true });
+  $(".destination-multiple-select2").select2({ placeholder: "Select destinations", allowClear: true });
+  $(".shipper-type-multiple-select2").select2({ placeholder: "Select shipper types", allowClear: true });
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
 
@@ -154,7 +154,7 @@ $(document).ready(function() {
 		autoclose: true,
     orientation: 'auto bottom'
 	});
-  $(".static-dropdown").select2();
+  $(".static-dropdown").select2({allowClear: true});
   // $(".combo-dropdown").select2({
   //   tags: true,
   //   createTag: function (params) {

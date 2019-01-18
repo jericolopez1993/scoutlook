@@ -329,3 +329,16 @@ tbody.spacer:before {
   font-size: 14px;
   opacity: .85;
 }
+.select2-container--default .select2-selection--multiple .select2-selection__clear {
+    margin-right: 0px !important;
+    padding: 0px 10px !important;
+    font-size: 16px !important;
+    background: #ff5b57;
+    border-color: #ff5b57;
+    color: #ffffff;
+    border-radius: 2px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__clear:hover {
+  background:#cc4946;
+  border-color:#cc4946
+}

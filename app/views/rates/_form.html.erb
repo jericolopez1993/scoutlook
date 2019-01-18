@@ -155,7 +155,7 @@
       <div class="form-group row m-b-15">
         <%= form.label :commodities, 'Commodities:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :commodities, Shipper::COMMODITY.collect {|r| [ r, r ] },{:include_blank => true, :selected => rate.commodities}, class: 'form-control multiple-select2', multiple: true %>
+          <%= form.select :commodities, Shipper::COMMODITY.collect {|r| [ r, r ] },{:include_blank => false, :selected => rate.commodities}, class: 'form-control multiple-select2', multiple: true %>
         </div>
       </div>
       <div class="form-group row m-b-15">
