@@ -98,16 +98,16 @@
           </div>
         <% end %>
         <div class="form-group row m-b-15">
-          <%= form.label :activity_id, 'Activity *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :activity_id, 'Activity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= form.select :activity_id, options_for_select([]),{}, class: 'form-control', 'data-parsley-validate' => true, :required => true %>
+            <%= form.select :activity_id, options_for_select([]),{}, class: 'form-control' %>
           </div>
         </div>
       <% else %>
         <div class="form-group row m-b-15">
-          <%= form.label :activity_id, 'Activity *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :activity_id, 'Activity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= collection_select :rate, :activity_id, @activities, :id, :campaign_name, {prompt: true}, {class: 'form-control', 'data-parsley-validate' => true, :required => true} %>
+            <%= collection_select :rate, :activity_id, @activities, :id, :campaign_name, {prompt: true}, {class: 'form-control'} %>
           </div>
         </div>
       <% end %>
