@@ -1,0 +1,113 @@
+<% if params[:controller] == "reminders" %>
+  <style>
+    .tooltip-inner {
+      background-color: #033309!important;
+    }
+    .tooltip .arrow::before{
+      border-right-color: #033309!important;
+    }
+  </style>
+<% end %>
+<table table class="table table-striped table-bordered display nowrap"  id="reminders_table">
+  <thead>
+    <tr class="odd gradeX">
+      <th>Carrier</th>
+      <th>Shipper</th>
+      <th>Activity</th>
+      <th>User</th>
+      <th>Date</th>
+      <th>Interval</th>
+      <th>Recurring</th>
+      <th>Date Created</th>
+      <% if with_actions %>
+        <th data-orderable="false">Actions</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th>Carrier</th>
+      <th>Shipper</th>
+      <th>Activity</th>
+      <th>User</th>
+      <th>Date</th>
+      <th>Interval</th>
+      <th>Recurring</th>
+      <th>Date Created</th>
+      <% if with_actions %>
+        <th data-orderable="false">Actions</th>
+      <% end %>
+    </tr>
+  </tfoot>
+  <tbody class="spacer">
+    <% reminders.each do |reminder| %>
+      <tr>
+        <td>
+          <% carrier = reminder.carrier ? reminder.carrier : (reminder.activity ? reminder.activity.carrier : nil) %>
+          <span
+            data-toggle="tooltip"
+            data-placement="right"
+            data-html="true"
+            title="
+              <b>Name</b>: <%= carrier && (carrier.company_name.blank? ? "(no name)" : carrier.company_name) %><br>
+              <b>Ops Name</b>: <%= carrier && (carrier.poc.nil? ? '' : carrier.poc.full_name) %><br>
+              <b>Ops Phone</b>: <%= carrier && (carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + " (#{carrier.poc.primary_phone_type})") : "")) %><br>
+              <b>Ops Email</b>: <%= carrier && (carrier.poc.nil? ? '' : carrier.poc.email) %><br>
+              <b>Class</b>: <%= carrier && (carrier.sales_priority) %><br>
+              <b>MC Number</b>: <%= carrier && (carrier.mc_number) %><br>
+              <b>Reefers Count</b>: <%= carrier && carrier.reefers %><br>
+              <b>Sate/Province</b>: <%= carrier && (carrier.location.nil? ? '' : carrier.location.state) %><br>
+              <b>Last Contact Date</b>: <%= carrier && (carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
+            ">
+          <%= carrier && link_to(carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier) %>
+          </span>
+        </td>
+        <td>
+          <% shipper = reminder.shipper ? reminder.shipper : (reminder.activity ? reminder.activity.shipper : nil) %>
+          <span
+            data-toggle="tooltip"
+            data-placement="right"
+            data-html="true"
+            title="
+              <b>Name</b>: <%= shipper && (shipper.company_name.blank? ? "(no name)" : shipper.company_name) %><br>
+              <b>DM Name</b>: <%= shipper && (shipper.pdm.nil? ? '' : shipper.pdm.full_name) %><br>
+              <b>DM Phone</b>: <%= shipper && (shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + " (#{shipper.pdm.primary_phone_type})") : "")) %><br>
+              <b>DM Email</b>: <%= shipper && (shipper.pdm.nil? ? '' : shipper.pdm.email) %><br>
+              <b>Class</b>: <%= shipper && (shipper.sales_priority) %><br>
+              <b>City</b>: <%= shipper && (shipper.location.nil? ? '' : shipper.location.city) %><br>
+              <b>Sate/Province</b>: <%= shipper && (shipper.location.nil? ? '' : shipper.location.state) %><br>
+              <b>Last Contact Date</b>: <%= shipper && (shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
+            ">
+          <%= shipper && link_to(shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper) %>
+          </span>
+        </td>
+        <td><%= reminder.activity && link_to(reminder.activity.campaign_name.blank? ? "(no name)" : reminder.activity.campaign_name, reminder.activity) %></td>
+        <td><%= reminder.user && link_to(reminder.user.full_name.blank? ? "(no name)" : reminder.user.full_name, reminder.user) %></td>
+        <td><%= reminder.reminder_date %></td>
+        <td><%= reminder.reminder_interval %></td>
+        <td><%= reminder.recurring ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
+        <td><%= reminder.created_at %></td>
+
+        <% if with_actions %>
+          <td>
+            <%= link_to '<i class="far fa-eye"></i>'.html_safe, reminder_path(:id => reminder.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
+            <% if carrier %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "carrier", :carrier_id => carrier.id), :class => 'btn btn-warning btn-xs' %>
+            <% elsif shipper %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "shipper", :shipper_id => shipper.id), :class => 'btn btn-warning btn-xs' %>
+            <% elsif reminder.activity %>
+                <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "activity", :activity_id => reminder.activity.id), :class => 'btn btn-warning btn-xs' %>
+            <% end %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, reminder_path(:id => reminder.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+          </td>
+      <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script language="javascript">
+  $(document).ready(function() {
+    filterTable("reminders_table");
+  });
+</script>

@@ -13,6 +13,9 @@
       <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || current_user.ro || current_user.cs %>
         <li><a href="<%= rates_path %>" class="<%= (params[:controller] == 'rates') ? 'active' : ''%> rate"><i class="fas fa-hand-holding-usd"></i> <span>Rates</span></a></li>
       <% end %>
+      <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || current_user.ro || current_user.cs %>
+        <li><a href="<%= reminders_path %>" class="<%= (params[:controller] == 'reminders') ? 'active' : ''%> reminder"><i class="far fa-bell"></i> <span>Reminders</span></a></li>
+      <% end %>
       <%# <% if current_user.has_role?(:admin) %>
         <!-- <li><a href="<%#= reps_path %>" class="<%#= (params[:controller] == 'reps') ? 'active' : ''%> steward"><i class="fa fa-users"></i> <span>Stewards</span></a></li> -->
       <%# end %>
