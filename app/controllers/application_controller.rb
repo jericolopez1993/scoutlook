@@ -29,10 +29,10 @@ class ApplicationController < ActionController::Base
 
     protected
     def after_sign_in_path_for(resource)
-      if current_user.has_role?(:contact) && !current_user.shipper_contact.nil?
-        shippers_path
-      else
+      if current_user.has_role?(:admin)
         request.env['omniauth.origin'] || stored_location_for(resource) || authenticated_root_path
+      else
+        shippers_path
       end
     end
 
