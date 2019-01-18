@@ -237,4 +237,23 @@ module ApplicationHelper
     end
   end
 
+  def shade_sales_priority(sales_priority)
+    if sales_priority.include?("A")
+      "<span class='text-lime'>#{sales_priority}</span>"
+    elsif sales_priority.include?("B")
+      "<span class='text-indigo'>#{sales_priority}</span>"
+    elsif sales_priority.include?("D")
+      "<span class='text-pink'>#{sales_priority}</span>"
+    elsif sales_priority.include?("C")
+      "<span class='text-purple'>#{sales_priority}</span>"
+    elsif sales_priority.include?("U")
+      "<span class='text-success'>#{sales_priority}</span>"
+    elsif sales_priority.include?("New")
+      "<span class='text-yellow'>#{sales_priority}</span>"
+    else
+      "<span class='text-dark'>#{sales_priority}</span>"
+    end
+
+  end
+
 end

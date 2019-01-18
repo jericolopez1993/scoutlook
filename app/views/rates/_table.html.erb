@@ -95,7 +95,7 @@
         <td><%= rate.notes %></td>
         <td><%= rate.created_at %></td>
         <td>
-          <% carrier = rate.carrier ? rate.carrier : rate.activity.carrier%>
+          <% carrier = rate.carrier ? rate.carrier : (rate.activity ? rate.activity.carrier : nil) %>
           <span
             data-toggle="tooltip"
             data-placement="right"
@@ -107,6 +107,7 @@
               <b>Ops Email</b>: <%= carrier && (carrier.poc.nil? ? '' : carrier.poc.email) %><br>
               <b>Class</b>: <%= carrier && (carrier.sales_priority) %><br>
               <b>MC Number</b>: <%= carrier && (carrier.mc_number) %><br>
+              <b>Reefers Count</b>: <%= carrier && carrier.reefers %><br>
               <b>Sate/Province</b>: <%= carrier && (carrier.location.nil? ? '' : carrier.location.state) %><br>
               <b>Last Contact Date</b>: <%= carrier && (carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
             ">
@@ -114,7 +115,7 @@
           </span>
         </td>
         <td>
-          <% shipper = rate.shipper ? rate.shipper : rate.activity.shipper %>
+          <% shipper = rate.shipper ? rate.shipper : (rate.activity ? rate.activity.shipper : nil) %>
           <span
             data-toggle="tooltip"
             data-placement="right"
@@ -135,10 +136,10 @@
         <% if with_actions %>
           <td>
             <%= link_to '<i class="far fa-eye"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
-            <% if !rate.activity.carrier.nil? %>
-              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_rate_path(rate, :previous_controller => params[:controller], :client_type => "carrier", :carrier_id => rate.activity.carrier.id), :class => 'btn btn-warning btn-xs' %>
-            <% elsif !rate.activity.shipper.nil? %>
-              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_rate_path(rate, :previous_controller => params[:controller], :client_type => "shipper", :shipper_id => rate.activity.shipper.id), :class => 'btn btn-warning btn-xs' %>
+            <% if carrier %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_rate_path(rate, :previous_controller => params[:controller], :client_type => "carrier", :carrier_id => carrier.id), :class => 'btn btn-warning btn-xs' %>
+            <% elsif shipper %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_rate_path(rate, :previous_controller => params[:controller], :client_type => "shipper", :shipper_id => shipper.id), :class => 'btn btn-warning btn-xs' %>
             <% end %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
           </td>

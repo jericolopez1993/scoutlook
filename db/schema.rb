@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_18_105228) do
+ActiveRecord::Schema.define(version: 2019_01_18_161655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,9 @@ ActiveRecord::Schema.define(version: 2019_01_18_105228) do
     t.string "state", default: ""
     t.string "postal", default: ""
     t.string "country", default: ""
+    t.string "primary_extension_number"
+    t.string "secondary_extension_number"
+    t.text "notes"
   end
 
   create_table "carrier_lanes", force: :cascade do |t|
@@ -354,6 +357,9 @@ ActiveRecord::Schema.define(version: 2019_01_18_105228) do
     t.string "state", default: ""
     t.string "postal", default: ""
     t.string "country", default: ""
+    t.string "primary_extension_number"
+    t.string "secondary_extension_number"
+    t.text "notes"
   end
 
   create_table "shipper_lanes", force: :cascade do |t|

@@ -100,6 +100,7 @@
                   <b>Ops Email</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : activity.carrier.poc.email) %><br>
                   <b>Class</b>: <%= activity.carrier && (activity.carrier.sales_priority) %><br>
                   <b>MC Number</b>: <%= activity.carrier && (activity.carrier.mc_number) %><br>
+                  <b>Reefers Count</b>: <%= activity.carrier && activity.carrier.reefers %><br>
                   <b>Sate/Province</b>: <%= activity.carrier && (activity.carrier.location.nil? ? '' : activity.carrier.location.state) %><br>
                   <b>Last Contact Date</b>: <%= activity.carrier && (activity.carrier.last_contact_date.nil? || activity.carrier.last_contact_date.date_opened.nil? ? "" : activity.carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
                 ">

@@ -28,8 +28,8 @@
         <td><%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %></td>
         <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name + " " + contact.last_name  %>" target="_top"><%= contact.email %>&nbsp;<i class="far fa-envelope"></a></i></td>
         <td><%= contact.same_ho ? (carrier.head_office_location.nil? ? '' : "#{format_address(carrier.head_office_location.address, carrier.head_office_location.city, carrier.head_office_location.state, carrier.head_office_location.country, carrier.head_office_location.postal)}") : ("#{format_address(contact.address, contact.city, contact.state, contact.country, contact.postal)}")%></td>
-        <td><b><%= contact.primary_phone %>&nbsp;<%= (!contact.primary_phone_type.nil? && contact.primary_phone_type != "") ? "(#{contact.primary_phone_type})" : ""%></b></td>
-        <td><%= contact.secondary_phone %>&nbsp;<%= (!contact.secondary_phone_type.nil? && contact.secondary_phone_type != "") ? "(#{contact.secondary_phone_type})" : ""%></td>
+        <td><b><%= contact.primary_phone + ((!contact.primary_extension_number.nil? && contact.primary_extension_number != "") ? (", Ext. " + contact.primary_extension_number) : "") %>&nbsp;<%= (!contact.primary_phone_type.nil? && contact.primary_phone_type != "") ? "(#{contact.primary_phone_type })" : ""%></b></td>
+        <td><%= contact.secondary_phone + ((!contact.secondary_extension_number.nil? && contact.secondary_extension_number != "") ? (", Ext. " + contact.secondary_extension_number) : "") %>&nbsp;<%= (!contact.secondary_phone_type.nil? && contact.secondary_phone_type != "") ? "(#{contact.secondary_phone_type})" : ""%></td>
         <td style="text-align: center;"><%= contact.linkedin_link.nil? || contact.linkedin_link == "" ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
       </tr>
     <% end %>

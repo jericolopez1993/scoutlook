@@ -27,14 +27,20 @@
   <div class="row">
     <label class="col-md-3 col-form-label">Phone Numbers:</label>
     <div class="col-md-9 lbl-padding-t">
-      <b><%= (!shipper_contact.primary_phone.nil? && shipper_contact.primary_phone != "") ? ("P1: " + shipper_contact.primary_phone + " " + shipper_contact.primary_phone_type + "<br/>").html_safe : ""  %></b>
-      <b><%= (!shipper_contact.secondary_phone.nil? && shipper_contact.secondary_phone != "") ? ("P2: " + shipper_contact.secondary_phone + " " + shipper_contact.secondary_phone_type).html_safe : ""  %></b>
+      <b><%= (!shipper_contact.primary_phone.nil? && shipper_contact.primary_phone != "") ? ("P1: " + shipper_contact.primary_phone + ((!shipper_contact.primary_extension_number.nil? && shipper_contact.primary_extension_number != "") ? (", Ext. " + shipper_contact.primary_extension_number) : "") + " " + shipper_contact.primary_phone_type + "<br/>").html_safe : ""  %></b>
+      <b><%= (!shipper_contact.secondary_phone.nil? && shipper_contact.secondary_phone != "") ? ("P2: " + shipper_contact.secondary_phone + ((!shipper_contact.secondary_extension_number.nil? && shipper_contact.secondary_extension_number != "") ? (", Ext. " + shipper_contact.secondary_extension_number) : "") + " " + shipper_contact.secondary_phone_type).html_safe : ""  %></b>
     </div>
   </div>
   <div class="row">
     <label class="col-md-3 col-form-label">Address:</label>
     <div class="col-md-9 lbl-padding-t">
       <%= shipper_contact.same_ho ? (@shipper.head_office_location.nil? ? '' : "#{format_address(@shipper.head_office_location.address, @shipper.head_office_location.city, @shipper.head_office_location.state, @shipper.head_office_location.country, @shipper.head_office_location.postal)}") : (shipper_contact.nil? ? '' : "#{format_address(shipper_contact.address, shipper_contact.city, shipper_contact.state, shipper_contact.country, shipper_contact.postal)}")%>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Notes:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= shipper_contact.notes.nil? ? "" : shipper_contact.notes.html_safe %>
     </div>
   </div>
 <% else %>

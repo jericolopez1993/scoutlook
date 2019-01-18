@@ -89,8 +89,11 @@
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :primary_phone, 'Primary Phone:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-3 col-sm-2">
           <%= form.text_field :primary_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
+        </div>
+        <div class="col-md-3 col-sm-2">
+          <%= form.text_field :primary_extension_number, class: 'form-control', placeholder: "Extension" %>
         </div>
         <div class="col-md-3 col-sm-2">
           <%= form.select :primary_phone_type, options_for_select(['Work', 'Cell'], carrier_contact.primary_phone_type),{:include_blank => true}, class: 'form-control' %>
@@ -98,11 +101,20 @@
       </div>
       <div class="form-group row m-b-15">
         <%= form.label :secondary_phone, 'Secondary Phone:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-3 col-sm-2">
           <%= form.text_field :secondary_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
         </div>
         <div class="col-md-3 col-sm-2">
+          <%= form.text_field :secondary_extension_number, class: 'form-control', placeholder: "Extension" %>
+        </div>
+        <div class="col-md-3 col-sm-2">
           <%= form.select :secondary_phone_type, options_for_select(['Work', 'Cell'], carrier_contact.secondary_phone_type),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15">
+        <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.text_area(:notes, cols: 20, rows: 5, class: 'tinymce') %>
         </div>
       </div>
 
@@ -134,11 +146,20 @@
     <% end %>
   </div>
 </div>
+<%= tinymce %>
 <!-- end panel -->
 <script language="javascript">
 
   $(document).ready(function() {
       sameHeadOffice(<%= carrier_contact.same_ho ? 'true' : 'false' %>);
+      hideExtensionNumber("carrier_contact", "primary")
+      hideExtensionNumber("carrier_contact", "secondary")
+      $("#carrier_contact_primary_phone_type").change(function() {
+        hideExtensionNumber("carrier_contact", "primary")
+      });
+      $("#carrier_contact_secondary_phone_type").change(function() {
+        hideExtensionNumber("carrier_contact", "secondary")
+      });
   });
   <% if !carrier_contact.country.nil? && carrier_contact.country != ""  %>
     $("#country").val('<%= carrier_contact.country %>').change();
