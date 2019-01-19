@@ -253,7 +253,23 @@ module ApplicationHelper
     else
       "<span class='text-dark'>#{sales_priority}</span>"
     end
-
+  end
+  def interval_to_text(reminder_interval)
+    if reminder_interval == 7
+      "1 wk"
+    elsif reminder_interval == 14
+      "2 wk"
+    elsif reminder_interval == 30
+      "1M"
+    elsif reminder_interval == 90
+      "3M"
+    elsif reminder_interval == 180
+      "6M"
+    elsif reminder_interval == 360
+      "12M"
+    else
+      ""
+    end
   end
 
 end

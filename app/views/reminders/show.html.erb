@@ -1,39 +1,36 @@
-<p id="notice"><%= notice %></p>
+<div class="header-scout">
+  <h1 class="pull-left">
+    <% if @reminder.carrier %>
+      <%= render 'layouts/static/header', header_title: "#{@reminder.carrier.nil? ? '' : generate_alphanumeric_id(@reminder.carrier.company_name, @reminder.carrier.id)}", sub_header_title: "#{@reminder.carrier.nil? ? '' : link_to(@reminder.carrier.company_name,  @reminder.carrier)}"  %>
+    <% elsif @reminder.shipper %>
+      <%= render 'layouts/static/header', header_title: "#{@reminder.shipper.nil? ? '' : generate_alphanumeric_id(@reminder.shipper.company_name, @reminder.shipper.id)}", sub_header_title: "#{@reminder.shipper.nil? ? '' : link_to(@reminder.shipper.company_name,  @reminder.shipper)}"  %>
+    <% elsif @reminder.activity %>
+      <%= render 'layouts/static/header', header_title: "#{@reminder.activity.nil? ? '' : generate_alphanumeric_id(@reminder.activity.campaign_name, @reminder.activity.id)}", sub_header_title: "#{@reminder.activity.nil? ? '' : link_to(@reminder.activity.campaign_name,  @reminder.activity)}"  %>
+    <% else %>
+      <%= render 'layouts/static/header', header_title: "Reminder", sub_header_title: ""  %>
+    <% end %>
+  </h1>
+  <span class="pull-right">
+    <% if current_user.has_role?(:admin) %>
+      <%= link_to 'Edit', edit_reminder_path(@reminder), :class => 'btn btn-warning btn-xs' %>
+      <% if @reminder.carrier %>
+        <%= link_to 'Back to Carrier', @reminder.carrier, :class => 'btn btn-info btn-xs' %>
+      <% elsif @reminder.shipper %>
+        <%= link_to 'Back to Shipper', @reminder.shipper, :class => 'btn btn-info btn-xs' %>
+      <% elsif @reminder.activity %>
+        <%= link_to 'Back to Activity', @reminder.activity, :class => 'btn btn-info btn-xs' %>
+      <% else %>
+        <%= link_to 'Back', reminders_path, :class => 'btn btn-info btn-xs' %>
+      <% end %>
+    <% end %>
+  </span>
+</div>
 
-<p>
-  <strong>Carrier:</strong>
-  <%= @reminder.carrier_id %>
-</p>
-
-<p>
-  <strong>Shipper:</strong>
-  <%= @reminder.shipper_id %>
-</p>
-
-<p>
-  <strong>Activity:</strong>
-  <%= @reminder.activity_id %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @reminder.user_id %>
-</p>
-
-<p>
-  <strong>Reminder date:</strong>
-  <%= @reminder.reminder_date %>
-</p>
-
-<p>
-  <strong>Reminder interval:</strong>
-  <%= @reminder.reminder_interval %>
-</p>
-
-<p>
-  <strong>Recurring:</strong>
-  <%= @reminder.recurring %>
-</p>
-
-<%= link_to 'Edit', edit_reminder_path(@reminder) %> |
-<%= link_to 'Back', reminders_path %>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title">Information</h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'reminders/show_fields', reminder: @reminder %>
+  </div>
+</div>

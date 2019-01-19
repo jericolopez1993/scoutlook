@@ -1,0 +1,61 @@
+<% if reminder %>
+  <% if reminder.carrier %>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Carrier:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= reminder.carrier.nil? ? "" : (link_to "#{reminder.carrier.company_name}", reminder.carrier) %>
+      </div>
+    </div>
+  <% end %>
+  <% if reminder.shipper %>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Shipper:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= reminder.shipper.nil? ? "" : (link_to "#{reminder.shipper.company_name}", reminder.shipper) %>
+      </div>
+    </div>
+  <% end %>
+  <% if reminder.activity %>
+    <div class="row">
+      <label class="col-md-2 col-form-label">Activity:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= link_to(reminder.activity.campaign_name.blank? ? "(no campaign name)" : reminder.activity.campaign_name, reminder.activity)  %>
+      </div>
+    </div>
+  <% end %>
+  <% if reminder.user %>
+    <div class="row">
+      <label class="col-md-2 col-form-label">User:</label>
+      <div class="col-md-9 lbl-padding-t">
+        <%= reminder.user.nil? ? "" : (link_to "#{reminder.user.full_name}", reminder.user) %>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <label class="col-md-2 col-form-label">Date:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= reminder.reminder_date %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-2 col-form-label">Interval:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= interval_to_text(reminder.reminder_interval) %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-2 col-form-label">Recurring?</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= reminder.recurring ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-2 col-form-label">Date Created:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= reminder.created_at %>
+    </div>
+  </div>
+
+<% else %>
+  <em>No Available</em>
+<% end %>

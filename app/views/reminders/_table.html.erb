@@ -84,7 +84,7 @@
         <td><%= reminder.activity && link_to(reminder.activity.campaign_name.blank? ? "(no name)" : reminder.activity.campaign_name, reminder.activity) %></td>
         <td><%= reminder.user && link_to(reminder.user.full_name.blank? ? "(no name)" : reminder.user.full_name, reminder.user) %></td>
         <td><%= reminder.reminder_date %></td>
-        <td><%= reminder.reminder_interval %></td>
+        <td><%= interval_to_text(reminder.reminder_interval) %></td>
         <td><%= reminder.recurring ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
         <td><%= reminder.created_at %></td>
 
