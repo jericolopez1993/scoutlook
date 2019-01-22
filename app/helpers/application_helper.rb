@@ -272,4 +272,24 @@ module ApplicationHelper
     end
   end
 
+  def reminder_to_sentence(reminder)
+    on_sentence = ""
+
+    if reminder.carrier
+      on_sentence = on_sentence + reminder.carrier.display_name
+    elsif reminder.shipper
+      on_sentence = on_sentence + reminder.shipper.display_name
+    elsif reminder.activity
+      on_sentence = on_sentence + reminder.activity.display_name
+    else
+      on_sentence = on_sentence + reminder.display_name
+    end
+    if reminder.carrier || reminder.shipper || reminder.activity
+      on_sentence = on_sentence + " has a #{reminder.display_name}."
+    else
+      on_sentence = "There is a " + on_sentence + "."
+    end
+    on_sentence
+  end
+
 end
