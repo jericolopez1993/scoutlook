@@ -34,10 +34,10 @@ class RatesController < ApplicationController
   def edit
     if @previous_controller == "carriers" || @client_type == "carrier"
       @activities = Activity.where(:carrier_id => params[:carrier_id])
-      @rate_carrier_id = @rate.activity.carrier_id
+      @rate_carrier_id = @rate.carrier_id
     elsif @previous_controller == "shippers" || @client_type == "shipper"
       @activities = Activity.where(:shipper_id => params[:shipper_id])
-      @rate_shipper_id = @rate.activity.shipper_id
+      @rate_shipper_id = @rate.shipper_id
     end
     authorize @rate
   end
@@ -99,7 +99,17 @@ class RatesController < ApplicationController
   def destroy
     @rate.destroy
     respond_to do |format|
-      format.html { redirect_to activity_path(:id => @rate.activity_id), notice: 'Rate was successfully removed.' }
+      if @previous_controller != 'rates'
+        if @rate.carrier
+          format.html { redirect_to @rate.carrier, notice: 'Rate was successfully updated.' }
+        elsif @rate.shipper
+          format.html { redirect_to @rate.shipper, notice: 'Rate was successfully updated.' }
+        else
+          format.html { redirect_to activity_path(:id => @rate.activity_id), notice: 'Rate was successfully removed.' }
+        end
+      else
+        format.html { redirect_to rates_path(), notice: 'Rate was successfully removed.' }
+      end
       format.json { head :no_content }
     end
   end

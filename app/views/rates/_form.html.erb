@@ -6,11 +6,19 @@
 }
 </style>
 <!-- begin page-header -->
-<div class="<% if params[:action] != 'new' %><% if @rate.activity.carrier %> header-scout <% elsif @rate.activity.shipper  %> header-darkblue <% end %><% else %><% end %>">
-  <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate " %>
-  </h1>
-</div>
+<% if @rate.activity %>
+  <div class="<% if params[:action] != 'new' %><% if @rate.activity.carrier %> header-scout <% elsif @rate.activity.shipper  %> header-darkblue <% end %><% else %><% end %>">
+    <h1 class="pull-left">
+      <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate " %>
+    </h1>
+  </div>
+<% else %>
+  <div class="<% if @rate.carrier %> header-scout <% elsif @rate.shipper  %> header-darkblue <% else %> header-emerald <% end %>">
+    <h1 class="pull-left">
+      <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate " %>
+    </h1>
+  </div>
+<% end %>
 <!-- end page-header -->
 
 <!-- begin panel -->
@@ -19,7 +27,11 @@
     <div class="panel-heading">
       <div class="panel-heading-btn">
       </div>
-      <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(rate.activity.activity_type, rate.id) + " - #{rate.activity.activity_type}") : "" %></h4>
+      <% if @rate.activity %>
+        <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(rate.activity.activity_type, rate.id) + " - #{rate.activity.activity_type}") : "" %></h4>
+      <% else %>
+        <h4 class="panel-title">Information</h4>
+      <% end %>
     </div>
     <div class="panel-body">
       <% if rate.errors.any? %>
