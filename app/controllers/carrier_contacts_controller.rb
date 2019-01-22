@@ -65,9 +65,13 @@ class CarrierContactsController < ApplicationController
         carrier = Carrier.find(@carrier_contact.carrier_id)
         if params[:pdm].present?
           carrier.update_attributes(:pdm_id => @carrier_contact.id)
+        else
+          carrier.update_attributes(:pdm_id => nil)
         end
         if params[:poc].present?
           carrier.update_attributes(:poc_id => @carrier_contact.id)
+        else
+          carrier.update_attributes(:poc_id => nil)
         end
         format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier contact was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_contact }
@@ -116,9 +120,13 @@ class CarrierContactsController < ApplicationController
         carrier = Carrier.find(@carrier_contact.carrier_id)
         if params[:pdm].present?
           carrier.update_attributes(:pdm_id => @carrier_contact.id)
+        else
+          carrier.update_attributes(:pdm_id => nil)
         end
         if params[:poc].present?
           carrier.update_attributes(:poc_id => @carrier_contact.id)
+        else
+          carrier.update_attributes(:poc_id => nil)
         end
         format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier_contact }

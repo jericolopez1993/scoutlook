@@ -66,9 +66,13 @@ class ShipperContactsController < ApplicationController
 
         if params[:pdm].present?
           shipper.update_attributes(:pdm_id => @shipper_contact.id)
+        else
+          shipper.update_attributes(:pdm_id => nil)
         end
         if params[:poc].present?
           shipper.update_attributes(:poc_id => @shipper_contact.id)
+        else
+          shipper.update_attributes(:poc_id => nil)
         end
         format.html { redirect_to shipper_path(:id => shipper.id), notice: 'Shipper contact was successfully created.' }
         format.json { render :show, status: :created, location: @shipper_contact }
@@ -117,9 +121,13 @@ class ShipperContactsController < ApplicationController
         shipper = Shipper.find(@shipper_contact.shipper_id)
         if params[:pdm].present?
           shipper.update_attributes(:pdm_id => @shipper_contact.id)
+        else
+          shipper.update_attributes(:pdm_id => nil)
         end
         if params[:poc].present?
           shipper.update_attributes(:poc_id => @shipper_contact.id)
+        else
+          shipper.update_attributes(:poc_id => nil)
         end
 
         format.html { redirect_to shipper_path(:id => shipper.id), notice: 'Shipper contact was successfully updated.' }
