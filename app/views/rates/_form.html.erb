@@ -91,7 +91,11 @@
         </div>
       </div>
       <h4 class="text-inverse">Details</h4>
-      <% if @previous_controller == "activities" %>
+      <% if @previous_controller == "carriers" %>
+        <%= form.hidden_field :carrier_id %>
+      <% elsif @previous_controller == "shippers" %>
+        <%= form.hidden_field :shipper_id %>
+      <% elsif @previous_controller == "activities" %>
         <%= form.hidden_field :activity_id %>
       <% elsif @previous_controller == "rates" %>
         <% if @client_type == "carrier"%>

@@ -19,13 +19,18 @@ class RatesController < ApplicationController
     @rate = Rate.new
     if params[:activity_id].present?
       @rate.activity_id = params[:activity_id]
+    elsif params[:carrier_id].present?
+      @rate.carrier_id = params[:carrier_id]
+    elsif params[:shipper_id].present?
+      @rate.shipper_id = params[:shipper_id]
     end
+
     if @previous_controller == "carriers"
       @activities = Activity.where(:carrier_id => params[:carrier_id])
-      @rate_carrier_id = ""
+      @rate_carrier_id = @rate.carrier_id
     elsif @previous_controller == "shippers"
       @activities = Activity.where(:shipper_id => params[:shipper_id])
-      @rate_carrier_id = ""
+      @rate_carrier_id = @rate.shipper_id
     end
     authorize @rate
   end
