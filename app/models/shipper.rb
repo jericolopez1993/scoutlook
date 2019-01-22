@@ -71,12 +71,18 @@ class Shipper < ApplicationRecord
 
   def rates
     activity_ids = self.activities.distinct(:id).pluck(:id).map(&:inspect).join(',')
-    if activity_ids != ''
-       Rate.where("activity_id IN (#{activity_ids})")
-     else
-       []
+    rates_shipper = Rate.where(shipper_id: self.id)
+    if activity_ids != '' && rates_shipper.present?
+      Rate.where("activity_id IN (#{activity_ids})").or(Rate.where(shipper_id: self.id))
+    elsif activity_ids != '' && rates_shipper.blank?
+      Rate.where("activity_id IN (#{activity_ids})")
+    elsif activity_ids == '' && rates_shipper.present?
+      Rate.where(shipper_id: self.id)
+    else
+      []
     end
   end
+
   private
     def remove_children
       ShipperContact.where(:shipper_id => self.id).destroy_all

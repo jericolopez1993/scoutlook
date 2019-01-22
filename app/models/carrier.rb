@@ -52,10 +52,15 @@ class Carrier < ApplicationRecord
 
   def rates
     activity_ids = self.activities.distinct(:id).pluck(:id).map(&:inspect).join(',')
-    if activity_ids != ''
-       Rate.where("activity_id IN (#{activity_ids})")
-     else
-       []
+    rates_carrier = Rate.where(carrier_id: self.id)
+    if activity_ids != '' && rates_carrier.present?
+      Rate.where("activity_id IN (#{activity_ids})").or(Rate.where(carrier_id: self.id))
+    elsif activity_ids != '' && rates_carrier.blank?
+      Rate.where("activity_id IN (#{activity_ids})")
+    elsif activity_ids == '' && rates_carrier.present?
+      Rate.where(carrier_id: self.id)
+    else
+      []
     end
   end
 
