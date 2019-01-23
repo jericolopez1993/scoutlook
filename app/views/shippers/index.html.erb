@@ -30,6 +30,8 @@
             <th>DM Name</th>
             <th>DM Phone</th>
             <th>DM Email</th>
+            <th>Lane 1</th>
+            <th>Lane 2</th>
             <th>Approved</th>
             <th>RO</th>
             <th>Class</th>
@@ -40,8 +42,6 @@
             <th>City</th>
             <th>ST/PV</th>
             <th>LPM</th>
-            <th>Lane 1</th>
-            <th>Lane 2</th>
             <th width="250px">Commodities</th>
           </tr>
         </thead>
@@ -51,6 +51,8 @@
             <th>DM Name</th>
             <th>DM Phone</th>
             <th>DM Email</th>
+            <th>Lane 1</th>
+            <th>Lane 2</th>
             <th>Approved</th>
             <th>RO</th>
             <th>Class</th>
@@ -61,8 +63,6 @@
             <th>City</th>
             <th>ST/PV</th>
             <th>LPM</th>
-            <th>Lane 1</th>
-            <th>Lane 2</th>
             <th width="250px">Commodities</th>
           </tr>
         </tfoot>
@@ -91,16 +91,6 @@
               <td nowrap><%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %></td>
               <td nowrap><b><%= shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + ((!shipper.pdm.primary_extension_number.nil? && shipper.pdm.primary_extension_number != "") ? (", Ext. " + shipper.pdm.primary_extension_number) : "") + " (#{shipper.pdm.primary_phone_type})") : "") %></b></td>
               <td nowrap><% if !shipper.pdm.nil?  %><a href="mailto:<%= shipper.pdm.email %>?Subject=Hello%20<%= shipper.pdm.first_name.nil? ? '' :  shipper.pdm.first_name + " " + shipper.pdm.last_name  %>" target="_top"><%= shipper.pdm.email %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
-              <td class="text-center"><%= shipper.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td nowrap class="text-center"><%= shipper.relationship_owner_user.nil? ? '' : "#{link_to("#{shipper.relationship_owner_user.first_name[0]}#{shipper.relationship_owner_user.last_name[0]}", shipper.relationship_owner_user)}".html_safe %></td>
-              <td class="text-center"><%= shade_sales_priority(shipper.sales_priority).html_safe %></td>
-              <td class="text-center"><%= shipper.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td nowrap><%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>
-              <td nowrap><%= shipper.load_last_month %></td>
-              <td nowrap><%= shipper.load_last_6_month %></td>
-              <td nowrap><%= shipper.location.nil? ? '' : shipper.location.city %></td>
-              <td nowrap><%= shipper.location.nil? ? '' : shipper.location.state %></td>
-              <td nowrap><%= shipper.loads_per_month %></td>
               <td nowrap>
                 <% shipper.lane_1.each do |lane| %>
                   <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
@@ -193,6 +183,17 @@
                   <br>
                 <% end %>
               </td>
+              <td class="text-center"><%= shipper.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
+              <td nowrap class="text-center"><%= shipper.relationship_owner_user.nil? ? '' : "#{link_to("#{shipper.relationship_owner_user.first_name[0]}#{shipper.relationship_owner_user.last_name[0]}", shipper.relationship_owner_user)}".html_safe %></td>
+              <td class="text-center"><%= shade_sales_priority(shipper.sales_priority).html_safe %></td>
+              <td class="text-center"><%= shipper.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
+              <td nowrap><%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>
+              <td nowrap><%= shipper.load_last_month %></td>
+              <td nowrap><%= shipper.load_last_6_month %></td>
+              <td nowrap><%= shipper.location.nil? ? '' : shipper.location.city %></td>
+              <td nowrap><%= shipper.location.nil? ? '' : shipper.location.state %></td>
+              <td nowrap><%= shipper.loads_per_month %></td>
+
               <td>
                 <% shipper.commodities_to_array.each do |cr| %>
                   <span class="badge badge-inverse"><%= cr %></span>

@@ -30,6 +30,10 @@
             <th>Ops Name</th>
             <th>Ops Phone</th>
             <th>Ops Email</th>
+            <th>MC</th>
+            <th>Reef</th>
+            <th>Lane 1</th>
+            <th>Lane 2</th>
             <th>Approved</th>
             <th>RO</th>
             <th>Class</th>
@@ -37,11 +41,7 @@
             <th>LstDateCon</th>
             <th>6M</th>
             <th>1M</th>
-            <th>MC</th>
             <th>ST/PV</th>
-            <th>Reef</th>
-            <th>Lane 1</th>
-            <th>Lane 2</th>
           </tr>
         </thead>
         <tfoot>
@@ -50,6 +50,10 @@
             <th>Ops Name</th>
             <th>Ops Phone</th>
             <th>Ops Email</th>
+            <th>MC</th>
+            <th>Reef</th>
+            <th>Lane 1</th>
+            <th>Lane 2</th>
             <th>Approved</th>
             <th>RO</th>
             <th>Class</th>
@@ -57,11 +61,7 @@
             <th>LstDateCon</th>
             <th>6M</th>
             <th>1M</th>
-            <th>MC</th>
             <th>ST/PV</th>
-            <th>Reef</th>
-            <th>Lane 1</th>
-            <th>Lane 2</th>
           </tr>
         </tfoot>
         <tbody class="spacer">
@@ -95,15 +95,7 @@
                   </a>
                 <% end %>
               </td>
-              <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= carrier.relationship_owner_user.nil? ? '' : "#{link_to("#{carrier.relationship_owner_user.first_name[0]}#{carrier.relationship_owner_user.last_name[0]}", carrier.relationship_owner_user)}".html_safe %></td>
-              <td class="text-center"><%= shade_sales_priority(carrier.sales_priority).html_safe %></td>
-              <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td><%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>
-              <td><%= carrier.load_last_6_month %></td>
-              <td><%= carrier.load_last_month %></td>
               <td><%= carrier.mc_number %></td>
-              <td><%= carrier.location.nil? ? '' : carrier.location.state %></td>
               <td class="text-center"><%= carrier.reefers %></td>
               <td>
                 <% carrier.lane_1.each do |lane| %>
@@ -197,6 +189,15 @@
                   <br>
                 <% end %>
               </td>
+              <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
+              <td class="text-center"><%= carrier.relationship_owner_user.nil? ? '' : "#{link_to("#{carrier.relationship_owner_user.first_name[0]}#{carrier.relationship_owner_user.last_name[0]}", carrier.relationship_owner_user)}".html_safe %></td>
+              <td class="text-center"><%= shade_sales_priority(carrier.sales_priority).html_safe %></td>
+              <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
+              <td><%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>
+              <td><%= carrier.load_last_6_month %></td>
+              <td><%= carrier.load_last_month %></td>
+              <td><%= carrier.location.nil? ? '' : carrier.location.state %></td>
+
             </tr>
           <% end %>
         </tbody>
