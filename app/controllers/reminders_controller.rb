@@ -1,5 +1,6 @@
 class RemindersController < ApplicationController
   before_action :set_reminder, only: [:show, :edit, :update, :destroy]
+  before_action :set_previous_controller, only: [:show, :edit, :update, :destroy, :new]
 
   # GET /reminders
   # GET /reminders.json
@@ -65,6 +66,17 @@ class RemindersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_reminder
       @reminder = Reminder.find(params[:id])
+    end
+
+    def set_previous_controller
+      if params[:previous_controller].present?
+        @previous_controller = params[:previous_controller]
+      else
+        @previous_controller = 'reminders'
+      end
+      if @previous_controller == "reminders"
+        @client_type = params[:client_type]
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -20,6 +20,25 @@ class Activity < ApplicationRecord
     end
   end
 
+  def display_select_name
+    display_name = ""
+    if self.user
+      display_name = self.user.full_name
+    end
+    if self.user && (self.carrier || self.shipper)
+       display_name = display_name + " @ "
+    end
+    if self.carrier
+      display_name = display_name + (!self.carrier.company_name.nil? ? self.carrier.company_name : "(no name)")
+    elsif self.shipper
+      display_name = display_name + (!self.shipper.company_name.nil? ? self.shipper.company_name : "(no name)")
+    end
+    if !display_name.blank?
+      display_name = display_name + " - "
+    end
+    display_name + "#{self.activity_type} (#{self.status ? 'Open' : 'Closed'})"
+  end
+
   def set_open_and_close_date
     if self.status
       self.date_opened = Time.now.getutc

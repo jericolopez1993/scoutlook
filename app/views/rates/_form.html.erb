@@ -123,7 +123,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :activity_id, 'Activity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
-            <%= collection_select :rate, :activity_id, @activities, :id, :campaign_name, {prompt: true}, {class: 'form-control'} %>
+            <%= collection_select :rate, :activity_id, @activities, :id, :display_select_name, {prompt: true}, {class: 'form-control'} %>
           </div>
         </div>
       <% end %>

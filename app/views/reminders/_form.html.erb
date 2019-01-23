@@ -20,24 +20,29 @@
           </ul>
         </div>
       <% end %>
-      <div class="form-group row m-b-15">
-        <%= form.label :carrier_id, 'Carrier:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-        <div class="col-md-9 col-sm-8">
-          <%= collection_select :rate, :carrier_id, Carrier.all.order("company_name ASC"), :id, :company_name, {prompt: true, :selected => reminder.carrier_id}, {class: 'form-control'} %>
+      <% if @previous_controller == "carriers" || @client_type == "carrier" %>
+        <div class="form-group row m-b-15">
+          <%= form.label :carrier_id, 'Carrier:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= collection_select :rate, :carrier_id, Carrier.all.order("company_name ASC"), :id, :company_name, {prompt: true, :selected => reminder.carrier_id}, {class: 'form-control'} %>
+          </div>
         </div>
-      </div>
-      <div class="form-group row m-b-15">
-        <%= form.label :shipper_id, 'Shipper:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-        <div class="col-md-9 col-sm-8">
-          <%= collection_select :rate, :shipper_id, Shipper.all.order("company_name ASC"), :id, :company_name, {prompt: true, :selected => reminder.shipper_id}, {class: 'form-control'} %>
+      <% elsif @previous_controller == "shippers" || @client_type == "shipper"  %>
+        <div class="form-group row m-b-15">
+          <%= form.label :shipper_id, 'Shipper:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= collection_select :rate, :shipper_id, Shipper.all.order("company_name ASC"), :id, :company_name, {prompt: true, :selected => reminder.shipper_id}, {class: 'form-control'} %>
+          </div>
         </div>
-      </div>
-      <div class="form-group row m-b-15">
-        <%= form.label :activity_id, 'Activity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-        <div class="col-md-9 col-sm-8">
-          <%= collection_select :rate, :activity_id, Activity.all.order("campaign_name ASC"), :id, :campaign_name, {prompt: true, :selected => reminder.shipper_id}, {class: 'form-control'} %>
+      <% elsif @previous_controller == "activities" || @client_type == "activity"  %>
+        <div class="form-group row m-b-15">
+          <%= form.label :activity_id, 'Activity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= collection_select :rate, :activity_id, Activity.all.order("campaign_name ASC"), :id, :display_select_name, {prompt: true, :selected => reminder.shipper_id}, {class: 'form-control'} %>
+          </div>
         </div>
-      </div>
+      <% end %>
+
       <div class="form-group row m-b-15">
         <%= form.label :reminder_date, 'Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
@@ -47,11 +52,11 @@
       <div class="form-group row m-b-15">
         <%= form.label :reminder_interval, 'Interval:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :reminder_interval, options_for_select([['1w', 7], ['2w', 14], ['1M', 30], ['3M', 90], ['6M', 180], ['12M', 360]], reminder.reminder_interval),{}, class: 'form-control', id: "reminder_interval" %>
+          <%= form.select :reminder_interval, options_for_select([['1w', 7], ['2w', 14], ['1M', 30], ['3M', 90], ['6M', 180], ['12M', 360]], reminder.reminder_interval),{:include_blank => true}, class: 'form-control', id: "reminder_interval" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-sm-4 col-form-label" style="font-size: 16px;">Recurring?</label>
+        <label class="text-right col-md-2 col-sm-4 col-form-label">is Recurring?</label>
         <div class="col-md-9 col-sm-8">
             <%= form.check_box :recurring, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: reminder.recurring %>
         </div>
