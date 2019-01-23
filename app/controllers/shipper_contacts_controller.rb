@@ -62,19 +62,8 @@ class ShipperContactsController < ApplicationController
             @user.add_role :contact
           end
         end
-        shipper = Shipper.find(@shipper_contact.shipper_id)
-
-        if params[:pdm].present?
-          shipper.update_attributes(:pdm_id => @shipper_contact.id)
-        else
-          shipper.update_attributes(:pdm_id => nil)
-        end
-        if params[:poc].present?
-          shipper.update_attributes(:poc_id => @shipper_contact.id)
-        else
-          shipper.update_attributes(:poc_id => nil)
-        end
-        format.html { redirect_to shipper_path(:id => shipper.id), notice: 'Shipper contact was successfully created.' }
+        check_for_pdm_poc
+        format.html { redirect_to shipper_path(:id => @shipper_contact.shipper_id), notice: 'Shipper contact was successfully created.' }
         format.json { render :show, status: :created, location: @shipper_contact }
       else
         format.html { render :new }
@@ -118,19 +107,8 @@ class ShipperContactsController < ApplicationController
             @shipper_contact.user.update(user_params)
           end
         end
-        shipper = Shipper.find(@shipper_contact.shipper_id)
-        if params[:pdm].present?
-          shipper.update_attributes(:pdm_id => @shipper_contact.id)
-        else
-          shipper.update_attributes(:pdm_id => nil)
-        end
-        if params[:poc].present?
-          shipper.update_attributes(:poc_id => @shipper_contact.id)
-        else
-          shipper.update_attributes(:poc_id => nil)
-        end
-
-        format.html { redirect_to shipper_path(:id => shipper.id), notice: 'Shipper contact was successfully updated.' }
+        check_for_pdm_poc
+        format.html { redirect_to shipper_path(:id => @shipper_contact.shipper_id), notice: 'Shipper contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @shipper_contact }
       else
         format.html { render :edit }
@@ -156,6 +134,23 @@ class ShipperContactsController < ApplicationController
       authorize @shipper_contact
     end
 
+    def check_for_pdm_poc
+      shipper = @shipper_contact.shipper
+      if params[:pdm].present?
+        shipper.update_attributes(:pdm_id => @shipper_contact.id)
+      else
+        if shipper.pdm_id == @shipper_contact.id
+          shipper.update_attributes(:pdm_id => nil)
+        end
+      end
+      if params[:poc].present?
+        shipper.update_attributes(:poc_id => @shipper_contact.id)
+      else
+        if shipper.poc_id == @shipper_contact.id
+          shipper.update_attributes(:poc_id => nil)
+        end
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipper_contact_params
       params.require(:shipper_contact).permit(:title, :first_name, :last_name, :email, :location_id, :shipper_id, :linkedin_link, :adm, :same_ho, :contact_type, :primary_phone, :primary_phone_type, :secondary_phone, :secondary_phone_type, :address, :city, :postal, :country, :state, :primary_extension_number, :secondary_extension_number, :notes)

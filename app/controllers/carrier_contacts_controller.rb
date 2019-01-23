@@ -62,18 +62,8 @@ class CarrierContactsController < ApplicationController
             @user.add_role :contact
           end
         end
-        carrier = Carrier.find(@carrier_contact.carrier_id)
-        if params[:pdm].present?
-          carrier.update_attributes(:pdm_id => @carrier_contact.id)
-        else
-          carrier.update_attributes(:pdm_id => nil)
-        end
-        if params[:poc].present?
-          carrier.update_attributes(:poc_id => @carrier_contact.id)
-        else
-          carrier.update_attributes(:poc_id => nil)
-        end
-        format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier contact was successfully created.' }
+        check_for_pdm_poc
+        format.html { redirect_to carrier_path(:id => @carrier_contact.carrier_id), notice: 'Carrier contact was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_contact }
       else
         format.html { render :new }
@@ -117,18 +107,8 @@ class CarrierContactsController < ApplicationController
             @carrier_contact.user.update(user_params)
           end
         end
-        carrier = Carrier.find(@carrier_contact.carrier_id)
-        if params[:pdm].present?
-          carrier.update_attributes(:pdm_id => @carrier_contact.id)
-        else
-          carrier.update_attributes(:pdm_id => nil)
-        end
-        if params[:poc].present?
-          carrier.update_attributes(:poc_id => @carrier_contact.id)
-        else
-          carrier.update_attributes(:poc_id => nil)
-        end
-        format.html { redirect_to carrier_path(:id => carrier.id), notice: 'Carrier contact was successfully updated.' }
+        check_for_pdm_poc
+        format.html { redirect_to carrier_path(:id => @carrier_contact.carrier_id), notice: 'Carrier contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier_contact }
       else
         format.html { render :edit }
@@ -152,6 +132,24 @@ class CarrierContactsController < ApplicationController
     def set_carrier_contact
       @carrier_contact = CarrierContact.find(params[:id])
       authorize @carrier_contact
+    end
+
+    def check_for_pdm_poc
+      carrier = @carrier_contact.carrier
+      if params[:pdm].present?
+        carrier.update_attributes(:pdm_id => @carrier_contact.id)
+      else
+        if carrier.pdm_id == @carrier_contact.id
+          carrier.update_attributes(:pdm_id => nil)
+        end
+      end
+      if params[:poc].present?
+        carrier.update_attributes(:poc_id => @carrier_contact.id)
+      else
+        if carrier.poc_id == @carrier_contact.id
+          carrier.update_attributes(:poc_id => nil)
+        end
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
