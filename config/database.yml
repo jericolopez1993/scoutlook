@@ -86,10 +86,7 @@ test:
 #
 production:
   <<: *default
-  database: scoutcrm
-  username: scoutcrm
-  password: Vb8eC4MqhoUjBa
-  host: scoutcrm.cvdfnojggqav.ca-central-1.rds.amazonaws.com
+  database: scoutv1_development
 
 staging:
   <<: *default

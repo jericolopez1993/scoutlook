@@ -150,7 +150,6 @@ $(document).ready(function() {
   });
 
 	$('.datepicker-autoClose').datepicker({
-		todayHighlight: true,
 		autoclose: true,
     orientation: 'auto bottom'
 	});

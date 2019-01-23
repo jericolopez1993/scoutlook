@@ -40,7 +40,7 @@
             <% reminders.limit(10).each do |reminder|%>
               <li class="media">
                 <div class="media-body notification-padding">
-                  <h6 class="media-heading"><%= reminder_to_sentence(reminder) %></h6>
+                  <h6 class="media-heading"><%= reminder_to_sentence(reminder).html_safe %></h6>
                   <div class="text-muted f-s-11"></div>
                 </div>
               </li>
