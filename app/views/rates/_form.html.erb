@@ -7,13 +7,13 @@
 </style>
 <!-- begin page-header -->
 <% if @rate.activity %>
-  <div class="<% if params[:action] != 'new' %><% if @rate.activity.carrier %> header-scout <% elsif @rate.activity.shipper  %> header-darkblue <% end %><% else %><% end %>">
+  <div class="<% if params[:action] != 'new' %><% if @rate.activity.carrier %> header-scout <% elsif @rate.activity.shipper  %> header-darkblue <% end %><% else %> header-yelloworange <% end %>">
     <h1 class="pull-left">
       <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate " %>
     </h1>
   </div>
 <% else %>
-  <div class="<% if @client_type == 'carrier' %> header-scout <% elsif @client_type == 'shipper'  %> header-darkblue <% else %> header-emerald <% end %>">
+  <div class="<% if @client_type == 'carrier' || @previous_controller == "carriers" %> header-scout <% elsif @client_type == 'shipper' || @previous_controller == "shippers"  %> header-darkblue <% else %> header-emerald <% end %>">
     <h1 class="pull-left">
       <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Rate' : "Edit Rate " %>
     </h1>

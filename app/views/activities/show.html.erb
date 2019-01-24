@@ -9,12 +9,14 @@ label {
 }
 </style>
 <!-- begin page-header -->
-<div class="<% if @activity.carrier %> header-scout <% elsif @activity.shipper %> header-darkblue <% end %>">
+<div class="<% if @activity.carrier %> header-scout <% elsif @activity.shipper %> header-darkblue <% else %> header-yelloworange <% end %>">
   <h1 class="pull-left">
     <% if @activity.carrier %>
       <%= render 'layouts/static/header', header_title: "#{@activity.carrier.nil? ? '' : generate_alphanumeric_id(@activity.carrier.company_name, @activity.carrier.id)}", sub_header_title: "#{@activity.carrier.nil? ? '' : link_to(@activity.carrier.company_name,  @activity.carrier)}"  %>
     <% elsif @activity.shipper %>
       <%= render 'layouts/static/header', header_title: "#{@activity.shipper.nil? ? '' : generate_alphanumeric_id(@activity.shipper.company_name, @activity.shipper.id)}", sub_header_title: "#{@activity.shipper.nil? ? '' : link_to(@activity.shipper.company_name,  @activity.shipper)}"  %>
+    <% else %>
+      <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@activity.user.first_name, @activity.id) %>
     <% end %>
   </h1>
   <span class="pull-right">
