@@ -6,6 +6,27 @@
     .tooltip .arrow::before{
       border-right-color: #033309!important;
     }
+    td.link a:visited {
+      color: #033309!important;
+    }
+  </style>
+<% elsif params[:controller] == "carriers" %>
+  <style>
+    td.link a:visited {
+      color: #6f060b!important;
+    }
+  </style>
+<% elsif params[:controller] == "shippers" %>
+  <style>
+    td.link a:visited {
+      color: #013a38!important;
+    }
+  </style>
+<% elsif params[:controller] == "activities" %>
+  <style>
+    td.link a:visited {
+      color: #dd8b00!important;
+    }
   </style>
 <% end %>
 <table table class="table table-striped table-bordered display nowrap"  id="rates_table">
@@ -94,7 +115,7 @@
         <td><%= rate.mc_number %></td>
         <td><%= rate.notes %></td>
         <td><%= rate.created_at %></td>
-        <td>
+        <td class="link">
           <% carrier = rate.carrier ? rate.carrier : (rate.activity ? rate.activity.carrier : nil) %>
           <span
             data-toggle="tooltip"
@@ -114,7 +135,7 @@
           <%= carrier && link_to(carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier) %>
           </span>
         </td>
-        <td>
+        <td class="link">
           <% shipper = rate.shipper ? rate.shipper : (rate.activity ? rate.activity.shipper : nil) %>
           <span
             data-toggle="tooltip"

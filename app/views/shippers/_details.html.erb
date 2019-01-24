@@ -36,7 +36,7 @@
           </div>
           <div class="row">
             <label class="col-md-4 col-form-label">Relationship Owner:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <div class="col-md-8 lbl-padding-t link">
               <%= shipper.relationship_owner_user.nil? ? 'Not Assigned' : link_to(shipper.relationship_owner_user.full_name, shipper.relationship_owner_user) %>
             </div>
           </div>
@@ -100,7 +100,7 @@
           </div>
           <div class="row">
             <label class="col-md-4 col-form-label">Blue Book Score:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <div class="col-md-8 lbl-padding-t link">
               <% if shipper.blue_book_url %>
                 <a target="_blank" href="<%= shipper.blue_book_url %>">
                   <%= shipper.blue_book_score %>
@@ -176,8 +176,8 @@
           </div>
           <div class="row">
             <label class="col-md-4 col-form-label">Website:</label>
-            <div class="col-md-8 lbl-padding-t">
-              <%= (!shipper.website.nil? && shipper.website.present?) ? "<a href='#{shipper.website}'>#{shipper.website}</a>" : "" %>
+            <div class="col-md-8 lbl-padding-t link">
+              <%= (!shipper.website.nil? && shipper.website.present?) ? "<a href='#{shipper.website}'>#{shipper.website}</a>".html_safe : "" %>
             </div>
           </div>
           <div class="row">

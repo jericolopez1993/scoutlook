@@ -1,4 +1,7 @@
 <style>
+  div.link a:visited {
+    color: #dd8b00!important;
+  }
 @media (max-width: 767px) {
   label {
     text-align: left!important;
@@ -71,7 +74,7 @@ label {
 
     <div class="row">
       <label class="col-md-2 col-form-label">Contact:</label>
-      <div class="col-md-9 lbl-padding-t">
+      <div class="col-md-9 lbl-padding-t link">
         <% if @activity.carrier_contact %>
           <%= @activity.carrier_contact.nil? ? "" : (link_to "#{@activity.carrier_contact.full_name}", edit_carrier_contact_path(@activity.carrier_contact)) %>
         <% elsif @activity.shipper_contact %>
@@ -82,7 +85,7 @@ label {
 
     <div class="row">
       <label class="col-md-2 col-form-label">Steward:</label>
-      <div class="col-md-9 lbl-padding-t">
+      <div class="col-md-9 lbl-padding-t link">
         <%= @activity.user.nil? ? "" : (link_to "#{@activity.user.first_name} #{@activity.user.last_name}", @activity.user) %>
       </div>
     </div>

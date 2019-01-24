@@ -18,7 +18,7 @@
           </div>
           <div class="row">
             <label class="col-md-4 col-form-label">Last Contact:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <div class="col-md-8 lbl-padding-t link">
               <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : (carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s + " " + (carrier.last_contact_date.user.nil? ? "" : link_to(carrier.last_contact_date.user.full_name, carrier.last_contact_date.user))).html_safe %>
             </div>
           </div>
@@ -42,13 +42,13 @@
           </div>
           <div class="row">
             <label class="col-md-4 col-form-label">Relationship Owner:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <div class="col-md-8 lbl-padding-t link">
               <%= carrier.relationship_owner_user.nil? ? 'Not Assigned' : link_to(carrier.relationship_owner_user.full_name, carrier.relationship_owner_user) %>
             </div>
           </div>
           <div class="row">
             <label class="col-md-4 col-form-label">Carrier Setup:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <div class="col-md-8 lbl-padding-t link">
               <%= carrier.carrier_setup_user.nil? ? 'Not Assigned' : link_to(carrier.carrier_setup_user.full_name, carrier.carrier_setup_user) %>
             </div>
           </div>

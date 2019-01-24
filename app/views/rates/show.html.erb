@@ -1,4 +1,7 @@
 <style>
+  div.link a:visited {
+    color: #033309!important;
+  }
   @media (max-width: 767px) {
     label {
       text-align: left!important;
@@ -90,7 +93,7 @@
     <% if @rate.carrier %>
       <div class="row">
         <label class="col-md-2 col-form-label">Carrier:</label>
-        <div class="col-md-9 lbl-padding-t">
+        <div class="col-md-9 lbl-padding-t link">
           <%= @rate.carrier.nil? ? "" : (link_to "#{@rate.carrier.company_name}", @rate.carrier) %>
         </div>
       </div>
@@ -98,14 +101,14 @@
     <% if @rate.shipper %>
       <div class="row">
         <label class="col-md-2 col-form-label">Shipper:</label>
-        <div class="col-md-9 lbl-padding-t">
+        <div class="col-md-9 lbl-padding-t link">
           <%= @rate.shipper.nil? ? "" : (link_to "#{@rate.shipper.company_name}", @rate.shipper) %>
         </div>
       </div>
     <% end %>
     <div class="row">
       <label class="col-md-2 col-form-label">Contact:</label>
-      <div class="col-md-9 lbl-padding-t">
+      <div class="col-md-9 lbl-padding-t link">
         <% if @rate.carrier_contact %>
           <%= @rate.carrier_contact.nil? ? "" : (link_to "#{@rate.carrier_contact.full_name}", edit_carrier_contact_path(@rate.carrier_contact)) %>
         <% elsif @rate.shipper_contact %>
@@ -116,7 +119,7 @@
     <% if @rate.activity %>
       <div class="row">
         <label class="col-md-2 col-form-label">Activity:</label>
-        <div class="col-md-9 lbl-padding-t">
+        <div class="col-md-9 lbl-padding-t link">
           <%= @rate.activity.nil? ? "" : (link_to "#{@rate.activity.campaign_name}", @rate.activity) %>
         </div>
       </div>

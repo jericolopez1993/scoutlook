@@ -6,6 +6,21 @@
     .tooltip .arrow::before{
       border-right-color: #dd8b00!important;
     }
+    td.link a:visited {
+      color: #dd8b00!important;
+    }
+  </style>
+<% elsif params[:controller] == "carriers" %>
+  <style>
+    td.link a:visited {
+      color: #6f060b!important;
+    }
+  </style>
+<% elsif params[:controller] == "shippers" %>
+  <style>
+    td.link a:visited {
+      color: #013a38!important;
+    }
   </style>
 <% end %>
 <table class="table table-striped table-bordered display"  id="activities_table">
@@ -76,7 +91,7 @@
             <% end %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => current_controller), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
           </td>
-          <td nowrap><%= activity.user.nil? ? "" : (link_to "#{activity.user.first_name} #{activity.user.last_name}", activity.user) %></td>
+          <td class="link" nowrap><%= activity.user.nil? ? "" : (link_to "#{activity.user.first_name} #{activity.user.last_name}", activity.user) %></td>
           <td><%= activity.status ? 'Open' : 'Closed' %></td>
           <td nowrap><%= activity.activity_type %></td>
           <td><%= activity.loads_per_week %></td>
@@ -88,7 +103,7 @@
           <td><%= activity.notes.nil? ? "" : activity.notes.html_safe %></td>
           <% if show_carrier || show_shipper %>
             <% if show_carrier %>
-            <td>
+            <td class="link">
               <span
                 data-toggle="tooltip"
                 data-placement="right"
@@ -109,7 +124,7 @@
             </td>
             <% end %>
             <% if show_shipper %>
-              <td>
+              <td class="link">
                 <span
                   data-toggle="tooltip"
                   data-placement="right"
@@ -129,12 +144,12 @@
               </td>
             <% end %>
             <% if show_carrier && !activity.carrier.nil? %>
-              <td nowrap><%= activity.carrier_contact.nil? ? "" : (link_to "#{activity.carrier_contact.full_name}", edit_carrier_contact_path(activity.carrier_contact)) %></td>
+              <td class="link" nowrap><%= activity.carrier_contact.nil? ? "" : (link_to "#{activity.carrier_contact.full_name}", edit_carrier_contact_path(activity.carrier_contact)) %></td>
               <td><%= activity.carrier.nil? || activity.carrier.sales_priority.blank? ? "" : activity.carrier.sales_priority %></td>
               <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.city %></td>
               <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.state %></td>
             <% elsif show_shipper && !activity.shipper.nil? %>
-              <td nowrap><%= activity.shipper_contact.nil? ? "" : (link_to "#{activity.shipper_contact.full_name}", edit_shipper_contact_path(activity.shipper_contact)) %></td>
+              <td class="link" nowrap><%= activity.shipper_contact.nil? ? "" : (link_to "#{activity.shipper_contact.full_name}", edit_shipper_contact_path(activity.shipper_contact)) %></td>
               <td><%= activity.shipper.nil? || activity.shipper.sales_priority.blank? ? "" : activity.shipper.sales_priority %></td>
               <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.city %></td>
               <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.state %></td>
