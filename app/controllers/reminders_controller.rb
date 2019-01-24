@@ -81,7 +81,7 @@ class RemindersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reminder_params
-      params[:reminder][:reminder_date] = Date::strptime(params[:reminder][:reminder_date], "%m/%d/%Y")
+      params[:reminder][:reminder_date].present? ? Date::strptime(params[:reminder][:reminder_date], "%m/%d/%Y") : nil
       params[:reminder][:user_id] = current_user.id
       params.require(:reminder).permit(:carrier_id, :shipper_id, :activity_id, :user_id, :reminder_date, :reminder_interval, :recurring)
     end
