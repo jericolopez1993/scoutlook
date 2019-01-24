@@ -1,4 +1,4 @@
-<div class="header-scout">
+<div class="<% if @reminder.carrier %> header-scout <% elsif @reminder.shipper %> header-darkblue <% elsif @reminder.activity %> header-yelloworange <% else %> header-lightblue <% end %>">
   <h1 class="pull-left">
     <% if @reminder.carrier %>
       <%= render 'layouts/static/header', header_title: "#{@reminder.carrier.nil? ? '' : generate_alphanumeric_id(@reminder.carrier.company_name, @reminder.carrier.id)}", sub_header_title: "#{@reminder.carrier.nil? ? '' : link_to(@reminder.carrier.company_name,  @reminder.carrier)}"  %>

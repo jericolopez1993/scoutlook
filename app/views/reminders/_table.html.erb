@@ -1,10 +1,10 @@
 <% if params[:controller] == "reminders" %>
   <style>
     .tooltip-inner {
-      background-color: #033309!important;
+      background-color: #0a849f!important;
     }
     .tooltip .arrow::before{
-      border-right-color: #033309!important;
+      border-right-color: #0a849f!important;
     }
   </style>
 <% end %>
@@ -91,9 +91,9 @@
         <% if with_actions %>
           <td>
             <%= link_to '<i class="far fa-eye"></i>'.html_safe, reminder_path(:id => reminder.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
-            <% if carrier %>
+            <% if reminder.carrier %>
               <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "carrier", :carrier_id => carrier.id), :class => 'btn btn-warning btn-xs' %>
-            <% elsif shipper %>
+            <% elsif reminder.shipper %>
               <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "shipper", :shipper_id => shipper.id), :class => 'btn btn-warning btn-xs' %>
             <% elsif reminder.activity %>
                 <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "activity", :activity_id => reminder.activity.id), :class => 'btn btn-warning btn-xs' %>
