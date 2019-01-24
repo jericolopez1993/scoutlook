@@ -509,18 +509,9 @@ function filterTable(id){
       $('[data-toggle="tooltip"]').tooltip({
           trigger: 'hover',
           html: true
-      });
-    }});
-  var table = $('#example').DataTable( {
-"drawCallback": function( settings ) {
-
-$('[data-toggle="tooltip1"]').tooltip();
-$('[data-toggle="tooltip2"]').tooltip();
-
-// add as many tooltips you want
-
-},
-});
+      })
+    },
+  });
 
   // Apply the search
   table.columns().every(function () {
@@ -528,6 +519,7 @@ $('[data-toggle="tooltip2"]').tooltip();
 
     $('input', this.footer()).on('keyup change', function () {
       if (that.search() !== this.value) {
+        console.log("hello")
         that.search( this.value ).draw();
       }
     });
