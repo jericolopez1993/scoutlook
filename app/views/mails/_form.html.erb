@@ -1,0 +1,86 @@
+<div class="header-scout">
+  <h1 class="pull-left">
+    Send a Mail
+  </h1>
+  <span class="pull-right">
+    <button type="submit" class="btn btn-danger btn-xs">Discard</button>
+    <button type="submit" class="btn btn-primary btn-xs">Send</button>
+  </span>
+</div>
+<!-- begin vertical-box -->
+<div class="vertical-box">
+  <!-- begin vertical-box-row -->
+  <div class="vertical-box-row bg-white">
+    <!-- begin vertical-box-cell -->
+    <div class="vertical-box-cell">
+      <!-- begin vertical-box-inner-cell -->
+      <div class="vertical-box-inner-cell">
+        <!-- begin scrollbar -->
+        <div data-scrollbar="true" data-height="100%" class="p-15" style="padding-bottom: 0;">
+          <!-- begin email form -->
+          <form action="/" method="POST" name="email_to_form">
+            <!-- begin email to -->
+            <div class="email-to">
+              <span class="float-right-link">
+                <a href="#" data-click="add-cc" data-name="Cc" class="m-r-5">Cc</a>
+                <a href="#" data-click="add-cc" data-name="Bcc">Bcc</a>
+              </span>
+              <label class="control-label">To:</label>
+              <ul id="email-to" class="primary line-mode">
+                <li>bootstrap@gmail.com</li>
+                <li>google@gmail.com</li>
+              </ul>
+            </div>
+            <!-- end email to -->
+
+            <div data-id="extra-cc"></div>
+
+            <!-- begin email subject -->
+            <div class="email-subject">
+              <input type="text" class="form-control form-control-lg" placeholder="Subject"/>
+            </div>
+            <!-- end email subject -->
+            <!-- begin email content -->
+            <div class="email-content p-t-15">
+              <textarea class="textarea form-control" id="wysihtml5" placeholder="Enter text ..." rows="20"></textarea>
+            </div>
+            <!-- end email content -->
+          </form>
+          <!-- end email form -->
+        </div>
+        <!-- end scrollbar -->
+      </div>
+      <!-- end vertical-box-inner-cell -->
+    </div>
+    <!-- end vertical-box-cell -->
+  </div>
+  <!-- end vertical-box-row -->
+</div>
+<!-- end vertical-box -->
+<script language="javascript">
+  $(document).ready(function () {
+    $('#wysihtml5').wysihtml5();
+    $('#email-to').tagit({
+      fieldName: 'sample',
+      availableTags: [
+        "c++",
+        "java",
+        "php",
+        "javascript",
+        "ruby",
+        "python",
+        "c"
+      ]
+    });
+  });
+  $(document).on('click', '[data-click="add-cc"]', function (e) {
+    e.preventDefault();
+
+    var targetName = $(this).attr('data-name');
+    var targetId = 'email-cc-' + targetName + '';
+    var targetHtml = '	<div class="email-to">		<label class="control-label">' + targetName + ':</label>		<ul id="' + targetId + '" class="primary line-mode"></ul>	</div>';
+    $('[data-id="extra-cc"]').append(targetHtml);
+    $('#' + targetId).tagit();
+    $(this).remove();
+  });
+</script>

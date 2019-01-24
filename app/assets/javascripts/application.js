@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require vendor/jquery-3.3.1.min
+//= require vendor/jquery-migrate-1.1.0.min
 //= require vendor/jquery-ui.min
 //= require vendor/bootstrap.bundle.min
 //= require vendor/jquery.slimscroll.min
@@ -37,6 +38,8 @@
 //= require vendor/jquery.gritter
 //= require vendor/switchery.min
 //= require vendor/form-slider-switcher.demo
+//= require vendor/tag-it.min
+//= require vendor/bootstrap3-wysihtml5.all.min
 //= require vendor/countries
 //= require vendor/jquery.chained
 //= require vendor/bootstrap-datepicker.min
