@@ -163,6 +163,7 @@
               <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_rate_path(rate, :previous_controller => params[:controller], :client_type => "shipper", :shipper_id => shipper.id), :class => 'btn btn-warning btn-xs' %>
             <% end %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, rate_path(:id => rate.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+            <%= link_to '<i class="far fa-paper-plane"></i>'.html_safe, new_mail_path(:id => rate.id, :previous_controller => 'rates'), :class => 'btn btn-dark btn-xs'%>
           </td>
       <% end %>
       </tr>

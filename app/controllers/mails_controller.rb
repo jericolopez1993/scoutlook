@@ -38,7 +38,7 @@ class MailsController < ApplicationController
       if @previous_controller == "activities"
         @subject = "Activity: #{generate_alphanumeric_id(@activity.campaign_name, @activity.id)} - #{@activity.campaign_name}"
       elsif @previous_controller == "rates"
-        @subject = "Activity: #{@rate.mc_number} - (#{@rate.origin_city + ", " + @rate.origin_state} -> #{@rate.destination_city + ", " + @rate.destination_state})"
+        @subject = "Rate: #{@rate.mc_number} - (#{@rate.origin_city + ", " + @rate.origin_state} -> #{@rate.destination_city + ", " + @rate.destination_state})"
       end
     end
 
