@@ -20,6 +20,7 @@
         <div data-scrollbar="true" data-height="100%" class="p-15" style="padding-bottom: 0;">
           <!-- begin email form -->
           <%= form_tag('/mails', id: 'mail_form') do %>
+            <%= hidden_field_tag :previous_controller, @previous_controller%>
             <!-- begin email to -->
             <div class="email-to">
               <span class="float-right-link">
@@ -28,8 +29,6 @@
               </span>
               <label class="control-label">To:</label>
               <ul id="email-to" class="primary line-mode">
-                <li>bootstrap@gmail.com</li>
-                <li>google@gmail.com</li>
               </ul>
             </div>
             <!-- end email to -->
@@ -38,12 +37,17 @@
 
             <!-- begin email subject -->
             <div class="email-subject">
-              <%= text_field_tag :subject, nil, class: 'form-control form-control-lg', placeholder: "Subject" %>
+              <%= text_field_tag :subject, @subject, class: 'form-control form-control-lg', placeholder: "Subject", disabled: true %>
             </div>
             <!-- end email subject -->
             <!-- begin email content -->
             <div class="email-content p-t-15">
-              <%= text_area_tag :content_body, nil, class: 'textarea form-control', id: 'wysihtml5', placeholder: "Enter text ...", rows: 20 %>
+              <%= hidden_field_tag :content, @content%>
+              <h5>Content Body:</h5>
+              <div style="padding-left: 2%">
+                <%= @content.html_safe%>
+              </div>
+              <%#= text_area_tag :content_body,, class: 'textarea form-control tinymce', placeholder: "Enter text ...", rows: 20 %>
             </div>
             <!-- end email content -->
           <% end %>
@@ -58,11 +62,12 @@
   <!-- end vertical-box-row -->
 </div>
 <!-- end vertical-box -->
+<%#= tinymce %>
 <script language="javascript">
   var availableTags = [<%= raw contacts.map(&:to_s).join(", ") %>];
   console.log(availableTags);
   $(document).ready(function () {
-    $('#wysihtml5').wysihtml5();
+    // $('#wysihtml5').wysihtml5();
     $('#email-to').tagit({
       fieldName: 'to[]',
       availableTags: availableTags
