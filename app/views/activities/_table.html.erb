@@ -90,6 +90,7 @@
               <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_activity_path(:id => activity.id, :previous_controller => current_controller, :client_type => "shipper"), :class => 'btn btn-warning btn-xs' %>
             <% end %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => current_controller), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+            <%= link_to '<i class="far fa-paper-plane"></i>'.html_safe, new_mail_path(:id => activity.id, :previous_controller => 'activities'), :class => 'btn btn-dark btn-xs'%>
           </td>
           <td class="link" nowrap><%= activity.user.nil? ? "" : (link_to "#{activity.user.first_name} #{activity.user.last_name}", activity.user) %></td>
           <td><%= activity.status ? 'Open' : 'Closed' %></td>

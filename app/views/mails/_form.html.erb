@@ -3,8 +3,9 @@
     Send a Mail
   </h1>
   <span class="pull-right">
-    <button type="submit" class="btn btn-danger btn-xs">Discard</button>
-    <button type="submit" class="btn btn-primary btn-xs">Send</button>
+
+    <button class="btn btn-danger btn-xs" onclick="window.history.back();">Discard</button>
+    <button type="submit" class="btn btn-primary btn-xs" onclick="$('#mail_form').submit();">Send</button>
   </span>
 </div>
 <!-- begin vertical-box -->
@@ -18,7 +19,7 @@
         <!-- begin scrollbar -->
         <div data-scrollbar="true" data-height="100%" class="p-15" style="padding-bottom: 0;">
           <!-- begin email form -->
-          <form action="/" method="POST" name="email_to_form">
+          <%= form_tag('/mails', id: 'mail_form') do %>
             <!-- begin email to -->
             <div class="email-to">
               <span class="float-right-link">
@@ -37,15 +38,15 @@
 
             <!-- begin email subject -->
             <div class="email-subject">
-              <input type="text" class="form-control form-control-lg" placeholder="Subject"/>
+              <%= text_field_tag :subject, nil, class: 'form-control form-control-lg', placeholder: "Subject" %>
             </div>
             <!-- end email subject -->
             <!-- begin email content -->
             <div class="email-content p-t-15">
-              <textarea class="textarea form-control" id="wysihtml5" placeholder="Enter text ..." rows="20"></textarea>
+              <%= text_area_tag :content_body, nil, class: 'textarea form-control', id: 'wysihtml5', placeholder: "Enter text ...", rows: 20 %>
             </div>
             <!-- end email content -->
-          </form>
+          <% end %>
           <!-- end email form -->
         </div>
         <!-- end scrollbar -->
@@ -58,19 +59,13 @@
 </div>
 <!-- end vertical-box -->
 <script language="javascript">
+  var availableTags = [<%= raw contacts.map(&:to_s).join(", ") %>];
+  console.log(availableTags);
   $(document).ready(function () {
     $('#wysihtml5').wysihtml5();
     $('#email-to').tagit({
-      fieldName: 'sample',
-      availableTags: [
-        "c++",
-        "java",
-        "php",
-        "javascript",
-        "ruby",
-        "python",
-        "c"
-      ]
+      fieldName: 'to[]',
+      availableTags: availableTags
     });
   });
   $(document).on('click', '[data-click="add-cc"]', function (e) {
@@ -80,7 +75,10 @@
     var targetId = 'email-cc-' + targetName + '';
     var targetHtml = '	<div class="email-to">		<label class="control-label">' + targetName + ':</label>		<ul id="' + targetId + '" class="primary line-mode"></ul>	</div>';
     $('[data-id="extra-cc"]').append(targetHtml);
-    $('#' + targetId).tagit();
+    $('#' + targetId).tagit({
+      fieldName: targetName.toLowerCase() + '[]',
+      availableTags: availableTags
+    });
     $(this).remove();
   });
 </script>
