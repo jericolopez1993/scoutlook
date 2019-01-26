@@ -14,6 +14,8 @@ class Shipper < ApplicationRecord
   has_many :activities, :dependent => :destroy
   has_many :rates, :dependent => :delete_all
   has_many :adm, -> { where(adm: true).order("id DESC")}, primary_key: "id", foreign_key: 'shipper_id', class_name: "ShipperContact"
+  has_many :shipper_contacts, :dependent => :delete_all
+  has_many :reminders, :dependent => :delete_all
 
   has_one :origin_location, primary_key: "origin", foreign_key: 'id', class_name: "ShipperLocation"
   has_one :destination_location, primary_key: "destination", foreign_key: 'id', class_name: "ShipperLocation"

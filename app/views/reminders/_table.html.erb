@@ -11,9 +11,11 @@
 <table table class="table table-striped table-bordered display nowrap"  id="reminders_table" width="100%">
   <thead>
     <tr class="odd gradeX">
-      <th>Carrier</th>
-      <th>Shipper</th>
-      <th>Activity</th>
+      <% if params[:controller] == "reminders"%>
+        <th>Carrier</th>
+        <th>Shipper</th>
+        <th>Activity</th>
+      <% end %>
       <th>User</th>
       <th>Date</th>
       <th>Interval</th>
@@ -26,9 +28,11 @@
   </thead>
   <tfoot>
     <tr>
-      <th>Carrier</th>
-      <th>Shipper</th>
-      <th>Activity</th>
+      <% if params[:controller] == "reminders"%>
+        <th>Carrier</th>
+        <th>Shipper</th>
+        <th>Activity</th>
+      <% end %>
       <th>User</th>
       <th>Date</th>
       <th>Interval</th>
@@ -42,6 +46,7 @@
   <tbody class="spacer">
     <% reminders.each do |reminder| %>
       <tr>
+        <% if params[:controller] == "reminders"%>
         <td>
           <% carrier = reminder.carrier ? reminder.carrier : (reminder.activity ? reminder.activity.carrier : nil) %>
           <span
@@ -82,6 +87,7 @@
           </span>
         </td>
         <td><%= reminder.activity && link_to(reminder.activity.campaign_name.blank? ? "(no name)" : reminder.activity.campaign_name, reminder.activity) %></td>
+        <% end %>
         <td><%= reminder.user && link_to(reminder.user.full_name.blank? ? "(no name)" : reminder.user.full_name, reminder.user) %></td>
         <td><%= reminder.reminder_date %></td>
         <td><%= interval_to_text(reminder.reminder_interval) %></td>
@@ -92,11 +98,11 @@
           <td>
             <%= link_to '<i class="far fa-eye"></i>'.html_safe, reminder_path(:id => reminder.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
             <% if reminder.carrier %>
-              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "carrier", :carrier_id => carrier.id), :class => 'btn btn-warning btn-xs' %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "carrier"), :class => 'btn btn-warning btn-xs' %>
             <% elsif reminder.shipper %>
-              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "shipper", :shipper_id => shipper.id), :class => 'btn btn-warning btn-xs' %>
+              <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "shipper"), :class => 'btn btn-warning btn-xs' %>
             <% elsif reminder.activity %>
-                <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "activity", :activity_id => reminder.activity.id), :class => 'btn btn-warning btn-xs' %>
+                <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "activity"), :class => 'btn btn-warning btn-xs' %>
             <% end %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, reminder_path(:id => reminder.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
           </td>

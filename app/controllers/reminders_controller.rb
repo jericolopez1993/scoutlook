@@ -16,6 +16,13 @@ class RemindersController < ApplicationController
   # GET /reminders/new
   def new
     @reminder = Reminder.new
+    if @previous_controller == "carriers"
+      @reminder.carrier_id = params[:id]
+    elsif @previous_controller == "shippers"
+      @reminder.shipper_id = params[:id]
+    elsif @previous_controller == "activities"
+      @reminder.activity_id = params[:id]
+    end
   end
 
   # GET /reminders/1/edit

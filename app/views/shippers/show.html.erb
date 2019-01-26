@@ -1,3 +1,4 @@
+
 <style>
   p {
     display: inline-block!important;
@@ -6,7 +7,7 @@
     visibility: hidden;
   }
   div.link a:visited {
-    color: #013a38!important;
+    color: #6f060b!important;
   }
   div.link a {
     text-decoration: underline;
@@ -31,7 +32,7 @@
   }
 </style>
 <!-- begin page-header -->
-<div class="header-darkblue">
+<div class="header-scout">
   <h1 class="pull-left">
     <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@shipper.company_name, @shipper.id), sub_header_title: @shipper.company_name %>
   </h1>
@@ -42,39 +43,18 @@
   </span>
 </div>
 <!-- end page-header -->
-<!-- begin row -->
-<ul class="nav nav-pills d-md-none">
-	<li class="nav-items text-center" style="width:100%;">
-		<a href="#company-name" data-toggle="tab" class="nav-link active hide-btn">
-			<span class="d-sm-none">General</span>
-		</a>
-	</li>
-	<li class="nav-items text-center" style="width:50%; margin-left:-.5px;">
-		<a href="#lanes" data-toggle="tab" class="nav-link attachment-btn">
-			<span class="d-sm-none">Lanes</span>
-		</a>
-	</li>
-	<li class="nav-items text-center" style="width:50%; margin-left:-.5px;">
-		<a href="#locations" data-toggle="tab" class="nav-link location-btn">
-			<span class="d-sm-none">Locations</span>
-		</a>
-	</li>
-  <li class="nav-items text-center" style="width:50%; margin-left:-.5px;">
-    <a href="#contacts" data-toggle="tab" class="nav-link contact-btn">
-      <span class="d-sm-none">Contacts</span>
-    </a>
-  </li>
-</ul>
+
 <!-- begin panel -->
 <div class="panel panel-inverse">
   <div class="panel-heading" style="padding: 5px 15px">
     <div class="panel-heading-btn" style="margin-top: 2.5px;">
-      <button type="button" class="btn btn-xs btn-primary new-attachment-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<%= form_with(model: @shipper, local: true, :html => {class: 'form-horizontal text-right'}) do |form| %><%= form.hidden_field :attachment_only, :value => true %><%= form.file_field :attachment_file, multiple: true %><%= form.submit 'Submit', :class => 'btn btn-xs btn-primary', disabled: true %><% end %>'>
+      <button type="button" class="btn btn-xs btn-primary new-attachment-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<%= form_with(model: @shipper, local: true, :html => {class: 'form-horizontal text-right'}) do |form| %><%= form.hidden_field :attachment_only, :value => true %><%= form.file_field :attachment_file, multiple: true %><%= form.submit 'Submit', :class => 'btn btn-xs btn-success', disabled: true %><% end %>'>
         Add Attachment
       </button>
+      <%= link_to 'New Reminder', new_reminder_path(:previous_controller => params[:controller], :id => @shipper.id), :class => 'btn btn-info btn-xs new-reminder-btn' %>
       <%= link_to 'New Location', new_shipper_location_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-location-btn' %>
       <%= link_to 'New Contact', new_shipper_contact_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-contact-btn' %>
-      <%= link_to 'New Activities', new_activity_path(:shipper_id => @shipper.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-activity-btn' %>
+      <%= link_to 'New Activity', new_activity_path(:shipper_id => @shipper.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-activity-btn' %>
       <%= link_to 'New Lane', new_shipper_lane_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
       <%= link_to 'New Rate', new_rate_path(:previous_controller => params[:controller], :shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-rate-btn' %>
     </div>
@@ -114,6 +94,11 @@
           <span class="d-sm-block d-none"><h4 class="panel-title">Rates</h4></span>
         </a>
       </li>
+      <li class="nav-items">
+        <a href="#reminders" data-toggle="tab" class="nav-link reminder-btn" style="padding:5px; margin: 0px 10px">
+          <span class="d-sm-block d-none"><h4 class="panel-title">Reminders</h4></span>
+        </a>
+      </li>
     </ul>
   </div>
 
@@ -149,7 +134,12 @@
     </div>
     <div class="tab-pane fade" id="rates">
       <div class="panel-body">
-          <%= render 'rates/table', rates: @shipper.rates, with_actions: true %>
+        <%= render 'rates/table', rates: @shipper.rates, with_actions: true %>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="reminders">
+      <div class="panel-body">
+        <%= render 'reminders/table', reminders: @shipper.reminders, with_actions: true %>
       </div>
     </div>
     <!-- end tab-pane -->
@@ -157,33 +147,37 @@
 </div>
 <!-- end panel -->
 <script type="text/javascript">
-  $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
+  $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
   $('.location-btn').on('click', function(){
-      $('.new-contact-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-contact-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
       $('.new-location-btn').show();
   });
   $('.contact-btn').on('click', function(){
-      $('.new-location-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-location-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
       $('.new-contact-btn').show();
   });
   $('.attachment-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
       $('.new-attachment-btn').show();
   });
   $('.lane-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
       $('.new-lane-btn').show();
   });
   $('.rate-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-activity-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-activity-btn, .new-reminder-btn').hide();
       $('.new-rate-btn').show();
   });
   $('.activity-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-rate-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-rate-btn, .new-reminder-btn').hide();
       $('.new-activity-btn').show();
   });
+  $('.reminder-btn').on('click', function(){
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-reminder-btn').show();
+  });
   $('.hide-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
   });
 
   $('.contact-btn, .lane-btn, .activity-btn, .location-btn, .rate-btn, .hide-btn').popover({ trigger:"manual" }).click(function(){
