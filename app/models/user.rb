@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :skip_password_validation
   audited
   rolify
   has_one_attached :avatar
@@ -15,4 +16,10 @@ class User < ApplicationRecord
   def full_name
     (self.first_name.nil? ? '' : self.first_name) + " " + (self.last_name.nil? ? '' : self.last_name)
   end
+
+  protected
+   def password_required?
+     return false if skip_password_validation
+     super
+   end
 end
