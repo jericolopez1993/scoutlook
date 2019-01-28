@@ -45,8 +45,8 @@ class MailsController < ApplicationController
     def generate_body
       if @previous_controller == "activities"
         @content = "<div style='font-family: Poppins, sans-serif; border: 10px solid #ee9c10; width: 500px; background-color: #fff; border-radius: 25px;'>" +
-                   "<p style='font-size: 50px; background-color: #ee9c10; color: #fff; padding: 1rem; text-align: center; margin-top: 0px;'><b>Here are the details about an Activity</b></p>" +
-                   "<p style='background-color:#fff; margin: 1rem; font-size: 20px; color: #707478'><b style='color: #555; padding-right: 20px;'>Campaign:</b> #{@activity.campaign_name}<br/>" +
+                   "<div style='font-size: 50px; background-color: #ee9c10; color: #fff; padding: 1rem; text-align: center; margin-top: 0px;'><b>Activity</b></div>" +
+                   "<div style='background-color:#fff; margin: 1rem; font-size: 20px; color: #707478'><b style='color: #555; padding-right: 20px;'>Campaign:</b> #{@activity.campaign_name}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Open Date:</b> #{@activity.date_stamp}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Type:</b> #{@activity.activity_type}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Contact:</b> #{@activity.carrier_contact ? @activity.carrier_contact.full_name : ''}<br/>" +
@@ -57,15 +57,16 @@ class MailsController < ApplicationController
                    "<b style='color: #555; padding-right: 20px;'>Date Opened:</b> #{convert_date(@activity.date_opened)}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Date Closed:</b> #{convert_date(@activity.date_closed)}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Other Notes:</b> #{@activity.other_notes}<br/>" +
-                   "</p>" +
-                   "<br/><br/><p style='background-color:#fff; margin: 1rem; font-size: 20px; color: #555'>Thanks," +
+                   "</div>" +
+                   "<br/><br/><div style='background-color:#fff; margin: 1rem; font-size: 20px; color: #555'>Thanks," +
                    "<br><img style='width: 50px; vertical-align: middle;' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'>" +
-                   "<b style='vertical-align: middle;'>Scout Logistics</b></p>" +
+                   "<b style='vertical-align: middle;'>Scout Logistics</b></div>" +
                    "</div>"
       elsif @previous_controller == "rates"
+
         @content = "<div style='font-family: Poppins, sans-serif; border: 10px solid #014b0a; width: 500px; background-color: #fff; border-radius: 25px;'>" +
-                   "<p style='font-size: 50px; background-color: #014b0a; color: #fff; padding: 1rem; text-align: center; margin-top: 0px;'><b>Here are the<br> details about a<br> Rate</b></p>" +
-                   "<p style='background-color:#fff; margin: 1rem; font-size: 20px; color: #707478'><b style='color: #555; padding-right: 20px;'>Origin:</b> #{@rate.origin_city + ", " + @rate.origin_state}<br/>" +
+                   "<div style='font-size: 50px; background-color: #014b0a; color: #fff; padding: 1rem; text-align: center; margin-top: 0px;'><b>Rate</b></div>" +
+                   "<div style='background-color:#fff; margin: 1rem; font-size: 20px; color: #707478'><b style='color: #555; padding-right: 20px;'>Origin:</b> #{@rate.origin_city + ", " + @rate.origin_state}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Destination:</b> #{@rate.destination_city + ", " + @rate.destination_state}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Carrier:</b> #{@rate.carrier ? @rate.carrier.company_name : ''}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Shipper:</b> #{@rate.shipper ? @rate.shipper.company_name : ''}<br/>" +
@@ -84,10 +85,10 @@ class MailsController < ApplicationController
                    "<b style='color: #555; padding-right: 20px;'>MC Number:</b> #{@rate.mc_number}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Notes:</b> #{@rate.notes}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Date Created:</b> #{@rate.created_at}<br/>" +
-                   "</p>" +
-                   "<br/><br/><p style='background-color:#fff; margin: 1rem; font-size: 20px; color: #555'>Thanks," +
+                   "</div>" +
+                   "<br/><br/><div style='background-color:#fff; margin: 1rem; font-size: 20px; color: #555'>Thanks," +
                    "<br><img style='width: 50px; vertical-align: middle;' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'>" +
-                   "<b style='vertical-align: middle;'>Scout Logistics</b></p>" +
+                   "<b style='vertical-align: middle;'>Scout Logistics</b></div>" +
                    "</div>"
       end
     end
