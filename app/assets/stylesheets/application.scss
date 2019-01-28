@@ -36,6 +36,9 @@
 body.pattern-white{
   background: url(asset_path('pattern-bg-white.png'));
 }
+.btn, .top-menu .nav > li > a, .panel-title {
+  font-family: 'Poppins', sans-serif!important;
+}
 .extend_image img {
   height: 40px !important;
   object-fit: cover;
