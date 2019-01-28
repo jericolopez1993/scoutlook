@@ -44,7 +44,7 @@ class MailsController < ApplicationController
 
     def generate_body
       if @previous_controller == "activities"
-        @content = "<div style='font-family: Poppins, sans-serif; border: 10px solid #ee9c10; width: 500px; background-color: #fff;'>" +
+        @content = "<div style='font-family: Poppins, sans-serif; border: 10px solid #ee9c10; width: 500px; background-color: #fff; border-radius: 25px;'>" +
                    "<p style='font-size: 50px; background-color: #ee9c10; color: #fff; padding: 1rem; text-align: center; margin-top: 0px;'><b>Here are the details about an Activity</b></p>" +
                    "<p style='background-color:#fff; margin: 1rem; font-size: 20px; color: #707478'><b style='color: #555; padding-right: 20px;'>Campaign:</b> #{@activity.campaign_name}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Open Date:</b> #{@activity.date_stamp}<br/>" +
@@ -63,8 +63,8 @@ class MailsController < ApplicationController
                    "<b style='vertical-align: middle;'>Scout Logistics</b></p>" +
                    "</div>"
       elsif @previous_controller == "rates"
-        @content = "<div style='font-family: Poppins, sans-serif; border: 10px solid #014b0a; width: 500px; background-color: #fff;'>" +
-                   "<p style='font-size: 50px; background-color: #014b0a; color: #fff; padding: 1rem; text-align: center; margin-top: 0px;'><b>Here are the details about a Rate</b></p>" +
+        @content = "<div style='font-family: Poppins, sans-serif; border: 10px solid #014b0a; width: 500px; background-color: #fff; border-radius: 25px;'>" +
+                   "<p style='font-size: 50px; background-color: #014b0a; color: #fff; padding: 1rem; text-align: center; margin-top: 0px;'><b>Here are the<br> details about a<br> Rate</b></p>" +
                    "<p style='background-color:#fff; margin: 1rem; font-size: 20px; color: #707478'><b style='color: #555; padding-right: 20px;'>Origin:</b> #{@rate.origin_city + ", " + @rate.origin_state}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Destination:</b> #{@rate.destination_city + ", " + @rate.destination_state}<br/>" +
                    "<b style='color: #555; padding-right: 20px;'>Carrier:</b> #{@rate.carrier ? @rate.carrier.company_name : ''}<br/>" +
