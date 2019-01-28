@@ -1,5 +1,6 @@
 class RatesController < ApplicationController
-  before_action :set_rate, only: [:show, :edit, :update, :destroy]
+  before_action :set_rate, only: [:show, :edit, :update, :destroy, :generate_pdf]
+  before_action :set_body, only: [:generate_pdf]
   before_action :set_previous_controller, only: [:show, :edit, :update, :destroy, :new]
 
   # GET /rates
@@ -119,11 +120,31 @@ class RatesController < ApplicationController
     end
   end
 
+  def generate_pdf
+    require "pdfkit"
+    kit = PDFKit.new(@content)
+    send_data(kit.to_pdf,filename: "#{@rate.mc_number.blank? ? "no number" : @rate.mc_number}.pdf",type: "application/pdf",)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rate
       @rate = Rate.find(params[:id])
       authorize @rate
+    end
+
+    def set_body
+      @content = "<div style='color: grey;'>" +
+                 "<h1 style='text-align: center;color: black;margin-bottom: 100px;'>Scout Logistics</h1>" +
+                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Origin</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Destination</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.origin_city + ", " + @rate.origin_state}</td><td style='text-align: right'>#{@rate.destination_city + ", " + @rate.destination_state}</td></tr></tbody> </table>" +
+                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Miles</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Carrier/Shipper</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.miles}</td><td style='text-align: right'>#{@rate.activity ? (@rate.activity.carrier ? @rate.activity.carrier.company_name : (@rate.activity.shipper ? @rate.activity.shipper.company_name : '<i>None</i>')) : '<i>None</i>'}</td></tr></tbody> </table>" +
+                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Type</th> <th style='text-align: center;color: black;padding-bottom: 5px;'>Picks</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Drops</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.rate_type}</td><td style='text-align: center'>#{@rate.picks}</td><td style='text-align: right'>#{@rate.drops}</td></tr></tbody> </table>" +
+                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Team</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Commodities</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.team}</td><td style='text-align: right'>#{@rate.commodities}</td></tr></tbody> </table>" +
+                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Bid</th> <th style='text-align: center;color: black;padding-bottom: 5px;'>Ask</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Accepted</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.bid}</td><td style='text-align: center'>#{@rate.ask}</td><td style='text-align: right'>#{@rate.accepted ? "Yes" : "No"}</td></tr></tbody> </table>" +
+                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Cost</th> <th style='text-align: center;color: black;padding-bottom: 5px;'>Currency</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>MC #</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.cost}</td><td style='text-align: center'>#{@rate.money_currency}</td><td style='text-align: right'>#{@rate.mc_number}</td></tr></tbody> </table>" +
+                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Date Created</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.created_at}</td></tr></tbody> </table>" +
+                 "<div style='margin-top: 100px;'><p><strong>Notes:</strong> #{@rate.notes.nil? ? "<i>None</i>" : @rate.notes.html_safe}</p></div>" +
+                 "</div>"
     end
 
     def set_previous_controller

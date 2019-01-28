@@ -19,6 +19,10 @@ class ActivityPolicy < ApplicationPolicy
     return true if user.present? && (user.has_role?(:admin)  || user.ro || user.cs)
   end
 
+  def generate_pdf?
+    return true if user.present? && (user.has_role?(:admin)  || user.ro || user.cs)
+  end
+
   private
 
     def activity

@@ -91,6 +91,7 @@
             <% end %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => current_controller), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
             <%= link_to '<i class="far fa-paper-plane"></i>'.html_safe, new_mail_path(:id => activity.id, :previous_controller => 'activities'), :class => 'btn btn-dark btn-xs'%>
+            <%= link_to '<i class="far fa-file-pdf"></i>'.html_safe, generate_pdf_activities_path(:id => activity.id), target: :_blank, :class => 'btn btn-indigo btn-xs'%>
           </td>
           <td class="link" nowrap><%= activity.user.nil? ? "" : (link_to "#{activity.user.first_name} #{activity.user.last_name}", activity.user) %></td>
           <td><%= activity.status ? 'Open' : 'Closed' %></td>

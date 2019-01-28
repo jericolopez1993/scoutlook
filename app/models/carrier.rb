@@ -67,7 +67,6 @@ class Carrier < ApplicationRecord
     end
   end
 
-
   private
     def remove_children
       CarrierContact.where(:carrier_id => self.id).destroy_all

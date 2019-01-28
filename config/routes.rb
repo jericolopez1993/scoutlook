@@ -8,9 +8,14 @@ Rails.application.routes.draw do
     collection do
       post    'quick_create'
       delete  'remove_attachment'
+      get     'generate_pdf'
     end
   end
-  resources :rates
+  resources :rates do
+    collection do
+      get     'generate_pdf'
+    end
+  end
   resources :reps, :path => 'stewards'
   resources :carrier_lanes
   resources :carrier_contacts

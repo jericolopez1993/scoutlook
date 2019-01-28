@@ -48,6 +48,8 @@ gem 'seed_dump'
 gem 'httparty'
 gem "audited", "~> 4.7"
 gem 'whenever', require: false
+gem 'pdfkit'
+gem 'wkhtmltopdf-binary'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
