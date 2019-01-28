@@ -12,52 +12,38 @@
 <div class="vertical-box">
   <!-- begin vertical-box-row -->
   <div class="vertical-box-row bg-white">
-    <!-- begin vertical-box-cell -->
-    <div class="vertical-box-cell">
-      <!-- begin vertical-box-inner-cell -->
-      <div class="vertical-box-inner-cell">
-        <!-- begin scrollbar -->
-        <div data-scrollbar="true" data-height="100%" class="p-15" style="padding-bottom: 0;">
-          <!-- begin email form -->
-          <%= form_tag('/mails', id: 'mail_form') do %>
-            <%= hidden_field_tag :previous_controller, @previous_controller%>
-            <!-- begin email to -->
-            <div class="email-to">
-              <span class="float-right-link">
-                <a href="#" data-click="add-cc" data-name="Cc" class="m-r-5">Cc</a>
-                <a href="#" data-click="add-cc" data-name="Bcc">Bcc</a>
-              </span>
-              <label class="control-label">To:</label>
-              <ul id="email-to" class="primary line-mode">
-              </ul>
-            </div>
-            <!-- end email to -->
-
-            <div data-id="extra-cc"></div>
-
-            <!-- begin email subject -->
-            <div class="email-subject">
-              <%= text_field_tag :subject, @subject, class: 'form-control form-control-lg', placeholder: "Subject", disabled: true %>
-            </div>
-            <!-- end email subject -->
-            <!-- begin email content -->
-            <div class="email-content p-t-15">
-              <%= hidden_field_tag :content, @content%>
-              <h5>Content Body:</h5>
-              <div style="padding-left: 2%">
-                <%= @content.html_safe%>
-              </div>
-              <%#= text_area_tag :content_body,, class: 'textarea form-control tinymce', placeholder: "Enter text ...", rows: 20 %>
-            </div>
-            <!-- end email content -->
-          <% end %>
-          <!-- end email form -->
-        </div>
-        <!-- end scrollbar -->
+    <%= form_tag('/mails', id: 'mail_form') do %>
+      <%= hidden_field_tag :previous_controller, @previous_controller%>
+      <!-- begin email to -->
+      <div class="email-to">
+        <span class="float-right-link">
+          <a href="#" data-click="add-cc" data-name="Cc" class="m-r-5 btn btn-info btn-xs p-l-10 p-r-10">Cc</a>
+          <a href="#" data-click="add-cc" data-name="Bcc" class="m-r-5 btn btn-success btn-xs p-l-10 p-r-10">Bcc</a>
+        </span>
+        <label class="control-label">To:</label>
+        <ul id="email-to" class="primary line-mode">
+        </ul>
       </div>
-      <!-- end vertical-box-inner-cell -->
-    </div>
-    <!-- end vertical-box-cell -->
+      <!-- end email to -->
+
+      <div data-id="extra-cc"></div>
+
+      <!-- begin email subject -->
+      <div class="email-subject">
+        <%= text_field_tag :subject, @subject, class: 'form-control form-control-lg', placeholder: "Subject", disabled: true %>
+      </div>
+      <!-- end email subject -->
+      <!-- begin email content -->
+      <div class="email-content p-t-15">
+        <%= hidden_field_tag :content, @content%>
+        <h5>Content Body:</h5>
+        <div style="padding-left: 2%; padding-bottom: 20px;">
+          <%= @content.html_safe%>
+        </div>
+        <%#= text_area_tag :content_body,, class: 'textarea form-control tinymce', placeholder: "Enter text ...", rows: 20 %>
+      </div>
+      <!-- end email content -->
+    <% end %>
   </div>
   <!-- end vertical-box-row -->
 </div>
