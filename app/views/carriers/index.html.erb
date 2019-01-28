@@ -111,7 +111,7 @@
                       <% elsif Carrier::BLUE.include?(origin) %>
                         <span class="badge badge-info"><%= link_to(origin, lane) %></span>
                       <% elsif Carrier::RED.include?(origin) %>
-                      <span class="badge badge-danger"><%= link_to(origin, lane) %></span>
+                      <span class="badge badge-scout"><%= link_to(origin, lane) %></span>
                       <% elsif Carrier::BROWN.include?(origin) %>
                         <span class="badge badge-brown"><%= link_to(origin, lane) %></span>
                       <% elsif Carrier::YELLOW.include?(origin) %>
@@ -132,7 +132,7 @@
                     <% elsif Carrier::BLUE.include?(destination) %>
                       <span class="badge badge-info"><%= link_to(destination, lane) %></span>
                     <% elsif Carrier::RED.include?(destination) %>
-                    <span class="badge badge-danger"><%= link_to(destination, lane) %></span>
+                    <span class="badge badge-scout"><%= link_to(destination, lane) %></span>
                     <% elsif Carrier::BROWN.include?(destination) %>
                       <span class="badge badge-brown"><%= link_to(destination, lane) %></span>
                     <% elsif Carrier::YELLOW.include?(destination) %>
