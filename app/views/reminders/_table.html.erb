@@ -20,10 +20,8 @@
         <th>Activity</th>
       <% end %>
       <th>User</th>
-      <th>Date</th>
+      <th>Next Reminder Date</th>
       <th>Interval</th>
-      <th>Recurring</th>
-      <th>Date Created</th>
     </tr>
   </thead>
   <tfoot>
@@ -37,10 +35,8 @@
         <th>Activity</th>
       <% end %>
       <th>User</th>
-      <th>Date</th>
+      <th>Next Reminder Date</th>
       <th>Interval</th>
-      <th>Recurring</th>
-      <th>Date Created</th>
     </tr>
   </tfoot>
   <tbody class="spacer">
@@ -102,10 +98,18 @@
         <td><%= reminder.activity && link_to(reminder.activity.campaign_name.blank? ? "(no name)" : reminder.activity.campaign_name, reminder.activity) %></td>
         <% end %>
         <td><%= reminder.user && link_to(reminder.user.full_name.blank? ? "(no name)" : reminder.user.full_name, reminder.user) %></td>
-        <td><%= reminder.reminder_date %></td>
+        <td>
+          <% if reminder.reminder_interval %>
+            <% if reminder.recurring %>
+              <%= reminder.reminder_date_reccuring %>
+            <% else %>
+              <%= reminder.reminder_date_interval %>
+            <% end %>
+          <% else %>
+            <%= reminder.reminder_date %>
+          <% end %>
+        </td>
         <td><%= interval_to_text(reminder.reminder_interval) %></td>
-        <td><%= reminder.recurring ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
-        <td><%= reminder.created_at %></td>
       </tr>
     <% end %>
   </tbody>
