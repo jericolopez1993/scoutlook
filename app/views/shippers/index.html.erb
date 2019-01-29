@@ -2,7 +2,7 @@
   .badge a {
     color: #fff!important;
   }
-  td a:visited {
+  td.link a:visited {
     color: #013a38!important;
   }
 </style>
@@ -73,7 +73,7 @@
           <% @shippers.each do |shipper| %>
             <tr>
 
-              <td nowrap>
+              <td class="link" nowrap>
                 <span
                   data-toggle="tooltip"
                   data-placement="right"
@@ -187,7 +187,7 @@
                 <% end %>
               </td>
               <td class="text-center"><%= shipper.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td nowrap class="text-center"><%= shipper.relationship_owner_user.nil? ? '' : "#{link_to("#{shipper.relationship_owner_user.first_name[0]}#{shipper.relationship_owner_user.last_name[0]}", shipper.relationship_owner_user)}".html_safe %></td>
+              <td nowrap class="text-center link"><%= shipper.relationship_owner_user.nil? ? '' : "#{link_to("#{shipper.relationship_owner_user.first_name[0]}#{shipper.relationship_owner_user.last_name[0]}", shipper.relationship_owner_user)}".html_safe %></td>
               <td class="text-center"><%= shade_sales_priority(shipper.sales_priority).html_safe %></td>
               <td class="text-center"><%= shipper.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
               <td nowrap><%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>

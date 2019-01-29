@@ -2,7 +2,7 @@
   .badge a {
     color: #fff!important;
   }
-  td a:visited {
+  td.link a:visited {
     color: #6f060b!important;
   }
 </style>
@@ -71,7 +71,7 @@
           <% @carriers.each do |carrier| %>
             <tr>
               <td><%= carrier.mc_number %></td>
-              <td>
+              <td class="link">
                 <span
                   data-toggle="tooltip"
                   data-placement="right"
@@ -193,7 +193,7 @@
                 <% end %>
               </td>
               <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= carrier.relationship_owner_user.nil? ? '' : "#{link_to("#{carrier.relationship_owner_user.first_name[0]}#{carrier.relationship_owner_user.last_name[0]}", carrier.relationship_owner_user)}".html_safe %></td>
+              <td class="text-center link"><%= carrier.relationship_owner_user.nil? ? '' : "#{link_to("#{carrier.relationship_owner_user.first_name[0]}#{carrier.relationship_owner_user.last_name[0]}", carrier.relationship_owner_user)}".html_safe %></td>
               <td class="text-center"><%= shade_sales_priority(carrier.sales_priority).html_safe %></td>
               <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
               <td><%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>
