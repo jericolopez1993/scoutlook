@@ -16,6 +16,11 @@
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
+!/storage/eq
+!/storage/jn
+!/storage/Mp
+!/storage/P9
+!/storage/Rs
 
 /node_modules
 /yarn-error.log
