@@ -53,7 +53,7 @@
         <% end %>
 
         <div class="form-group row m-b-15">
-          <%= form.label :reminder_date, 'Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :reminder_date, 'Reminder Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.text_field :reminder_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
           </div>
@@ -85,3 +85,28 @@
   </div>
 </div>
 <!-- end panel -->
+<script type="text/javascript">
+  $('#reminder_reminder_date').change(function(){
+    if ($('#reminder_reminder_date').val() != "") {
+        $('#reminder_interval').attr("disabled","disabled")
+        $('.switchery').addClass('disable-switch');
+    } else {
+        $('#reminder_interval').removeAttr('disabled');
+        $('.switchery').removeClass('disable-switch');
+    }
+  });
+  $('#reminder_interval').change(function(){
+    if ($('#reminder_interval').val() != "") {
+        $('#reminder_reminder_date').attr("disabled","disabled")
+    } else {
+        $('#reminder_reminder_date').removeAttr('disabled');
+    }
+  });
+  $('#reminder_recurring').on('change', function(){
+    if ($('#reminder_recurring').is(':checked')) {
+        $('#reminder_reminder_date').attr("disabled","disabled")
+    } else {
+        $('#reminder_reminder_date').removeAttr('disabled');
+    }
+  });
+</script>

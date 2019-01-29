@@ -390,3 +390,7 @@ tbody.spacer:before {
   background:#cc4946;
   border-color:#cc4946
 }
+.disable-switch {
+  pointer-events: none;
+  opacity: .5;
+}
