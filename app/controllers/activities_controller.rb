@@ -154,37 +154,131 @@ class ActivitiesController < ApplicationController
     end
 
     def set_body
-      @content = "<div style='color: grey;'>" +
-                 "<h1 style='text-align: center;color: black;margin-bottom: 100px;'>Scout Logistics</h1>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'>" +
-                 "<thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Owner</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Status</th> </tr></thead>" +
-                 "<tbody> <tr> <td style='text-align: left'>#{@activity.user ? @activity.user.full_name : ''}</td><td style='text-align: right'>#{@activity.status ? 'Open' : 'Closed'}</td></tr></tbody>" +
-                 "</table>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'>" +
-                 " <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Type</th> <th style='text-align: center;color: black;padding-bottom: 5px;'>LPW</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Annual</th> </tr></thead>" +
-                 " <tbody> <tr> <td style='text-align: left'>#{@activity.activity_type}</td><td style='text-align: center'>#{@activity.loads_per_week}</td><td style='text-align: right'>#{@activity.annual_value}</td></tr></tbody>" +
-                 "</table>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'>" +
-                 "<thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Open</th> <th style='text-align: center;color: black;padding-bottom: 5px;'>Close</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Outcome</th> </tr></thead>" +
-                 " <tbody> <tr> <td style='text-align: left'>#{convert_date(@activity.date_opened)}</td><td style='text-align: center'>#{convert_date(@activity.date_closed)}</td><td style='text-align: right'>#{@activity.outcome}</td></tr></tbody>" +
-                 "</table>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'>" +
-                 " <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Reason</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>
-                 Carrier/Shipper</th> </tr></thead>" +
-                 " <tbody> <tr> <td style='text-align: left'>#{!@activity.reason.blank? ? @activity.reason : '<i>None</i>'}</td><td style='text-align: right'>#{@activity.carrier ? @activity.carrier.company_name : (@activity.shipper ? @activity.shipper.company_name : '<i>None</i>')}</td></tr></tbody>" +
-                 "</table>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'>" +
-                 "<thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Contact Activity</th> <th style='text-align: center;color: black;padding-bottom: 5px;'>Priority</th> <th style='text-align: center;color: black;padding-bottom: 5px;'>City</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>State</th> </tr></thead>"
+      @style = "<style>
+                      .header {
+                        text-align: center;
+                        color: #000;
+                        margin-bottom: -15px;
+                      }
+                      .sub-header {
+                        text-align: center;
+                        color: #ee9c10;
+                        margin-bottom: 50px;
+                      }
+                      .header-logo {
+                        width: 50px;
+                        vertical-align: middle;
+                      }
+                      tr>td {
+                        font-size: 18px;
+                        padding-bottom: 1em;
+                      }
+                      .carrier {
+                        color: #6f060b;
+                      }
+                      .shipper {
+                        color: #013a38;
+                      }
+                      .none {
+                        color: #999;
+                      }
+                </style>"
+
+      @content = "<tr>
+                    <td><b>Owner:</b> <span>#{@activity.user ? @activity.user.full_name : ''}</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>Type:</b> <span>#{@activity.activity_type}</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>Status:</b> <span>#{@activity.status ? 'Open' : 'Closed'}</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>LPW:</b> <span>#{@activity.loads_per_week}</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>Annual:</b> <span>#{@activity.annual_value}</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>Date Open:</b> <span>#{@activity.date_opened}</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>Date Close:</b> <span>#{@activity.date_closed}</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>Outcome:</b> <span>#{@activity.outcome}</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>Reason:</b> <span>#{!@activity.reason.blank? ? @activity.reason : '<span class=none>None</span>'}</span></td>
+                  </tr>
+                  <tr>
+                    <td><hr></td>
+                  </tr>"
+
       if !@activity.carrier.nil?
-        @content = @content + "<tbody><tr><td style='text-align: left'>#{@activity.carrier_contact.nil? ? '<i>None</i>' : @activity.carrier_contact.full_name}</td><td style='text-align: center'>#{@activity.carrier.nil? || @activity.carrier.sales_priority.blank? ? '<i>None</i>' : @activity.carrier.sales_priority}</td><td style='text-align: center'>#{@activity.carrier.nil? || @activity.carrier.head_office_location.nil? ? '<i>None</i>' : @activity.carrier.head_office_location.city}</td><td style='text-align: right'>#{@activity.carrier.nil? || @activity.carrier.head_office_location.nil? ? '<i>None</i>' : @activity.carrier.head_office_location.state}</td></tr></tbody>"
+        @content = @content +
+                   "<tr>
+                     <td><b>Carrier:</b> <strong class='carrier'>#{@activity.carrier ? @activity.carrier.company_name : ''}</strong></td>
+                    </tr>
+                    <tr>
+                      <td><b>Contact Activity:</b> <span>#{@activity.carrier_contact.nil? ? '<span class=none>None</span>' : @activity.carrier_contact.full_name}</span></td>
+                    </tr>
+                    <tr>
+                      <td><b>Priority:</b> <span>#{@activity.carrier.nil? || @activity.carrier.sales_priority.blank? ? '<span class=none>None</span>' : @activity.carrier.sales_priority}</span></td>
+                    </tr>
+                    <tr>
+                      <td><b>City:</b> <span>#{@activity.carrier.nil? || @activity.carrier.head_office_location.city.blank? ? '<span class=none>None</span>' : @activity.carrier.head_office_location.city}</span></td>
+                    </tr>
+                    <tr>
+                      <td><b>State:</b> <span>#{@activity.carrier.nil? || @activity.carrier.head_office_location.state.blank? ? '<span class=none>None</span>' : @activity.carrier.head_office_location.state}</span></td>
+                    </tr>
+                    <tr>
+                      <td><hr></td>
+                    </tr>
+                    <tr>
+                      <td><b>Notes:</b> <span>#{@activity.notes.blank? ? "<span class=none>None</span>" : @activity.notes.html_safe}</span></td>
+                    </tr>"
       elsif !@activity.shipper.nil?
-        @content = @content + "<tbody><tr><td style='text-align: left'>#{@activity.shipper_contact.nil? ? '<i>None</i>' : @activity.shipper_contact.full_name}</td><td style='text-align: center'>#{@activity.shipper.nil? || @activity.shipper.sales_priority.blank? ? '<i>None</i>' : @activity.shipper.sales_priority}</td><td style='text-align: center'>#{@activity.shipper.nil? || @activity.shipper.head_office_location.nil? ? '<i>None</i>' : @activity.shipper.head_office_location.city}</td><td style='text-align: right'>#{@activity.shipper.nil? || @activity.shipper.head_office_location.nil? ? '<i>None</i>' : @activity.shipper.head_office_location.state}</td></tr></tbody>"
+        @content = @content +
+                   "<tr>
+                     <td><b>Shipper:</b> <strong class='shipper'>#{@activity.shipper ? @activity.shipper.company_name : ''}</strong></td>
+                    </tr>
+                    <tr>
+                      <td><b>Contact Activity:</b> <span>#{@activity.shipper_contact.nil? ? '<span class=none>None</span>' : @activity.shipper_contact.full_name}</span></td>
+                    </tr>
+                    <tr>
+                      <td><b>Priority:</b> <span>#{@activity.shipper.blank? || @activity.shipper.sales_priority.blank? ? '<span class=none>None</span>' : @activity.shipper.sales_priority}</span></td>
+                    </tr>
+                    <tr>
+                      <td><b>City:</b> <span>#{@activity.shipper.nil? || @activity.shipper.head_office_location.city.blank? ? '<span class=none>None</span>' : @activity.shipper.head_office_location.city}</span></td>
+                    </tr>
+                    <tr>
+                      <td><b>State:</b> <span>#{@activity.shipper.nil? || @activity.shipper.head_office_location.state.blank? ? '<span class=none>None</span>' : @activity.shipper.head_office_location.state}</span></td>
+                    </tr>
+                    <tr>
+                      <td><hr></td>
+                    </tr>
+                    <tr>
+                      <td><b>Notes:</b> <span>#{@activity.notes.blank? ? "<span class=none>None</span>" : @activity.notes.html_safe}</span></td>
+                    </tr>"
       else
-        @content = @content + "<tbody><tr><td></td><td></td><td></td><td></td></tr></tbody>"
+        @content = @content +
+                   "<tr>
+                     <td><b>Notes:</b> <span>#{@activity.notes.blank? ? "<span class=none>None</span>" : @activity.notes.html_safe}</span></td>
+                   </tr>"
       end
-      @content = @content + "</table>" +
-                 "<div style='margin-top: 100px;'><p><strong>Notes:</strong> #{@activity.notes.nil? ? "<i>None</i>" : @activity.notes.html_safe}</p></div>" +
-                 "</div>"
+
+      @content = @style +
+                 "<div>" +
+                    "<h1 class='header'><img class='header-logo' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'> <span style='vertical-align: middle;'>Scout Logistics<span></h1>" +
+                    "<h3 class='sub-header'>(Activity)</h3>" +
+                    "<table width=100%>" +
+                      "<tbody>" +
+                        @content +
+                      "</tbody>" +
+                    "</table>" +
+                  "</div>"
+
     end
 
     def set_previous_controller

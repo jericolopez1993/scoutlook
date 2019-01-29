@@ -134,17 +134,119 @@ class RatesController < ApplicationController
     end
 
     def set_body
-      @content = "<div style='color: grey;'>" +
-                 "<h1 style='text-align: center;color: black;margin-bottom: 100px;'>Scout Logistics</h1>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Origin</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Destination</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.origin_city + ", " + @rate.origin_state}</td><td style='text-align: right'>#{@rate.destination_city + ", " + @rate.destination_state}</td></tr></tbody> </table>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Miles</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Carrier/Shipper</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.miles}</td><td style='text-align: right'>#{@rate.activity ? (@rate.activity.carrier ? @rate.activity.carrier.company_name : (@rate.activity.shipper ? @rate.activity.shipper.company_name : '<i>None</i>')) : '<i>None</i>'}</td></tr></tbody> </table>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Type</th> <th style='text-align: center;color: black;padding-bottom: 5px;'>Picks</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Drops</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.rate_type}</td><td style='text-align: center'>#{@rate.picks}</td><td style='text-align: right'>#{@rate.drops}</td></tr></tbody> </table>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Team</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Commodities</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.team}</td><td style='text-align: right'>#{@rate.commodities}</td></tr></tbody> </table>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Bid</th> <th style='text-align: center;color: black;padding-bottom: 5px;'>Ask</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>Accepted</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.bid}</td><td style='text-align: center'>#{@rate.ask}</td><td style='text-align: right'>#{@rate.accepted ? "Yes" : "No"}</td></tr></tbody> </table>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Cost</th> <th style='text-align: center;color: black;padding-bottom: 5px;'>Currency</th> <th style='text-align: right;color: black;padding-bottom: 5px;'>MC #</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.cost}</td><td style='text-align: center'>#{@rate.money_currency}</td><td style='text-align: right'>#{@rate.mc_number}</td></tr></tbody> </table>" +
-                 "<table style='width: 100%;padding-bottom: 10px;'> <thead> <tr> <th style='text-align: left;color: black;padding-bottom: 5px;'>Date Created</th> </tr></thead> <tbody> <tr> <td style='text-align: left'>#{@rate.created_at}</td></tr></tbody> </table>" +
-                 "<div style='margin-top: 100px;'><p><strong>Notes:</strong> #{@rate.notes.nil? ? "<i>None</i>" : @rate.notes.html_safe}</p></div>" +
-                 "</div>"
+      @style = "<style>
+                      .header {
+                        text-align: center;
+                        color: #000;
+                        margin-bottom: -15px;
+                      }
+                      .sub-header {
+                        text-align: center;
+                        color: #033309;
+                        margin-bottom: 50px;
+                      }
+                      .header-logo {
+                        width: 50px;
+                        vertical-align: middle;
+                      }
+                      tr>td {
+                        font-size: 18px;
+                        padding-bottom: 1em;
+                      }
+                      .carrier {
+                        color: #6f060b;
+                      }
+                      .shipper {
+                        color: #013a38;
+                      }
+                      .none {
+                        color: #999;
+                      }
+                </style>"
+
+      if @rate.activity
+        if @rate.activity.carrier
+          @extra_content = "<tr>
+                             <td><b>Carrier:</b> <strong class='carrier'>#{@rate.activity.carrier.company_name}</strong></td>
+                            </tr>"
+        elsif @rate.activity.shipper
+          @extra_content = "<tr>
+                             <td><b>Shipper:</b> <strong class='shipper'>#{@rate.activity.shipper.company_name}</strong></td>
+                            </tr>"
+        end
+      else
+        @extra_content = "<tr>
+                           <td><b>Carrier/Shipper:</b> <span class='none'>None</span></td>
+                          </tr>"
+      end
+
+      @content = "<tr>
+                  <td><b>Origin:</b> <span>#{@rate.origin_city + ", " + @rate.origin_state}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Destination:</b> <span>#{@rate.destination_city + ", " + @rate.destination_state}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Miles:</b> <span>#{@rate.miles}</span></td>
+                 </tr>" +
+                 @extra_content +
+                 "<tr>
+                  <td><b>Type:</b> <span>#{@rate.rate_type}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Picks:</b> <span>#{@rate.picks}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Drops:</b> <span>#{@rate.drops}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Team:</b> <span>#{@rate.team}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Commodities:</b> <span>#{@rate.commodities.split(',').to_sentence}</span></td>
+                 </tr>
+                 <tr>
+                   <td><hr></td>
+                 </tr>
+                 <tr>
+                  <td><b>Bid:</b> <span>#{@rate.bid}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Ask:</b> <span>#{@rate.ask}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Accepted:</b> <span>#{@rate.accepted ? "Yes" : "No"}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Cost:</b> <span>#{@rate.cost}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Currency:</b> <span>#{@rate.money_currency}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>MC #:</b> <span>#{@rate.mc_number}</span></td>
+                 </tr>
+                 <tr>
+                  <td><b>Date Created:</b> <span>#{@rate.created_at}</span></td>
+                 </tr>
+                 <tr>
+                   <td><hr></td>
+                 </tr>
+                 <tr>
+                  <td><b>Notes:</b> <span>#{@rate.notes.nil? ? "<span class='none'>None</span>" : @rate.notes.html_safe}</span></td>
+                 </tr>"
+
+      @content = @style +
+                  "<div>" +
+                     "<h1 class='header'><img class='header-logo' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'> <span style='vertical-align: middle;'>Scout Logistics<span></h1>" +
+                     "<h3 class='sub-header'>(Rate)</h3>" +
+                     "<table width=100%>" +
+                       "<tbody>" +
+                         @content +
+                       "</tbody>" +
+                     "</table>" +
+                   "</div>"
+
     end
 
     def set_previous_controller
