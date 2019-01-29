@@ -16,6 +16,17 @@ namespace :puma do
   before :start, :make_dirs
 end
 
+namespace :nginx do
+    %w(start stop restart reload).each do |command|
+        desc "#{command.capitalize} Nginx"
+        task command do
+            on roles(:app) do
+                execute :sudo, "service nginx #{command}"
+            end
+        end
+    end
+end
+
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
@@ -43,10 +54,26 @@ namespace :deploy do
     end
   end
 
+  desc 'Start Nginx'
+  task :start_nginx do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'nginx:start'
+    end
+  end
+
+  desc 'Stop Nginx'
+  task :stop_nginx do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'nginx:stop'
+    end
+  end
+
+  before :starting,     :stop_nginx
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
+  after  :finishing,    :start_nginx
 end
 
 # ps aux | grep puma    # Get puma pid
