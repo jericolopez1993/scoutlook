@@ -21,7 +21,7 @@
       <% end %>
       <th>User</th>
       <th>Next Reminder Date</th>
-      <th>Interval</th>
+      <th>Last Reminded</th>
     </tr>
   </thead>
   <tfoot>
@@ -36,7 +36,7 @@
       <% end %>
       <th>User</th>
       <th>Next Reminder Date</th>
-      <th>Interval</th>
+      <th>Last Reminded</th>
     </tr>
   </tfoot>
   <tbody class="spacer">
@@ -101,16 +101,16 @@
         <td>
           <% if reminder.reminder_interval %>
             <% if reminder.recurring %>
-              <%= reminder.reminder_date_reccuring %>
+              <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.created_at.strftime('%d/%m/%Y')})" %>
             <% else %>
-              <%= reminder.reminder_date_interval %>
+            <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.created_at.strftime('%d/%m/%Y')})" %>
             <% end %>
           <% else %>
             <%= reminder.reminder_date %>
           <% end %>
         </td>
-        <td><%= interval_to_text(reminder.reminder_interval) %></td>
-      </tr>
+        <td><%= reminder.last_reminded %></td>
+      </tr>``
     <% end %>
   </tbody>
 </table>

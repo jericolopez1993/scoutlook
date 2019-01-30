@@ -32,21 +32,23 @@
     </div>
   <% end %>
   <div class="row">
-    <label class="col-md-2 col-form-label">Reminder Date:</label>
+    <label class="col-md-2 col-form-label">Next Reminder Date:</label>
     <div class="col-md-9 lbl-padding-t">
-      <%= reminder.reminder_date %>
+      <% if reminder.reminder_interval %>
+        <% if reminder.recurring %>
+          <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.created_at.strftime('%d/%m/%Y')})" %>
+        <% else %>
+        <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.created_at.strftime('%d/%m/%Y')})" %>
+        <% end %>
+      <% else %>
+        <%= reminder.reminder_date %>
+      <% end %>
     </div>
   </div>
   <div class="row">
-    <label class="col-md-2 col-form-label">Interval:</label>
+    <label class="col-md-2 col-form-label">Last Reminded:</label>
     <div class="col-md-9 lbl-padding-t">
-      <%= interval_to_text(reminder.reminder_interval) %>
-    </div>
-  </div>
-  <div class="row">
-    <label class="col-md-2 col-form-label">Recurring?</label>
-    <div class="col-md-9 lbl-padding-t">
-      <%= reminder.recurring ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %>
+      <%= reminder.last_reminded %>
     </div>
   </div>
   <div class="row">
