@@ -1,8 +1,16 @@
+<style>
+  div.link a:visited {
+    color: #0a849f!important;
+  }
+  div.link a {
+    text-decoration: underline;
+  }
+</style>
 <% if reminder %>
   <% if reminder.carrier %>
     <div class="row">
       <label class="col-md-2 col-form-label">Carrier:</label>
-      <div class="col-md-9 lbl-padding-t">
+      <div class="col-md-9 lbl-padding-t link">
         <%= reminder.carrier.nil? ? "" : (link_to "#{reminder.carrier.company_name}", reminder.carrier) %>
       </div>
     </div>
@@ -10,7 +18,7 @@
   <% if reminder.shipper %>
     <div class="row">
       <label class="col-md-2 col-form-label">Shipper:</label>
-      <div class="col-md-9 lbl-padding-t">
+      <div class="col-md-9 lbl-padding-t link">
         <%= reminder.shipper.nil? ? "" : (link_to "#{reminder.shipper.company_name}", reminder.shipper) %>
       </div>
     </div>
@@ -18,7 +26,7 @@
   <% if reminder.activity %>
     <div class="row">
       <label class="col-md-2 col-form-label">Activity:</label>
-      <div class="col-md-9 lbl-padding-t">
+      <div class="col-md-9 lbl-padding-t link">
         <%= link_to(reminder.activity.campaign_name.blank? ? "(no campaign name)" : reminder.activity.campaign_name, reminder.activity)  %>
       </div>
     </div>
@@ -26,7 +34,7 @@
   <% if reminder.user %>
     <div class="row">
       <label class="col-md-2 col-form-label">User:</label>
-      <div class="col-md-9 lbl-padding-t">
+      <div class="col-md-9 lbl-padding-t link">
         <%= reminder.user.nil? ? "" : (link_to "#{reminder.user.full_name}", reminder.user) %>
       </div>
     </div>
