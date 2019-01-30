@@ -271,6 +271,9 @@ $(document).ready(function() {
   $("#invoice_status").change(function(){
     statusNotes((currentInvoiceStatus === $(this).val()), 'invoice-audit-comment');
   });
+  $("#years_established").change(function(){
+    $("#years_in_business").val((new Date()).getFullYear() - parseInt($(this).val()));
+  });
 });
 
 function activityOutcomeFields(actype, stat, outcome) {

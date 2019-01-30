@@ -106,9 +106,15 @@
             </div>
           </div>
           <div class="form-group row m-b-15">
+            <%= form.label :years_established, 'Years Established:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :years_established, (Time.zone.now.year - 80)..(Time.zone.now.year),{:include_blank => true, :selected => (carrier.years_established.blank? ? Time.zone.now.year : carrier.years_established)}, class: 'form-control', id: 'years_established' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
             <%= form.label :years_in_business, 'Years in Business:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.number_field :years_in_business, class: 'form-control' %>
+              <%= form.number_field :years_in_business, class: 'form-control', id: 'years_in_business', disabled: true %>
             </div>
           </div>
           <div class="form-group row m-b-15">

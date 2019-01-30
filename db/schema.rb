@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_22_184819) do
+ActiveRecord::Schema.define(version: 2019_01_30_053538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_184819) do
     t.date "date_approved"
     t.date "last_load_date"
     t.boolean "contract_rates", default: false
+    t.integer "years_established"
   end
 
   create_table "master_invoices", force: :cascade do |t|
@@ -459,6 +460,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_184819) do
     t.integer "load_last_6_month", default: 0
     t.boolean "approved", default: false
     t.date "date_approved"
+    t.integer "years_established"
   end
 
   create_table "users", force: :cascade do |t|
