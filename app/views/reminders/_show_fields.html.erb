@@ -40,6 +40,12 @@
     </div>
   <% end %>
   <div class="row">
+    <label class="col-md-2 col-form-label">Type:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= reminder.reminder_type %>
+    </div>
+  </div>
+  <div class="row">
     <label class="col-md-2 col-form-label">Next Reminder Date:</label>
     <div class="col-md-9 lbl-padding-t">
       <% if reminder.reminder_interval %>
@@ -63,6 +69,12 @@
     <label class="col-md-2 col-form-label">Date Created:</label>
     <div class="col-md-9 lbl-padding-t">
       <%= reminder.created_at %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-2 col-form-label">Notes:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= reminder.notes.nil? ? "" : reminder.notes.html_safe %>
     </div>
   </div>
 

@@ -94,6 +94,6 @@ class RemindersController < ApplicationController
         params[:reminder][:reminder_date] = nil
       end
       params[:reminder][:user_id] = current_user.id
-      params.require(:reminder).permit(:carrier_id, :shipper_id, :activity_id, :user_id, :reminder_date, :reminder_interval, :recurring)
+      params.require(:reminder).permit(:carrier_id, :shipper_id, :activity_id, :user_id, :reminder_date, :reminder_interval, :recurring, :notes, :reminder_type)
     end
 end

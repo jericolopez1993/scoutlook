@@ -23,8 +23,10 @@
         <th>Activity</th>
       <% end %>
       <th>User</th>
+      <th>Type</th>
       <th>Next Reminder Date</th>
       <th>Last Reminded</th>
+      <th>Notes</th>
     </tr>
   </thead>
   <tfoot>
@@ -38,8 +40,10 @@
         <th>Activity</th>
       <% end %>
       <th>User</th>
+      <th>Type</th>
       <th>Next Reminder Date</th>
       <th>Last Reminded</th>
+      <th>Notes</th>
     </tr>
   </tfoot>
   <tbody class="spacer">
@@ -101,6 +105,7 @@
         <td class="link"><%= reminder.activity && link_to(reminder.activity.campaign_name.blank? ? "(no name)" : reminder.activity.campaign_name, reminder.activity) %></td>
         <% end %>
         <td class="link"><%= reminder.user && link_to(reminder.user.full_name.blank? ? "(no name)" : reminder.user.full_name, reminder.user) %></td>
+        <td><%= reminder.reminder_type %></td>
         <td>
           <% if reminder.reminder_interval %>
             <% if reminder.recurring %>
@@ -113,6 +118,7 @@
           <% end %>
         </td>
         <td><%= reminder.last_reminded %></td>
+        <td><%= reminder.notes.nil? ? '' : reminder.notes.html_safe %></td>
       </tr>
     <% end %>
   </tbody>

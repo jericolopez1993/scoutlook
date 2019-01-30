@@ -51,7 +51,12 @@
             </div>
           <% end %>
         <% end %>
-
+        <div class="form-group row m-b-15">
+          <%= form.label :reminder_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.select :reminder_type, options_for_select(['Initial Interview', 'Check Capacity', 'Follow-up'], reminder.reminder_type),{:include_blank => true}, class: 'form-control', id: "reminder_type" %>
+          </div>
+        </div>
         <div class="form-group row m-b-15">
           <%= form.label :reminder_date, 'Reminder Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
@@ -70,6 +75,12 @@
               <%= form.check_box :recurring, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: reminder.recurring %>
           </div>
         </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.text_area(:notes, cols: 20, rows: 5, class: 'tinymce') %>
+          </div>
+        </div>
         <div class="form-group row m-b-0">
           <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
           <div class="col-md-9 col-sm-8">
@@ -84,6 +95,7 @@
     </div>
   </div>
 </div>
+<%= tinymce %>
 <!-- end panel -->
 <script type="text/javascript">
   $('#reminder_reminder_date').change(function(){
