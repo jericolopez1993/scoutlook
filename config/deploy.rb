@@ -27,6 +27,21 @@ namespace :nginx do
     end
 end
 
+namespace :seed do
+  desc "Backup the database based on environment"
+  task :make_dirs do
+    on roles(:app) do
+      execute "mkdir #{shared_path}/seeds -p"
+    end
+  end
+
+  task :dump do
+    on roles(:app) do
+      execute "cd #{release_path} && /usr/local/rvm/bin/rvm default do bundle exec rake db:seed:dump EXCLUDE=[] FILE=#{shared_path}/seeds/#{Date.now}-seeds.rb RAILS_ENV=#{fetch(:stage)}"
+    end
+  end
+end
+
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
@@ -68,12 +83,22 @@ namespace :deploy do
     end
   end
 
+  desc 'Seed Dump'
+  task :seed_dump do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'seed:make_dirs'
+      invoke 'seed:dump'
+    end
+  end
+
   before :starting,     :stop_nginx
+  before :starting,     :seed_dump
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
   after  :finishing,    :start_nginx
+  # after  :finishing,    :seed_dump
 end
 
 # ps aux | grep puma    # Get puma pid
