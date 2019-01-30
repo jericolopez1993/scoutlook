@@ -1,10 +1,10 @@
 <div id="top-menu" class="top-menu">
     <!-- begin top-menu nav -->
     <ul class="nav bg-inverse">
-      <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || current_user.ro || current_user.cs || (!current_user.carrier_contact.nil? && current_user.has_role?(:contact)) %>
+      <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || current_user.ro || current_user.cs  %>
         <li><a href="<%= carriers_path %>" class="<%= (params[:controller] == 'carriers') ? 'active' : ''%> carrier"><i class="fa fa-truck"></i> <span>Carriers</span></a></li>
       <% end %>
-      <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || current_user.ro || (!current_user.shipper_contact.nil? && current_user.has_role?(:contact)) %>
+      <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || current_user.ro || current_user.cs  %>
         <li><a href="<%= shippers_path %>" class="<%= (params[:controller] == 'shippers') ? 'active' : ''%> shipper"><i class="fa fa-shopping-basket"></i> <span>Shippers</span></a></li>
       <% end %>
       <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || current_user.ro || current_user.cs %>
