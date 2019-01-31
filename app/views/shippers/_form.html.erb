@@ -167,9 +167,9 @@
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :years_established, 'Years Established:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :years_established, 'Year Established:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.select :years_established, (Time.zone.now.year - 80)..(Time.zone.now.year),{:include_blank => true, :selected => (shipper.years_established.blank? ? Time.zone.now.year : shipper.years_established)}, class: 'form-control', id: 'years_established' %>
+              <%= form.select :years_established, (Time.zone.now.year - 80)..(Time.zone.now.year),{:include_blank => true, :selected => (shipper.years_established.blank? ? '' : shipper.years_established)}, class: 'form-control', id: 'years_established' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
