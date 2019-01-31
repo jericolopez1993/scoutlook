@@ -59,17 +59,15 @@
         </div>
         <div class="form-group row m-b-15">
           <%= form.label :reminder_date, 'Reminder Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
+          <div class="col-md-4 col-sm-8">
             <%= form.text_field :reminder_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
           </div>
-        </div>
-        <div class="form-group row m-b-15">
-          <%= form.label :reminder_interval, 'Interval:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
-          <div class="col-md-9 col-sm-8">
+          <%= form.label :reminder_interval, 'OR Interval:', class: 'text-right col-md-1 col-sm-4 col-form-label' %>
+          <div class="col-md-4 col-sm-8">
             <%= form.select :reminder_interval, options_for_select([['1w', 7], ['2w', 14], ['1M', 30], ['3M', 90], ['6M', 180], ['12M', 360]], reminder.reminder_interval),{:include_blank => true}, class: 'form-control', id: "reminder_interval" %>
           </div>
         </div>
-        <div class="form-group row m-b-15">
+        <div class="form-group row m-b-15 switch-block">
           <label class="text-right col-md-2 col-sm-4 col-form-label">is Recurring?</label>
           <div class="col-md-9 col-sm-8">
               <%= form.check_box :recurring, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: reminder.recurring %>
@@ -98,6 +96,11 @@
 <%= tinymce %>
 <!-- end panel -->
 <script type="text/javascript">
+  $(".switchery").ready(function(){
+    if ($('#reminder_interval').val() == "") {
+      $('.switch-block').hide()
+    }
+  });
   $('#reminder_reminder_date').change(function(){
     if ($('#reminder_reminder_date').val() != "") {
         $('#reminder_interval').attr("disabled","disabled")
@@ -110,8 +113,10 @@
   $('#reminder_interval').change(function(){
     if ($('#reminder_interval').val() != "") {
         $('#reminder_reminder_date').attr("disabled","disabled")
+        $('.switch-block').show()
     } else {
         $('#reminder_reminder_date').removeAttr('disabled');
+        $('.switch-block').hide()
     }
   });
   $('#reminder_recurring').on('change', function(){
