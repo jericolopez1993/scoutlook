@@ -89,8 +89,8 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
+  config.action_mailer.default_url_options = { host:'scout-dev.marcelo.ph'}
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
-
