@@ -77,7 +77,7 @@
       <div class="form-group row m-b-15">
         <%= form.label :date_stamp, 'Open Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.text_field :date_stamp, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: activity.date_stamp, :id => "date_stamp"%>
+          <%= form.text_field :date_stamp, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: (activity.date_stamp.nil? ? Time.now.strftime('%d/%m/%Y').to_s : activity.date_stamp.strftime('%d/%m/%Y').to_s), :id => "date_stamp"%>
         </div>
       </div>
       <div class="form-group row m-b-15">

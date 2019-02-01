@@ -1,7 +1,7 @@
 # Change these
 server 'ubuntu@piggyback.net', roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@github.com:opinionatedsoft/pb-platform.git'
+set :repo_url,        'git@gitlab.com:opinionatedsoft/scoutcrm.git'
 set :application,     'scout_prod'
 set :user,            'ubuntu'
 set :puma_threads,    [4, 16]
