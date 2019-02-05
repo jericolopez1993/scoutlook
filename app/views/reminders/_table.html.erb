@@ -26,7 +26,7 @@
       <th>Type</th>
       <th>Next Reminder Date</th>
       <th>Last Reminded</th>
-      <th>Notes</th>
+      <th width="25%">Notes</th>
     </tr>
   </thead>
   <tfoot>
@@ -43,7 +43,7 @@
       <th>Type</th>
       <th>Next Reminder Date</th>
       <th>Last Reminded</th>
-      <th>Notes</th>
+      <th width="25%">Notes</th>
     </tr>
   </tfoot>
   <tbody class="spacer">
@@ -109,20 +109,42 @@
         <td>
           <% if reminder.reminder_date %>
             <% if reminder.reminder_date > Date.today %>
-              <%= reminder.reminder_date %>
+              <% if reminder.recurring %>
+                <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y")})" %>
+              <% else %>
+                <% if reminder.reminder_interval %>
+                  <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.reminder_date.strftime("%m/%d/%Y")})" %>
+                <% else %>
+                  <%= reminder.reminder_date %>
+                <% end %>
+              <% end %>
             <% else %>
-              Done
+              <% if reminder.recurring %>
+                <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y")})" %>
+              <% else %>
+                <% if reminder.reminder_interval %>
+                  <% if reminder.reminder_date_interval > Date.today.strftime("%m/%d/%Y") %>
+                    <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.reminder_date.strftime("%m/%d/%Y")})" %>
+                  <% else %>
+                    Done
+                  <% end %>
+                <% else %>
+                  Done
+                <% end %>
+              <% end %>
             <% end %>
           <% else %>
             <% if reminder.recurring %>
               <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.created_at.strftime("%m/%d/%Y")})" %>
             <% else %>
-              <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.created_at.strftime("%m/%d/%Y")})" %>
+              <% if reminder.reminder_interval %>
+                <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.created_at.strftime("%m/%d/%Y")})" %>
+              <% end %>
             <% end %>
           <% end %>
         </td>
         <td><%= reminder.last_reminded.nil? ? '' : reminder.last_reminded.strftime("%m/%d/%Y") %></td>
-        <td><%= reminder.notes.nil? ? '' : reminder.notes.html_safe %></td>
+        <td><%= reminder.notes.nil? ? '' : truncate(reminder.notes.html_safe, :length => 100, :omission => '...', :escape => false) %></td>
       </tr>
     <% end %>
   </tbody>

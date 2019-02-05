@@ -9,16 +9,30 @@ class Reminder < ApplicationRecord
   end
 
   def reminder_date_interval
-    date = self.created_at + self.reminder_interval.days
-    date.strftime("%m/%d/%Y")
+    if self.reminder_date
+      date = self.reminder_date + self.reminder_interval.days
+      date.strftime("%m/%d/%Y")
+    elsif self.reminder_date.nil?
+      date = self.created_at + self.reminder_interval.days
+      date.strftime("%m/%d/%Y")
+    elsif self.reminder_interval.nil?
+      date = nil
+    end
   end
 
   def reminder_date_reccuring
-    current = self.created_at + self.reminder_interval.days
-    until current >= Date.today
-      current += self.reminder_interval.days
+    if self.reminder_date
+      current = self.reminder_date + self.reminder_interval.days
+      until current >= Date.today
+        current += self.reminder_interval.days
+      end
+      current.strftime("%m/%d/%Y")
+    else
+      current = self.created_at + self.reminder_interval.days
+      until current >= Date.today
+        current += self.reminder_interval.days
+      end
+      current.strftime("%m/%d/%Y")
     end
-    current.strftime("%m/%d/%Y")
   end
-
 end
