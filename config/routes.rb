@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :shipper_companies
+  resources :carrier_companies
   resources :reminders
   resources :master_signals, :path => 'signals'
   resources :shipments

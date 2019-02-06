@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @shipper_company.name %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @shipper_company.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @shipper_company.state %>
+</p>
+
+<p>
+  <strong>Company type:</strong>
+  <%= @shipper_company.company_type %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @shipper_company.phone_number %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @shipper_company.website %>
+</p>
+
+<%= link_to 'Edit', edit_shipper_company_path(@shipper_company) %> |
+<%= link_to 'Back', shipper_companies_path %>

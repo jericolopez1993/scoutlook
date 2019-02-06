@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @carrier_company.name %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @carrier_company.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @carrier_company.state %>
+</p>
+
+<p>
+  <strong>Company type:</strong>
+  <%= @carrier_company.company_type %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @carrier_company.phone_number %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @carrier_company.website %>
+</p>
+
+<%= link_to 'Edit', edit_carrier_company_path(@carrier_company) %> |
+<%= link_to 'Back', carrier_companies_path %>

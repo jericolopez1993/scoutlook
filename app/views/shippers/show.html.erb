@@ -32,7 +32,7 @@
   }
 </style>
 <!-- begin page-header -->
-<div class="header-darkblue">
+<div class="header-scout">
   <h1 class="pull-left">
     <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@shipper.company_name, @shipper.id), sub_header_title: @shipper.company_name %>
   </h1>
@@ -57,6 +57,7 @@
       <%= link_to 'New Activity', new_activity_path(:shipper_id => @shipper.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-activity-btn' %>
       <%= link_to 'New Lane', new_shipper_lane_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
       <%= link_to 'New Rate', new_rate_path(:previous_controller => params[:controller], :shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-rate-btn' %>
+      <%= link_to 'New Affiliated Company', new_shipper_company_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-company-btn' %>
     </div>
     <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
       <li class="nav-items">
@@ -97,6 +98,11 @@
       <li class="nav-items">
         <a href="#reminders" data-toggle="tab" class="nav-link reminder-btn" style="padding:5px; margin: 0px 10px">
           <span class="d-sm-block d-none"><h4 class="panel-title">Reminders</h4></span>
+        </a>
+      </li>
+      <li class="nav-items">
+        <a href="#companies" data-toggle="tab" class="nav-link company-btn" style="padding:5px; margin: 0px 10px">
+          <span class="d-sm-block d-none"><h4 class="panel-title">Affiliated Company</h4></span>
         </a>
       </li>
     </ul>
@@ -142,42 +148,51 @@
         <%= render 'reminders/table', reminders: @shipper.reminders, with_actions: true %>
       </div>
     </div>
+    <div class="tab-pane fade" id="companies">
+      <div class="panel-body">
+        <%= render 'shipper_companies/table', shipper_companies: @shipper.shipper_companies, with_actions: true %>
+      </div>
+    </div>
     <!-- end tab-pane -->
   </div>
 </div>
 <!-- end panel -->
 <script type="text/javascript">
-  $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
+  $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn, .new-company-btn').hide();
   $('.location-btn').on('click', function(){
-      $('.new-contact-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
+      $('.new-contact-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn, .new-company-btn').hide();
       $('.new-location-btn').show();
   });
   $('.contact-btn').on('click', function(){
-      $('.new-location-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
+      $('.new-location-btn, .new-lane-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn, .new-company-btn').hide();
       $('.new-contact-btn').show();
   });
   $('.attachment-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn, .new-company-btn').hide();
       $('.new-attachment-btn').show();
   });
   $('.lane-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn, .new-company-btn').hide();
       $('.new-lane-btn').show();
   });
   $('.rate-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-activity-btn, .new-reminder-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-activity-btn, .new-reminder-btn, .new-company-btn').hide();
       $('.new-rate-btn').show();
   });
   $('.activity-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-rate-btn, .new-reminder-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-rate-btn, .new-reminder-btn, .new-company-btn').hide();
       $('.new-activity-btn').show();
   });
   $('.reminder-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-rate-btn, .new-activity-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-rate-btn, .new-activity-btn, .new-company-btn').hide();
       $('.new-reminder-btn').show();
   });
+  $('.company-btn').on('click', function(){
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-attachment-btn, .new-lane-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
+      $('.new-company-btn').show();
+  });
   $('.hide-btn').on('click', function(){
-      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn').hide();
+      $('.new-contact-btn, .new-location-btn, .new-activity-btn, .new-lane-btn, .new-attachment-btn, .new-rate-btn, .new-activity-btn, .new-reminder-btn, .new-company-btn').hide();
   });
 
   $('.contact-btn, .lane-btn, .activity-btn, .location-btn, .rate-btn, .hide-btn').popover({ trigger:"manual" }).click(function(){

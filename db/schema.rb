@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_183852) do
+ActiveRecord::Schema.define(version: 2019_02_06_021747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,18 @@ ActiveRecord::Schema.define(version: 2019_01_30_183852) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "carrier_companies", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "state"
+    t.string "company_type"
+    t.string "phone_number"
+    t.string "website"
+    t.integer "carrier_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "carrier_contacts", force: :cascade do |t|
@@ -349,6 +361,18 @@ ActiveRecord::Schema.define(version: 2019_01_30_183852) do
     t.string "own_type"
     t.string "shipment_status"
     t.string "client_reference"
+  end
+
+  create_table "shipper_companies", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "state"
+    t.string "company_type"
+    t.string "phone_number"
+    t.string "website"
+    t.integer "shipper_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "shipper_contacts", force: :cascade do |t|

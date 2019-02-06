@@ -1,0 +1,40 @@
+<!-- begin page-header -->
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create Affiliated Company' : "Edit Affiliated Company" %>
+  </h1>
+</div>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <div class="panel-heading-btn">
+    </div>
+    <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(shipper_company.name, shipper_company.id) + " - #{shipper_company.name}") : "" %></h4>
+  </div>
+  <div class="panel-body">
+    <%= form_with(model: shipper_company, local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+    <%= form.hidden_field :shipper_id %>
+    <% if shipper_company.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(shipper_company.errors.count, "error") %> prohibited this shipper_company from being saved:</h2>
+        <ul>
+          <% shipper_company.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= render 'fields', shipper_company: shipper_company, form: form %>
+      <div class="form-group row m-b-0">
+        <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
+        <div class="col-md-9 col-sm-8">
+          <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+          <% shipper = Shipper.find_by(id: shipper_company.shipper_id)%>
+          &nbsp;&nbsp;<%= link_to 'Back', shipper, :class => 'btn btn-info' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<!-- end panel -->
