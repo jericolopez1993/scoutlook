@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :load_tiles
+  resources :load_lists
   resources :shipper_companies
   resources :carrier_companies
   resources :reminders
