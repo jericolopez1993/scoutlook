@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @load_tile.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @load_tile.status %>
+</p>
+
+<p>
+  <strong>Origin:</strong>
+  <%= @load_tile.origin %>
+</p>
+
+<p>
+  <strong>Destination:</strong>
+  <%= @load_tile.destination %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @load_tile.details %>
+</p>
+
+<%= link_to 'Edit', edit_load_tile_path(@load_tile) %> |
+<%= link_to 'Back', load_tiles_path %>

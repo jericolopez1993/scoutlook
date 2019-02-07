@@ -1,0 +1,2 @@
+class LoadTile < ApplicationRecord
+end
