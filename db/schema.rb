@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_06_021747) do
+ActiveRecord::Schema.define(version: 2019_02_06_174326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,6 +204,18 @@ ActiveRecord::Schema.define(version: 2019_02_06_021747) do
     t.integer "years_established"
   end
 
+  create_table "load_tiles", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.string "origin"
+    t.string "destination"
+    t.text "details"
+    t.integer "carrier_id"
+    t.integer "shipper_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "master_invoices", force: :cascade do |t|
     t.string "shipment_type"
     t.integer "shipper_id"
@@ -299,20 +311,6 @@ ActiveRecord::Schema.define(version: 2019_02_06_021747) do
     t.date "last_reminded"
     t.text "notes"
     t.string "reminder_type"
-  end
-
-  create_table "reps", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "location"
-    t.date "date_of_hire"
-    t.string "rep_id"
-    t.string "parent_id"
-    t.string "phone"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
   end
 
   create_table "roles", force: :cascade do |t|
