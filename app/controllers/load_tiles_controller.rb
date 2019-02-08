@@ -10,6 +10,9 @@ class LoadTilesController < ApplicationController
   # GET /load_tiles/1
   # GET /load_tiles/1.json
   def show
+    respond_to do |format|
+      format.js { }
+    end
   end
 
   # GET /load_tiles/new

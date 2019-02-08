@@ -9,10 +9,10 @@
               <div class="panel-body">
                   <div id="TODO-<%= index%>" class="kanban-centered">
                     <% LoadTile.where(:load_date => cdate.strftime("%m/%d/%Y") ).each_with_index do |load_tile, index2|%>
-                      <article class="kanban-entry grab" id="item<%= index2 %>" draggable="true">
+                      <article class="kanban-entry grab" id="item<%= load_tile.id %>" draggable="true" >
                           <div class="kanban-entry-inner">
                               <div class="kanban-label">
-                                  <h2><a href="#"><%= load_tile.name %></a> <span><%= load_tile.status %></span></h2>
+                                  <h2><%= link_to load_tile.name, load_tile, :remote => true, :id => 'show_tile' %> <span><%= load_tile.status %></span></h2>
                                   <h5>
                                     <% load_tile.origin_to_array.each do |cr| %>
                                       <% if Carrier::LIGHT_BLUE.include?(cr) %>
