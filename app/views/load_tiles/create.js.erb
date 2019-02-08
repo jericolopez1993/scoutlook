@@ -1,0 +1,5 @@
+$("div#sortableKanbanBoards").html("<%= escape_javascript(render 'tiles') %>");
+$('#new_load').trigger("reset");
+$('.new-load-origin-multiple').val(null).trigger('change');
+$('.new-load-destination-multiple').val(null).trigger('change');
+$("#newLoadForm").modal('hide');

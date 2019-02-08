@@ -292,5 +292,16 @@ module ApplicationHelper
     on_sentence
   end
 
+  def date_to_words(date)
+    if date == Date.today()
+      "Today"
+    elsif date == Date.today() - 1
+      "Yesterday"
+    elsif date == Date.today() + 1
+      "Tomorrow"
+    else
+      date.strftime("%B %d")
+    end
+  end
 
 end

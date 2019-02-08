@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_06_174326) do
+ActiveRecord::Schema.define(version: 2019_02_08_171325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,8 @@ ActiveRecord::Schema.define(version: 2019_02_06_174326) do
     t.integer "shipper_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "load_date"
+    t.integer "priority"
   end
 
   create_table "master_invoices", force: :cascade do |t|

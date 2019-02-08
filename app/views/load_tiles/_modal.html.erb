@@ -1,0 +1,17 @@
+<!-- Modal -->
+<div class="modal fade" id="newLoadForm" role="dialog" aria-labelledby="newLoadFormLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Load</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', load_tile: LoadTile.new, form_id: 'new_load' %>
+      </div>
+
+    </div>
+  </div>
+</div>

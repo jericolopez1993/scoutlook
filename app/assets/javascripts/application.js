@@ -138,6 +138,8 @@ $(document).ready(function() {
   $(".origin-multiple-select2").select2({ placeholder: "Select origins", allowClear: true });
   $(".destination-multiple-select2").select2({ placeholder: "Select destinations", allowClear: true });
   $(".shipper-type-multiple-select2").select2({ placeholder: "Select shipper types", allowClear: true });
+  $(".new-load-origin-multiple").select2({placeholder: "Select origins", allowClear: true, dropdownParent: $("#new_load")});
+  $(".new-load-destination-multiple").select2({placeholder: "Select destinations", allowClear: true, dropdownParent: $("#new_load")});
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
 
@@ -157,6 +159,7 @@ $(document).ready(function() {
     orientation: 'auto bottom'
 	});
   $(".static-dropdown").select2({allowClear: true});
+  $(".new-load-dropdown").select2({allowClear: true, dropdownParent: $("#new_load")});
   // $(".combo-dropdown").select2({
   //   tags: true,
   //   createTag: function (params) {

@@ -27,13 +27,8 @@ class LoadTilesController < ApplicationController
     @load_tile = LoadTile.new(load_tile_params)
 
     respond_to do |format|
-      if @load_tile.save
-        format.html { redirect_to @load_tile, notice: 'Load tile was successfully created.' }
-        format.json { render :show, status: :created, location: @load_tile }
-      else
-        format.html { render :new }
-        format.json { render json: @load_tile.errors, status: :unprocessable_entity }
-      end
+      @load_tile.save
+      format.js { }
     end
   end
 
@@ -69,6 +64,8 @@ class LoadTilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def load_tile_params
-      params.require(:load_tile).permit(:name, :status, :origin, :destination, :details, :carrier_id, :shipper_id)
+      params[:load_tile][:origin] = convert_array(params[:load_tile][:origin])
+      params[:load_tile][:destination] = convert_array(params[:load_tile][:destination])
+      params.require(:load_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id)
     end
 end
