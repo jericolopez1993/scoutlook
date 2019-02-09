@@ -22,6 +22,9 @@ class LoadTilesController < ApplicationController
 
   # GET /load_tiles/1/edit
   def edit
+    respond_to do |format|
+      format.js { }
+    end
   end
 
   # POST /load_tiles
@@ -39,13 +42,8 @@ class LoadTilesController < ApplicationController
   # PATCH/PUT /load_tiles/1.json
   def update
     respond_to do |format|
-      if @load_tile.update(load_tile_params)
-        format.html { redirect_to @load_tile, notice: 'Load tile was successfully updated.' }
-        format.json { render :show, status: :ok, location: @load_tile }
-      else
-        format.html { render :edit }
-        format.json { render json: @load_tile.errors, status: :unprocessable_entity }
-      end
+      @load_tile.update(load_tile_params)
+      format.js { }
     end
   end
 
@@ -54,8 +52,7 @@ class LoadTilesController < ApplicationController
   def destroy
     @load_tile.destroy
     respond_to do |format|
-      format.html { redirect_to load_tiles_url, notice: 'Load tile was successfully destroyed.' }
-      format.json { head :no_content }
+      format.js { }
     end
   end
 

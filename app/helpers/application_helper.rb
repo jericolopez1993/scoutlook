@@ -294,11 +294,11 @@ module ApplicationHelper
 
   def date_to_words(date)
     if date == Date.today()
-      "Today"
+      "Today (#{date.strftime("%B %d")})"
     elsif date == Date.today() - 1
-      "Yesterday"
+      "Yesterday (#{date.strftime("%B %d")})"
     elsif date == Date.today() + 1
-      "Tomorrow"
+      "Tomorrow (#{date.strftime("%B %d")})"
     else
       date.strftime("%B %d")
     end
