@@ -60,7 +60,7 @@ class MailsController < ApplicationController
                    "</div>" +
                    "<br/><br/><div style='background-color:#fff; margin: 1rem; font-size: 20px; color: #555'>Thanks," +
                    "<br><img style='width: 50px; vertical-align: middle;' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'>" +
-                   "<b style='vertical-align: middle;'>Scout Logistics</b></div>" +
+                   "<b style='vertical-align: middle;'>ScoutLook</b></div>" +
                    "</div>"
       elsif @previous_controller == "rates"
 
@@ -88,7 +88,7 @@ class MailsController < ApplicationController
                    "</div>" +
                    "<br/><br/><div style='background-color:#fff; margin: 1rem; font-size: 20px; color: #555'>Thanks," +
                    "<br><img style='width: 50px; vertical-align: middle;' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'>" +
-                   "<b style='vertical-align: middle;'>Scout Logistics</b></div>" +
+                   "<b style='vertical-align: middle;'>ScoutLook</b></div>" +
                    "</div>"
       end
     end

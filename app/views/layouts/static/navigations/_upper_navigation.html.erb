@@ -3,7 +3,7 @@
   <div class="navbar-header">
     <!-- <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>PB</b> Platform</a> -->
     <a href="<%= authenticated_root_path %>" class="navbar-brand"><img src="<%= asset_path('scout_fav.png') %>" />
-      <b>Scout</b><%= user_signed_in? ? (current_user.has_role?(:admin) ? ' Admin' : ' User') : ''%>
+      <b>ScoutLook</b><%= user_signed_in? ? (current_user.has_role?(:admin) ? ' Admin' : ' User') : ''%>
       <small class="version">v 1.01</small>
     </a>
     <button type="button" class="navbar-toggle" data-click="sidebar-toggled">

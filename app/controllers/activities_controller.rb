@@ -270,7 +270,7 @@ class ActivitiesController < ApplicationController
 
       @content = @style +
                  "<div>" +
-                    "<h1 class='header'><img class='header-logo' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'> <span style='vertical-align: middle;'>Scout Logistics<span></h1>" +
+                    "<h1 class='header'><img class='header-logo' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'> <span style='vertical-align: middle;'>ScoutLook<span></h1>" +
                     "<h3 class='sub-header'>(Activity)</h3>" +
                     "<table width=100%>" +
                       "<tbody>" +
