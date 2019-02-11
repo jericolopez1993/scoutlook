@@ -6,10 +6,10 @@
                   <%= date_to_words(cdate) %>
                   <a onclick="addDateToForm('<%=cdate.strftime("%m/%d/%Y")%>');"><i class="text-muted fa fa-2x fa-plus-circle pull-right"></i></a>
               </div>
-              <div class="panel-body">
+              <div class="panel-body" data-date="<%= cdate.strftime("%m/%d/%Y") %>">
                   <div id="TODO-<%= index%>" class="kanban-centered">
                     <% LoadTile.where(:load_date => cdate.strftime("%m/%d/%Y") ).each_with_index do |load_tile, index2|%>
-                      <article class="kanban-entry grab" id="item<%= load_tile.id %>" draggable="true" >
+                      <article class="kanban-entry grab" id="item<%= load_tile.id %>" data-id="<%= load_tile.id %>" draggable="true" >
                           <div class="kanban-entry-inner">
                               <div class="kanban-label">
                                   <h2><%= link_to load_tile.name, load_tile, :remote => true, :id => 'show_tile' %> <span><%= load_tile.status %></span></h2>
