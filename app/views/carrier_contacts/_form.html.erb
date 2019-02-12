@@ -99,6 +99,12 @@
           <%= form.select :primary_phone_type, options_for_select(['Work', 'Cell'], carrier_contact.primary_phone_type),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
+      <div class="form-group row m-b-15" id="eligible_first">
+        <%= form.label :notes, 'Eligible for Texting (Primary):', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+            <%= form.check_box :primary_eligible_texting, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: carrier_contact.primary_eligible_texting %>
+        </div>
+      </div>
       <div class="form-group row m-b-15">
         <%= form.label :secondary_phone, 'Secondary Phone:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-3 col-sm-2">
@@ -109,6 +115,12 @@
         </div>
         <div class="col-md-3 col-sm-2">
           <%= form.select :secondary_phone_type, options_for_select(['Work', 'Cell'], carrier_contact.secondary_phone_type),{:include_blank => true}, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row m-b-15" id="eligible_second">
+        <%= form.label :notes, 'Eligible for Texting (Secondary):', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <div class="col-md-9 col-sm-8">
+          <%= form.check_box :secondary_eligible_texting, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: carrier_contact.secondary_eligible_texting %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -149,8 +161,37 @@
 <%= tinymce %>
 <!-- end panel -->
 <script language="javascript">
-
+  $("#carrier_contact_primary_phone_type").on("change", function(){
+      var primary_phone = $("#carrier_contact_primary_phone_type").val()
+      if (primary_phone == "Cell") {
+          $("#eligible_first").show()
+      } else {
+        $("#eligible_first").hide()
+      }
+  });
+  $("#carrier_contact_secondary_phone_type").on("change", function(){
+      var secondary_phone = $("#carrier_contact_secondary_phone_type").val()
+      if (secondary_phone == "Cell") {
+          $("#eligible_second").show()
+      } else {
+        $("#eligible_second").hide()
+      }
+  });
   $(document).ready(function() {
+      $("#eligible_first").hide()
+      $("#eligible_second").hide()
+      var primary_phone = $("#carrier_contact_primary_phone_type").val()
+      var secondary_phone = $("#carrier_contact_secondary_phone_type").val()
+      if (primary_phone == "Cell") {
+          $("#eligible_first").show()
+      } else {
+        $("#eligible_first").hide()
+      }
+      if (secondary_phone == "Cell") {
+          $("#eligible_second").show()
+      } else {
+        $("#eligible_second").hide()
+      }
       sameHeadOffice(<%= carrier_contact.same_ho ? 'true' : 'false' %>);
       hideExtensionNumber("carrier_contact", "primary")
       hideExtensionNumber("carrier_contact", "secondary")

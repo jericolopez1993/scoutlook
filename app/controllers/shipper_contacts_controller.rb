@@ -153,7 +153,7 @@ class ShipperContactsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipper_contact_params
-      params.require(:shipper_contact).permit(:title, :first_name, :last_name, :email, :location_id, :shipper_id, :linkedin_link, :adm, :same_ho, :contact_type, :primary_phone, :primary_phone_type, :secondary_phone, :secondary_phone_type, :address, :city, :postal, :country, :state, :primary_extension_number, :secondary_extension_number, :notes)
+      params.require(:shipper_contact).permit(:title, :first_name, :last_name, :email, :location_id, :shipper_id, :linkedin_link, :adm, :same_ho, :contact_type, :primary_phone, :primary_phone_type, :secondary_phone, :secondary_phone_type, :address, :city, :postal, :country, :state, :primary_extension_number, :secondary_extension_number, :notes, :primary_eligible_texting, :secondary_eligible_texting)
     end
     def user_params
       params.require(:shipper_contact).permit(:first_name, :last_name, :email, :password)
