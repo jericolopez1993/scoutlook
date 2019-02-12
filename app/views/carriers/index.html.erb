@@ -80,7 +80,7 @@
                     <b>Name</b>: <%= carrier.company_name.blank? ? "(no name)" : carrier.company_name %><br>
                     <b>Ops Name</b>: <%= carrier.poc.nil? ? '' : carrier.poc.full_name %><br>
                     <b>Ops Phone</b>: <%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + " (#{carrier.poc.primary_phone_type})") : "") %><br>
-                    <b>Ops Email</b>: <%= carrier.poc.nil? ? '' : carrier.poc.email %><br>
+                    <b>Ops Email</b>: <%= carrier.poc.nil? ? '' : carrier.poc.email.downcase %><br>
                     <b>Class</b>: <%= carrier.sales_priority %><br>
                     <b>MC Number</b>: <%= carrier.mc_number %><br>
                     <b>Reefers Count</b>: <%= carrier.reefers %><br>
@@ -95,7 +95,7 @@
               <td>
                 <% if !carrier.poc.nil?  %>
                   <a href="mailto:<%= carrier.poc.email %>?Subject=Hello%20<%= carrier.poc.first_name.nil? ? '' :  carrier.poc.first_name + " " + carrier.poc.last_name  %>" target="_top">
-                    <%= carrier.poc.email %>&nbsp;<i class="far fa-envelope"></i>
+                    <%= carrier.poc.email.downcase %>&nbsp;<i class="far fa-envelope"></i>
                   </a>
                 <% end %>
               </td>

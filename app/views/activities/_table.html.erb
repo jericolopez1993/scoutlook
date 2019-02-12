@@ -114,7 +114,7 @@
                   <b>Name</b>: <%= activity.carrier && (activity.carrier.company_name.blank? ? "(no name)" : activity.carrier.company_name) %><br>
                   <b>Ops Name</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : activity.carrier.poc.full_name) %><br>
                   <b>Ops Phone</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : ((!activity.carrier.poc.primary_phone.nil? && activity.carrier.poc.primary_phone != "") ? (activity.carrier.poc.primary_phone + " (#{activity.carrier.poc.primary_phone_type})") : "")) %><br>
-                  <b>Ops Email</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : activity.carrier.poc.email) %><br>
+                  <b>Ops Email</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : activity.carrier.poc.email.downcase) %><br>
                   <b>Class</b>: <%= activity.carrier && (activity.carrier.sales_priority) %><br>
                   <b>MC Number</b>: <%= activity.carrier && (activity.carrier.mc_number) %><br>
                   <b>Reefers Count</b>: <%= activity.carrier && activity.carrier.reefers %><br>
@@ -135,7 +135,7 @@
                     <b>Name</b>: <%= activity.shipper && (activity.shipper.company_name.blank? ? "(no name)" : activity.shipper.company_name) %><br>
                     <b>DM Name</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : activity.shipper.pdm.full_name) %><br>
                     <b>DM Phone</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : ((!activity.shipper.pdm.primary_phone.nil? && activity.shipper.pdm.primary_phone != "") ? (activity.shipper.pdm.primary_phone + " (#{activity.shipper.pdm.primary_phone_type})") : "")) %><br>
-                    <b>DM Email</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : activity.shipper.pdm.email) %><br>
+                    <b>DM Email</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : activity.shipper.pdm.email.downcase) %><br>
                     <b>Class</b>: <%= activity.shipper && (activity.shipper.sales_priority) %><br>
                     <b>City</b>: <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.city) %><br>
                     <b>Sate/Province</b>: <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.state) %><br>

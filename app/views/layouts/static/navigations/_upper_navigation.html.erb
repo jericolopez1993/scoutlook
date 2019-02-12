@@ -109,7 +109,7 @@
           </div>
         <% end %>
         <span class="d-none d-md-inline">
-        <%= (!current_user.first_name.nil? && !current_user.last_name.nil?) ? (current_user.first_name + " " + current_user.last_name) : current_user.email %></span> <b class="caret"></b>
+        <%= (!current_user.first_name.nil? && !current_user.last_name.nil?) ? (current_user.first_name + " " + current_user.last_name) : current_user.email.downcase %></span> <b class="caret"></b>
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <%= link_to('Edit Profile', edit_user_registration_path, class: "dropdown-item") %>

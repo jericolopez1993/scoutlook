@@ -20,7 +20,7 @@
     <% @shipper_contacts.each do |shipper_contact| %>
       <tr>
         <td><%= shipper_contact.last_name %></td>
-        <td><%= shipper_contact.email %></td>
+        <td><%= shipper_contact.email.downcase %></td>
         <td><%= shipper_contact.primary_phone %></td>
         <td><%= shipper_contact.secondary_phone %></td>
         <td><%= shipper_contact.address %></td>

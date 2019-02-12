@@ -20,7 +20,7 @@
     <% @carrier_contacts.each do |carrier_contact| %>
       <tr>
         <td><%= carrier_contact.last_name %></td>
-        <td><%= carrier_contact.email %></td>
+        <td><%= carrier_contact.email.downcase %></td>
         <td><%= carrier_contact.primary_phone %></td>
         <td><%= carrier_contact.secondary_phone %></td>
         <td><%= carrier_contact.address %></td>
