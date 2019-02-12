@@ -94,7 +94,7 @@
               <td><b><%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + ((!carrier.poc.primary_extension_number.nil? && carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + " (#{carrier.poc.primary_phone_type})") : "") %></b></td>
               <td>
                 <% if !carrier.poc.nil?  %>
-                  <a href="mailto:<%= carrier.poc.email %>?Subject=Hello%20<%= carrier.poc.first_name.nil? ? '' :  carrier.poc.first_name + " " + carrier.poc.last_name  %>" target="_top">
+                  <a href="mailto:<%= carrier.poc.email %>?Subject=Hello%20<%= carrier.poc.first_name.nil? ? '' :  carrier.poc.first_name.capitalize + " " + carrier.poc.last_name.capitalize  %>" target="_top">
                     <%= carrier.poc.email.downcase %>&nbsp;<i class="far fa-envelope"></i>
                   </a>
                 <% end %>

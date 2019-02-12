@@ -13,7 +13,7 @@ class ShipperContact < ApplicationRecord
   end
 
   def full_name
-    (self.first_name.nil? ? '' : self.first_name) + " " + (self.last_name.nil? ? '' : self.last_name)
+    (self.first_name.nil? ? '' : self.first_name.capitalize) + " " + (self.last_name.nil? ? '' : self.last_name.capitalize)
   end
 
 end

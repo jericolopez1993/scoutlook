@@ -93,7 +93,7 @@
               </td>
               <td nowrap><%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %></td>
               <td nowrap><b><%= shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + ((!shipper.pdm.primary_extension_number.nil? && shipper.pdm.primary_extension_number != "") ? (", Ext. " + shipper.pdm.primary_extension_number) : "") + " (#{shipper.pdm.primary_phone_type})") : "") %></b></td>
-              <td nowrap><% if !shipper.pdm.nil?  %><a href="mailto:<%= shipper.pdm.email %>?Subject=Hello%20<%= shipper.pdm.first_name.nil? ? '' :  shipper.pdm.first_name + " " + shipper.pdm.last_name  %>" target="_top"><%= shipper.pdm.email.downcase %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
+              <td nowrap><% if !shipper.pdm.nil?  %><a href="mailto:<%= shipper.pdm.email %>?Subject=Hello%20<%= shipper.pdm.first_name.nil? ? '' :  shipper.pdm.first_name.capitalize + " " + shipper.pdm.last_name.capitalize  %>" target="_top"><%= shipper.pdm.email.downcase %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
               <td nowrap>
                 <% shipper.lane_1.each do |lane| %>
                   <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>

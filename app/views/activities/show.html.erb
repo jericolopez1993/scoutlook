@@ -89,7 +89,7 @@ label {
     <div class="row">
       <label class="col-md-2 col-form-label">Steward:</label>
       <div class="col-md-9 lbl-padding-t link">
-        <%= @activity.user.nil? ? "" : (link_to "#{@activity.user.first_name} #{@activity.user.last_name}", @activity.user) %>
+        <%= @activity.user.nil? ? "" : (link_to "#{@activity.user.first_name.capitalize} #{@activity.user.last_name.capitalize}", @activity.user) %>
       </div>
     </div>
 
