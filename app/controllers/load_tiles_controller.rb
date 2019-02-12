@@ -66,6 +66,11 @@ class LoadTilesController < ApplicationController
     def load_tile_params
       params[:load_tile][:origin] = convert_array(params[:load_tile][:origin])
       params[:load_tile][:destination] = convert_array(params[:load_tile][:destination])
+      if params[:load_tile][:load_date].present?
+        params[:load_tile][:load_date] = Date::strptime(params[:load_tile][:load_date], "%m/%d/%Y")
+      else
+        params[:load_tile][:load_date] = nil
+      end
       params.require(:load_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id)
     end
 end

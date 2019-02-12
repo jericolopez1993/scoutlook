@@ -7,7 +7,7 @@ module Api
     end
 
     def update
-      if params[:load_date].present?
+      if params[:load_date].present? && !params[:load_date].nil?
         if @load_tile.update_attributes(:load_date => params[:load_date])
           head :no_content
         else
