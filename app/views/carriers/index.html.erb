@@ -29,7 +29,7 @@
       <table class="table table-striped table-bordered display nowrap"  data-order="[[1, &quot;asc&quot;]]" id="carrier_table">
         <thead>
           <tr>
-            <th><input type="checkbox" class="carrier_master_checkbox"/></th>
+            <th></th>
             <th>MC</th>
             <th>Name</th>
             <th>Ops Name</th>
@@ -72,7 +72,7 @@
         <tbody class="spacer">
           <% @carriers.each do |carrier| %>
             <tr>
-              <td><input type="checkbox" name="carrier_ids[]" value="<%= carrier.id %>"/></td>
+              <td></td>
               <td><%= carrier.mc_number %></td>
               <td class="link">
                 <span
@@ -214,13 +214,18 @@
 
 <script language="javascript">
   $(document).ready(function() {
-    filterAndSelectAllTable("carrier_table");
-
-    $(".carrier_master_checkbox").click(function (e){
-
-      console.log('Working...')
-      var table= $(e.target).closest('table');
-      $('td input:checkbox',table).prop('checked',this.checked);
-    });
+    // filterAndSelectAllTable("carrier_table");
+    $('#carrier_table').DataTable( {
+        columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+            targets:   0
+        } ],
+        select: {
+            style:    'os',
+            selector: 'td:first-child'
+        },
+        order: [[ 1, 'asc' ]]
+    } );
   });
 </script>
