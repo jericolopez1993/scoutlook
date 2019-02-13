@@ -134,12 +134,32 @@ $(document).ready(function() {
   statusNotes(true, 'shipment-audit-comment');
   statusNotes(true, 'invoice-audit-comment');
 
-  $(".multiple-select2").select2({ placeholder: "Select commodities", allowClear: true });
-  $(".origin-multiple-select2").select2({ placeholder: "Select origins", allowClear: true });
-  $(".destination-multiple-select2").select2({ placeholder: "Select destinations", allowClear: true });
-  $(".shipper-type-multiple-select2").select2({ placeholder: "Select shipper types", allowClear: true });
-  $(".new-load-origin-multiple").select2({placeholder: "Select origins", allowClear: true, dropdownParent: $("#new_load")});
-  $(".new-load-destination-multiple").select2({placeholder: "Select destinations", allowClear: true, dropdownParent: $("#new_load")});
+  $(".multiple-select2").select2({
+    placeholder: "Select commodities",
+    allowClear: true
+  });
+  $(".origin-multiple-select2").select2({
+    placeholder: "Select origins",
+    allowClear: true
+  });
+  $(".destination-multiple-select2").select2({
+    placeholder: "Select destinations",
+    allowClear: true
+  });
+  $(".shipper-type-multiple-select2").select2({
+    placeholder: "Select shipper types",
+    allowClear: true
+  });
+  $(".new-load-origin-multiple").select2({
+    placeholder: "Select origins",
+    allowClear: true,
+    dropdownParent: $("#new_load")
+  });
+  $(".new-load-destination-multiple").select2({
+    placeholder: "Select destinations",
+    allowClear: true,
+    dropdownParent: $("#new_load")
+  });
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
 
@@ -147,19 +167,24 @@ $(document).ready(function() {
     confirmKeys: [13, 188]
   });
 
-  $('.tags-input input').on('keypress', function(e){
-    if (e.keyCode == 13){
+  $('.tags-input input').on('keypress', function(e) {
+    if (e.keyCode == 13) {
       e.keyCode = 188;
       e.preventDefault();
     };
   });
 
-	$('.datepicker-autoClose').datepicker({
-		autoclose: true,
+  $('.datepicker-autoClose').datepicker({
+    autoclose: true,
     orientation: 'auto bottom'
-	});
-  $(".static-dropdown").select2({allowClear: true});
-  $(".new-load-dropdown").select2({allowClear: true, dropdownParent: $("#new_load")});
+  });
+  $(".static-dropdown").select2({
+    allowClear: true
+  });
+  $(".new-load-dropdown").select2({
+    allowClear: true,
+    dropdownParent: $("#new_load")
+  });
   // $(".combo-dropdown").select2({
   //   tags: true,
   //   createTag: function (params) {
@@ -179,17 +204,17 @@ $(document).ready(function() {
   //
   //     return $result;
   //   });
-  $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
     $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
   });
   Inputmask().mask(document.querySelectorAll("input"));
-  $("#engagement_type").change(function(){
+  $("#engagement_type").change(function() {
     activityOutcomeFields($(this).val(), $("#engagement_status").val(), $("#engagement_outcome").val());
   });
-  $("#engagement_status").change(function(){
+  $("#engagement_status").change(function() {
     activityOutcomeFields($("#engagement_type").val(), $(this).val(), $("#engagement_outcome").val());
   });
-  $("#engagement_outcome").change(function(){
+  $("#engagement_outcome").change(function() {
     activityOutcomeFields($("#engagement_type").val(), $("#engagement_status").val(), $(this).val());
   });
   $(document).on('change', '[data-change="check-switchery-state-text"]', function() {
@@ -213,7 +238,7 @@ $(document).ready(function() {
   $('input[type=radio][name="master_invoice[shipment_entry]"]').change(function() {
     shipmentFields(this.value);
   });
-  $("#master_invoice_shipper_id").change(function(){
+  $("#master_invoice_shipper_id").change(function() {
     clientLocation($(this).val(), 'origin');
   });
   $('.total_charge_fields').keyup(function() {
@@ -227,75 +252,75 @@ $(document).ready(function() {
   $("#rate_origin_city, #rate_destination_city").keyup(function() {
     getDistance();
   });
-  $("#rate_origin_state, #rate_origin_country, #rate_destination_state, #rate_destination_country").change(function(){
+  $("#rate_origin_state, #rate_origin_country, #rate_destination_state, #rate_destination_country").change(function() {
     getDistance();
   });
-  $("#shipment_date, #received_date").change(function(){
+  $("#shipment_date, #received_date").change(function() {
     var shipment_date = $("#shipment_date").val();
     var received_date = $("#received_date").val();
     var transit_time = getDateDifference(shipment_date, received_date);
     $("#transit_time").val(transit_time);
   });
-  $("#location_id").change(function(){
+  $("#location_id").change(function() {
     var er = /^-?[0-9]+$/;
     var isNew = er.test($(this).val());
     addressCreate(!isNew);
-    if(isNew){
+    if (isNew) {
       locationDetails($(this).val());
     }
   });
-  $("#origin_location_id").change(function(){
+  $("#origin_location_id").change(function() {
     var er = /^-?[0-9]+$/;
     var isNew = er.test($(this).val());
     addressCreateOD(!isNew, 'origin');
-    if(isNew){
+    if (isNew) {
       locationDetailsOD($(this).val(), 'origin');
     }
   });
-  $("#destination_location_id").change(function(){
+  $("#destination_location_id").change(function() {
     var er = /^-?[0-9]+$/;
     var isNew = er.test($(this).val());
-      addressCreateOD(!isNew, 'destination');
-    if(isNew){
+    addressCreateOD(!isNew, 'destination');
+    if (isNew) {
       locationDetailsOD($(this).val(), 'destination');
     }
   });
-  $("#quick_destination_id").change(function(){
+  $("#quick_destination_id").change(function() {
     var er = /^-?[0-9]+$/;
     var isNew = er.test($(this).val());
-      addressCreateQuickS(!isNew, 'quick_destination');
-    if(isNew){
+    addressCreateQuickS(!isNew, 'quick_destination');
+    if (isNew) {
       locationDetailsOD($(this).val(), 'quick_destination');
     }
   });
-  $("#shipment_status").change(function(){
+  $("#shipment_status").change(function() {
     statusNotes((currentShipmentStatus === $(this).val()), 'shipment-audit-comment');
   });
-  $("#invoice_status").change(function(){
+  $("#invoice_status").change(function() {
     statusNotes((currentInvoiceStatus === $(this).val()), 'invoice-audit-comment');
   });
-  $("#years_established").change(function(){
+  $("#years_established").change(function() {
     $("#years_in_business").val((new Date()).getFullYear() - parseInt($(this).val()));
   });
 });
 
 function activityOutcomeFields(actype, stat, outcome) {
   if (actype === 'Proposal' && stat === "false") {
-      $(".outcome-fields").show();
-      $(".proposal-fields").show();
-      $(".activity_buttons").hide();
-      if (outcome.includes("Win")) {
-        $(".win-fields").show();
-        $("#activity_load_numbers").attr('data-parsley-required', 'true');
-      } else {
-        $(".win-fields").hide();
-        $("#activity_load_numbers").removeAttr("data-parsley-required");
-      }
-  } else {
-      $(".outcome-fields").hide();
-      $(".proposal-fields").hide();
-      $(".activity_buttons").show();
+    $(".outcome-fields").show();
+    $(".proposal-fields").show();
+    $(".activity_buttons").hide();
+    if (outcome.includes("Win")) {
+      $(".win-fields").show();
+      $("#activity_load_numbers").attr('data-parsley-required', 'true');
+    } else {
       $(".win-fields").hide();
+      $("#activity_load_numbers").removeAttr("data-parsley-required");
+    }
+  } else {
+    $(".outcome-fields").hide();
+    $(".proposal-fields").hide();
+    $(".activity_buttons").show();
+    $(".win-fields").hide();
   }
 }
 
@@ -310,16 +335,16 @@ function getDateDifference(str_date1, str_date2) {
 function sameHeadOffice(isTrue) {
   if (isTrue) {
     $(".address-fields").hide();
-  }else{
+  } else {
     $(".address-fields").show();
   }
 }
 
 function statusNotes(isTrue, className) {
   if (isTrue) {
-    $("."+className).hide();
-  }else{
-    $("."+className).show();
+    $("." + className).hide();
+  } else {
+    $("." + className).show();
   }
 }
 
@@ -336,7 +361,7 @@ function addressCreate(isTrue) {
     $("#state").attr("disabled", false);
     $("#country").val('USA').change();
 
-  }else{
+  } else {
     $("#address").attr("disabled", true);
     $("#city").attr("disabled", true);
     $("#postal").attr("disabled", true);
@@ -348,70 +373,69 @@ function addressCreate(isTrue) {
 }
 
 function addressCreateQuickS(isTrue, name) {
-  $("#"+ name +"_address").val('');
-  $("#"+ name +"_city").val('');
-  $("#"+ name +"_postal").val('');
-  $("#"+ name +"_state").val('').change();
+  $("#" + name + "_address").val('');
+  $("#" + name + "_city").val('');
+  $("#" + name + "_postal").val('');
+  $("#" + name + "_state").val('').change();
   if (isTrue) {
-    $("#"+ name +"_address").attr("disabled", false);
-    $("#"+ name +"_city").attr("disabled", false);
-    $("#"+ name +"_postal").attr("disabled", false);
-    $("#"+ name +"_country").attr("disabled", false);
-    $("#"+ name +"_state").attr("disabled", false);
-    $("#"+ name +"_country").val('USA').change();
-  }else{
-    $("#"+ name +"_address").attr("disabled", true);
-    $("#"+ name +"_city").attr("disabled", true);
-    $("#"+ name +"_postal").attr("disabled", true);
-    $("#"+ name +"_country").attr("disabled", true);
-    $("#"+ name +"_state").attr("disabled", true);
-    $("#"+ name +"_country").val('-1').change();
+    $("#" + name + "_address").attr("disabled", false);
+    $("#" + name + "_city").attr("disabled", false);
+    $("#" + name + "_postal").attr("disabled", false);
+    $("#" + name + "_country").attr("disabled", false);
+    $("#" + name + "_state").attr("disabled", false);
+    $("#" + name + "_country").val('USA').change();
+  } else {
+    $("#" + name + "_address").attr("disabled", true);
+    $("#" + name + "_city").attr("disabled", true);
+    $("#" + name + "_postal").attr("disabled", true);
+    $("#" + name + "_country").attr("disabled", true);
+    $("#" + name + "_state").attr("disabled", true);
+    $("#" + name + "_country").val('-1').change();
   }
 }
 
 function addressCreateOD(isTrue, name) {
-  $("#"+ name +"_address").val('');
-  $("#"+ name +"_city").val('');
-  $("#"+ name +"_postal").val('');
-  $("#"+ name +"_state").val('').change();
+  $("#" + name + "_address").val('');
+  $("#" + name + "_city").val('');
+  $("#" + name + "_postal").val('');
+  $("#" + name + "_state").val('').change();
   if (isTrue) {
-    $("#"+ name +"_address").attr("disabled", false);
-    $("#"+ name +"_city").attr("disabled", false);
-    $("#"+ name +"_postal").attr("disabled", false);
-    $("#"+ name +"_country").attr("disabled", false);
-    $("#"+ name +"_state").attr("disabled", false);
-    $("#"+ name +"_country").val('USA').change();
+    $("#" + name + "_address").attr("disabled", false);
+    $("#" + name + "_city").attr("disabled", false);
+    $("#" + name + "_postal").attr("disabled", false);
+    $("#" + name + "_country").attr("disabled", false);
+    $("#" + name + "_state").attr("disabled", false);
+    $("#" + name + "_country").val('USA').change();
 
-  }else{
-    $("#"+ name +"_address").attr("disabled", true);
-    $("#"+ name +"_city").attr("disabled", true);
-    $("#"+ name +"_postal").attr("disabled", true);
-    $("#"+ name +"_country").attr("disabled", true);
-    $("#"+ name +"_state").attr("disabled", true);
-    $("#"+ name +"_country").val('-1').change();
+  } else {
+    $("#" + name + "_address").attr("disabled", true);
+    $("#" + name + "_city").attr("disabled", true);
+    $("#" + name + "_postal").attr("disabled", true);
+    $("#" + name + "_country").attr("disabled", true);
+    $("#" + name + "_state").attr("disabled", true);
+    $("#" + name + "_country").val('-1').change();
   }
 }
 
 function isHeadOffice(isTrue) {
   if (isTrue) {
     $(".head-office-fields").hide();
-  }else{
+  } else {
     $(".head-office-fields").show();
   }
   $(".address-fields").show();
 }
 
 function tiggerChangeOnSelectCountry(id, val) {
-  $('#'+id).val(val);
-  $('#'+id).trigger("change");
+  $('#' + id).val(val);
+  $('#' + id).trigger("change");
 }
 
 function shipmentFields(shipmentEntry) {
   if (shipmentEntry == "Single") {
     $(".shipment-fields").show();
     $(".single-shipment").hide();
-  }
-  else {
+  } else {
     $(".shipment-fields").hide();
     $(".single-shipment").show();
   }
@@ -419,19 +443,21 @@ function shipmentFields(shipmentEntry) {
 
 function addTotalNumbers(className, id) {
   var total_num = 0;
-  $('.'+className).each(function(){
-    if ($(this).val() != ""){
-        total_num = total_num + parseFloat($(this).val().replace('$ ','').replace(/,/g,""));
+  $('.' + className).each(function() {
+    if ($(this).val() != "") {
+      total_num = total_num + parseFloat($(this).val().replace('$ ', '').replace(/,/g, ""));
     }
   })
-    $('#'+id).val(total_num);
+  $('#' + id).val(total_num);
 }
 
 function selectOriginClient(client_id) {
   $.ajax({
     method: 'get',
     url: "/clients/origins",
-    data: {client_id: client_id}
+    data: {
+      client_id: client_id
+    }
   }).done(function(data) {
     $("#origin_id").val(data.client_id).change();
     $("#origin_location_id").val(data.origins).change();
@@ -441,7 +467,7 @@ function selectOriginClient(client_id) {
 function locationDetails(id) {
   $.ajax({
     method: 'get',
-    url: "/api/locations/"+id
+    url: "/api/locations/" + id
   }).done(function(data) {
     $("#address").val(data.address);
     $("#country").val(data.country).change();
@@ -455,13 +481,13 @@ function locationDetails(id) {
 function locationDetailsOD(id, name) {
   $.ajax({
     method: 'get',
-    url: "/api/locations/"+id
+    url: "/api/locations/" + id
   }).done(function(data) {
-    $("#"+ name +"_address").val(data.address);
-    $("#"+ name +"_country").val(data.country).change();
-    $("#"+ name +"_state").val(data.state).change();
-    $("#"+ name +"_city").val(data.city);
-    $("#"+ name +"_postal").val(data.postal);
+    $("#" + name + "_address").val(data.address);
+    $("#" + name + "_country").val(data.country).change();
+    $("#" + name + "_state").val(data.state).change();
+    $("#" + name + "_city").val(data.city);
+    $("#" + name + "_postal").val(data.postal);
   })
 
 }
@@ -469,20 +495,23 @@ function locationDetailsOD(id, name) {
 function clientLocation(id, name) {
   $.ajax({
     method: 'get',
-    url: "/api/clients/"+id
+    url: "/api/clients/" + id
   }).done(function(data) {
-    $("#"+ name +"_location_id").val(data.default_location.id).change();
+    $("#" + name + "_location_id").val(data.default_location.id).change();
   })
 
 }
 
-function getDistance(){
+function getDistance() {
   var origin = $("#rate_origin_city").val() + " " + $("#rate_origin_state").val() + "," + $("#rate_origin_country").val();
   var destination = $("#rate_destination_city").val() + " " + $("#rate_destination_state").val() + "," + $("#rate_destination_country").val();
   $.ajax({
     method: 'get',
     url: "/api/locations/distance",
-    data: {origin: origin, destination: destination}
+    data: {
+      origin: origin,
+      destination: destination
+    }
   }).done(function(data) {
     $("#rate_miles").val((data.distance / 1000).toFixed(2));
     // var map = $('#map'),
@@ -493,103 +522,139 @@ function getDistance(){
   })
 }
 
-function setFieldMask(country_id, field_mask_id){
-  var str_val = $('#'+country_id).val();
-  var selector = '#'+field_mask_id;
-  if (str_val === "Canada"){
-    $(selector).inputmask({ mask: "A9A9A9"});
-  }else if (str_val === "USA") {
-    $(selector).inputmask({ mask: "99999"});
-  }else{
+function setFieldMask(country_id, field_mask_id) {
+  var str_val = $('#' + country_id).val();
+  var selector = '#' + field_mask_id;
+  if (str_val === "Canada") {
+    $(selector).inputmask({
+      mask: "A9A9A9"
+    });
+  } else if (str_val === "USA") {
+    $(selector).inputmask({
+      mask: "99999"
+    });
+  } else {
     $(selector).inputmask('remove');
   }
 }
 
-function filterTable(id){
-  $('#' + id + ' tfoot th').each(function () {
+function filterTable(id) {
+  $('#' + id + ' tfoot th').each(function() {
     var title = $(this).text();
-    $(this).html('<input type="text" placeholder="Search '+title+'" style="width: 100%;"/>');
+    if (title != "" && title != undefined && title != null) {
+      $(this).html('<input type="text" placeholder="Search ' + title + '" style="width: 100%;"/>');
+    }
   });
 
   // DataTable
   var table = $('#' + id).DataTable({
     "scrollX": true,
-    "drawCallback": function( settings ) {
+    "drawCallback": function(settings) {
       $('[data-toggle="tooltip"]').tooltip({
-          trigger: 'hover',
-          html: true
+        trigger: 'hover',
+        html: true
       })
     },
   });
 
   // Apply the search
-  table.columns().every(function () {
+  table.columns().every(function() {
     var that = this;
 
-    $('input', this.footer()).on('keyup change', function () {
+    $('input', this.footer()).on('keyup change', function() {
       if (that.search() !== this.value) {
         console.log("hello")
-        that.search( this.value ).draw();
+        that.search(this.value).draw();
       }
     });
   });
 }
 
-function loadContacts(client_type, controller, value, selected){
-  var this_id = "#" + controller + "_" + client_type + "_contact_id"
-  var url = "/api/"+ client_type +"_contacts"
-  if (value) {
-    url = url + "?"+ client_type + "_id="+value
-  }
-      $(this_id).empty().append('<option value="">Select Contact</option>');
-      $.ajax({
-        method: 'get',
-        url: url
-      }).done(function(data) {
-        var array = data;
-        if (array != ''){
-          for (i in array) {
-            if (array[i].id.toString() == selected.toString()) {
-              $(this_id).append("<option value='"+ array[i].id +"' selected>"+array[i].full_name+"</option>");
-            }else{
-              $(this_id).append("<option value='"+ array[i].id +"'>"+array[i].full_name+"</option>");
-            }
-         }
-        }
+function filterAndSelectAllTable(id) {
+  $('#' + id + ' tfoot th').each(function() {
+    var title = $(this).text();
+    $(this).html('<input type="text" placeholder="Search ' + title + '" style="width: 100%;"/>');
+  });
+
+  // DataTable
+  var table = $('#' + id).DataTable({
+    "scrollX": true,
+    "drawCallback": function(settings) {
+      $('[data-toggle="tooltip"]').tooltip({
+        trigger: 'hover',
+        html: true
       })
+    },
+  });
+
+  // Apply the search
+  table.columns().every(function() {
+    var that = this;
+
+    $('input', this.footer()).on('keyup change', function() {
+      if (that.search() !== this.value) {
+        console.log("hello")
+        that.search(this.value).draw();
+      }
+    });
+  });
 }
 
-function loadActivities(client_type, value, selected){
+function loadContacts(client_type, controller, value, selected) {
+  var this_id = "#" + controller + "_" + client_type + "_contact_id"
+  var url = "/api/" + client_type + "_contacts"
+  if (value) {
+    url = url + "?" + client_type + "_id=" + value
+  }
+  $(this_id).empty().append('<option value="">Select Contact</option>');
+  $.ajax({
+    method: 'get',
+    url: url
+  }).done(function(data) {
+    var array = data;
+    if (array != '') {
+      for (i in array) {
+        if (array[i].id.toString() == selected.toString()) {
+          $(this_id).append("<option value='" + array[i].id + "' selected>" + array[i].full_name + "</option>");
+        } else {
+          $(this_id).append("<option value='" + array[i].id + "'>" + array[i].full_name + "</option>");
+        }
+      }
+    }
+  })
+}
+
+function loadActivities(client_type, value, selected) {
   var this_id = "#rate_activity_id"
   var url = "/api/activities"
   if (value) {
-    url = url + "?"+ client_type + "_id="+value
+    url = url + "?" + client_type + "_id=" + value
   }
-      $(this_id).empty().append('<option value="">Select Activity</option>');
-      $.ajax({
-        method: 'get',
-        url: url
-      }).done(function(data) {
-        var array = data;
-        if (array != ''){
-          for (i in array) {
-            if (array[i].id.toString() == selected.toString()) {
-              $(this_id).append("<option value='"+ array[i].id +"' selected>"+array[i].campaign_name+"</option>");
-            }else{
-              $(this_id).append("<option value='"+ array[i].id +"'>"+array[i].campaign_name+"</option>");
-            }
-         }
+  $(this_id).empty().append('<option value="">Select Activity</option>');
+  $.ajax({
+    method: 'get',
+    url: url
+  }).done(function(data) {
+    var array = data;
+    if (array != '') {
+      for (i in array) {
+        if (array[i].id.toString() == selected.toString()) {
+          $(this_id).append("<option value='" + array[i].id + "' selected>" + array[i].campaign_name + "</option>");
+        } else {
+          $(this_id).append("<option value='" + array[i].id + "'>" + array[i].campaign_name + "</option>");
         }
-      })
+      }
+    }
+  })
 }
 
-function hideExtensionNumber(controller, field){
+function hideExtensionNumber(controller, field) {
   var this_id = "#" + controller + "_" + field + "_extension_number";
   var phone_type = $("#" + controller + "_" + field + "_phone_type").val();
 
-  if (phone_type === 'Work'){
+  if (phone_type === 'Work') {
     $(this_id).prop('disabled', false);
-  }else{
+  } else {
     $(this_id).prop('disabled', true);
   }
 }
