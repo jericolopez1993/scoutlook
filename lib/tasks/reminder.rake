@@ -17,11 +17,11 @@ namespace :reminder do
     end
     Reminder.where(:recurring => true).where('reminder_interval <> 0').each do |reminder|
       if reminder.reminder_date
-        if ((Date.today - reminder.reminder_date).to_i % reminder.reminder_interval) == 0
+        if ((Date.today.to_date - reminder.reminder_date.to_date).to_i % reminder.reminder_interval) == 0
           reminder.update_attributes(:last_reminded => Date.today)
         end
       else
-        if ((Date.today - reminder.created_at).to_i % reminder.reminder_interval) == 0
+        if ((Date.today.to_date - reminder.created_at.to_date).to_i % reminder.reminder_interval) == 0
           reminder.update_attributes(:last_reminded => Date.today)
         end
       end
