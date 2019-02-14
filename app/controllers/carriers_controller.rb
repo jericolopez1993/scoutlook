@@ -146,6 +146,17 @@ class CarriersController < ApplicationController
     end
   end
 
+  def compose_mail
+    @contacts = Carrier.where("carriers.id IN (#{params[:ids]})").joins("LEFT JOIN carrier_contacts ON carriers.poc_id = carrier_contacts.id ").distinct("carrier_contacts.email").pluck("carrier_contacts.email").join(",")
+    render :layout => 'mail'
+  end
+
+  def send_mail
+    params[:to].each do |contact|
+      MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content]).deliver_now
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_carrier

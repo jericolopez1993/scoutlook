@@ -21,6 +21,7 @@
   <div class="panel panel-scout">
     <div class="panel-heading">
       <div class="panel-heading-btn">
+        <button id="send-mail-btn" class="btn btn-warning btn-xs">Compose Mail</button>
       <%= link_to 'New Carrier', new_carrier_path, :class => 'btn btn-danger btn-xs' %>
       </div>
       <h4 class="panel-title lp-header">Carriers</h4>
@@ -72,7 +73,7 @@
         <tbody class="spacer">
           <% @carriers.each do |carrier| %>
             <tr>
-              <td></td>
+              <td><%= carrier.id %></td>
               <td><%= carrier.mc_number %></td>
               <td class="link">
                 <span
@@ -224,19 +225,12 @@
 
 <script language="javascript">
   $(document).ready(function() {
-    // filterAndSelectAllTable("carrier_table");
-   $('#carrier_table').DataTable( {
-       columnDefs: [ {
-           orderable: false,
-           className: 'select-checkbox',
-           targets:   0
-       } ],
-       select: {
-           style:    'os',
-           selector: 'td:first-child'
-       },
-       order: [[ 1, 'asc' ]]
-   } );
-
- });
+    filterAndSelectAllTable("carrier_table");
+    $('#send-mail-btn').on('click', function(){
+        var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
+        if (rows_selected.join(",") != ""){
+          $.redirect('/carriers/compose_mail', {'ids': rows_selected.join(",")});
+        }
+    });
+  });
 </script>
