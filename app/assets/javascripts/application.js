@@ -591,6 +591,16 @@ function filterAndSelectAllTable(id) {
 
   // DataTable
   var table = $('#' + id).DataTable({
+    columnDefs: [ {
+        orderable: false,
+        className: 'select-checkbox',
+        targets:   0
+    } ],
+    select: {
+        style:    'os',
+        selector: 'td:first-child'
+    },
+    order: [[ 1, 'asc' ]],
     "scrollX": true,
     "drawCallback": function(settings) {
       $('[data-toggle="tooltip"]').tooltip({
