@@ -94,7 +94,12 @@
                 </span>
               </td>
               <td><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
-              <td><b><%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + ((!carrier.poc.primary_extension_number.nil? && carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + " (#{carrier.poc.primary_phone_type})") : "") %></b></td>
+              <td><b>
+                <% if carrier.poc && carrier.poc.primary_eligible_texting %>
+                  <%= carrier.poc.primary_phone %> (TEXT)
+                <% else %>
+                  <%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + ((!carrier.poc.primary_extension_number.nil? && carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((carrier.poc.primary_phone_type != "") ? (" (#{carrier.poc.primary_phone_type})") : "")) : "") %></b></td>
+                <% end %>
               <td>
                 <% if !carrier.poc.nil?  %>
                   <a href="mailto:<%= carrier.poc.email %>?Subject=Hello%20<%= carrier.poc.first_name.nil? ? '' :  carrier.poc.first_name.capitalize + " " + carrier.poc.last_name.capitalize  %>" target="_top">
@@ -214,18 +219,6 @@
 
 <script language="javascript">
   $(document).ready(function() {
-    // filterAndSelectAllTable("carrier_table");
-    $('#carrier_table').DataTable( {
-        columnDefs: [ {
-            orderable: false,
-            className: 'select-checkbox',
-            targets:   0
-        } ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-        order: [[ 1, 'asc' ]]
-    } );
+    filterAndSelectAllTable("carrier_table");
   });
 </script>
