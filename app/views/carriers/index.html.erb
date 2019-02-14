@@ -219,6 +219,19 @@
 
 <script language="javascript">
   $(document).ready(function() {
-    filterAndSelectAllTable("carrier_table");
-  });
+    // filterAndSelectAllTable("carrier_table");
+   $('#carrier_table').DataTable( {
+       columnDefs: [ {
+           orderable: false,
+           className: 'select-checkbox',
+           targets:   0
+       } ],
+       select: {
+           style:    'os',
+           selector: 'td:first-child'
+       },
+       order: [[ 1, 'asc' ]]
+   } );
+
+ });
 </script>

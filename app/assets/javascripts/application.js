@@ -549,18 +549,6 @@ function filterTable(id) {
 
   // DataTable
   var table = $('#' + id).DataTable({
-        columnDefs: [ {
-          targets: 0,
-          data: null,
-          defaultContent: '',
-          orderable: false,
-          className: 'select-checkbox'
-        } ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-        order: [[ 1, 'asc' ]],
     "scrollX": true,
     "drawCallback": function(settings) {
       $('[data-toggle="tooltip"]').tooltip({
