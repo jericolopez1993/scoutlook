@@ -536,7 +536,7 @@ function filterTable(id){
   });
 }
 
-function filterAndSelectAllTable(id) {
+function filterAndSelectAllTable(id, ordered) {
   $('#' + id + ' tfoot th').each(function() {
     var title = $(this).text();
     if (title != "" && title != undefined && title != null) {
@@ -556,7 +556,7 @@ function filterAndSelectAllTable(id) {
       'style': 'multi'
     },
     'order': [
-      [1, 'asc']
+      [ordered, 'asc']
     ],
     "scrollX": true,
     "drawCallback": function(settings) {

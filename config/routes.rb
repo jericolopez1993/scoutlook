@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     collection do
       get     'origins'
       delete  'remove_attachment'
+      post     'compose_mail'
+      post     'send_mail'
     end
   end
   resources :logs

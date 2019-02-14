@@ -225,7 +225,7 @@
 
 <script language="javascript">
   $(document).ready(function() {
-    filterAndSelectAllTable("carrier_table");
+    filterAndSelectAllTable("carrier_table", 1);
     $('#send-mail-btn').on('click', function(){
         var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
         if (rows_selected.join(",") != ""){

@@ -21,6 +21,7 @@
   <div class="panel panel-darkblue">
     <div class="panel-heading">
       <div class="panel-heading-btn">
+        <button id="send-mail-btn" class="btn btn-warning btn-xs">Compose Mail</button>
         <%= link_to 'New Shipper', new_shipper_path, :class => 'btn btn-success btn-xs' %>
       </div>
       <h4 class="panel-title lp-header">Shippers</h4>
@@ -74,7 +75,7 @@
         <tbody class="spacer">
           <% @shippers.each do |shipper| %>
             <tr>
-              <td></td>
+              <td><%= shipper.id %></td>
               <td class="link">
                 <span
                   data-toggle="tooltip"
@@ -224,7 +225,13 @@
 
 <script language="javascript">
   $(document).ready(function() {
-     filterTable("shipper_table");
+    filterAndSelectAllTable("shipper_table", 1);
+    $('#send-mail-btn').on('click', function(){
+        var rows_selected = $('#shipper_table').DataTable().column(0).checkboxes.selected();
+        if (rows_selected.join(",") != ""){
+          $.redirect('/shippers/compose_mail', {'ids': rows_selected.join(",")});
+        }
+    });
   });
 </script>
 

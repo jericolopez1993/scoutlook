@@ -137,6 +137,18 @@ class ShippersController < ApplicationController
     end
   end
 
+  def compose_mail
+    @contacts = Shipper.where("shippers.id IN (#{params[:ids]})").joins("LEFT JOIN shipper_contacts ON shippers.poc_id = shipper_contacts.id ").distinct("shipper_contacts.email").pluck("shipper_contacts.email").join(",")
+    render :layout => 'mail'
+  end
+
+  def send_mail
+    params[:to].split(',').map(&:to_s).each do |contact|
+      MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content]).deliver_now
+    end
+      redirect_to shippers_path, notice: 'Mail was successfully sent to shipper/s.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_shipper
