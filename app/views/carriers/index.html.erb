@@ -82,7 +82,12 @@
                   title="
                     <b>Name</b>: <%= carrier.company_name.blank? ? "(no name)" : carrier.company_name %><br>
                     <b>Ops Name</b>: <%= carrier.poc.nil? ? '' : carrier.poc.full_name %><br>
-                    <b>Ops Phone</b>: <%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + " (#{carrier.poc.primary_phone_type})") : "") %><br>
+                    <b>Ops Phone</b>:
+                      <% if carrier.poc && carrier.poc.primary_eligible_texting %>
+                        <%= carrier.poc.primary_phone %> (TEXT) <br>
+                      <% else %>
+                        <%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + ((!carrier.poc.primary_extension_number.nil? && carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((carrier.poc.primary_phone_type != "") ? (" (#{carrier.poc.primary_phone_type})") : "")) : "") %><br>
+                      <% end %>
                     <b>Ops Email</b>: <%= carrier.poc.nil? ? '' : carrier.poc.email.downcase %><br>
                     <b>Class</b>: <%= carrier.sales_priority %><br>
                     <b>MC Number</b>: <%= carrier.mc_number %><br>

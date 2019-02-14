@@ -83,7 +83,12 @@
                   title="
                     <b>Name</b>: <%= shipper.company_name.blank? ? "(no name)" : shipper.company_name %><br>
                     <b>DM Name</b>: <%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %><br>
-                    <b>DM Phone</b>: <%= shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + " (#{shipper.pdm.primary_phone_type})") : "") %><br>
+                    <b>DM Phone</b>:
+                      <% if shipper.pdm && shipper.pdm.primary_eligible_texting %>
+                        <%= shipper.pdm.primary_phone %> (TEXT) <br>
+                      <% else %>
+                        <%= shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + ((!shipper.pdm.primary_extension_number.nil? && shipper.pdm.primary_extension_number != "") ? (", Ext. " + shipper.pdm.primary_extension_number) : "") + ((shipper.pdm.primary_phone_type != "") ? (" (#{shipper.pdm.primary_phone_type})") : "")) : "") %><br>
+                      <% end %>
                     <b>DM Email</b>: <%= shipper.pdm.nil? ? '' : shipper.pdm.email.downcase %><br>
                     <b>Class</b>: <%= shipper.sales_priority %><br>
                     <b>City</b>: <%= shipper.location.nil? ? '' : shipper.location.city %><br>
