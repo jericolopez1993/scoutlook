@@ -42,10 +42,8 @@
             <%= contact.secondary_phone + ((!contact.secondary_extension_number.nil? && contact.secondary_extension_number != "") ? (", Ext. " + contact.secondary_extension_number) : "") %>&nbsp;<%= (!contact.secondary_phone_type.nil? && contact.secondary_phone_type != "") ? ((contact.secondary_phone_type != "") ? (" (#{contact.secondary_phone_type})") : "") : ""%>
           <% end %>
         </td>
-
         <td style="text-align: center;"><%= contact.linkedin_link.nil? || contact.linkedin_link == "" ? "" : (link_to '<i class="fab fa-linkedin"></i>'.html_safe, contact.linkedin_link, :target => "_blank", :class => "social-links") %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<td><b>
