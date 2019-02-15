@@ -83,12 +83,7 @@
                   title="
                     <b>Name</b>: <%= shipper.company_name.blank? ? "(no name)" : shipper.company_name %><br>
                     <b>DM Name</b>: <%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %><br>
-                    <b>DM Phone</b>:
-                      <% if shipper.pdm && shipper.pdm.primary_eligible_texting %>
-                        <%= shipper.pdm.primary_phone %> (TEXT) <br>
-                      <% else %>
-                        <%= shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + ((!shipper.pdm.primary_extension_number.nil? && shipper.pdm.primary_extension_number != "") ? (", Ext. " + shipper.pdm.primary_extension_number) : "") + ((shipper.pdm.primary_phone_type != "") ? (" (#{shipper.pdm.primary_phone_type})") : "")) : "") %><br>
-                      <% end %>
+                    <b>DM Phone</b>: <%= shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + ((!shipper.pdm.primary_extension_number.nil? && shipper.pdm.primary_extension_number != "") ? (", Ext. " + shipper.pdm.primary_extension_number) : "") + ((shipper.pdm.primary_phone_type != "") ? (" (#{(shipper.pdm.primary_eligible_texting ? "TEXT" : shipper.pdm.primary_phone_type)})") : "")) : "") %><br>
                     <b>DM Email</b>: <%= shipper.pdm.nil? ? '' : shipper.pdm.email.downcase %><br>
                     <b>Class</b>: <%= shipper.sales_priority %><br>
                     <b>City</b>: <%= shipper.location.nil? ? '' : shipper.location.city %><br>
@@ -100,11 +95,7 @@
               </td>
               <td nowrap><%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %></td>
               <td nowrap><b>
-                <% if shipper.pdm && shipper.pdm.primary_eligible_texting %>
-                  <%= shipper.pdm.primary_phone %> (TEXT)
-                <% else %>
-                  <%= shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + ((!shipper.pdm.primary_extension_number.nil? && shipper.pdm.primary_extension_number != "") ? (", Ext. " + shipper.pdm.primary_extension_number) : "") + ((shipper.pdm.primary_phone_type != "") ? (" (#{shipper.pdm.primary_phone_type})") : "")) : "") %></b></td>
-                <% end %>
+                  <%= shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + ((!shipper.pdm.primary_extension_number.nil? && shipper.pdm.primary_extension_number != "") ? (", Ext. " + shipper.pdm.primary_extension_number) : "") + ((shipper.pdm.primary_phone_type != "") ? (" (#{(shipper.pdm.primary_eligible_texting ? "TEXT" : shipper.pdm.primary_phone_type)})") : "")) : "") %></b></td>
               <td nowrap><% if !shipper.pdm.nil?  %><a href="mailto:<%= shipper.pdm.email %>?Subject=Hello%20<%= shipper.pdm.first_name.nil? ? '' :  shipper.pdm.first_name.capitalize + " " + shipper.pdm.last_name.capitalize  %>" target="_top"><%= shipper.pdm.email.downcase %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
               <td nowrap>
                 <% if shipper.shipper_lanes.length > 1 %>
