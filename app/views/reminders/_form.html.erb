@@ -64,7 +64,7 @@
           </div>
           <%= form.label :reminder_interval, 'Reminder Interval:', class: 'text-right col-md-1 col-sm-4 col-form-label' %>
           <div class="col-md-4 col-sm-8">
-            <%= form.select :reminder_interval, options_for_select([['1w', 7], ['2w', 14], ['1M', 30], ['3M', 90], ['6M', 180], ['12M', 360]], reminder.reminder_interval),{:include_blank => true}, class: 'form-control', id: "reminder_interval" %>
+            <%= form.select :reminder_interval, options_for_select([['', 0],['1w', 7], ['2w', 14], ['1M', 30], ['3M', 90], ['6M', 180], ['12M', 360]], reminder.reminder_interval),{}, class: 'form-control', id: "reminder_interval" %>
           </div>
         </div>
         <div class="form-group row m-b-15 switch-block">
@@ -102,7 +102,7 @@
     }
   });
   $('#reminder_interval').change(function(){
-    if ($('#reminder_interval').val() != "") {
+    if ($('#reminder_interval').val() != 0) {
         $('.switch-block').show()
     } else {
         $('.switch-block').hide()

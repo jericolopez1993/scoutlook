@@ -32,6 +32,7 @@
         <thead>
           <tr>
             <th></th>
+            <th class="text-center"><i class="fas fa-clock"></i> <b class="text-danger">Today</b> / <b class="text-green">Future</b></th>
             <th width="150px">Name</th>
             <th>DM Name</th>
             <th>DM Phone</th>
@@ -52,6 +53,7 @@
         </thead>
         <tfoot>
           <tr>
+            <th></th>
             <th></th>
             <th>Name</th>
             <th>DM Name</th>
@@ -75,6 +77,13 @@
           <% @shippers.each do |shipper| %>
             <tr>
               <td><%= shipper.id %></td>
+              <td>
+                <% if shipper.reminders %>
+                  <% shipper.reminders.each do |reminder| %>
+                      <%= reminder_to_html(reminder).html_safe %>
+                  <% end %>
+                <% end %>
+              </td>
               <td class="link">
                 <span
                   data-toggle="tooltip"

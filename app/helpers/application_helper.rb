@@ -304,4 +304,63 @@ module ApplicationHelper
     end
   end
 
+  def reminder_to_html(reminder)
+    str_date = ""
+    if reminder.recurring
+      if reminder.last_reminded
+        str_date = generate_reminder(reminder.last_reminded, reminder.reminder_interval, reminder.reminder_date)
+      elsif reminder.reminder_date
+        str_date = generate_reminder(reminder.reminder_date, reminder.reminder_interval, reminder.reminder_date)
+      else
+        current_date = reminder.created_at
+        until current_date >= Date.today
+          current_date += reminder.reminder_interval.days
+        end
+        if current_date >= Date.today
+          str_date = str_date + "<span class='badge badge-#{(current_date == Date.today) ? 'danger' : 'green'} badge-square'>#{current_date.strftime("%d/%m/%Y")}</span>"
+        end
+      end
+    else
+      if reminder.reminder_interval > 0
+        if reminder.reminder_date
+          quot = ((Date.today.to_date - reminder.reminder_date.to_date).to_i / reminder.reminder_interval)
+          if quot >= 1 && reminder.reminder_date >= Date.today
+            str_date = str_date + "<span class='badge badge-#{(quot == 1) ? 'danger' : 'green'} badge-square'>#{reminder.reminder_date.strftime("%d/%m/%Y")}</span>"
+          end
+        else
+          str_date = str_date + "<span class='badge badge-green badge-square'>#{(reminder.created_at + reminder.reminder_interval.days).strftime("%d/%m/%Y")}</span>"
+        end
+      else
+        if reminder.reminder_date
+          if reminder.reminder_date >= Date.today
+            str_date = str_date + "<span class='badge badge-#{(reminder.reminder_date == Date.today) ? 'danger' : 'green'} badge-square'>#{reminder.reminder_date.strftime("%d/%m/%Y")}</span>"
+          end
+        end
+      end
+    end
+    if !str_date.blank?
+      str_date + "<br/>"
+    else
+      str_date
+    end
+  end
+
+  def generate_reminder(current_date, interval, default_date)
+    str_date = ""
+    if current_date <= Date.today
+      if current_date == Date.today
+        str_date = str_date + "<span class='badge badge-danger badge-square'>#{current_date.strftime("%d/%m/%Y")}</span> "
+      end
+      until current_date >= Date.today
+        current_date += interval.days
+      end
+      if interval > 0 && current_date > Date.today
+        str_date = str_date + "<span class='badge badge-green badge-square'>#{current_date.strftime("%d/%m/%Y")}</span>"
+      end
+    else
+      str_date = str_date + "<span class='badge badge-danger badge-square'>#{default_date.strftime("%d/%m/%Y")}</span>"
+    end
+    str_date
+  end
+
 end
