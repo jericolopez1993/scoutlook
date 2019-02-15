@@ -78,13 +78,13 @@
     <div class="row">
       <label class="col-md-2 col-form-label">Origin:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.origin_city + ", " + @rate.origin_state %>
+        <%= @rate.origin_city + ", " + @rate.origin_state.upcase %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-form-label">Destination:</label>
       <div class="col-md-9 lbl-padding-t">
-        <%= @rate.destination_city + ", " + @rate.destination_state %>
+        <%= @rate.destination_city + ", " + @rate.destination_state.upcase %>
       </div>
     </div>
     <div class="row">

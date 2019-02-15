@@ -159,12 +159,12 @@
               <td class="link" nowrap><%= activity.carrier_contact.nil? ? "" : (link_to "#{activity.carrier_contact.full_name}", edit_carrier_contact_path(activity.carrier_contact)) %></td>
               <td><%= activity.carrier.nil? || activity.carrier.sales_priority.blank? ? "" : activity.carrier.sales_priority %></td>
               <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.city %></td>
-              <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.state %></td>
+              <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.state.upcase %></td>
             <% elsif show_shipper && !activity.shipper.nil? %>
               <td class="link" nowrap><%= activity.shipper_contact.nil? ? "" : (link_to "#{activity.shipper_contact.full_name}", edit_shipper_contact_path(activity.shipper_contact)) %></td>
               <td><%= activity.shipper.nil? || activity.shipper.sales_priority.blank? ? "" : activity.shipper.sales_priority %></td>
               <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.city %></td>
-              <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.state %></td>
+              <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.state.upcase %></td>
             <% else %>
               <td></td>
               <td></td>

@@ -249,10 +249,10 @@
     tiggerChangeOnSelectCountry('rate_destination_country', '<%= rate.destination_country %>')
   <% end %>
   <% if rate.origin_state.present? %>
-    tiggerChangeOnSelectCountry('rate_origin_state', '<%= rate.origin_state %>')
+    tiggerChangeOnSelectCountry('rate_origin_state', '<%= rate.origin_state.upcase %>')
   <% end %>
   <% if rate.destination_state.present? %>
-    tiggerChangeOnSelectCountry('rate_destination_state', '<%= rate.destination_state %>')
+    tiggerChangeOnSelectCountry('rate_destination_state', '<%= rate.destination_state.upcase %>')
   <% end %>
   });
 </script>

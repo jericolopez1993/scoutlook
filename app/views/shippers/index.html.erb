@@ -93,7 +93,7 @@
                     <b>DM Email</b>: <%= shipper.pdm.nil? ? '' : shipper.pdm.email.downcase %><br>
                     <b>Class</b>: <%= shipper.sales_priority %><br>
                     <b>City</b>: <%= shipper.location.nil? ? '' : shipper.location.city %><br>
-                    <b>Sate/Province</b>: <%= shipper.location.nil? ? '' : shipper.location.state %><br>
+                    <b>Sate/Province</b>: <%= shipper.location.nil? ? '' : shipper.location.state.upcase %><br>
                     <b>Last Contact Date</b>: <%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %><br>
                   ">
                     <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper %>
@@ -207,7 +207,7 @@
               <td nowrap><%= shipper.load_last_month %></td>
               <td nowrap><%= shipper.load_last_6_month %></td>
               <td nowrap><%= shipper.location.nil? ? '' : shipper.location.city %></td>
-              <td nowrap><%= shipper.location.nil? ? '' : shipper.location.state %></td>
+              <td nowrap><%= shipper.location.nil? ? '' : shipper.location.state.upcase %></td>
               <td nowrap><%= shipper.loads_per_month %></td>
 
               <td>

@@ -93,7 +93,7 @@
                     <b>Class</b>: <%= carrier.sales_priority %><br>
                     <b>MC Number</b>: <%= carrier.mc_number %><br>
                     <b>Reefers Count</b>: <%= carrier.reefers %><br>
-                    <b>Sate/Province</b>: <%= carrier.location.nil? ? '' : carrier.location.state %><br>
+                    <b>Sate/Province</b>: <%= carrier.location.nil? ? '' : carrier.location.state.upcase %><br>
                     <b>Last Contact Date</b>: <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %><br>
                   ">
                   <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier %>
@@ -213,7 +213,7 @@
               <td><%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>
               <td><%= carrier.load_last_6_month %></td>
               <td><%= carrier.load_last_month %></td>
-              <td><%= carrier.location.nil? ? '' : carrier.location.state %></td>
+              <td><%= carrier.location.nil? ? '' : carrier.location.state.upcase %></td>
 
             </tr>
           <% end %>

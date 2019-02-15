@@ -107,9 +107,9 @@
           </td>
         <% end %>
         <td><%= rate.origin_city %></td>
-        <td><%= rate.origin_state %></td>
+        <td><%= rate.origin_state.upcase %></td>
         <td><%= rate.destination_city %></td>
-        <td><%= rate.destination_state %></td>
+        <td><%= rate.destination_state.upcase %></td>
         <td><%= rate.miles %></td>
         <td><%= rate.rate_type %></td>
         <td><%= rate.picks %></td>

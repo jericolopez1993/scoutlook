@@ -71,6 +71,6 @@
     tiggerChangeOnSelectCountry('loc_country', '<%= carrier_location.country %>')
   <% end %>
   <% if carrier_location.state.present? %>
-    tiggerChangeOnSelectCountry('loc_state', '<%= carrier_location.state %>')
+    tiggerChangeOnSelectCountry('loc_state', '<%= carrier_location.state.upcase %>')
   <% end %>
 </script>

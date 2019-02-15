@@ -18,7 +18,7 @@
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipper_company, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
           </td>
           <td><%= shipper_company.name %></td>
-          <td><%= shipper_company.city %>, <%= shipper_company.state %></td>
+          <td><%= shipper_company.city %>, <%= shipper_company.state.upcase %></td>
           <td><%= shipper_company.company_type %></td>
           <td><%= shipper_company.phone_number %></td>
           <td><%= shipper_company.website.blank? ? '' : "<a href='#{shipper_company.website}'>#{shipper_company.website}</a>".html_safe %></td>
