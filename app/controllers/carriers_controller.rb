@@ -153,7 +153,7 @@ class CarriersController < ApplicationController
 
   def send_mail
     params[:to].split(',').map(&:to_s).each do |contact|
-      MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content]).deliver_now
+      MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content_body], current_user.email).deliver_now
     end
       redirect_to carriers_path, notice: 'Mail was successfully sent to carrier/s.'
   end
