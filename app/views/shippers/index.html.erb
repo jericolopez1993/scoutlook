@@ -28,12 +28,12 @@
       <h4 class="panel-title lp-header">Shippers</h4>
     </div>
     <div class="panel-body">
-      <table class="table table-striped table-bordered display" data-order="[[1, &quot;asc&quot;]]" id="shipper_table">
+      <table class="table table-striped table-bordered display nowrap" data-order="[[1, &quot;asc&quot;]]" id="shipper_table">
         <thead>
           <tr>
             <th></th>
-            <th class="text-center"><i class="fas fa-clock"></i> <b class="text-danger">Today</b> / <b class="text-green">Future</b></th>
-            <th width="150px">Name</th>
+            <th class="text-center"  width="150px"><i class="fas fa-clock"></i> <b class="text-danger">Today</b> / <b class="text-green">Future</b></th>
+            <th>Name</th>
             <th>DM Name</th>
             <th>DM Phone</th>
             <th>DM Email</th>
@@ -48,7 +48,7 @@
             <th>City</th>
             <th>ST/PV</th>
             <th>LPM</th>
-            <th width="250px">Commodities</th>
+            <th>Commodities</th>
           </tr>
         </thead>
         <tfoot>
@@ -70,7 +70,7 @@
             <th>City</th>
             <th>ST/PV</th>
             <th>LPM</th>
-            <th width="250px">Commodities</th>
+            <th>Commodities</th>
           </tr>
         </tfoot>
         <tbody class="spacer">
@@ -212,8 +212,21 @@
               <td nowrap><%= shipper.loads_per_month %></td>
 
               <td>
-                <% shipper.commodities_to_array.each do |cr| %>
+                <% shipper.commodities_to_array.first(5).each do |cr| %>
                   <span class="badge badge-inverse"><%= cr %></span>
+                <% end %>
+                <% if shipper.commodities_to_array.count >= 5 %>
+                <span
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  data-html="true"
+                  title="
+                  <% shipper.commodities_to_array.drop(5).each do |cr| %>
+                    <span class='badge badge-success'><%= cr %></span>
+                  <% end %>
+                  ">
+                  <span class="badge badge-inverse">+<%= shipper.commodities_to_array.count - 5 %></span>
+                </span>
                 <% end %>
               </td>
             </tr>
