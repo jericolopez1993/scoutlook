@@ -61,38 +61,86 @@
                                       <% elsif Carrier::DARK_BLUE.include?(cr) %>
                                         <span class="badge badge-drakblue"><%= cr %></span>
                                       <% elsif Carrier::BLUE.include?(cr) %>
-                                        <span class="badge badge-info"><%= cr %></span>
+                                        <span class="badge badge-info">
+                                          <% if cr == "NY-Brooklyn" %>
+                                            BKN
+                                          <% elsif cr == "NY-Bronx" %>
+                                            BXN
+                                          <% else %>
+                                            <%= cr %>
+                                          <% end %>
+                                        </span>
                                       <% elsif Carrier::RED.include?(cr) %>
                                       <span class="badge badge-danger"><%= cr %></span>
                                       <% elsif Carrier::BROWN.include?(cr) %>
-                                        <span class="badge badge-brown"><%= cr %></span>
+                                        <span class="badge badge-brown">
+                                          <% if cr == "TX-McAllen" %>
+                                            MCT
+                                          <% else %>
+                                            <%= cr %>
+                                          <% end %>
+                                        </span>
                                       <% elsif Carrier::YELLOW.include?(cr) %>
                                         <span class="badge badge-yellow"><%= cr %></span>
                                       <% elsif Carrier::ORANGE.include?(cr) %>
-                                        <span class="badge badge-warning"><%= cr %></span>
+                                        <span class="badge badge-warning">
+                                          <% if cr == "CA-Fresno" %>
+                                            FRC
+                                          <% elsif cr == "CA-Bakersfield" %>
+                                            BKC
+                                          <% elsif cr == "AZ-Yuma" %>
+                                            YUZ
+                                          <% else %>
+                                            <%= cr %>
+                                          <% end %>
+                                        </span>
                                       <% elsif Carrier::GREEN.include?(cr) %>
                                         <span class="badge badge-green"><%= cr %></span>
                                       <% end %>
                                     <% end %>
                                      ->
                                      <% load_tile.destination_to_array.each do |cr| %>
-                                       <% if Carrier::LIGHT_BLUE.include?(cr) %>
-                                         <span class="badge badge-primary"><%= cr %></span>
-                                       <% elsif Carrier::DARK_BLUE.include?(cr) %>
-                                         <span class="badge badge-drakblue"><%= cr %></span>
-                                       <% elsif Carrier::BLUE.include?(cr) %>
-                                         <span class="badge badge-info"><%= cr %></span>
-                                       <% elsif Carrier::RED.include?(cr) %>
-                                       <span class="badge badge-danger"><%= cr %></span>
-                                       <% elsif Carrier::BROWN.include?(cr) %>
-                                         <span class="badge badge-brown"><%= cr %></span>
-                                       <% elsif Carrier::YELLOW.include?(cr) %>
-                                         <span class="badge badge-yellow"><%= cr %></span>
-                                       <% elsif Carrier::ORANGE.include?(cr) %>
-                                         <span class="badge badge-warning"><%= cr %></span>
-                                       <% elsif Carrier::GREEN.include?(cr) %>
-                                         <span class="badge badge-green"><%= cr %></span>
-                                       <% end %>
+                                     <% if Carrier::LIGHT_BLUE.include?(cr) %>
+                                       <span class="badge badge-primary"><%= cr %></span>
+                                     <% elsif Carrier::DARK_BLUE.include?(cr) %>
+                                       <span class="badge badge-drakblue"><%= cr %></span>
+                                     <% elsif Carrier::BLUE.include?(cr) %>
+                                       <span class="badge badge-info">
+                                         <% if cr == "NY-Brooklyn" %>
+                                           BKN
+                                         <% elsif cr == "NY-Bronx" %>
+                                           BXN
+                                         <% else %>
+                                           <%= cr %>
+                                         <% end %>
+                                       </span>
+                                     <% elsif Carrier::RED.include?(cr) %>
+                                     <span class="badge badge-danger"><%= cr %></span>
+                                     <% elsif Carrier::BROWN.include?(cr) %>
+                                       <span class="badge badge-brown">
+                                         <% if cr == "TX-McAllen" %>
+                                           MCT
+                                         <% else %>
+                                           <%= cr %>
+                                         <% end %>
+                                       </span>
+                                     <% elsif Carrier::YELLOW.include?(cr) %>
+                                       <span class="badge badge-yellow"><%= cr %></span>
+                                     <% elsif Carrier::ORANGE.include?(cr) %>
+                                       <span class="badge badge-warning">
+                                         <% if cr == "CA-Fresno" %>
+                                           FRC
+                                         <% elsif cr == "CA-Bakersfield" %>
+                                           BKC
+                                         <% elsif cr == "AZ-Yuma" %>
+                                           YUZ
+                                         <% else %>
+                                           <%= cr %>
+                                         <% end %>
+                                       </span>
+                                     <% elsif Carrier::GREEN.include?(cr) %>
+                                       <span class="badge badge-green"><%= cr %></span>
+                                     <% end %>
                                      <% end %>
                                   </h5>
                                   <p>

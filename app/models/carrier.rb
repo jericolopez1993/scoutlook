@@ -32,7 +32,7 @@ class Carrier < ApplicationRecord
   "TN", "UT", "VT", "VA", "WV", "WI", "WY",]
   DARK_BLUE = ["US-Northeast", "US-Northeast (No Bronx)", "US-Southeast", "US-Northwest", "US-Midwest",]
   BROWN = ["TX", "TX-McAllen"]
-  ORANGE = ["CA", "AZ",]
+  ORANGE = ["CA", "CA-Fresno", "CA-Bakersfield", "AZ", "AZ-Yuma",]
   YELLOW = ["FL",]
   GREEN = ["WA",]
   RED = ["BC", "AB", "SK", "MB", "ON", "QC", "NB", "NS", "PEI", "NL", "NU",
