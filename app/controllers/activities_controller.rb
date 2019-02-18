@@ -166,7 +166,7 @@ class ActivitiesController < ApplicationController
                         margin-bottom: 50px;
                       }
                       .header-logo {
-                        width: 50px;
+                        width: 200px;
                         vertical-align: middle;
                       }
                       tr>td {
@@ -270,7 +270,7 @@ class ActivitiesController < ApplicationController
 
       @content = @style +
                  "<div>" +
-                    "<h1 class='header'><img class='header-logo' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'> <span style='vertical-align: middle;'>ScoutLook<span></h1>" +
+                    "<h1 class='header'><img class='header-logo' src='https://scoutlook.ca/assets/Scoutlook_Logo_red-9899a10bfe6dff35407ad6c1a6fd366b02035573e1567ba004147d0d01220ccd.png'> <span style='vertical-align: middle;'></h1>" +
                     "<h3 class='sub-header'>(Activity)</h3>" +
                     "<table width=100%>" +
                       "<tbody>" +

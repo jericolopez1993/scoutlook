@@ -59,8 +59,7 @@ class MailsController < ApplicationController
                    "<b style='color: #555; padding-right: 20px;'>Other Notes:</b> #{@activity.other_notes}<br/>" +
                    "</div>" +
                    "<br/><br/><div style='background-color:#fff; margin: 1rem; font-size: 20px; color: #555'>Thanks," +
-                   "<br><img style='width: 50px; vertical-align: middle;' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'>" +
-                   "<b style='vertical-align: middle;'>ScoutLook</b></div>" +
+                   "<br><img style='width: 200px; vertical-align: middle;' src='https://scoutlook.ca/assets/Scoutlook_Logo_red-9899a10bfe6dff35407ad6c1a6fd366b02035573e1567ba004147d0d01220ccd.png'>" +
                    "</div>"
       elsif @previous_controller == "rates"
 
@@ -87,8 +86,7 @@ class MailsController < ApplicationController
                    "<b style='color: #555; padding-right: 20px;'>Date Created:</b> #{@rate.created_at}<br/>" +
                    "</div>" +
                    "<br/><br/><div style='background-color:#fff; margin: 1rem; font-size: 20px; color: #555'>Thanks," +
-                   "<br><img style='width: 50px; vertical-align: middle;' src='https://scouteye.marcelo.ph/assets/scout_fav-5a780324cf2f17ab213cf7ccbbdaa0cca037a75a40500aded47ae7eb33dda6f6.png'>" +
-                   "<b style='vertical-align: middle;'>ScoutLook</b></div>" +
+                   "<br><img style='width: 200px; vertical-align: middle;' src='https://scoutlook.ca/assets/Scoutlook_Logo_red-9899a10bfe6dff35407ad6c1a6fd366b02035573e1567ba004147d0d01220ccd.png'>" +
                    "</div>"
       end
     end
