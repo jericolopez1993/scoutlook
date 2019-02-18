@@ -317,7 +317,7 @@ module ApplicationHelper
           current_date += reminder.reminder_interval.days
         end
         if current_date >= Date.today
-          str_date = str_date + "<span class='badge badge-#{(current_date == Date.today) ? 'danger' : 'green'} badge-square'>#{current_date.strftime("%d/%m/%Y")}</span>"
+          str_date = str_date + "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type} <br>Notes: #{reminder.notes}' class='badge badge-#{(current_date == Date.today) ? 'danger' : 'green'} badge-square'>#{current_date.strftime("%d/%m/%Y")}</span>"
         end
       end
     else
@@ -325,15 +325,15 @@ module ApplicationHelper
         if reminder.reminder_date
           quot = ((Date.today.to_date - reminder.reminder_date.to_date).to_i / reminder.reminder_interval)
           if quot >= 1 && reminder.reminder_date >= Date.today
-            str_date = str_date + "<span class='badge badge-#{(quot == 1) ? 'danger' : 'green'} badge-square'>#{reminder.reminder_date.strftime("%d/%m/%Y")}</span>"
+            str_date = str_date + "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type} <br>Notes: #{reminder.notes}'  class='badge badge-#{(quot == 1) ? 'danger' : 'green'} badge-square'>#{reminder.reminder_date.strftime("%d/%m/%Y")}</span>"
           end
         else
-          str_date = str_date + "<span class='badge badge-green badge-square'>#{(reminder.created_at + reminder.reminder_interval.days).strftime("%d/%m/%Y")}</span>"
+          str_date = str_date + "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type} <br>Notes: #{reminder.notes}' class='badge badge-green badge-square'>#{(reminder.created_at + reminder.reminder_interval.days).strftime("%d/%m/%Y")}</span>"
         end
       else
         if reminder.reminder_date
           if reminder.reminder_date >= Date.today
-            str_date = str_date + "<span class='badge badge-#{(reminder.reminder_date == Date.today) ? 'danger' : 'green'} badge-square'>#{reminder.reminder_date.strftime("%d/%m/%Y")}</span>"
+            str_date = str_date + "<span class='badge badge-#{(reminder.reminder_date == Date.today) ? 'danger' : 'green'} badge-square' data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type} <br>Notes: #{reminder.notes}' > #{reminder.reminder_date.strftime("%d/%m/%Y")}</span>"
           end
         end
       end
@@ -349,16 +349,16 @@ module ApplicationHelper
     str_date = ""
     if current_date <= Date.today
       if current_date == Date.today
-        str_date = str_date + "<span class='badge badge-danger badge-square'>#{current_date.strftime("%d/%m/%Y")}</span> "
+        str_date = str_date + "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type} <br>Notes: #{reminder.notes}' class='badge badge-danger badge-square'>#{current_date.strftime("%d/%m/%Y")}</span> "
       end
       until current_date >= Date.today
         current_date += interval.days
       end
       if interval > 0 && current_date > Date.today
-        str_date = str_date + "<span class='badge badge-green badge-square'>#{current_date.strftime("%d/%m/%Y")}</span>"
+        str_date = str_date + "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type} <br>Notes: #{reminder.notes}' class='badge badge-green badge-square'>#{current_date.strftime("%d/%m/%Y")}</span>"
       end
     else
-      str_date = str_date + "<span class='badge badge-danger badge-square'>#{default_date.strftime("%d/%m/%Y")}</span>"
+      str_date = str_date + "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type} <br>Notes: #{reminder.notes}' class='badge badge-danger badge-square'>#{default_date.strftime("%d/%m/%Y")}</span>"
     end
     str_date
   end
