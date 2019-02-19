@@ -35,6 +35,7 @@
             <th class="text-center"><i class="fas fa-clock"></i> <b class="text-danger">Today</b> / <b class="text-green">Future</b></th>
             <th>MC</th>
             <th>Name</th>
+            <th>ST/PV</th>
             <th>Ops Name</th>
             <th>Ops Phone</th>
             <th>Ops Email</th>
@@ -47,7 +48,6 @@
             <th>LstDateCon</th>
             <th>6M</th>
             <th>1M</th>
-            <th>ST/PV</th>
           </tr>
         </thead>
         <tfoot>
@@ -56,6 +56,7 @@
             <th></th>
             <th>MC</th>
             <th>Name</th>
+            <th>ST/PV</th>
             <th>Ops Name</th>
             <th>Ops Phone</th>
             <th>Ops Email</th>
@@ -68,7 +69,6 @@
             <th>LstDateCon</th>
             <th>6M</th>
             <th>1M</th>
-            <th>ST/PV</th>
           </tr>
         </tfoot>
         <tbody class="spacer">
@@ -103,6 +103,7 @@
                   <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier %>
                 </span>
               </td>
+              <td><%= carrier.location.nil? ? '' : carrier.location.state.upcase %></td>
               <td><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
               <td><b>
                   <%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + ((!carrier.poc.primary_extension_number.nil? && carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((carrier.poc.primary_phone_type != "") ? (" (#{(carrier.poc.primary_eligible_texting ? "TEXT" : carrier.poc.primary_phone_type)})") : "")) : "") %></b></td>
@@ -310,8 +311,6 @@
               <td><%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>
               <td><%= carrier.load_last_6_month %></td>
               <td><%= carrier.load_last_month %></td>
-              <td><%= carrier.location.nil? ? '' : carrier.location.state.upcase %></td>
-
             </tr>
           <% end %>
         </tbody>
