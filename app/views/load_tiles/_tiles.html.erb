@@ -99,7 +99,7 @@
                                       <% end %>
                                     <% end %>
                                      ->
-                                     <% load_tile.destination_to_array.each do |cr| %>
+                                    <% load_tile.destination_to_array.each do |cr| %>
                                      <% if Carrier::LIGHT_BLUE.include?(cr) %>
                                        <span class="badge badge-primary"><%= cr %></span>
                                      <% elsif Carrier::DARK_BLUE.include?(cr) %>
@@ -141,7 +141,7 @@
                                      <% elsif Carrier::GREEN.include?(cr) %>
                                        <span class="badge badge-green"><%= cr %></span>
                                      <% end %>
-                                     <% end %>
+                                    <% end %>
                                   </h5>
                                   <p>
                                     <%= load_tile.details %>
