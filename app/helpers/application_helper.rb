@@ -326,6 +326,10 @@ module ApplicationHelper
           quot = ((Date.today.to_date - reminder.reminder_date.to_date).to_i / reminder.reminder_interval)
           if quot >= 1 && reminder.reminder_date >= Date.today
             str_date = str_date + "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type.nil? ? '' : reminder.reminder_type} <br>Notes: #{reminder.notes.nil? ? '' : reminder.notes}'  class='badge badge-#{(quot == 1) ? 'danger' : 'green'} badge-square'>#{reminder.reminder_date.strftime("%d/%m/%Y")}</span>"
+          else
+            if (reminder.reminder_date + reminder.reminder_interval.days) == Date.today.to_date
+              str_date = str_date + "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type.nil? ? '' : reminder.reminder_type} <br>Notes: #{reminder.notes.nil? ? '' : reminder.notes}'  class='badge badge-danger badge-square'>#{Date.today}</span>"
+            end
           end
         else
           str_date = str_date + "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type.nil? ? '' : reminder.reminder_type} <br>Notes: #{reminder.notes.nil? ? '' : reminder.notes}' class='badge badge-green badge-square'>#{(reminder.created_at + reminder.reminder_interval.days).strftime("%d/%m/%Y")}</span>"
