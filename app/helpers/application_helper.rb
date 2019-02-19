@@ -210,10 +210,10 @@ module ApplicationHelper
       str += city.titleize + ", "
     end
     if !state.nil? && state != ""
-      str += state.titleize + ", "
+      str += state.upcase + ", "
     end
     if !country.nil? && country != ""
-      str += country.titleize + " "
+      str += country.upcase + " "
     end
     if !postal.nil? && postal != ""
       str += postal.titleize
