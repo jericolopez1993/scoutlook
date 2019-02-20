@@ -14,6 +14,12 @@
   .tooltip .arrow::before{
     border-right-color: #6f060b!important;
   }
+  th {
+    vertical-align: top;
+  }
+  th.rewrap {
+    white-space: nowrap;
+  }
   </style>
 <% end %>
 <!-- begin panel -->
@@ -28,47 +34,47 @@
       <h4 class="panel-title lp-header">Carriers</h4>
     </div>
     <div class="panel-body">
-      <table class="table table-striped table-bordered display nowrap"  data-order="[[3, &quot;asc&quot;]]" id="carrier_table">
+      <table class="table table-striped table-bordered display"  data-order="[[3, &quot;asc&quot;]]" id="carrier_table" width="100%">
         <thead>
           <tr>
             <th></th>
-            <th class="text-center"><i class="fas fa-clock"></i> <b class="text-danger">Today</b> / <b class="text-green">Future</b></th>
-            <th>MC</th>
-            <th>Name</th>
-            <th>ST/PV</th>
-            <th>Ops Name</th>
-            <th>Ops Phone</th>
-            <th>Ops Email</th>
-            <th>Reef</th>
-            <th>Lane</th>
-            <th>Approved</th>
-            <th>RO</th>
-            <th>Class</th>
-            <th>CR</th>
-            <th>LstDateCon</th>
-            <th>6M</th>
-            <th>1M</th>
+            <th class="text-center"><i class="fas fa-clock"></i></th>
+            <th class="rewrap">MC</th>
+            <th class="rewrap">Name</th>
+            <th class="rewrap">ST/PV</th>
+            <th class="rewrap">Ops Name</th>
+            <th class="rewrap">Ops Phone</th>
+            <th width="12%">Ops Email</th>
+            <th class="rewrap">Reef</th>
+            <th width="20%">Lane</th>
+            <th class="rewrap">Approved</th>
+            <th class="rewrap">RO</th>
+            <th class="rewrap">Class</th>
+            <th class="rewrap">CR</th>
+            <th class="rewrap">LstDateCon</th>
+            <th class="rewrap">6M</th>
+            <th class="rewrap">1M</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
             <th></th>
             <th></th>
-            <th>MC</th>
-            <th>Name</th>
-            <th>ST/PV</th>
-            <th>Ops Name</th>
-            <th>Ops Phone</th>
-            <th>Ops Email</th>
-            <th>Reef</th>
-            <th>Lane</th>
-            <th>Approved</th>
-            <th>RO</th>
-            <th>Class</th>
-            <th>CR</th>
-            <th>LstDateCon</th>
-            <th>6M</th>
-            <th>1M</th>
+            <th class="rewrap">MC</th>
+            <th class="rewrap">Name</th>
+            <th class="rewrap">ST/PV</th>
+            <th class="rewrap">Ops Name</th>
+            <th class="rewrap">Ops Phone</th>
+            <th width="12%">Ops Email</th>
+            <th class="rewrap">Reef</th>
+            <th width="20%">Lane</th>
+            <th class="rewrap">Approved</th>
+            <th class="rewrap">RO</th>
+            <th class="rewrap">Class</th>
+            <th class="rewrap">CR</th>
+            <th class="rewrap">LstDateCon</th>
+            <th class="rewrap">6M</th>
+            <th class="rewrap">1M</th>
           </tr>
         </tfoot>
         <tbody class="spacer">
@@ -107,7 +113,7 @@
               <td><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
               <td><b>
                   <%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + ((!carrier.poc.primary_extension_number.nil? && carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((carrier.poc.primary_phone_type != "") ? (" (#{(carrier.poc.primary_eligible_texting ? "TEXT" : carrier.poc.primary_phone_type)})") : "")) : "") %></b></td>
-              <td>
+              <td width="12%">
                 <% if !carrier.poc.nil?  %>
                   <a href="mailto:<%= carrier.poc.email %>?Subject=Hello%20<%= carrier.poc.first_name.nil? ? '' :  carrier.poc.first_name.capitalize + " " + carrier.poc.last_name.capitalize  %>" target="_top">
                     <%= carrier.poc.email.downcase %>&nbsp;<i class="far fa-envelope"></i>
@@ -115,7 +121,7 @@
                 <% end %>
               </td>
               <td class="text-center"><%= carrier.reefers %></td>
-              <td>
+              <td width="20%">
                 <% if carrier.carrier_lanes.length > 1 %>
                   <% carrier.lane_1.each do |lane| %>
                     <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
