@@ -1,0 +1,62 @@
+<%= form_with(model: truck_tile, local: true) do |form| %>
+  <% if truck_tile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(truck_tile.errors.count, "error") %> prohibited this truck_tile from being saved:</h2>
+
+      <ul>
+      <% truck_tile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin %>
+    <%= form.text_field :origin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination %>
+    <%= form.text_field :destination %>
+  </div>
+
+  <div class="field">
+    <%= form.label :details %>
+    <%= form.text_area :details %>
+  </div>
+
+  <div class="field">
+    <%= form.label :carrier_id %>
+    <%= form.number_field :carrier_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shipper_id %>
+    <%= form.number_field :shipper_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :load_date %>
+    <%= form.date_select :load_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.number_field :priority %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

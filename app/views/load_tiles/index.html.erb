@@ -40,7 +40,7 @@
   .kanban-centered:after,
   .kanban-centered:before {
     content: " ";
-    display: table;
+    /* display: table; */
   }
 
   .kanban-centered:after {
@@ -430,24 +430,29 @@
     $('.panel-body').bind('drop', function (event) {
       var children = $(this).children();
       var targetId = children.attr('id');
-
+      console.log(sourceId)
+      console.log(targetId)
       if (sourceId != targetId) {
         var elementId = event.originalEvent.dataTransfer.getData("text/plain");
         $('#processing-modal').modal('toggle'); //before post
         // Post data
         var element = document.getElementById(elementId);
-        $.ajax({
-          method: "PUT",
-          url: "/api/load_tiles/"+$(element).data('id'),
-          data: {
-            load_date: $(this).data('date')
-          }
-        }).done(function (data) {
           setTimeout(function () {
             children.prepend(element);
             $('#processing-modal').modal('toggle'); // after post
           }, 1000);
-        });
+        // $.ajax({
+        //   method: "PUT",
+        //   url: "/api/load_tiles/"+$(element).data('id'),
+        //   data: {
+        //     load_date: $(this).data('date')
+        //   }
+        // }).done(function (data) {
+        //   setTimeout(function () {
+        //     children.prepend(element);
+        //     $('#processing-modal').modal('toggle'); // after post
+        //   }, 1000);
+        // });
       }
 
       event.preventDefault();

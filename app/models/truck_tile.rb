@@ -1,0 +1,2 @@
+class TruckTile < ApplicationRecord
+end

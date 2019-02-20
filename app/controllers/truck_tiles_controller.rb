@@ -1,0 +1,76 @@
+class TruckTilesController < ApplicationController
+  before_action :set_truck_tile, only: [:show, :edit, :update, :destroy]
+
+  # GET /truck_tiles
+  # GET /truck_tiles.json
+  def index
+    @truck_tiles = TruckTile.all
+  end
+
+  # GET /truck_tiles/1
+  # GET /truck_tiles/1.json
+  def show
+    respond_to do |format|
+      format.js { }
+    end
+  end
+
+  # GET /truck_tiles/new
+  def new
+    @truck_tile = TruckTile.new
+  end
+
+  # GET /truck_tiles/1/edit
+  def edit
+    respond_to do |format|
+      format.js { }
+    end
+  end
+
+  # POST /truck_tiles
+  # POST /truck_tiles.json
+  def create
+    @truck_tile = TruckTile.new(truck_tile_params)
+
+    respond_to do |format|
+      @truck_tile.save
+      format.js { }
+    end
+  end
+
+  # PATCH/PUT /truck_tiles/1
+  # PATCH/PUT /truck_tiles/1.json
+  def update
+    respond_to do |format|
+      @truck_tile.update(truck_tile_params)
+      format.js { }
+    end
+  end
+
+  # DELETE /truck_tiles/1
+  # DELETE /truck_tiles/1.json
+  def destroy
+    @truck_tile.destroy
+    respond_to do |format|
+      format.js { }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_truck_tile
+      @truck_tile = TruckTile.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def truck_tile_params
+      params[:truck_tile][:origin] = convert_array(params[:truck_tile][:origin])
+      params[:truck_tile][:destination] = convert_array(params[:truck_tile][:destination])
+      if params[:truck_tile][:load_date].present?
+        params[:truck_tile][:load_date] = Date::strptime(params[:truck_tile][:load_date], "%m/%d/%Y")
+      else
+        params[:truck_tile][:load_date] = nil
+      end
+      params.require(:truck_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id)
+    end
+end
