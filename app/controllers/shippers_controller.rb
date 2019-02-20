@@ -138,7 +138,8 @@ class ShippersController < ApplicationController
   end
 
   def compose_mail
-    @contacts = Shipper.where("shippers.id IN (#{params[:ids]})").joins("LEFT JOIN shipper_contacts ON shippers.poc_id = shipper_contacts.id ").distinct("shipper_contacts.email").pluck("shipper_contacts.email").join(",")
+    @ids = params[:ids]
+    @contacts = Shipper.where("shippers.id IN (#{@ids})").joins("LEFT JOIN shipper_contacts ON shippers.poc_id = shipper_contacts.id ").distinct("shipper_contacts.email").pluck("shipper_contacts.email").join(",")
     render :layout => 'mail'
   end
 
@@ -146,7 +147,14 @@ class ShippersController < ApplicationController
     params[:to].split(',').map(&:to_s).each do |contact|
       MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content_body], current_user.email).deliver_now
     end
-      redirect_to shippers_path, notice: 'Mail was successfully sent to shipper/s.'
+    if params[:record_activity].present?
+      if params[:ids].present? && !params[:ids].blank?
+        Shipper.where("shippers.id IN (#{params[:ids]})").each do |shipper|
+          Activity.create(:shipper_id => shipper.id, :campaign_name => "Email: #{params[:subject]}", :activity_type => "Email", :shipper_contact_id => shipper.pdm_id, :other_notes => params[:content_body], :date_opened => Date.today)
+        end
+      end
+    end
+    redirect_to shippers_path, notice: 'Mail was successfully sent to shipper/s.'
   end
 
   private

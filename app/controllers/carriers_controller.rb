@@ -147,7 +147,8 @@ class CarriersController < ApplicationController
   end
 
   def compose_mail
-    @contacts = Carrier.where("carriers.id IN (#{params[:ids]})").joins("LEFT JOIN carrier_contacts ON carriers.poc_id = carrier_contacts.id ").distinct("carrier_contacts.email").pluck("carrier_contacts.email").join(",")
+    @ids = params[:ids]
+    @contacts = Carrier.where("carriers.id IN (#{@ids})").joins("LEFT JOIN carrier_contacts ON carriers.poc_id = carrier_contacts.id ").distinct("carrier_contacts.email").pluck("carrier_contacts.email").join(",")
     render :layout => 'mail'
   end
 
@@ -155,7 +156,14 @@ class CarriersController < ApplicationController
     params[:to].split(',').map(&:to_s).each do |contact|
       MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content_body], current_user.email).deliver_now
     end
-      redirect_to carriers_path, notice: 'Mail was successfully sent to carrier/s.'
+    if params[:record_activity].present?
+      if params[:ids].present? && !params[:ids].blank?
+        Carrier.where("carriers.id IN (#{params[:ids]})").each do |carrier|
+          Activity.create(:carrier_id => carrier.id, :campaign_name => "Email: #{params[:subject]}", :activity_type => "Email", :carrier_contact_id => carrier.poc_id, :other_notes => params[:content_body], :date_opened => Date.today)
+        end
+      end
+    end
+    redirect_to carriers_path, notice: 'Mail was successfully sent to carrier/s.'
   end
 
   private

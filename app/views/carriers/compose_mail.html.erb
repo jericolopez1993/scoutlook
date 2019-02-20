@@ -28,6 +28,7 @@
       <div class="email-to">
         <label class="control-label">To:</label>
         <input name="to" id="email-to" class="primary line-mode" value="<%= @contacts %>">
+        <input type="hidden" name="ids" value="<%= @ids %>">
 
       </div>
       <!-- end email to -->
@@ -45,6 +46,10 @@
         <%= text_area_tag(:content_body, nil, class: 'textarea form-control', id: "wysihtml5", placeholder: "Content here...", cols: 20, rows: 20) %>
       </div>
       <!-- end email content -->
+      <div class="email-subject" style="padding-top: 2%;">
+        <input type="checkbox" name="record_activity" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" />
+        Record in Activity
+      </div>
     <% end %>
   </div>
   <!-- end vertical-box-row -->
