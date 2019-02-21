@@ -1,0 +1,84 @@
+$("div#showTruck").find(".modal-body").html("<%= escape_javascript(render 'form', truck_tile: @truck_tile, form_id: 'edit_load') %>");
+$("div#showTruck").find(".modal-title").text("Edit - <%= escape_javascript(@truck_tile.name) %>")
+$(".new-truck-origin-multiple").select2({placeholder: "Select origins", allowClear: true, dropdownParent: $("#edit_truck")});
+$(".new-truck-destination-multiple").select2({placeholder: "Select destinations", allowClear: true, dropdownParent: $("#edit_truck")});
+$(".new-truck-origin-multiple").val(<%= raw @truck_tile.origin_to_array %>).trigger("change");
+$(".new-truck-destination-multiple").val(<%= raw @truck_tile.destination_to_array %>).trigger("change");
+$('.datepicker-autoClose').datepicker({
+  autoclose: true,
+  orientation: 'auto bottom'
+});
+$("#showTruck").modal('show');
+
+$(function () {
+  var kanbanCol = $('.panel-body');
+  kanbanCol.css('max-height', (window.innerHeight - 150) + 'px');
+
+  var kanbanColCount = parseInt(kanbanCol.length);
+  $('.container-fluid').css('min-width', (kanbanColCount * 350) + 'px');
+
+  draggableInit();
+
+  // $('.panel-heading').click(function() {     var $panelBody = $(this).parent().children('.panel-body');     $panelBody.slideToggle(); });
+});
+
+function addDateToLoadForm(date) {
+  $("#new_load").find("#last_load_date").datepicker('update', date);
+  $("#newLoadForm").modal('show');
+}
+function addDateToTruckForm(date) {
+  $("#new_truck").find("#last_load_date").datepicker('update', date);
+  $("#newTruckForm").modal('show');
+}
+function draggableInit() {
+  var sourceId;
+  var targetType;
+
+  $('[draggable=true]').bind('dragstart', function (event) {
+    targetType = $(this).data('tile-type');
+    sourceId = targetType + "-" +$(this).parent().data('index');
+    event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('id'));
+  });
+
+  $('.panel-body').bind('dragover', function (event) {
+    event.preventDefault();
+  });
+
+  $('.panel-body').bind('drop', function (event) {
+    var children = $(this).children();
+    var targetId = targetType + "-" +children.data('index');
+    children = $("#"+targetId);
+    if (sourceId != targetId) {
+      var elementId = event.originalEvent.dataTransfer.getData("text/plain");
+      $('#processing-modal').modal('toggle'); //before post
+      // Post data
+      var element = document.getElementById(elementId);
+        setTimeout(function () {
+          children.prepend(element);
+          $('#processing-modal').modal('toggle'); // after post
+        }, 1000);
+
+        var url =  "";
+        if (targetType === "LOAD") {
+          url = "/api/load_tiles/"+$(element).data('id');
+        }else if (targetType === "TRUCK") {
+          url = "/api/truck_tiles/"+$(element).data('id');
+        }
+
+        $.ajax({
+          method: "PUT",
+          url: url,
+          data: {
+            load_date: $(this).data('date')
+          }
+        }).done(function (data) {
+          setTimeout(function () {
+            children.prepend(element);
+            $('#processing-modal').modal('toggle'); // after post
+          }, 1000);
+        });
+    }
+
+    event.preventDefault();
+  });
+}

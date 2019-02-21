@@ -1,8 +1,7 @@
-<%= form_with(model: truck_tile, local: true) do |form| %>
+<%= form_with(model: truck_tile, :html => {remote: true, class: 'form-horizontal', 'data-parsley-validate' => true, id: form_id}) do |form| %>
   <% if truck_tile.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(truck_tile.errors.count, "error") %> prohibited this truck_tile from being saved:</h2>
-
       <ul>
       <% truck_tile.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,53 +9,48 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-group row m-b-15">
+    <%= form.label :name, 'Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.text_field :status %>
+  <div class="form-group row m-b-15">
+    <%= form.label :load_date, 'Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.text_field :load_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", :id => "last_load_date", :value => "#{truck_tile.load_date.nil? ? "" : truck_tile.load_date.strftime("%m/%d/%Y")}" %>
+    </div>
   </div>
+  <div class="form-group row m-b-15">
+    <%= form.label :status, 'Status:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.select :status, options_for_select(['Booked', 'Dispatched', 'To Be Dispatched', 'Hot', 'Urgent Priority to Cover', 'Potential Load', 'Truck based on conditions'], ''), {:include_blank => false}, class: 'form-control' %>
 
-  <div class="field">
-    <%= form.label :origin %>
-    <%= form.text_field :origin %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :destination %>
-    <%= form.text_field :destination %>
+  <div class="form-group row m-b-15">
+    <%= form.label :origin, 'Origin:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.select :origin, grouped_options_for_select(CarrierLane::ORIGINS), {:include_blank => false}, class: 'new-truck-origin-multiple', multiple: true %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :details %>
-    <%= form.text_area :details %>
+  <div class="form-group row m-b-15">
+    <%= form.label :destination, 'Destination:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.select :destination, grouped_options_for_select(CarrierLane::DESTINATIONS), {:include_blank => false}, class: 'new-truck-destination-multiple', multiple: true %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :carrier_id %>
-    <%= form.number_field :carrier_id %>
+  <div class="form-group row m-b-15">
+    <%= form.label :details, 'Details:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.text_area(:details, rows: 5, class: 'form-control') %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :shipper_id %>
-    <%= form.number_field :shipper_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :load_date %>
-    <%= form.date_select :load_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :priority %>
-    <%= form.number_field :priority %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group row m-b-15">
+    <div class="col-md-2"></div>
+    <div class="col-md-9 col-sm-12 d-flex justify-content-end">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>

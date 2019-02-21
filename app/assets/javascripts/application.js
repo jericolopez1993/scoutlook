@@ -141,6 +141,8 @@ $(document).ready(function() {
   $(".shipper-type-multiple-select2").select2({ placeholder: "Select shipper types", allowClear: true });
   $(".new-load-origin-multiple").select2({placeholder: "Select origins", allowClear: true, dropdownParent: $("#new_load")});
   $(".new-load-destination-multiple").select2({placeholder: "Select destinations", allowClear: true, dropdownParent: $("#new_load")});
+  $(".new-truck-origin-multiple").select2({placeholder: "Select origins", allowClear: true, dropdownParent: $("#new_truck")});
+  $(".new-truck-destination-multiple").select2({placeholder: "Select destinations", allowClear: true, dropdownParent: $("#new_truck")});
   $("#origin_location_id").chained("#origin_id");
   $("#destination_location_id").chained("#destination_id");
 
