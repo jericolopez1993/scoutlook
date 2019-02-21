@@ -92,7 +92,7 @@ namespace :deploy do
   end
 
   before :starting,     :stop_nginx
-  before :starting,     :seed_dump
+  # before :starting,     :seed_dump
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
