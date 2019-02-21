@@ -26,9 +26,39 @@
         </button>
       </div>
       <div class="modal-body">
-
       </div>
+    </div>
+  </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="newTruckForm" role="dialog" aria-labelledby="newTruckFormLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Truck</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'truck_tiles/form', truck_tile: TruckTile.new, form_id: 'new_truck' %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="showTruck" role="dialog" aria-labelledby="showTruckLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
     </div>
   </div>
 </div>

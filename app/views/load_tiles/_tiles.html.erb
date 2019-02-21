@@ -24,10 +24,10 @@
                   <button id="" class="btn btn-green btn-xs pull-right" style="margin-right: 5px;"><i class="fas fa-comment-alt"></i></button>
               </div>
               <div class="panel-body row" data-date="<%= cdate %>" style="min-height: 100px;">
-                <div id="TRUCK-<%= index%>" class="col-6 kanban-centered">
+                <div id="TRUCK-<%= index%>" data-index="<%= index %>" class="col-6 kanban-centered">
 
                   <% TruckTile.where(:load_date => cdate ).each_with_index do |truck_tile, index2|%>
-                    <article class="kanban-entry grab" id="truck<%= truck_tile.id %>" data-id="<%= truck_tile.id %>" draggable="true" >
+                    <article class="kanban-entry grab" data-tile-type="TRUCK" id="truck<%= truck_tile.id %>" data-id="<%= truck_tile.id %>" draggable="true" >
                         <div class="kanban-entry-inner">
                             <div class="kanban-label"
                                 style="border: 5px solid
@@ -159,10 +159,10 @@
                   <% end %>
 
                 </div>
-                  <div id="LOAD-<%= index%>" class="col-6 kanban-centered">
+                  <div id="LOAD-<%= index%>" data-index="<%= index %>"  class="col-6 kanban-centered">
 
                     <% LoadTile.where(:load_date => cdate ).each_with_index do |load_tile, index2|%>
-                      <article class="kanban-entry grab" id="load<%= load_tile.id %>" data-id="<%= load_tile.id %>" draggable="true" >
+                      <article class="kanban-entry grab" data-tile-type="LOAD" id="load<%= load_tile.id %>" data-id="<%= load_tile.id %>" draggable="true" >
                           <div class="kanban-entry-inner">
                               <div class="kanban-label"
                                   style="border: 5px solid

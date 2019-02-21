@@ -417,9 +417,11 @@
 
   function draggableInit() {
     var sourceId;
+    var targetType;
 
     $('[draggable=true]').bind('dragstart', function (event) {
-      sourceId = $(this).parent().attr('id');
+      targetType = $(this).data('tile-type');
+      sourceId = targetType + "-" +$(this).parent().data('index');
       event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('id'));
     });
 
@@ -429,9 +431,8 @@
 
     $('.panel-body').bind('drop', function (event) {
       var children = $(this).children();
-      var targetId = children.attr('id');
-      console.log(sourceId)
-      console.log(targetId)
+      var targetId = targetType + "-" +children.data('index');
+      children = $("#"+targetId);
       if (sourceId != targetId) {
         var elementId = event.originalEvent.dataTransfer.getData("text/plain");
         $('#processing-modal').modal('toggle'); //before post
@@ -441,18 +442,26 @@
             children.prepend(element);
             $('#processing-modal').modal('toggle'); // after post
           }, 1000);
-        // $.ajax({
-        //   method: "PUT",
-        //   url: "/api/load_tiles/"+$(element).data('id'),
-        //   data: {
-        //     load_date: $(this).data('date')
-        //   }
-        // }).done(function (data) {
-        //   setTimeout(function () {
-        //     children.prepend(element);
-        //     $('#processing-modal').modal('toggle'); // after post
-        //   }, 1000);
-        // });
+
+          var url =  "";
+          if (targetType === "LOAD") {
+            url = "/api/load_tiles/"+$(element).data('id');
+          }else if (targetType === "TRUCK") {
+            url = "/api/truck_tiles/"+$(element).data('id');
+          }
+
+          $.ajax({
+            method: "PUT",
+            url: url,
+            data: {
+              load_date: $(this).data('date')
+            }
+          }).done(function (data) {
+            setTimeout(function () {
+              children.prepend(element);
+              $('#processing-modal').modal('toggle'); // after post
+            }, 1000);
+          });
       }
 
       event.preventDefault();
