@@ -1,5 +1,5 @@
 # Change these
-server 'ubuntu@piggyback.net', roles: [:web, :app, :db], primary: true
+server 'ubuntu@scoutlook-dev2.opinionated.software', roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@gitlab.com:opinionatedsoft/scoutcrm.git'
 set :application,     'scout_prod'
