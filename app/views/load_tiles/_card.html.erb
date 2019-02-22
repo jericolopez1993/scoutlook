@@ -1,0 +1,129 @@
+<div class="kanban-entry-inner">
+    <div class="kanban-label"
+        style="border: 5px solid
+        <% if tile.status == "Booked" || tile.status == "Dispatched" %>
+          #99da00
+        <% elsif tile.status == "To Be Dispatched" %>
+          #ffdc00
+        <% elsif tile.status == "Hot" || tile.status == "Urgent Priority to Cover" %>
+          #ffafbd
+        <% elsif tile.status == "Potential Load" || tile.status == "Truck based on conditions" %>
+          #0992fa
+        <% else %>
+          #ffffff
+        <% end %>
+        ">
+        <h6><span><%= link_to tile.name, tile, :remote => true, :id => 'show_tile' %></span>
+          <br/>
+           <span style="color: <% if tile.status == "Booked" || tile.status == "Dispatched" %>
+          #5b8200
+        <% elsif tile.status == "To Be Dispatched" %>
+          #b29a00
+        <% elsif tile.status == "Hot" || tile.status == "Urgent Priority to Cover" %>
+          #b27a84
+        <% elsif tile.status == "Potential Load" || tile.status == "Truck based on conditions" %>
+          #0666af
+        <% end %>
+        ">
+          <%= tile.status %></span></h6>
+
+        <h5>
+          <% tile.origin_to_array.each do |cr| %>
+            <% if Carrier::LIGHT_BLUE.include?(cr) %>
+              <span class="badge badge-primary"><%= cr %></span>
+            <% elsif Carrier::DARK_BLUE.include?(cr) %>
+              <span class="badge badge-drakblue"><%= cr %></span>
+            <% elsif Carrier::BLUE.include?(cr) %>
+              <span class="badge badge-info">
+                <% if cr == "NY-Brooklyn" %>
+                  BKN
+                <% elsif cr == "NY-Bronx" %>
+                  BXN
+                <% else %>
+                  <%= cr %>
+                <% end %>
+              </span>
+            <% elsif Carrier::RED.include?(cr) %>
+            <span class="badge badge-danger"><%= cr %></span>
+            <% elsif Carrier::BROWN.include?(cr) %>
+              <span class="badge badge-brown">
+                <% if cr == "TX-McAllen" %>
+                  MCT
+                <% else %>
+                  <%= cr %>
+                <% end %>
+              </span>
+            <% elsif Carrier::YELLOW.include?(cr) %>
+              <span class="badge badge-yellow"><%= cr %></span>
+            <% elsif Carrier::ORANGE.include?(cr) %>
+              <span class="badge badge-warning">
+                <% if cr == "CA-Fresno" %>
+                  FRC
+                <% elsif cr == "CA-Bakersfield" %>
+                  BKC
+                <% elsif cr == "AZ-Yuma" %>
+                  YUZ
+                <% else %>
+                  <%= cr %>
+                <% end %>
+              </span>
+            <% elsif Carrier::GREEN.include?(cr) %>
+              <span class="badge badge-green"><%= cr %></span>
+            <% end %>
+          <% end %>
+           ->
+          <% tile.destination_to_array.each do |cr| %>
+           <% if Carrier::LIGHT_BLUE.include?(cr) %>
+             <span class="badge badge-primary"><%= cr %></span>
+           <% elsif Carrier::DARK_BLUE.include?(cr) %>
+             <span class="badge badge-drakblue"><%= cr %></span>
+           <% elsif Carrier::BLUE.include?(cr) %>
+             <span class="badge badge-info">
+               <% if cr == "NY-Brooklyn" %>
+                 BKN
+               <% elsif cr == "NY-Bronx" %>
+                 BXN
+               <% else %>
+                 <%= cr %>
+               <% end %>
+             </span>
+           <% elsif Carrier::RED.include?(cr) %>
+           <span class="badge badge-danger"><%= cr %></span>
+           <% elsif Carrier::BROWN.include?(cr) %>
+             <span class="badge badge-brown">
+               <% if cr == "TX-McAllen" %>
+                 MCT
+               <% else %>
+                 <%= cr %>
+               <% end %>
+             </span>
+           <% elsif Carrier::YELLOW.include?(cr) %>
+             <span class="badge badge-yellow"><%= cr %></span>
+           <% elsif Carrier::ORANGE.include?(cr) %>
+             <span class="badge badge-warning">
+               <% if cr == "CA-Fresno" %>
+                 FRC
+               <% elsif cr == "CA-Bakersfield" %>
+                 BKC
+               <% elsif cr == "AZ-Yuma" %>
+                 YUZ
+               <% else %>
+                 <%= cr %>
+               <% end %>
+             </span>
+           <% elsif Carrier::GREEN.include?(cr) %>
+             <span class="badge badge-green"><%= cr %></span>
+           <% end %>
+          <% end %>
+        </h5>
+        <p>
+          <%= tile.details %>
+          <%= tile.load_date %>
+        </p>
+        <p class="text-right">
+          <%= link_to '<i class="far fa-edit fa-1-2x"></i>'.html_safe, (tile_type == "truck" ? edit_load_tile_path(tile) : edit_truck_tile_path(tile)), :remote => true, :id => 'edit_tile', :class => 'text-warning' %>
+          <%= link_to '<i class="far fa-eye fa-1-2x"></i>'.html_safe, tile, :remote => true, :id => 'show_tile', :class => 'text-success' %>
+          <%= link_to '<i class="fas fa-trash-alt fa-1-2x"></i>'.html_safe, tile, :remote => true, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'text-danger'%>
+        </p>
+    </div>
+</div>
