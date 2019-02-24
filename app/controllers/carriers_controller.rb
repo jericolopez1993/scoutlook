@@ -153,8 +153,9 @@ class CarriersController < ApplicationController
   end
 
   def send_mail
+    attachment_files = params[:file].present? ? params[:file] : nil
     params[:to].split(',').map(&:to_s).each do |contact|
-      MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content_body], current_user.email).deliver_now
+      MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content_body], current_user.email, attachment_files).deliver_now
     end
     if params[:record_activity].present?
       if params[:ids].present? && !params[:ids].blank?

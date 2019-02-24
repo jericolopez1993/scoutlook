@@ -46,6 +46,7 @@
 //= require vendor/bootstrap-datepicker.min
 //= require vendor/bootstrap-tagsinput
 //= require vendor/depends_on
+//= require vendor/dropzone.min
 //= require inputmask
 //= require jquery.inputmask
 //= require inputmask.extensions

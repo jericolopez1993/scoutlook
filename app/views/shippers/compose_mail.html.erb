@@ -3,25 +3,27 @@
     position: unset;
   }
 </style>
+
 <div class="header-inverse">
   <h1 class="pull-left">
     Send a Mail
   </h1>
   <span class="pull-right">
     <button class="btn btn-danger btn-xs" onclick="window.history.back();">Discard</button>
-    <button type="submit" class="btn btn-primary btn-xs" onclick="$('#mail_form').submit();">Send</button>
+    <button type="submit" class="btn btn-primary btn-xs">Send</button>
   </span>
 </div>
 <!-- begin vertical-box -->
 <div class="vertical-box">
   <!-- begin vertical-box-row -->
   <div class="vertical-box-row bg-white">
-    <%= form_tag('/shippers/send_mail', id: 'mail_form') do %>
+    <%= form_tag('/shippers/send_mail', id: 'mail_form', multipart: true) do %>
       <!-- begin email to -->
       <div class="email-to">
         <label class="control-label">To:</label>
         <input name="to" id="email-to" class="primary line-mode" value="<%= @contacts %>">
         <input type="hidden" name="ids" value="<%= @ids %>">
+
       </div>
       <!-- end email to -->
 
@@ -37,11 +39,20 @@
         <%= hidden_field_tag :content, @content%>
         <%= text_area_tag(:content_body, nil, class: 'textarea form-control', id: "wysihtml5", placeholder: "Content here...", cols: 20, rows: 20) %>
       </div>
-      <div class="email-subject" style="padding-top: 2%;">
-        <input type="checkbox" name="record_activity" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" />
-        Record in Activity
-      </div>
       <!-- end email content -->
+<div id="dropzone" class="dropzone"  style="margin-top: 1%;">
+    <div id="dropzoneEmailPreview" class="dz-message needsclick">
+      Drop attachments or files <b>here</b> or <b>click</b> to upload.<br />
+      <span class="dz-note needsclick">
+        (Attachments or Files can be <b>removed</b>.)
+      </span>
+    </div>
+</div>
+<div class="email-subject" style="padding-top: 1%;padding-bottom: 2%;">
+  <input type="checkbox" name="record_activity" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" />
+  Record in Activity
+</div>
+
     <% end %>
   </div>
   <!-- end vertical-box-row -->
@@ -71,4 +82,37 @@
     });
     $(this).remove();
   });
+  var emailPreviewDropzone = new Dropzone("#mail_form", {
+        url: "/shippers/send_mail",
+        addRemoveLinks: true,
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 10,
+        maxFiles: 10,
+        previewsContainer: "#dropzoneEmailPreview",
+        clickable: "#dropzoneEmailPreview",
+
+        // The setting up of the dropzone
+        init: function() {
+          var myDropzone = this;
+          myDropzone = this; // closure
+          $("button[type=submit]").on("click", function(e) {
+            // Make sure that the form isn't actually being sent.
+            e.preventDefault();
+            e.stopPropagation();
+            if (myDropzone.getQueuedFiles().length === 0) {
+              $("#mail_form").submit();
+            } else {
+              myDropzone.processQueue();
+            }
+          });
+          myDropzone.on("complete", function(file) {
+            $("#mail_form").submit();
+          });
+          this.on("successmultiple", function(files, response) {
+            var data = response;
+            location.reload(true);
+          });
+        }
+      });
 </script>

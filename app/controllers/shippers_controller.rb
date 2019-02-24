@@ -144,13 +144,14 @@ class ShippersController < ApplicationController
   end
 
   def send_mail
+    attachment_files = params[:file].present? ? params[:file] : nil
     params[:to].split(',').map(&:to_s).each do |contact|
-      MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content_body], current_user.email).deliver_now
+      MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content_body], current_user.email, attachment_files).deliver_now
     end
     if params[:record_activity].present?
       if params[:ids].present? && !params[:ids].blank?
         Shipper.where("shippers.id IN (#{params[:ids]})").each do |shipper|
-          Activity.create(:shipper_id => shipper.id, :campaign_name => "Email: #{params[:subject]}", :activity_type => "Email", :shipper_contact_id => shipper.pdm_id, :other_notes => params[:content_body], :date_opened => Date.today)
+          Activity.create(:shipper_id => shipper.id, :campaign_name => "Email: #{params[:subject]}", :activity_type => "Email", :shipper_contact_id => shipper.poc_id, :other_notes => params[:content_body], :date_opened => Date.today)
         end
       end
     end
