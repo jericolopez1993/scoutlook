@@ -77,6 +77,7 @@ Rails.application.routes.draw do
    resources :shipper_contacts
    resources :activities
    resources :load_tiles
+   resources :truck_tiles
  end
  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.htmlerb
 end

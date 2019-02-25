@@ -1,61 +1,50 @@
-$("div#sortableKanbanBoards").html("<%= escape_javascript(render 'tiles') %>");
+$("div#sortableKanbanBoards").html("<%= escape_javascript(render 'load_tiles/tiles') %>");
 $('#edit_load').trigger("reset");
 $('.new-load-origin-multiple').val(null).trigger('change');
 $('.new-load-destination-multiple').val(null).trigger('change');
 $("#showLoad").modal('hide');
 
 $(function () {
-  var kanbanCol = $('.panel-body');
-  kanbanCol.css('max-height', (window.innerHeight - 150) + 'px');
-
-  var kanbanColCount = parseInt(kanbanCol.length);
-  $('.container-fluid').css('min-width', (kanbanColCount * 350) + 'px');
-
-  draggableInit();
-
-  // $('.panel-heading').click(function() {     var $panelBody = $(this).parent().children('.panel-body');     $panelBody.slideToggle(); });
-});
-
-function addDateToForm(date) {
-  $("#new_load").find("#last_load_date").datepicker('update', date);
-  $("#newLoadForm").modal('show');
-}
-
-function draggableInit() {
-  var sourceId;
-
-  $('[draggable=true]').bind('dragstart', function (event) {
-    sourceId = $(this).parent().attr('id');
-    event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('id'));
-  });
-
-  $('.panel-body').bind('dragover', function (event) {
-    event.preventDefault();
-  });
-
-  $('.panel-body').bind('drop', function (event) {
-    var children = $(this).children();
-    var targetId = children.attr('id');
-
-    if (sourceId != targetId) {
-      var elementId = event.originalEvent.dataTransfer.getData("text/plain");
-      $('#processing-modal').modal('toggle'); //before post
-      // Post data
-      var element = document.getElementById(elementId);
-      $.ajax({
-        method: "PUT",
-        url: "/api/load_tiles/"+$(element).data('id'),
-        data: {
-          load_date: $(this).data('date')
-        }
-      }).done(function (data) {
-        setTimeout(function () {
-          children.prepend(element);
-          $('#processing-modal').modal('toggle'); // after post
-        }, 1000);
-      });
-    }
-
-    event.preventDefault();
-  });
-}
+  $( ".sortable-truck" ).sortable({
+        connectWith: '.sortable-truck',
+        cursor: 'move',
+      placeholder: 'placeholder',
+      forcePlaceholderSize: true,
+      opacity: 0.4,
+          stop: function(event, ui) {
+            $.ajax({
+              method: "PUT",
+              url: "/api/truck_tiles/"+$(ui.item).data('id'),
+              data: {
+                load_date: $(ui.item).parent().parent().data('date')
+              }
+            }).done(function (data) {
+            });
+          }
+   });
+   $( ".sortable-load" ).sortable({
+         connectWith: '.sortable-load',
+         cursor: 'move',
+      placeholder: 'placeholder',
+      forcePlaceholderSize: true,
+      opacity: 0.4,
+           stop: function(event, ui) {
+             $.ajax({
+               method: "PUT",
+               url: "/api/load_tiles/"+$(ui.item).data('id'),
+               data: {
+                 load_date: $(ui.item).parent().parent().data('date')
+               }
+             }).done(function (data) {
+             });
+           }
+    });
+ });
+ function addDateToLoadForm(date) {
+   $("#new_load").find("#last_load_date").datepicker('update', date);
+   $("#newLoadForm").modal('show');
+ }
+ function addDateToTruckForm(date) {
+   $("#new_truck").find("#last_load_date").datepicker('update', date);
+   $("#newTruckForm").modal('show');
+ }

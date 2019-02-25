@@ -5,74 +5,46 @@ $('.new-truck-destination-multiple').val(null).trigger('change');
 $("#newTruckForm").modal('hide');
 
 $(function () {
-  var kanbanCol = $('.panel-body');
-  kanbanCol.css('max-height', (window.innerHeight - 150) + 'px');
-
-  var kanbanColCount = parseInt(kanbanCol.length);
-  $('.container-fluid').css('min-width', (kanbanColCount * 350) + 'px');
-
-  draggableInit();
-
-  // $('.panel-heading').click(function() {     var $panelBody = $(this).parent().children('.panel-body');     $panelBody.slideToggle(); });
-});
-
-function addDateToLoadForm(date) {
-  $("#new_load").find("#last_load_date").datepicker('update', date);
-  $("#newLoadForm").modal('show');
-}
-function addDateToTruckForm(date) {
-  $("#new_truck").find("#last_load_date").datepicker('update', date);
-  $("#newTruckForm").modal('show');
-}
-function draggableInit() {
-  var sourceId;
-  var targetType;
-
-  $('[draggable=true]').bind('dragstart', function (event) {
-    targetType = $(this).data('tile-type');
-    sourceId = targetType + "-" +$(this).parent().data('index');
-    event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('id'));
-  });
-
-  $('.panel-body').bind('dragover', function (event) {
-    event.preventDefault();
-  });
-
-  $('.panel-body').bind('drop', function (event) {
-    var children = $(this).children();
-    var targetId = targetType + "-" +children.data('index');
-    children = $("#"+targetId);
-    if (sourceId != targetId) {
-      var elementId = event.originalEvent.dataTransfer.getData("text/plain");
-      $('#processing-modal').modal('toggle'); //before post
-      // Post data
-      var element = document.getElementById(elementId);
-        setTimeout(function () {
-          children.prepend(element);
-          $('#processing-modal').modal('toggle'); // after post
-        }, 1000);
-
-        var url =  "";
-        if (targetType === "LOAD") {
-          url = "/api/load_tiles/"+$(element).data('id');
-        }else if (targetType === "TRUCK") {
-          url = "/api/truck_tiles/"+$(element).data('id');
-        }
-
-        $.ajax({
-          method: "PUT",
-          url: url,
-          data: {
-            load_date: $(this).data('date')
+  $( ".sortable-truck" ).sortable({
+        connectWith: '.sortable-truck',
+        cursor: 'move',
+      placeholder: 'placeholder',
+      forcePlaceholderSize: true,
+      opacity: 0.4,
+          stop: function(event, ui) {
+            $.ajax({
+              method: "PUT",
+              url: "/api/truck_tiles/"+$(ui.item).data('id'),
+              data: {
+                load_date: $(ui.item).parent().parent().data('date')
+              }
+            }).done(function (data) {
+            });
           }
-        }).done(function (data) {
-          setTimeout(function () {
-            children.prepend(element);
-            $('#processing-modal').modal('toggle'); // after post
-          }, 1000);
-        });
-    }
-
-    event.preventDefault();
-  });
-}
+   });
+   $( ".sortable-load" ).sortable({
+         connectWith: '.sortable-load',
+         cursor: 'move',
+      placeholder: 'placeholder',
+      forcePlaceholderSize: true,
+      opacity: 0.4,
+           stop: function(event, ui) {
+             $.ajax({
+               method: "PUT",
+               url: "/api/load_tiles/"+$(ui.item).data('id'),
+               data: {
+                 load_date: $(ui.item).parent().parent().data('date')
+               }
+             }).done(function (data) {
+             });
+           }
+    });
+ });
+ function addDateToLoadForm(date) {
+   $("#new_load").find("#last_load_date").datepicker('update', date);
+   $("#newLoadForm").modal('show');
+ }
+ function addDateToTruckForm(date) {
+   $("#new_truck").find("#last_load_date").datepicker('update', date);
+   $("#newTruckForm").modal('show');
+ }
