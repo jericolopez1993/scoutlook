@@ -23,7 +23,7 @@
     }
   </style>
 <% end %>
-<table class="table table-striped table-bordered display"  id="activities_table">
+<table class="table table-striped table-bordered display"  id="activities_table" data-order="[[3, &quot;asc&quot;]]">
   <thead>
     <tr class="odd gradeX">
       <th data-orderable="false">Actions</th>
@@ -105,7 +105,7 @@
           <td><%= activity.notes.nil? ? "" : activity.notes.html_safe %></td>
           <% if show_carrier || show_shipper %>
             <% if show_carrier %>
-            <td class="link">
+            <td class="link" nowrap>
               <span
                 data-toggle="tooltip"
                 data-placement="right"
@@ -126,7 +126,7 @@
             </td>
             <% end %>
             <% if show_shipper %>
-              <td class="link">
+              <td class="link" nowrap>
                 <span
                   data-toggle="tooltip"
                   data-placement="right"
