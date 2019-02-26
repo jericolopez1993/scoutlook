@@ -71,6 +71,6 @@ class LoadTilesController < ApplicationController
       else
         params[:load_tile][:load_date] = nil
       end
-      params.require(:load_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id)
+      params.require(:load_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id, :salesperson_id, :bill_rate, :origin_city, :destination_city, :picks, :drops, :pu_time, :pu_general_time, :del_date, :del_time, :del_general_time, :teams, :truck_tile_id)
     end
 end

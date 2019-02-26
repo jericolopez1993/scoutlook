@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_155120) do
+ActiveRecord::Schema.define(version: 2019_02_26_174132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -218,6 +218,19 @@ ActiveRecord::Schema.define(version: 2019_02_20_155120) do
     t.datetime "updated_at", null: false
     t.date "load_date"
     t.integer "priority"
+    t.integer "salesperson_id"
+    t.integer "bill_rate"
+    t.string "origin_city"
+    t.string "destination_city"
+    t.integer "picks", default: 1
+    t.integer "drops", default: 1
+    t.string "pu_time"
+    t.string "pu_general_time"
+    t.date "del_date"
+    t.string "del_time"
+    t.string "del_general_time"
+    t.boolean "teams", default: false
+    t.integer "truck_tile_id"
   end
 
   create_table "master_invoices", force: :cascade do |t|
@@ -505,6 +518,14 @@ ActiveRecord::Schema.define(version: 2019_02_20_155120) do
     t.integer "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "dispatcher_id"
+    t.integer "bill_rate"
+    t.integer "pu_time"
+    t.string "pu_general_time"
+    t.date "del_date"
+    t.integer "del_time"
+    t.string "del_general_time"
+    t.boolean "teams", default: false
   end
 
   create_table "users", force: :cascade do |t|

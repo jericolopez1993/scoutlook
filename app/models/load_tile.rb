@@ -1,4 +1,8 @@
 class LoadTile < ApplicationRecord
+  belongs_to :carrier, optional: true
+  belongs_to :shipper, optional: true
+  belongs_to :salesperson, class_name: "User", foreign_key: "salesperson_id", optional: true
+
   def origin_to_array
     if self.origin.nil?
       []
