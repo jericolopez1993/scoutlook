@@ -29,7 +29,7 @@
     }
   </style>
 <% end %>
-<table table class="table table-striped table-bordered display nowrap"  id="rates_table">
+<table table class="table table-striped table-bordered display nowrap" data-order="[[6, &quot;asc&quot;]]"  id="rates_table">
   <thead>
     <tr class="odd gradeX">
       <% if with_actions %>
@@ -121,9 +121,22 @@
             <b class="text-danger"><%= rate.team %></b>
           <% end %>
         </td>
-        <td>
-          <% rate.commodities_to_array.each do |cr| %>
+        <td nowrap>
+          <% rate.commodities_to_array.first(5).each do |cr| %>
             <span class="badge badge-inverse"><%= cr %></span>
+          <% end %>
+          <% if rate.commodities_to_array.count >= 5 %>
+          <span
+            data-toggle="tooltip"
+            data-placement="right"
+            data-html="true"
+            title="
+            <% rate.commodities_to_array.drop(5).each do |cr| %>
+              <span class='badge badge-green'><%= cr %></span>
+            <% end %>
+            ">
+            <span class="badge badge-inverse">+<%= rate.commodities_to_array.count - 5 %></span>
+          </span>
           <% end %>
         </td>
         <td><%= rate.bid %></td>
