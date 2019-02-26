@@ -24,7 +24,7 @@
   <div class="form-group row m-b-15">
     <%= form.label :status, 'Status:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-      <%= form.select :status, options_for_select(['Booked', 'Dispatched', 'To Be Dispatched', 'Hot', 'Urgent Priority to Cover', 'Potential Load', 'Truck based on conditions'], ''), {:include_blank => false}, class: 'form-control' %>
+      <%= form.select :status, options_for_select(['Open', 'Covered', 'Hot', 'Stranded', 'Dropped'], ''), {:include_blank => false}, class: 'form-control' %>
 
     </div>
   </div>

@@ -1,14 +1,16 @@
 <div class="kanban-entry-inner">
     <div class="kanban-label"
         style="border: 5px solid
-        <% if tile.status == "Booked" || tile.status == "Dispatched" %>
+        <% if tile.status == "Open" %>
           #99da00;
-        <% elsif tile.status == "To Be Dispatched" %>
+        <% elsif tile.status == "Covered" %>
           #ffdc00;
-        <% elsif tile.status == "Hot" || tile.status == "Urgent Priority to Cover" %>
+        <% elsif tile.status == "Hot" %>
           #ffafbd;
-        <% elsif tile.status == "Potential Load" || tile.status == "Truck based on conditions" %>
-          #0992fa
+        <% elsif tile.status == "Stranded" %>
+          #6f060b;
+        <% elsif tile.status == "Dropped" %>
+          #999999;
         <% else %>
           #ffffff;
         <% end %>
@@ -34,7 +36,7 @@
                         US-MW
                       <% elsif cr == "US-Northeast (No Bronx)" %>
                         US-NE <br>
-                        (No Bronx)
+                        No BXN
                       <% else %>
                         <%= cr %>
                       <% end %>
@@ -106,7 +108,7 @@
                            US-MW
                          <% elsif cr == "US-Northeast (No Bronx)" %>
                            US-NE <br>
-                           (No Bronx)
+                           No BXN
                          <% else %>
                            <%= cr %>
                          <% end %>
