@@ -209,7 +209,6 @@
     position: relative;
     background: #f5f5f6;
     padding: 0.75em;
-    /*margin-left: 50px;*/
     -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
     background-clip: padding-box;
@@ -217,20 +216,6 @@
     -moz-border-radius: 3px;
     border-radius: 3px;
   }
-
-  /*.kanban-centered .kanban-entry .kanban-entry-inner .kanban-label:after {
-                    content: '';
-                    display: block;
-                    position: absolute;
-                    width: 0;
-                    height: 0;
-                    border-style: solid;
-                    border-width: 9px 9px 9px 0;
-                    border-color: transparent #f5f5f6 transparent transparent;
-                    left: 0;
-                    top: 10px;
-                    margin-left: -9px;
-                }*/
 
   .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2,
   .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label p {
@@ -305,6 +290,17 @@
   .badge {
     margin: 1px 0;
   }
+  a {
+    color: inherit;
+    transition: none;
+    display: block;
+  }
+  a:hover {
+    color: inherit;
+  }
+  a.inline {
+    display: inline;
+  }
 </style>
 
 <div class="tile-container">
@@ -329,6 +325,7 @@
 <%= render 'load_tiles/modal' %>
 
 <script type="text/javascript">
+  var not_dragged = true;
   $(function () {
     $( ".sortable-truck" ).sortable({
           connectWith: '.sortable-truck',
@@ -337,6 +334,7 @@
         forcePlaceholderSize: true,
         opacity: 0.4,
             stop: function(event, ui) {
+
               $.ajax({
                 method: "PUT",
                 url: "/api/truck_tiles/"+$(ui.item).data('id'),
@@ -346,7 +344,7 @@
               }).done(function (data) {
               });
             }
-     });
+     }).disableSelection();
      $( ".sortable-load" ).sortable({
            connectWith: '.sortable-load',
            cursor: 'move',
@@ -363,7 +361,7 @@
                }).done(function (data) {
                });
              }
-      });
+      }).disableSelection();
    });
    function addDateToLoadForm(date) {
      $("#new_load").find("#last_load_date").datepicker('update', date);

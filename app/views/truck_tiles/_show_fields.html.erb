@@ -66,3 +66,7 @@
     <%= truck_tile.details %>
   </div>
 </div>
+<p class="text-right">
+    <%= link_to '<i class="far fa-edit fa-1-2x"></i>'.html_safe, edit_truck_tile_path(truck_tile), :remote => true, :id => 'edit_tile', :class => 'text-warning inline' %>
+    <%= link_to '<i class="fas fa-trash-alt fa-1-2x"></i>'.html_safe, truck_tile, :remote => true, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'text-danger inline'%>
+</p>
