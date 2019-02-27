@@ -1,4 +1,10 @@
 <div class="row">
+  <label class="col-md-3 col-form-label">ID:</label>
+  <div class="col-md-9 lbl-padding-t">
+    <b><%= truck_tile.uniq_id %></b>
+  </div>
+</div>
+<div class="row">
   <label class="col-md-3 col-form-label">Dispatcher:</label>
   <div class="col-md-9 lbl-padding-t">
     <%= truck_tile.salesperson && truck_tile.salesperson.full_name %>
