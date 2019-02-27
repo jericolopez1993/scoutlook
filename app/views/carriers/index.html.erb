@@ -46,7 +46,7 @@
             <th class="rewrap">Ops Phone</th>
             <th width="12%">Ops Email</th>
             <th class="rewrap">Reef</th>
-            <th width="20%">Lane</th>
+            <th class="rewrap">Lane</th>
             <th class="rewrap">Appr</th>
             <th class="rewrap">RO</th>
             <th class="rewrap">Class</th>
@@ -67,7 +67,7 @@
             <th class="rewrap">Ops Phone</th>
             <th width="12%">Ops Email</th>
             <th class="rewrap">Reef</th>
-            <th width="20%">Lane</th>
+            <th class="rewrap">Lane</th>
             <th class="rewrap">Appr</th>
             <th class="rewrap">RO</th>
             <th class="rewrap">Class</th>
@@ -121,7 +121,7 @@
                 <% end %>
               </td>
               <td class="text-center"><%= carrier.reefers %></td>
-              <td width="20%">
+              <td nowrap>
                 <% if carrier.carrier_lanes.length > 1 %>
                   <% carrier.lane_1.each do |lane| %>
                     <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
