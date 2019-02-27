@@ -10,7 +10,7 @@
   </h1>
   <span class="pull-right">
     <button class="btn btn-danger btn-xs" onclick="window.history.back();">Discard</button>
-    <button type="submit" class="btn btn-primary btn-xs">Send</button>
+    <button id="send_mail" class="btn btn-primary btn-xs">Send</button>
   </span>
 </div>
 <!-- begin vertical-box -->
@@ -83,7 +83,6 @@
     $(this).remove();
   });
   var emailPreviewDropzone = new Dropzone("#mail_form", {
-        url: "/shippers/send_mail",
         addRemoveLinks: true,
         autoProcessQueue: false,
         uploadMultiple: true,
@@ -96,7 +95,7 @@
         init: function() {
           var myDropzone = this;
           myDropzone = this; // closure
-          $("button[type=submit]").on("click", function(e) {
+          $("#send_mail").on("click", function(e) {
             // Make sure that the form isn't actually being sent.
             e.preventDefault();
             e.stopPropagation();
@@ -107,7 +106,7 @@
             }
           });
           myDropzone.on("complete", function(file) {
-            $("#mail_form").submit();
+            window.location = "<%= shippers_path %>"
           });
           this.on("successmultiple", function(files, response) {
             var data = response;
