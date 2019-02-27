@@ -2,7 +2,12 @@ class TruckTile < ApplicationRecord
   belongs_to :carrier, optional: true
   belongs_to :shipper, optional: true
   belongs_to :salesperson, class_name: "User", foreign_key: "dispatcher_id", optional: true
+  has_one :load_tile_id
 
+  def display_name
+    "#{self.origin} &rarr; #{self.destination}".html_safe
+  end
+  
   def origin_to_array
     if self.origin.nil?
       []
