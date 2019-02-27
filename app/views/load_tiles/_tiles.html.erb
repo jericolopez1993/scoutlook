@@ -23,7 +23,7 @@
                   <button id="" class="btn btn-primary btn-xs pull-right"><i class="fas fa-envelope"></i></button>
                   <button id="" class="btn btn-green btn-xs pull-right" style="margin-right: 5px;"><i class="fas fa-comment-alt"></i></button>
               </div>
-              <div class="panel-body row" data-date="<%= cdate %>" style="min-height: 150px;z-index: 100;">
+              <div class="panel-body row" data-date="<%= cdate %>" style="min-height: 150px;z-index: 100;margin-bottom: 30px;">
                 <% ['Hot', 'Open', 'Covered', 'Stranded', 'Dropped', ''].each do |stat| %>
 
                   <% load_tiles = stat != '' ? LoadTile.where(:load_date => cdate, :status => stat) : LoadTile.where(:load_date => cdate).where("status is NULL OR status = ''") %>
