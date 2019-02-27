@@ -102,7 +102,7 @@
   <div class="form-group row m-b-15">
     <%= form.label :truck_tile_id, 'Truck Tile:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-      <%= collection_select :load_tile, :truck_tile_id, TruckTile.all, :id, :display_name, {prompt: true}, {class: 'form-control'} %>
+      <%= collection_select :load_tile, :truck_tile_id, TruckTile.all, :id, :location_with_uniq_id, {prompt: true}, {class: 'form-control'} %>
     </div>
   </div>
   <div class="form-group row m-b-15">

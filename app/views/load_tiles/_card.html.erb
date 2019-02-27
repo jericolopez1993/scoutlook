@@ -84,6 +84,7 @@
                 <div class="row">
                   <div class="col-md-12" style="font-size: 9.5px; padding-top: 5px;">
                     <!-- ADD LEFT CONTENT HERE -->
+                    <b><%= tile.uniq_id %></b>
                     <span><%= tile.pu_time %><%= tile.pu_general_time %> <%= tile.try(:picks) ? (tile.picks > 1 ? "#{tile.picks}P" : "") : "" %></span>
                     <span><%= tile.teams ? "TEAM" : ""%></span>
                   </div>

@@ -7,7 +7,7 @@ class TruckTile < ApplicationRecord
   def display_name
     "#{self.origin} &rarr; #{self.destination}".html_safe
   end
-  
+
   def origin_to_array
     if self.origin.nil?
       []
@@ -15,11 +15,20 @@ class TruckTile < ApplicationRecord
       self.origin.split(',').map(&:to_s)
     end
   end
+
   def destination_to_array
     if self.destination.nil?
       []
     else
       self.destination.split(',').map(&:to_s)
     end
+  end
+
+  def uniq_id
+    "TRUCK#{self.id}"
+  end
+
+  def location_with_uniq_id
+    "#{self.origin} -> #{self.destination} (#{self.uniq_id})"
   end
 end
