@@ -17,17 +17,6 @@ module PbPlatform
 
     config.action_controller.allow_forgery_protection = false
     config.action_mailer.delivery_method = :smtp
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.smtp_settings = {
-      :user_name => 'kevinmarceloph',
-      :password => 'bd2ejj36epxP3Qcn',
-      :domain => 'scout.net',
-      :address => 'smtp.sendgrid.net',
-      :port => 587,
-      :authentication => :plain,
-      :enable_starttls_auto => true
-    }
 
   end
 end
