@@ -161,7 +161,12 @@
                 <div class="row">
                   <div class="col-md-12" style="font-size: 9.5px; padding-top: 5px;">
                     <!-- ADD RIGHT CONTENT HERE -->
-                    <span><%= tile.shipper && tile.shipper.company_name.gsub(/[^0-9A-Za-z]/, '')[0, 5].upcase %></span>
+                    <% if tile.shipper %>
+                      <span><%= tile.shipper && tile.shipper.company_name.gsub(/[^0-9A-Za-z]/, '')[0, 5].upcase %></span>
+                    <% end %>
+                    <% if tile.carrier %>
+                      <span><%= tile.carrier && tile.carrier.company_name.gsub(/[^0-9A-Za-z]/, '')[0, 5].upcase %></span>
+                    <% end %>
                     <span><%= tile.load_date.strftime("%^a") %> <%= tile.del_time %><%= tile.del_general_time %> <%= tile.try(:drops) ? (tile.drops > 1 ? "#{tile.drops}D" : "") : "" %></span>
                   </div>
                 </div>
