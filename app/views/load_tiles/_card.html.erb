@@ -2,17 +2,19 @@
     <div class="kanban-label"
         style="border: 5px solid
         <% if tile.status == "Open" %>
-          #99da00;
+          #ffffff;
         <% elsif tile.status == "Covered" %>
           #ffdc00;
-        <% elsif tile.status == "Hot" %>
-          #ffafbd;
-        <% elsif tile.status == "Stranded" %>
+        <% elsif tile.status == "Dispatched" %>
+          #99da00;
+        <% elsif tile.status == "Priority" %>
           #6f060b;
+        <% elsif tile.status == "Stranded" %>
+          #1a2229;
         <% elsif tile.status == "Dropped" %>
-          #999999;
+          #0992fa;
         <% else %>
-          #ffffff;
+          #999999;
         <% end %>
         border-radius: 10px;">
         <div class="row">
