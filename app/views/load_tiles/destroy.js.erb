@@ -1,6 +1,7 @@
 $("div#sortableKanbanBoards").html("<%= escape_javascript(render 'load_tiles/tiles') %>");
 
 $(function () {
+  $('#showLoad').modal('toggle')   
   $( ".sortable-truck" ).sortable({
         connectWith: '.sortable-truck',
         cursor: 'move',
