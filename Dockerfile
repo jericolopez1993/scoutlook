@@ -9,4 +9,6 @@ COPY Gemfile.lock /pb-platform/Gemfile.lock
 
 RUN bundle install
 
+RUN  gem install mailcatcher -v 0.6.5
+
 COPY . /pb-platform
