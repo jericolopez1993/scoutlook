@@ -14,8 +14,8 @@
   .tooltip .arrow::before{
     border-right-color: #013a38!important;
   }
-  th.rewrap {
-    white-space: nowrap;
+  th {
+    vertical-align: top;
   }
   </style>
 <% end %>
@@ -31,48 +31,48 @@
       <h4 class="panel-title lp-header">Shippers</h4>
     </div>
     <div class="panel-body">
-      <table class="table table-striped table-bordered display" data-order="[[2, &quot;asc&quot;]]" id="shipper_table" width="120%">
+      <table class="table table-striped table-bordered display nowrap" data-order="[[2, &quot;asc&quot;]]" id="shipper_table">
         <thead>
           <tr>
-            <th style="vertical-align: top"></th>
-            <th class="text-center"  width="150px" style="vertical-align: top"><i class="fas fa-clock"></i></th>
-            <th width="8%" style="vertical-align: top">Name</th>
-            <th class="rewrap" style="vertical-align: top">ST/PV</th>
-            <th class="rewrap" style="vertical-align: top">DM Name</th>
-            <th class="rewrap" style="vertical-align: top">DM Phone</th>
-            <th style="vertical-align: top">DM Email</th>
-            <th class="rewrap" style="vertical-align: top">Lane</th>
-            <th class="rewrap" style="vertical-align: top">Appr</th>
-            <th class="rewrap" style="vertical-align: top">RO</th>
-            <th class="rewrap" style="vertical-align: top">Class</th>
-            <th class="rewrap" style="vertical-align: top">CR</th>
-            <th class="rewrap" style="vertical-align: top">LstDateCon</th>
-            <th class="rewrap" style="vertical-align: top">1M</th>
-            <th class="rewrap" style="vertical-align: top">6M</th>
-            <th class="rewrap" style="vertical-align: top">City</th>
-            <th class="rewrap" style="vertical-align: top">LPM</th>
-            <th style="vertical-align: top">Commodities</th>
+            <th></th>
+            <th class="text-center"><i class="fas fa-clock"></i></th>
+            <th>Name</th>
+            <th>ST/PV</th>
+            <th>DM Name</th>
+            <th>DM Phone</th>
+            <th>Lane</th>
+            <th>DM Email</th>
+            <th>Appr</th>
+            <th>RO</th>
+            <th>Class</th>
+            <th>CR</th>
+            <th>LstDateCon</th>
+            <th>1M</th>
+            <th>6M</th>
+            <th>City</th>
+            <th>LPM</th>
+            <th>Commodities</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
             <th></th>
             <th></th>
-            <th width="8%">Name</th>
-            <th class="rewrap">ST/PV</th>
-            <th class="rewrap">DM Name</th>
-            <th class="rewrap">DM Phone</th>
+            <th>Name</th>
+            <th>ST/PV</th>
+            <th>DM Name</th>
+            <th>DM Phone</th>
+            <th>Lane</th>
             <th>DM Email</th>
-            <th class="rewrap">Lane</th>
-            <th class="rewrap">Appr</th>
-            <th class="rewrap">RO</th>
-            <th class="rewrap">Class</th>
-            <th class="rewrap">CR</th>
-            <th class="rewrap">LstDateCon</th>
-            <th class="rewrap">1M</th>
-            <th class="rewrap">6M</th>
-            <th class="rewrap">City</th>
-            <th class="rewrap">LPM</th>
+            <th>Appr</th>
+            <th>RO</th>
+            <th>Class</th>
+            <th>CR</th>
+            <th>LstDateCon</th>
+            <th>1M</th>
+            <th>6M</th>
+            <th>City</th>
+            <th>LPM</th>
             <th>Commodities</th>
           </tr>
         </tfoot>
@@ -87,7 +87,7 @@
                   <% end %>
                 <% end %>
               </td>
-              <td class="link" nowrap>
+              <td class="link">
                 <span
                   data-toggle="tooltip"
                   data-placement="right"
@@ -106,11 +106,10 @@
                 </span>
               </td>
               <td><%= shipper.location.nil? ? '' : shipper.location.state.upcase %></td>
-              <td nowrap><%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %></td>
-              <td nowrap><b>
+              <td><%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %></td>
+              <td><b>
                   <%= shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + ((!shipper.pdm.primary_extension_number.nil? && shipper.pdm.primary_extension_number != "") ? (", Ext. " + shipper.pdm.primary_extension_number) : "") + ((shipper.pdm.primary_phone_type != "") ? (" (#{(shipper.pdm.primary_eligible_texting ? "TEXT" : shipper.pdm.primary_phone_type)})") : "")) : "") %></b></td>
-              <td nowrap><% if !shipper.pdm.nil?  %><a href="mailto:<%= shipper.pdm.email %>?Subject=Hello%20<%= shipper.pdm.first_name.nil? ? '' :  shipper.pdm.first_name.capitalize + " " + shipper.pdm.last_name.capitalize  %>" target="_top"><%= shipper.pdm.email.downcase %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
-              <td nowrap>
+              <td>
                 <% if shipper.shipper_lanes.length > 1 %>
                   <% shipper.lane_1.each do |lane| %>
                     <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
@@ -299,7 +298,7 @@
                   <% end %>
               <% end %>
               </td>
-
+              <td><% if !shipper.pdm.nil?  %><a href="mailto:<%= shipper.pdm.email %>?Subject=Hello%20<%= shipper.pdm.first_name.nil? ? '' :  shipper.pdm.first_name.capitalize + " " + shipper.pdm.last_name.capitalize  %>" target="_top"><%= shipper.pdm.email.downcase %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
               <td class="text-center"><%= shipper.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
               <td class="text-center link"><%= shipper.relationship_owner_user.nil? ? '' : "#{link_to("#{shipper.relationship_owner_user.first_name[0]}#{shipper.relationship_owner_user.last_name[0]}", shipper.relationship_owner_user)}".html_safe %></td>
               <td class="text-center"><%= shade_sales_priority(shipper.sales_priority).html_safe %></td>
@@ -309,7 +308,7 @@
               <td class="text-center"><%= shipper.load_last_6_month %></td>
               <td><%= shipper.location.nil? ? '' : shipper.location.city %></td>
               <td><%= shipper.loads_per_month %></td>
-              <td nowrap>
+              <td>
                 <% shipper.commodities_to_array.first(5).each do |cr| %>
                   <span class="badge badge-inverse"><%= cr %></span>
                 <% end %>

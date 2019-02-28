@@ -17,9 +17,6 @@
   th {
     vertical-align: top;
   }
-  th.rewrap {
-    white-space: nowrap;
-  }
   </style>
 <% end %>
 <!-- begin panel -->
@@ -34,47 +31,47 @@
       <h4 class="panel-title lp-header">Carriers</h4>
     </div>
     <div class="panel-body">
-      <table class="table table-striped table-bordered display"  data-order="[[3, &quot;asc&quot;]]" id="carrier_table" width="120%">
+      <table class="table table-striped table-bordered display nowrap"  data-order="[[3, &quot;asc&quot;]]" id="carrier_table">
         <thead>
           <tr>
             <th></th>
             <th class="text-center"><i class="fas fa-clock"></i></th>
-            <th class="rewrap">MC</th>
-            <th class="rewrap">Name</th>
-            <th class="rewrap">ST/PV</th>
-            <th class="rewrap">Ops Name</th>
-            <th class="rewrap">Ops Phone</th>
-            <th width="12%">Ops Email</th>
-            <th class="rewrap">Reef</th>
-            <th class="rewrap">Lane</th>
-            <th class="rewrap">Appr</th>
-            <th class="rewrap">RO</th>
-            <th class="rewrap">Class</th>
-            <th class="rewrap">CR</th>
-            <th class="text-center" class="rewrap">LstDateCon</th>
-            <th class="rewrap">6M</th>
-            <th class="rewrap">1M</th>
+            <th>MC</th>
+            <th>Name</th>
+            <th>ST/PV</th>
+            <th>Ops Name</th>
+            <th>Ops Phone</th>
+            <th>Reef</th>
+            <th>Lane</th>
+            <th>Ops Email</th>
+            <th>Appr</th>
+            <th>RO</th>
+            <th>Class</th>
+            <th>CR</th>
+            <th class="text-center">LstDateCon</th>
+            <th>6M</th>
+            <th>1M</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
             <th></th>
             <th></th>
-            <th class="rewrap">MC</th>
-            <th class="rewrap">Name</th>
-            <th class="rewrap">ST/PV</th>
-            <th class="rewrap">Ops Name</th>
-            <th class="rewrap">Ops Phone</th>
-            <th width="12%">Ops Email</th>
-            <th class="rewrap">Reef</th>
-            <th class="rewrap">Lane</th>
-            <th class="rewrap">Appr</th>
-            <th class="rewrap">RO</th>
-            <th class="rewrap">Class</th>
-            <th class="rewrap">CR</th>
-            <th class="rewrap">LstDateCon</th>
-            <th class="rewrap">6M</th>
-            <th class="rewrap">1M</th>
+            <th>MC</th>
+            <th>Name</th>
+            <th>ST/PV</th>
+            <th>Ops Name</th>
+            <th>Ops Phone</th>
+            <th>Reef</th>
+            <th>Lane</th>
+            <th>Ops Email</th>
+            <th>Appr</th>
+            <th>RO</th>
+            <th>Class</th>
+            <th>CR</th>
+            <th>LstDateCon</th>
+            <th>6M</th>
+            <th>1M</th>
           </tr>
         </tfoot>
         <tbody class="spacer">
@@ -89,7 +86,7 @@
                 <% end %>
               </td>
               <td><%= carrier.mc_number %></td>
-              <td class="link" nowrap>
+              <td class="link">
                 <span
                   data-toggle="tooltip"
                   data-placement="right"
@@ -110,18 +107,11 @@
                 </span>
               </td>
               <td><%= carrier.location.nil? ? '' : carrier.location.state.upcase %></td>
-              <td nowrap><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
-              <td nowrap><b>
+              <td><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
+              <td><b>
                   <%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + ((!carrier.poc.primary_extension_number.nil? && carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((carrier.poc.primary_phone_type != "") ? (" (#{(carrier.poc.primary_eligible_texting ? "TEXT" : carrier.poc.primary_phone_type)})") : "")) : "") %></b></td>
-              <td width="12%">
-                <% if !carrier.poc.nil?  %>
-                  <a href="mailto:<%= carrier.poc.email %>?Subject=Hello%20<%= carrier.poc.first_name.nil? ? '' :  carrier.poc.first_name.capitalize + " " + carrier.poc.last_name.capitalize  %>" target="_top">
-                    <%= carrier.poc.email.downcase %>&nbsp;<i class="far fa-envelope"></i>
-                  </a>
-                <% end %>
-              </td>
               <td class="text-center"><%= carrier.reefers %></td>
-              <td nowrap>
+              <td>
                 <% if carrier.carrier_lanes.length > 1 %>
                   <% carrier.lane_1.each do |lane| %>
                     <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
@@ -309,6 +299,13 @@
                     <% end %>
                   <% end %>
               <% end %>
+              </td>
+              <td>
+                <% if !carrier.poc.nil?  %>
+                  <a href="mailto:<%= carrier.poc.email %>?Subject=Hello%20<%= carrier.poc.first_name.nil? ? '' :  carrier.poc.first_name.capitalize + " " + carrier.poc.last_name.capitalize  %>" target="_top">
+                    <%= carrier.poc.email.downcase %>&nbsp;<i class="far fa-envelope"></i>
+                  </a>
+                <% end %>
               </td>
               <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
               <td class="text-center link"><%= carrier.relationship_owner_user.nil? ? '' : "#{link_to("#{carrier.relationship_owner_user.first_name[0]}#{carrier.relationship_owner_user.last_name[0]}", carrier.relationship_owner_user)}".html_safe %></td>
