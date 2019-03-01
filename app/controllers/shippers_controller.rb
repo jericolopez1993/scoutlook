@@ -145,9 +145,7 @@ class ShippersController < ApplicationController
 
   def send_mail
     attachment_files = params[:file].present? ? params[:file] : nil
-    params[:to].split(',').map(&:to_s).each do |contact|
-      MailMailer.send_mail(contact, nil, nil, params[:subject], params[:content_body], current_user.email, attachment_files).deliver_now
-    end
+    SendComposeMailJob.perform_now(params[:to], nil, nil, params[:subject], params[:content_body], current_user.email, attachment_files)
     if params[:record_activity].present?
       if params[:ids].present? && !params[:ids].blank?
         Shipper.where("shippers.id IN (#{params[:ids]})").each do |shipper|
