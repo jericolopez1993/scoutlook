@@ -1,4 +1,5 @@
 class TruckTile < ApplicationRecord
+  belongs_to :tile_tab, optional: true
   belongs_to :carrier, optional: true
   belongs_to :shipper, optional: true
   belongs_to :salesperson, class_name: "User", foreign_key: "dispatcher_id", optional: true

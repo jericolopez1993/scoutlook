@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_01_121251) do
+ActiveRecord::Schema.define(version: 2019_03_01_204511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,7 @@ ActiveRecord::Schema.define(version: 2019_03_01_121251) do
     t.string "del_general_time"
     t.boolean "teams", default: false
     t.integer "truck_tile_id"
+    t.integer "tile_tab_id"
   end
 
   create_table "master_invoices", force: :cascade do |t|
@@ -521,6 +522,14 @@ ActiveRecord::Schema.define(version: 2019_03_01_121251) do
     t.integer "years_established"
   end
 
+  create_table "tile_tabs", force: :cascade do |t|
+    t.string "name"
+    t.text "notes"
+    t.integer "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "truck_tiles", force: :cascade do |t|
     t.string "name"
     t.string "status"
@@ -541,6 +550,7 @@ ActiveRecord::Schema.define(version: 2019_03_01_121251) do
     t.integer "del_time"
     t.string "del_general_time"
     t.boolean "teams", default: false
+    t.integer "tile_tab_id"
   end
 
   create_table "users", force: :cascade do |t|

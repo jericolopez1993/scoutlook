@@ -1,0 +1,31 @@
+<%= form_with(model: tile_tab, :html => {remote: true, class: 'form-horizontal', 'data-parsley-validate' => true, id: form_id}) do |form| %>
+  <% if tile_tab.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tile_tab.errors.count, "error") %> prohibited this tile_tab from being saved:</h2>
+      <ul>
+      <% tile_tab.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group row m-b-15">
+    <%= form.label :name, 'Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group row m-b-15">
+    <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.text_area(:notes, rows: 5, class: 'form-control') %>
+    </div>
+  </div>
+  <div class="form-group row m-b-15">
+    <div class="col-md-2"></div>
+    <div class="col-md-9 col-sm-12 d-flex justify-content-end">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;
+      <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

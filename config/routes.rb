@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tile_tabs
   resources :truck_tiles
   resources :load_tiles
   resources :shipper_companies

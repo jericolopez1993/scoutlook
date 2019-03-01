@@ -306,10 +306,15 @@
     display: inline;
   }
 </style>
-
-<div class="tile-container">
+<div id="tile-tab-container" style="position: fixed;width: 100%;z-index: 1014">
+  <%= render 'load_tiles/tabs' %>
+</div>
+<div class="tile-container" style="padding-top: 100px;">
   <div id="sortableKanbanBoards" class="row" style="padding: 0 2%; width: 2800px;">
-    <%= render 'load_tiles/tiles' %>
+    <% if @tile_tab %>
+      <%= render 'load_tiles/tiles' %>
+    <% else %>
+    <% end %>
   </div>
   <!-- Static Modal -->
   <div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
@@ -329,50 +334,7 @@
 <%= render 'load_tiles/modal' %>
 
 <script type="text/javascript">
-  var not_dragged = true;
-  $(function () {
-    $( ".sortable-truck" ).sortable({
-          connectWith: '.sortable-truck',
-          cursor: 'move',
-        placeholder: 'placeholder',
-        forcePlaceholderSize: true,
-        opacity: 0.4,
-            stop: function(event, ui) {
-
-              $.ajax({
-                method: "PUT",
-                url: "/api/truck_tiles/"+$(ui.item).data('id'),
-                data: {
-                  load_date: $(ui.item).parent().parent().data('date')
-                }
-              }).done(function (data) {
-              });
-            }
-     }).disableSelection();
-     $( ".sortable-load" ).sortable({
-           connectWith: '.sortable-load',
-           cursor: 'move',
-        placeholder: 'placeholder',
-        forcePlaceholderSize: true,
-        opacity: 0.4,
-             stop: function(event, ui) {
-               $.ajax({
-                 method: "PUT",
-                 url: "/api/load_tiles/"+$(ui.item).data('id'),
-                 data: {
-                   load_date: $(ui.item).parent().parent().data('date')
-                 }
-               }).done(function (data) {
-               });
-             }
-      }).disableSelection();
-   });
-   function addDateToLoadForm(date) {
-     $("#new_load").find("#last_load_date").datepicker('update', date);
-     $("#newLoadForm").modal('show');
-   }
-   function addDateToTruckForm(date) {
-     $("#new_truck").find("#last_load_date").datepicker('update', date);
-     $("#newTruckForm").modal('show');
-   }
+    $(document).ready(function() {
+      Tiles.init();
+    });
 </script>

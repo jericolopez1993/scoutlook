@@ -1,5 +1,6 @@
 class TruckTilesController < ApplicationController
   before_action :set_truck_tile, only: [:show, :edit, :update, :destroy]
+  before_action :set_tile_tab, only: [:show, :edit, :update, :destroy, :create]
 
   # GET /truck_tiles
   # GET /truck_tiles.json
@@ -70,6 +71,14 @@ class TruckTilesController < ApplicationController
       @truck_tile = TruckTile.find(params[:id])
     end
 
+    def set_tile_tab
+      if action_name == "create"
+        @tile_tab = TileTab.find(params[:truck_tile][:tile_tab_id])
+      else
+        @tile_tab = @truck_tile.tile_tab
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def truck_tile_params
       params[:truck_tile][:origin] = convert_array(params[:truck_tile][:origin])
@@ -79,6 +88,6 @@ class TruckTilesController < ApplicationController
       else
         params[:truck_tile][:load_date] = nil
       end
-      params.require(:truck_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id, :dispatcher_id, :bill_rate, :pu_time, :pu_general_time, :del_date, :del_time, :del_general_time, :teams)
+      params.require(:truck_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id, :dispatcher_id, :bill_rate, :pu_time, :pu_general_time, :del_date, :del_time, :del_general_time, :teams, :tile_tab_id)
     end
 end

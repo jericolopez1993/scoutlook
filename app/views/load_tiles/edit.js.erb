@@ -10,47 +10,6 @@ $('.datepicker-autoClose').datepicker({
 });
 $("#showLoad").modal('show');
 
-$(function () {
-  $( ".sortable-truck" ).sortable({
-        connectWith: '.sortable-truck',
-        cursor: 'move',
-      placeholder: 'placeholder',
-      forcePlaceholderSize: true,
-      opacity: 0.4,
-          stop: function(event, ui) {
-            $.ajax({
-              method: "PUT",
-              url: "/api/truck_tiles/"+$(ui.item).data('id'),
-              data: {
-                load_date: $(ui.item).parent().parent().data('date')
-              }
-            }).done(function (data) {
-            });
-          }
-   });
-   $( ".sortable-load" ).sortable({
-         connectWith: '.sortable-load',
-         cursor: 'move',
-      placeholder: 'placeholder',
-      forcePlaceholderSize: true,
-      opacity: 0.4,
-           stop: function(event, ui) {
-             $.ajax({
-               method: "PUT",
-               url: "/api/load_tiles/"+$(ui.item).data('id'),
-               data: {
-                 load_date: $(ui.item).parent().parent().data('date')
-               }
-             }).done(function (data) {
-             });
-           }
-    });
- });
- function addDateToLoadForm(date) {
-   $("#new_load").find("#last_load_date").datepicker('update', date);
-   $("#newLoadForm").modal('show');
- }
- function addDateToTruckForm(date) {
-   $("#new_truck").find("#last_load_date").datepicker('update', date);
-   $("#newTruckForm").modal('show');
- }
+$(document).ready(function() {
+  Tiles.init();
+});

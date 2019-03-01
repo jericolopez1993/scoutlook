@@ -1,0 +1,8 @@
+$("div#showTab").find(".modal-body").html("<%= escape_javascript(render 'tile_tabs/form', tile_tab: @tile_tab, form_id: 'edit_tile_tab') %>");
+$("div#showTab").find(".modal-title").text("Edit - <%= escape_javascript(@tile_tab.name) %>")
+
+$("#showTab").modal('show');
+
+$(document).ready(function() {
+  Tiles.init();
+});

@@ -296,6 +296,7 @@ table.dataTable {
   font-weight: 500;
   font-size: 20px;
 }
+
 .header-scout {
   padding: 15px;
   width: 100%;
@@ -338,17 +339,23 @@ table.dataTable {
   height: 50px;
   background-color: #242a30;
 }
-.header-scout h1, .header-darkblue h1, .header-violet h1, .header-emerald h1,.header-yelloworange h1, .header-lightblue h1, .header-inverse h1 {
+.header-gray {
+  padding: 15px;
+  width: 100%;
+  height: 50px;
+  background-color: #c0bbbb;
+}
+.header-scout h1, .header-darkblue h1, .header-violet h1, .header-emerald h1,.header-yelloworange h1, .header-lightblue h1, .header-inverse h1, .header-gray h1 {
   color: #fff;
   font-family: 'Poppins', sans-serif!important;
   font-size: 20px!important;
 }
-.header-scout small, .header-violet small, .header-darkblue small, .header-emerald small, .header-yelloworange small, .header-lightblue small, .header-inverse small {
+.header-scout small, .header-violet small, .header-darkblue small, .header-emerald small, .header-yelloworange small, .header-lightblue small, .header-inverse small, .header-gray small {
   color: #fff;
   font-family: 'Poppins', sans-serif!important;
   font-size: 15px;
 }
-.header-scout a, .header-violet a, .header-darkblue a, .header-emerald a, .header-yelloworange a, .header-lightblue a, .header-inverse a {
+.header-scout a, .header-violet a, .header-darkblue a, .header-emerald a, .header-yelloworange a, .header-lightblue a, .header-inverse a, .header-gray a {
   color: #fff!important;
 }
 

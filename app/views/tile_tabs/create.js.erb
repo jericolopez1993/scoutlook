@@ -1,0 +1,8 @@
+$("div#sortableKanbanBoards").html("<%= escape_javascript(render 'load_tiles/tiles') %>");
+$("div#tile-tab-container").html("<%= escape_javascript(render 'load_tiles/tabs') %>");
+$('#new_tile_tab').trigger("reset");
+$("#newTabForm").modal('hide');
+
+$(document).ready(function() {
+  Tiles.init();
+});

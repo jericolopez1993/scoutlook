@@ -1,10 +1,12 @@
 class LoadTilesController < ApplicationController
   before_action :set_load_tile, only: [:show, :edit, :update, :destroy]
+  before_action :set_tile_tab, only: [:show, :edit, :update, :destroy, :create]
+
 
   # GET /load_tiles
   # GET /load_tiles.json
   def index
-    @load_tiles = LoadTile.all
+    @tile_tab = TileTab.first
   end
 
   # GET /load_tiles/1
@@ -62,6 +64,14 @@ class LoadTilesController < ApplicationController
       @load_tile = LoadTile.find(params[:id])
     end
 
+    def set_tile_tab
+      if action_name == "create"
+        @tile_tab = TileTab.find(params[:load_tile][:tile_tab_id])
+      else
+        @tile_tab = @load_tile.tile_tab
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def load_tile_params
       params[:load_tile][:origin] = convert_array(params[:load_tile][:origin])
@@ -71,6 +81,6 @@ class LoadTilesController < ApplicationController
       else
         params[:load_tile][:load_date] = nil
       end
-      params.require(:load_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id, :salesperson_id, :bill_rate, :origin_city, :destination_city, :picks, :drops, :pu_time, :pu_general_time, :del_date, :del_time, :del_general_time, :teams, :truck_tile_id)
+      params.require(:load_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id, :salesperson_id, :bill_rate, :origin_city, :destination_city, :picks, :drops, :pu_time, :pu_general_time, :del_date, :del_time, :del_general_time, :teams, :truck_tile_id, :tile_tab_id)
     end
 end

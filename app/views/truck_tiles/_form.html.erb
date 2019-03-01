@@ -9,6 +9,7 @@
       </ul>
     </div>
   <% end %>
+  <%= form.hidden_field :tile_tab_id %>
   <div class="form-group row m-b-15">
     <%= form.label :dispatcher_id, 'Dispatcher:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
@@ -22,7 +23,7 @@
     </div>
   </div>
   <div class="form-group row m-b-15">
-    <%= form.label :bill_rate, 'TTT Rate:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <%= form.label :bill_rate, 'Bill Rate:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
       <%= form.number_field :bill_rate, class: 'form-control' %>
     </div>
