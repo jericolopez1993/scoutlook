@@ -128,6 +128,12 @@
     <%= load_tile.details %>
   </div>
 </div>
+<div class="row">
+  <label class="col-md-3 col-form-label">Truck:</label>
+  <div class="col-md-9 lbl-padding-t">
+    <%= load_tile.truck_tile && load_tile.truck_tile.uniq_id %>
+  </div>
+</div>
 <p class="text-right">
     <%= link_to '<i class="far fa-edit fa-1-2x"></i>'.html_safe, edit_load_tile_path(load_tile), :remote => true, :id => 'edit_tile', :class => 'text-warning inline' %>
     <%= link_to '<i class="fas fa-trash-alt fa-1-2x"></i>'.html_safe, load_tile, :remote => true, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'text-danger inline'%>

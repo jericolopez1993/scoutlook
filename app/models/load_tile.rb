@@ -2,6 +2,7 @@ class LoadTile < ApplicationRecord
   belongs_to :carrier, optional: true
   belongs_to :shipper, optional: true
   belongs_to :salesperson, class_name: "User", foreign_key: "salesperson_id", optional: true
+  belongs_to :truck_tile, optional: true
 
   def display_name
     "#{self.origin} &rarr; #{self.destination}".html_safe

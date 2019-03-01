@@ -80,7 +80,7 @@
   <div class="form-group row m-b-15">
     <%= form.label :load_tile_id, 'Load Tile:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-      <%= collection_select :load_tile, :load_tile_id, LoadTile.all, :id, :location_with_uniq_id, {prompt: true}, {class: 'form-control'} %>
+      <%= form.select :load_tile_id, LoadTile.all.collect {|r| [ r.location_with_uniq_id, r.id ] },{:include_blank => true, :selected => truck_tile.load_tile ? truck_tile.load_tile.id : ""}, class: 'form-control' %>
     </div>
   </div>
   <div class="form-group row m-b-15">
