@@ -42,6 +42,10 @@ class TruckTilesController < ApplicationController
   # PATCH/PUT /truck_tiles/1
   # PATCH/PUT /truck_tiles/1.json
   def update
+    if @truck_tile.load_tile
+      puts "#{@truck_tile.load_tile.to_json}"
+      @truck_tile.load_tile.update_attributes(:status => params[:truck_tile][:status])
+    end
     respond_to do |format|
         @truck_tile.update(truck_tile_params)
       # if params[:truck_tile][:load_tile_id].present?
@@ -84,7 +88,8 @@ class TruckTilesController < ApplicationController
       params[:truck_tile][:origin] = convert_array(params[:truck_tile][:origin])
       params[:truck_tile][:destination] = convert_array(params[:truck_tile][:destination])
       if params[:truck_tile][:load_date].present?
-        params[:truck_tile][:load_date] = Date::strptime(params[:truck_tile][:load_date], "%m/%d/%Y")
+        load_date = params[:truck_tile][:load_date].split("/")
+        params[:truck_tile][:load_date] = load_date[2] + "-" + load_date[1] + "-" + load_date[0]
       else
         params[:truck_tile][:load_date] = nil
       end

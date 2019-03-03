@@ -32,6 +32,14 @@ class LoadTilesController < ApplicationController
   # POST /load_tiles
   # POST /load_tiles.json
   def create
+    if params[:load_tile][:truck_tile_id].present?
+      status = 'Covered'
+      if ['Covered', 'Dispatched'].include?(params[:load_tile][:status])
+        status = params[:load_tile][:status]
+      end
+      TruckTile.find(params[:load_tile][:truck_tile_id]).update_attributes(:status => status)
+      params[:load_tile][:status] = status
+    end
     @load_tile = LoadTile.new(load_tile_params)
 
     respond_to do |format|
@@ -43,6 +51,23 @@ class LoadTilesController < ApplicationController
   # PATCH/PUT /load_tiles/1
   # PATCH/PUT /load_tiles/1.json
   def update
+    if params[:load_tile][:truck_tile_id].present?
+      if @load_tile.truck_tile && @load_tile.truck_tile_id != params[:load_tile][:truck_tile_id]
+        @load_tile.truck_tile.update_attributes(:status => 'Open')
+      end
+      status = 'Covered'
+      if ['Covered', 'Dispatched'].include?(params[:load_tile][:status])
+        status = params[:load_tile][:status]
+      end
+      TruckTile.find(params[:load_tile][:truck_tile_id]).update_attributes(:status => status)
+      params[:load_tile][:status] = status
+    else
+      status = 'Open'
+      if @load_tile.truck_tile
+        @load_tile.truck_tile.update_attributes(:status => status)
+      end
+      params[:load_tile][:status] = status
+    end
     respond_to do |format|
       @load_tile.update(load_tile_params)
       format.js { }
@@ -77,7 +102,8 @@ class LoadTilesController < ApplicationController
       params[:load_tile][:origin] = convert_array(params[:load_tile][:origin])
       params[:load_tile][:destination] = convert_array(params[:load_tile][:destination])
       if params[:load_tile][:load_date].present?
-        params[:load_tile][:load_date] = Date::strptime(params[:load_tile][:load_date], "%m/%d/%Y")
+        load_date = params[:load_tile][:load_date].split("/")
+        params[:load_tile][:load_date] = load_date[2] + "-" + load_date[1] + "-" + load_date[0]
       else
         params[:load_tile][:load_date] = nil
       end
