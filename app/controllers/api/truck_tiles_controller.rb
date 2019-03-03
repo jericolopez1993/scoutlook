@@ -2,6 +2,15 @@ module Api
   class TruckTilesController < ApplicationController
     before_action :set_truck_tile, only: [:show, :edit, :update, :destroy]
 
+    def index
+      if params[:load_date].present? && params[:tile_tab_id].present?
+        @truck_tiles = TruckTile.where(:load_date => params[:load_date], :tile_tab_id => params[:tile_tab_id])
+      else
+        @truck_tiles = []
+      end
+      render json: @truck_tiles, methods: [:location_with_uniq_id]
+    end
+
     def show
       render json: @truck_tile
     end

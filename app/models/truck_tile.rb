@@ -30,6 +30,6 @@ class TruckTile < ApplicationRecord
   end
 
   def location_with_uniq_id
-    "#{self.origin} -> #{self.destination} (#{self.uniq_id})"
+    "#{self.uniq_id} #{self.shipper && '& ' + self.carrier.company_name.gsub(/[^0-9A-Za-z]/, '')[0, 10].upcase} & #{self.origin} - #{self.destination}"
   end
 end

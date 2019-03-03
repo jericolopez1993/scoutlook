@@ -8,6 +8,14 @@ $('.datepicker-autoClose').datepicker({
   autoclose: true,
   orientation: 'auto bottom'
 });
+id_value = '<%= @load_tile.truck_tile && @load_tile.truck_tile_id %>'
+if (id_value === ""){
+  $(".without_truck").show();
+  $(".with_truck").hide();
+}else{
+  $(".without_truck").hide();
+  $(".with_truck").show();
+}
 $("#showLoad").modal('show');
 
 $(document).ready(function() {

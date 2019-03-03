@@ -44,16 +44,16 @@ class TruckTilesController < ApplicationController
   def update
     respond_to do |format|
         @truck_tile.update(truck_tile_params)
-      if params[:truck_tile][:load_tile_id].present?
-        if @truck_tile.load_tile
-          if @truck_tile.load_tile.id != params[:truck_tile][:load_tile_id]
-            @truck_tile.load_tile.update_attributes(:truck_tile_id => nil)
-          end
-        end
-        LoadTile.find(params[:truck_tile][:load_tile_id]).update_attributes(:truck_tile_id => @truck_tile.id)
-      else
-        @truck_tile.load_tile && @truck_tile.load_tile.update_attributes(:truck_tile_id => nil)
-      end
+      # if params[:truck_tile][:load_tile_id].present?
+      #   if @truck_tile.load_tile
+      #     if @truck_tile.load_tile.id != params[:truck_tile][:load_tile_id]
+      #       @truck_tile.load_tile.update_attributes(:truck_tile_id => nil)
+      #     end
+      #   end
+      #   LoadTile.find(params[:truck_tile][:load_tile_id]).update_attributes(:truck_tile_id => @truck_tile.id)
+      # else
+      #   @truck_tile.load_tile && @truck_tile.load_tile.update_attributes(:truck_tile_id => nil)
+      # end
       format.js { }
     end
   end

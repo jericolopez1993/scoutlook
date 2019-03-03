@@ -31,7 +31,11 @@
   <div class="form-group row m-b-15">
     <%= form.label :status, 'Status:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-      <%= form.select :status, options_for_select(['Open', 'Covered', 'Priority', 'Dispatched', 'Stranded', 'Dropped'], truck_tile.status), {:include_blank => true}, class: 'form-control' %>
+      <% if truck_tile.load_tile %>
+        <%= form.select :status, options_for_select(['Covered', 'Dispatched'], truck_tile.status), {:include_blank => true}, class: 'form-control', id: 'with-load' %>
+      <% else %>
+        <%= form.select :status, options_for_select(['Open', 'Priority', 'Stranded', 'Dropped'], truck_tile.status), {:include_blank => true}, class: 'form-control', id: 'without-load' %>
+      <% end %>
     </div>
   </div>
   <div class="form-group row m-b-15">
@@ -78,12 +82,12 @@
       <%= form.text_area(:details, rows: 5, class: 'form-control') %>
     </div>
   </div>
-  <div class="form-group row m-b-15">
-    <%= form.label :load_tile_id, 'Load Tile:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <!-- <div class="form-group row m-b-15">
+    <%#= form.label :load_tile_id, 'Load Tile:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-      <%= form.select :load_tile_id, LoadTile.all.collect {|r| [ r.location_with_uniq_id, r.id ] },{:include_blank => true, :selected => truck_tile.load_tile ? truck_tile.load_tile.id : ""}, class: 'form-control' %>
+      <%#= form.select :load_tile_id, LoadTile.all.collect {|r| [ r.location_with_uniq_id, r.id ] },{:include_blank => true, :selected => truck_tile.load_tile ? truck_tile.load_tile.id : ""}, class: 'form-control' %>
     </div>
-  </div>
+  </div> -->
   <div class="form-group row m-b-15">
     <div class="col-md-2"></div>
     <div class="col-md-9 col-sm-12 d-flex justify-content-end">
