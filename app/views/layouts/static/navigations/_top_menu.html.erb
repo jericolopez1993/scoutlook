@@ -17,7 +17,9 @@
         <li><a href="<%= reminders_path %>" class="<%= (params[:controller] == 'reminders') ? 'active' : ''%> reminder"><i class="far fa-bell"></i> <span>Reminders</span></a></li>
       <% end %>
       <% if current_user.has_role?(:admin) || current_user.has_role?(:steward) || current_user.ro || current_user.cs %>
-        <li><a href="<%= load_tiles_path %>" class="<%= (params[:controller] == 'load_tiles') ? 'active' : ''%> load_tile"><i class="fas fa-columns"></i> <span>Load & Truck</span></a></li>
+        <li><a href="<%= load_tiles_path %>" class="
+          <% if params[:controller] == 'load_tiles' || params[:controller] == 'tile_tabs'%> active <% end %> load_tile">
+          <i class="fas fa-columns"></i> <span>Load & Truck</span></a></li>
       <% end %>
 
       <%# <% if current_user.has_role?(:admin) %>

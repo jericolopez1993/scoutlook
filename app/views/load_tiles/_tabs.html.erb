@@ -4,7 +4,7 @@
     <%= render 'layouts/static/header', header_title: "Load & Truck Tiles" %>
   </h1>
   <span class="pull-right">
-    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newTabForm">New Tab</button>
+    <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#newTabForm">New Tab</button>
     <% if !@tile_tab.nil? %>
       <%= link_to 'Edit', edit_tile_tab_path(@tile_tab), :remote => true, :class => 'btn btn-warning btn-xs' %>
       <%= link_to 'Delete', @tab, :remote => true, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
@@ -13,19 +13,21 @@
 </div>
 <div class="panel panel-inverse" style="top: 140px;">
   <div class="panel-heading" style="padding: 5px 15px">
-    <div class="panel-heading-btn" style="margin-top: 2.5px;">
-    </div>
-    <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
-      <% @tabs.each do |tab| %>
+    <div class="panel-heading" style="padding: 5px 0;">
+      <ul class="nav nav-pills md-nav" style="margin-bottom: 0px; margin-left: -15px;">
+        <% @tabs.each do |tab| %>
         <li class="nav-items">
           <a href="<%= tile_tab_path(tab)%>" class="nav-link active show" style="padding:5px; margin: 0px 10px">
             <span class="d-sm-block d-none"><h4 class="panel-title"><%= tab.name.titleize %></h4></span>
           </a>
         </li>
-      <% end %>
-    </ul>
+        <% end %>
+      </ul>
+    </div>
   </div>
+  <% if @tile_tab %>
   <div class="panel-body" style="padding: 5px 15px">
       <%= @tile_tab.nil? ? "" : @tile_tab.notes %>
   </div>
+  <% end %>
 </div>
