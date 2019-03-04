@@ -1,5 +1,6 @@
 $("div#sortableKanbanBoards").html("<%= escape_javascript(render 'load_tiles/tiles') %>");
 
 $(document).ready(function() {
+  $('#showLoad').modal('toggle')   
   Tiles.init();
 });

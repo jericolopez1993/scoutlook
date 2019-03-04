@@ -2,5 +2,6 @@ $("div#sortableKanbanBoards").html("<%= escape_javascript(render 'load_tiles/tab
 $("div#sortableKanbanBoards").html("<%= escape_javascript(render 'load_tiles/tiles') %>");
 
 $(document).ready(function() {
+  $('#showTruck').modal('toggle') 
   Tiles.init();
 });
