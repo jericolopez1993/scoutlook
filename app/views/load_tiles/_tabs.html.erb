@@ -1,15 +1,16 @@
 <style>
   .nav-<%= @tile_tab.id %> {
-    background: #fff;
+    background: #8753de;
+    color: #fff!important;
   }
 </style>
 <% @tabs = TileTab.all %>
-<div class="header-gray" >
+<div class="header-violet" >
   <h1 class="pull-left">
     <%= render 'layouts/static/header', header_title: "Load & Truck Tiles" %>
   </h1>
   <span class="pull-right">
-    <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#newTabForm">New Tab</button>
+    <button type="button" class="btn btn-indigo btn-xs" data-toggle="modal" data-target="#newTabForm">New Tab</button>
     <% if !@tile_tab.nil? %>
       <%= link_to 'Edit', edit_tile_tab_path(@tile_tab), :remote => true, :class => 'btn btn-warning btn-xs' %>
       <%= link_to 'Delete', @tab, :remote => true, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>

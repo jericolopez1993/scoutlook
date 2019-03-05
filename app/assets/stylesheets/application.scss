@@ -230,12 +230,12 @@ table.dataTable {
   font-weight: bold;
   opacity: .8;
 }
-.active.steward {
+.active.steward, .active.load_tile {
   background-color: #7e1d7e!important;
   color: #fff!important;
   font-weight: bold;
 }
-.active.steward:hover {
+.active.steward:hover, .active.load_tile:hover {
   background-color: #7e1d7e!important;
   color: #fff!important;
   font-weight: bold;
