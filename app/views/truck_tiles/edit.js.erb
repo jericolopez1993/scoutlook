@@ -8,8 +8,11 @@ $('.datepicker-autoClose').datepicker({
   autoclose: true,
   orientation: 'auto bottom'
 });
-$("#showTruck").modal('show');
+id_value = '<%= @truck_tile.load_tile && @truck_tile.load_tile.id %>'
+stat_selected = '<%= @truck_tile.status.present? ? @truck_tile.status : "" %>'
 
 $(document).ready(function() {
   Tiles.init();
+  getStatusOptions(id_value, "edit_truck", stat_selected);
 });
+$("#showTruck").modal('show');

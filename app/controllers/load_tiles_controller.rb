@@ -104,14 +104,10 @@ class LoadTilesController < ApplicationController
       if params[:load_tile][:load_date].present?
         load_date = params[:load_tile][:load_date].split("/")
         params[:load_tile][:load_date] = load_date[2] + "-" + load_date[1] + "-" + load_date[0]
-      else
-        params[:load_tile][:load_date] = nil
       end
       if params[:load_tile][:del_date].present?
         del_date = params[:load_tile][:del_date].split("/")
         params[:load_tile][:del_date] = del_date[2] + "-" + del_date[1] + "-" + del_date[0]
-      else
-        params[:load_tile][:del_date] = nil
       end
       params.require(:load_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id, :salesperson_id, :bill_rate, :origin_city, :destination_city, :picks, :drops, :pu_time, :pu_general_time, :del_date, :del_time, :del_general_time, :teams, :truck_tile_id, :tile_tab_id)
     end

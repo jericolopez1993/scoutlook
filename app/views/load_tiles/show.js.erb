@@ -1,5 +1,8 @@
 $("div#showLoad").find(".modal-body").html("<%= escape_javascript(render 'load_tiles/show_fields', load_tile: @load_tile) %>");
 $("div#showLoad").find(".modal-title").text("<%= @load_tile.origin %> -> <%= @load_tile.destination %>")
+$('#new_load').trigger("reset");
+$('.new-load-origin-multiple').val(null).trigger('change');
+$('.new-load-destination-multiple').val(null).trigger('change');
 $("#showLoad").modal('show');
 
 $(document).ready(function() {

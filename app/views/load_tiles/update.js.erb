@@ -1,3 +1,4 @@
+callProcessingModal();
 $("div#sortableKanbanBoards").html("<%= escape_javascript(render 'load_tiles/tiles') %>");
 $('#edit_load').trigger("reset");
 $('.new-load-origin-multiple').val(null).trigger('change');
@@ -6,4 +7,4 @@ $("#showLoad").modal('hide');
 
 $(document).ready(function() {
   Tiles.init();
-});
+});``

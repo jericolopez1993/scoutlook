@@ -1,5 +1,8 @@
 $("div#showTruck").find(".modal-body").html("<%= escape_javascript(render 'truck_tiles/show_fields', truck_tile: @truck_tile) %>");
 $("div#showTruck").find(".modal-title").text("<%= @truck_tile.origin %> -> <%= @truck_tile.destination %>")
+$('#new_load').trigger("reset");
+$('.new-truck-origin-multiple').val(null).trigger('change');
+$('.new-truck-destination-multiple').val(null).trigger('change');
 $("#showTruck").modal('show');
 
 $(document).ready(function() {
