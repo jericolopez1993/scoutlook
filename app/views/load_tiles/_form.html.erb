@@ -37,7 +37,7 @@
   <div class="form-group row m-b-15">
     <%= form.label :status, 'Status:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-        <%= form.select :status, options_for_select(['Open', 'Priority', 'Stranded', 'Dropped']), {:include_blank => true}, class: 'form-control', :id => "#{form_id}_status" %>
+        <%= form.select :status, options_for_select(['Open', 'Priority', 'Stranded', 'Dropped', 'Forecast']), {:include_blank => true}, class: 'form-control', :id => "#{form_id}_status" %>
     </div>
   </div>
   <div class="form-group row m-b-15">

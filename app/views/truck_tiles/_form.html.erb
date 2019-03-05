@@ -34,7 +34,7 @@
       <% if truck_tile.load_tile %>
         <%= form.select :status, options_for_select(['Covered', 'Dispatched'], truck_tile.status), {:include_blank => true}, class: 'form-control', id: 'with-load' %>
       <% else %>
-        <%= form.select :status, options_for_select(['Open', 'Priority', 'Stranded', 'Dropped'], truck_tile.status), {:include_blank => true}, class: 'form-control', id: 'without-load' %>
+        <%= form.select :status, options_for_select(['Open', 'Priority', 'Stranded', 'Dropped', 'Forecast'], truck_tile.status), {:include_blank => true}, class: 'form-control', id: 'without-load' %>
       <% end %>
     </div>
   </div>

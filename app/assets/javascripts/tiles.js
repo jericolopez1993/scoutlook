@@ -31,7 +31,7 @@ function getTileOptions(load_date, tile_tab_id, tile_type, form_id) {
 }
 function getStatusOptions(tile_id, form_id, selected) {
   with_truck = ['Covered', 'Dispatched'];
-  without_truck = ['Open', 'Priority', 'Stranded', 'Dropped'];
+  without_truck = ['Open', 'Priority', 'Stranded', 'Dropped', 'Forecast'];
     var items = '<option value=""></option>';
     if (tile_id == "") {
       for(i=0;i<without_truck.length;i++){
