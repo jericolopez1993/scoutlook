@@ -82,7 +82,13 @@
     </div>
   </div>
   <div class="form-group row m-b-15">
-    <%= form.label :load_date, 'Del Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <%= form.label :del_date, 'Del Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+    <div class="col-md-9 col-sm-8">
+      <%= form.text_field :del_date, class: 'form-control datepicker_last_del_date', :id => "last_del_date", :value => "#{load_tile.del_date.nil? ? "" : load_tile.del_date.strftime("%d/%m/%Y")}", 'data-form_id' => "#{form_id}" %>
+    </div>
+  </div>
+  <div class="form-group row m-b-15">
+    <%= form.label :load_date, 'Load Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
       <%= form.text_field :load_date, class: 'form-control datepicker_last_load_date', :id => "last_load_date", :value => "#{load_tile.load_date.nil? ? "" : load_tile.load_date.strftime("%d/%m/%Y")}", 'data-form_id' => "#{form_id}" %>
     </div>
