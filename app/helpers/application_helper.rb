@@ -293,15 +293,7 @@ module ApplicationHelper
   end
 
   def date_to_words(date)
-    if date == Date.today()
-      "Today (#{date.strftime("%B %d")})"
-    elsif date == Date.today() - 1
-      "Yesterday (#{date.strftime("%B %d")})"
-    elsif date == Date.today() + 1
-      "Tomorrow (#{date.strftime("%B %d")})"
-    else
-      date.strftime("%B %d")
-    end
+    date.strftime("%B %d - %^a")
   end
 
   def reminder_to_html(reminder)
