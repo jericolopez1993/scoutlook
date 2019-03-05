@@ -442,3 +442,17 @@ tbody.spacer:before {
   min-height: 65vh;
 }
 ul.wysihtml5-toolbar li a[title="Insert image"] { display: none; }
+
+.float-chained-tile {
+  float: right;
+  position: relative;
+  left: 48%;
+  margin-top: -25%;
+}
+.float-chained-tile > i {
+  -moz-transform: rotate(41deg);
+  -webkit-transform: rotate(41deg);
+  -moz-transform: rotate(41deg);
+  -ms-transform: rotate(41deg);
+  -o-transform: rotate(41deg);
+}
