@@ -1,4 +1,4 @@
-$("div#showTruck").find(".modal-body").html("<%= escape_javascript(render 'truck_tiles/form', truck_tile: @truck_tile, form_id: 'edit_load') %>");
+$("div#showTruck").find(".modal-body").html("<%= escape_javascript(render 'truck_tiles/form', truck_tile: @truck_tile, form_id: 'edit_truck') %>");
 $("div#showTruck").find(".modal-title").text("Edit - <%= escape_javascript(@truck_tile.name) %>")
 $(".new-truck-origin-multiple").select2({placeholder: "Select origins", allowClear: true, dropdownParent: $("#edit_truck")});
 $(".new-truck-destination-multiple").select2({placeholder: "Select destinations", allowClear: true, dropdownParent: $("#edit_truck")});

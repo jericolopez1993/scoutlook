@@ -43,7 +43,7 @@
   <div class="form-group row m-b-15">
     <%= form.label :origin, 'Origin:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-      <%= form.select :origin, grouped_options_for_select(CarrierLane::ORIGINS), {:include_blank => false}, class: 'new-load-origin-multiple', multiple: true %>
+      <%= form.select :origin, grouped_options_for_select(CarrierLane::ORIGINS), {:include_blank => false, :selected => load_tile.origin}, class: 'new-load-origin-multiple', multiple: true %>
     </div>
   </div>
   <div class="form-group row m-b-15">
