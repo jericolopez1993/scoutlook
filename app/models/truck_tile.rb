@@ -26,7 +26,7 @@ class TruckTile < ApplicationRecord
   end
 
   def uniq_id
-    "TRUCK#{self.id}"
+    "T-#{self.id}"
   end
 
   def location_with_uniq_id

@@ -26,7 +26,7 @@ class LoadTile < ApplicationRecord
   end
 
   def uniq_id
-    "LOAD#{self.id}"
+    "L-#{self.id}"
   end
 
   def location_with_uniq_id
