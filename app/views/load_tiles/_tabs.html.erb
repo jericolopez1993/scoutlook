@@ -1,3 +1,8 @@
+<style>
+  .nav-<%= @tile_tab.id %> {
+    background: #fff;
+  }
+</style>
 <% @tabs = TileTab.all %>
 <div class="header-gray" >
   <h1 class="pull-left">
@@ -17,7 +22,7 @@
       <ul class="nav nav-pills md-nav" style="margin-bottom: 0px; margin-left: -15px;">
         <% @tabs.each do |tab| %>
         <li class="nav-items">
-          <a href="<%= tile_tab_path(tab)%>" class="nav-link active show" style="padding:5px; margin: 0px 10px">
+          <a href="<%= tile_tab_path(tab)%>" class="nav-link show nav-<%= tab.id %>" style="padding:5px; margin: 0 0 0 10px">
             <span class="d-sm-block d-none"><h4 class="panel-title"><%= tab.name.titleize %></h4></span>
           </a>
         </li>
@@ -26,8 +31,8 @@
     </div>
   </div>
   <% if @tile_tab %>
-  <div class="panel-body" style="padding: 5px 15px">
-      <%= @tile_tab.nil? ? "" : @tile_tab.notes %>
-  </div>
+    <div class="panel-body" style="padding: 5px 15px">
+        <%= @tile_tab.nil? ? "" : @tile_tab.notes %>
+    </div>
   <% end %>
 </div>
