@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_01_204511) do
+ActiveRecord::Schema.define(version: 2019_03_06_025153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -504,7 +504,7 @@ ActiveRecord::Schema.define(version: 2019_03_01_204511) do
     t.string "spend_per_year"
     t.string "commodities"
     t.text "commodities_notes"
-    t.integer "blue_book_score"
+    t.string "blue_book_score"
     t.string "blue_book_url"
     t.string "buying_criteria"
     t.boolean "works_with_brokers", default: false
