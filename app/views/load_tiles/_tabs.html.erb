@@ -1,7 +1,10 @@
 <style>
-  .nav-<%= @tile_tab.id %> {
+  .nav-<%= @tile_tab.nil? ? '' : @tile_tab.id %> {
     background: #8753de;
     color: #fff!important;
+  }
+  .nav-<%= @tile_tab.nil? ? '' : @tile_tab.id %>:hover {
+    color: #333!important;
   }
 </style>
 <% @tabs = TileTab.all %>
