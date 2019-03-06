@@ -62,11 +62,9 @@ class LoadTilesController < ApplicationController
       TruckTile.find(params[:load_tile][:truck_tile_id]).update_attributes(:status => status)
       params[:load_tile][:status] = status
     else
-      status = 'Open'
       if @load_tile.truck_tile
         @load_tile.truck_tile.update_attributes(:status => status)
       end
-      params[:load_tile][:status] = status
     end
     respond_to do |format|
       @load_tile.update(load_tile_params)
