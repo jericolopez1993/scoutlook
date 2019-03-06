@@ -1,4 +1,7 @@
 function addDateToLoadForm(date, tile_tab_id) {
+  $('#new_load').trigger("reset");
+  $('.new-load-origin-multiple').val(null).trigger('change');
+  $('.new-load-destination-multiple').val(null).trigger('change');
   $("#new_load").find("#last_load_date").datepicker('update', date);
   $("#new_load").find("#load_tile_tile_tab_id").val(tile_tab_id)
   getTileOptions(date, tile_tab_id, "truck", "new_load", "");
@@ -6,6 +9,9 @@ function addDateToLoadForm(date, tile_tab_id) {
 }
 
 function addDateToTruckForm(date, tile_tab_id) {
+  $('#new_truck').trigger("reset");
+  $('.new-truck-origin-multiple').val(null).trigger('change');
+  $('.new-truck-destination-multiple').val(null).trigger('change');
   $("#new_truck").find("#last_load_date").datepicker('update', date);
   $("#new_truck").find("#truck_tile_tile_tab_id").val(tile_tab_id)
   $("#newTruckForm").modal('show');
