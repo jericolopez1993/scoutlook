@@ -17,6 +17,18 @@
   </div>
 </div>
 <div class="row">
+  <label class="col-md-3 col-form-label">Ops Name:</label>
+  <div class="col-md-9 lbl-padding-t">
+    <%= truck_tile.carrier && (truck_tile.carrier.poc.nil? ? '' : truck_tile.carrier.poc.full_name) %><br>
+  </div>
+</div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Ops Phone:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= truck_tile.carrier && (truck_tile.carrier.poc.nil? ? '' : ((!truck_tile.carrier.poc.primary_phone.nil? && truck_tile.carrier.poc.primary_phone != "") ? (truck_tile.carrier.poc.primary_phone + ((!truck_tile.carrier.poc.primary_extension_number.nil? && truck_tile.carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((truck_tile.carrier.poc.primary_phone_type != "") ? (" (#{(truck_tile.carrier.poc.primary_eligible_texting ? "TEXT" : truck_tile.carrier.poc.primary_phone_type)})") : "")) : "")) %>
+    </div>
+  </div>
+<div class="row">
   <label class="col-md-3 col-form-label">TTT Rate:</label>
   <div class="col-md-9 lbl-padding-t">
     <%= truck_tile.bill_rate %>
