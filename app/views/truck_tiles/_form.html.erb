@@ -60,13 +60,13 @@
   <div class="form-group row m-b-15">
     <%= form.label :load_date, 'Load Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-      <%= form.text_field :load_date, class: 'form-control datepicker_last_truck_date', :id => "last_load_date", :value => "#{truck_tile.load_date.nil? ? "" : truck_tile.load_date.strftime("%d/%m/%Y")}", :disabled => truck_tile.load_tile.present?  %>
+      <%= form.text_field :load_date, class: 'form-control datepicker_last_truck_date', :id => "last_load_date", :value => "#{truck_tile.load_date.nil? ? "" : truck_tile.load_date.strftime("%d/%m/%Y")}", :disabled => truck_tile.id.present?  %>
     </div>
   </div>
   <div class="form-group row m-b-15">
     <%= form.label :del_date, 'Del Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
     <div class="col-md-9 col-sm-8">
-      <%= form.text_field :del_date, class: 'form-control datepicker_last_truck_date', :id => "last_del_date", :value => "#{truck_tile.del_date.nil? ? "" : truck_tile.del_date.strftime("%d/%m/%Y")}", :disabled => truck_tile.load_tile.present?  %>
+      <%= form.text_field :del_date, class: 'form-control datepicker_last_truck_date', :id => "last_del_date", :value => "#{truck_tile.del_date.nil? ? "" : truck_tile.del_date.strftime("%d/%m/%Y")}"  %>
     </div>
   </div>
   <div class="form-group row m-b-15">
