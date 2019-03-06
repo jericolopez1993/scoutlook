@@ -5,7 +5,7 @@
     <span class="float-right">
       <%= link_to '<i class="far fa-edit fa-1-2x"></i>'.html_safe, edit_truck_tile_path(truck_tile), :remote => true, :id => 'edit_tile', :class => 'text-warning inline' %>
       <%= link_to '<i class="fas fa-trash-alt fa-1-2x"></i>'.html_safe, truck_tile, :remote => true, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'text-danger inline'%>
-</span>
+    </span>
   </div>
 </div>
 <div class="row">
@@ -16,121 +16,109 @@
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">Dispatcher:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= truck_tile.salesperson && truck_tile.salesperson.full_name %>
   </div>
-</div>
-<div class="row">
   <label class="col-md-3 col-form-label">Carrier:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= link_to(truck_tile.carrier && truck_tile.carrier.company_name, truck_tile.carrier, target: :_blank ) %>
   </div>
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">Ops Name:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= truck_tile.carrier && (truck_tile.carrier.poc.nil? ? '' : truck_tile.carrier.poc.full_name) %><br>
   </div>
-</div>
-  <div class="row">
-    <label class="col-md-3 col-form-label">Ops Phone:</label>
-    <div class="col-md-9 lbl-padding-t">
-      <%= truck_tile.carrier && (truck_tile.carrier.poc.nil? ? '' : ((!truck_tile.carrier.poc.primary_phone.nil? && truck_tile.carrier.poc.primary_phone != "") ? (truck_tile.carrier.poc.primary_phone + ((!truck_tile.carrier.poc.primary_extension_number.nil? && truck_tile.carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((truck_tile.carrier.poc.primary_phone_type != "") ? (" (#{(truck_tile.carrier.poc.primary_eligible_texting ? "TEXT" : truck_tile.carrier.poc.primary_phone_type)})") : "")) : "")) %>
-    </div>
+  <label class="col-md-3 col-form-label">Ops Phone:</label>
+  <div class="col-md-3 lbl-padding-t">
+    <%= truck_tile.carrier && (truck_tile.carrier.poc.nil? ? '' : ((!truck_tile.carrier.poc.primary_phone.nil? && truck_tile.carrier.poc.primary_phone != "") ? (truck_tile.carrier.poc.primary_phone +
+    ((!truck_tile.carrier.poc.primary_extension_number.nil? && truck_tile.carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((truck_tile.carrier.poc.primary_phone_type != "") ? ("
+    (#{(truck_tile.carrier.poc.primary_eligible_texting ? "TEXT" : truck_tile.carrier.poc.primary_phone_type)})") : "")) : "")) %>
   </div>
+</div>
 <div class="row">
   <label class="col-md-3 col-form-label">TTT Rate:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= truck_tile.bill_rate %>
   </div>
-</div>
-<div class="row">
   <label class="col-md-3 col-form-label">Status:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= truck_tile.status %>
   </div>
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">Origin:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <% truck_tile.origin_to_array.each do |cr| %>
       <% if Carrier::LIGHT_BLUE.include?(cr) %>
         <span class="badge badge-primary"><%= cr %></span>
-      <% elsif Carrier::DARK_BLUE.include?(cr) %>
-        <span class="badge badge-drakblue"><%= cr %></span>
-      <% elsif Carrier::BLUE.include?(cr) %>
-        <span class="badge badge-info"><%= cr %></span>
-      <% elsif Carrier::RED.include?(cr) %>
-      <span class="badge badge-danger"><%= cr %></span>
-      <% elsif Carrier::BROWN.include?(cr) %>
-        <span class="badge badge-brown"><%= cr %></span>
-      <% elsif Carrier::YELLOW.include?(cr) %>
-        <span class="badge badge-yellow"><%= cr %></span>
-      <% elsif Carrier::ORANGE.include?(cr) %>
-        <span class="badge badge-warning"><%= cr %></span>
-      <% elsif Carrier::GREEN.include?(cr) %>
-        <span class="badge badge-green"><%= cr %></span>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Destination:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <% truck_tile.destination_to_array.each do |cr| %>
-      <% if Carrier::LIGHT_BLUE.include?(cr) %>
-        <span class="badge badge-primary"><%= cr %></span>
-      <% elsif Carrier::DARK_BLUE.include?(cr) %>
-        <span class="badge badge-drakblue"><%= cr %></span>
-      <% elsif Carrier::BLUE.include?(cr) %>
-        <span class="badge badge-info"><%= cr %></span>
-      <% elsif Carrier::RED.include?(cr) %>
-      <span class="badge badge-danger"><%= cr %></span>
-      <% elsif Carrier::BROWN.include?(cr) %>
-        <span class="badge badge-brown"><%= cr %></span>
-      <% elsif Carrier::YELLOW.include?(cr) %>
-        <span class="badge badge-yellow"><%= cr %></span>
-      <% elsif Carrier::ORANGE.include?(cr) %>
-        <span class="badge badge-warning"><%= cr %></span>
-      <% elsif Carrier::GREEN.include?(cr) %>
-        <span class="badge badge-green"><%= cr %></span>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">PU Time:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= truck_tile.pu_time %><%= truck_tile.pu_general_time %>
-  </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Load Date:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= truck_tile.load_date %>
-  </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Del Date:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= truck_tile.del_date %>
-  </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Del Time:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= truck_tile.del_time %><%= truck_tile.del_general_time %>
-  </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Team:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= truck_tile.teams ? "Yes" : "No" %>
-  </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Notes:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= truck_tile.details %>
-  </div>
-</div>
+        <% elsif Carrier::DARK_BLUE.include?(cr) %>
+          <span class="badge badge-drakblue"><%= cr %></span>
+          <% elsif Carrier::BLUE.include?(cr) %>
+            <span class="badge badge-info"><%= cr %></span>
+            <% elsif Carrier::RED.include?(cr) %>
+              <span class="badge badge-danger"><%= cr %></span>
+              <% elsif Carrier::BROWN.include?(cr) %>
+                <span class="badge badge-brown"><%= cr %></span>
+                <% elsif Carrier::YELLOW.include?(cr) %>
+                  <span class="badge badge-yellow"><%= cr %></span>
+                  <% elsif Carrier::ORANGE.include?(cr) %>
+                    <span class="badge badge-warning"><%= cr %></span>
+                    <% elsif Carrier::GREEN.include?(cr) %>
+                      <span class="badge badge-green"><%= cr %></span>
+                    <% end %>
+                  <% end %>
+                </div>
+                <label class="col-md-3 col-form-label">Destination:</label>
+                <div class="col-md-3 lbl-padding-t">
+                  <% truck_tile.destination_to_array.each do |cr| %>
+                    <% if Carrier::LIGHT_BLUE.include?(cr) %>
+                      <span class="badge badge-primary"><%= cr %></span>
+                      <% elsif Carrier::DARK_BLUE.include?(cr) %>
+                        <span class="badge badge-drakblue"><%= cr %></span>
+                        <% elsif Carrier::BLUE.include?(cr) %>
+                          <span class="badge badge-info"><%= cr %></span>
+                          <% elsif Carrier::RED.include?(cr) %>
+                            <span class="badge badge-danger"><%= cr %></span>
+                            <% elsif Carrier::BROWN.include?(cr) %>
+                              <span class="badge badge-brown"><%= cr %></span>
+                              <% elsif Carrier::YELLOW.include?(cr) %>
+                                <span class="badge badge-yellow"><%= cr %></span>
+                                <% elsif Carrier::ORANGE.include?(cr) %>
+                                  <span class="badge badge-warning"><%= cr %></span>
+                                  <% elsif Carrier::GREEN.include?(cr) %>
+                                    <span class="badge badge-green"><%= cr %></span>
+                                  <% end %>
+                                <% end %>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <label class="col-md-3 col-form-label">PU Time:</label>
+                              <div class="col-md-3 lbl-padding-t">
+                                <%= truck_tile.pu_time %><%= truck_tile.pu_general_time %>
+                              </div>
+                              <label class="col-md-3 col-form-label">Load Date:</label>
+                              <div class="col-md-3 lbl-padding-t">
+                                <%= truck_tile.load_date %>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <label class="col-md-3 col-form-label">Del Date:</label>
+                              <div class="col-md-3 lbl-padding-t">
+                                <%= truck_tile.del_date %>
+                              </div>
+                              <label class="col-md-3 col-form-label">Del Time:</label>
+                              <div class="col-md-3 lbl-padding-t">
+                                <%= truck_tile.del_time %><%= truck_tile.del_general_time %>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <label class="col-md-3 col-form-label">Notes:</label>
+                              <div class="col-md-3 lbl-padding-t">
+                                <%= truck_tile.details %>
+                              </div>
+                              <label class="col-md-3 col-form-label">Team:</label>
+                              <div class="col-md-3 lbl-padding-t">
+                                <%= truck_tile.teams ? "Yes" : "No" %>
+                              </div>
+                            </div>

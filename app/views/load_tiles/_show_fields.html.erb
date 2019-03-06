@@ -17,31 +17,27 @@
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">Salesperson:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= load_tile.salesperson && load_tile.salesperson.full_name %>
   </div>
-</div>
-<div class="row">
   <label class="col-md-3 col-form-label">Customer:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= link_to(load_tile.shipper && load_tile.shipper.company_name, load_tile.shipper, target: :_blank ) %>
   </div>
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">Bill Rate:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= load_tile.bill_rate %>
   </div>
-</div>
-<div class="row">
   <label class="col-md-3 col-form-label">Status:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= load_tile.status %>
   </div>
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">Origin:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <% load_tile.origin_to_array.each do |cr| %>
       <% if Carrier::LIGHT_BLUE.include?(cr) %>
         <span class="badge badge-primary"><%= cr %></span>
@@ -62,16 +58,14 @@
       <% end %>
     <% end %>
   </div>
-</div>
-<div class="row">
   <label class="col-md-3 col-form-label">City:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= load_tile.origin_city %>
   </div>
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">Destination:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <% load_tile.destination_to_array.each do |cr| %>
       <% if Carrier::LIGHT_BLUE.include?(cr) %>
         <span class="badge badge-primary"><%= cr %></span>
@@ -92,12 +86,10 @@
       <% end %>
     <% end %>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">City:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= load_tile.destination_city %>
-  </div>
+    <label class="col-md-3 col-form-label">City:</label>
+    <div class="col-md-3 lbl-padding-t">
+      <%= load_tile.destination_city %>
+    </div>
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">Picks:</label>
@@ -111,37 +103,31 @@
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">PU Time:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= load_tile.pu_time %><%= load_tile.pu_general_time %>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Load Date:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= load_tile.load_date %>
-  </div>
+    <label class="col-md-3 col-form-label">Load Date:</label>
+    <div class="col-md-3 lbl-padding-t">
+      <%= load_tile.load_date %>
+    </div>
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">Del Date:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= load_tile.del_date %>
   </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Del Time:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= load_tile.del_time %><%= load_tile.del_general_time %>
-  </div>
-</div>
-<div class="row">
-  <label class="col-md-3 col-form-label">Team:</label>
-  <div class="col-md-9 lbl-padding-t">
-    <%= load_tile.teams ? "Yes" : "No" %>
-  </div>
+    <label class="col-md-3 col-form-label">Del Time:</label>
+    <div class="col-md-3 lbl-padding-t">
+      <%= load_tile.del_time %><%= load_tile.del_general_time %>
+    </div>
 </div>
 <div class="row">
   <label class="col-md-3 col-form-label">Notes:</label>
-  <div class="col-md-9 lbl-padding-t">
+  <div class="col-md-3 lbl-padding-t">
     <%= load_tile.details %>
+  </div>
+  <label class="col-md-3 col-form-label">Team:</label>
+  <div class="col-md-3 lbl-padding-t">
+    <%= load_tile.teams ? "Yes" : "No" %>
   </div>
 </div>
