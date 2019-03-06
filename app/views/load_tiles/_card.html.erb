@@ -169,7 +169,7 @@
                     <% if tile.carrier %>
                       <span><%= tile.carrier && tile.carrier.company_name.gsub(/[^0-9A-Za-z]/, '')[0, 5].upcase %></span>
                     <% end %>
-                    <span><%= tile.load_date.strftime("%^a") %> <%= tile.del_time %><%= tile.del_general_time %> <%= tile.try(:drops) ? (tile.drops > 1 ? "#{tile.drops}D" : "") : "" %></span>
+                    <span><%= tile.del_date.strftime("%^a") %> <%= tile.del_time %><%= tile.del_general_time %> <%= tile.try(:drops) ? (tile.drops > 1 ? "#{tile.drops}D" : "") : "" %></span>
                   </div>
                 </div>
               </div>
