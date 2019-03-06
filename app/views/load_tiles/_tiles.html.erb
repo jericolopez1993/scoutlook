@@ -30,7 +30,7 @@
         </button>
       </div>
       <div class="panel-body row" data-date="<%= cdate %>" style="min-height: 150px;z-index: 100;margin-bottom: 30px;">
-        <% ['Open', 'Covered', 'Priority', 'Stranded', 'Dropped', 'Dispatched', 'Forecast', ''].each do |stat| %>
+        <% ['Open', 'Priority', 'Stranded', 'Dropped', 'Forecast', 'Covered', 'Dispatched', ''].each do |stat| %>
           <% load_tiles = stat != '' ?  @tile_tab.load_tiles.where(:load_date => cdate, :status => stat) : @tile_tab.load_tiles.where(:load_date => cdate).where("status is NULL OR status = ''") %>
             <% truck_tiles = stat != '' ? @tile_tab.truck_tiles.where(:load_date => cdate, :status => stat, :tile_tab_id => @tile_tab.id) : @tile_tab.truck_tiles.where(:load_date => cdate).where("status is NULL OR status = ''") %>
 
