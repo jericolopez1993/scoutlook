@@ -13,7 +13,7 @@
 <div class="row">
   <label class="col-md-3 col-form-label">Customer:</label>
   <div class="col-md-9 lbl-padding-t">
-    <%= load_tile.shipper && load_tile.shipper.company_name %>
+    <%= link_to(load_tile.shipper && load_tile.shipper.company_name, load_tile.shipper) %>
   </div>
 </div>
 <div class="row">
