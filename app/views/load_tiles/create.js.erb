@@ -4,7 +4,6 @@ $("div#newLoadForm").find(".modal-body").html("<%= escape_javascript(render 'loa
 $(".new-load-origin-multiple").select2({placeholder: "Select origins", allowClear: true, dropdownParent: $("#new_load")});
 $(".new-load-destination-multiple").select2({placeholder: "Select destinations", allowClear: true, dropdownParent: $("#new_load")});
 $("#newLoadForm").modal('hide');
-
 $(document).ready(function() {
   Tiles.init();
 });
