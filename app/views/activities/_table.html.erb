@@ -23,59 +23,37 @@
     }
   </style>
 <% end %>
-<table class="table table-striped table-bordered display"  id="activities_table" data-order="[[3, &quot;asc&quot;]]">
+<table class="table table-striped table-bordered display nowrap"  id="activities_table" data-order="[[3, &quot;asc&quot;]]">
   <thead>
-    <tr class="odd gradeX">
+    <tr>
       <th data-orderable="false">Actions</th>
-      <th>Owner</th>
-      <th>Status</th>
-      <th>Type</th>
+      <th>SP</th>
+      <th>Name</th>
+      <th>State</th>
       <th>LPW</th>
-      <th>Annual</th>
       <th>Open</th>
       <th>Close</th>
       <th>Outcome</th>
-      <th>Reason</th>
       <th>Learned</th>
-      <% if show_carrier || show_shipper %>
-        <% if show_carrier %>
-          <th>Carrier</th>
-        <% end %>
-        <% if show_shipper %>
-          <th>Shipper</th>
-        <% end %>
-        <th width="200px">Contact Activity</th>
-        <th>Priority</th>
-        <th>City</th>
-        <th>State</th>
-      <% end %>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Reason</th>
     </tr>
   </thead>
   <tfoot>
     <tr>
-      <th data-orderable="false">Actions</th>
-      <th>Owner</th>
-      <th>Status</th>
-      <th>Type</th>
+      <th>Actions</th>
+      <th>SP</th>
+      <th>Name</th>
+      <th>State</th>
       <th>LPW</th>
-      <th>Annual</th>
       <th>Open</th>
       <th>Close</th>
       <th>Outcome</th>
+      <th>Learned</th>
+      <th>Type</th>
+      <th>Status</th>
       <th>Reason</th>
-      <th width="250px">Learned</th>
-      <% if show_carrier || show_shipper %>
-        <% if show_carrier %>
-          <th>Carrier</th>
-        <% end %>
-        <% if show_shipper %>
-          <th>Shipper</th>
-        <% end %>
-        <th width="200px">Contact Activity</th>
-        <th>Priority</th>
-        <th>City</th>
-        <th>State</th>
-      <% end %>
     </tr>
   </tfoot>
   <tbody class="spacer">
@@ -93,75 +71,82 @@
             <%= link_to '<i class="far fa-paper-plane"></i>'.html_safe, new_mail_path(:id => activity.id, :previous_controller => 'activities'), :class => 'btn btn-dark btn-xs'%>
             <%= link_to '<i class="far fa-file-pdf"></i>'.html_safe, generate_pdf_activities_path(:id => activity.id), target: :_blank, :class => 'btn btn-indigo btn-xs'%>
           </td>
-          <td class="link" nowrap><%= activity.user.nil? ? "" : (link_to "#{activity.user.first_name.capitalize} #{activity.user.last_name.capitalize}", activity.user) %></td>
-          <td><%= activity.status ? 'Open' : 'Closed' %></td>
-          <td nowrap><%= activity.activity_type %></td>
-          <td><%= activity.loads_per_week %></td>
-          <td><%= activity.annual_value %></td>
-          <td nowrap><%= convert_date(activity.date_opened) %></td>
-          <td nowrap><%= convert_date(activity.date_closed) %></td>
-          <td><%= activity.outcome %></td>
-          <td><%= activity.reason %></td>
-          <td><%= activity.notes.nil? ? "" : activity.notes.html_safe %></td>
-          <% if show_carrier || show_shipper %>
-            <% if show_carrier %>
+          <td class="text-center link"><%= activity.user.nil? ? "" : (link_to "#{activity.user.first_name[0]}#{activity.user.last_name[0]}", activity.user) %></td>
             <td class="link" nowrap>
-              <span
-                data-toggle="tooltip"
-                data-placement="right"
-                data-html="true"
-                title="
-                  <b>Name</b>: <%= activity.carrier && (activity.carrier.company_name.blank? ? "(no name)" : activity.carrier.company_name) %><br>
-                  <b>Ops Name</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : activity.carrier.poc.full_name) %><br>
-                  <b>Ops Phone</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : ((!activity.carrier.poc.primary_phone.nil? && activity.carrier.poc.primary_phone != "") ? (activity.carrier.poc.primary_phone + ((!activity.carrier.poc.primary_extension_number.nil? && activity.carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((activity.carrier.poc.primary_phone_type != "") ? (" (#{(activity.carrier.poc.primary_eligible_texting ? "TEXT" : activity.carrier.poc.primary_phone_type)})") : "")) : "")) %><br>
-                  <b>Ops Email</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : activity.carrier.poc.email.downcase) %><br>
-                  <b>Class</b>: <%= activity.carrier && (activity.carrier.sales_priority) %><br>
-                  <b>MC Number</b>: <%= activity.carrier && (activity.carrier.mc_number) %><br>
-                  <b>Reefers Count</b>: <%= activity.carrier && activity.carrier.reefers %><br>
-                  <b>Sate/Province</b>: <%= activity.carrier && (activity.carrier.location.nil? ? '' : activity.carrier.location.state) %><br>
-                  <b>Last Contact Date</b>: <%= activity.carrier && (activity.carrier.last_contact_date.nil? || activity.carrier.last_contact_date.date_opened.nil? ? "" : activity.carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
-                ">
-                  <%= activity.carrier && link_to(activity.carrier.company_name.blank? ? "(no name)" : activity.carrier.company_name, activity.carrier) %>
-              </span>
-            </td>
-            <% end %>
-            <% if show_shipper %>
-              <td class="link" nowrap>
+              <% if show_carrier || show_shipper %>
+                <% if show_carrier && activity.carrier %>
                 <span
                   data-toggle="tooltip"
                   data-placement="right"
                   data-html="true"
                   title="
-                    <b>Name</b>: <%= activity.shipper && (activity.shipper.company_name.blank? ? "(no name)" : activity.shipper.company_name) %><br>
-                    <b>DM Name</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : activity.shipper.pdm.full_name) %><br>
-                    <b>DM Phone</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : ((!activity.shipper.pdm.primary_phone.nil? && activity.shipper.pdm.primary_phone != "") ? (activity.shipper.pdm.primary_phone + ((!activity.shipper.pdm.primary_extension_number.nil? && activity.shipper.pdm.primary_extension_number != "") ? (", Ext. " + activity.shipper.pdm.primary_extension_number) : "") + ((activity.shipper.pdm.primary_phone_type != "") ? (" (#{(activity.shipper.pdm.primary_eligible_texting ? "TEXT" : activity.shipper.pdm.primary_phone_type)})") : "")) : "")) %><br>
-                    <b>DM Email</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : activity.shipper.pdm.email.downcase) %><br>
-                    <b>Class</b>: <%= activity.shipper && (activity.shipper.sales_priority) %><br>
-                    <b>City</b>: <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.city) %><br>
-                    <b>Sate/Province</b>: <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.state) %><br>
-                    <b>Last Contact Date</b>: <%= activity.shipper && (activity.shipper.last_contact_date.nil? || activity.shipper.last_contact_date.date_opened.nil? ? "" : activity.shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
+                    <b>Name</b>: <%= activity.carrier && (activity.carrier.company_name.blank? ? "(no name)" : activity.carrier.company_name) %><br>
+                    <b>Ops Name</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : activity.carrier.poc.full_name) %><br>
+                    <b>Ops Phone</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : ((!activity.carrier.poc.primary_phone.nil? && activity.carrier.poc.primary_phone != "") ? (activity.carrier.poc.primary_phone + ((!activity.carrier.poc.primary_extension_number.nil? && activity.carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((activity.carrier.poc.primary_phone_type != "") ? (" (#{(activity.carrier.poc.primary_eligible_texting ? "TEXT" : activity.carrier.poc.primary_phone_type)})") : "")) : "")) %><br>
+                    <b>Ops Email</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : activity.carrier.poc.email.downcase) %><br>
+                    <b>Class</b>: <%= activity.carrier && (activity.carrier.sales_priority) %><br>
+                    <b>MC Number</b>: <%= activity.carrier && (activity.carrier.mc_number) %><br>
+                    <b>Reefers Count</b>: <%= activity.carrier && activity.carrier.reefers %><br>
+                    <b>Sate/Province</b>: <%= activity.carrier && (activity.carrier.location.nil? ? '' : activity.carrier.location.state) %><br>
+                    <b>Last Contact Date</b>: <%= activity.carrier && (activity.carrier.last_contact_date.nil? || activity.carrier.last_contact_date.date_opened.nil? ? "" : activity.carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
                   ">
-                    <%= activity.shipper && link_to(activity.shipper.company_name.blank? ? "(no name)" : activity.shipper.company_name, activity.shipper) %>
+                    <%= activity.carrier && link_to(activity.carrier.company_name.blank? ? "(no name)" : activity.carrier.company_name, activity.carrier) %>
                 </span>
-              </td>
-            <% end %>
-            <% if show_carrier && !activity.carrier.nil? %>
-              <td class="link" nowrap><%= activity.carrier_contact.nil? ? "" : (link_to "#{activity.carrier_contact.full_name}", edit_carrier_contact_path(activity.carrier_contact)) %></td>
-              <td><%= activity.carrier.nil? || activity.carrier.sales_priority.blank? ? "" : activity.carrier.sales_priority %></td>
-              <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.city %></td>
-              <td><%= activity.carrier.nil? || activity.carrier.head_office_location.nil? ? "" : activity.carrier.head_office_location.state.upcase %></td>
-            <% elsif show_shipper && !activity.shipper.nil? %>
-              <td class="link" nowrap><%= activity.shipper_contact.nil? ? "" : (link_to "#{activity.shipper_contact.full_name}", edit_shipper_contact_path(activity.shipper_contact)) %></td>
-              <td><%= activity.shipper.nil? || activity.shipper.sales_priority.blank? ? "" : activity.shipper.sales_priority %></td>
-              <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.city %></td>
-              <td><%= activity.shipper.nil? || activity.shipper.head_office_location.nil? ? "" : activity.shipper.head_office_location.state.upcase %></td>
-            <% else %>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            <% end %>
-          <% end %>
+                <% end %>
+                <% if show_shipper && activity.shipper && show_carrier && activity.carrier %>
+                &nbsp;/&nbsp;
+                <% end %>
+                <% if show_shipper && activity.shipper %>
+                    <span
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      data-html="true"
+                      title="
+                        <b>Name</b>: <%= activity.shipper && (activity.shipper.company_name.blank? ? "(no name)" : activity.shipper.company_name) %><br>
+                        <b>DM Name</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : activity.shipper.pdm.full_name) %><br>
+                        <b>DM Phone</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : ((!activity.shipper.pdm.primary_phone.nil? && activity.shipper.pdm.primary_phone != "") ? (activity.shipper.pdm.primary_phone + ((!activity.shipper.pdm.primary_extension_number.nil? && activity.shipper.pdm.primary_extension_number != "") ? (", Ext. " + activity.shipper.pdm.primary_extension_number) : "") + ((activity.shipper.pdm.primary_phone_type != "") ? (" (#{(activity.shipper.pdm.primary_eligible_texting ? "TEXT" : activity.shipper.pdm.primary_phone_type)})") : "")) : "")) %><br>
+                        <b>DM Email</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : activity.shipper.pdm.email.downcase) %><br>
+                        <b>Class</b>: <%= activity.shipper && (activity.shipper.sales_priority) %><br>
+                        <b>City</b>: <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.city) %><br>
+                        <b>Sate/Province</b>: <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.state) %><br>
+                        <b>Last Contact Date</b>: <%= activity.shipper && (activity.shipper.last_contact_date.nil? || activity.shipper.last_contact_date.date_opened.nil? ? "" : activity.shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
+                      ">
+                        <%= activity.shipper && link_to(activity.shipper.company_name.blank? ? "(no name)" : activity.shipper.company_name, activity.shipper) %>
+                    </span>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if show_carrier || show_shipper %>
+                <% if show_carrier && activity.carrier %>
+                  <%= activity.shipper && (activity.carrier.location.nil? ? '' : activity.carrier.location.state) %>
+                <% end %>
+                <% if show_shipper && activity.shipper && show_carrier && activity.carrier %>
+                &nbsp;/&nbsp;
+                <% end %>
+                <% if show_shipper && activity.shipper %>
+                  <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.state) %>
+                <% end %>
+              <% end %>
+            </td>
+            <td class="text-center"><%= activity.loads_per_week %></td>
+            <td nowrap><%= convert_date(activity.date_opened) %></td>
+            <td nowrap><%= convert_date(activity.date_closed) %></td>
+            <td><%= activity.outcome %></td>
+            <td>
+              <span
+                data-toggle="tooltip"
+                data-placement="right"
+                data-html="true"
+                title="
+                <%= activity.notes.nil? ? '' : activity.notes.html_safe %>
+                  ">
+                  <%= activity.notes.nil? ? '' : truncate_html(activity.notes.html_safe, :length => 100, :omission => '...', :escape => false) %>
+              </span>
+            </td>
+            <td nowrap><%= activity.activity_type %></td>
+            <td><%= activity.status ? 'Open' : 'Closed' %></td>
+            <td><%= activity.reason %></td>
         </tr>
       <% end %>
     <% end %>
