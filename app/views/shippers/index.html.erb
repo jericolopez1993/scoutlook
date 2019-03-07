@@ -100,7 +100,7 @@
                     <b>Class</b>: <%= shipper.sales_priority %><br>
                     <b>City</b>: <%= shipper.location.nil? ? '' : shipper.location.city %><br>
                     <b>Sate/Province</b>: <%= shipper.location.nil? ? '' : shipper.location.state.upcase %><br>
-                    <b>Last Contact Date</b>: <%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %><br>
+                    <b>Last Contact Date</b>: <%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %><br>
                   ">
                     <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper %>
                 </span>
@@ -303,7 +303,7 @@
               <td class="text-center link"><%= shipper.relationship_owner_user.nil? ? '' : "#{link_to("#{shipper.relationship_owner_user.first_name[0]}#{shipper.relationship_owner_user.last_name[0]}", shipper.relationship_owner_user)}".html_safe %></td>
               <td class="text-center"><%= shade_sales_priority(shipper.sales_priority).html_safe %></td>
               <td class="text-center"><%= shipper.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>
+              <td class="text-center"><%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %></td>
               <td class="text-center"><%= shipper.load_last_month %></td>
               <td class="text-center"><%= shipper.load_last_6_month %></td>
               <td><%= shipper.location.nil? ? '' : shipper.location.city %></td>

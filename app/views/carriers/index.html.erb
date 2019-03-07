@@ -101,7 +101,7 @@
                     <b>MC Number</b>: <%= carrier.mc_number %><br>
                     <b>Reefers Count</b>: <%= carrier.reefers %><br>
                     <b>Sate/Province</b>: <%= carrier.location.nil? ? '' : carrier.location.state.upcase %><br>
-                    <b>Last Contact Date</b>: <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %><br>
+                    <b>Last Contact Date</b>: <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %><br>
                   ">
                   <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier %>
                 </span>
@@ -311,7 +311,7 @@
               <td class="text-center link"><%= carrier.relationship_owner_user.nil? ? '' : "#{link_to("#{carrier.relationship_owner_user.first_name[0]}#{carrier.relationship_owner_user.last_name[0]}", carrier.relationship_owner_user)}".html_safe %></td>
               <td class="text-center"><%= shade_sales_priority(carrier.sales_priority).html_safe %></td>
               <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s %></td>
+              <td class="text-center"><%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %></td>
               <td class="text-center"><%= carrier.load_last_6_month %></td>
               <td class="text-center"><%= carrier.load_last_month %></td>
             </tr>

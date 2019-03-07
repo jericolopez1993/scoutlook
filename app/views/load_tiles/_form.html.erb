@@ -70,7 +70,7 @@
   <div class="form-group row m-b-15">
     <%= form.label :load_date, 'Load Date:', class: 'text-right col-md-2 col-sm-2 col-form-label' %>
     <div class="col-md-4 col-sm-4">
-      <%= form.text_field :load_date, class: 'form-control datepicker_last_load_date', :id => "last_load_date", :value => "#{load_tile.load_date.nil? ? "" : load_tile.load_date.strftime("%d/%m/%Y")}", 'data-form_id' => "#{form_id}", :disabled => load_tile.id.present? %>
+      <%= form.text_field :load_date, class: 'form-control datepicker_last_load_date', :id => "last_load_date", :value => "#{load_tile.load_date.nil? ? "" : load_tile.load_date.strftime("%m/%d/%Y")}", 'data-form_id' => "#{form_id}", :disabled => load_tile.id.present? %>
     </div>
     <%= form.label :pu_time, 'PU Time:', class: 'text-right col-md-2 col-sm-2 col-form-label' %>
     <div class="col-md-4 col-sm-4">
@@ -81,7 +81,7 @@
   <div class="form-group row m-b-15">
     <%= form.label :del_date, 'Del Date:', class: 'text-right col-md-2 col-sm-2 col-form-label' %>
     <div class="col-md-4 col-sm-4">
-      <%= form.text_field :del_date, class: 'form-control datepicker_last_del_date', :id => "last_del_date", :value => "#{load_tile.del_date.nil? ? "" : load_tile.del_date.strftime("%d/%m/%Y")}", 'data-form_id' => "#{form_id}" %>
+      <%= form.text_field :del_date, class: 'form-control datepicker_last_del_date', :id => "last_del_date", :value => "#{load_tile.del_date.nil? ? "" : load_tile.del_date.strftime("%m/%d/%Y")}", 'data-form_id' => "#{form_id}" %>
     </div>
     <%= form.label :del_time, 'Del Time:', class: 'text-right col-md-2 col-sm-2 col-form-label' %>
     <div class="col-md-4 col-sm-4">

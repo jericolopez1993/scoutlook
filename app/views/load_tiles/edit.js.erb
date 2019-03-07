@@ -11,7 +11,7 @@ $('.datepicker-autoClose').datepicker({
 $('.datepicker_last_del_date').datepicker('setStartDate', '<%= @load_tile.load_date && @load_tile.load_date.strftime("%m/%d/%Y") %>');
 id_value = '<%= @load_tile.truck_tile && @load_tile.truck_tile_id %>'
 stat_selected = '<%= @load_tile.status.present? ? @load_tile.status : "" %>'
-load_date = '<%= @load_tile.load_date.present? ? @load_tile.load_date.strftime("%d/%m/%Y") : "" %>'
+load_date = '<%= @load_tile.load_date.present? ? @load_tile.load_date.strftime("%m/%d/%Y") : "" %>'
 tile_tab_id = '<%= @load_tile.tile_tab_id.present? ? @load_tile.tile_tab_id : "" %>'
 truck_selected = '<%= @load_tile.truck_tile_id %>'
 $("#load_tile_truck_tile_id").html(items);

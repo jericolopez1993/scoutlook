@@ -78,7 +78,7 @@
               <b>MC Number</b>: <%= carrier && (carrier.mc_number) %><br>
               <b>Reefers Count</b>: <%= carrier && carrier.reefers %><br>
               <b>Sate/Province</b>: <%= carrier && (carrier.location.nil? ? '' : carrier.location.state) %><br>
-              <b>Last Contact Date</b>: <%= carrier && (carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
+              <b>Last Contact Date</b>: <%= carrier && (carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
             ">
           <%= carrier && link_to(carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier) %>
           </span>
@@ -97,7 +97,7 @@
               <b>Class</b>: <%= shipper && (shipper.sales_priority) %><br>
               <b>City</b>: <%= shipper && (shipper.location.nil? ? '' : shipper.location.city) %><br>
               <b>Sate/Province</b>: <%= shipper && (shipper.location.nil? ? '' : shipper.location.state) %><br>
-              <b>Last Contact Date</b>: <%= shipper && (shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
+              <b>Last Contact Date</b>: <%= shipper && (shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
             ">
           <%= shipper && link_to(shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper) %>
           </span>

@@ -119,7 +119,7 @@
                   <b>MC Number</b>: <%= activity.carrier && (activity.carrier.mc_number) %><br>
                   <b>Reefers Count</b>: <%= activity.carrier && activity.carrier.reefers %><br>
                   <b>Sate/Province</b>: <%= activity.carrier && (activity.carrier.location.nil? ? '' : activity.carrier.location.state) %><br>
-                  <b>Last Contact Date</b>: <%= activity.carrier && (activity.carrier.last_contact_date.nil? || activity.carrier.last_contact_date.date_opened.nil? ? "" : activity.carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
+                  <b>Last Contact Date</b>: <%= activity.carrier && (activity.carrier.last_contact_date.nil? || activity.carrier.last_contact_date.date_opened.nil? ? "" : activity.carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
                 ">
                   <%= activity.carrier && link_to(activity.carrier.company_name.blank? ? "(no name)" : activity.carrier.company_name, activity.carrier) %>
               </span>
@@ -139,7 +139,7 @@
                     <b>Class</b>: <%= activity.shipper && (activity.shipper.sales_priority) %><br>
                     <b>City</b>: <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.city) %><br>
                     <b>Sate/Province</b>: <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.state) %><br>
-                    <b>Last Contact Date</b>: <%= activity.shipper && (activity.shipper.last_contact_date.nil? || activity.shipper.last_contact_date.date_opened.nil? ? "" : activity.shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s) %><br>
+                    <b>Last Contact Date</b>: <%= activity.shipper && (activity.shipper.last_contact_date.nil? || activity.shipper.last_contact_date.date_opened.nil? ? "" : activity.shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
                   ">
                     <%= activity.shipper && link_to(activity.shipper.company_name.blank? ? "(no name)" : activity.shipper.company_name, activity.shipper) %>
                 </span>

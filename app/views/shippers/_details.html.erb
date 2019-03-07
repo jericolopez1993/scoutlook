@@ -19,7 +19,7 @@
           <div class="row">
             <label class="col-md-4 col-form-label">Last Contact:</label>
             <div class="col-md-8 lbl-padding-t">
-              <%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : (shipper.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s + " " + (shipper.last_contact_date.user.nil? ? "" : link_to(shipper.last_contact_date.user.full_name, shipper.last_contact_date.user))).html_safe %>
+              <%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : (shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s + " " + (shipper.last_contact_date.user.nil? ? "" : link_to(shipper.last_contact_date.user.full_name, shipper.last_contact_date.user))).html_safe %>
             </div>
           </div>
           <div class="row">
@@ -61,7 +61,7 @@
           <div class="row">
             <label class="col-md-4 col-form-label">Date Created:</label>
             <div class="col-md-8 lbl-padding-t">
-              <%= shipper.created_at.strftime('%d/%m/%Y') %>
+              <%= shipper.created_at.strftime('%m/%d/%Y') %>
             </div>
           </div>
           <div class="row">

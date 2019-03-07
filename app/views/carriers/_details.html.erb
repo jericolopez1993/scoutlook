@@ -19,7 +19,7 @@
           <div class="row">
             <label class="col-md-4 col-form-label">Last Contact:</label>
             <div class="col-md-8 lbl-padding-t link">
-              <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : (carrier.last_contact_date.date_opened.strftime('%d/%m/%Y').to_s + " " + (carrier.last_contact_date.user.nil? ? "" : link_to(carrier.last_contact_date.user.full_name, carrier.last_contact_date.user))).html_safe %>
+              <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : (carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s + " " + (carrier.last_contact_date.user.nil? ? "" : link_to(carrier.last_contact_date.user.full_name, carrier.last_contact_date.user))).html_safe %>
             </div>
           </div>
           <div class="row">
@@ -79,7 +79,7 @@
           <div class="row">
             <label class="col-md-4 col-form-label">Date Created:</label>
             <div class="col-md-8 lbl-padding-t">
-              <%= carrier.created_at.strftime('%d/%m/%Y') %>
+              <%= carrier.created_at.strftime('%m/%d/%Y') %>
             </div>
           </div>
           <div class="row">
