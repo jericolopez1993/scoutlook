@@ -332,6 +332,8 @@
 <%= render 'load_tiles/modal' %>
 
 <script type="text/javascript">
+  var origin = <%= raw CarrierLane::ORIGINS %>;
+  var destination = <%= raw CarrierLane::DESTINATIONS %>;
     $(document).ready(function() {
       Tiles.init();
     });

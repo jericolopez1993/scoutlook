@@ -72,6 +72,10 @@ function callProcessingModal() {
 }
 var handleTile = function() {
   $(function() {
+    $(".new-load-origin-multiple").select2({placeholder: "Select origins", allowClear: true, dropdownParent: $("#new_load")});
+    $(".new-load-destination-multiple").select2({placeholder: "Select destinations", allowClear: true, dropdownParent: $("#new_load")});
+    $(".new-truck-origin-multiple").select2({placeholder: "Select origins", allowClear: true, dropdownParent: $("#new_truck")});
+    $(".new-truck-destination-multiple").select2({placeholder: "Select destinations", allowClear: true, dropdownParent: $("#new_truck")});
     $(".sortable-truck").sortable({
       connectWith: '.sortable-truck',
       cursor: 'move',
