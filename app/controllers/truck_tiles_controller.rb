@@ -95,6 +95,9 @@ class TruckTilesController < ApplicationController
         del_date = params[:truck_tile][:del_date].split("/")
         params[:truck_tile][:del_date] = del_date[2] + "-" + del_date[1] + "-" + del_date[0]
       end
+      if !params[:truck_tile][:status].present?
+        params[:truck_tile][:status] = "Open"
+      end
       params.require(:truck_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id, :dispatcher_id, :bill_rate, :pu_time, :pu_general_time, :del_date, :del_time, :del_general_time, :teams, :tile_tab_id)
     end
 end

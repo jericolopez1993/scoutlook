@@ -107,6 +107,9 @@ class LoadTilesController < ApplicationController
         del_date = params[:load_tile][:del_date].split("/")
         params[:load_tile][:del_date] = del_date[2] + "-" + del_date[1] + "-" + del_date[0]
       end
+      if !params[:load_tile][:status].present?
+        params[:load_tile][:status] = "Open"
+      end
       params.require(:load_tile).permit(:name, :load_date, :priority, :status, :origin, :destination, :details, :carrier_id, :shipper_id, :salesperson_id, :bill_rate, :origin_city, :destination_city, :picks, :drops, :pu_time, :pu_general_time, :del_date, :del_time, :del_general_time, :teams, :truck_tile_id, :tile_tab_id)
     end
 end
