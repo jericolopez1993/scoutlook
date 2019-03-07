@@ -5,6 +5,7 @@ function addDateToLoadForm(date, tile_tab_id) {
   $("#new_load").find("#last_load_date").datepicker('update', date);
   $("#new_load").find("#load_tile_tile_tab_id").val(tile_tab_id)
   getTileOptions(date, tile_tab_id, "truck", "new_load", "");
+  $('.datepicker_last_del_date').datepicker('setStartDate', date);
   $("#newLoadForm").modal('show');
 }
 
@@ -14,10 +15,11 @@ function addDateToTruckForm(date, tile_tab_id) {
   $('.new-truck-destination-multiple').val(null).trigger('change');
   $("#new_truck").find("#last_load_date").datepicker('update', date);
   $("#new_truck").find("#truck_tile_tile_tab_id").val(tile_tab_id)
+  $('.datepicker_last_truck_date').datepicker('setStartDate', date);
   $("#newTruckForm").modal('show');
 }
 
-function getTileOptions(load_date, tile_tab_id, tile_type, form_id, selected) {
+function getTileOptions(load_date, tile_tab_id, tile_type, form_id, selected) {22222
   $.ajax({
     url: "/api/" + tile_type + "_tiles",
     data: {

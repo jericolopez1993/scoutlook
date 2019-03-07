@@ -8,6 +8,7 @@ $('.datepicker-autoClose').datepicker({
   autoclose: true,
   orientation: 'auto bottom'
 });
+$('.datepicker_last_truck_date').datepicker('setStartDate', '<%= @truck_tile.load_date && @truck_tile.load_date.strftime("%m/%d/%Y") %>');
 id_value = '<%= @truck_tile.load_tile && @truck_tile.load_tile.id %>'
 stat_selected = '<%= @truck_tile.status.present? ? @truck_tile.status : "" %>'
 
