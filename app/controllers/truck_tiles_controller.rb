@@ -89,11 +89,11 @@ class TruckTilesController < ApplicationController
       params[:truck_tile][:destination] = convert_array(params[:truck_tile][:destination])
       if params[:truck_tile][:load_date].present?
         load_date = params[:truck_tile][:load_date].split("/")
-        params[:truck_tile][:load_date] = load_date[2] + "-" + load_date[1] + "-" + load_date[0]
+        params[:truck_tile][:load_date] = load_date[2] + "-" + load_date[0] + "-" + load_date[1]
       end
       if params[:truck_tile][:del_date].present?
         del_date = params[:truck_tile][:del_date].split("/")
-        params[:truck_tile][:del_date] = del_date[2] + "-" + del_date[1] + "-" + del_date[0]
+        params[:truck_tile][:del_date] = del_date[2] + "-" + del_date[0] + "-" + del_date[1]
       end
       if !params[:truck_tile][:status].present?
         params[:truck_tile][:status] = "Open"

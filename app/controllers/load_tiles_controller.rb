@@ -101,11 +101,11 @@ class LoadTilesController < ApplicationController
       params[:load_tile][:destination] = convert_array(params[:load_tile][:destination])
       if params[:load_tile][:load_date].present?
         load_date = params[:load_tile][:load_date].split("/")
-        params[:load_tile][:load_date] = load_date[2] + "-" + load_date[1] + "-" + load_date[0]
+        params[:load_tile][:load_date] = load_date[2] + "-" + load_date[0] + "-" + load_date[1]
       end
       if params[:load_tile][:del_date].present?
         del_date = params[:load_tile][:del_date].split("/")
-        params[:load_tile][:del_date] = del_date[2] + "-" + del_date[1] + "-" + del_date[0]
+        params[:load_tile][:del_date] = del_date[2] + "-" + del_date[0] + "-" + del_date[1]
       end
       if !params[:load_tile][:status].present?
         params[:load_tile][:status] = "Open"

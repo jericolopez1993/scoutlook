@@ -113,19 +113,19 @@ var handleTile = function() {
       getStatusOptions($(this).val(), $(this).data("form_id"), "");
     });
     $('.datepicker_last_load_date').datepicker({
-      format: 'dd/mm/yyyy',
+      format: 'mm/dd/yyyy',
       autoclose: true,
       orientation: 'auto bottom'
     }).on('changeDate', function(e) {
       getTileOptions($(this).val(), $("#load_tile_tile_tab_id").val(), "truck", $(this).data("form_id"), "")
     });
     $('.datepicker_last_del_date').datepicker({
-      format: 'dd/mm/yyyy',
+      format: 'mm/dd/yyyy',
       autoclose: true,
       orientation: 'auto bottom'
     });
     $('.datepicker_last_truck_date').datepicker({
-      format: 'dd/mm/yyyy',
+      format: 'mm/dd/yyyy',
       autoclose: true,
       orientation: 'auto bottom'
     });
