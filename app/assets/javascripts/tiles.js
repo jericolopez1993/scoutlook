@@ -94,7 +94,9 @@ var handleTile = function() {
           data: {
             load_date: $(ui.item).parent().parent().data('date')
           }
-        }).done(function(data) {});
+        }).done(function(data) {
+          $("div#sortableKanbanBoards").html(data);
+        });
       }
     }).disableSelection();
     $(".sortable-load").sortable({
@@ -110,7 +112,9 @@ var handleTile = function() {
           data: {
             load_date: $(ui.item).parent().parent().data('date')
           }
-        }).done(function(data) {});
+        }).done(function(data) {
+          $("div#sortableKanbanBoards").html(data);
+        });
       }
     }).disableSelection();
     $(".load_tile_truck_tile_id").change(function() {

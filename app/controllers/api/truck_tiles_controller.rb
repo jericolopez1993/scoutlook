@@ -1,6 +1,7 @@
 module Api
   class TruckTilesController < ApplicationController
     before_action :set_truck_tile, only: [:show, :edit, :update, :destroy]
+    before_action :set_tile_tab, only: [:show, :edit, :update, :destroy, :create]
 
     def index
       if params[:load_date].present? && params[:tile_tab_id].present?
@@ -17,8 +18,10 @@ module Api
 
     def update
       if params[:load_date].present? && !params[:load_date].nil?
+        load_date = params[:load_date].split("/")
+        params[:load_date] = load_date[2] + "-" + load_date[0] + "-" + load_date[1]
         if @truck_tile.update_attributes(:load_date => params[:load_date])
-          head :no_content
+          render 'load_tiles/tiles', :layout => false
         else
           render json: { status: 'failed' }, status: :unprocessable_entity
         end
@@ -30,5 +33,13 @@ module Api
       def set_truck_tile
         @truck_tile = TruckTile.find(params[:id])
       end
+      def set_tile_tab
+        if action_name == "create"
+          @tile_tab = TileTab.find(params[:truck_tile][:tile_tab_id])
+        else
+          @tile_tab = @truck_tile.tile_tab
+        end
+      end
+
   end
 end
