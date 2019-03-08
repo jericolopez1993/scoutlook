@@ -359,4 +359,9 @@ module ApplicationHelper
     str_date
   end
 
+  def organize_date(date)
+    date = date.split("/")
+    date[2] + "-" + date[0] + "-" + date[1]
+  end
+
 end

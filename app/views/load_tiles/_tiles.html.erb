@@ -1,6 +1,6 @@
 <!--sütun başlangıç-->
 <% if @tile_tab %>
-  <% ((Date.today() - 1)..(Date.today() + 6)).to_a.each_with_index do |cdate, index|%>
+  <% (cookies[:start_date]..cookies[:end_date]).to_a.each_with_index do |cdate, index|%>
     <div
       class="panel
             <% if cdate < Date.today %>
@@ -67,7 +67,6 @@
                     <% end %>
                   </div>
                 <% end %>
-
               <% end %>
             <% end %>
             <div id="LOAD-<%= index%>" data-index="<%= index %>" class="col-6 kanban-centered sortable-load"></div>

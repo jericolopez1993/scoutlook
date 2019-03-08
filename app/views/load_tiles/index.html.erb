@@ -39,7 +39,7 @@
     position: relative;
     /*width: 50%;
         float: right;*/
-      margin: 10px auto;
+    margin: 10px auto;
     clear: both;
     border-radius: 4px;
     -webkit-box-shadow: 1px 1px 2px 0 rgba(50, 50, 50, 0.5);
@@ -246,7 +246,7 @@
     opacity: 0.6;
     -ms-filter: alpha(opacity=60);
     filter: alpha(opacity=60);
-}
+  }
   .modal-static {
     position: fixed;
     top: 50% !important;
@@ -306,13 +306,19 @@
     width: 30%;
     display: inline;
   }
+
+  #mybutton {
+    position: fixed;
+    bottom: 4px;
+    left: 10px;
+  }
 </style>
 <div id="tile-tab-container" style="position: fixed;width: 100%;z-index: 1014">
   <%= render 'load_tiles/tabs' %>
 </div>
 <div class="tile-container" style="padding-top: 100px;">
   <div id="sortableKanbanBoards" class="row" style="padding: 0 2%; width: 2800px;">
-      <%= render 'load_tiles/tiles' %>
+    <%= render 'load_tiles/tiles' %>
   </div>
   <!-- Static Modal -->
   <div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
@@ -329,12 +335,18 @@
   </div>
 </div>
 
+<div id="mybutton">
+  <div class="btn-group btn-group-toggle">
+    <a href="<%= tile_tabs_path(:navigation_type => "previous", :id => @tile_tab.id) %>" class="btn btn-secondary"><i class="fas fa-step-backward"></i> Prev</a>
+    <a href="<%= tile_tabs_path(:navigation_type => "current", :id => @tile_tab.id) %>" class="btn btn-secondary">Now</a>
+    <a href="<%= tile_tabs_path(:navigation_type => "next", :id => @tile_tab.id) %>" class="btn btn-secondary">Next <i class="fas fa-step-forward"></i></a>
+  </div>
+</div>
 <%= render 'load_tiles/modal' %>
-
 <script type="text/javascript">
   var origin = <%= raw CarrierLane::ORIGINS %>;
   var destination = <%= raw CarrierLane::DESTINATIONS %>;
-    $(document).ready(function() {
-      Tiles.init();
-    });
+  $(document).ready(function () {
+    Tiles.init();
+  });
 </script>
