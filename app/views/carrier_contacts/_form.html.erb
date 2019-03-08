@@ -96,7 +96,7 @@
           <%= form.text_field :primary_extension_number, class: 'form-control', placeholder: "Extension" %>
         </div>
         <div class="col-md-3 col-sm-2">
-          <%= form.select :primary_phone_type, options_for_select(['Work', 'Cell'], carrier_contact.primary_phone_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+          <%= form.select :primary_phone_type, options_for_select(['Land Line', 'Cell'], carrier_contact.primary_phone_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
         </div>
       </div>
       <div class="form-group row m-b-15" id="eligible_first">
@@ -114,7 +114,7 @@
           <%= form.text_field :secondary_extension_number, class: 'form-control', placeholder: "Extension" %>
         </div>
         <div class="col-md-3 col-sm-2">
-          <%= form.select :secondary_phone_type, options_for_select(['Work', 'Cell'], carrier_contact.secondary_phone_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+          <%= form.select :secondary_phone_type, options_for_select(['Land Line', 'Cell'], carrier_contact.secondary_phone_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
         </div>
       </div>
       <div class="form-group row m-b-15" id="eligible_second">
