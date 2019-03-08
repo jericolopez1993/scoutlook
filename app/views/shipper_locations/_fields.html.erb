@@ -1,19 +1,19 @@
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :address, 'Address:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :address, 'Address *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-    <%= form.text_field :address, class: 'form-control', :value => shipper_location.address, :autocomplete => "none" %>
+    <%= form.text_field :address, class: 'form-control', :value => shipper_location.address, :autocomplete => "none", 'data-parsley-required' => true  %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :city, 'City / Town *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-    <%= form.text_field :city, class: 'form-control', :value => shipper_location.city, :autocomplete => "none" %>
+    <%= form.text_field :city, class: 'form-control', :value => shipper_location.city, :autocomplete => "none", 'data-parsley-required' => true  %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :state, 'Province / State *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-    <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "loc_state", :autocomplete => "none" %>
+    <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "loc_state", :autocomplete => "none", 'data-parsley-required' => true  %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
@@ -23,15 +23,15 @@
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :country, 'Country *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-    <%= form.select :country, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "loc_country" %>
+    <%= form.select :country, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "loc_country", 'data-parsley-required' => true  %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :phone, 'Phone #:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :phone, 'Phone # *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
-    <%= form.text_field :phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", :value => shipper_location.phone %>
+    <%= form.text_field :phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", :value => shipper_location.phone, 'data-parsley-required' => true  %>
   </div>
 </div>
 

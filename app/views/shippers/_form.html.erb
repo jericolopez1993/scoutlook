@@ -53,9 +53,9 @@
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :company_name, 'Company Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :company_name, 'Company Name *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.text_field :company_name, class: 'form-control' %>
+              <%= form.text_field :company_name, class: 'form-control', 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
@@ -77,9 +77,9 @@
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :shipper_type, 'Shipper Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :shipper_type, 'Shipper Type *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.select :shipper_type, options_for_select(['Broker', 'Shipper', 'Receiver', 'Wholesaler'], shipper.shipper_type), {:include_blank => false}, class: 'form-control shipper-type-multiple-select2', multiple: true %>
+              <%= form.select :shipper_type, options_for_select(['Broker', 'Shipper', 'Receiver', 'Wholesaler'], shipper.shipper_type), {:include_blank => false}, class: 'form-control shipper-type-multiple-select2', multiple: true, 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
@@ -89,21 +89,21 @@
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :loads_per_month, 'Loads Per Month:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :loads_per_month, 'Loads Per Month *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.select :loads_per_month, options_for_select(['0-10', '11-50', '51-100', '> 100'], shipper.loads_per_month), {:include_blank => true}, class: 'form-control' %>
+              <%= form.select :loads_per_month, options_for_select(['0-10', '11-50', '51-100', '> 100'], shipper.loads_per_month), {:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :spend_per_year, 'Spend Per Year:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :spend_per_year, 'Spend Per Year *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.select :spend_per_year, options_for_select(['< 1M', '1M-5M', '5M-10M', '10M-25M', '> 25M'], shipper.spend_per_year), {:include_blank => true}, class: 'form-control' %>
+              <%= form.select :spend_per_year, options_for_select(['< 1M', '1M-5M', '5M-10M', '10M-25M', '> 25M'], shipper.spend_per_year), {:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :commodities, 'Commodities:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :commodities, 'Commodities *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.select :commodities, Shipper::COMMODITY.collect {|r| [ r, r ] },{:include_blank => false, :selected => shipper.commodities}, class: 'form-control multiple-select2', multiple: true %>
+              <%= form.select :commodities, Shipper::COMMODITY.collect {|r| [ r, r ] },{:include_blank => false, :selected => shipper.commodities}, class: 'form-control multiple-select2', multiple: true, 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
@@ -167,9 +167,9 @@
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :years_established, 'Year Established:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :years_established, 'Year Established *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.select :years_established, (Time.zone.now.year - 80)..(Time.zone.now.year),{:include_blank => true, :selected => (shipper.years_established.blank? ? '' : shipper.years_established)}, class: 'form-control', id: 'years_established' %>
+              <%= form.select :years_established, (Time.zone.now.year - 80)..(Time.zone.now.year),{:include_blank => true, :selected => (shipper.years_established.blank? ? '' : shipper.years_established)}, class: 'form-control', id: 'years_established', 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">

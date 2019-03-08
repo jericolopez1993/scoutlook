@@ -56,15 +56,15 @@
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :first_name, 'First Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :first_name, 'First Name *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.text_field :first_name, class: 'form-control' %>
+          <%= form.text_field :first_name, class: 'form-control', 'data-parsley-required' => true %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :last_name, 'Last Name:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :last_name, 'Last Name *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.text_field :last_name, class: 'form-control' %>
+          <%= form.text_field :last_name, class: 'form-control', 'data-parsley-required' => true %>
         </div>
       </div>
       <div class="form-group row m-b-15">
@@ -81,21 +81,21 @@
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :email, 'Email Address:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :email, 'Email Address *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.email_field :email, class: 'form-control' %>
+          <%= form.email_field :email, class: 'form-control', 'data-parsley-required' => true %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :primary_phone, 'Primary Phone:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :primary_phone, 'Primary Phone *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-3 col-sm-2">
-          <%= form.text_field :primary_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
+          <%= form.text_field :primary_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", 'data-parsley-required' => true %>
         </div>
         <div class="col-md-3 col-sm-2">
           <%= form.text_field :primary_extension_number, class: 'form-control', placeholder: "Extension" %>
         </div>
         <div class="col-md-3 col-sm-2">
-          <%= form.select :primary_phone_type, options_for_select(['Work', 'Cell'], shipper_contact.primary_phone_type),{:include_blank => true}, class: 'form-control' %>
+          <%= form.select :primary_phone_type, options_for_select(['Work', 'Cell'], shipper_contact.primary_phone_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
         </div>
       </div>
       <div class="form-group row m-b-15" id="eligible_first">
@@ -105,15 +105,15 @@
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :secondary_phone, 'Secondary Phone:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :secondary_phone, 'Secondary Phone *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-3 col-sm-2">
-          <%= form.text_field :secondary_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'" %>
+          <%= form.text_field :secondary_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", 'data-parsley-required' => true %>
         </div>
         <div class="col-md-3 col-sm-2">
           <%= form.text_field :secondary_extension_number, class: 'form-control', placeholder: "Extension" %>
         </div>
         <div class="col-md-3 col-sm-2">
-          <%= form.select :secondary_phone_type, options_for_select(['Work', 'Cell'], shipper_contact.secondary_phone_type),{:include_blank => true}, class: 'form-control' %>
+          <%= form.select :secondary_phone_type, options_for_select(['Work', 'Cell'], shipper_contact.secondary_phone_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
         </div>
       </div>
       <div class="form-group row m-b-15" id="eligible_second">
