@@ -8,6 +8,9 @@ up:
 req:
 		@docker-compose exec web bundle install
 
+bash:
+		@docker-compose exec web bash
+
 shell:
 		@docker-compose exec web rails console
 

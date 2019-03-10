@@ -8,12 +8,12 @@ class MailMailer < ApplicationMailer
         end
       end
     from = (from.nil? || from.blank?) ? "no-reply@scoutlook.net" : from
-      mail(
-        :from => from,
-        :to => contact,
-        :cc => cc,
-        :bcc => bcc,
-        :subject => subject
-      )
+    mail(
+      :from => from,
+      :to => contact,
+      :cc => cc,
+      :bcc => bcc,
+      :subject => subject
+    )
   end
 end
