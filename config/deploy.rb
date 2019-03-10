@@ -66,6 +66,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:restart'
+      invoke 'delayed_job:restart'
     end
   end
 
@@ -97,7 +98,6 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
-  after  :finishing,    ':delayed_job:default'
   after  :finishing,    :start_nginx
   # after  :finishing,    :seed_dump
 end

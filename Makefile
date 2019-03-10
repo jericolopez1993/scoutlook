@@ -43,6 +43,9 @@ tests:
 		@docker-compose exec web rake db:seed RAILS_ENV=test
 		@docker-compose exec web cucumber
 
+deploy:
+		@docker-compose exec web cap production deploy --trace
+
 init:
 		$(MAKE) up
 		$(MAKE) req
