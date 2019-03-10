@@ -61,7 +61,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if user_params[:password]
+      if !user_params.fetch(:password, '').empty?  # so it won't throw the ParameterMissing error
         if @user.update(user_params)
           if params[:is_admin].present? && !@user.has_role?(:admin)
             @user.add_role :admin
@@ -117,6 +117,6 @@ class UsersController < ApplicationController
     def user_params
       params[:user][:ro] = params[:ro].present?
       params[:user][:cs] = params[:cs].present?
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :ro, :cs)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :ro, :cs, :email_signature)
     end
 end
