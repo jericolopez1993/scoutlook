@@ -52,6 +52,8 @@ gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 gem 'truncate_html'
 gem 'delayed_job_active_record'
+gem 'daemons'
+gem 'capistrano3-delayed-job', '= 1.7.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

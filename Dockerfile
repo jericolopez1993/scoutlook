@@ -2,13 +2,13 @@ FROM ruby:2.3.1
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
-WORKDIR /pb-platform
+WORKDIR /scoutcrm
 
-COPY Gemfile /pb-platform/Gemfile
-COPY Gemfile.lock /pb-platform/Gemfile.lock
+COPY Gemfile /scoutcrm/Gemfile
+COPY Gemfile.lock /scoutcrm/Gemfile.lock
 
 RUN bundle install
 
 RUN  gem install mailcatcher -v 0.6.5
 
-COPY . /pb-platform
+COPY . /scoutcrm
