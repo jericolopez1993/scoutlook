@@ -38,6 +38,7 @@
             <th class="text-center"><i class="fas fa-clock"></i></th>
             <th>MC</th>
             <th>Name</th>
+            <th>Cat</th>
             <th>ST/PV</th>
             <th>Ops Name</th>
             <th>Ops Phone</th>
@@ -59,6 +60,7 @@
             <th></th>
             <th>MC</th>
             <th>Name</th>
+            <th>Cat</th>
             <th>ST/PV</th>
             <th>Ops Name</th>
             <th>Ops Phone</th>
@@ -106,6 +108,7 @@
                   <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier %>
                 </span>
               </td>
+              <td><%= carrier.category %></td>
               <td><%= carrier.location.nil? ? '' : carrier.location.state.upcase %></td>
               <td><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
               <td><b>

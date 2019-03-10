@@ -571,17 +571,17 @@ function filterAndSelectAllTable(id, ordered) {
     }
   });
 
-// Apply the search
-table.columns().every(function() {
-  var that = this;
+  // Apply the search
+  table.columns().every(function() {
+    var that = this;
 
-  $('input', this.footer()).on('keyup change', function() {
-    if (that.search() !== this.value) {
-      console.log("hello")
-      that.search(this.value).draw();
-    }
+    $('input', this.footer()).on('keyup change', function() {
+      if (that.search() !== this.value) {
+        console.log("hello")
+        that.search(this.value).draw();
+      }
+    });
   });
-});
 }
 
 function loadContacts(client_type, controller, value, selected){

@@ -5,6 +5,12 @@
       <div class="card bg-light" >
         <div class="card-body">
           <div class="row">
+            <label class="col-md-4 col-form-label">Category:</label>
+            <div class="col-md-8 lbl-padding-t">
+              <%= carrier.category %>
+            </div>
+          </div>
+          <div class="row">
             <label class="col-md-4 col-form-label">Approved to do business?</label>
             <div class="col-md-8 lbl-padding-t">
               <%= carrier.approved ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>

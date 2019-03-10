@@ -34,6 +34,12 @@
             </div>
           <% end %>
           <div class="form-group row m-b-15">
+            <%= form.label :category, 'Category:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.select :category, options_for_select(['P', 'S', 'O', 'D'], carrier.category), {:include_blank => true}, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
             <label class="text-right col-md-2 col-sm-4 col-form-label" style="font-size: 16px;">Approved to do business?</label>
             <div class="col-md-9 col-sm-8">
                 <%= form.check_box :approved, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: carrier.approved %>
