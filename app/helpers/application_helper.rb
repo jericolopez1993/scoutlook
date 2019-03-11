@@ -45,27 +45,6 @@ module ApplicationHelper
    obj.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
   end
 
-  # def get_distance(origin_id, destination_id)
-  #   distance = 0
-  #   if (!origin_id.nil? && !destination_id.nil?) && (origin_id != "" && destination_id != "")
-  #     begin
-  #     origin = Location.find(origin_id)
-  #     @origin = origin.address + " " + origin.state + "," + origin.country
-  #     destination = Location.find(destination_id)
-  #     @destination = destination.address + " " +destination.state + "," + destination.country
-  #       str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + @origin + "&destinations=" + @destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
-  #       response = HTTParty.get(str_url)
-  #       body = JSON.parse(response.body)
-  #       temp_distance =  body['rows'][0]['elements'][0]['distance']['value'].nil? ? 0 :  body['rows'][0]['elements'][0]['distance']['value']
-  #       distance = temp_distance / 1000
-  #     rescue
-  #       puts 'Google Maps API error'
-  #       distance
-  #     end
-  #   else
-  #     distance
-  #   end
-  # end
   def get_distance(origin, destination)
       begin
         str_url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=" + origin + "&destinations=" + destination + "&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0"
@@ -81,7 +60,6 @@ module ApplicationHelper
 
   def get_map(origin, destination)
     require 'uri'
-
     URI.parse("https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C#{origin}%7C#{destination}&key=AIzaSyCbFFNkesD-8_F4lMdyihwqpARlDYmG6k0")
   end
 
@@ -362,6 +340,37 @@ module ApplicationHelper
   def organize_date(date)
     date = date.split("/")
     date[2] + "-" + date[0] + "-" + date[1]
+  end
+
+  def generate_phone_type(phone_type, eligible_texting)
+    str = ""
+    if eligible_texting
+      str = "TEXT"
+    else
+      if phone_type == "Land Line"
+        str = "LAND"
+      else
+        str = phone_type
+      end
+    end
+  end
+
+  def generate_phone_number(extra_str, phone_number, extension_number, eligible_texting, phone_type)
+    str = ""
+    if !phone_number.nil? && phone_number != ""
+      if extra_str != ""
+        str = extra_str + ": "
+      end
+      str = str + phone_number
+      if !extension_number.nil? && extension_number != ""
+        str = str + ", Ext. " + extension_number
+      end
+      str = str + " " + generate_phone_type(phone_type, eligible_texting)
+      if extra_str == "P1"
+        str = str + "<br/>"
+      end
+    end
+    str
   end
 
 end
