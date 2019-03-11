@@ -334,14 +334,15 @@
     </div>
   </div>
 </div>
-
-<div id="mybutton">
-  <div class="btn-group btn-group-toggle">
-    <a href="<%= tile_tabs_path(:navigation_type => "previous", :id => @tile_tab.id) %>" class="btn btn-secondary"><i class="fas fa-step-backward"></i> Prev</a>
-    <a href="<%= tile_tabs_path(:navigation_type => "current", :id => @tile_tab.id) %>" class="btn btn-secondary">Now</a>
-    <a href="<%= tile_tabs_path(:navigation_type => "next", :id => @tile_tab.id) %>" class="btn btn-secondary">Next <i class="fas fa-step-forward"></i></a>
+<% if @tile_tab %>
+  <div id="mybutton">
+    <div class="btn-group btn-group-toggle">
+      <a href="<%= tile_tabs_path(:navigation_type => "previous", :id => @tile_tab.id) %>" class="btn btn-secondary"><i class="fas fa-step-backward"></i> Prev</a>
+      <a href="<%= tile_tabs_path(:navigation_type => "current", :id => @tile_tab.id) %>" class="btn btn-secondary">Now</a>
+      <a href="<%= tile_tabs_path(:navigation_type => "next", :id => @tile_tab.id) %>" class="btn btn-secondary">Next <i class="fas fa-step-forward"></i></a>
+    </div>
   </div>
-</div>
+<% end %>
 <%= render 'load_tiles/modal' %>
 <script type="text/javascript">
   var origin = <%= raw CarrierLane::ORIGINS %>;
