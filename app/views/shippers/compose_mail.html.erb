@@ -37,7 +37,7 @@
       <!-- begin email content -->
       <div class="email-content p-t-15">
         <%= hidden_field_tag :content, @content%>
-        <%= text_area_tag(:content_body, nil, class: 'textarea form-control', id: "wysihtml5", placeholder: "Content here...", cols: 20, rows: 20) %>
+        <%= text_area_tag(:content_body, '<br><br>---<br><br>' + current_user.email_signature, class: 'textarea form-control', id: "wysihtml5", placeholder: "Content here...", cols: 20, rows: 20) %>
       </div>
       <!-- end email content -->
 <div id="dropzone" class="dropzone"  style="margin-top: 1%;">
@@ -63,7 +63,11 @@
   var availableTags = [];
   console.log(availableTags);
   $(document).ready(function () {
-     $('#wysihtml5').wysihtml5();
+    $('#wysihtml5').wysihtml5({
+      parser: function(html) {
+       return html;
+     }
+    });
     $('#email-to').tagit({
       fieldName: 'to[]',
       availableTags: availableTags
