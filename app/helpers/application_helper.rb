@@ -285,7 +285,7 @@ module ApplicationHelper
       on_sentence = on_sentence + reminder.display_name
     end
     if reminder.carrier || reminder.shipper || reminder.activity
-      on_sentence = on_sentence + " has a #{reminder.display_name}."
+      on_sentence = on_sentence + " has a <a data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type.nil? ? '' : reminder.reminder_type} <br>Notes: #{reminder.notes.nil? ? '' : reminder.notes}' href='/reminders/#{reminder.id}'>Reminder</a>#{truncate_html(reminder.notes, :length => 50, :omission => '...', :escape => false)}"
     else
       on_sentence = "There is a " + on_sentence + "."
     end
