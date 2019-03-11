@@ -63,7 +63,11 @@
   var availableTags = [];
   console.log(availableTags);
   $(document).ready(function () {
-     $('#wysihtml5').wysihtml5();
+     $('#wysihtml5').wysihtml5({
+       parser: function(html) {
+        return html;
+      }
+     });
     $('#email-to').tagit({
       fieldName: 'to[]',
       availableTags: availableTags
