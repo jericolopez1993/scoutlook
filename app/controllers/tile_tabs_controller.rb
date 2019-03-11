@@ -46,6 +46,8 @@ class TileTabsController < ApplicationController
   # POST /tile_tabs.json
   def create
     @tile_tab = TileTab.new(tile_tab_params)
+    cookies[:start_date] = {:value => Date.today() - 1, :expires => 1.day.from_now}
+    cookies[:end_date] = {:value => Date.today() + 6, :expires => 1.day.from_now}
 
     respond_to do |format|
       @tile_tab.save
@@ -65,6 +67,8 @@ class TileTabsController < ApplicationController
   # DELETE /tile_tabs/1
   # DELETE /tile_tabs/1.json
   def destroy
+    cookies[:start_date] = {:value => Date.today() - 1, :expires => 1.day.from_now}
+    cookies[:end_date] = {:value => Date.today() + 6, :expires => 1.day.from_now}
     @tile_tab.destroy
     @tile_tab = TileTab.first
     respond_to do |format|
