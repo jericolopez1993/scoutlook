@@ -144,7 +144,18 @@
           <% end %>
         </td>
         <td><%= reminder.last_reminded.nil? ? '' : reminder.last_reminded.strftime("%m/%d/%Y") %></td>
-        <td><%= reminder.notes.nil? ? '' : truncate_html(reminder.notes.html_safe, :length => 100, :omission => '...', :escape => false) %></td>
+        <td>
+          <span
+            class="learned"
+            data-toggle="tooltip"
+            data-placement="left"
+            data-html="true"
+            title="
+            <%= reminder.notes.nil? ? '' : reminder.notes %>
+              ">
+              <%= reminder.notes.nil? ? '' : truncate_html(reminder.notes.html_safe, :length => 100, :omission => '...', :escape => false) %>
+          </span>
+        </td>
       </tr>
     <% end %>
   </tbody>

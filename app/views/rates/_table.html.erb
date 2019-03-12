@@ -145,7 +145,17 @@
         <td><%= rate.cost %></td>
         <td><%= rate.money_currency %></td>
         <td><%= rate.mc_number %></td>
-        <td><%= rate.notes %></td>
+        <td>
+          <span
+            data-toggle="tooltip"
+            data-placement="right"
+            data-html="true"
+            title="
+            <%= rate.notes.nil? ? '' : rate.notes.html_safe %>
+              ">
+              <%= rate.notes.nil? ? '' : truncate_html(rate.notes.html_safe, :length => 50, :omission => '...', :escape => false) %>
+          </span>
+        </td>
         <td><%= rate.created_at %></td>
         <% if params[:controller] == "rates" %>
           <td class="link">
