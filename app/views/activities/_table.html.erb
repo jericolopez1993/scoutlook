@@ -32,7 +32,7 @@
       <th data-orderable="false">Actions</th>
       <th>SP</th>
       <th>Name</th>
-      <th>State</th>
+      <th>ST/PV</th>
       <th>LPW</th>
       <th>Open</th>
       <th>Close</th>
@@ -48,7 +48,7 @@
       <th>Actions</th>
       <th>SP</th>
       <th>Name</th>
-      <th>State</th>
+      <th>ST/PV</th>
       <th>LPW</th>
       <th>Open</th>
       <th>Close</th>
@@ -133,9 +133,9 @@
               <% end %>
             </td>
             <td class="text-center"><%= activity.loads_per_week %></td>
-            <td><%= convert_date(activity.date_opened) %></td>
-            <td><%= convert_date(activity.date_closed) %></td>
-            <td><%= activity.outcome %></td>
+            <td class="text-center link"><%= convert_date(activity.date_opened) %></td>
+            <td class="text-center link"><%= convert_date(activity.date_closed) %></td>
+            <td class="text-center link"><%= activity.outcome %></td>
             <td>
               <span
                 class="learned"
