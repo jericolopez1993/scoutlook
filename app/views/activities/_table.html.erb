@@ -9,6 +9,9 @@
     td.link a:visited {
       color: #dd8b00!important;
     }
+    .learned p {
+      margin-bottom: 0!important;
+    }
   </style>
 <% elsif params[:controller] == "carriers" %>
   <style>
@@ -60,7 +63,7 @@
     <% if !activities.nil? %>
       <% activities.each do |activity| %>
         <tr>
-          <td nowrap>
+          <td>
           <%= link_to '<i class="far fa-eye"></i>'.html_safe, activity_path(:id => activity.id, :previous_controller => current_controller), :class => 'btn btn-info btn-xs' %>
             <% if !activity.carrier.nil? %>
               <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_activity_path(:id => activity.id, :previous_controller => current_controller, :client_type => "carrier"), :class => 'btn btn-warning btn-xs' %>
@@ -72,7 +75,7 @@
             <%= link_to '<i class="far fa-file-pdf"></i>'.html_safe, generate_pdf_activities_path(:id => activity.id), target: :_blank, :class => 'btn btn-indigo btn-xs'%>
           </td>
           <td class="text-center link"><%= activity.user.nil? ? "" : (link_to "#{activity.user.first_name[0]}#{activity.user.last_name[0]}", activity.user) %></td>
-            <td class="link" nowrap>
+            <td class="link">
               <% if show_carrier || show_shipper %>
                 <% if show_carrier && activity.carrier %>
                 <span
@@ -130,21 +133,22 @@
               <% end %>
             </td>
             <td class="text-center"><%= activity.loads_per_week %></td>
-            <td nowrap><%= convert_date(activity.date_opened) %></td>
-            <td nowrap><%= convert_date(activity.date_closed) %></td>
+            <td><%= convert_date(activity.date_opened) %></td>
+            <td><%= convert_date(activity.date_closed) %></td>
             <td><%= activity.outcome %></td>
             <td>
               <span
+                class="learned"
                 data-toggle="tooltip"
                 data-placement="right"
                 data-html="true"
                 title="
                 <%= activity.notes.nil? ? '' : activity.notes.html_safe %>
                   ">
-                  <%= activity.notes.nil? ? '' : truncate_html(activity.notes.html_safe, :length => 100, :omission => '...', :escape => false) %>
+                  <%= activity.notes.nil? ? '' : truncate_html(activity.notes.html_safe, :length => 50, :omission => '...', :escape => false) %>
               </span>
             </td>
-            <td nowrap><%= activity.activity_type %></td>
+            <td><%= activity.activity_type %></td>
             <td><%= activity.status ? 'Open' : 'Closed' %></td>
             <td><%= activity.reason %></td>
         </tr>
