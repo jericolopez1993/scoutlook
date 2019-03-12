@@ -3,7 +3,7 @@
     color: #fff!important;
   }
   td.link a:visited {
-    color: #6f060b!important;
+    /* color: #6f060b!important; */
   }
 </style>
 <% if params[:controller] == "carriers" %>
@@ -105,7 +105,7 @@
                     <b>Sate/Province</b>: <%= carrier.location.nil? ? '' : carrier.location.state.upcase %><br>
                     <b>Last Contact Date</b>: <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %><br>
                   ">
-                  <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier %>
+                  <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier, :class => generate_styling_activities(carrier, nil) %>
                 </span>
               </td>
               <td><%= carrier.category %></td>

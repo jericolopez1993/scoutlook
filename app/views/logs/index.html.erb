@@ -13,7 +13,7 @@
 				</tr>
 			</thead>
 			<tbody>
-        <% Audited::Audit.order("created_at DESC").each do |audit| %>
+        <% Audit.order("created_at DESC").each do |audit| %>
           <tr>
             <td><%= audit.on_sentence(current_user).html_safe %></td>
           </tr>

@@ -373,4 +373,64 @@ module ApplicationHelper
     str
   end
 
+  def generate_styling_activities(carrier, shipper)
+    audits = get_audits(carrier, shipper)
+    three_days_audits = audits.where(:created_at => (Date.today - 3.day)..Date.today)
+    seven_days_audits = audits.where(:created_at => (Date.today - 7.day)..(Date.today - 3.day))
+
+    if three_days_audits.present?
+      "text-success"
+    elsif seven_days_audits.present?
+      "text-warning"
+    else
+      "text-danger"
+    end
+  end
+
+  def get_audits(carrier=nil, shipper=nil)
+    query = ""
+    models = []
+    values = []
+    if carrier
+      models = ['Carrier', 'CarrierCompany', 'CarrierContact', 'CarrierLane', 'CarrierLocation', 'Activity', 'Rate', 'Reminder']
+      values << carrier.id.to_s
+      values << carrier.carrier_companies.pluck(:id).join(",")
+      values << carrier.carrier_contacts.pluck(:id).join(",")
+      values << carrier.carrier_lanes.pluck(:id).join(",")
+      values << carrier.locations.pluck(:id).join(",")
+      values << carrier.activities.pluck(:id).join(",")
+      values << carrier.rates.pluck(:id).join(",")
+      values << carrier.reminders.pluck(:id).join(",")
+    elsif shipper
+      models = ['Shipper', 'ShipperCompany', 'ShipperContact', 'ShipperLane', 'ShipperLocation', 'Activity', 'Rate', 'Reminder']
+      values << shipper.id.to_s
+      values << shipper.shipper_companies.pluck(:id).join(",")
+      values << shipper.shipper_contacts.pluck(:id).join(",")
+      values << shipper.shipper_lanes.pluck(:id).join(",")
+      values << shipper.locations.pluck(:id).join(",")
+      values << shipper.activities.pluck(:id).join(",")
+      values << shipper.rates.pluck(:id).join(",")
+      values << shipper.reminders.pluck(:id).join(",")
+    end
+
+    if models.present? && values.present?
+      x=0
+      models.each do |model|
+        if !values[x].blank?
+          if !query.blank?
+            query = query + " OR "
+          end
+          query = query + "(auditable_type = '#{model}' AND auditable_id IN (#{values[x]}))"
+        end
+        x=x+1
+      end
+    end
+
+    if !query.blank?
+      Audit.where(query).order("created_at DESC")
+    else
+      []
+    end
+  end
+
 end

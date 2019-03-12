@@ -32,6 +32,8 @@ class CarriersController < ApplicationController
   # GET /carriers/1
   # GET /carriers/1.json
   def show
+    audits = get_audits(@carrier, nil)
+    puts "#{audits.to_json}"
   end
 
   # GET /carriers/new

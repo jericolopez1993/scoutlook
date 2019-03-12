@@ -3,7 +3,7 @@
     color: #fff!important;
   }
   td.link a:visited {
-    color: #013a38!important;
+    /* color: #013a38!important; */
   }
 </style>
 <% if params[:controller] == "shippers" %>
@@ -102,7 +102,7 @@
                     <b>Sate/Province</b>: <%= shipper.location.nil? ? '' : shipper.location.state.upcase %><br>
                     <b>Last Contact Date</b>: <%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %><br>
                   ">
-                    <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper %>
+                    <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper, :class => generate_styling_activities(nil, shipper) %>
                 </span>
               </td>
               <td><%= shipper.location.nil? ? '' : shipper.location.state.upcase %></td>
