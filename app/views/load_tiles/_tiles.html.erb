@@ -1,24 +1,13 @@
 <!--sütun başlangıç-->
 <% if @tile_tab %>
-  <% (cookies[:start_date]..cookies[:end_date]).to_a.each_with_index do |cdate, index|%>
+  <% (session[:start_date]..session[:end_date]).to_a.each_with_index do |cdate, index|%>
+    <% cdate = check_date(cdate) %>
     <div
       class="panel
-            <% if cdate < Date.today %>
-              panel-darkred
-            <% elsif cdate == Date.today %>
-              panel-green
-            <% else %>
-              panel-inverse
-            <% end %>
+            <%= date_group_color(cdate) %>
             kanban-col"
       style="margin:2% auto; border: 2px solid
-              <% if cdate < Date.today %>
-                #500007;
-              <% elsif cdate == Date.today %>
-                #3d5700;
-              <% else %>
-                #242a30;
-              <% end %>
+        <%= date_border_color(cdate) %>
               border-radius: 15px; position: relative; height: 100%;">
       <div class="panel-heading" style="border-top-right-radius: 10px; border-top-left-radius: 10px;z-index: -1;">
         <%= date_to_words(cdate) %>

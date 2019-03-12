@@ -4,20 +4,20 @@ class TileTabsController < ApplicationController
   # GET /tile_tabs
   # GET /tile_tabs.json
   def index
-    start_date = organize_date(cookies[:start_date])
-    end_date = organize_date(cookies[:end_date])
+    start_date = organize_date(session[:start_date])
+    end_date = organize_date(session[:end_date])
     if params[:navigation_type] == "previous"
-      cookies[:start_date] = {:value => Date.parse(start_date) - 8.day, :expires => 1.day.from_now}
-      cookies[:end_date] = {:value => Date.parse(start_date) - 1.day, :expires => 1.day.from_now}
+      session[:start_date] = Date.parse(start_date) - 8.day
+      session[:end_date] = Date.parse(start_date) - 1.day
     elsif params[:navigation_type] == "current"
-      cookies[:start_date] = {:value => Date.today() - 1, :expires => 1.day.from_now}
-      cookies[:end_date] = {:value => Date.today() + 6, :expires => 1.day.from_now}
+      session[:start_date] = Date.today() - 1
+      session[:end_date] = Date.today() + 6
     elsif params[:navigation_type] == "next"
-      cookies[:start_date] = {:value => Date.parse(end_date) + 1.day, :expires => 1.day.from_now}
-      cookies[:end_date] = {:value => Date.parse(end_date) + 8.day, :expires => 1.day.from_now}
+      session[:start_date] = Date.parse(end_date) + 1.day
+      session[:end_date] = Date.parse(end_date) + 8.day
     else
-      cookies[:start_date] = {:value => Date.today() - 1, :expires => 1.day.from_now}
-      cookies[:end_date] = {:value => Date.today() + 6, :expires => 1.day.from_now}
+      session[:start_date] = Date.today() - 1
+      session[:end_date] = Date.today() + 6
     end
     render "load_tiles/index"
   end
@@ -25,8 +25,8 @@ class TileTabsController < ApplicationController
   # GET /tile_tabs/1
   # GET /tile_tabs/1.json
   def show
-    cookies[:start_date] = {:value => Date.today() - 1, :expires => 1.day.from_now}
-    cookies[:end_date] = {:value => Date.today() + 6, :expires => 1.day.from_now}
+    session[:start_date] = Date.today() - 1
+    session[:end_date] = Date.today() + 6
     render "load_tiles/index"
   end
 
@@ -46,8 +46,8 @@ class TileTabsController < ApplicationController
   # POST /tile_tabs.json
   def create
     @tile_tab = TileTab.new(tile_tab_params)
-    cookies[:start_date] = {:value => Date.today() - 1, :expires => 1.day.from_now}
-    cookies[:end_date] = {:value => Date.today() + 6, :expires => 1.day.from_now}
+    session[:start_date] = Date.today() - 1
+    session[:end_date] = Date.today() + 6
 
     respond_to do |format|
       @tile_tab.save
@@ -67,8 +67,8 @@ class TileTabsController < ApplicationController
   # DELETE /tile_tabs/1
   # DELETE /tile_tabs/1.json
   def destroy
-    cookies[:start_date] = {:value => Date.today() - 1, :expires => 1.day.from_now}
-    cookies[:end_date] = {:value => Date.today() + 6, :expires => 1.day.from_now}
+    session[:start_date] = Date.today() - 1
+    session[:end_date] = Date.today() + 6
     @tile_tab.destroy
     @tile_tab = TileTab.first
     respond_to do |format|

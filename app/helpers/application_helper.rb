@@ -338,8 +338,15 @@ module ApplicationHelper
   end
 
   def organize_date(date)
-    date = date.split("/")
-    date[2] + "-" + date[0] + "-" + date[1]
+    if date.is_a? Date
+      date = date.to_s
+    end
+    begin
+      cdate = date.split("/")
+      cdate[2] + "-" + cdate[0] + "-" + cdate[1]
+    rescue
+      date
+    end
   end
 
   def generate_phone_type(phone_type, eligible_texting)
@@ -430,6 +437,32 @@ module ApplicationHelper
       Audit.where(query).order("created_at DESC")
     else
       []
+    end
+  end
+
+  def check_date(cdate)
+    if cdate.is_a? String
+      cdate = Date.parse(cdate)
+    end
+    cdate
+  end
+
+  def date_group_color(cdate)
+     if cdate < Date.today
+      "panel-darkred"
+    elsif cdate == Date.today
+      "panel-green"
+    else
+      "panel-inverse"
+    end
+  end
+  def date_border_color(cdate)
+     if cdate < Date.today
+      "#500007;"
+    elsif cdate == Date.today
+      "#3d5700;"
+    else
+      "#242a30;"
     end
   end
 

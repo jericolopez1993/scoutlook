@@ -7,8 +7,8 @@ class LoadTilesController < ApplicationController
   # GET /load_tiles.json
   def index
     @tile_tab = TileTab.first
-    cookies[:start_date] = {:value => Date.today() - 1, :expires => 1.day.from_now}
-    cookies[:end_date] = {:value => Date.today() + 6, :expires => 1.day.from_now}
+    session[:start_date] = Date.today() - 1
+    session[:end_date] = Date.today() + 6
   end
 
   # GET /load_tiles/1
