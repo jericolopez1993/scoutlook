@@ -150,10 +150,8 @@
             data-toggle="tooltip"
             data-placement="left"
             data-html="true"
-            title="
-            <%= reminder.notes.nil? ? '' : reminder.notes %>
-              ">
-              <%= reminder.notes.nil? ? '' : truncate_html(reminder.notes.html_safe, :length => 100, :omission => '...', :escape => false) %>
+            title="<%= reminder.notes.nil? ? '' : reminder.notes %>">
+              <%= reminder.notes.nil? ? '' : truncate_html_to_sentence(reminder.notes.html_safe) %>
           </span>
         </td>
       </tr>

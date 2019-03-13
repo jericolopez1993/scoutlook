@@ -147,13 +147,12 @@
         <td><%= rate.mc_number %></td>
         <td>
           <span
+            class="learned"
             data-toggle="tooltip"
-            data-placement="right"
+            data-placement="left"
             data-html="true"
-            title="
-            <%= rate.notes.nil? ? '' : rate.notes.html_safe %>
-              ">
-              <%= rate.notes.nil? ? '' : truncate_html(rate.notes.html_safe, :length => 50, :omission => '...', :escape => false) %>
+            title="<%= rate.notes.nil? ? '' : rate.notes %>">
+              <%= rate.notes.nil? ? '' : truncate_html_to_sentence(rate.notes.html_safe) %>
           </span>
         </td>
         <td><%= rate.created_at %></td>
