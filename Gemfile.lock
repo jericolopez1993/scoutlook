@@ -58,6 +58,22 @@ GEM
     arel (9.0.0)
     audited (4.8.0)
       activerecord (>= 4.0, < 5.3)
+    aws-eventstream (1.0.2)
+    aws-partitions (1.144.0)
+    aws-sdk-core (3.46.2)
+      aws-eventstream (~> 1.0)
+      aws-partitions (~> 1.0)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.13.0)
+      aws-sdk-core (~> 3, >= 3.39.0)
+      aws-sigv4 (~> 1.0)
+    aws-sdk-s3 (1.0.0)
+      aws-sdk-core (~> 3)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.0)
+    aws-sigv4 (1.1.0)
+      aws-eventstream (~> 1.0, >= 1.0.2)
     backports (3.11.4)
     bcrypt (3.1.12)
     bindex (0.5.0)
@@ -161,6 +177,7 @@ GEM
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    jmespath (1.4.0)
     libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -325,6 +342,7 @@ PLATFORMS
 
 DEPENDENCIES
   audited (~> 4.7)
+  aws-sdk-s3
   bootsnap (= 1.1.6)
   byebug
   capistrano
