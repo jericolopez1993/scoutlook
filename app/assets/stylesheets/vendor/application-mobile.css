@@ -72,6 +72,16 @@
     color: #fff!important;
     margin-right: -3px;
   }
+  #carrier_table_filter, #carrier_table_filter input[type=search] {
+    margin-top: 10px;
+  }
+  div.dataTables_wrapper div.dataTables_filter {
+    text-align: left!important;
+  }
+  .header .navbar-nav > li > .notification.dropdown-menu {
+    width: 300px;
+    transform: translate3d(-206px, 50px, 0px)!important;
+  }
 }
 
 @media screen and (max-width: 768px) {

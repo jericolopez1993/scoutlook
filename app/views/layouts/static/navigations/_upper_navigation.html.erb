@@ -37,13 +37,24 @@
           <ul class="dropdown-menu media-list dropdown-menu-right">
             <li class="dropdown-header">REMINDERS (<%= reminders.length %>)</li>
             <% if reminders.length > 0%>
-              <% reminders.limit(10).each do |reminder|%>
-                <li class="media">
-                  <div class="media-body notification-padding">
-                    <h6 class="media-heading"><%= reminder_to_sentence(reminder).html_safe %></h6>
-                    <div class="text-muted f-s-11"></div>
-                  </div>
-                </li>
+              <% if is_mobile %>
+                <% reminders.limit(5).each do |reminder|%>
+                  <li class="media">
+                    <div class="media-body notification-padding">
+                      <h6 class="media-heading"><%= reminder_to_sentence(reminder).html_safe %></h6>
+                      <div class="text-muted f-s-11"></div>
+                    </div>
+                  </li>
+                <% end %>
+              <% else %>
+                <% reminders.limit(10).each do |reminder|%>
+                  <li class="media">
+                    <div class="media-body notification-padding">
+                      <h6 class="media-heading"><%= reminder_to_sentence(reminder).html_safe %></h6>
+                      <div class="text-muted f-s-11"></div>
+                    </div>
+                  </li>
+                <% end %>
               <% end %>
             <% else %>
               <li class="text-center width-300 p-b-10">
@@ -67,9 +78,19 @@
               <span class="label"><%= audits.length %></span>
             <% end %>
           </a>
-          <ul class="dropdown-menu media-list dropdown-menu-right">
+          <ul class="notification dropdown-menu media-list dropdown-menu-right">
             <li class="dropdown-header">NOTIFICATIONS (<%= audits.length %>)</li>
             <% if audits.length > 0%>
+              <% if is_mobile %>
+                <% audits.limit(5).each do |audit|%>
+                  <li class="media">
+                    <div class="media-body notification-padding">
+                      <h6 class="media-heading"><%= audit.on_sentence(current_user).html_safe %></h6>
+                      <div class="text-muted f-s-11"><%= audit.created_at %></div>
+                    </div>
+                  </li>
+                <% end %>
+              <% else %>
               <% audits.limit(10).each do |audit|%>
                 <li class="media">
                   <div class="media-body notification-padding">
@@ -77,6 +98,7 @@
                     <div class="text-muted f-s-11"><%= audit.created_at %></div>
                   </div>
                 </li>
+              <% end %>
               <% end %>
             <% else %>
               <li class="text-center width-300 p-b-10">

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   layout :layout_by_resource
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  before_action :set_raven_context
+  helper_method :is_mobile
 
   private
     def set_raven_context
@@ -24,6 +24,9 @@ class ApplicationController < ActionController::Base
       else
         "application"
       end
+    end
+    def is_mobile
+      request.user_agent =~ /\b(Android|iPhone|Windows Phone|Opera Mobi|Kindle|BackBerry|PlayBook)\b/i
     end
 
 
