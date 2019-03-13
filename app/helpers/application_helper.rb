@@ -456,6 +456,7 @@ module ApplicationHelper
       "panel-inverse"
     end
   end
+
   def date_border_color(cdate)
      if cdate < Date.today
       "#500007;"
@@ -463,6 +464,14 @@ module ApplicationHelper
       "#3d5700;"
     else
       "#242a30;"
+    end
+  end
+
+  def truncate_html_to_sentence(notes)
+    if !notes.nil?
+      truncate(ActionView::Base.full_sanitizer.sanitize(notes), length: 50, omission: '...')
+    else
+      ""
     end
   end
 
