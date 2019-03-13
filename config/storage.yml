@@ -11,7 +11,7 @@ amazon:
   service: S3
   access_key_id: AKIAIJ22XV7I7XDYN2SA
   secret_access_key: tdSgWyKL2Jd7FLD5Lhf/pvwCruybsZ/WOTxDYYXc
-  region: us-east-1
+  region: ca-central-1
   bucket: scoutcrm
 
 # Remember not to checkin your GCS keyfile to a repository
