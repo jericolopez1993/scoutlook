@@ -1,45 +1,45 @@
 <% if !carrier_contact.nil? %>
   <% @carrier = Carrier.find(carrier_contact.carrier_id) %>
   <div class="row">
-    <label class="col-md-3 col-form-label">Name:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-3 col-form-label">Name:</label>
+    <div class="col-9 lbl-padding-t">
       <%= carrier_contact.full_name %>
     </div>
   </div>
   <div class="row">
-    <label class="col-md-3 col-form-label">Title:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-3 col-form-label">Title:</label>
+    <div class="col-9 lbl-padding-t">
       <%= carrier_contact.title %>
     </div>
   </div>
   <div class="row">
-    <label class="col-md-3 col-form-label">LinkedIn:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-3 col-form-label">LinkedIn:</label>
+    <div class="col-9 lbl-padding-t">
       <%= carrier_contact.linkedin_link.nil? || carrier_contact.linkedin_link == "" ? "" : (link_to carrier_contact.linkedin_link, carrier_contact.linkedin_link, :target => "_blank") %>
     </div>
   </div>
   <div class="row">
-    <label class="col-md-3 col-form-label">Email:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-3 col-form-label">Email:</label>
+    <div class="col-9 lbl-padding-t">
       <a href="mailto:<%= carrier_contact.email %>?Subject=Hello%20<%= carrier_contact.first_name.nil? ? '' :  carrier_contact.first_name.capitalize + " " + carrier_contact.last_name.capitalize  %>" target="_top"><%= carrier_contact.email.downcase %>&nbsp;<i class="far fa-envelope"></i></a>
     </div>
   </div>
   <div class="row">
-    <label class="col-md-3 col-form-label">Phone Numbers:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-3 col-form-label">Phone Numbers:</label>
+    <div class="col-9 lbl-padding-t">
       <b><%= generate_phone_number("P1", carrier_contact.primary_phone, carrier_contact.primary_extension_number, carrier_contact.primary_eligible_texting, carrier_contact.primary_phone_type).html_safe %></b>
       <b><%= generate_phone_number("P2", carrier_contact.secondary_phone, carrier_contact.secondary_extension_number, carrier_contact.secondary_eligible_texting, carrier_contact.secondary_phone_type) %></b>
     </div>
   </div>
   <div class="row">
-    <label class="col-md-3 col-form-label">Address:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-3 col-form-label">Address:</label>
+    <div class="col-9 lbl-padding-t">
       <%= carrier_contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "#{format_address(@carrier.head_office_location.address, @carrier.head_office_location.city, @carrier.head_office_location.state, @carrier.head_office_location.country, @carrier.head_office_location.postal)}") : (carrier_contact.nil? ? '' : "#{format_address(carrier_contact.address, carrier_contact.city, carrier_contact.state, carrier_contact.country, carrier_contact.postal)}")%>
     </div>
   </div>
   <div class="row">
-    <label class="col-md-3 col-form-label">Notes:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-3 col-form-label">Notes:</label>
+    <div class="col-9 lbl-padding-t">
       <%= carrier_contact.notes.nil? ? "" : carrier_contact.notes.html_safe %>
     </div>
   </div>
