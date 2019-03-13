@@ -7,6 +7,7 @@ class CarriersController < ApplicationController
     if !user_signed_in?
       redirect_to(unauthenticated_root_path)
     else
+      @carrier_categories = current_user.carrier_categories_to_array
       @carriers = []
       begin
         if current_user.has_role?(:admin)

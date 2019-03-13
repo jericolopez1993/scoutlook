@@ -13,8 +13,17 @@ class User < ApplicationRecord
   def display_name
     "<a href='/users'>Users</a>"
   end
+
   def full_name
     (self.first_name.nil? ? '' : self.first_name.capitalize) + " " + (self.last_name.nil? ? '' : self.last_name.capitalize)
+  end
+
+  def carrier_categories_to_array
+    if self.carrier_categories.nil?
+      [false, false, false, false]
+    else
+      self.carrier_categories.split(',').collect {|x| x == "true" }
+    end
   end
 
   protected
