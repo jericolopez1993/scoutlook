@@ -113,92 +113,12 @@
                   <% shipper.lane_1.each do |lane| %>
                     <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
                       <% lane.lane_origin_to_array.each do |origin| %>
-                        <% if Shipper::LIGHT_BLUE.include?(origin) %>
-                          <span class="badge badge-primary"><%= link_to(origin, lane) %></span>
-                        <% elsif Shipper::DARK_BLUE.include?(origin) %>
-                          <span class="badge badge-drakblue"><%= link_to(origin, lane) %></span>
-                        <% elsif Shipper::BLUE.include?(origin) %>
-                          <span class="badge badge-info">
-                            <% if origin == "NY-Brooklyn" %>
-                              BKN
-                            <% elsif origin == "NY-Bronx" %>
-                              BXN
-                            <% else %>
-                              <%= link_to(origin, lane) %>
-                            <% end %>
-                          </span>
-                        <% elsif Shipper::RED.include?(origin) %>
-                        <span class="badge badge-danger"><%= link_to(origin, lane) %></span>
-                        <% elsif Shipper::BROWN.include?(origin) %>
-                          <span class="badge badge-brown">
-                            <% if origin == "TX-McAllen" %>
-                              MCT
-                            <% else %>
-                              <%= link_to(origin, lane) %>
-                            <% end %>
-                          </span>
-                        <% elsif Shipper::YELLOW.include?(origin) %>
-                          <span class="badge badge-yellow"><%= link_to(origin, lane) %></span>
-                        <% elsif Shipper::ORANGE.include?(origin) %>
-                          <span class="badge badge-warning">
-                            <% if origin == "CA-Fresno" %>
-                              FRC
-                            <% elsif origin == "CA-Bakersfield" %>
-                              BKC
-                            <% elsif origin == "AZ-Yuma" %>
-                              YUZ
-                            <% else %>
-                              <%= link_to(origin, lane) %>
-                            <% end %>
-                          </span>
-                        <% elsif Shipper::GREEN.include?(origin) %>
-                          <span class="badge badge-green"><%= link_to(origin, lane) %></span>
-                        <% end %>
+                        <%= generate_location(origin, lane).html_safe %>
                       <% end %>
                       &rarr;
                     <% end %>
                     <% lane.lane_destination_to_array.each do |destination| %>
-                      <% if Shipper::LIGHT_BLUE.include?(destination) %>
-                        <span class="badge badge-primary"><%= link_to(destination, lane) %></span>
-                      <% elsif Shipper::DARK_BLUE.include?(destination) %>
-                        <span class="badge badge-drakblue"><%= link_to(destination, lane) %></span>
-                      <% elsif Shipper::BLUE.include?(destination) %>
-                        <span class="badge badge-info">
-                          <% if destination == "NY-Brooklyn" %>
-                            BKN
-                          <% elsif destination == "NY-Bronx" %>
-                            BXN
-                          <% else %>
-                            <%= link_to(destination, lane) %>
-                          <% end %>
-                        </span>
-                      <% elsif Shipper::RED.include?(destination) %>
-                      <span class="badge badge-danger"><%= link_to(destination, lane) %></span>
-                      <% elsif Shipper::BROWN.include?(destination) %>
-                        <span class="badge badge-brown">
-                          <% if destination == "TX-McAllen" %>
-                            MCT
-                          <% else %>
-                            <%= link_to(destination, lane) %>
-                          <% end %>
-                        </span>
-                      <% elsif Shipper::YELLOW.include?(destination) %>
-                        <span class="badge badge-yellow"><%= link_to(destination, lane) %></span>
-                      <% elsif Shipper::ORANGE.include?(destination) %>
-                        <span class="badge badge-warning">
-                          <% if destination == "CA-Fresno" %>
-                            FRC
-                          <% elsif destination == "CA-Bakersfield" %>
-                            BKC
-                          <% elsif destination == "AZ-Yuma" %>
-                            YUZ
-                          <% else %>
-                            <%= link_to(destination, lane) %>
-                          <% end %>
-                        </span>
-                      <% elsif Shipper::GREEN.include?(destination) %>
-                        <span class="badge badge-green"><%= link_to(destination, lane) %></span>
-                      <% end %>
+                      <%= generate_location(destination, lane).html_safe %>
                     <% end %>
                     <br>
                   <% end %>
@@ -207,92 +127,12 @@
                     <% if !lane.nil? %>
                       <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
                         <% lane.lane_origin_to_array.each do |origin| %>
-                          <% if Shipper::LIGHT_BLUE.include?(origin) %>
-                            <span class="badge badge-primary"><%= link_to(origin, lane) %></span>
-                          <% elsif Shipper::DARK_BLUE.include?(origin) %>
-                            <span class="badge badge-drakblue"><%= link_to(origin, lane) %></span>
-                          <% elsif Shipper::BLUE.include?(origin) %>
-                            <span class="badge badge-info">
-                              <% if origin == "NY-Brooklyn" %>
-                                BKN
-                              <% elsif origin == "NY-Bronx" %>
-                                BXN
-                              <% else %>
-                                <%= link_to(origin, lane) %>
-                              <% end %>
-                            </span>
-                          <% elsif Shipper::RED.include?(origin) %>
-                          <span class="badge badge-danger"><%= link_to(origin, lane) %></span>
-                          <% elsif Shipper::BROWN.include?(origin) %>
-                            <span class="badge badge-brown">
-                              <% if origin == "TX-McAllen" %>
-                                MCT
-                              <% else %>
-                                <%= link_to(origin, lane) %>
-                              <% end %>
-                            </span>
-                          <% elsif Shipper::YELLOW.include?(origin) %>
-                            <span class="badge badge-yellow"><%= link_to(origin, lane) %></span>
-                          <% elsif Shipper::ORANGE.include?(origin) %>
-                            <span class="badge badge-warning">
-                              <% if origin == "CA-Fresno" %>
-                                FRC
-                              <% elsif origin == "CA-Bakersfield" %>
-                                BKC
-                              <% elsif origin == "AZ-Yuma" %>
-                                YUZ
-                              <% else %>
-                                <%= link_to(origin, lane) %>
-                              <% end %>
-                            </span>
-                          <% elsif Shipper::GREEN.include?(origin) %>
-                            <span class="badge badge-green"><%= link_to(origin, lane) %></span>
-                          <% end %>
+                          <%= generate_location(origin, lane).html_safe %>
                         <% end %>
                         &rarr;
                       <% end %>
                     <% lane.lane_destination_to_array.each do |destination| %>
-                      <% if Shipper::LIGHT_BLUE.include?(destination) %>
-                        <span class="badge badge-primary"><%= link_to(destination, lane) %></span>
-                      <% elsif Shipper::DARK_BLUE.include?(destination) %>
-                        <span class="badge badge-drakblue"><%= link_to(destination, lane) %></span>
-                      <% elsif Shipper::BLUE.include?(destination) %>
-                        <span class="badge badge-info">
-                          <% if destination == "NY-Brooklyn" %>
-                            BKN
-                          <% elsif destination == "NY-Bronx" %>
-                            BXN
-                          <% else %>
-                            <%= link_to(destination, lane) %>
-                          <% end %>
-                        </span>
-                      <% elsif Shipper::RED.include?(destination) %>
-                      <span class="badge badge-danger"><%= link_to(destination, lane) %></span>
-                      <% elsif Shipper::BROWN.include?(destination) %>
-                        <span class="badge badge-brown">
-                          <% if destination == "TX-McAllen" %>
-                            MCT
-                          <% else %>
-                            <%= link_to(destination, lane) %>
-                          <% end %>
-                        </span>
-                      <% elsif Shipper::YELLOW.include?(destination) %>
-                        <span class="badge badge-yellow"><%= link_to(destination, lane) %></span>
-                      <% elsif Shipper::ORANGE.include?(destination) %>
-                        <span class="badge badge-warning">
-                          <% if destination == "CA-Fresno" %>
-                            FRC
-                          <% elsif destination == "CA-Bakersfield" %>
-                            BKC
-                          <% elsif destination == "AZ-Yuma" %>
-                            YUZ
-                          <% else %>
-                            <%= link_to(destination, lane) %>
-                          <% end %>
-                        </span>
-                      <% elsif Shipper::GREEN.include?(destination) %>
-                        <span class="badge badge-green"><%= link_to(destination, lane) %></span>
-                      <% end %>
+                      <%= generate_location(destination, lane).html_safe %>
                     <% end %>
                   <% end %>
               <% end %>

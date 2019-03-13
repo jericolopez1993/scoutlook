@@ -15,7 +15,7 @@
     <label class="col-md-3 col-form-label">Origin:</label>
     <div class="col-md-9 lbl-padding-t">
       <% carrier_lane.lane_origin_to_array.each do |cr| %>
-        <span class="badge badge-success"><%= cr %></span>
+        <%= generate_location(cr, nil).html_safe %>
       <% end %>
     </div>
   </div>
@@ -23,7 +23,7 @@
     <label class="col-md-3 col-form-label">Destination:</label>
     <div class="col-md-9 lbl-padding-t">
       <% carrier_lane.lane_destination_to_array.each do |cr| %>
-        <span class="badge badge-primary"><%= cr %></span>
+        <%= generate_location(cr, nil).html_safe %>
       <% end %>
     </div>
   </div>

@@ -26,62 +26,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <% tile.origin_to_array.each do |cr| %>
-                    <% if Carrier::LIGHT_BLUE.include?(cr) %>
-                    <span class="badge badge-primary"><%= cr %></span>
-                    <% elsif Carrier::DARK_BLUE.include?(cr) %>
-                    <span class="badge badge-drakblue">
-                      <% if cr == "US-Northeast" %>
-                        US-NE
-                      <% elsif cr == "US-Southeast" %>
-                        US-SE
-                      <% elsif cr == "US-Northwest" %>
-                        US-NW
-                      <% elsif cr == "US-Midwest" %>
-                        US-MW
-                      <% elsif cr == "US-Northeast (No Bronx)" %>
-                        US-NE <br>
-                        <span style="font-size: 8px">No BXN</span>
-                      <% else %>
-                        <%= cr %>
-                      <% end %>
-                    </span>
-                    <% elsif Carrier::BLUE.include?(cr) %>
-                    <span class="badge badge-info">
-                      <% if cr == "NY-Brooklyn" %>
-                      BKN
-                      <% elsif cr == "NY-Bronx" %>
-                      BXN
-                      <% else %>
-                      <%= cr %>
-                      <% end %>
-                    </span>
-                    <% elsif Carrier::RED.include?(cr) %>
-                    <span class="badge badge-danger"><%= cr %></span>
-                    <% elsif Carrier::BROWN.include?(cr) %>
-                    <span class="badge badge-brown">
-                      <% if cr == "TX-McAllen" %>
-                      MCT
-                      <% else %>
-                      <%= cr %>
-                      <% end %>
-                    </span>
-                    <% elsif Carrier::YELLOW.include?(cr) %>
-                    <span class="badge badge-yellow"><%= cr %></span>
-                    <% elsif Carrier::ORANGE.include?(cr) %>
-                    <span class="badge badge-warning">
-                      <% if cr == "CA-Fresno" %>
-                      FRC
-                      <% elsif cr == "CA-Bakersfield" %>
-                      BKC
-                      <% elsif cr == "AZ-Yuma" %>
-                      YUZ
-                      <% else %>
-                      <%= cr %>
-                      <% end %>
-                    </span>
-                    <% elsif Carrier::GREEN.include?(cr) %>
-                    <span class="badge badge-green"><%= cr %></span>
-                    <% end %>
+                      <%= generate_location(cr, nil).html_safe %>
                     <% end %>
                   </div>
                 </div>
@@ -101,62 +46,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <% tile.destination_to_array.each do |cr| %>
-                     <% if Carrier::LIGHT_BLUE.include?(cr) %>
-                       <span class="badge badge-primary"><%= cr %></span>
-                     <% elsif Carrier::DARK_BLUE.include?(cr) %>
-                       <span class="badge badge-drakblue">
-                         <% if cr == "US-Northeast" %>
-                           US-NE
-                         <% elsif cr == "US-Southeast" %>
-                           US-SE
-                         <% elsif cr == "US-Northwest" %>
-                           US-NW
-                         <% elsif cr == "US-Midwest" %>
-                           US-MW
-                         <% elsif cr == "US-Northeast (No Bronx)" %>
-                           US-NE <br>
-                           <span style="font-size: 8px">No BXN</span>
-                         <% else %>
-                           <%= cr %>
-                         <% end %>
-                       </span>
-                     <% elsif Carrier::BLUE.include?(cr) %>
-                       <span class="badge badge-info">
-                         <% if cr == "NY-Brooklyn" %>
-                           BKN
-                         <% elsif cr == "NY-Bronx" %>
-                           BXN
-                         <% else %>
-                           <%= cr %>
-                         <% end %>
-                       </span>
-                     <% elsif Carrier::RED.include?(cr) %>
-                     <span class="badge badge-danger"><%= cr %></span>
-                     <% elsif Carrier::BROWN.include?(cr) %>
-                       <span class="badge badge-brown">
-                         <% if cr == "TX-McAllen" %>
-                           MCT
-                         <% else %>
-                           <%= cr %>
-                         <% end %>
-                       </span>
-                     <% elsif Carrier::YELLOW.include?(cr) %>
-                       <span class="badge badge-yellow"><%= cr %></span>
-                     <% elsif Carrier::ORANGE.include?(cr) %>
-                       <span class="badge badge-warning">
-                         <% if cr == "CA-Fresno" %>
-                           FRC
-                         <% elsif cr == "CA-Bakersfield" %>
-                           BKC
-                         <% elsif cr == "AZ-Yuma" %>
-                           YUZ
-                         <% else %>
-                           <%= cr %>
-                         <% end %>
-                       </span>
-                     <% elsif Carrier::GREEN.include?(cr) %>
-                       <span class="badge badge-green"><%= cr %></span>
-                     <% end %>
+                      <%= generate_location(cr, nil).html_safe %>
                     <% end %>
                   </div>
                 </div>

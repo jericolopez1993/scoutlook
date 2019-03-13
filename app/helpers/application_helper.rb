@@ -478,4 +478,54 @@ module ApplicationHelper
     end
   end
 
+  def generate_abv(loc)
+    if loc == "NY-Brooklyn"
+      "BKN"
+    elsif loc == "NY-Bronx"
+      "BXN"
+    elsif loc == "TX-McAllen"
+      "MCT"
+    elsif loc == "CA-Fresno"
+      "FRC"
+    elsif loc == "CA-Bakersfield"
+      "BKC"
+    elsif loc == "AZ-Yuma"
+      "YUZ"
+    elsif loc == "US-Northeast"
+      "US-NE"
+    elsif loc == "US-Southeast"
+      "US-SE"
+    elsif loc == "US-Northwest"
+      "US-NW"
+    elsif loc == "US-Midwest"
+      "US-MW"
+    elsif loc == "US-Northeast (No Bronx)"
+      "US-NE <br><span style='font-size: 8px'>No BXN</span>"
+    else
+      loc
+    end
+  end
+
+  def generate_location(loc, lane=nil)
+    if Carrier::LIGHT_BLUE.include?(loc)
+      "<span class='badge badge-primary'>#{lane ? link_to(generate_abv(loc), lane) : generate_abv(loc)}</span>"
+    elsif Carrier::DARK_BLUE.include?(loc)
+      "<span class='badge badge-drakblue'>#{lane ? link_to(generate_abv(loc), lane) : generate_abv(loc)}</span>"
+    elsif Carrier::BLUE.include?(loc)
+      "<span class='badge badge-info'>#{lane ? link_to(generate_abv(loc), lane) : generate_abv(loc)}</span>"
+    elsif Carrier::RED.include?(loc)
+    "<span class='badge badge-danger'>#{lane ? link_to(generate_abv(loc), lane) : generate_abv(loc)}</span>"
+    elsif Carrier::BROWN.include?(loc)
+      "<span class='badge badge-brown'>#{lane ? link_to(generate_abv(loc), lane) : generate_abv(loc)}</span>"
+    elsif Carrier::YELLOW.include?(loc)
+      "<span class='badge badge-yellow'>#{lane ? link_to(generate_abv(loc), lane) : generate_abv(loc)}</span>"
+    elsif Carrier::ORANGE.include?(loc)
+      "<span class='badge badge-warning'>#{lane ? link_to(generate_abv(loc), lane) : generate_abv(loc)}</span>"
+    elsif Carrier::GREEN.include?(loc)
+      "<span class='badge badge-green'>#{lane ? link_to(generate_abv(loc), lane) : generate_abv(loc)}</span>"
+    else
+      ""
+    end
+  end
+
 end
