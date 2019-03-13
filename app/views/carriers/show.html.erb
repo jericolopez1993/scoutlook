@@ -47,7 +47,7 @@
 <!-- begin panel -->
 <div class="panel panel-inverse">
   <div class="panel-heading" style="padding: 5px 15px">
-    <div class="panel-heading-btn" style="margin-top: 2.5px;">
+    <div class="panel-heading-btn d-sm-block d-none" style="margin-top: 2.5px;">
       <button type="button" class="btn btn-xs btn-primary new-attachment-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<%= form_with(model: @carrier, local: true, :html => {class: 'form-horizontal text-right'}) do |form| %><%= form.hidden_field :attachment_only, :value => true %><%= form.file_field :attachment_file, multiple: true %><%= form.submit 'Submit', :class => 'btn btn-xs btn-success', disabled: true %><% end %>'>
         Add Attachment
       </button>
@@ -106,6 +106,66 @@
         </a>
       </li>
     </ul>
+
+    <% if is_mobile %>
+      <div class="row">
+        <div class="col-12 text-center nav-hide" id="m-nav-pill">
+          <ul class="nav nav-pills" style="margin-bottom: 0px;">
+            <li class="nav-items col-4">
+              <a href="#company-name" data-toggle="tab" class="nav-link active show hide-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">General</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#attachments" data-toggle="tab" class="nav-link attachment-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Attachments</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#lanes" data-toggle="tab" class="nav-link lane-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Lanes</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#activity" data-toggle="tab" class="nav-link activity-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Activities</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#locations" data-toggle="tab" class="nav-link location-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Locations</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#contacts" data-toggle="tab" class="nav-link contact-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Contacts</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#rates" data-toggle="tab" class="nav-link rate-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Rates</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#reminders" data-toggle="tab" class="nav-link reminder-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Reminders</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#companies" data-toggle="tab" class="nav-link company-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Affiliated Company</h4></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-12 text-scout" id="hide-m-nav"  style="font-size: 14px;">
+            <i class="fas fa-plus float-right p-r-10 p-t-10"><span class="float-right">&nbsp;show tabs</span></i>
+        </div>
+        <div class="col-12 nav-hide text-scout" style="font-size: 14px;" id="show-m-nav">
+            <i class="fas fa-minus float-right p-r-10 p-t-10"><span class="float-right">&nbsp;hide tabs</span></i>
+        </div>
+      </div>
+    <% end %>
   </div>
 
   <div class="tab-content">
@@ -203,5 +263,17 @@
     if(file != null) {
       $('input[name="commit"]').removeAttr("disabled");
     }
+  });
+  $(document).ready(function() {
+    $('.fa-plus').on('click', function(){
+      $('#hide-m-nav').hide();
+      $('#show-m-nav').show();
+      $('#m-nav-pill').show();
+    })
+    $('.fa-minus').on('click', function(){
+      $('#hide-m-nav').show();
+      $('#show-m-nav').hide();
+      $('#m-nav-pill').hide();
+    })
   })
 </script>

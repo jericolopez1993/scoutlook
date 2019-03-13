@@ -82,6 +82,25 @@
     width: 300px;
     transform: translate3d(-206px, 50px, 0px)!important;
   }
+  .nav-pills > li + li {
+    margin:0!important;
+  }
+  .nav-items.col-4 {
+    padding: 0px;
+  }
+  .nav-pills .nav-link, .nav-pills > li > a {
+    background: #242a3078!important;
+    color: #fff;
+  }
+  .nav-pills > li > a.active {
+    background: #242a30!important;
+  }
+  .tab-content {
+    padding: 0!important;
+  }
+  .nav-hide {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 768px) {

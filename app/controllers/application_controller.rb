@@ -25,8 +25,9 @@ class ApplicationController < ActionController::Base
         "application"
       end
     end
+
     def is_mobile
-      request.user_agent =~ /\b(Android|iPhone|Windows Phone|Opera Mobi|Kindle|BackBerry|PlayBook)\b/i
+      request.user_agent =~ /\b(Android|iPhone|Windows Phone|Opera Mobi|Kindle|BackBerry)\b/i
     end
 
 
