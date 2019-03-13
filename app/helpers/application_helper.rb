@@ -372,7 +372,10 @@ module ApplicationHelper
       if !extension_number.nil? && extension_number != ""
         str = str + ", Ext. " + extension_number
       end
-      str = str + " " + generate_phone_type(phone_type, eligible_texting)
+      ptype = generate_phone_type(phone_type, eligible_texting)
+      if !ptype.blank?
+        str = str + " (" + generate_phone_type(phone_type, eligible_texting) + ")"
+      end
       if extra_str == "P1"
         str = str + "<br/>"
       end

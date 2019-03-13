@@ -72,7 +72,7 @@
             title="
               <b>Name</b>: <%= carrier && (carrier.company_name.blank? ? "(no name)" : carrier.company_name) %><br>
               <b>Ops Name</b>: <%= carrier && (carrier.poc.nil? ? '' : carrier.poc.full_name) %><br>
-              <b>Ops Phone</b>: <%= carrier && (carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + ((!carrier.poc.primary_extension_number.nil? && carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((carrier.poc.primary_phone_type != "") ? (" (#{(carrier.poc.primary_eligible_texting ? "TEXT" : carrier.poc.primary_phone_type)})") : "")) : "")) %><br>
+              <b>Ops Phone</b>: <%= carrier && (carrier.poc.nil? ? '' : generate_phone_number("", carrier.poc.primary_phone, carrier.poc.primary_extension_number, carrier.poc.primary_eligible_texting, carrier.poc.primary_phone_type).html_safe) %><br/>
               <b>Ops Email</b>: <%= carrier && (carrier.poc.nil? ? '' : carrier.poc.email.downcase) %><br>
               <b>Class</b>: <%= carrier && (carrier.sales_priority) %><br>
               <b>MC Number</b>: <%= carrier && (carrier.mc_number) %><br>
@@ -92,7 +92,7 @@
             title="
               <b>Name</b>: <%= shipper && (shipper.company_name.blank? ? "(no name)" : shipper.company_name) %><br>
               <b>DM Name</b>: <%= shipper && (shipper.pdm.nil? ? '' : shipper.pdm.full_name) %><br>
-              <b>DM Phone</b>: <%= shipper && (shipper.pdm.nil? ? '' : ((!shipper.pdm.primary_phone.nil? && shipper.pdm.primary_phone != "") ? (shipper.pdm.primary_phone + ((!shipper.pdm.primary_extension_number.nil? && shipper.pdm.primary_extension_number != "") ? (", Ext. " + shipper.pdm.primary_extension_number) : "") + ((shipper.pdm.primary_phone_type != "") ? (" (#{(shipper.pdm.primary_eligible_texting ? "TEXT" : shipper.pdm.primary_phone_type)})") : "")) : "")) %><br>
+              <b>DM Phone</b>: <%= shipper.nil? ? '' : (shipper.pdm.nil? ? '' : generate_phone_number("", shipper.pdm.primary_phone, shipper.pdm.primary_extension_number, shipper.pdm.primary_eligible_texting, shipper.pdm.primary_phone_type).html_safe) %><br>
               <b>DM Email</b>: <%= shipper && (shipper.pdm.nil? ? '' : shipper.pdm.email.downcase) %><br>
               <b>Class</b>: <%= shipper && (shipper.sales_priority) %><br>
               <b>City</b>: <%= shipper && (shipper.location.nil? ? '' : shipper.location.city) %><br>

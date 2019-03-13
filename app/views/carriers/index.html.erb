@@ -96,8 +96,7 @@
                   title="
                     <b>Name</b>: <%= carrier.company_name.blank? ? "(no name)" : carrier.company_name %><br>
                     <b>Ops Name</b>: <%= carrier.poc.nil? ? '' : carrier.poc.full_name %><br>
-                    <b>Ops Phone</b>:
-                      <%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + ((!carrier.poc.primary_extension_number.nil? && carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((carrier.poc.primary_phone_type != "") ? (" (#{(carrier.poc.primary_eligible_texting ? "TEXT" : carrier.poc.primary_phone_type)})") : "")) : "") %><br/>
+                    <b>Ops Phone</b>: <%= carrier.poc.nil? ? '' : generate_phone_number("", carrier.poc.primary_phone, carrier.poc.primary_extension_number, carrier.poc.primary_eligible_texting, carrier.poc.primary_phone_type).html_safe %><br/>
                     <b>Ops Email</b>: <%= carrier.poc.nil? ? '' : carrier.poc.email.downcase %><br>
                     <b>Class</b>: <%= carrier.sales_priority %><br>
                     <b>MC Number</b>: <%= carrier.mc_number %><br>
@@ -111,8 +110,7 @@
               <td><%= carrier.category %></td>
               <td><%= carrier.location.nil? ? '' : carrier.location.state.upcase %></td>
               <td><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
-              <td><b>
-                  <%= carrier.poc.nil? ? '' : ((!carrier.poc.primary_phone.nil? && carrier.poc.primary_phone != "") ? (carrier.poc.primary_phone + ((!carrier.poc.primary_extension_number.nil? && carrier.poc.primary_extension_number != "") ? (", Ext. " + carrier.poc.primary_extension_number) : "") + ((carrier.poc.primary_phone_type != "") ? (" (#{(carrier.poc.primary_eligible_texting ? "TEXT" : carrier.poc.primary_phone_type)})") : "")) : "") %></b></td>
+              <td><b><%= carrier.poc.nil? ? '' : generate_phone_number("", carrier.poc.primary_phone, carrier.poc.primary_extension_number, carrier.poc.primary_eligible_texting, carrier.poc.primary_phone_type).html_safe %></b></td>
               <td class="text-center"><%= carrier.reefers %></td>
               <td>
                 <% if carrier.carrier_lanes.length > 1 %>
