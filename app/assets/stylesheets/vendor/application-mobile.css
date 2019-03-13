@@ -19,6 +19,59 @@
   .s-font {
     font-size: 12px!important;
   }
+  .navbar-header {
+    border-bottom: none!important;
+  }
+  .header .navbar-form {
+    padding-top: 10px!important;
+  }
+  .navbar-right {
+    float: none!important;
+  }
+  .page-header-fixed #header, .page-sidebar-fixed .sidebar, .page-with-two-sidebar.page-sidebar-fixed .sidebar.sidebar-right {
+    position: absolute!important;
+  }
+  .m-nav {
+    display: block!important;
+    padding: 0 20px;
+  }
+  .m-nav-container i {
+    font-size: 20px;
+  }
+  .m-nav-container a {
+    color: #fff!important;
+  }
+  .m-nav-icon span {
+    display: block;
+    position: relative;
+    text-align: center;
+    top: calc(50% - 5px);
+  }
+  .m-nav-icon.carrier.active {
+    background-color: #A6181F!important;
+  }
+  .m-nav-icon.shipper.active {
+    background-color: #005a58!important;
+  }
+  .m-nav-icon.activity.active {
+    background-color: #ee9c10!important;
+  }
+  .m-nav-icon.rate.active {
+    background-color: #014b0a!important;
+  }
+  .m-nav-icon.reminder.active {
+    background-color: #0cadd0!important;
+  }
+  .m-nav-icon.load_tile.active {
+    background-color: #7e1d7e!important;
+  }
+  .m-nav-icon.carrier, .m-nav-icon.shipper, .m-nav-icon.activity, .m-nav-icon.rate, .m-nav-icon.reminder, .m-nav-icon.load_tile {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    color: #fff!important;
+    margin-right: -3px;
+  }
 }
 
 @media screen and (max-width: 768px) {

@@ -35,6 +35,11 @@
  *= require_self
  */
 
+
+.m-nav {
+  display: none;
+}
+
 body.pattern-white{
   background: url(asset_path('pattern-bg-white.png'));
 }
