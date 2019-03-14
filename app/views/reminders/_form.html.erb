@@ -1,3 +1,10 @@
+<style>
+@media (max-width: 767px) {
+  .text-right {
+    text-align: left!important;
+  }
+}
+</style>
 <!-- begin page-header -->
 <%#= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Reminders' : "Edit Reminder - #{reminder.first_name} #{reminder.last_name}" %>
 <!-- end page-header -->
@@ -68,8 +75,8 @@
           </div>
         </div>
         <div class="form-group row m-b-15 switch-block">
-          <label class="text-right col-md-2 col-sm-4 col-form-label">is Recurring?</label>
-          <div class="col-md-9 col-sm-8">
+          <label class="text-right col-md-2 col-4 col-form-label">is Recurring?</label>
+          <div class="col-md-9 col-8">
               <%= form.check_box :recurring, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: reminder.recurring %>
           </div>
         </div>

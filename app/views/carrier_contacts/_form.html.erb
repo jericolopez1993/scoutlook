@@ -1,3 +1,10 @@
+<style>
+@media (max-width: 767px) {
+  .text-right {
+    text-align: left!important;
+  }
+}
+</style>
 <!-- begin page-header -->
 <div class="header-scout">
   <h1 class="pull-left">
@@ -32,26 +39,26 @@
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-sm-4 col-form-label">is it Primary Ops Contact?</label>
-        <div class="col-md-9 col-sm-8">
+        <label class="text-right col-md-2 col-8 col-form-label">is it Primary Ops Contact?</label>
+        <div class="col-md-9 col-4">
           <input type="checkbox" name="poc"   data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= is_poc ? 'checked' : '' %> >
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-sm-4 col-form-label">is it Primary Decision Maker? </label>
-        <div class="col-md-9 col-sm-8">
+        <label class="text-right col-md-2 col-8 col-form-label">is it Primary Decision Maker? </label>
+        <div class="col-md-9 col-4">
           <input type="checkbox" name="pdm"  data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= is_pdm ? 'checked' : '' %> >
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-sm-4 col-form-label">is it Alternate Decision Maker? </label>
-        <div class="col-md-9 col-sm-8">
+        <label class="text-right col-md-2 col-8 col-form-label">is it Alternate Decision Maker? </label>
+        <div class="col-md-9 col-4">
           <%= form.check_box :adm, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: carrier_contact.adm %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-sm-4 col-form-label">same as Head Office or Master Carrier Record? </label>
-        <div class="col-md-9 col-sm-8">
+        <label class="text-right col-md-2 col-8 col-form-label">same as Head Office or Master Carrier Record? </label>
+        <div class="col-md-9 col-4">
           <%= form.check_box :same_ho, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)',  change: 'check-switchery-state-text'}, checked: carrier_contact.same_ho %>
 
         </div>

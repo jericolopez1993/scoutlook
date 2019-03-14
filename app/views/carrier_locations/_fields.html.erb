@@ -1,3 +1,10 @@
+<style>
+@media (max-width: 767px) {
+  .text-right {
+    text-align: left!important;
+  }
+}
+</style>
 <div class="form-group row m-b-15 ">
   <%= form.label :address, 'Address *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
@@ -36,20 +43,20 @@
 </div>
 <% if params[:controller] != "clients" && params[:controller] != "carriers" %>
   <div class="form-group row m-b-15">
-    <label class="text-right col-md-2 col-sm-4 col-form-label"> is Head Office or MCR?</label>
-    <div class="col-md-9 col-sm-8">
+    <label class="text-right col-md-2 col-4 col-form-label"> is Head Office or MCR?</label>
+    <div class="col-md-9 col-8">
       <input type="checkbox" name="head_office" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-same-office" <%= is_head_office ? 'checked' : '' %> />
     </div>
   </div>
 <div class="form-group row m-b-15">
-  <label class="text-right col-md-2 col-sm-4 col-form-label"> is Origin?</label>
-  <div class="col-md-9 col-sm-8">
+  <label class="text-right col-md-2 col-4 col-form-label"> is Origin?</label>
+  <div class="col-md-9 col-8">
     <%= form.check_box :is_origin, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: carrier_location.is_origin %>
   </div>
 </div>
 <div class="form-group row m-b-15">
-  <label class="text-right col-md-2 col-sm-4 col-form-label"> is Destination? </label>
-  <div class="col-md-9 col-sm-8">
+  <label class="text-right col-md-2 col-4 col-form-label"> is Destination? </label>
+  <div class="col-md-9 col-8">
     <%= form.check_box :is_destination, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: carrier_location.is_destination %>
   </div>
 </div>
