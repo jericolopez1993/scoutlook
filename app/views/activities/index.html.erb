@@ -6,9 +6,20 @@
   <div class="panel panel-yelloworange">
     <div class="panel-heading">
       <div class="panel-heading-btn">
-        <%= link_to 'New Carrier Activity', new_activity_path(:previous_controller => params[:controller], :client_type => "carrier"), :class => 'btn btn-warning btn-xs' %>
-        <%= link_to 'New Shipper Activity', new_activity_path(:previous_controller => params[:controller], :client_type => "shipper"), :class => 'btn btn-warning btn-xs' %>
-
+        <% if !is_mobile %>
+          <%= link_to 'New Carrier Activity', new_activity_path(:previous_controller => params[:controller], :client_type => "carrier"), :class => 'btn btn-warning btn-xs m-font' %>
+          <%= link_to 'New Shipper Activity', new_activity_path(:previous_controller => params[:controller], :client_type => "shipper"), :class => 'btn btn-warning btn-xs m-font' %>
+        <% else %>
+          <div class="btn-group">
+            <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              New Activity
+            </button>
+            <div class="dropdown-menu">
+              <%= link_to 'New Carrier Activity', new_activity_path(:previous_controller => params[:controller], :client_type => "carrier"), :class => 'dropdown-item' %>
+              <%= link_to 'New Shipper Activity', new_activity_path(:previous_controller => params[:controller], :client_type => "shipper"), :class => 'dropdown-item' %>
+            </div>
+          </div>
+        <% end %>
       </div>
       <h4 class="panel-title lp-header">Activities</h4>
     </div>
