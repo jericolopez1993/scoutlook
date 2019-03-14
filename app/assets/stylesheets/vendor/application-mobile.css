@@ -101,6 +101,9 @@
   .nav-hide {
     display: none;
   }
+  .dt-buttons.btn-group {
+    padding-top: 25px!important;
+  }
 }
 
 @media screen and (max-width: 768px) {
