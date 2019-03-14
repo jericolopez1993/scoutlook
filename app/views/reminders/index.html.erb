@@ -6,9 +6,22 @@
   <div class="panel panel-lightblue">
     <div class="panel-heading">
       <div class="panel-heading-btn">
-        <%= link_to 'New Carrier Reminder', new_reminder_path(:previous_controller => params[:controller], :client_type => "carrier"), :class => 'btn btn-info btn-xs' %>
-        <%= link_to 'New Shipper Reminder', new_reminder_path(:previous_controller => params[:controller], :client_type => "shipper"), :class => 'btn btn-info btn-xs' %>
-        <%= link_to 'New Activity Reminder', new_reminder_path(:previous_controller => params[:controller], :client_type => "activity"), :class => 'btn btn-info btn-xs' %>
+        <% if !is_mobile %>
+          <%= link_to 'New Carrier Reminder', new_reminder_path(:previous_controller => params[:controller], :client_type => "carrier"), :class => 'btn btn-info btn-xs' %>
+          <%= link_to 'New Shipper Reminder', new_reminder_path(:previous_controller => params[:controller], :client_type => "shipper"), :class => 'btn btn-info btn-xs' %>
+          <%= link_to 'New Activity Reminder', new_reminder_path(:previous_controller => params[:controller], :client_type => "activity"), :class => 'btn btn-info btn-xs' %>
+        <% else %>
+        <div class="btn-group">
+          <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            New Reminder
+          </button>
+          <div class="dropdown-menu">
+            <%= link_to 'New Carrier Reminder', new_reminder_path(:previous_controller => params[:controller], :client_type => "carrier"), :class => 'dropdown-item' %>
+            <%= link_to 'New Shipper Reminder', new_reminder_path(:previous_controller => params[:controller], :client_type => "shipper"), :class => 'dropdown-item' %>
+            <%= link_to 'New Activity Reminder', new_reminder_path(:previous_controller => params[:controller], :client_type => "activity"), :class => 'dropdown-item' %>
+          </div>
+        </div>
+        <% end %>
       </div>
       <h4 class="panel-title lp-header">Reminder</h4>
     </div>
