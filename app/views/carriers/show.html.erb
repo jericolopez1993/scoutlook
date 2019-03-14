@@ -34,7 +34,7 @@
 <!-- begin page-header -->
 <div class="header-scout">
   <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@carrier.company_name, @carrier.id), sub_header_title: @carrier.company_name %>
+    <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@carrier.company_name, @carrier.id), sub_header_title: @carrier.company_name.truncate(15) %>
   </h1>
   <span class="pull-right">
     <%= link_to 'Edit', edit_carrier_path(@carrier), :class => 'btn btn-warning btn-xs' %>
