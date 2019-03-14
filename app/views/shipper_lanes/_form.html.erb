@@ -1,3 +1,10 @@
+<style>
+@media (max-width: 767px) {
+  .text-right {
+    text-align: left!important;
+  }
+}
+</style>
 <div class="header-darkblue">
   <h1 class="pull-left">
     Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(shipper_lane.lane_origin, shipper_lane.id) + " - #{shipper_lane.lane_origin}") : "" %>
@@ -39,8 +46,8 @@
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="text-right col-md-2 col-sm-4 col-form-label">Prefer Teams? </label>
-            <div class="col-md-9 col-sm-8">
+            <label class="text-right col-md-2 col-4 col-form-label">Prefer Teams? </label>
+            <div class="col-md-9 col-8">
               <%= form.check_box :prefer_team, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper_lane.prefer_team %>
             </div>
           </div>

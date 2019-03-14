@@ -10,7 +10,25 @@
 <!-- end page-header -->
 <!-- begin panel -->
 <div class="panel panel-inverse">
-  <div class="panel <% if @client_type == "carrier" %> panel-scout <% elsif @client_type == "shipper"  %> panel-darkblue <% elsif @client_type == "activity" %> panel-yelloworange <% else %> panel-lightblue <% end %> ">
+  <div class="panel
+    <% if @client_type == "carrier" %>
+      panel-scout
+    <% elsif @client_type == "shipper"  %>
+      panel-darkblue
+    <% elsif @client_type == "activity" %>
+      panel-yelloworange
+    <% else %>
+      <% if @previous_controller == "carriers" %>
+        panel-scout
+      <% elsif @previous_controller == "shippers" %>
+        panel-darkblue
+      <% elsif @previous_controller == "activities" %>
+        panel-yelloworange
+      <% else %>
+        panel-lightblue
+      <% end %>
+    <% end %>
+  ">
     <div class="panel-heading">
       <div class="panel-heading-btn">
       </div>

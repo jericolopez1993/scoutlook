@@ -1,5 +1,12 @@
+<style>
+@media (max-width: 767px) {
+  .text-right {
+    text-align: left!important;
+  }
+}
+</style>
 <!-- begin page-header -->
-<div class="header-scout">
+<div class="header-darkblue">
   <h1 class="pull-left">
     <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create Affiliated Company' : "Edit Affiliated Company" %>
   </h1>
