@@ -12,6 +12,11 @@
   div.link a {
     text-decoration: underline;
   }
+  @media screen and (max-width: 479px) {
+    .dt-buttons.btn-group {
+      padding-top: 25px!important;
+    }
+  }
   @media (max-width: 767px) {
     .panel-inverse > .panel-heading {
       background: 0 0;
@@ -34,7 +39,7 @@
 <!-- begin page-header -->
 <div class="header-scout">
   <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@carrier.company_name, @carrier.id), sub_header_title: @carrier.company_name.truncate(15) %>
+    <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@carrier.company_name, @carrier.id), sub_header_title: is_mobile ? @carrier.company_name.truncate(15) : @carrier.company_name %>
   </h1>
   <span class="pull-right">
     <%= link_to 'Edit', edit_carrier_path(@carrier), :class => 'btn btn-warning btn-xs' %>
@@ -157,16 +162,30 @@
               </a>
             </li>
           </ul>
+          <div class="d-md-none d-lg-block" style="position: absolute; right: 20px;">
+            <button type="button" class="btn btn-xs btn-primary new-attachment-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<%= form_with(model: @carrier, local: true, :html => {class: 'form-horizontal text-right'}) do |form| %><%= form.hidden_field :attachment_only, :value => true %><%= form.file_field :attachment_file, multiple: true %><%= form.submit 'Submit', :class => 'btn btn-xs btn-success', disabled: true %><% end %>'>
+              Add Attachment
+            </button>
+            <%= link_to 'New Reminder', new_reminder_path(:previous_controller => params[:controller], :id => @carrier.id), :class => 'btn btn-info btn-xs new-reminder-btn' %>
+            <%= link_to 'New Location', new_carrier_location_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-location-btn' %>
+            <%= link_to 'New Contact', new_carrier_contact_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-contact-btn' %>
+            <%= link_to 'New Activity', new_activity_path(:carrier_id => @carrier.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-activity-btn' %>
+            <%= link_to 'New Lane', new_carrier_lane_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
+            <%= link_to 'New Rate', new_rate_path(:previous_controller => params[:controller], :carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-rate-btn' %>
+            <%= link_to 'New Affiliated Company', new_carrier_company_path(:carrier_id => @carrier.id), :class => 'btn btn-primary btn-xs new-company-btn' %>
+          </div>
         </div>
       </div>
     <% end %>
   </div>
-  <div class="col-12 text-inverse" id="hide-m-nav"  style="font-size: 14px;">
-      <i class="fas fa-plus float-right p-r-10 p-t-10" style="margin-bottom: -20px;"><span class="float-right">&nbsp;show tabs</span></i>
-  </div>
-  <div class="col-12 nav-hide text-inverse" style="font-size: 14px;" id="show-m-nav">
-      <i class="fas fa-minus float-right p-r-10 p-t-10" style="margin-bottom: -20px;"><span class="float-right">&nbsp;hide tabs</span></i>
-  </div>
+  <% if is_mobile %>
+    <div class="col-12 text-inverse" id="hide-m-nav"  style="font-size: 14px;">
+        <i class="fas fa-plus float-right p-r-10 p-t-10" style="margin-bottom: -20px; margin-top: 20px;"><span class="float-right">&nbsp;show tabs</span></i>
+    </div>
+    <div class="col-12 nav-hide text-inverse" style="font-size: 14px;" id="show-m-nav">
+        <i class="fas fa-minus float-right p-r-10 p-t-10" style="margin-bottom: -20px; margin-top: 20px;"><span class="float-right">&nbsp;hide tabs</span></i>
+    </div>
+  <% end %>
   <div class="tab-content">
     <!-- begin tab-pane -->
     <div class="tab-pane fade active show" id="company-name">
@@ -273,6 +292,6 @@
       $('#hide-m-nav').show();
       $('#show-m-nav').hide();
       $('#m-nav-pill').hide();
-    })
-  })
+    });
+  });
 </script>

@@ -12,6 +12,11 @@
   div.link a {
     text-decoration: underline;
   }
+  @media screen and (max-width: 479px) {
+    .dt-buttons.btn-group {
+      padding-top: 25px!important;
+    }
+  }
   @media (max-width: 767px) {
     .panel-inverse > .panel-heading {
       background: 0 0;
@@ -34,7 +39,7 @@
 <!-- begin page-header -->
 <div class="header-darkblue">
   <h1 class="pull-left">
-    <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@shipper.company_name, @shipper.id), sub_header_title: @shipper.company_name %>
+    <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@shipper.company_name, @shipper.id), sub_header_title:is_mobile ? @shipper.company_name.truncate(15) : @shipper.company_name %>
   </h1>
   <span class="pull-right">
     <%= link_to 'Edit', edit_shipper_path(@shipper), :class => 'btn btn-warning btn-xs' %>
@@ -47,7 +52,7 @@
 <!-- begin panel -->
 <div class="panel panel-inverse">
   <div class="panel-heading" style="padding: 5px 15px">
-    <div class="panel-heading-btn" style="margin-top: 2.5px;">
+    <div class="panel-heading-btn d-sm-block d-none" style="margin-top: 2.5px;">
       <button type="button" class="btn btn-xs btn-primary new-attachment-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<%= form_with(model: @shipper, local: true, :html => {class: 'form-horizontal text-right'}) do |form| %><%= form.hidden_field :attachment_only, :value => true %><%= form.file_field :attachment_file, multiple: true %><%= form.submit 'Submit', :class => 'btn btn-xs btn-success', disabled: true %><% end %>'>
         Add Attachment
       </button>
@@ -106,8 +111,81 @@
         </a>
       </li>
     </ul>
-  </div>
 
+    <% if is_mobile %>
+      <div class="row">
+        <div class="col-12 text-center nav-hide" id="m-nav-pill">
+          <ul class="nav nav-pills" style="margin-bottom: 0px;">
+            <li class="nav-items col-4">
+              <a href="#company-name" data-toggle="tab" class="nav-link active show hide-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">General</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#attachments" data-toggle="tab" class="nav-link attachment-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Attachments</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#lanes" data-toggle="tab" class="nav-link lane-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Lanes</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#activity" data-toggle="tab" class="nav-link activity-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Activities</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#locations" data-toggle="tab" class="nav-link location-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Locations</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#contacts" data-toggle="tab" class="nav-link contact-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Contacts</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#rates" data-toggle="tab" class="nav-link rate-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Rates</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#reminders" data-toggle="tab" class="nav-link reminder-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Reminders</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#companies" data-toggle="tab" class="nav-link company-btn" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Affiliated Company</h4></span>
+              </a>
+            </li>
+          </ul>
+          <div class="d-md-none d-lg-block" style="position: absolute; right: 20px;">
+            <button type="button" class="btn btn-xs btn-primary new-attachment-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<%= form_with(model: @shipper, local: true, :html => {class: 'form-horizontal text-right'}) do |form| %><%= form.hidden_field :attachment_only, :value => true %><%= form.file_field :attachment_file, multiple: true %><%= form.submit 'Submit', :class => 'btn btn-xs btn-success', disabled: true %><% end %>'>
+              Add Attachment
+            </button>
+            <%= link_to 'New Reminder', new_reminder_path(:previous_controller => params[:controller], :id => @shipper.id), :class => 'btn btn-info btn-xs new-reminder-btn' %>
+            <%= link_to 'New Location', new_shipper_location_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-location-btn' %>
+            <%= link_to 'New Contact', new_shipper_contact_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-contact-btn' %>
+            <%= link_to 'New Activity', new_activity_path(:shipper_id => @shipper.id, :previous_controller => params[:controller]), :class => 'btn btn-primary btn-xs new-activity-btn' %>
+            <%= link_to 'New Lane', new_shipper_lane_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-lane-btn' %>
+            <%= link_to 'New Rate', new_rate_path(:previous_controller => params[:controller], :shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-rate-btn' %>
+            <%= link_to 'New Affiliated Company', new_shipper_company_path(:shipper_id => @shipper.id), :class => 'btn btn-primary btn-xs new-company-btn' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% if is_mobile %>
+    <div class="col-12 text-inverse" id="hide-m-nav"  style="font-size: 14px;">
+        <i class="fas fa-plus float-right p-r-10 p-t-10" style="margin-bottom: -20px; margin-top: 20px;"><span class="float-right">&nbsp;show tabs</span></i>
+    </div>
+    <div class="col-12 nav-hide text-inverse" style="font-size: 14px;" id="show-m-nav">
+        <i class="fas fa-minus float-right p-r-10 p-t-10" style="margin-bottom: -20px; margin-top: 20px;"><span class="float-right">&nbsp;hide tabs</span></i>
+    </div>
+  <% end %>
   <div class="tab-content">
     <!-- begin tab-pane -->
     <div class="tab-pane fade active show" id="company-name">
@@ -125,7 +203,7 @@
     </div>
     <div class="tab-pane fade" id="activity">
       <div class="panel-body">
-        <%= render 'activities/table', show_carrier: false, show_shipper: false, activities: @shipper.activities, current_controller: params[:controller] %>
+        <%= render 'activities/table', show_shipper: false, show_shipper: false, activities: @shipper.activities, current_controller: params[:controller] %>
       </div>
     </div>
     <div class="tab-pane fade" id="locations">
@@ -203,5 +281,17 @@
     if(file != null) {
       $('input[name="commit"]').removeAttr("disabled");
     }
-  })
+  });
+  $(document).ready(function() {
+    $('.fa-plus').on('click', function(){
+      $('#hide-m-nav').hide();
+      $('#show-m-nav').show();
+      $('#m-nav-pill').show();
+    })
+    $('.fa-minus').on('click', function(){
+      $('#hide-m-nav').show();
+      $('#show-m-nav').hide();
+      $('#m-nav-pill').hide();
+    });
+  });
 </script>

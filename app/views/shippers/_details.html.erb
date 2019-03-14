@@ -5,102 +5,102 @@
       <div class="card bg-light" >
         <div class="card-body">
         <div class="row">
-          <label class="col-md-4 col-form-label">Approved to do business?</label>
-          <div class="col-md-8 lbl-padding-t">
+          <label class="col-4 col-form-label">Approved to do business?</label>
+          <div class="col-8 lbl-padding-t">
             <%= shipper.approved ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
           </div>
         </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Complete Record:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Complete Record:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.complete_record ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Last Contact:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Last Contact:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : (shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s + " " + (shipper.last_contact_date.user.nil? ? "" : link_to(shipper.last_contact_date.user.full_name, shipper.last_contact_date.user))).html_safe %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Sales Priority:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Sales Priority:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.sales_priority %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Company Name:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Company Name:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.company_name %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Relationship Owner:</label>
-            <div class="col-md-8 lbl-padding-t link">
+            <label class="col-4 col-form-label">Relationship Owner:</label>
+            <div class="col-8 lbl-padding-t link">
               <%= shipper.relationship_owner_user.nil? ? 'Not Assigned' : link_to(shipper.relationship_owner_user.full_name, shipper.relationship_owner_user) %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Load Last Month:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Load Last Month:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.load_last_month %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Last Last 6 Months:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Last Last 6 Months:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.load_last_6_month %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Date Approved:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Date Approved:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.date_approved %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Date Created:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Date Created:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.created_at.strftime('%m/%d/%Y') %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Shipper Type:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Shipper Type:</label>
+            <div class="col-8 lbl-padding-t">
               <% shipper.shipper_type_to_array.each do |cr| %>
                 <span class="badge badge-inverse"><%= cr %></span>
               <% end %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Control Freight:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Control Freight:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.control_freight ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Loads Per Month:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Loads Per Month:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.loads_per_month %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Spend Per Year:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Spend Per Year:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.spend_per_year %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Commodities:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Commodities:</label>
+            <div class="col-8 lbl-padding-t">
               <% shipper.commodities_to_array.each do |cr| %>
                 <span class="badge badge-inverse"><%= cr %></span>
               <% end %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Blue Book Score:</label>
-            <div class="col-md-8 lbl-padding-t link">
+            <label class="col-4 col-form-label">Blue Book Score:</label>
+            <div class="col-8 lbl-padding-t link">
               <% if shipper.blue_book_url %>
                 <a target="_blank" href="<%= shipper.blue_book_url %>">
                   <%= shipper.blue_book_score %>
@@ -111,84 +111,84 @@
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Buying Criteria:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Buying Criteria:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.buying_criteria %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Works with Brokers?:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Works with Brokers?:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.works_with_brokers ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Price Sensitivity:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Price Sensitivity:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.price_sensitivity %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Challenges:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Challenges:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.challenges.nil? ? "" : shipper.challenges.html_safe %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Current Carrier Mix:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Current Carrier Mix:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.current_carrier_mix.nil? ? "" : shipper.current_carrier_mix.html_safe %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Prefer Teams?:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Prefer Teams?:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.prefer_teams ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Notes:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Notes:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.notes.nil? ? "" : shipper.notes.html_safe %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Year Established:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Year Established:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.years_established %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Years in Business:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Years in Business:</label>
+            <div class="col-8 lbl-padding-t">
               <%= shipper.years_in_business %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Shipping Days:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Shipping Days:</label>
+            <div class="col-8 lbl-padding-t">
               <% shipper.location.shipping_day_to_array.each do |days| %>
                 <span class="badge badge-inverse"><%= days %></span>
               <% end %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Receiving Days:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">Receiving Days:</label>
+            <div class="col-8 lbl-padding-t">
               <% shipper.location.receiving_day_to_array.each do |days| %>
                 <span class="badge badge-inverse"><%= days %></span>
               <% end %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">Website:</label>
-            <div class="col-md-8 lbl-padding-t link">
+            <label class="col-4 col-form-label">Website:</label>
+            <div class="col-8 lbl-padding-t link">
               <%= (!shipper.website.nil? && shipper.website.present?) ? "<a href='#{shipper.website}'>#{shipper.website}</a>".html_safe : "" %>
             </div>
           </div>
           <div class="row">
-            <label class="col-md-4 col-form-label">LinkedIn:</label>
-            <div class="col-md-8 lbl-padding-t">
+            <label class="col-4 col-form-label">LinkedIn:</label>
+            <div class="col-8 lbl-padding-t">
               <%= (!shipper.linkedin.nil? && shipper.linkedin.present?) ? "<a href='#{shipper.website}'>#{shipper.linkedin}</a>" : "" %>
             </div>
           </div>
