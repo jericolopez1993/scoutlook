@@ -12,7 +12,7 @@ amazon:
   access_key_id: AKIAIJ22XV7I7XDYN2SA
   secret_access_key: tdSgWyKL2Jd7FLD5Lhf/pvwCruybsZ/WOTxDYYXc
   region: ca-central-1
-  bucket: scoutcrm
+  bucket: scoutcrm2
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
