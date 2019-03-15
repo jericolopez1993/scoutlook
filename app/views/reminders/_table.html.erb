@@ -151,7 +151,7 @@
             data-placement="left"
             data-html="true"
             title="<%= reminder.notes.nil? ? '' : reminder.notes %>">
-              <%= reminder.notes.nil? ? '' : truncate_html_to_sentence(reminder.notes.html_safe) %>
+              <%= reminder.notes.nil? ? '' : truncate_html_to_sentence(reminder.notes) %>
           </span>
         </td>
       </tr>

@@ -142,8 +142,8 @@
                 data-toggle="tooltip"
                 data-placement="right"
                 data-html="true"
-                title="<%= activity.notes.nil? ? '' : activity.notes.html_safe %>">
-                <%= activity.notes.nil? ? '' : truncate_html_to_sentence(activity.notes.html_safe) %>
+                title="<%= activity.notes.nil? ? '' : activity.notes %>">
+                <%= activity.notes.nil? ? '' : truncate_html_to_sentence(activity.notes) %>
               </span>
             </td>
             <td><%= activity.activity_type %></td>
