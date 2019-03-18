@@ -78,44 +78,13 @@
             <td class="link">
               <% if show_carrier || show_shipper %>
                 <% if show_carrier && activity.carrier %>
-                <span
-                  data-toggle="tooltip"
-                  data-placement="right"
-                  data-html="true"
-                  title="
-                    <b>Name</b>: <%= activity.carrier && (activity.carrier.company_name.blank? ? "(no name)" : activity.carrier.company_name) %><br>
-                    <b>Ops Name</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : activity.carrier.poc.full_name) %><br>
-                    <b>Ops Phone</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : generate_phone_number("", activity.carrier.poc.primary_phone, activity.carrier.poc.primary_extension_number, activity.carrier.poc.primary_eligible_texting, activity.carrier.poc.primary_phone_type).html_safe) %><br>
-                    <b>Ops Email</b>: <%= activity.carrier && (activity.carrier.poc.nil? ? '' : activity.carrier.poc.email.downcase) %><br>
-                    <b>Class</b>: <%= activity.carrier && (activity.carrier.sales_priority) %><br>
-                    <b>MC Number</b>: <%= activity.carrier && (activity.carrier.mc_number) %><br>
-                    <b>Reefers Count</b>: <%= activity.carrier && activity.carrier.reefers %><br>
-                    <b>Sate/Province</b>: <%= activity.carrier && (activity.carrier.location.nil? ? '' : activity.carrier.location.state) %><br>
-                    <b>Last Contact Date</b>: <%= activity.carrier && (activity.carrier.last_contact_date.nil? || activity.carrier.last_contact_date.date_opened.nil? ? "" : activity.carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
-                  ">
-                    <%= activity.carrier && link_to(activity.carrier.company_name.blank? ? "(no name)" : activity.carrier.company_name, activity.carrier) %>
-                </span>
+                  <%= render "carriers/link", carrier: activity.carrier %>
                 <% end %>
                 <% if show_shipper && activity.shipper && show_carrier && activity.carrier %>
                 &nbsp;/&nbsp;
                 <% end %>
                 <% if show_shipper && activity.shipper %>
-                    <span
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      data-html="true"
-                      title="
-                        <b>Name</b>: <%= activity.shipper && (activity.shipper.company_name.blank? ? "(no name)" : activity.shipper.company_name) %><br>
-                        <b>DM Name</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : activity.shipper.pdm.full_name) %><br>
-                        <b>DM Phone</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : generate_phone_number("", activity.shipper.pdm.primary_phone, activity.shipper.pdm.primary_extension_number, activity.shipper.pdm.primary_eligible_texting, activity.shipper.pdm.primary_phone_type).html_safe) %><br>
-                        <b>DM Email</b>: <%= activity.shipper && (activity.shipper.pdm.nil? ? '' : activity.shipper.pdm.email.downcase) %><br>
-                        <b>Class</b>: <%= activity.shipper && (activity.shipper.sales_priority) %><br>
-                        <b>City</b>: <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.city) %><br>
-                        <b>Sate/Province</b>: <%= activity.shipper && (activity.shipper.location.nil? ? '' : activity.shipper.location.state) %><br>
-                        <b>Last Contact Date</b>: <%= activity.shipper && (activity.shipper.last_contact_date.nil? || activity.shipper.last_contact_date.date_opened.nil? ? "" : activity.shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
-                      ">
-                        <%= activity.shipper && link_to(activity.shipper.company_name.blank? ? "(no name)" : activity.shipper.company_name, activity.shipper) %>
-                    </span>
+                  <%= render "shippers/link", shipper: activity.shipper %>
                 <% end %>
               <% end %>
             </td>

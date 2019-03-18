@@ -158,41 +158,10 @@
         <td><%= rate.created_at %></td>
         <% if params[:controller] == "rates" %>
           <td class="link">
-            <span
-              data-toggle="tooltip"
-              data-placement="right"
-              data-html="true"
-              title="
-                <b>Name</b>: <%= carrier && (carrier.company_name.blank? ? "(no name)" : carrier.company_name) %><br>
-                <b>Ops Name</b>: <%= carrier && (carrier.poc.nil? ? '' : carrier.poc.full_name) %><br>
-                <b>Ops Phone</b>: <%= carrier && (carrier.poc.nil? ? '' : generate_phone_number("", carrier.poc.primary_phone, carrier.poc.primary_extension_number, carrier.poc.primary_eligible_texting, carrier.poc.primary_phone_type).html_safe) %><br/>
-                <b>Ops Email</b>: <%= carrier && (carrier.poc.nil? ? '' : carrier.poc.email.downcase) %><br>
-                <b>Class</b>: <%= carrier && (carrier.sales_priority) %><br>
-                <b>MC Number</b>: <%= carrier && (carrier.mc_number) %><br>
-                <b>Reefers Count</b>: <%= carrier && carrier.reefers %><br>
-                <b>Sate/Province</b>: <%= carrier && (carrier.location.nil? ? '' : carrier.location.state) %><br>
-                <b>Last Contact Date</b>: <%= carrier && (carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
-              ">
-              <%= carrier && link_to(carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier) %>
-            </span>
+              <%= render "carriers/link", carrier: carrier %>
           </td>
           <td class="link">
-            <span
-              data-toggle="tooltip"
-              data-placement="right"
-              data-html="true"
-              title="
-                <b>Name</b>: <%= shipper && (shipper.company_name.blank? ? "(no name)" : shipper.company_name) %><br>
-                <b>DM Name</b>: <%= shipper && (shipper.pdm.nil? ? '' : shipper.pdm.full_name) %><br>
-                <b>DM Phone</b>: <%= shipper.nil? ? '' : (shipper.pdm.nil? ? '' : generate_phone_number("", shipper.pdm.primary_phone, shipper.pdm.primary_extension_number, shipper.pdm.primary_eligible_texting, shipper.pdm.primary_phone_type).html_safe) %><br>
-                <b>DM Email</b>: <%= shipper && (shipper.pdm.nil? ? '' : shipper.pdm.email.downcase) %><br>
-                <b>Class</b>: <%= shipper && (shipper.sales_priority) %><br>
-                <b>City</b>: <%= shipper && (shipper.location.nil? ? '' : shipper.location.city) %><br>
-                <b>Sate/Province</b>: <%= shipper && (shipper.location.nil? ? '' : shipper.location.state) %><br>
-                <b>Last Contact Date</b>: <%= shipper && (shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s) %><br>
-              ">
-              <%= shipper && link_to(shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper) %>
-            </span>
+              <%= render "shippers/link", shipper: shipper %>
           </td>
       <% end %>
       </tr>

@@ -1,0 +1,19 @@
+<% if carrier %>
+  <span
+    data-toggle="tooltip"
+    data-placement="right"
+    data-html="true"
+    title="
+      <b>Name</b>: <%= carrier.company_name.blank? ? "(no name)" : carrier.company_name %><br>
+      <b>Ops Name</b>: <%= carrier.poc.nil? ? '' : carrier.poc.full_name %><br>
+      <b>Ops Phone</b>: <%= carrier.poc.nil? ? '' : generate_phone_number("", carrier.poc.primary_phone, carrier.poc.primary_extension_number, carrier.poc.primary_eligible_texting, carrier.poc.primary_phone_type).html_safe %><br/>
+      <b>Ops Email</b>: <%= carrier.poc.nil? ? '' : carrier.poc.email.downcase %><br>
+      <b>Class</b>: <%= carrier.sales_priority %><br>
+      <b>MC Number</b>: <%= carrier.mc_number %><br>
+      <b>Reefers Count</b>: <%= carrier.reefers %><br>
+      <b>Sate/Province</b>: <%= carrier.location.nil? ? '' : carrier.location.state.upcase %><br>
+      <b>Last Contact Date</b>: <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %><br>
+    ">
+    <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier, :class => generate_styling_activities(carrier, nil) %>
+  </span>
+<% end %>
