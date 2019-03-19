@@ -111,7 +111,18 @@
             <% if params[:action] == 'edit' %>
               &nbsp;&nbsp;<%= link_to 'Show', reminder, :class => 'btn btn-info' %>
             <% end %>
-              &nbsp;&nbsp;<%= link_to 'Back', reminders_path, :class => 'btn btn-default' %>
+            <% if @previous_controller == "activities" %>
+              <% activity = Activity.find(reminder.activity_id)%>
+                &nbsp;&nbsp;<%= link_to 'Back to Activity', activity, :class => 'btn btn-default' %>
+            <% elsif @previous_controller == "carriers" %>
+              <% carrier = Carrier.find(reminder.carrier_id)%>
+                &nbsp;&nbsp;<%= link_to 'Back to Carrier', carrier, :class => 'btn btn-default' %>
+            <% elsif @previous_controller == "shippers" %>
+              <% shipper = Shipper.find(reminder.shipper_id)%>
+                &nbsp;&nbsp;<%= link_to 'Back to Shipper', shipper, :class => 'btn btn-default' %>
+            <% else %>
+                &nbsp;&nbsp;<%= link_to 'Back', reminders_path, :class => 'btn btn-default' %>
+            <% end %>
           </div>
         </div>
       <% end %>
