@@ -152,7 +152,7 @@ class CarriersController < ApplicationController
   def compose_mail
     @ids = params[:ids]
     @contacts = Carrier.where("carriers.id IN (#{@ids})").joins("LEFT JOIN carrier_contacts ON carriers.poc_id = carrier_contacts.id ").distinct("carrier_contacts.email").pluck("carrier_contacts.email").join(",")
-    render :layout => 'mail'
+    render 'global_pages/mail_form', :layout => 'mail'
   end
 
   def send_mail
