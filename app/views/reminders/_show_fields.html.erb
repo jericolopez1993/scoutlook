@@ -9,45 +9,45 @@
 <% if reminder %>
   <% if reminder.carrier %>
     <div class="row">
-      <label class="col-md-2 col-form-label">Carrier:</label>
-      <div class="col-md-9 lbl-padding-t link">
+      <label class="col-md-2 col-6 col-form-label">Carrier:</label>
+      <div class="col-md-9 col-6 lbl-padding-t link">
         <%= reminder.carrier.nil? ? "" : (link_to "#{reminder.carrier.company_name}", reminder.carrier) %>
       </div>
     </div>
   <% end %>
   <% if reminder.shipper %>
     <div class="row">
-      <label class="col-md-2 col-form-label">Shipper:</label>
-      <div class="col-md-9 lbl-padding-t link">
+      <label class="col-md-2 col-6 col-form-label">Shipper:</label>
+      <div class="col-md-9 col-6 lbl-padding-t link">
         <%= reminder.shipper.nil? ? "" : (link_to "#{reminder.shipper.company_name}", reminder.shipper) %>
       </div>
     </div>
   <% end %>
   <% if reminder.activity %>
     <div class="row">
-      <label class="col-md-2 col-form-label">Activity:</label>
-      <div class="col-md-9 lbl-padding-t link">
+      <label class="col-md-2 col-6 col-form-label">Activity:</label>
+      <div class="col-md-9 col-6 lbl-padding-t link">
         <%= link_to(reminder.activity.campaign_name.blank? ? "(no campaign name)" : reminder.activity.campaign_name, reminder.activity)  %>
       </div>
     </div>
   <% end %>
   <% if reminder.user %>
     <div class="row">
-      <label class="col-md-2 col-form-label">User:</label>
-      <div class="col-md-9 lbl-padding-t link">
+      <label class="col-md-2 col-6 col-form-label">User:</label>
+      <div class="col-md-9 col-6 lbl-padding-t link">
         <%= reminder.user.nil? ? "" : (link_to "#{reminder.user.full_name}", reminder.user) %>
       </div>
     </div>
   <% end %>
   <div class="row">
-    <label class="col-md-2 col-form-label">Type:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-md-2 col-6 col-form-label">Type:</label>
+    <div class="col-md-9 col-6 lbl-padding-t">
       <%= reminder.reminder_type %>
     </div>
   </div>
   <div class="row">
-    <label class="col-md-2 col-form-label">Next Reminder Date:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-md-2 col-6 col-form-label">Next Reminder Date:</label>
+    <div class="col-md-9 col-6 lbl-padding-t">
       <% if reminder.reminder_date %>
         <% if reminder.reminder_date > Date.today %>
           <% if reminder.recurring %>
@@ -86,14 +86,14 @@
     </div>
   </div>
   <div class="row">
-    <label class="col-md-2 col-form-label">Last Reminded:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-md-2 col-6 col-form-label">Last Reminded:</label>
+    <div class="col-md-9 col-6 lbl-padding-t">
       <%= reminder.last_reminded %>
     </div>
   </div>
   <div class="row">
-    <label class="col-md-2 col-form-label">Date Created:</label>
-    <div class="col-md-9 lbl-padding-t">
+    <label class="col-md-2 col-6 col-form-label">Date Created:</label>
+    <div class="col-md-9 col-6 lbl-padding-t">
       <%= reminder.created_at %>
     </div>
   </div>
