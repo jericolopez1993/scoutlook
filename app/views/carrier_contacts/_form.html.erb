@@ -208,9 +208,9 @@
     $("#country").val('USA').change();
   <% end %>
   <%# if carrier_contact.country.present? %>
-    // tiggerChangeOnSelectCountry('carrier_contact_country', '<%# carrier_contact.country %>')
+    // triggerChangeOnSelectCountry('carrier_contact_country', '<%# carrier_contact.country %>')
   <%# end %>
   <%# if carrier_contact.state.present? %>
-    // tiggerChangeOnSelectCountry('carrier_contact_state', '<%# carrier_contact.state.upcase %>')
+    // triggerChangeOnSelectCountry('carrier_contact_state', '<%# generate_abv(carrier_contact.state).upcase %>')
   <%# end %>
 </script>

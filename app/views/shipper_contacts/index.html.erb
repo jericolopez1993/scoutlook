@@ -25,7 +25,7 @@
         <td><%= shipper_contact.secondary_phone %></td>
         <td><%= shipper_contact.address %></td>
         <td><%= shipper_contact.city %></td>
-        <td><%= shipper_contact.state.upcase %></td>
+        <td><%= generate_abv(shipper_contact.state).upcase %></td>
         <td><%= shipper_contact.postal %></td>
         <td><%= shipper_contact.country %></td>
         <td><%= shipper_contact.shipper_id %></td>

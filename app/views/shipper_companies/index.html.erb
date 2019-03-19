@@ -20,7 +20,7 @@
       <tr>
         <td><%= shipper_company.name %></td>
         <td><%= shipper_company.city %></td>
-        <td><%= shipper_company.state.upcase %></td>
+        <td><%= generate_abv(shipper_company.state).upcase %></td>
         <td><%= shipper_company.company_type %></td>
         <td><%= shipper_company.phone_number %></td>
         <td><%= shipper_company.website %></td>

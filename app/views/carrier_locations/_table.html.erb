@@ -27,7 +27,7 @@
           <% end %>
           <td><%= carrier_location.address %></td>
           <td><%= carrier_location.city %></td>
-          <td><%= carrier_location.state.upcase %></td>
+          <td><%= generate_abv(carrier_location.state).upcase %></td>
           <td><%= carrier_location.country %></td>
           <td><%= carrier_location.phone %></td>
         </tr>

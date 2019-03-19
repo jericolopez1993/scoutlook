@@ -68,9 +68,9 @@
     setTimeout(function(){ setFieldMask('loc_country', 'loc_postal'); }, 1000);
   });
   <% if carrier_location.country.present? %>
-    tiggerChangeOnSelectCountry('loc_country', '<%= carrier_location.country %>')
+    triggerChangeOnSelectCountry('loc_country', '<%= carrier_location.country %>')
   <% end %>
   <% if carrier_location.state.present? %>
-    tiggerChangeOnSelectCountry('loc_state', '<%= carrier_location.state %>')
+    setTimeout(function(){ triggerChangeOnSelectCountry('loc_state', '<%= carrier_location.state %>') }, 500);
   <% end %>
 </script>

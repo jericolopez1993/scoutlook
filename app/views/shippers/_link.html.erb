@@ -10,7 +10,7 @@
       <b>DM Email</b>: <%= shipper.pdm.nil? ? '' : shipper.pdm.email.downcase %><br>
       <b>Class</b>: <%= shipper.sales_priority %><br>
       <b>City</b>: <%= shipper.location.nil? ? '' : shipper.location.city %><br>
-      <b>Sate/Province</b>: <%= shipper.location.nil? ? '' : shipper.location.state.upcase %><br>
+      <b>Sate/Province</b>: <%= shipper.location.nil? ? '' : shipper.generate_abv(location.state).upcase %><br>
       <b>Last Contact Date</b>: <%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %><br>
     ">
       <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper, :class => generate_styling_activities(nil, shipper) %>

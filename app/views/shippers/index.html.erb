@@ -90,7 +90,7 @@
               <td class="link">
                 <%= render "shippers/link", shipper: shipper %>
               </td>
-              <td><%= shipper.location.nil? ? '' : shipper.location.state.upcase %></td>
+              <td><%= shipper.location.nil? ? '' : generate_abv(shipper.location.state).upcase %></td>
               <td><%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %></td>
               <td><b><%= shipper.pdm.nil? ? '' : generate_phone_number("", shipper.pdm.primary_phone, shipper.pdm.primary_extension_number, shipper.pdm.primary_eligible_texting, shipper.pdm.primary_phone_type).html_safe %></b></td>
               <td>

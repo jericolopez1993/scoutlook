@@ -11,7 +11,7 @@
       <b>Class</b>: <%= carrier.sales_priority %><br>
       <b>MC Number</b>: <%= carrier.mc_number %><br>
       <b>Reefers Count</b>: <%= carrier.reefers %><br>
-      <b>Sate/Province</b>: <%= carrier.location.nil? ? '' : carrier.location.state.upcase %><br>
+      <b>Sate/Province</b>: <%= carrier.location.nil? ? '' : carrier.generate_abv(location.state).upcase %><br>
       <b>Last Contact Date</b>: <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %><br>
     ">
     <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier, :class => generate_styling_activities(carrier, nil) %>

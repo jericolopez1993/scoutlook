@@ -25,7 +25,7 @@
         <td><%= carrier_contact.secondary_phone %></td>
         <td><%= carrier_contact.address %></td>
         <td><%= carrier_contact.city %></td>
-        <td><%= carrier_contact.state.upcase %></td>
+        <td><%= generate_abv(carrier_contact.state).upcase %></td>
         <td><%= carrier_contact.postal %></td>
         <td><%= carrier_contact.country %></td>
         <td><%= carrier_contact.carrier_id %></td>

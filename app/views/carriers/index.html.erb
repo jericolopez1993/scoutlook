@@ -92,7 +92,7 @@
                 <%= render "carriers/link", carrier: carrier %>
               </td>
               <td><%= carrier.category %></td>
-              <td><%= carrier.location.nil? ? '' : carrier.location.state.upcase %></td>
+              <td><%= carrier.location.nil? ? '' : generate_abv(carrier.location.state).upcase %></td>
               <td><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
               <td><b><%= carrier.poc.nil? ? '' : generate_phone_number("", carrier.poc.primary_phone, carrier.poc.primary_extension_number, carrier.poc.primary_eligible_texting, carrier.poc.primary_phone_type).html_safe %></b></td>
               <td class="text-center"><%= carrier.reefers %></td>

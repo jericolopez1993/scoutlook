@@ -242,16 +242,16 @@
   populateCountries("rate_origin_country", "rate_origin_state");
   populateCountries("rate_destination_country", "rate_destination_state");
   <% if rate.origin_country.present? %>
-    tiggerChangeOnSelectCountry('rate_origin_country', '<%= rate.origin_country %>')
+    triggerChangeOnSelectCountry('rate_origin_country', '<%= rate.origin_country %>')
   <% end %>
   <% if rate.destination_country.present? %>
-    tiggerChangeOnSelectCountry('rate_destination_country', '<%= rate.destination_country %>')
+    triggerChangeOnSelectCountry('rate_destination_country', '<%= rate.destination_country %>')
   <% end %>
   <% if rate.origin_state.present? %>
-    tiggerChangeOnSelectCountry('rate_origin_state', '<%= rate.origin_state.upcase %>')
+    triggerChangeOnSelectCountry('rate_origin_state', '<%= rate.generate_abv(origin.state).upcase %>')
   <% end %>
   <% if rate.destination_state.present? %>
-    tiggerChangeOnSelectCountry('rate_destination_state', '<%= rate.destination_state.upcase %>')
+    triggerChangeOnSelectCountry('rate_destination_state', '<%= rate.generate_abv(destination.state).upcase %>')
   <% end %>
   });
 </script>

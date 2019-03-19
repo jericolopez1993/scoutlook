@@ -406,7 +406,7 @@ function isHeadOffice(isTrue) {
   $(".address-fields").show();
 }
 
-function tiggerChangeOnSelectCountry(id, val) {
+function triggerChangeOnSelectCountry(id, val) {
   $('#'+id).val(val);
   $('#'+id).trigger("change");
 }

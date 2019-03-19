@@ -52,11 +52,11 @@
           </td>
           <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.name %></td>
           <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.city %></td>
-          <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.state.upcase %></td>
+          <td><%= shipment.origin_location.nil? ? "" : shipment.generate_abv(origin_location.state).upcase %></td>
           <td><%= shipment.origin_location.nil? ? "" : shipment.origin_location.country %></td>
           <td><%= shipment.destination_location.nil? ? "" : shipment.destination_location.name %></td>
           <td><%= shipment.destination_location.nil? ? "" : shipment.destination_location.city %></td>
-          <td><%= shipment.destination_location.nil? ? "" : shipment.destination_location.state.upcase %></td>
+          <td><%= shipment.destination_location.nil? ? "" : shipment.generate_abv(destination_location.state).upcase %></td>
           <td><%= shipment.destination_location.nil? ? "" : shipment.destination_location.country %></td>
           <td><%= shipment.distance %></td>
           <td><%= shipment.billed_weight.nil? ? 0 : shipment.billed_weight %> <%= (shipment.unit_of_weight.nil? || shipment.unit_of_weight == '') ? '' : shipment.unit_of_weight %></td>
