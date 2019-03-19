@@ -471,9 +471,7 @@ module ApplicationHelper
   end
 
   def truncate_html_to_sentence(notes)
-    puts "--------#{notes}"
     if !notes.nil?
-      puts ">>>>>>>>>>>#{truncate(ActionView::Base.full_sanitizer.sanitize(notes), length: 50, omission: '...')}"
       truncate(ActionView::Base.full_sanitizer.sanitize(notes), length: 50, omission: '...')
     else
       ""
