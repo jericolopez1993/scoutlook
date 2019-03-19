@@ -89,10 +89,11 @@
     padding: 0px;
   }
   .nav-pills .nav-link, .nav-pills > li > a {
-    background: #242a3078!important;
-    color: #fff;
+    color: #242a30;
+    border: 2px solid #242a30;
   }
   .nav-pills > li > a.active {
+    color: #fff!important;
     background: #242a30!important;
   }
   .tab-content {
@@ -106,6 +107,17 @@
   }
   .text-right.m-position-left {
     text-align: left!important;
+  }
+  #tile-tab-container {
+    position: relative!important;
+  }
+  .tile-container {
+    padding-top: 0!important;
+    padding-bottom: 50px!important;
+  }
+  #sortableKanbanBoards {
+    width: auto!important;
+    margin: 0!important;
   }
 }
 
