@@ -168,6 +168,26 @@ class CarriersController < ApplicationController
     redirect_to carriers_path, notice: 'Mail was successfully sent to carrier/s.'
   end
 
+  def compose_sms
+    @ids = params[:ids]
+    @phone_numbers = []
+    @carrier_contact_ids = Carrier.where("carriers.id IN (#{@ids})").distinct("poc_id").pluck("poc_id").join(",")
+    @contacts = CarrierContact.where("id IN (#{@carrier_contact_ids})").where("primary_eligible_texting = '1' OR secondary_phone_type = '1'")
+    puts "#{@contacts.to_json}"
+    @contacts.each do |contact|
+      if contact.primary_eligible_texting && contact.primary_phone_type == "Cell"
+        @phone_numbers.push(contact.primary_phone)
+      elsif contact.secondary_eligible_texting && contact.secondary_phone_type == "Cell"
+        @phone_numbers.push(contact.secondary_phone)
+      end
+    end
+    @phone_numbers = @phone_numbers.join(",")
+    render 'global_pages/sms_form', :layout => 'mail'
+  end
+
+  def send_sms
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_carrier
@@ -175,7 +195,7 @@ class CarriersController < ApplicationController
       authorize @carrier
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters fr om the scary internet, only allow the white list through.
     def carrier_params
       params.require(:carrier).permit(:relationship_owner, :carrier_setup, :company_name, :carrier_id, :parent_id, :category, :sales_priority, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval, :score_card, :freight_guard, :years_in_business, :years_established, :owner_operators, :reefers, :dry_vans, :flat_beds, :teams, :contract_rates, :find_loads, :complete_record, :total_fleet_size, :website, :linkedin, :last_contact, :last_contact_by, :power_units, :company_drivers, :load_last_month, :load_last_6_month, :approved, :mc_number, :last_load_date)
     end

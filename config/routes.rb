@@ -31,6 +31,8 @@ Rails.application.routes.draw do
       delete  'remove_attachment'
       post     'compose_mail'
       post     'send_mail'
+      post     'compose_sms'
+      post     'send_sms'
     end
   end
   resources :shipper_lanes
@@ -42,6 +44,8 @@ Rails.application.routes.draw do
       delete  'remove_attachment'
       post     'compose_mail'
       post     'send_mail'
+      post     'compose_sms'
+      post     'send_sms'
     end
   end
   resources :logs

@@ -156,6 +156,26 @@ class ShippersController < ApplicationController
     redirect_to shippers_path, notice: 'Mail was successfully sent to shipper/s.'
   end
 
+  def compose_sms
+    @ids = params[:ids]
+    @phone_numbers = []
+    @shipper_contact_ids = Shipper.where("shippers.id IN (#{@ids})").distinct("poc_id").pluck("poc_id").join(",")
+    @contacts = ShipperContact.where("id IN (#{@shipper_contact_ids})").where("primary_eligible_texting = '1' OR secondary_phone_type = '1'")
+    puts "#{@contacts.to_json}"
+    @contacts.each do |contact|
+      if contact.primary_eligible_texting && contact.primary_phone_type == "Cell"
+        @phone_numbers.push(contact.primary_phone)
+      elsif contact.secondary_eligible_texting && contact.secondary_phone_type == "Cell"
+        @phone_numbers.push(contact.secondary_phone)
+      end
+    end
+    @phone_numbers = @phone_numbers.join(",")
+    render 'global_pages/sms_form', :layout => 'mail'
+  end
+
+  def send_sms
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_shipper

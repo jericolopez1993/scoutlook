@@ -1,0 +1,53 @@
+<style>
+  .modal-backdrop {
+    position: unset;
+  }
+</style>
+
+<div class="header-inverse">
+  <h1 class="pull-left">
+    Send a SMS
+  </h1>
+  <span class="pull-right">
+    <button class="btn btn-danger btn-xs" onclick="window.history.back();">Discard</button>
+    <button id="send_mail" class="btn btn-primary btn-xs">Send</button>
+  </span>
+</div>
+<!-- begin vertical-box -->
+<div class="vertical-box">
+  <!-- begin vertical-box-row -->
+  <div class="vertical-box-row bg-white">
+    <%= form_tag("/#{params[:controller]}/send_sms", id: 'sms_form') do %>
+      <!-- begin email to -->
+      <div class="email-to">
+        <label class="control-label">To:</label>
+        <input name="to" id="send-to" class="primary line-mode" value="<%= @phone_numbers %>">
+        <input type="hidden" name="ids" value="<%= @ids %>">
+
+      </div>
+      <!-- end email subject -->
+      <!-- begin email content -->
+      <div class="email-content p-t-15">
+        <%= hidden_field_tag :content, @content%>
+        <%= text_area_tag(:content_body, '', class: 'textarea form-control', placeholder: "Compose message...", cols: 20, rows: 20) %>
+      </div>
+<div class="email-subject" style="padding-top: 1%;padding-bottom: 2%;">
+  <input type="checkbox" name="record_activity" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" />
+  Record in Activity
+</div>
+
+    <% end %>
+  </div>
+  <!-- end vertical-box-row -->
+</div>
+<!-- end vertical-box -->
+<script language="javascript">
+  var availableTags = [];
+  $(document).ready(function () {
+    $('#send-to').tagit({
+      fieldName: 'to[]',
+      availableTags: availableTags
+    });
+  });
+
+</script>

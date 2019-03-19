@@ -167,6 +167,12 @@
           $.redirect('/shippers/compose_mail', {'ids': rows_selected.join(",")});
         }
     });
+    $('#send-text-btn').on('click', function(){
+        var rows_selected = $('#shipper_table').DataTable().column(0).checkboxes.selected();
+        if (rows_selected.join(",") != ""){
+          $.redirect('/shippers/compose_sms', {'ids': rows_selected.join(",")});
+        }
+    });
   });
 </script>
 
