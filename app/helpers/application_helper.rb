@@ -502,7 +502,7 @@ module ApplicationHelper
     elsif loc == "US-Midwest"
       "US-MW"
     elsif loc == "US-Northeast (No Bronx)"
-      "US-NE <br><span style='font-size: 8px'>No BXN</span>"
+      "US-NE (No BXN)"
     else
       loc
     end
