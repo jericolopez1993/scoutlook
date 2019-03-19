@@ -99,7 +99,7 @@
     tiggerChangeOnSelectCountry('loc_country', '<%= shipper_location.country %>')
   <% end %>
   <% if shipper_location.state.present? %>
-    tiggerChangeOnSelectCountry('loc_state', '<%= shipper_location.state.upcase %>')
+    tiggerChangeOnSelectCountry('loc_state', '<%= shipper_location.state %>')
   <% end %>
   $("#shipper_location_shipping_day").val(<%= raw shipper_location.shipping_day_to_array %>);
   $("#shipper_location_receiving_day").val(<%= raw shipper_location.receiving_day_to_array %>);
