@@ -158,7 +158,7 @@
             &nbsp;&nbsp;<%= link_to 'Show', shipper, :class => 'btn btn-info' %>
           <% end %>
           <% if params[:action] == 'new' %>
-            &nbsp;&nbsp;<%= link_to 'Back', shippers_path, :class => 'btn btn-default' %>
+            &nbsp;&nbsp;<%= link_to 'Back', shipper_path(:id => @shipper_contact.shipper_id), :class => 'btn btn-default' %>
           <% end %>
         </div>
       </div>

@@ -158,7 +158,7 @@
             &nbsp;&nbsp;<%= link_to 'Show', carrier, :class => 'btn btn-info' %>
           <% end %>
           <% if params[:action] == 'new' %>
-            &nbsp;&nbsp;<%= link_to 'Back', carriers_path, :class => 'btn btn-default' %>
+            &nbsp;&nbsp;<%= link_to 'Back', carrier_path(:id => @carrier_contact.carrier_id), :class => 'btn btn-default' %>
           <% end %>
         </div>
       </div>
