@@ -1,10 +1,3 @@
-<style>
-@media (max-width: 767px) {
-  .text-right {
-    text-align: left!important;
-  }
-}
-</style>
 <!-- begin page-header -->
 <div class="header-darkblue">
   <h1 class="pull-left">
@@ -33,68 +26,68 @@
         </div>
       <% end %>
       <div class="form-group row m-b-15">
-        <%= form.label :contact_type, 'Contact Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :contact_type, 'Contact Type:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :contact_type, options_for_select(['Owner', 'President/GM/CEO', 'Sales', 'Sales Manager', 'Dispatch & Operations', 'Customer Service', 'Accounts Receivable'], shipper_contact.contact_type),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-8 col-form-label">is it Primary Ops Contact?</label>
+        <label class="text-right m-position-left col-md-2 col-8 col-form-label">is it Primary Ops Contact?</label>
         <div class="col-md-9 col-4">
           <input type="checkbox" name="poc"   data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= is_poc ? 'checked' : '' %> >
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-8 col-form-label">is it Primary Decision Maker? </label>
+        <label class="text-right m-position-left col-md-2 col-8 col-form-label">is it Primary Decision Maker? </label>
         <div class="col-md-9 col-4">
           <input type="checkbox" name="pdm"  data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)"  <%= is_pdm ? 'checked' : '' %> >
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-8 col-form-label">is it Alternate Decision Maker? </label>
+        <label class="text-right m-position-left col-md-2 col-8 col-form-label">is it Alternate Decision Maker? </label>
         <div class="col-md-9 col-4">
           <%= form.check_box :adm, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper_contact.adm %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-8 col-form-label">same as Head Office or Master Shipper Record? </label>
+        <label class="text-right m-position-left col-md-2 col-8 col-form-label">same as Head Office or Master Shipper Record? </label>
         <div class="col-md-9 col-4">
           <%= form.check_box :same_ho, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)', change: 'check-switchery-state-text' }, checked: shipper_contact.same_ho %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :first_name, 'First Name *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :first_name, 'First Name *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :first_name, class: 'form-control', 'data-parsley-required' => true %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :last_name, 'Last Name *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :last_name, 'Last Name *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :last_name, class: 'form-control', 'data-parsley-required' => true %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :title, 'Title:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :title, 'Title:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :title, class: 'form-control' %>
         </div>
       </div>
       <%= render 'global_subforms/address_form_without_location_id', form: form %>
       <div class="form-group row m-b-15">
-        <%= form.label :linkedin_link, 'LinkedIn:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :linkedin_link, 'LinkedIn:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.url_field :linkedin_link, class: 'form-control'%>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :email, 'Email Address *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :email, 'Email Address *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.email_field :email, class: 'form-control', 'data-parsley-required' => true %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :primary_phone, 'Primary Phone *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :primary_phone, 'Primary Phone *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-3 col-sm-2">
           <%= form.text_field :primary_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", 'data-parsley-required' => true %>
         </div>
@@ -106,13 +99,13 @@
         </div>
       </div>
       <div class="form-group row m-b-15" id="eligible_first">
-        <%= form.label :notes, 'Eligible for Texting (Primary):', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :notes, 'Eligible for Texting (Primary):', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
             <%= form.check_box :primary_eligible_texting, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper_contact.primary_eligible_texting %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :secondary_phone, 'Secondary Phone *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :secondary_phone, 'Secondary Phone *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-3 col-sm-2">
           <%= form.text_field :secondary_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", 'data-parsley-required' => true %>
         </div>
@@ -124,13 +117,13 @@
         </div>
       </div>
       <div class="form-group row m-b-15" id="eligible_second">
-        <%= form.label :notes, 'Eligible for Texting (Secondary):', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :notes, 'Eligible for Texting (Secondary):', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.check_box :secondary_eligible_texting, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper_contact.secondary_eligible_texting %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :notes, 'Notes:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_area(:notes, cols: 20, rows: 5, class: 'tinymce') %>
         </div>
@@ -138,19 +131,19 @@
 
 
       <!-- <div class="form-group row m-b-15">
-        <%#= form.label :password, 'Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%#= form.label :password, 'Password:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%#= form.password_field :password, class: 'form-control' %>
         </div>
       </div> -->
       <!-- <div class="form-group row m-b-15">
-        <%#= form.label :password_confirmation, 'Confirm Password:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%#= form.label :password_confirmation, 'Confirm Password:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%#= form.password_field :password_confirmation, class: 'form-control' %>
         </div>
       </div> -->
       <div class="form-group row m-b-0">
-        <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
+        <label class="text-right m-position-left col-md-2 col-sm-4 col-form-label">&nbsp;</label>
         <div class="col-md-9 col-sm-8">
           <%= form.submit 'Submit', :class => 'btn btn-primary' %>
           <% shipper = Shipper.find(shipper_contact.shipper_id)%>

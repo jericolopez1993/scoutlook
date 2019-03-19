@@ -104,6 +104,9 @@
   .dt-buttons.btn-group {
     padding-top: 25px!important;
   }
+  .text-right.m-position-left {
+    text-align: left!important;
+  }
 }
 
 @media screen and (max-width: 768px) {

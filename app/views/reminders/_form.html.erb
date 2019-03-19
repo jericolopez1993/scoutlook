@@ -1,10 +1,3 @@
-<style>
-@media (max-width: 767px) {
-  .text-right {
-    text-align: left!important;
-  }
-}
-</style>
 <!-- begin page-header -->
 <%#= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Reminders' : "Edit Reminder - #{reminder.first_name} #{reminder.last_name}" %>
 <!-- end page-header -->
@@ -55,21 +48,21 @@
         <% else %>
           <% if @client_type == "carrier" || reminder.carrier %>
             <div class="form-group row m-b-15">
-              <%= form.label :carrier_id, 'Carrier:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+              <%= form.label :carrier_id, 'Carrier:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
               <div class="col-md-9 col-sm-8">
                 <%= collection_select :reminder, :carrier_id, Carrier.all.order("company_name ASC"), :id, :company_name, {prompt: true, :selected => reminder.carrier_id}, {class: 'form-control'} %>
               </div>
             </div>
           <% elsif @client_type == "shipper" || reminder.shipper  %>
             <div class="form-group row m-b-15">
-              <%= form.label :shipper_id, 'Shipper:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+              <%= form.label :shipper_id, 'Shipper:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
               <div class="col-md-9 col-sm-8">
                 <%= collection_select :reminder, :shipper_id, Shipper.all.order("company_name ASC"), :id, :company_name, {prompt: true, :selected => reminder.shipper_id}, {class: 'form-control'} %>
               </div>
             </div>
           <% elsif @client_type == "activity" || reminder.activity  %>
             <div class="form-group row m-b-15">
-              <%= form.label :activity_id, 'Activity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+              <%= form.label :activity_id, 'Activity:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
               <div class="col-md-9 col-sm-8">
                 <%= collection_select :reminder, :activity_id, Activity.all.order("campaign_name ASC"), :id, :display_select_name, {prompt: true, :selected => reminder.shipper_id}, {class: 'form-control'} %>
               </div>
@@ -77,35 +70,35 @@
           <% end %>
         <% end %>
         <div class="form-group row m-b-15">
-          <%= form.label :reminder_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :reminder_type, 'Type:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.select :reminder_type, options_for_select(['Initial Interview', 'Check Capacity', 'Follow-up'], reminder.reminder_type),{:include_blank => true}, class: 'form-control', id: "reminder_type" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
-          <%= form.label :reminder_date, 'Reminder Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :reminder_date, 'Reminder Date:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-4 col-sm-8">
             <%= form.text_field :reminder_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
           </div>
-          <%= form.label :reminder_interval, 'Reminder Interval:', class: 'text-right col-md-1 col-sm-4 col-form-label' %>
+          <%= form.label :reminder_interval, 'Reminder Interval:', class: 'text-right m-position-left col-md-1 col-sm-4 col-form-label' %>
           <div class="col-md-4 col-sm-8">
             <%= form.select :reminder_interval, options_for_select([['', 0],['1w', 7], ['2w', 14], ['1M', 30], ['3M', 90], ['6M', 180], ['12M', 360]], reminder.reminder_interval),{}, class: 'form-control', id: "reminder_interval" %>
           </div>
         </div>
         <div class="form-group row m-b-15 switch-block">
-          <label class="text-right col-md-2 col-4 col-form-label">is Recurring?</label>
+          <label class="text-right m-position-left col-md-2 col-4 col-form-label">is Recurring?</label>
           <div class="col-md-9 col-8">
               <%= form.check_box :recurring, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: reminder.recurring %>
           </div>
         </div>
         <div class="form-group row m-b-15">
-          <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :notes, 'Notes:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.text_area(:notes, cols: 20, rows: 5, class: 'tinymce') %>
           </div>
         </div>
         <div class="form-group row m-b-0">
-          <label class="text-right col-md-2 col-sm-4 col-form-label">&nbsp;</label>
+          <label class="text-right m-position-left col-md-2 col-sm-4 col-form-label">&nbsp;</label>
           <div class="col-md-9 col-sm-8">
             <%= form.submit 'Submit', :class => 'btn btn-primary' %>
             <% if params[:action] == 'edit' %>

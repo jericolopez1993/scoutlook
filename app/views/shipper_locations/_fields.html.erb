@@ -1,42 +1,35 @@
-<style>
-@media (max-width: 767px) {
-  .text-right {
-    text-align: left!important;
-  }
-}
-</style>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :address, 'Address *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :address, 'Address *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.text_field :address, class: 'form-control', :value => shipper_location.address, :autocomplete => "none", 'data-parsley-required' => true  %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :city, 'City / Town *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :city, 'City / Town *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.text_field :city, class: 'form-control', :value => shipper_location.city, :autocomplete => "none", 'data-parsley-required' => true  %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :state, 'Province / State *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :state, 'Province / State *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "loc_state", :autocomplete => "none", 'data-parsley-required' => true  %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :postal, 'Postal / Zip:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :postal, 'Postal / Zip:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.text_field :postal, class: 'form-control', :value => shipper_location.postal, :id => "loc_postal", :autocomplete => "none" %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :country, 'Country *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :country, 'Country *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.select :country, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => "loc_country", 'data-parsley-required' => true  %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :phone, 'Phone # *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :phone, 'Phone # *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.text_field :phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", :value => shipper_location.phone, 'data-parsley-required' => true  %>
   </div>
@@ -44,7 +37,7 @@
 
 <% if params[:controller] != "clients" && params[:controller] != "shippers" %>
   <div class="form-group row m-b-15">
-    <label class="text-right col-md-2 col-4 col-form-label"> is Head Office or MCR?</label>
+    <label class="text-right m-position-left col-md-2 col-4 col-form-label"> is Head Office or MCR?</label>
     <div class="col-md-9 col-8">
       <input type="checkbox" name="head_office" data-render="switchery" data-theme="default" data-secondary-color="rgb(255, 91, 87)" data-change="check-switchery-state-same-office" <%= is_head_office ? 'checked' : '' %> />
     </div>
@@ -52,38 +45,38 @@
 <% end %>
 
 <div class="form-group row m-b-15">
-  <label class="text-right col-md-2 col-4 col-form-label"> is Origin?</label>
+  <label class="text-right m-position-left col-md-2 col-4 col-form-label"> is Origin?</label>
   <div class="col-md-9 col-8">
     <%= form.check_box :is_origin, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper_location.is_origin %>
   </div>
 </div>
 <div class="form-group row m-b-15">
-  <label class="text-right col-md-2 col-4 col-form-label"> is Destination? </label>
+  <label class="text-right m-position-left col-md-2 col-4 col-form-label"> is Destination? </label>
   <div class="col-md-9 col-8">
     <%= form.check_box :is_destination, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper_location.is_destination %>
   </div>
 </div>
 
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :phone, 'Shipping Days:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :phone, 'Shipping Days:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.select :shipping_day, options_for_select(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], shipper_location.shipping_day),{:include_blank => false}, class: 'form-control', multiple: true %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :phone, 'Shipping Hours:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :phone, 'Shipping Hours:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.number_field :shipping_hour, class: 'form-control', :value => shipper_location.shipping_hour %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :phone, 'Receiving Days:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :phone, 'Receiving Days:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.select :receiving_day, options_for_select(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], shipper_location.receiving_day),{:include_blank => false}, class: 'form-control', multiple: true %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :phone, 'Receiving Hours:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :phone, 'Receiving Hours:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.number_field :receiving_hour, class: 'form-control', :value => shipper_location.receiving_hour %>
   </div>

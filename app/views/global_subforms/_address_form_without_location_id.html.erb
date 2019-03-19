@@ -1,29 +1,29 @@
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :address, 'Address:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :address, 'Address:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.text_field :address, class: 'form-control', :id => 'address', :autocomplete => "none" %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :city, 'City / Town:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.text_field :city, class: 'form-control', :id => 'city', :autocomplete => "none" %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :state, 'Province / State:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.select :state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown', :id => 'state', :autocomplete => "none" %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :postal, 'Postal / Zip:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :postal, 'Postal / Zip:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.text_field :postal, class: 'form-control', :id => 'postal', :autocomplete => "none" %>
   </div>
 </div>
 <div class="form-group row m-b-15 address-fields">
-  <%= form.label :country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+  <%= form.label :country, 'Country:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
   <div class="col-md-9 col-sm-8">
     <%= form.select :country, options_for_select([]), {}, class: 'form-control static-dropdown', :id => 'country' %>
   </div>

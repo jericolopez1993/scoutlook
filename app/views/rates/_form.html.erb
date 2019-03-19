@@ -1,10 +1,3 @@
-<style>
-@media (max-width: 767px) {
-  .text-right {
-    text-align: left!important;
-  }
-}
-</style>
 <!-- begin page-header -->
 <% if @rate.activity %>
   <div class="<% if params[:action] != 'new' %><% if @rate.activity.carrier %> header-scout <% elsif @rate.activity.shipper  %> header-darkblue <% end %><% else %> header-yelloworange <% end %>">
@@ -47,19 +40,19 @@
       <hr>
       <h4 class="text-inverse">Origin</h4>
       <div class="form-group row m-b-15">
-        <%= form.label :origin_city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :origin_city, 'City / Town:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :origin_city, class: 'form-control', :autocomplete => "none" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :origin_state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :origin_state, 'Province / State:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :origin_state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :origin_country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :origin_country, 'Country:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :origin_country, options_for_select([]), {}, class: 'form-control static-dropdown' %>
         </div>
@@ -67,25 +60,25 @@
       <hr>
       <h4 class="text-inverse">Destination</h4>
       <div class="form-group row m-b-15">
-        <%= form.label :destination_city, 'City / Town:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :destination_city, 'City / Town:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :destination_city, class: 'form-control', :autocomplete => "none" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :destination_state, 'Province / State:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :destination_state, 'Province / State:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :destination_state, options_for_select([]),{:include_blank => true}, class: 'form-control static-dropdown' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :destination_country, 'Country:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :destination_country, 'Country:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :destination_country, options_for_select([]), {}, class: 'form-control static-dropdown' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :miles, 'Miles:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :miles, 'Miles:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :miles, class: 'form-control', :readonly => true %>
         </div>
@@ -100,28 +93,28 @@
       <% elsif @previous_controller == "rates" %>
         <% if @client_type == "carrier"%>
           <div class="form-group row m-b-15">
-            <%= form.label :carrier_id, 'Carrier:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :carrier_id, 'Carrier:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= collection_select :rate, :carrier_id, Carrier.all.order("company_name ASC"), :id, :company_name, {prompt: true, :selected => @rate_carrier_id}, {class: 'form-control'} %>
             </div>
           </div>
         <% elsif @client_type == "shipper" %>
           <div class="form-group row m-b-15">
-            <%= form.label :shipper_id, 'Shipper:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :shipper_id, 'Shipper:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= collection_select :rate, :shipper_id, Shipper.all, :id, :company_name, {prompt: true, :selected => @rate_shipper_id}, {class: 'form-control'} %>
             </div>
           </div>
         <% end %>
         <div class="form-group row m-b-15">
-          <%= form.label :activity_id, 'Activity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :activity_id, 'Activity:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.select :activity_id, options_for_select([]),{}, class: 'form-control' %>
           </div>
         </div>
       <% else %>
         <div class="form-group row m-b-15">
-          <%= form.label :activity_id, 'Activity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :activity_id, 'Activity:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= collection_select :rate, :activity_id, @activities, :id, :display_select_name, {prompt: true}, {class: 'form-control'} %>
           </div>
@@ -129,7 +122,7 @@
       <% end %>
       <% if @previous_controller != "activities" %>
         <div class="form-group row m-b-15">
-          <%= form.label :contact, 'Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :contact, 'Contact:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <% if @previous_controller == "carriers" %>
               <%= collection_select :rate, :carrier_contact_id, CarrierContact.where(carrier_id: rate.carrier_id), :id, :full_name, {prompt: true}, {class: 'form-control'} %>
@@ -145,73 +138,73 @@
         </div>
       <% end %>
       <div class="form-group row m-b-15">
-        <%= form.label :rate_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :rate_type, 'Type:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :rate_type, options_for_select(['Spot', 'Signal'], rate.rate_type),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :picks, 'Picks:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :picks, 'Picks:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :picks, options_for_select(['1', '2', '3', '4', '5'], rate.picks),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :drops, 'Drops:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :drops, 'Drops:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :drops, options_for_select(['1', '2', '3', '4', '5'], rate.drops),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-sm-4 col-form-label">Team:</label>
+        <label class="text-right m-position-left col-md-2 col-sm-4 col-form-label">Team:</label>
         <div class="col-md-9 col-sm-8">
           <%= form.select :team, options_for_select(['Yes', 'No'], rate.team),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :commodities, 'Commodities:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :commodities, 'Commodities:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :commodities, Shipper::COMMODITY.collect {|r| [ r, r ] },{:include_blank => false, :selected => rate.commodities}, class: 'form-control multiple-select2', multiple: true %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :bid, 'Bid:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :bid, 'Bid:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :bid, class: 'form-control', value: rate.bid, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :ask, 'Ask:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :ask, 'Ask:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :ask, class: 'form-control', value: rate.ask, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <label class="text-right col-md-2 col-4 col-form-label">Accepted:</label>
+        <label class="text-right m-position-left col-md-2 col-4 col-form-label">Accepted:</label>
         <div class="col-md-9 col-8">
           <%= form.check_box :accepted, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: rate.accepted %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :cost, 'Cost:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :cost, 'Cost:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :cost, class: 'form-control', value: rate.cost, 'data-inputmask' => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :money_currency, 'Currency:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :money_currency, 'Currency:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :money_currency, options_for_select(['US', 'CDN'], "#{rate.money_currency.present? ? rate.money_currency : 'CDN'}"),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :mc_number, 'MC Number:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :mc_number, 'MC Number:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :mc_number, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :notes, 'Notes:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :notes, class: 'form-control' %>
         </div>

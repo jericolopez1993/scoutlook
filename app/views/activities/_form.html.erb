@@ -1,10 +1,3 @@
-<style>
-@media (max-width: 767px) {
-  .text-right {
-    text-align: left!important;
-  }
-}
-</style>
 <!-- begin page-header -->
 <% if @client_type == "carrier" || @previous_controller == "carriers" %>
   <div class="header-scout">
@@ -54,14 +47,14 @@
       <% else %>
         <% if @client_type == "carrier" %>
           <div class="form-group row m-b-15">
-            <%= form.label :carrier_id, 'Carrier:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :carrier_id, 'Carrier:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= collection_select :activity, :carrier_id, Carrier.all, :id, :company_name, {prompt: true}, {class: 'form-control'} %>
             </div>
           </div>
         <% elsif @client_type == "shipper" %>
           <div class="form-group row m-b-15">
-            <%= form.label :shipper_id, 'Shipper:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :shipper_id, 'Shipper:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= collection_select :activity, :shipper_id, Shipper.all, :id, :company_name, {prompt: true}, {class: 'form-control'} %>
             </div>
@@ -69,31 +62,31 @@
         <% end %>
       <% end %>
       <div class="form-group row m-b-15">
-        <%= form.label :campaign_name, 'Campaign:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :campaign_name, 'Campaign:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :campaign_name, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :date_stamp, 'Open Date:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :date_stamp, 'Open Date:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_field :date_stamp, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: (activity.date_stamp.nil? ? Time.now.strftime('%m/%d/%Y').to_s : activity.date_stamp.strftime('%m/%d/%Y').to_s), :id => "date_stamp"%>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :activity_type, 'Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :activity_type, 'Type:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :activity_type, options_for_select(['Initial Prospecting', 'Follow-up Prospecting', 'Initial Set-Up', 'Update Information', 'Courtesy', 'Schedule, Rates, Booking', 'RFP or Contacts', 'Proposal', 'Email'], activity.activity_type), {:include_blank => false}, class: 'form-control', id: 'engagement_type' %>
         </div>
       </div>
       <div class="form-group row m-b-15 engagement-fields"  style="display: none;">
-        <%= form.label :engagement_type, 'Engagement Type:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :engagement_type, 'Engagement Type:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :engagement_type, options_for_select(['Phone', 'In-Person', 'E-mail'], activity.engagement_type),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :user_id, 'Contact:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :user_id, 'Contact:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <% if @previous_controller == "carriers" ||  @client_type == "carrier" %>
             <%= collection_select :activity, :carrier_contact_id, CarrierContact.where(carrier_id: activity.carrier_id), :id, :full_name, {prompt: true}, {class: 'form-control'} %>
@@ -104,31 +97,31 @@
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :annual_value, 'Annual Value:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :annual_value, 'Annual Value:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+'], activity.annual_value),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :loads_per_week, 'Loads Per Week:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :loads_per_week, 'Loads Per Week:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :loads_per_week, options_for_select(['1', '2-5', '6-10', '11-25', '26-50', '>50'], activity.loads_per_week),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :proposal_pdf, 'Proposal PDF:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :proposal_pdf, 'Proposal PDF:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.file_field :proposal_pdf, multiple: true  %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :status, 'Status:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :status, 'Status:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :status, options_for_select([['Open', true], ['Closed', false]], activity.status),{}, class: 'form-control', id: "engagement_status" %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :other_notes, 'Other Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :other_notes, 'Other Notes:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.text_area(:other_notes, cols: 20, rows: 5,  class: 'tinymce notes')  %>
         </div>
@@ -137,26 +130,26 @@
         <hr>
         <h4 class="text-inverse">Outcome</h4>
         <div class="form-group row m-b-15 proposal-fields"  style="display: none;">
-          <%= form.label :outcome, 'Outcome:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :outcome, 'Outcome:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.select :outcome, options_for_select(['Win', 'Win - Forfeit', 'Win - Customer Drop', 'Learn'], activity.outcome), {:include_blank => true}, class: 'form-control', id: "engagement_outcome"%>
           </div>
         </div>
         <div class="form-group row m-b-15 win-fields" style="display: none;">
-          <%= form.label :credit_application, 'Complete Credit Application:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :credit_application, 'Complete Credit Application:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
           <%= form.file_field :credit_application, autocomplete: "credit_application", placeholder: 'Proposal PDF' %>
           </div>
         </div>
         <div class="form-group row m-b-15">
-          <%= form.label :reason, 'Reason:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :reason, 'Reason:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.select :reason, options_for_select(['Price', 'Availability', 'Service', 'Relationship', 'Timing', 'Satisficed', 'Other'], activity.reason), {:include_blank => true}, class: 'form-control', id: 'engagement_reason' %>
             <%= form.text_field :reason_other, value: activity.reason_other, "data-depends-on" => "#engagement_reason", "data-depends-on-value" => "Other", class: 'form-control', placeholder: 'Please specify the reason...' %>
           </div>
         </div>
         <div class="form-group row m-b-15">
-          <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :notes, 'Notes:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.text_area(:notes, cols: 20, rows: 5,  class: 'tinymce', :value => activity.notes)  %>
           </div>
@@ -166,7 +159,7 @@
         <hr>
         <h4 class="text-inverse ">Load Details</h4>
         <div class="form-group row m-b-15 win-fields">
-          <%= form.label :load_numbers, 'Load Numbers:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+          <%= form.label :load_numbers, 'Load Numbers:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-9 col-sm-8">
             <%= form.number_field :load_numbers, class: 'form-control' %>
           </div>

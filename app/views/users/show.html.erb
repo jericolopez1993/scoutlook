@@ -1,10 +1,3 @@
-<style>
-@media (max-width: 767px) {
-  .text-right {
-    text-align: left!important;
-  }
-}
-</style>
 <!-- begin page-header -->
 <div class="header-violet">
   <h1 class="pull-left">
@@ -27,32 +20,32 @@
   <div class="panel-body">
     <h4 class="text-inverse">Details</h4>
     <div class="row">
-      <label class="col-md-2 text-right col-form-label">Administrator:</label>
+      <label class="col-md-2 text-right m-position-left col-form-label">Administrator:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @user.has_role?(:admin) ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
       </div>
     </div>
     <div class="row">
-      <label class="col-md-2 text-right col-form-label">in Relationship Owner choices?</label>
+      <label class="col-md-2 text-right m-position-left col-form-label">in Relationship Owner choices?</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @user.ro ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
       </div>
     </div>
     <div class="row">
-      <label class="col-md-2 text-right col-form-label">in Carrier Setup choices?</label>
+      <label class="col-md-2 text-right m-position-left col-form-label">in Carrier Setup choices?</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @user.cs ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
       </div>
     </div>
     <div class="row">
-      <label class="col-md-2 text-right col-form-label">Name:</label>
+      <label class="col-md-2 text-right m-position-left col-form-label">Name:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @user.first_name.capitalize %>&nbsp;<%= @user.last_name.capitalize %>
       </div>
     </div>
 
     <div class="row">
-      <label class="col-md-2 text-right col-form-label">E-mail:</label>
+      <label class="col-md-2 text-right m-position-left col-form-label">E-mail:</label>
       <div class="col-md-9 lbl-padding-t">
         <%= @user.email %>
       </div>

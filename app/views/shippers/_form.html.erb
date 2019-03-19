@@ -1,10 +1,3 @@
-<style>
-  @media (max-width: 767px) {
-    .text-right {
-      text-align: left!important;
-    }
-  }
-</style>
 <!-- begin page-header -->
 <div class="header-darkblue">
   <h1 class="pull-left">
@@ -35,163 +28,163 @@
             </div>
           <% end %>
           <div class="form-group row m-b-15">
-            <label class="text-right col-md-2 col-6 col-form-label" style="font-size: 16px;">Approved to do business?</label>
+            <label class="text-right m-position-left col-md-2 col-6 col-form-label" style="font-size: 16px;">Approved to do business?</label>
             <div class="col-md-9 col-6">
               <%= form.check_box :approved, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper.approved %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="text-right col-md-2 col-6 col-form-label" style="font-size: 16px;">Complete Record *:</label>
+            <label class="text-right m-position-left col-md-2 col-6 col-form-label" style="font-size: 16px;">Complete Record *:</label>
             <div class="col-md-9 col-6">
               <%= form.check_box :complete_record, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper.complete_record %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :sales_priority, 'Sales Priority:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :sales_priority, 'Sales Priority:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :sales_priority, options_for_select(['New', 'AA', 'A', 'B', 'C', 'D', 'U'], shipper.sales_priority), {:include_blank => true}, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :company_name, 'Company Name *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :company_name, 'Company Name *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.text_field :company_name, class: 'form-control', 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :relationship_owner, 'Relationship Owner:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :relationship_owner, 'Relationship Owner:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :relationship_owner, User.where(:ro => true).collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => shipper.relationship_owner}, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :load_last_month, 'Loads Last Month:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :load_last_month, 'Loads Last Month:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.number_field :load_last_month, class: 'form-control', :disabled => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :load_last_6_month, 'Loads Last 6 Months:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :load_last_6_month, 'Loads Last 6 Months:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.number_field :load_last_6_month, class: 'form-control', :disabled => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :shipper_type, 'Shipper Type *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :shipper_type, 'Shipper Type *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :shipper_type, options_for_select(['Broker', 'Shipper', 'Receiver', 'Wholesaler'], shipper.shipper_type), {:include_blank => false}, class: 'form-control shipper-type-multiple-select2', multiple: true, 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="text-right col-md-2 col-4 col-form-label">Control Freight:</label>
+            <label class="text-right m-position-left col-md-2 col-4 col-form-label">Control Freight:</label>
             <div class="col-md-9 col-8">
               <%= form.check_box :control_freight, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper.control_freight %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :loads_per_month, 'Loads Per Month *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :loads_per_month, 'Loads Per Month *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :loads_per_month, options_for_select(['0-10', '11-50', '51-100', '> 100'], shipper.loads_per_month), {:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :spend_per_year, 'Spend Per Year *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :spend_per_year, 'Spend Per Year *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :spend_per_year, options_for_select(['< 1M', '1M-5M', '5M-10M', '10M-25M', '> 25M'], shipper.spend_per_year), {:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :commodities, 'Commodities *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :commodities, 'Commodities *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :commodities, Shipper::COMMODITY.collect {|r| [ r, r ] },{:include_blank => false, :selected => shipper.commodities}, class: 'form-control multiple-select2', multiple: true, 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :commodities_notes, 'Commodities Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :commodities_notes, 'Commodities Notes:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.text_area(:commodities_notes, cols: 20, rows: 5, class: 'tinymce') %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :blue_book_score, 'Blue Book Score:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :blue_book_score, 'Blue Book Score:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.text_field :blue_book_score, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :blue_book_url, 'Blue Book Page URL:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :blue_book_url, 'Blue Book Page URL:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.url_field :blue_book_url, class: 'form-control'%>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :buying_criteria, 'Buying Criteria:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :buying_criteria, 'Buying Criteria:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :buying_criteria, options_for_select(['Price', 'Communication', 'Service', 'Transit Time'], shipper.buying_criteria), {:include_blank => true}, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="text-right col-md-2 col-4 col-form-label">Works with Brokers?:</label>
+            <label class="text-right m-position-left col-md-2 col-4 col-form-label">Works with Brokers?:</label>
             <div class="col-md-9 col-8">
               <%= form.check_box :works_with_brokers, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper.works_with_brokers %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :price_sensitivity, 'Price Sensitivity:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :price_sensitivity, 'Price Sensitivity:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :price_sensitivity, options_for_select(['Above Market', 'Market', 'Below Market', 'Stinky'], shipper.price_sensitivity), {:include_blank => true}, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :challenges, 'Challenges:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :challenges, 'Challenges:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.text_area(:challenges, cols: 20, rows: 10, class: 'tinymce') %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :current_carrier_mix, 'Current Carrier Mix:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :current_carrier_mix, 'Current Carrier Mix:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.text_area(:current_carrier_mix, cols: 20, rows: 10, class: 'tinymce') %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <label class="text-right col-md-2 col-4 col-form-label">Prefer Teams?:</label>
+            <label class="text-right m-position-left col-md-2 col-4 col-form-label">Prefer Teams?:</label>
             <div class="col-md-9 col-8">
               <%= form.check_box :prefer_teams, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: shipper.prefer_teams %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :notes, 'Notes:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :notes, 'Notes:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.text_area(:notes, cols: 20, rows: 5, class: 'tinymce') %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :years_established, 'Year Established *:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :years_established, 'Year Established *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :years_established, (Time.zone.now.year - 80)..(Time.zone.now.year),{:include_blank => true, :selected => (shipper.years_established.blank? ? '' : shipper.years_established)}, class: 'form-control', id: 'years_established', 'data-parsley-required' => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :years_in_business, 'Years in Business:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :years_in_business, 'Years in Business:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.number_field :years_in_business, class: 'form-control', id: 'years_in_business', disabled: true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :website, 'Website:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :website, 'Website:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.url_field :website, class: 'form-control'%>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :linkedin, 'LinkedIn:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :linkedin, 'LinkedIn:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.url_field :linkedin, class: 'form-control'%>
             </div>
           </div>
           <div class="form-group row m-b-15">
-            <%= form.label :attachment_file, 'Attachements:', class: 'text-right col-md-2 col-sm-4 col-form-label' %>
+            <%= form.label :attachment_file, 'Attachements:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.file_field :attachment_file, multiple: true %>
             </div>
