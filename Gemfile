@@ -48,14 +48,14 @@ gem 'seed_dump'
 gem 'httparty'
 gem "audited", "~> 4.7"
 gem 'whenever', require: false
-gem 'pdfkit'
+gem 'pdfkit' # Reading and Generating a PDF from HTML Pages
 gem 'wkhtmltopdf-binary'
-gem 'truncate_html'
+gem 'truncate_html' # Removing HTML codes to Note fields
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem "aws-sdk-s3", require: false
-gem 'twilio-ruby'
-
+gem "aws-sdk-s3", require: false # AWS requirement for Active Storage
+gem 'twilio-ruby' # twilio gem
+gem 'e164'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

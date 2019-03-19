@@ -7,10 +7,11 @@ class TwilioTextMessenger
   end
 
   def text
+    converted_phone_number = E164.normalize(phone_number)
     client = Twilio::REST::Client.new
     client.messages.create({
       from: Rails.application.secrets.twilio_phone_number,
-      to: phone_number,
+      to: converted_phone_number,
       body: message
     })
   end

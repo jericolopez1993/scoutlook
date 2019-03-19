@@ -186,6 +186,15 @@ class CarriersController < ApplicationController
   end
 
   def send_sms
+    SendSmsJob.delay.perform_now(params[:to], params[:content_body])
+    if params[:record_activity].present?
+      if params[:ids].present? && !params[:ids].blank?
+        Carrier.where("carriers.id IN (#{params[:ids]})").each do |carrier|
+          Activity.create(:carrier_id => carrier.id, :campaign_name => "Text", :activity_type => "Text", :carrier_contact_id => carrier.poc_id, :other_notes => params[:content_body], :date_opened => Date.today)
+        end
+      end
+    end
+    redirect_to carriers_path, notice: 'SMS was successfully sent to carrier/s.'
   end
 
   private

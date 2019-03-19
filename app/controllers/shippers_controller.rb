@@ -174,6 +174,15 @@ class ShippersController < ApplicationController
   end
 
   def send_sms
+    SendSmsJob.delay.perform_now(params[:to], params[:content_body])
+    if params[:record_activity].present?
+      if params[:ids].present? && !params[:ids].blank?
+        Shipper.where("shippers.id IN (#{params[:ids]})").each do |shipper|
+          Activity.create(:shipper_id => shipper.id, :campaign_name => "Text", :activity_type => "Text", :shipper_contact_id => shipper.poc_id, :other_notes => params[:content_body], :date_opened => Date.today)
+        end
+      end
+    end
+    redirect_to shippers_path, notice: 'SMS was successfully sent to shipper/s.'
   end
 
   private
