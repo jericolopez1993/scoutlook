@@ -1,7 +1,7 @@
 # Change these
-role :web 'ubuntu@scoutlook-one.opinionated.software', primary: true
-role :app 'ubuntu@scoutlook-two.opinionated.software'
-role :db 'ubuntu@scoutlook-one.opinionated.software'
+role :web, 'ubuntu@scoutlook-one.opinionated.software', primary: true
+role :app, 'ubuntu@scoutlook-two.opinionated.software'
+role :db, 'ubuntu@scoutlook-one.opinionated.software'
 
 set :repo_url,        'git@gitlab.com:opinionatedsoft/scoutcrm.git'
 set :application,     'scout_prod'
