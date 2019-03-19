@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_173138) do
+ActiveRecord::Schema.define(version: 2019_03_19_211009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,6 +250,21 @@ ActiveRecord::Schema.define(version: 2019_03_13_173138) do
     t.integer "tile_tab_id"
   end
 
+  create_table "mailings", force: :cascade do |t|
+    t.string "recipient"
+    t.string "cc"
+    t.string "bcc"
+    t.string "sender"
+    t.string "subject"
+    t.text "content_body"
+    t.integer "user_id"
+    t.boolean "sent", default: false
+    t.boolean "trash", default: false
+    t.boolean "archive", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "master_invoices", force: :cascade do |t|
     t.string "shipment_type"
     t.integer "shipper_id"
@@ -292,6 +307,18 @@ ActiveRecord::Schema.define(version: 2019_03_13_173138) do
     t.datetime "updated_at", null: false
     t.integer "origin_location_id"
     t.integer "destination_location_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "recipient"
+    t.string "sender"
+    t.text "content_body"
+    t.integer "user_id"
+    t.boolean "sent", default: false
+    t.boolean "trash", default: false
+    t.boolean "archive", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rates", force: :cascade do |t|

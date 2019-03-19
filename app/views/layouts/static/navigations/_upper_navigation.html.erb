@@ -146,6 +146,8 @@
             <h6 class="dropdown-header">System Settings</h6>
             <a class="dropdown-item" href="<%= logs_path %>">Logs</a>
             <a class="dropdown-item" href="<%= users_path %>">Users</a>
+            <a class="dropdown-item" href="<%= mailings_path %>">Mails</a>
+            <a class="dropdown-item" href="<%= messages_path %>">SMS/Messages</a>
           <% end %>
           <div class="dropdown-divider"></div>
           <%= link_to('Log Out', destroy_user_session_path, method: :delete, class: "dropdown-item") %>

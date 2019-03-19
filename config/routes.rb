@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :mailings
+  resources :messages
   resources :tile_tabs
   resources :truck_tiles
   resources :load_tiles
