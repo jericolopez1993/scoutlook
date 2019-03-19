@@ -226,6 +226,12 @@
           <% if @previous_controller == "activities" %>
             <% activity = Activity.find(rate.activity_id)%>
               &nbsp;&nbsp;<%= link_to 'Back to Activity', activity, :class => 'btn btn-default' %>
+          <% elsif @previous_controller == "carriers" %>
+            <% carrier = Carrier.find(rate.carrier_id)%>
+              &nbsp;&nbsp;<%= link_to 'Back to Carrier', carrier, :class => 'btn btn-default' %>
+          <% elsif @previous_controller == "shippers" %>
+            <% shipper = Shipper.find(rate.shipper_id)%>
+              &nbsp;&nbsp;<%= link_to 'Back to Shipper', shipper, :class => 'btn btn-default' %>
           <% else %>
               &nbsp;&nbsp;<%= link_to 'Back', rates_path, :class => 'btn btn-default' %>
           <% end %>
