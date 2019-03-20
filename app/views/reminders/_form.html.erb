@@ -80,15 +80,15 @@
           <div class="col-md-4 col-sm-8">
             <%= form.text_field :reminder_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
           </div>
-          <%= form.label :reminder_interval, 'Reminder Interval:', class: 'text-right m-position-left col-md-1 col-sm-4 col-form-label' %>
-          <div class="col-md-4 col-sm-8">
-            <%= form.select :reminder_interval, options_for_select([['', 0],['1w', 7], ['2w', 14], ['1M', 30], ['3M', 90], ['6M', 180], ['12M', 360]], reminder.reminder_interval),{}, class: 'form-control', id: "reminder_interval" %>
+          <label class="text-right m-position-left col-md-2 col-sm-4 col-form-label">is Recurring?</label>
+          <div class="col-md-4 col-8">
+              <%= form.check_box :recurring, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: reminder.recurring %>
           </div>
         </div>
         <div class="form-group row m-b-15 switch-block">
-          <label class="text-right m-position-left col-md-2 col-4 col-form-label">is Recurring?</label>
-          <div class="col-md-9 col-8">
-              <%= form.check_box :recurring, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: reminder.recurring %>
+          <%= form.label :reminder_interval, 'Reminder Interval:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+            <%= form.select :reminder_interval, options_for_select([['', 0],['1w', 7], ['2w', 14], ['1M', 30], ['3M', 90], ['6M', 180], ['12M', 360]], reminder.reminder_interval),{}, class: 'form-control', id: "reminder_interval" %>
           </div>
         </div>
         <div class="form-group row m-b-15">
@@ -105,12 +105,12 @@
               &nbsp;&nbsp;<%= link_to 'Show', reminder, :class => 'btn btn-info' %>
               <% if reminder.reminder_interval > 0 %>
                 <% if !reminder.recurring %>
-                  <% if reminder.last_reminded <= Date.today %>
+                  <% if !reminder.last_reminded.nil? && reminder.last_reminded <= Date.today %>
                     &nbsp;&nbsp;<%= link_to 'Dismiss', reminder_path(:id => reminder.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
                   <% end %>
                 <% end %>
               <% else %>
-                <% if reminder.reminder_date <= Date.today %>
+                <% if !reminder.reminder_date.nil? && reminder.reminder_date <= Date.today %>
                   &nbsp;&nbsp;<%= link_to 'Dismiss', reminder_path(:id => reminder.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
                 <% end %>
               <% end %>
@@ -138,16 +138,16 @@
 <%= tinymce %>
 <!-- end panel -->
 <script type="text/javascript">
-  $(".switchery").ready(function(){
-    if ($('#reminder_interval').val() == "") {
-      $('.switch-block').hide()
-    }
-  });
-  $('#reminder_interval').change(function(){
-    if ($('#reminder_interval').val() != 0) {
-        $('.switch-block').show()
+  if ($('#reminder_recurring').is(':checked')) {
+    $('.switch-block').show()
+  } else {
+    $('.switch-block').hide()
+  }
+  $('#reminder_recurring').on('change', function(){
+    if ($('#reminder_recurring').is(':checked')) {
+      $('.switch-block').show()
     } else {
-        $('.switch-block').hide()
+      $('.switch-block').hide()
     }
   });
 </script>
