@@ -248,10 +248,10 @@
     triggerChangeOnSelectCountry('rate_destination_country', '<%= rate.destination_country %>')
   <% end %>
   <% if rate.origin_state.present? %>
-    triggerChangeOnSelectCountry('rate_origin_state', '<%= rate.generate_abv(origin.state).upcase %>')
+    triggerChangeOnSelectCountry('rate_origin_state', '<%= generate_abv(rate.origin.state).upcase %>')
   <% end %>
   <% if rate.destination_state.present? %>
-    triggerChangeOnSelectCountry('rate_destination_state', '<%= rate.generate_abv(destination.state).upcase %>')
+    triggerChangeOnSelectCountry('rate_destination_state', '<%= generate_abv(rate.destination.state).upcase %>')
   <% end %>
   });
 </script>

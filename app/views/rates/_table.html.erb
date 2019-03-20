@@ -107,9 +107,9 @@
           </td>
         <% end %>
         <td><%= rate.origin_city %></td>
-        <td><%= rate.generate_abv(origin.state).upcase %></td>
+        <td><%= generate_abv(rate.origin.state).upcase %></td>
         <td><%= rate.destination_city %></td>
-        <td><%= rate.generate_abv(destination.state).upcase %></td>
+        <td><%= generate_abv(rate.destination.state).upcase %></td>
         <td><%= rate.miles %></td>
         <td><%= rate.rate_type %></td>
         <td><%= rate.picks %></td>

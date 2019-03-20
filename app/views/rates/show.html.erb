@@ -78,13 +78,13 @@
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Origin:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @rate.origin_city + ", " + @rate.generate_abv(origin.state).upcase %>
+        <%= @rate.origin_city + ", " + @generate_abv(rate.origin.state).upcase %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Destination:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @rate.destination_city + ", " + @rate.generate_abv(destination.state).upcase %>
+        <%= @rate.destination_city + ", " + @generate_abv(rate.destination.state).upcase %>
       </div>
     </div>
     <div class="row">
