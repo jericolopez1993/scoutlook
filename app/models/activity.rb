@@ -12,9 +12,9 @@ class Activity < ApplicationRecord
   has_many :reminders, :dependent => :delete_all
 
   def display_name
-    if self.carrier.nil?
+    if !self.carrier.nil?
       "Carrier Activity to #{self.carrier.display_name}"
-    elsif self.shipper.nil?
+    elsif !self.shipper.nil?
       "Shipper Activity to #{self.shipper.display_name}"
     else
       "<a href='/activities/#{self.id}'>Activity</a>"
