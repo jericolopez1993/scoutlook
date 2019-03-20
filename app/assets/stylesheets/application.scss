@@ -11,24 +11,11 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
- *= require vendor/jquery-ui.min
- *= require vendor/bootstrap.min
  *= require vendor/all.min
- *= require vendor/animate.min
  *= require vendor/style.min
  *= require vendor/style-responsive
  *= require vendor/default
- *= require vendor/dataTables.bootstrap.min
- *= require vendor/buttons.bootstrap.min
- *= require vendor/responsive.bootstrap.min
- *= require vendor/parsley
- *= require vendor/jquery.gritter
- *= require vendor/switchery.min
- *= require vendor/bootstrap-datepicker.min
- *= require vendor/bootstrap-tagsinput
- *= require vendor/jquery.tagit
  *= require vendor/bootstrap3-wysihtml5
- *= require vendor/dropzone.min
  *= require vendor/application-mobile
  *= require select2
  *= require select2-bootstrap
