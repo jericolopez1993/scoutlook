@@ -24,7 +24,11 @@
       <h4 class="panel-title lp-header">Activities</h4>
     </div>
     <div class="panel-body">
-        <%= render 'table', activities: Activity.all.order('date_closed DESC NULLS FIRST'), show_carrier: true, show_shipper: true, current_controller: params[:controller] %>
+      <!-- <%# if current_user.has_role?(:admin) %>
+        <%#= render 'table', activities: @activities.order('date_closed DESC NULLS FIRST'), show_carrier: true, show_shipper: true, current_controller: params[:controller] %>
+      <% else %> -->
+        <%= render 'table', activities: Activity.where("user_id = ?", current_user.id).order('date_closed DESC NULLS FIRST'), show_carrier: true, show_shipper: true, current_controller: params[:controller] %>
+      <%# end %>
     </div>
   </div>
 </div>
