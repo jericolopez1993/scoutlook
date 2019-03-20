@@ -4,6 +4,9 @@ class Audit
   scope :today, -> do
     where("created_at >= ?", Time.zone.today.midnight).reorder('created_at DESC')
   end
+  scope :overall, -> do
+    select("audits.*, CONCAT(users.first_name, ' ', users.last_name) as user_name").joins("INNER JOIN users ON users.id = audits.user_id").reorder('created_at DESC')
+  end
 
   def on_sentence(current_user=nil)
     @to_sentence = ""
