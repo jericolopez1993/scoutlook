@@ -397,6 +397,22 @@ module ApplicationHelper
     end
   end
 
+  def last_edit(carrier, shipper)
+    if carrier
+      Audit.where(auditable_id: carrier.id).order("created_at DESC").limit(1)
+    elsif shipper
+      Audit.where(auditable_id: shipper.id).order("created_at DESC").limit(1)
+    end
+  end
+
+  def last_activity(carrier,shipper)
+    if carrier
+      Activity.where(carrier_id: carrier.id).order("created_at DESC").limit(1)
+    elsif shipper
+      Activity.where(shipper_id: shipper.id).order("created_at DESC").limit(1)
+    end
+  end
+
   def get_audits(carrier=nil, shipper=nil)
     query = ""
     models = []
