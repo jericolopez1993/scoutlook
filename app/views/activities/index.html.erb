@@ -24,7 +24,7 @@
       <h4 class="panel-title lp-header">Activities</h4>
     </div>
     <div class="panel-body">
-        <%= render 'table', activities: @activities, show_carrier: true, show_shipper: true, current_controller: params[:controller] %>
+        <%= render 'table', activities: Activity.all.order('date_closed DESC NULLS FIRST'), show_carrier: true, show_shipper: true, current_controller: params[:controller] %>
     </div>
   </div>
 </div>
