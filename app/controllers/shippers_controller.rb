@@ -139,7 +139,7 @@ class ShippersController < ApplicationController
 
   def compose_mail
     @ids = params[:ids]
-    @contacts = Shipper.where("shippers.id IN (#{@ids})").joins("LEFT JOIN shipper_contacts ON shippers.poc_id = shipper_contacts.id ").distinct("shipper_contacts.email").pluck("shipper_contacts.email").join(",")
+    contacts = Shipper.where("shippers.id IN (#{@ids})").pluck("shipper_contacts.email").join(",")
     render 'global_pages/mail_form', :layout => 'mail'
   end
 
