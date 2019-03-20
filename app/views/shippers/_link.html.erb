@@ -5,25 +5,21 @@
     data-html="true"
     title="
       <b>Name</b>: <%= shipper.company_name.blank? ? "(no name)" : shipper.company_name %><br>
-      <b>DM Name</b>: <%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %><br>
-      <b>DM Phone</b>: <%= shipper.pdm.nil? ? '' : generate_phone_number("", shipper.pdm.primary_phone, shipper.pdm.primary_extension_number, shipper.pdm.primary_eligible_texting, shipper.pdm.primary_phone_type).html_safe %><br>
-      <b>DM Email</b>: <%= shipper.pdm.nil? ? '' : shipper.pdm.email.downcase %><br>
+      <b>DM Name</b>: <%= shipper.pdm_name %><br>
+      <b>DM Phone</b>: <%= generate_phone_number("", shipper.primary_phone, shipper.primary_extension_number, shipper.primary_eligible_texting, shipper.primary_phone_type).html_safe %><br>
+      <b>DM Email</b>: <%= shipper.contact_email.downcase %><br>
       <b>Class</b>: <%= shipper.sales_priority %><br>
-      <b>City</b>: <%= shipper.location.nil? ? '' : shipper.location.city %><br>
-      <b>Sate/Province</b>: <%= shipper.location.nil? ? '' : generate_abv(shipper.location.state).upcase %><br>
-      <b>Last Contact Date</b>: <%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %><br>
-      <% last_edit(nil, shipper).each do |audit| %>
-        <b>Last Edit Date</b>: <%= audit.created_at.strftime("%m/%d/%Y") %><br>
-      <% end %>
+      <b>City</b>: <%= shipper.city %><br>
+      <b>Sate/Province</b>: <%= shipper.state.nil? ? '' : generate_abv(shipper.state).upcase %><br>
+      <b>Last Contact Date</b>: <%= shipper.date_opened.nil? ? "" : shipper.date_opened.strftime('%m/%d/%Y').to_s %><br>
+      <b>Last Edit Date</b>: <%= shipper.last_activity_date.nil? ? "" : shipper.last_activity_date.strftime("%m/%d/%Y") %><br>
       <% if params[:controller] != "activities" %>
-        <% last_activity(nil, shipper).each do |activity| %>
         <hr>
-        <b>Last Activity Name</b>: <%= activity.campaign_name.blank? ? '(no name)' : activity.campaign_name %><br>
-        <b>Last Activity Type</b>: <%= activity.activity_type.nil? ? '' : activity.activity_type %><br>
-        <b>Last Activity Status</b>: <%= activity.status ? 'Open' : 'Closed' %><br>
-        <% end %>
+        <b>Last Activity Name</b>: <%= shipper.campaign_name.blank? ? '(no name)' : shipper.campaign_name %><br>
+        <b>Last Activity Type</b>: <%= shipper.activity_type.nil? ? '' : shipper.activity_type %><br>
+        <b>Last Activity Status</b>: <%= shipper.activity_status ? 'Open' : 'Closed' %><br>
       <% end %>
     ">
-      <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper, :class => generate_styling_activities(nil, shipper) %>
+      <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper, :class => generate_styling_activities2(shipper.last_activity_date) %>
   </span>
 <% end %>

@@ -87,56 +87,40 @@
                   <% end %>
                 <% end %>
               </td>
-              <td class="text-center link"><%= carrier.relationship_owner_user.nil? ? '' : "#{link_to("#{carrier.relationship_owner_user.first_name[0]}#{carrier.relationship_owner_user.last_name[0]}", carrier.relationship_owner_user)}".html_safe %></td>
+              <td class="text-center link"><%= carrier.relationship_owner_name.nil? ? '' : "#{link_to(covert_initials(carrier.relationship_owner_name), user_path(:id => carrier.relationship_owner))}".html_safe %></td>
               <td><%= carrier.mc_number %></td>
               <td class="link">
                 <%= render "carriers/link", carrier: carrier %>
               </td>
               <td><%= carrier.category %></td>
-              <td><%= carrier.location.nil? ? '' : generate_abv(carrier.location.state).upcase %></td>
-              <td><%= carrier.poc.nil? ? '' : carrier.poc.full_name %></td>
-              <td><b><%= carrier.poc.nil? ? '' : generate_phone_number("", carrier.poc.primary_phone, carrier.poc.primary_extension_number, carrier.poc.primary_eligible_texting, carrier.poc.primary_phone_type).html_safe %></b></td>
+              <td><%= carrier.state.nil? ? '' : generate_abv(carrier.state).upcase %></td>
+              <td><%= carrier.poc_name %></td>
+              <td><b><%= carrier.primary_phone.nil? ? '' : generate_phone_number("", carrier.primary_phone, carrier.primary_extension_number, carrier.primary_eligible_texting, carrier.primary_phone_type).html_safe %></b></td>
               <td class="text-center"><%= carrier.reefers %></td>
               <td>
-                <% if carrier.carrier_lanes.length > 1 %>
-                  <% carrier.lane_1.each do |lane| %>
-                    <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
-                      <% lane.lane_origin_to_array.each do |origin| %>
-                        <%= generate_location(origin, lane).html_safe %>
-                      <% end %>
-                      &rarr;
-                    <% end %>
-                    <% lane.lane_destination_to_array.each do |destination| %>
-                      <%= generate_location(destination, lane).html_safe %>
-                    <% end %>
-                    <br>
+                <% if !carrier.lane_origin.nil? && carrier.lane_origin != "" %>
+                  <% carrier.lane_origin.split(',').map(&:to_s).each do |origin| %>
+                    <%= generate_location2(origin, params[:controller], carrier.lane_id).html_safe %>
                   <% end %>
-                <% else %>
-                    <% lane = carrier.carrier_lanes.last %>
-                    <% if !lane.nil? %>
-                      <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
-                        <% lane.lane_origin_to_array.each do |origin| %>
-                          <%= generate_location(origin, lane).html_safe %>
-                        <% end %>
-                        &rarr;
-                      <% end %>
-                    <% lane.lane_destination_to_array.each do |destination| %>
-                      <%= generate_location(destination, lane).html_safe %>
-                    <% end %>
-                  <% end %>
+                <% end %>
+                <% if !carrier.lane_destination.nil? && carrier.lane_destination != "" %>
+                &rarr;
+                <% carrier.lane_destination.split(',').map(&:to_s).each do |destination| %>
+                  <%= generate_location2(destination, params[:controller], carrier.lane_id).html_safe %>
+                <% end %>
               <% end %>
               </td>
               <td>
-                <% if !carrier.poc.nil?  %>
-                  <a href="mailto:<%= carrier.poc.email %>?Subject=Hello%20<%= carrier.poc.first_name.nil? ? '' :  carrier.poc.first_name.capitalize + " " + carrier.poc.last_name.capitalize  %>" target="_top">
-                    <%= carrier.poc.email.downcase %>&nbsp;<i class="far fa-envelope"></i>
+                <% if !carrier.contact_email.nil?  %>
+                  <a href="mailto:<%= carrier.contact_email %>?Subject=Hello%20<%= carrier.poc_name.nil? ? '' :  carrier.poc_name.capitalize  %>" target="_top">
+                    <%= carrier.contact_email.downcase %>&nbsp;<i class="far fa-envelope"></i>
                   </a>
                 <% end %>
               </td>
               <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
               <td class="text-center"><%= shade_sales_priority(carrier.sales_priority).html_safe %></td>
               <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %></td>
+              <td class="text-center"><%=  carrier.date_opened.nil? ? "" : carrier.date_opened.strftime('%m/%d/%Y').to_s %></td>
               <td class="text-center"><%= carrier.load_last_6_month %></td>
               <td class="text-center"><%= carrier.load_last_month %></td>
             </tr>

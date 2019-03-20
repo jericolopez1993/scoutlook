@@ -87,50 +87,34 @@
                   <% end %>
                 <% end %>
               </td>
-              <td class="text-center link"><%= shipper.relationship_owner_user.nil? ? '' : "#{link_to("#{shipper.relationship_owner_user.first_name[0]}#{shipper.relationship_owner_user.last_name[0]}", shipper.relationship_owner_user)}".html_safe %></td>
+              <td class="text-center link"><%= shipper.relationship_owner_name.nil? ? '' : "#{link_to(covert_initials(shipper.relationship_owner_name), user_path(:id => shipper.relationship_owner))}".html_safe %></td>
               <td class="link">
                 <%= render "shippers/link", shipper: shipper %>
               </td>
               <td><%= shipper.location.nil? ? '' : generate_abv(shipper.location.state).upcase %></td>
-              <td><%= shipper.pdm.nil? ? '' : shipper.pdm.full_name %></td>
-              <td><b><%= shipper.pdm.nil? ? '' : generate_phone_number("", shipper.pdm.primary_phone, shipper.pdm.primary_extension_number, shipper.pdm.primary_eligible_texting, shipper.pdm.primary_phone_type).html_safe %></b></td>
+              <td><%= shipper.pdm_name %></td>
+              <td><b><%=generate_phone_number("", shipper.primary_phone, shipper.primary_extension_number, shipper.primary_eligible_texting, shipper.primary_phone_type).html_safe %></b></td>
               <td>
-                <% if shipper.shipper_lanes.length > 1 %>
-                  <% shipper.lane_1.each do |lane| %>
-                    <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
-                      <% lane.lane_origin_to_array.each do |origin| %>
-                        <%= generate_location(origin, lane).html_safe %>
-                      <% end %>
-                      &rarr;
-                    <% end %>
-                    <% lane.lane_destination_to_array.each do |destination| %>
-                      <%= generate_location(destination, lane).html_safe %>
-                    <% end %>
-                    <br>
+                <% if !shipper.lane_origin.nil? && shipper.lane_origin != "" %>
+                  <% shipper.lane_origin.split(',').map(&:to_s).each do |origin| %>
+                    <%= generate_location2(origin, params[:controller], shipper.lane_id).html_safe %>
                   <% end %>
-                <% else %>
-                    <% lane = shipper.shipper_lanes.last %>
-                    <% if !lane.nil? %>
-                      <% if !lane.lane_origin.nil? && lane.lane_origin != "" %>
-                        <% lane.lane_origin_to_array.each do |origin| %>
-                          <%= generate_location(origin, lane).html_safe %>
-                        <% end %>
-                        &rarr;
-                      <% end %>
-                    <% lane.lane_destination_to_array.each do |destination| %>
-                      <%= generate_location(destination, lane).html_safe %>
-                    <% end %>
-                  <% end %>
+                <% end %>
+                <% if !shipper.lane_destination.nil? && shipper.lane_destination != "" %>
+                &rarr;
+                <% shipper.lane_destination.split(',').map(&:to_s).each do |destination| %>
+                  <%= generate_location2(destination, params[:controller], shipper.lane_id).html_safe %>
+                <% end %>
               <% end %>
               </td>
-              <td><% if !shipper.pdm.nil?  %><a href="mailto:<%= shipper.pdm.email %>?Subject=Hello%20<%= shipper.pdm.first_name.nil? ? '' :  shipper.pdm.first_name.capitalize + " " + shipper.pdm.last_name.capitalize  %>" target="_top"><%= shipper.pdm.email.downcase %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
+              <td><% if !shipper.contact_email.nil?  %><a href="mailto:<%= shipper.contact_email %>?Subject=Hello%20<%= shipper.pdm_name.nil? ? '' :  shipper.pdm_name.capitalize  %>" target="_top"><%= shipper.contact_email.downcase %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
               <td class="text-center"><%= shipper.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
               <td class="text-center"><%= shade_sales_priority(shipper.sales_priority).html_safe %></td>
               <td class="text-center"><%= shipper.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= shipper.last_contact_date.nil? || shipper.last_contact_date.date_opened.nil? ? "" : shipper.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s %></td>
+              <td class="text-center"><%= shipper.date_opened.nil? ? "" : shipper.date_opened.strftime('%m/%d/%Y').to_s %></td>
               <td class="text-center"><%= shipper.load_last_month %></td>
               <td class="text-center"><%= shipper.load_last_6_month %></td>
-              <td><%= shipper.location.nil? ? '' : shipper.location.city %></td>
+              <td><%= shipper.city %></td>
               <td><%= shipper.loads_per_month %></td>
               <td>
                 <% shipper.commodities_to_array.first(5).each do |cr| %>

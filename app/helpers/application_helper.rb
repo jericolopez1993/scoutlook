@@ -29,6 +29,15 @@ module ApplicationHelper
     end
   end
 
+  def covert_initials(name)
+    arr = name.split(' ')
+    initials = ""
+    arr.each do |partial_name|
+      initials = initials + partial_name.strip[0]
+    end
+    initials
+  end
+
   def location_format(location)
     if location.country.upcase == "USA" || location.country.upcase == "CANADA"
       "<b>#{location.name}</b><br/>#{location.city}, #{location.state}".html_safe
@@ -397,6 +406,21 @@ module ApplicationHelper
     end
   end
 
+  def generate_styling_activities2(last_activity_date)
+    if last_activity_date
+      if (Date.today - 3.day)..Date.today === last_activity_date
+        "text-success"
+      elsif (Date.today - 7.day)..(Date.today - 3.day) === last_activity_date
+        "text-warning"
+      else
+        "text-danger"
+      end
+    else
+      "text-danger"
+    end
+
+  end
+
   def last_edit(carrier, shipper)
     if carrier
       Audit.where(auditable_id: carrier.id).order("created_at DESC").limit(1)
@@ -418,25 +442,27 @@ module ApplicationHelper
     models = []
     values = []
     if carrier
+      id = carrier.id.to_s
       models = ['Carrier', 'CarrierCompany', 'CarrierContact', 'CarrierLane', 'CarrierLocation', 'Activity', 'Rate', 'Reminder']
       values << carrier.id.to_s
-      values << carrier.carrier_companies.pluck(:id).join(",")
-      values << carrier.carrier_contacts.pluck(:id).join(",")
-      values << carrier.carrier_lanes.pluck(:id).join(",")
-      values << carrier.locations.pluck(:id).join(",")
-      values << carrier.activities.pluck(:id).join(",")
-      values << carrier.rates.pluck(:id).join(",")
-      values << carrier.reminders.pluck(:id).join(",")
+      values << "SELECT id FROM carrier_companies WHERE carrier_id = #{id}"
+      values << "SELECT id FROM carrier_contacts WHERE carrier_id = #{id}"
+      values << "SELECT id FROM carrier_lanes WHERE carrier_id = #{id}"
+      values << "SELECT id FROM carrier_locations WHERE carrier_id = #{id}"
+      values << "SELECT id FROM activities WHERE carrier_id = #{id}"
+      values << "SELECT id FROM rates WHERE carrier_id = #{id}"
+      values << "SELECT id FROM reminders WHERE carrier_id = #{id}"
     elsif shipper
+      id = shipper.id.to_s
       models = ['Shipper', 'ShipperCompany', 'ShipperContact', 'ShipperLane', 'ShipperLocation', 'Activity', 'Rate', 'Reminder']
       values << shipper.id.to_s
-      values << shipper.shipper_companies.pluck(:id).join(",")
-      values << shipper.shipper_contacts.pluck(:id).join(",")
-      values << shipper.shipper_lanes.pluck(:id).join(",")
-      values << shipper.locations.pluck(:id).join(",")
-      values << shipper.activities.pluck(:id).join(",")
-      values << shipper.rates.pluck(:id).join(",")
-      values << shipper.reminders.pluck(:id).join(",")
+      values << "SELECT id FROM shipper_companies WHERE shipper_id = #{id}"
+      values << "SELECT id FROM shipper_contacts WHERE shipper_id = #{id}"
+      values << "SELECT id FROM shipper_lanes WHERE shipper_id = #{id}"
+      values << "SELECT id FROM shipper_locations WHERE shipper_id = #{id}"
+      values << "SELECT id FROM activities WHERE shipper_id = #{id}"
+      values << "SELECT id FROM rates WHERE shipper_id = #{id}"
+      values << "SELECT id FROM reminders WHERE shipper_id = #{id}"
     end
 
     if models.present? && values.present?
@@ -539,6 +565,28 @@ module ApplicationHelper
       "<span class='badge badge-warning'>#{lane ? link_to(generate_abv(loc), lane) : generate_abv(loc)}</span>"
     elsif Carrier::GREEN.include?(loc)
       "<span class='badge badge-green'>#{lane ? link_to(generate_abv(loc), lane) : generate_abv(loc)}</span>"
+    else
+      ""
+    end
+  end
+
+  def generate_location2(loc, controller, lane=nil)
+    if Carrier::LIGHT_BLUE.include?(loc)
+      "<span class='badge badge-primary'>#{lane ? link_to(generate_abv(loc), "/#{controller}_lane/#{lane}") : generate_abv(loc)}</span>"
+    elsif Carrier::DARK_BLUE.include?(loc)
+      "<span class='badge badge-drakblue'>#{lane ? link_to(generate_abv(loc), "/#{controller}_lane/#{lane}") : generate_abv(loc)}</span>"
+    elsif Carrier::BLUE.include?(loc)
+      "<span class='badge badge-info'>#{lane ? link_to(generate_abv(loc), "/#{controller}_lane/#{lane}") : generate_abv(loc)}</span>"
+    elsif Carrier::RED.include?(loc)
+    "<span class='badge badge-danger'>#{lane ? link_to(generate_abv(loc), "/#{controller}_lane/#{lane}") : generate_abv(loc)}</span>"
+    elsif Carrier::BROWN.include?(loc)
+      "<span class='badge badge-brown'>#{lane ? link_to(generate_abv(loc), "/#{controller}_lane/#{lane}") : generate_abv(loc)}</span>"
+    elsif Carrier::YELLOW.include?(loc)
+      "<span class='badge badge-yellow'>#{lane ? link_to(generate_abv(loc), "/#{controller}_lane/#{lane}") : generate_abv(loc)}</span>"
+    elsif Carrier::ORANGE.include?(loc)
+      "<span class='badge badge-warning'>#{lane ? link_to(generate_abv(loc), "/#{controller}_lane/#{lane}") : generate_abv(loc)}</span>"
+    elsif Carrier::GREEN.include?(loc)
+      "<span class='badge badge-green'>#{lane ? link_to(generate_abv(loc), "/#{controller}_lane/#{lane}") : generate_abv(loc)}</span>"
     else
       ""
     end
