@@ -103,6 +103,18 @@
             <%= form.submit 'Submit', :class => 'btn btn-primary' %>
             <% if params[:action] == 'edit' %>
               &nbsp;&nbsp;<%= link_to 'Show', reminder, :class => 'btn btn-info' %>
+              <% if reminder.reminder_interval > 0 %>
+                <% if !reminder.recurring %>
+                  <% if reminder.last_reminded <= Date.today %>
+                    &nbsp;&nbsp;<%= link_to 'Dismiss', reminder_path(:id => reminder.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% if reminder.reminder_date <= Date.today %>
+                  &nbsp;&nbsp;<%= link_to 'Dismiss', reminder_path(:id => reminder.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'%>
+                <% end %>
+              <% end %>
+
             <% end %>
             <% if @previous_controller == "activities" %>
               <% activity = Activity.find(reminder.activity_id)%>
@@ -116,6 +128,7 @@
             <% else %>
                 &nbsp;&nbsp;<%= link_to 'Back', reminders_path, :class => 'btn btn-default' %>
             <% end %>
+
           </div>
         </div>
       <% end %>
