@@ -7,7 +7,7 @@
       <b>Name</b>: <%= carrier.company_name.blank? ? "(no name)" : carrier.company_name %><br>
       <b>Ops Name</b>: <%= carrier.poc_name %><br>
       <b>Ops Phone</b>: <%= generate_phone_number("", carrier.primary_phone, carrier.primary_extension_number, carrier.primary_eligible_texting, carrier.primary_phone_type).html_safe %><br/>
-      <b>Ops Email</b>: <%= carrier.contact_email.downcase %><br>
+      <b>Ops Email</b>: <%= carrier.contact_email && carrier.contact_email.downcase %><br>
       <b>Class</b>: <%= carrier.sales_priority %><br>
       <b>MC Number</b>: <%= carrier.mc_number %><br>
       <b>Reefers Count</b>: <%= carrier.reefers %><br>
