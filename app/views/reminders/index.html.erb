@@ -26,11 +26,11 @@
       <h4 class="panel-title lp-header">Reminder</h4>
     </div>
     <div class="panel-body">
-      <!--<%# if current_user.has_role?(:admin) %>
-        <%#= render 'table', reminders: Reminder.all, with_actions: true %>
-      <%# else %> -->
+      <% if current_user.has_role?(:admin) %>
+        <%= render 'table', reminders: Reminder.all, with_actions: true %>
+      <% else %>
         <%= render 'table', reminders: Reminder.where("user_id = ?", current_user.id), with_actions: true %>
-      <%# end %>
+      <% end %>
     </div>
   </div>
 </div>
