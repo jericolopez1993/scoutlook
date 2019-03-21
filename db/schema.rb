@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_19_211009) do
+ActiveRecord::Schema.define(version: 2019_03_21_194732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -263,6 +263,7 @@ ActiveRecord::Schema.define(version: 2019_03_19_211009) do
     t.boolean "archive", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "inbox", default: false
   end
 
   create_table "master_invoices", force: :cascade do |t|
@@ -319,6 +320,7 @@ ActiveRecord::Schema.define(version: 2019_03_19_211009) do
     t.boolean "archive", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "inbox", default: false
   end
 
   create_table "rates", force: :cascade do |t|

@@ -146,6 +146,7 @@ class ShippersController < ApplicationController
   def send_mail
     attachment_files = params[:file].present? ? params[:file] : nil
     SendComposeMailJob.delay.perform_now(params[:to], nil, nil, params[:subject], params[:content_body], current_user.email, attachment_files)
+    save_mail
     if params[:record_activity].present?
       if params[:ids].present? && !params[:ids].blank?
         Shipper.where("shippers.id IN (#{params[:ids]})").each do |shipper|
@@ -204,5 +205,20 @@ class ShippersController < ApplicationController
       params[:shipper][:is_destination] = params[:destination].present?
       params[:shipper][:name] = params[:shipper][:location_name]
       params.require(:shipper).permit(:name, :address, :country, :state, :city, :postal, :is_origin, :is_destination, :loc_type, :phone)
+    end
+
+    def save_mail
+      mail = Mailing.new
+      mail.recipient = params[:to]
+      mail.sender = current_user.email
+      mail.subject = params[:subject]
+      mail.content_body = params[:content_body]
+      mail.user_id = current_user.id
+      mail.sent = true
+      if mail.save
+        if params[:file].present?
+          mail.attachment_files.attach(params[:file])
+        end
+      end
     end
 end
