@@ -8,6 +8,8 @@ set :user,            'ubuntu'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 set :delayed_job_workers, 2
+set :branch, ENV.fetch('REVISION', 'master')
+
 
 # Don't change these unless you know what you're doing
 set :pty,             true
