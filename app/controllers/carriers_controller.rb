@@ -172,8 +172,7 @@ class CarriersController < ApplicationController
   def compose_sms
     @ids = params[:ids]
     @phone_numbers = []
-    @carrier_contact_ids = Carrier.where("carriers.id IN (#{@ids})").distinct("poc_id").pluck("poc_id").join(",")
-    @contacts = CarrierContact.where("id IN (#{@carrier_contact_ids})").where("primary_eligible_texting = '1' OR secondary_phone_type = '1'")
+    @contacts = Carrier.where("carriers.id IN (#{@ids})").where("primary_eligible_texting = '1' OR secondary_phone_type = '1'")
     puts "#{@contacts.to_json}"
     @contacts.each do |contact|
       if contact.primary_eligible_texting && contact.primary_phone_type == "Cell"
@@ -187,7 +186,7 @@ class CarriersController < ApplicationController
   end
 
   def send_sms
-    SendSmsJob.delay.perform_now(params[:to], params[:content_body])
+    SendSmsJob.perform_now(params[:to], params[:content_body])
     if params[:record_activity].present?
       if params[:ids].present? && !params[:ids].blank?
         Carrier.where("carriers.id IN (#{params[:ids]})").each do |carrier|

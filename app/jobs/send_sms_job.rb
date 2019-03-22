@@ -3,7 +3,8 @@ class SendSmsJob < ApplicationJob
 
   def perform(numbers, message)
     numbers.split(',').map(&:to_s).each do |number|
-      TwilioTextMessenger.new(message, number).text
+      num = E164.normalize(number)
+      TwilioTextMessenger.new(message, num).text
     end
   end
 end
