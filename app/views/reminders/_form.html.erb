@@ -78,7 +78,7 @@
         <div class="form-group row m-b-15">
           <%= form.label :reminder_date, 'Reminder Date:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-4 col-sm-8">
-            <%= form.text_field :reminder_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'"%>
+            <%= form.text_field :reminder_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: (reminder.reminder_date.nil? ? Time.now.strftime('%m/%d/%Y').to_s : reminder.reminder_date.strftime('%m/%d/%Y').to_s) %>
           </div>
           <label class="text-right m-position-left col-md-2 col-sm-4 col-form-label">is Recurring?</label>
           <div class="col-md-4 col-8">
