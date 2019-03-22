@@ -137,19 +137,19 @@
           <div class="form-group row m-b-15">
             <%= form.label :reefers, 'Reefers *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.number_field :reefers, class: 'form-control', 'data-parsley-required' => true, 'data-parsley-min' => '1' %>
+              <%= form.number_field :reefers, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
             <%= form.label :dry_vans, 'Dry Vans *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.number_field :dry_vans, class: 'form-control', 'data-parsley-required' => true, 'data-parsley-min' => '1' %>
+              <%= form.number_field :dry_vans, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
             <%= form.label :flat_beds, 'Flat Beds *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
-              <%= form.number_field :flat_beds, class: 'form-control', 'data-parsley-required' => true, 'data-parsley-min' => '1' %>
+              <%= form.number_field :flat_beds, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
@@ -211,3 +211,34 @@
 <!-- end panel -->
 <%= tinymce %>
 <!-- end panel -->
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#carrier_reefers').on('change keyup', function(){
+      if ($('#carrier_reefers').val() > 0) {
+        $("#carrier_dry_vans").attr({ "min" : 0 });
+        $("#carrier_flat_beds").attr({ "min" : 0 });
+      } else {
+        $("#carrier_dry_vans").attr({ "min" : 1 });
+        $("#carrier_flat_beds").attr({ "min" : 1 });
+      }
+    });
+    $('#carrier_dry_vans').on('change keyup', function(){
+      if ($('#carrier_dry_vans').val() > 0) {
+        $("#carrier_reefers").attr({ "min" : 0 });
+        $("#carrier_flat_beds").attr({ "min" : 0 });
+      } else {
+        $("#carrier_reefers").attr({ "min" : 1 });
+        $("#carrier_flat_beds").attr({ "min" : 1 });
+      }
+    });
+    $('#carrier_flat_beds').on('change keyup', function(){
+      if ($('#carrier_flat_beds').val() > 0) {
+        $("#carrier_reefers").attr({ "min" : 0 });
+        $("#carrier_dry_vans").attr({ "min" : 0 });
+      } else {
+        $("#carrier_reefers").attr({ "min" : 1 });
+        $("#carrier_dry_vans").attr({ "min" : 1 });
+      }
+    });
+  });
+</script>
