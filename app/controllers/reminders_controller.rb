@@ -93,6 +93,9 @@ class RemindersController < ApplicationController
       else
         params[:reminder][:reminder_date] = nil
       end
+      if params[:reminder][:notes].present?
+        params[:reminder][:notes] = params[:reminder][:notes].gsub("'", '&#39;')
+      end
       params[:reminder][:user_id] = current_user.id
       params.require(:reminder).permit(:carrier_id, :shipper_id, :activity_id, :user_id, :reminder_date, :reminder_interval, :recurring, :notes, :reminder_type)
     end
