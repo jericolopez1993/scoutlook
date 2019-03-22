@@ -87,7 +87,7 @@
                   <% end %>
                 <% end %>
               </td>
-              <td class="text-center link"><%= carrier.relationship_owner_name.nil? ? '' : "#{link_to(covert_initials(carrier.relationship_owner_name), user_path(:id => carrier.relationship_owner))}".html_safe %></td>
+              <td class="text-center link"><%= carrier.relationship_owner_name.blank? ? '' : "#{link_to(covert_initials(carrier.relationship_owner_name), user_path(:id => carrier.relationship_owner))}".html_safe %></td>
               <td><%= carrier.mc_number %></td>
               <td class="link">
                 <%= render "carriers/link", carrier: carrier %>

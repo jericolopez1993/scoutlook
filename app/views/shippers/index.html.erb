@@ -87,7 +87,7 @@
                   <% end %>
                 <% end %>
               </td>
-              <td class="text-center link"><%= shipper.relationship_owner_name.nil? ? '' : "#{link_to(covert_initials(shipper.relationship_owner_name), user_path(:id => shipper.relationship_owner))}".html_safe %></td>
+              <td class="text-center link"><%= shipper.relationship_owner_name.blank? ? '' : "#{link_to(covert_initials(shipper.relationship_owner_name), user_path(:id => shipper.relationship_owner))}".html_safe %></td>
               <td class="link">
                 <%= render "shippers/link", shipper: shipper %>
               </td>
