@@ -160,7 +160,7 @@ class ShippersController < ApplicationController
   def compose_sms
     @ids = params[:ids]
     @phone_numbers = []
-    @contacts = Shipper.where("shippers.id IN (#{@ids})")where("primary_eligible_texting = '1' OR secondary_phone_type = '1'")
+    @contacts = Shipper.where("shippers.id IN (#{@ids})").where("primary_eligible_texting = '1' OR secondary_phone_type = '1'")
     puts "#{@contacts.to_json}"
     @contacts.each do |contact|
       if contact.primary_eligible_texting && contact.primary_phone_type == "Cell"
