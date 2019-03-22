@@ -608,7 +608,7 @@ function hideExtensionNumber(controller, field){
   var this_id = "#" + controller + "_" + field + "_extension_number";
   var phone_type = $("#" + controller + "_" + field + "_phone_type").val();
 
-  if (phone_type === 'Work'){
+  if (phone_type === 'Land Line'){
     $(this_id).prop('disabled', false);
   }else{
     $(this_id).prop('disabled', true);
