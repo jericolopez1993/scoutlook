@@ -78,7 +78,7 @@
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Origin:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @rate.origin_city + ", " + @generate_abv(rate.origin_state).upcase %>
+        <%= @rate.origin_city + ", " + generate_abv(@rate.origin_state).upcase %>
       </div>
     </div>
     <div class="row">
