@@ -270,7 +270,7 @@ class ActivitiesController < ApplicationController
 
       @content = @style +
                  "<div>" +
-                    "<h1 class='header'><img class='header-logo' src='https://scoutlook.ca/assets/Scoutlook_Logo_red-9899a10bfe6dff35407ad6c1a6fd366b02035573e1567ba004147d0d01220ccd.png'> <span style='vertical-align: middle;'></h1>" +
+                    "<h1 class='header'><img class='header-logo' src='https://app.scoutlook.ca/assets/Scoutlook_Logo_red-9899a10bfe6dff35407ad6c1a6fd366b02035573e1567ba004147d0d01220ccd.png'> <span style='vertical-align: middle;'></h1>" +
                     "<h3 class='sub-header'>(Activity)</h3>" +
                     "<table width=100%>" +
                       "<tbody>" +
