@@ -99,7 +99,7 @@
       <div class="form-group row m-b-15">
         <%= form.label :annual_value, 'Annual Value:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
-          <%= form.select :annual_value, options_for_select(['0-5M', '5-10M', '10-25M', '25-100M', '100M+'], activity.annual_value),{:include_blank => true}, class: 'form-control' %>
+          <%= form.select :annual_value, options_for_select(['0-250K', '250K – 1M', '1-5M', '5-10M', '>10M'], activity.annual_value),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
