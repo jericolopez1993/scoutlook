@@ -392,25 +392,11 @@ module ApplicationHelper
     str
   end
 
-  def generate_styling_activities(carrier, shipper)
-    audits = get_audits(carrier, shipper)
-    three_days_audits = audits.where(:created_at => (Date.today - 3.day)..Date.today)
-    seven_days_audits = audits.where(:created_at => (Date.today - 7.day)..(Date.today - 3.day))
-
-    if three_days_audits.present?
-      "text-success"
-    elsif seven_days_audits.present?
-      "text-warning"
-    else
-      "text-danger"
-    end
-  end
-
-  def generate_styling_activities2(last_activity_date)
+  def generate_styling_activities(last_activity_date)
     if last_activity_date
-      if (Date.today - 3.day)..Date.today === last_activity_date
+      if ((Date.today - 3.day)..Date.today).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(last_activity_date.strftime('%m/%d/%Y').to_s)
         "text-success"
-      elsif (Date.today - 7.day)..(Date.today - 3.day) === last_activity_date
+      elsif ((Date.today - 7.day)..(Date.today - 3.day)).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(last_activity_date.strftime('%m/%d/%Y').to_s)
         "text-warning"
       else
         "text-danger"
@@ -418,7 +404,6 @@ module ApplicationHelper
     else
       "text-danger"
     end
-
   end
 
   def last_edit(carrier, shipper)

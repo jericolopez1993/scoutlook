@@ -22,6 +22,6 @@
           <b>Last Activity Status</b>: <%= carrier.activity_status ? 'Open' : 'Closed' %><br>
       <% end %>
     ">
-    <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier, :class => generate_styling_activities2(carrier.last_activity_date) %>
+    <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier, :class => generate_styling_activities(carrier.last_activity_date) %>
   </span>
 <% end %>
