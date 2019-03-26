@@ -9,8 +9,8 @@
       <b>DM Phone</b>: <%= generate_phone_number("", shipper.primary_phone, shipper.primary_extension_number, shipper.primary_eligible_texting, shipper.primary_phone_type).html_safe %><br>
       <b>DM Email</b>: <%= shipper.contact_email && shipper.contact_email.downcase %><br>
       <b>Class</b>: <%= shipper.sales_priority %><br>
-      <b>City</b>: <%= shipper.city %><br>
-      <b>Sate/Province</b>: <%= shipper.state.nil? ? '' : generate_abv(shipper.state).upcase %><br>
+      <b>City</b>: <%= shipper.city.blank? ? '(none)' : shipper.city %><br>
+      <b>Sate/Province</b>: <%= shipper.state.blank? ? '(none)' : generate_abv(shipper.state).upcase %><br>
       <b>Last Contact Date</b>: <%= shipper.date_opened.nil? ? "" : shipper.date_opened.strftime('%m/%d/%Y').to_s %><br>
       <b>Last Edit Date</b>: <%= shipper.last_activity_date.nil? ? "" : shipper.last_activity_date.strftime("%m/%d/%Y") %><br>
       <% if params[:controller] != "activities" %>
