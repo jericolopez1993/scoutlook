@@ -78,6 +78,12 @@ Rails.application.routes.draw do
        get      'distance'
      end
    end
+   resources :mailings do
+     collection do
+       post      'delete_mails'
+       post      'update_mails'
+     end
+   end
    resources :clients
    resources :carriers
    resources :carrier_contacts

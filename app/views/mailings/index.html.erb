@@ -56,16 +56,16 @@
           <!-- begin btn-group -->
           <div class="btn-group">
             <% if @mtype == "trash" %>
-              <button class="btn btn-sm btn-danger hide" data-email-action="delete"><i class="fa t-plus-1 fa-times f-s-14 m-r-3"></i> <span class="hidden-xs">Delete Permanently</span></button>
+              <button class="btn btn-sm btn-danger hide" data-email-action="delete" id="delete-btn"><i class="fa t-plus-1 fa-times f-s-14 m-r-3"></i> <span class="hidden-xs">Delete Permanently</span></button>
             <% end %>
             <% if @mtype != "sent" %>
-              <button class="btn btn-sm btn-green hide" data-email-action="archive"><i class="fa t-plus-1 fa-envelope f-s-14 m-r-3"></i> <span class="hidden-xs">To Sent</span></button>
+              <button class="btn btn-sm btn-green hide" data-email-action="to sent" id="to-sent-btn"><i class="fa t-plus-1 fa-envelope f-s-14 m-r-3"></i> <span class="hidden-xs">To Sent</span></button>
             <% end %>
             <% if @mtype != "archive" %>
-              <button class="btn btn-sm btn-success hide" data-email-action="archive"><i class="fa t-plus-1 fa-folder f-s-14 m-r-3"></i> <span class="hidden-xs">Archive</span></button>
+              <button class="btn btn-sm btn-success hide" data-email-action="archive" id="archive-btn"><i class="fa t-plus-1 fa-folder f-s-14 m-r-3"></i> <span class="hidden-xs">Archive</span></button>
             <% end %>
             <% if @mtype != "trash" %>
-              <button class="btn btn-sm btn-warning hide" data-email-action="archive"><i class="fa t-plus-1 fa-trash f-s-14 m-r-3"></i> <span class="hidden-xs">Trash</span></button>
+              <button class="btn btn-sm btn-warning hide" data-email-action="trash" id="trash-btn"><i class="fa t-plus-1 fa-trash f-s-14 m-r-3"></i> <span class="hidden-xs">Trash</span></button>
             <% end %>
 
           </div>
@@ -124,3 +124,51 @@
   <!-- end vertical-box-column -->
 </div>
 <!-- end vertical-box -->
+<script type="text/javascript">
+  function getCheckboxValues(){
+    mails = [];
+    $.each($("input[data-checked=email-checkbox]:checked"), function(){
+      mails.push($(this).val());
+    });
+    return mails;
+  }
+  function updateMails(mtype){
+    mails = getCheckboxValues();
+    $.ajax({
+      url: "/api/mailings/update_mails",
+      data: {
+        mail_ids: mails,
+        mtype: mtype
+      },
+      type: "POST",
+      success: function(response) {
+
+      }
+    });
+  }
+  $(document).ready(function() {
+    $('#delete-btn').click(function() {
+      mails = getCheckboxValues();
+      $.ajax({
+        url: "/api/mailings/delete_mails",
+        data: {
+          mail_ids: mails
+        },
+        type: "POST",
+        success: function(response) {
+
+        }
+      });
+    });
+    $('#to-sent-btn').click(function() {
+      updateMails('sent');
+    });
+    $('#archive-btn').click(function() {
+      updateMails('archive');
+    });
+    $('#trash-btn').click(function() {
+      updateMails('trash');
+    });
+
+  });
+</script>
