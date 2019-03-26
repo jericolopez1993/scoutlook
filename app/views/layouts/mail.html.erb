@@ -42,7 +42,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js" integrity="sha256-tQ3x4V2JW+L0ew/P3v2xzL46XDjEWUExFkCDY0Rflqc=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tag-it/2.0/js/tag-it.min.js" integrity="sha256-Bjx0ta01W5UAbRCbwHS8AEvyCSNuCUp0xaGeXW23GFY=" crossorigin="anonymous"></script>
     <!-- CDNs for Javascripts -->
-    
+
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
 
@@ -74,6 +74,7 @@
           FormSliderSwitcher.init();
           <%= (params[:action] == 'index' || params[:action] == 'show') ? 'TableManageButtons.init();' : ''%>
           <%= ((params[:action] == 'new' || params[:action] == 'edit') && params[:controller] != 'dashboards') ? 'Highlight.init();' : ''%>
+          InboxV2.init();
           <% if flash[:error] %>
             $.gritter.add({
                 title: 'ERROR',

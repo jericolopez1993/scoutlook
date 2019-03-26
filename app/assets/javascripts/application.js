@@ -19,6 +19,7 @@
 //= require vendor/form-slider-switcher.demo
 //= require vendor/countries
 //= require vendor/depends_on
+//= require vendor/email-inbox
 //= require inputmask
 //= require jquery.inputmask
 //= require inputmask.extensions
