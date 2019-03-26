@@ -105,15 +105,15 @@
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :secondary_phone, 'Secondary Phone *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :secondary_phone, 'Secondary Phone:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-3 col-sm-2">
-          <%= form.text_field :secondary_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", 'data-parsley-required' => true %>
+          <%= form.text_field :secondary_phone, class: 'form-control', 'data-inputmask' => "'mask': '(999) 999-9999'", 'data-parsley-required' => false %>
         </div>
         <div class="col-md-3 col-sm-2">
           <%= form.text_field :secondary_extension_number, class: 'form-control', placeholder: "Extension" %>
         </div>
         <div class="col-md-3 col-sm-2">
-          <%= form.select :secondary_phone_type, options_for_select(['Land Line', 'Cell'], shipper_contact.secondary_phone_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => true %>
+          <%= form.select :secondary_phone_type, options_for_select(['Land Line', 'Cell'], shipper_contact.secondary_phone_type),{:include_blank => true}, class: 'form-control', 'data-parsley-required' => false %>
         </div>
       </div>
       <div class="form-group row m-b-15" id="eligible_second">
