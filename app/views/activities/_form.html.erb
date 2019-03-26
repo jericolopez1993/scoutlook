@@ -97,13 +97,13 @@
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :annual_value, 'Annual Value:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :annual_value, 'Annual Value:', class: 'annual-text text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :annual_value, options_for_select(['0-250K', '250K – 1M', '1-5M', '5-10M', '>10M'], activity.annual_value),{:include_blank => true}, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group row m-b-15">
-        <%= form.label :loads_per_week, 'Loads Per Week:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
+        <%= form.label :loads_per_week, 'Loads Per Week:', class: 'load-text text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
         <div class="col-md-9 col-sm-8">
           <%= form.select :loads_per_week, options_for_select(['1', '2-5', '6-10', '11-25', '26-50', '>50'], activity.loads_per_week),{:include_blank => true}, class: 'form-control' %>
         </div>
@@ -220,10 +220,25 @@
       });
     <% end %>
     tinymce.init({
-      console.log("hello")
       selector: 'textarea',  // change this value according to your HTML
       forced_root_block : ""
     });
   });
 </script>
 <% end %>
+<script type="text/javascript">
+  $('#engagement_type').on('change', function(){
+    var type = $('#engagement_type').val();
+    if(type == "Proposal") {
+      $('.annual-text').text("Annual Value *:")
+      $('.load-text').text("Loads Per Week *:")
+      $('#activity_annual_value').prop('required', true);
+      $('#activity_loads_per_week').prop('required', true);
+    } else {
+      $('.annual-text').text("Annual Value:")
+      $('.load-text').text("Loads Per Week:")
+      $('#activity_annual_value').prop('required', false);
+      $('#activity_loads_per_week').prop('required', false);
+    }
+  });
+</script>
