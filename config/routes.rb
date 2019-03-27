@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :mailings
+  resources :mailings do
+    collection do
+      get    'resend'
+    end
+  end
   resources :messages
   resources :tile_tabs
   resources :truck_tiles
