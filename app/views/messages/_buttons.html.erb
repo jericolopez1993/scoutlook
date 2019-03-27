@@ -10,24 +10,12 @@
       </div>
       <!-- begin btn-group -->
       <div class="btn-group m-r-5">
-        <a href="<%= mailings_path(:mtype => @mtype) %>" class="btn btn-sm btn-white"><i class="fa fa-redo f-s-14 t-plus-1"></i></a>
+        <a href="<%= messages_path(:mtype => @mtype) %>" class="btn btn-sm btn-white"><i class="fa fa-redo f-s-14 t-plus-1"></i></a>
       </div>
       <!-- end btn-group -->
       <!-- begin btn-group -->
       <div class="btn-group">
-        <% if @mtype == "trash" %>
           <button class="btn btn-sm btn-danger hide" data-email-action="delete" id="delete-btn"><i class="fa t-plus-1 fa-times f-s-14 m-r-3"></i> <span class="hidden-xs">Delete Permanently</span></button>
-        <% end %>
-        <% if @mtype != "sent" %>
-          <button class="btn btn-sm btn-green hide" data-email-action="to sent" id="to-sent-btn"><i class="fa t-plus-1 fa-envelope f-s-14 m-r-3"></i> <span class="hidden-xs">To Sent</span></button>
-        <% end %>
-        <% if @mtype != "archive" %>
-          <button class="btn btn-sm btn-success hide" data-email-action="archive" id="archive-btn"><i class="fa t-plus-1 fa-folder f-s-14 m-r-3"></i> <span class="hidden-xs">Archive</span></button>
-        <% end %>
-        <% if @mtype != "trash" %>
-          <button class="btn btn-sm btn-warning hide" data-email-action="trash" id="trash-btn"><i class="fa t-plus-1 fa-trash f-s-14 m-r-3"></i> <span class="hidden-xs">Trash</span></button>
-        <% end %>
-
       </div>
       <!-- end btn-group -->
       <!-- begin btn-group -->

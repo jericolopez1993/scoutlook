@@ -1,0 +1,26 @@
+<% if messages.length > 0  %>
+  <% messages.each do |message|  %>
+  <li class="list-group-item">
+    <div class="email-checkbox">
+      <label>
+        <i class="far fa-square"></i>
+        <input type="checkbox" data-checked="email-checkbox" value="<%= message.id %>" />
+      </label>
+    </div>
+    <a href="<%= message_path(:id => message.id, :mtype => @mtype)%>" class="email-user bg-gradient-blue">
+      <span class="text-white"><%= message.recipient[0].upcase %></span>
+    </a>
+    <div class="email-info">
+      <a href="<%= message_path(:id => message.id, :mtype => @mtype)%>">
+        <span class="email-time"><%= message.created_at.strftime('%m/%d/%Y')%></span>
+        <span class="email-sender"><%= message.recipient %></span>
+        <span class="email-desc"><%= truncate_html_to_sentence(message.content_body) %></span>
+      </a>
+    </div>
+  </li>
+  <% end %>
+<% else %>
+<li class="list-group-item text-center">
+  <b> No SMS available. </b>
+</li>
+<% end %>

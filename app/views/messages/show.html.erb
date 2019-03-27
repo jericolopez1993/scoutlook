@@ -1,0 +1,104 @@
+<!-- begin vertical-box -->
+<div class="vertical-box with-grid">
+  <%= render 'messages/sidebar_nav' %>
+  <!-- begin vertical-box-column -->
+  <div class="vertical-box-column bg-white">
+    <!-- begin vertical-box -->
+    <div class="vertical-box">
+      <%= render 'messages/show_buttons' %>
+
+      <!-- begin vertical-box-row -->
+      <div class="vertical-box-row">
+        <!-- begin vertical-box-cell -->
+        <div class="vertical-box-cell">
+          <!-- begin vertical-box-inner-cell -->
+          <div class="vertical-box-inner-cell">
+            <!-- begin scrollbar -->
+            <div data-scrollbar="true" data-height="100%">
+              <!-- begin wrapper -->
+              <div class="wrapper">
+                <ul class="media-list underline m-b-15 p-b-15">
+                  <li class="media media-sm clearfix">
+                    <a href="<%= message_path(:id => @message.id)%>" class="email-user pull-left" data-letters="<%= @message.recipient[0].upcase %>"></a>
+
+                    <div class="media-body">
+                      <div class="email-from text-inverse f-s-14 f-w-600 m-b-3">
+                        from <%#= @message.sender %>
+                      </div>
+                      <div class="m-b-3"><i class="fa fa-clock fa-fw"></i> <%= @message.created_at.strftime('%m/%d/%Y %l:%M %p') %></div>
+                      <div class="email-to">
+                        To: <%= @message.recipient %>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <!-- <ul class="attached-document clearfix">
+                  <li class="fa-file">
+                    <div class="document-file">
+                      <a href="javascript:;">
+                        <i class="fa fa-file-pdf"></i>
+                      </a>
+                    </div>
+                    <div class="document-name"><a href="javascript:;">flight_ticket.pdf</a></div>
+                  </li>
+                </ul> -->
+
+                <p class="f-s-12 text-inverse p-t-10">
+                  <%= @message.content_body.html_safe unless @message.content_body.nil? %>
+                </p>
+              </div>
+              <!-- end wrapper -->
+            </div>
+            <!-- end scrollbar -->
+          </div>
+          <!-- end vertical-box-inner-cell -->
+        </div>
+        <!-- end vertical-box-cell -->
+      </div>
+      <!-- end vertical-box-row -->
+      <!-- end wrapper -->
+    </div>
+    <!-- end vertical-box -->
+  </div>
+  <!-- end vertical-box-column -->
+</div>
+<!-- end vertical-box -->
+<script type="text/javascript">
+  function updateMails(mtype){
+    $.ajax({
+      url: "/api/messages/update_mails",
+      data: {
+        sms_id: <%= @message.id %>,
+        mtype: mtype
+      },
+      type: "POST",
+      success: function(response) {
+        window.location = "/messages?mtype="+mtype
+      }
+    });
+  }
+  $(document).ready(function() {
+    $('#delete-btn').click(function() {
+      $.ajax({
+        url: "/api/messages/delete_mails",
+        data: {
+          sms_id: <%= @message.id %>
+        },
+        type: "POST",
+        success: function(response) {
+            window.location = "<%= messages_path(:mtype => @mtype)%>"
+        }
+      });
+    });
+    $('#to-sent-btn').click(function() {
+      updateMails('sent');
+    });
+    $('#archive-btn').click(function() {
+      updateMails('archive');
+    });
+    $('#trash-btn').click(function() {
+      updateMails('trash');
+    });
+
+  });
+</script>

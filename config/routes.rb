@@ -4,7 +4,11 @@ Rails.application.routes.draw do
       get    'resend'
     end
   end
-  resources :messages
+  resources :messages do
+    collection do
+      get    'resend'
+    end
+  end
   resources :tile_tabs
   resources :truck_tiles
   resources :load_tiles

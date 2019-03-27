@@ -175,6 +175,7 @@ class ShippersController < ApplicationController
 
   def send_sms
     SendSmsJob.perform_now(params[:to], params[:content_body])
+    save_sms
     if params[:record_activity].present?
       if params[:ids].present? && !params[:ids].blank?
         Shipper.where("shippers.id IN (#{params[:ids]})").each do |shipper|
@@ -219,5 +220,14 @@ class ShippersController < ApplicationController
           mail.attachment_files.attach(params[:file])
         end
       end
+    end
+
+    def save_sms
+      sms = Message.new
+      sms.recipient = params[:to]
+      sms.content_body = params[:content_body]
+      sms.user_id = current_user.id
+      sms.sent = true
+      sms.save
     end
 end
