@@ -98,6 +98,7 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
+  after  :finishing,    :restart_nginx
   # after  :finishing,    :start_nginx
   # after  :finishing,    :seed_dump
 end
