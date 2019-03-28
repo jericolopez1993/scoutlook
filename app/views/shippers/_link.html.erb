@@ -15,9 +15,13 @@
       <b>Last Edit Date</b>: <%= shipper.last_activity_date.nil? ? "" : shipper.last_activity_date.strftime("%m/%d/%Y") %><br>
       <% if params[:controller] != "activities" %>
         <hr>
-        <b>Last Activity Name</b>: <%= shipper.campaign_name.blank? ? '(no name)' : shipper.campaign_name %><br>
-        <b>Last Activity Type</b>: <%= shipper.activity_type.nil? ? '' : shipper.activity_type %><br>
-        <b>Last Activity Status</b>: <%= shipper.activity_status ? 'Open' : 'Closed' %><br>
+        <% if !shipper.activities.empty? %>
+          <b>Last Activity Name</b>: <%= shipper.campaign_name.blank? ? '(no name)' : shipper.campaign_name %><br>
+          <b>Last Activity Type</b>: <%= shipper.activity_type.nil? ? '' : shipper.activity_type %><br>
+          <b>Last Activity Status</b>: <%= shipper.activity_status ? 'Open' : 'Closed' %><br>
+        <% else %>
+          <b>Last Activity</b>: None <br>
+        <% end %>
       <% end %>
     ">
       <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper, :class => generate_styling_activities(shipper.last_activity_date) %>
