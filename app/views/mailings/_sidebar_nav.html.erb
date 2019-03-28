@@ -1,0 +1,35 @@
+<!-- begin vertical-box-column -->
+<div class="vertical-box-column width-200 bg-silver hidden-xs">
+  <!-- begin vertical-box -->
+  <div class="vertical-box">
+    <!-- begin vertical-box-row -->
+    <div class="vertical-box-row">
+      <!-- begin vertical-box-cell -->
+      <div class="vertical-box-cell">
+        <!-- begin vertical-box-inner-cell -->
+        <div class="vertical-box-inner-cell">
+          <!-- begin scrollbar -->
+          <div data-scrollbar="true" data-height="100%">
+            <!-- begin wrapper -->
+            <div class="wrapper p-0">
+              <div class="nav-title"><b>FOLDERS</b></div>
+              <ul class="nav nav-inbox">
+                <li class="<%= if @mtype == 'inbox' then "active" end %>"><a href="<%= mailings_path(:mtype => 'inbox') %>"><i class="fa fa-inbox fa-fw m-r-5"></i> Inbox</a></li>
+                <li class="<%= if @mtype == 'archive' then "active" end %>"><a href="<%= mailings_path(:mtype => 'archive') %>"><i class="fa fa-flag fa-fw m-r-5"></i> Archived</a></li>
+                <li class="<%= if @mtype == 'sent' then "active" end %>"><a href="<%= mailings_path(:mtype => 'sent') %>"><i class="fa fa-envelope fa-fw m-r-5"></i> Sent</a></li>
+                <li class="<%= if @mtype == 'trash' then "active" end %>"><a href="<%= mailings_path(:mtype => 'trash') %>"><i class="fa fa-trash fa-fw m-r-5"></i> Trash</a></li>
+              </ul>
+            </div>
+            <!-- end wrapper -->
+          </div>
+          <!-- end scrollbar -->
+        </div>
+        <!-- end vertical-box-inner-cell -->
+      </div>
+      <!-- end vertical-box-cell -->
+    </div>
+    <!-- end vertical-box-row -->
+  </div>
+  <!-- end vertical-box -->
+</div>
+<!-- end vertical-box-column -->

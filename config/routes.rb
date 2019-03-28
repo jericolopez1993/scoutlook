@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  resources :mailings
-  resources :messages
+  resources :mailings do
+    collection do
+      get    'resend'
+    end
+  end
+  resources :messages do
+    collection do
+      get    'resend'
+    end
+  end
   resources :tile_tabs
   resources :truck_tiles
   resources :load_tiles
@@ -76,6 +84,12 @@ Rails.application.routes.draw do
    resources :locations do
      collection do
        get      'distance'
+     end
+   end
+   resources :mailings do
+     collection do
+       post      'delete_mails'
+       post      'update_mails'
      end
    end
    resources :clients

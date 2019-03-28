@@ -1,11 +1,11 @@
 <!-- begin vertical-box -->
 <div class="vertical-box with-grid">
-  <%= render 'mailings/sidebar_nav' %>
+  <%= render 'messages/sidebar_nav' %>
   <!-- begin vertical-box-column -->
   <div class="vertical-box-column bg-white">
     <!-- begin vertical-box -->
     <div class="vertical-box">
-      <%= render 'mailings/buttons' %>
+      <%= render 'messages/buttons' %>
       <!-- begin vertical-box-row -->
       <div class="vertical-box-row">
         <!-- begin vertical-box-cell -->
@@ -16,7 +16,7 @@
             <div data-scrollbar="true" data-height="100%">
               <!-- begin list-email -->
               <ul class="list-group list-group-lg no-radius list-email" id="list-email">
-                  <%= render 'mailings/row', mailings: @mailings %>
+                  <%= render 'messages/row', messages: @messages %>
               </ul>
               <!-- end list-email -->
             </div>
@@ -37,7 +37,7 @@
             <i class="fa fa-chevron-right f-s-14 t-plus-1"></i>
           </button>
         </div> -->
-        <div class="m-t-5 text-inverse f-w-600"><%= @mailings.length %> message/s</div>
+        <div class="m-t-5 text-inverse f-w-600"><%= @messages.length %> message/s</div>
       </div>
       <!-- end wrapper -->
     </div>
@@ -57,9 +57,9 @@
   function updateMails(mtype){
     mails = getCheckboxValues();
     $.ajax({
-      url: "/api/mailings/update_mails",
+      url: "/api/messages/update_mails",
       data: {
-        mail_ids: mails,
+        sms_ids: mails,
         mtype: mtype
       },
       type: "POST",
@@ -72,9 +72,9 @@
     $('#delete-btn').click(function() {
       mails = getCheckboxValues();
       $.ajax({
-        url: "/api/mailings/delete_mails",
+        url: "/api/messages/delete_mails",
         data: {
-          mail_ids: mails
+          sms_ids: mails
         },
         type: "POST",
         success: function(response) {

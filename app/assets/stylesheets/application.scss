@@ -449,3 +449,19 @@ ul.wysihtml5-toolbar li a[title="Insert image"] { display: none; }
   -ms-transform: rotate(41deg);
   -o-transform: rotate(41deg);
 }
+[data-letters]:before {
+  content:attr(data-letters);
+  display:inline-block;
+  font-size:2em;
+  width:64px;
+  height:64px;
+  line-height:2.5em;
+  text-align:center;
+  border-radius:50%;
+  background: -moz-linear-gradient(-45deg, #5188da 0, #3487e2 100%) !important;
+  background: -webkit-linear-gradient(-45deg, #5188da 0, #3487e2 100%) !important;
+  background: linear-gradient(135deg, #5188da 0, #3487e2 100%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5188da', endColorstr='#3487e2', GradientType=1 ) !important;
+  vertical-align:middle;
+  color:white;
+  }
