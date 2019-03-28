@@ -263,16 +263,16 @@ module ApplicationHelper
     on_sentence = ""
 
     if reminder.carrier
-      on_sentence = on_sentence + reminder.carrier.display_name
+      on_sentence = on_sentence + reminder.carrier.display_name_reminder
     elsif reminder.shipper
-      on_sentence = on_sentence + reminder.shipper.display_name
+      on_sentence = on_sentence + reminder.shipper.display_name_reminder
     elsif reminder.activity
       on_sentence = on_sentence + reminder.activity.display_name
     else
       on_sentence = on_sentence + reminder.display_name
     end
     if reminder.carrier || reminder.shipper || reminder.activity
-      on_sentence = on_sentence + " has a <a data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type.nil? ? '' : reminder.reminder_type} <br>Notes: #{reminder.notes.nil? ? '' : reminder.notes.gsub("'", '&#39;')}' href='/reminders/#{reminder.id}'>Reminder</a>#{truncate_html(reminder.notes, :length => 50, :omission => '...', :escape => false)}"
+      on_sentence = on_sentence + "<a data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type.nil? ? '' : reminder.reminder_type} <br>Notes: #{reminder.notes.nil? ? '' : reminder.notes.gsub("'", '&#39;')}' href='/reminders/#{reminder.id}'>#{truncate_html(reminder.notes, :length => 50, :omission => '...', :escape => false)}</a>"
     else
       on_sentence = "There is a " + on_sentence + "."
     end

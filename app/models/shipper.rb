@@ -55,6 +55,15 @@ class Shipper < ApplicationRecord
     end
   end
 
+  def display_name_reminder
+    if self.company_name.present? && self.company_name != "" && !self.company_name.nil?
+      "<a href='/shippers/#{self.id}'>#{self.company_name}</a> (Shipper)"
+    else
+      "<a href='/shippers/#{self.id}'>Shipper</a>"
+    end
+  end
+
+
   def is_inbound?(location_id)
     ShipperLocation.where(:shipper_id => self.id, :location_id => location_id).length > 0
   end
