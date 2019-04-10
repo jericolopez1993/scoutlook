@@ -1,6 +1,6 @@
 module Api
   class MessagesController < ApplicationController
-    before_action :authenticate_user!, :except => [:recieve]
+    before_action :authenticate_user!, :except => [:receive]
 
     def delete_messages
       if params[:sms_ids]
@@ -39,7 +39,7 @@ module Api
       end
     end
 
-    def recieve
+    def receive
       if params['from'] && params['body']
         sms = Message.new
         sms.recipient = params['from']

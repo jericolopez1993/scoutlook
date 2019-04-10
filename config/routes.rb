@@ -96,7 +96,7 @@ Rails.application.routes.draw do
      collection do
        post      'delete_messages'
        post      'update_messages'
-       post      'recieve'
+       post      'receive'
      end
    end
    resources :clients
