@@ -1,5 +1,6 @@
 module Api
   class MessagesController < ApplicationController
+    before_action :authenticate_user!, :except => [:recieve]
 
     def delete_messages
       if params[:sms_ids]
@@ -35,6 +36,22 @@ module Api
             Message.find(params[:sms_id]).update_attributes(sent: false, trash: true, archive: false)
           end
         end
+      end
+    end
+
+    def recieve
+      if params['from'] && params['body']
+        sms = Message.new
+        sms.recipient = params['from']
+        sms.content_body = params['body']
+        sms.inbox = true
+        if sms.save
+          render :json => {}, :status => :ok
+        else
+          render :json => {status: 'failed'}, :status => :unprocessable_entity
+        end
+      else
+          render :json => {status: 'failed'}, :status => :unprocessable_entity
       end
     end
 

@@ -92,6 +92,13 @@ Rails.application.routes.draw do
        post      'update_mails'
      end
    end
+   resources :messages do
+     collection do
+       post      'delete_messages'
+       post      'update_messages'
+       post      'recieve'
+     end
+   end
    resources :clients
    resources :carriers
    resources :carrier_contacts
