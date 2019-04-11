@@ -45,6 +45,16 @@ module Api
         sms.recipient = params['From']
         sms.content_body = params['Body'] ? params['Body'] : (params['Caller'] ? "Called only" : "")
         sms.inbox = true
+
+        carrier_contact = CarrierContact.where("primary_phone = ? OR secondary_phone = ?", params['From'], params['From']).first
+        shipper_contact = ShipperContact.where("primary_phone = ? OR secondary_phone = ?", params['From'], params['From']).first
+
+        if carrier_contact
+          sms.carrier_id = carrier_contact.carrier_id
+        elsif shipper_contact
+          sms.shipper_id = shipper_contact.shipper_id
+        end
+
         if sms.save
           render :json => {}, :status => :ok
         else

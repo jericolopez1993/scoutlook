@@ -8,6 +8,7 @@ class Shipper < ApplicationRecord
 
   has_many :locations, primary_key: "id", foreign_key: 'shipper_id', class_name: "ShipperLocation"
   has_many :shipper_lanes, :dependent => :delete_all
+  has_many :messages, :dependent => :delete_all
   has_many :lane_1, -> { where(lane_priority: 1)}, primary_key: "id", foreign_key: 'shipper_id', class_name: "ShipperLane"
   has_many :lane_2, -> { where(lane_priority: 2)}, primary_key: "id", foreign_key: 'shipper_id', class_name: "ShipperLane"
   has_many :lane_3, -> { where(lane_priority: 3)}, primary_key: "id", foreign_key: 'shipper_id', class_name: "ShipperLane"

@@ -19,15 +19,14 @@
               <div class="wrapper">
                 <ul class="media-list underline m-b-15 p-b-15">
                   <li class="media media-sm clearfix">
-                    <a href="<%= message_path(:id => @message.id)%>" class="email-user pull-left" data-letters="<%= @message.recipient[0].upcase %>"></a>
+                    <a href="<%= message_path(:id => @message.id)%>" class="email-user pull-left" data-letters="<%= @message.get_company_name ? @message.get_company_name[0].upcase : @message.recipient[0].upcase %>"></a>
 
                     <div class="media-body">
                       <div class="email-from text-inverse f-s-14 f-w-600 m-b-3">
-                        from <%#= @message.sender %>
+                        <%= @message.get_company_name ? "#{@message.get_company_name} (#{@message.recipient})" : @message.recipient %>
                       </div>
                       <div class="m-b-3"><i class="fa fa-clock fa-fw"></i> <%= @message.created_at.strftime('%m/%d/%Y %l:%M %p') %></div>
                       <div class="email-to">
-                        To: <%= @message.recipient %>
                       </div>
                     </div>
                   </li>
