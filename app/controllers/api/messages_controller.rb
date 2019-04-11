@@ -40,10 +40,10 @@ module Api
     end
 
     def receive
-      if params['from'] && params['body']
+      if params['From']
         sms = Message.new
-        sms.recipient = params['from']
-        sms.content_body = params['body']
+        sms.recipient = params['From']
+        sms.content_body = params['Body'] ? params['Body'] : (params['Caller'] ? "Called only" : "")
         sms.inbox = true
         if sms.save
           render :json => {}, :status => :ok

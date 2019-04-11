@@ -28,18 +28,18 @@ class MessagesController < ApplicationController
   def set_listings
     if params[:mtype].present?
       if params[:mtype] == "sent"
-        @messages = Message.sents(current_user.id)
+        @messages = Message.sents
       elsif params[:mtype] == "trash"
-        @messages = Message.trashes(current_user.id)
+        @messages = Message.trashes
       elsif params[:mtype] == "archive"
-        @messages = Message.archives(current_user.id)
+        @messages = Message.archives
       else
         params[:mtype] = "inbox"
-        @messages = Message.inboxes(current_user.id)
+        @messages = Message.inboxes
       end
     else
       params[:mtype] = "inbox"
-      @messages = Message.inboxes(current_user.id)
+      @messages = Message.inboxes
     end
     @mtype = params[:mtype]
   end
