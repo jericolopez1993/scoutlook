@@ -1,0 +1,8 @@
+<button id="send-text-btn" class="btn btn-green btn-xs"><i class="fas fa-comment-alt"></i></button>
+<button id="send-mail-btn" class="btn btn-primary btn-xs"><i class="fas fa-envelope"></i></button>
+<%= link_to 'Create Carrier', new_carrier_path, :class => 'btn btn-danger btn-xs' %>
+<div class="btn-group btn-group-sm" role="group" aria-label="Basic example" style="margin-left: 5px;">
+  <%= link_to 'Promotions', prom_carriers_path, :class => 'btn btn-success btn-xs' %>
+  <%= link_to 'Demotions', demo_carriers_path, :class => 'btn btn-danger btn-xs' %>
+  <%= link_to 'New', newly_carriers_path, :class => 'btn btn-green btn-xs' %>
+</div>

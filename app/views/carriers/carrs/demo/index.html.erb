@@ -1,0 +1,85 @@
+<style>
+  .badge a {
+    color: #fff!important;
+  }
+  td.link a:visited {
+    /* color: #6f060b!important; */
+  }
+</style>
+<% if params[:controller] == "carriers" %>
+  <style media="screen">
+  .tooltip-inner {
+    background-color: #6f060b!important;
+  }
+  .tooltip .arrow::before{
+    border-right-color: #6f060b!important;
+  }
+  th {
+    vertical-align: top;
+  }
+  </style>
+<% end %>
+<!-- begin panel -->
+<div style="width: 100%">
+  <div class="panel panel-scout">
+    <div class="panel-heading">
+      <div class="panel-heading-btn">
+        <%= render 'carriers/header/buttons_and_links' %>
+      </div>
+      <h4 class="panel-title lp-header">Carriers (Demotion)</h4>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped table-bordered display nowrap"  data-order="[[1, &quot;asc&quot;]]" id="carrier_table" width="100%">
+        <thead>
+          <tr>
+            <th>MC #</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Highest Tier</th>
+            <th>Tier Last Week</th>
+            <th>Tier This Week</th>
+            <th>Gross Margin</th>
+            <th>Loads Last Month</th>
+            <th>Loads Last 3 Month</th>
+            <th>Loads Last 6 Month</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>MC #</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Highest Tier</th>
+            <th>Tier Last Week</th>
+            <th>Tier This Week</th>
+            <th>Gross Margin</th>
+            <th>Loads Last Month</th>
+            <th>Loads Last 3 Month</th>
+            <th>Loads Last 6 Month</th>
+          </tr>
+        </tfoot>
+        <tbody class="spacer">
+          <% CarrDemo.all.each do |carr| %>
+            <tr>
+              <td><%= carr['MC#'] %></td>
+              <td><%= carr['Carrier_Name'] %></td>
+              <td><%= (carr['Phone#1'] ? "#{carr['Phone#1']} / " : "") + "#{carr['Phone#2']}" %></td>
+              <td><%= generate_rank_text(carr['Highest_Tier']).html_safe %> <%= carr['Highest_Tier_Date'] ? DateTime.parse(carr['Highest_Tier_Date']).strftime('%m/%d/%Y') : "" %></td>
+              <td><%= generate_rank_text(carr['Previous_Tier']).html_safe %></td>
+              <td><%= generate_rank_text(carr['Current_Tier']).html_safe %></td>
+              <td><%= carr['Gross_Margin_%'] %>%</td>
+              <td class="text-center"><%= carr['Load_Last_Month'] %></td>
+              <td class="text-center"><%= carr['Load_Last_3_Months'] %></td>
+              <td class="text-center"><%= carr['Load_Last_6_Months'] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script language="javascript">
+  $(document).ready(function() {
+    filterTable("carrier_table", 1);
+  });
+</script>

@@ -198,6 +198,18 @@ class CarriersController < ApplicationController
     redirect_to carriers_path, notice: 'SMS was successfully sent to carrier/s.'
   end
 
+  def prom
+    render "carriers/carrs/prom/index"
+  end
+
+  def demo
+    render "carriers/carrs/demo/index"
+  end
+
+  def newly
+    render "carriers/carrs/new/index"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_carrier

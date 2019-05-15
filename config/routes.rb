@@ -43,6 +43,9 @@ Rails.application.routes.draw do
       post     'send_mail'
       post     'compose_sms'
       post     'send_sms'
+      get      'prom'
+      get      'demo'
+      get      'newly'
     end
   end
   resources :shipper_lanes

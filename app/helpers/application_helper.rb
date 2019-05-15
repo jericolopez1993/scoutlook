@@ -577,4 +577,24 @@ module ApplicationHelper
     end
   end
 
+  def generate_rank_text(rank)
+    if rank
+      color = ""
+      if rank == "Bronze"
+        color = "brown"
+      elsif rank == "Silver"
+        color = "secondary"
+      elsif rank == "Gold"
+        color = "warning"
+      elsif rank == "Platinum"
+        color = "success"
+      elsif rank == "Diamond"
+        color = "purple"
+      end
+      "<span class='badge badge-#{color}'>#{rank}</span>"
+    else
+      ""
+    end
+  end
+
 end

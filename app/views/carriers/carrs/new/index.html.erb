@@ -1,0 +1,73 @@
+<style>
+  .badge a {
+    color: #fff!important;
+  }
+  td.link a:visited {
+    /* color: #6f060b!important; */
+  }
+</style>
+<% if params[:controller] == "carriers" %>
+  <style media="screen">
+  .tooltip-inner {
+    background-color: #6f060b!important;
+  }
+  .tooltip .arrow::before{
+    border-right-color: #6f060b!important;
+  }
+  th {
+    vertical-align: top;
+  }
+  </style>
+<% end %>
+<!-- begin panel -->
+<div style="width: 100%">
+  <div class="panel panel-scout">
+    <div class="panel-heading">
+      <div class="panel-heading-btn">
+        <%= render 'carriers/header/buttons_and_links' %>
+      </div>
+      <h4 class="panel-title lp-header">Carriers (New)</h4>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped table-bordered display nowrap"  data-order="[[1, &quot;asc&quot;]]" id="carrier_table" width="100%">
+        <thead>
+          <tr>
+            <th>MC #</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Gross Margin</th>
+            <th>Loads Last Month</th>
+            <th>First Load Date</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>MC #</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Gross Margin</th>
+            <th>Loads Last Month</th>
+            <th>First Load Date</th>
+          </tr>
+        </tfoot>
+        <tbody class="spacer">
+          <% CarrNew.all.each do |carr| %>
+            <tr>
+              <td><%= carr['MC#'] %></td>
+              <td><%= carr['Carrier_Name'] %></td>
+              <td><%= (carr['Phone#1'] ? "#{carr['Phone#1']} / " : "") + "#{carr['Phone#2']}" %></td>
+              <td><%= carr['Gross_Margin_%'] %>%</td>
+              <td class="text-center"><%= carr['Load_Last_Month'] %></td>
+              <td><%= carr['First_Load_Date'] ? carr['First_Load_Date'].strftime('%m/%d/%Y') : "" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script language="javascript">
+  $(document).ready(function() {
+    filterTable("carrier_table", 1);
+  });
+</script>
