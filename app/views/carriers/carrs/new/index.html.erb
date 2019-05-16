@@ -34,20 +34,26 @@
           <tr>
             <th>MC #</th>
             <th>Name</th>
-            <th>Phone</th>
-            <th>Gross Margin</th>
-            <th>Loads Last Month</th>
+            <th>Load Last Month</th>
             <th>First Load Date</th>
+            <th>Gross Margin %</th>
+            <th>Phone #1</th>
+            <th>Phone #2</th>
+            <th>Prime Status</th>
+            <th>Owner</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
             <th>MC #</th>
             <th>Name</th>
-            <th>Phone</th>
-            <th>Gross Margin</th>
-            <th>Loads Last Month</th>
+            <th>Load Last Month</th>
             <th>First Load Date</th>
+            <th>Gross Margin %</th>
+            <th>Phone #1</th>
+            <th>Phone #2</th>
+            <th>Prime Status</th>
+            <th>Owner</th>
           </tr>
         </tfoot>
         <tbody class="spacer">
@@ -55,10 +61,13 @@
             <tr>
               <td><%= carr['MC#'] %></td>
               <td><%= carr['Carrier_Name'] %></td>
-              <td><%= (carr['Phone#1'] ? "#{carr['Phone#1']} / " : "") + "#{carr['Phone#2']}" %></td>
-              <td><%= carr['Gross_Margin_%'] %>%</td>
-              <td class="text-center"><%= carr['Load_Last_Month'] %></td>
+              <td><%= carr['Load_Last_Month'] %></td>
               <td><%= carr['First_Load_Date'] ? carr['First_Load_Date'].strftime('%m/%d/%Y') : "" %></td>
+              <td><%= carr['Gross_Margin_%'] %>%</td>
+              <td><%= carr['Phone#1'] %></td>
+              <td><%= carr['Phone#2'] %></td>
+              <td><%= carr['Prime Status'] %></td>
+              <td><%= carr['Owner'] %></td>
             </tr>
           <% end %>
         </tbody>

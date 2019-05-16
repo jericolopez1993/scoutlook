@@ -34,28 +34,42 @@
           <tr>
             <th>MC #</th>
             <th>Name</th>
-            <th>Phone</th>
+            <th>Current Tier</th>
+            <th>Previous Tier</th>
             <th>Highest Tier</th>
-            <th>Tier Last Week</th>
-            <th>Tier This Week</th>
-            <th>Gross Margin</th>
-            <th>Loads Last Month</th>
-            <th>Loads Last 3 Month</th>
-            <th>Loads Last 6 Month</th>
+            <th>Highest Tier Date</th>
+            <th>Gross Margin %</th>
+            <th>Load Last Week</th>
+            <th>Load Last Month</th>
+            <th>Load Last 3 Months</th>
+            <th>Load Last 6 Months</th>
+            <th>Highest Tier Reached</th>
+            <th>Phone #1</th>
+            <th>Phone #2</th>
+            <th>Prime Status</th>
+            <th>Owner</th>
+            <th>Days Since</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
             <th>MC #</th>
             <th>Name</th>
-            <th>Phone</th>
+            <th>Current Tier</th>
+            <th>Previous Tier</th>
             <th>Highest Tier</th>
-            <th>Tier Last Week</th>
-            <th>Tier This Week</th>
-            <th>Gross Margin</th>
-            <th>Loads Last Month</th>
-            <th>Loads Last 3 Month</th>
-            <th>Loads Last 6 Month</th>
+            <th>Highest Tier Date</th>
+            <th>Gross Margin %</th>
+            <th>Load Last Week</th>
+            <th>Load Last Month</th>
+            <th>Load Last 3 Months</th>
+            <th>Load Last 6 Months</th>
+            <th>Highest Tier Reached</th>
+            <th>Phone #1</th>
+            <th>Phone #2</th>
+            <th>Prime Status</th>
+            <th>Owner</th>
+            <th>Days Since</th>
           </tr>
         </tfoot>
         <tbody class="spacer">
@@ -63,14 +77,21 @@
             <tr>
               <td><%= carr['MC#'] %></td>
               <td><%= carr['Carrier_Name'] %></td>
-              <td><%= (carr['Phone#1'] ? "#{carr['Phone#1']} / " : "") + "#{carr['Phone#2']}" %></td>
-              <td><%= generate_rank_text(carr['Highest_Tier']).html_safe %> <%= carr['Highest_Tier_Date'] ? DateTime.parse(carr['Highest_Tier_Date']).strftime('%m/%d/%Y') : "" %></td>
-              <td><%= generate_rank_text(carr['Previous_Tier']).html_safe %></td>
               <td><%= generate_rank_text(carr['Current_Tier']).html_safe %></td>
+              <td><%= generate_rank_text(carr['Previous_Tier']).html_safe %></td>
+              <td><%= generate_rank_text(carr['Highest_Tier']).html_safe %></td>
+              <td><%= carr['Highest_Tier_Date'] ? DateTime.parse(carr['Highest_Tier_Date']).strftime('%m/%d/%Y') : "" %></td>
               <td><%= carr['Gross_Margin_%'] %>%</td>
-              <td class="text-center"><%= carr['Load_Last_Month'] %></td>
-              <td class="text-center"><%= carr['Load_Last_3_Months'] %></td>
-              <td class="text-center"><%= carr['Load_Last_6_Months'] %></td>
+              <td><%= carr['Load_Last_Week'] %></td>
+              <td><%= carr['Load_Last_Month'] %></td>
+              <td><%= carr['Load_Last_3_Months'] %></td>
+              <td><%= carr['Load_Last_6_Months'] %></td>
+              <td><%= carr['Highest_Tier_Reached'] %></td>
+              <td><%= carr['Phone#1'] %></td>
+              <td><%= carr['Phone#2'] %></td>
+              <td><%= carr['Prime Status'] %></td>
+              <td><%= carr['Owner'] %></td>
+              <td><%= carr['Days_Since'] %></td>
             </tr>
           <% end %>
         </tbody>
