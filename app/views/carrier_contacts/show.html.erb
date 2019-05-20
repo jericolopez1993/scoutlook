@@ -1,54 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "#{@carrier_contact.carrier.nil? ? '' : generate_alphanumeric_id(@carrier_contact.carrier.company_name, @carrier_contact.carrier.id)}", sub_header_title: "#{@carrier_contact.carrier.nil? ? '' : link_to(@carrier_contact.carrier.company_name,  @carrier_contact.carrier)}"  %>
+  </h1>
+  <span class="pull-right">
+    <% if current_user.has_role?(:admin) %>
+      <%= link_to 'Edit', edit_carrier_contact_path(@carrier_contact), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Back', carrier_path(:id => @carrier_contact.carrier_id), :class => 'btn btn-info btn-xs' %>
+    <% end %>
+  </span>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @carrier_contact.title %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @carrier_contact.email.downcase %>
-</p>
-
-<p>
-  <strong>Work phone:</strong>
-  <%= @carrier_contact.primary_phone %>
-</p>
-
-<p>
-  <strong>Home phone:</strong>
-  <%= @carrier_contact.secondary_phone %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @carrier_contact.address %>
-</p>
-
-<p>
-  <strong>City/Town:</strong>
-  <%= @carrier_contact.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @generate_abv(carrier_contact.state).upcase %>
-</p>
-
-<p>
-  <strong>Postal:</strong>
-  <%= @carrier_contact.postal %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @carrier_contact.country %>
-</p>
-
-<p>
-  <strong>Carrier:</strong>
-  <%= @carrier_contact.carrier_id %>
-</p>
-
-<%= link_to 'Edit', edit_carrier_contact_path(@carrier_contact) %> |
-<%= link_to 'Back', carrier_contacts_path %>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title"></h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'carrier_contacts/show_fields', carrier_contact: @carrier_contact %>
+  </div>
+</div>

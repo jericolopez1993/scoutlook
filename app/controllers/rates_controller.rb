@@ -57,16 +57,7 @@ class RatesController < ApplicationController
         if params[:rate][:supporting_pdf].present?
           @rate.supporting_pdf.attach(params[:rate][:supporting_pdf])
         end
-        if @rate.carrier
-          format.html { redirect_to @rate.carrier, notice: 'Rate was successfully created.' }
-        elsif @rate.shipper
-          format.html { redirect_to @rate.shipper, notice: 'Rate was successfully created.' }
-        elsif @rate.activity
-          format.html { redirect_to activity_path(:id => @rate.activity_id), notice: 'Rate was successfully created.' }
-        else
-          format.html { redirect_to @rate, notice: 'Rate was successfully created.' }
-        end
-        # format.html { redirect_to @rate, notice: 'Rate was successfully created.' }
+        format.html { redirect_to @rate, notice: 'Rate was successfully created.' }
         format.json { render :show, status: :created, location: @rate }
       else
         format.html { render :new }
@@ -83,15 +74,7 @@ class RatesController < ApplicationController
         if params[:rate][:supporting_pdf].present?
           @rate.supporting_pdf.attach(params[:rate][:supporting_pdf])
         end
-        if @rate.carrier
-          format.html { redirect_to @rate.carrier, notice: 'Rate was successfully updated.' }
-        elsif @rate.shipper
-          format.html { redirect_to @rate.shipper, notice: 'Rate was successfully updated.' }
-        elsif @rate.activity
-          format.html { redirect_to activity_path(:id => @rate.activity_id), notice: 'Rate was successfully updated.' }
-        else
-          format.html { redirect_to @rate, notice: 'Rate was successfully updated.' }
-        end
+        format.html { redirect_to @rate, notice: 'Rate was successfully updated.' }
         format.json { render :show, status: :ok, location: @rate }
       else
         format.html { render :edit }

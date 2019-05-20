@@ -1,0 +1,35 @@
+<% if carrier_company.present? && !carrier_company.nil? %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Name:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_company.name %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">City:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_company.city %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">State:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_company.state %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Company Type:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_company.company_type %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Website:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_company.phone_number %>
+    </div>
+  </div>
+
+<% else %>
+  <em>No Available</em>
+<% end %>

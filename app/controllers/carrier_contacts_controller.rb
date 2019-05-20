@@ -63,7 +63,7 @@ class CarrierContactsController < ApplicationController
           end
         end
         check_for_pdm_poc
-        format.html { redirect_to carrier_path(:id => @carrier_contact.carrier_id), notice: 'Carrier contact was successfully created.' }
+        format.html { redirect_to @carrier_contact, notice: 'Carrier contact was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_contact }
       else
         format.html { render :new }
@@ -108,7 +108,7 @@ class CarrierContactsController < ApplicationController
           end
         end
         check_for_pdm_poc
-        format.html { redirect_to carrier_path(:id => @carrier_contact.carrier_id), notice: 'Carrier contact was successfully updated.' }
+        format.html { redirect_to @carrier_contact, notice: 'Carrier contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier_contact }
       else
         format.html { render :edit }

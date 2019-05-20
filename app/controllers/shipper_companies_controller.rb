@@ -31,7 +31,7 @@ class ShipperCompaniesController < ApplicationController
 
     respond_to do |format|
       if @shipper_company.save
-        format.html { redirect_to shipper_path(:id => @shipper_company.shipper_id), notice: 'Shipper company was successfully created.' }
+        format.html { redirect_to @shipper_company, notice: 'Shipper company was successfully created.' }
         format.json { render :show, status: :created, location: @shipper_company }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class ShipperCompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @shipper_company.update(shipper_company_params)
-        format.html { redirect_to shipper_path(:id => @shipper_company.shipper_id), notice: 'Shipper company was successfully updated.' }
+        format.html { redirect_to @shipper_company, notice: 'Shipper company was successfully updated.' }
         format.json { render :show, status: :ok, location: @shipper_company }
       else
         format.html { render :edit }

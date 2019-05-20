@@ -16,7 +16,8 @@
     <% ShipperContact.where(:shipper_id => shipper.id).each do |contact| %>
       <tr>
         <td>
-          <a class="btn btn-warning btn-xs" href="<%= edit_shipper_contact_path(contact) %>"><i class="far fa-edit"></i></a>&nbsp;
+          <%= link_to '<i class="far fa-eye"></i>'.html_safe, contact, :class => 'btn btn-info btn-xs' %>
+          <a class="btn btn-warning btn-xs" href="<%= edit_shipper_contact_path(contact) %>"><i class="far fa-edit"></i></a>
           <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href="/shipper_contacts/<%= contact.id %>"><i class="far fa-trash-alt"></i></a>
         </td>
         <td style="text-align: center;">

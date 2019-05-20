@@ -30,7 +30,7 @@ class CarrierLanesController < ApplicationController
     @carrier_lane = CarrierLane.new(carrier_lane_params)
     respond_to do |format|
       if @carrier_lane.save
-        format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully created.' }
+        format.html { redirect_to @carrier_lane, notice: 'Carrier lane was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_lane }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class CarrierLanesController < ApplicationController
   def update
     respond_to do |format|
       if @carrier_lane.update(carrier_lane_params)
-        format.html { redirect_to carrier_path(:id => @carrier_lane.carrier_id), notice: 'Carrier lane was successfully updated.' }
+        format.html { redirect_to @carrier_lane, notice: 'Carrier lane was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier_lane }
       else
         format.html { render :edit }

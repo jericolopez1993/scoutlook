@@ -1,34 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "#{@carrier_company.carrier.nil? ? '' : generate_alphanumeric_id(@carrier_company.carrier.company_name, @carrier_company.carrier.id)}", sub_header_title: "#{@carrier_company.carrier.nil? ? '' : link_to(@carrier_company.carrier.company_name,  @carrier_company.carrier)}"  %>
+  </h1>
+  <span class="pull-right">
+    <% if current_user.has_role?(:admin) %>
+      <%= link_to 'Edit', edit_carrier_company_path(@carrier_company), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Back', carrier_path(:id => @carrier_company.carrier_id), :class => 'btn btn-info btn-xs' %>
+    <% end %>
+  </span>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @carrier_company.name %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @carrier_company.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @generate_abv(carrier_company.state).upcase %>
-</p>
-
-<p>
-  <strong>Company type:</strong>
-  <%= @carrier_company.company_type %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @carrier_company.phone_number %>
-</p>
-
-<p>
-  <strong>Website:</strong>
-  <%= @carrier_company.website %>
-</p>
-
-<%= link_to 'Edit', edit_carrier_company_path(@carrier_company) %> |
-<%= link_to 'Back', carrier_companies_path %>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title"></h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'carrier_companies/show_fields', carrier_company: @carrier_company %>
+  </div>
+</div>

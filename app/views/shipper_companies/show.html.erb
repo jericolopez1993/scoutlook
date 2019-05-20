@@ -1,34 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="header-darkblue">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "#{@shipper_company.shipper.nil? ? '' : generate_alphanumeric_id(@shipper_company.shipper.company_name, @shipper_company.shipper.id)}", sub_header_title: "#{@shipper_company.shipper.nil? ? '' : link_to(@shipper_company.shipper.company_name,  @shipper_company.shipper)}"  %>
+  </h1>
+  <span class="pull-right">
+    <% if current_user.has_role?(:admin) %>
+      <%= link_to 'Edit', edit_shipper_company_path(@shipper_company), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Back', shipper_path(:id => @shipper_company.shipper_id), :class => 'btn btn-info btn-xs' %>
+    <% end %>
+  </span>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @shipper_company.name %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @shipper_company.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @generate_abv(shipper_company.state).upcase %>
-</p>
-
-<p>
-  <strong>Company type:</strong>
-  <%= @shipper_company.company_type %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @shipper_company.phone_number %>
-</p>
-
-<p>
-  <strong>Website:</strong>
-  <%= @shipper_company.website %>
-</p>
-
-<%= link_to 'Edit', edit_shipper_company_path(@shipper_company) %> |
-<%= link_to 'Back', shipper_companies_path %>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title"></h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'shipper_companies/show_fields', shipper_company: @shipper_company %>
+  </div>
+</div>

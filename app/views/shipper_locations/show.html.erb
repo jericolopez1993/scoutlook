@@ -1,9 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="header-darkblue">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "#{@shipper_location.shipper.nil? ? '' : generate_alphanumeric_id(@shipper_location.shipper.company_name, @shipper_location.shipper.id)}", sub_header_title: "#{@shipper_location.shipper.nil? ? '' : link_to(@shipper_location.shipper.company_name,  @shipper_location.shipper)}"  %>
+  </h1>
+  <span class="pull-right">
+    <% if current_user.has_role?(:admin) %>
+      <%= link_to 'Edit', edit_shipper_location_path(@shipper_location), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Back', shipper_path(:id => @shipper_location.shipper_id), :class => 'btn btn-info btn-xs' %>
+    <% end %>
+  </span>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @shipper_location.name %>
-</p>
-
-<%= link_to 'Edit', edit_shipper_location_path(@shipper_location) %> |
-<%= link_to 'Back', shipper_locations_path %>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title"></h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'shipper_locations/show_fields', shipper_location: @shipper_location %>
+  </div>
+</div>

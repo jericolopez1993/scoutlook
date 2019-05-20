@@ -39,7 +39,7 @@ class ShipperLocationsController < ApplicationController
           shipper = Shipper.find(params[:shipper_location][:shipper_id])
           shipper.update_attributes(:head_office => @shipper_location.id)
         end
-        format.html { redirect_to shipper_path(:id => @shipper_location.shipper_id), notice: 'Location was successfully created.' }
+        format.html { redirect_to @shipper_location, notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, shipper_location: @shipper_location }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class ShipperLocationsController < ApplicationController
           shipper.update_attributes(:head_office => @shipper_location.id)
         end
 
-        format.html { redirect_to shipper_path(:id => @shipper_location.shipper_id), notice: 'Location was successfully updated.' }
+        format.html { redirect_to @shipper_location, notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, shipper_location: @shipper_location }
       else
         format.html { render :edit }

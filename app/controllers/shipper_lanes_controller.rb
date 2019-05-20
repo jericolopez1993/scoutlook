@@ -30,7 +30,7 @@ class ShipperLanesController < ApplicationController
     @shipper_lane = ShipperLane.new(shipper_lane_params)
     respond_to do |format|
       if @shipper_lane.save
-        format.html { redirect_to shipper_path(:id => @shipper_lane.shipper_id), notice: 'Shipper lane was successfully created.' }
+        format.html { redirect_to @shipper_lane, notice: 'Shipper lane was successfully created.' }
         format.json { render :show, status: :created, location: @shipper_lane }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class ShipperLanesController < ApplicationController
   def update
     respond_to do |format|
       if @shipper_lane.update(shipper_lane_params)
-        format.html { redirect_to shipper_path(:id => @shipper_lane.shipper_id), notice: 'Shipper lane was successfully updated.' }
+        format.html { redirect_to @shipper_lane, notice: 'Shipper lane was successfully updated.' }
         format.json { render :show, status: :ok, location: @shipper_lane }
       else
         format.html { render :edit }

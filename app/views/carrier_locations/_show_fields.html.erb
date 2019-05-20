@@ -1,0 +1,35 @@
+<% if carrier_location.present? && !carrier_location.nil? %>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Address:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_location.address %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">City:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_location.city %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">State:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_location.state %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Country:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_location.country %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Phone:</label>
+    <div class="col-md-9 lbl-padding-t">
+      <%= carrier_location.phone %>
+    </div>
+  </div>
+
+<% else %>
+  <em>No Available</em>
+<% end %>

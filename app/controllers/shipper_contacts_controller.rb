@@ -63,7 +63,7 @@ class ShipperContactsController < ApplicationController
           end
         end
         check_for_pdm_poc
-        format.html { redirect_to shipper_path(:id => @shipper_contact.shipper_id), notice: 'Shipper contact was successfully created.' }
+        format.html { redirect_to @shipper_contact, notice: 'Shipper contact was successfully created.' }
         format.json { render :show, status: :created, location: @shipper_contact }
       else
         format.html { render :new }
@@ -108,7 +108,7 @@ class ShipperContactsController < ApplicationController
           end
         end
         check_for_pdm_poc
-        format.html { redirect_to shipper_path(:id => @shipper_contact.shipper_id), notice: 'Shipper contact was successfully updated.' }
+        format.html { redirect_to @shipper_contact, notice: 'Shipper contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @shipper_contact }
       else
         format.html { render :edit }

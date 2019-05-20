@@ -37,6 +37,7 @@
             <th></th>
             <th class="text-center"><i class="fas fa-clock"></i></th>
             <th>RO</th>
+            <th>Class</th>
             <th>Name</th>
             <th>ST/PV</th>
             <th>DM Name</th>
@@ -44,7 +45,6 @@
             <th>Lane</th>
             <th>DM Email</th>
             <th>Appr</th>
-            <th>Class</th>
             <th>CR</th>
             <th>LstDateCon</th>
             <th>1M</th>
@@ -59,14 +59,14 @@
             <th></th>
             <th></th>
             <th>RO</th>
+            <th>Class</th>
             <th>Name</th>
-            <th> </th>
+            <th>ST/PV</th>
             <th>DM Name</th>
             <th>DM Phone</th>
             <th>Lane</th>
             <th>DM Email</th>
             <th>Appr</th>
-            <th>Class</th>
             <th>CR</th>
             <th>LstDateCon</th>
             <th>1M</th>
@@ -88,11 +88,12 @@
                 <% end %>
               </td>
               <td class="text-center link"><%= shipper.relationship_owner_name.blank? ? '' : "#{link_to(covert_initials(shipper.relationship_owner_name), user_path(:id => shipper.relationship_owner))}".html_safe %></td>
+              <td class="text-center"><%= shade_sales_priority(shipper.sales_priority).html_safe %></td>
               <td class="link">
                 <%= render "shippers/link", shipper: shipper %>
               </td>
               <td><%= shipper.location.nil? ? '' : generate_abv(shipper.location.state).upcase %></td>
-              <td><%= shipper.pdm_name %></td>
+              <td><%= truncate_fields(shipper.pdm_name).html_safe %></td>
               <td><b><%=generate_phone_number("", shipper.primary_phone, shipper.primary_extension_number, shipper.primary_eligible_texting, shipper.primary_phone_type).html_safe %></b></td>
               <td>
                 <% if !shipper.lane_origin.nil? && shipper.lane_origin != "" %>
@@ -109,7 +110,6 @@
               </td>
               <td><% if !shipper.contact_email.nil?  %><a href="mailto:<%= shipper.contact_email %>?Subject=Hello%20<%= shipper.pdm_name.nil? ? '' :  shipper.pdm_name.capitalize  %>" target="_top"><%= shipper.contact_email.downcase %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
               <td class="text-center"><%= shipper.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= shade_sales_priority(shipper.sales_priority).html_safe %></td>
               <td class="text-center"><%= shipper.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
               <td class="text-center"><%= shipper.date_opened.nil? ? "" : shipper.date_opened.strftime('%m/%d/%Y').to_s %></td>
               <td class="text-center"><%= shipper.load_last_month %></td>

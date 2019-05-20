@@ -44,17 +44,7 @@ class ActivitiesController < ApplicationController
         if params[:activity][:credit_application].present?
           @activity.credit_application.attach(params[:activity][:credit_application])
         end
-        if params[:activity][:previous_params] != "activities"
-          if !@activity.carrier.nil?
-            format.html { redirect_to carrier_path(:id => @activity.carrier_id), notice: 'Activity was successfully created.' }
-          elsif !@activity.shipper.nil?
-            format.html { redirect_to shipper_path(:id => @activity.shipper_id), notice: 'Activity was successfully created.' }
-          else
-            format.html { redirect_to activities_path, notice: 'Activity was successfully created.' }
-          end
-        else
-          format.html { redirect_to activities_path, notice: 'Activity was successfully created.' }
-        end
+        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
         format.json { render :show, status: :created, location: @activity }
       else
         format.html { render :new }
@@ -74,17 +64,7 @@ class ActivitiesController < ApplicationController
         if params[:activity][:credit_application].present?
           @activity.credit_application.attach(params[:activity][:credit_application])
         end
-        if params[:activity][:previous_params] != "activities"
-          if !@activity.carrier.nil?
-            format.html { redirect_to carrier_path(:id => @activity.carrier_id), notice: 'Activity was successfully updated.' }
-          elsif !@activity.shipper.nil?
-            format.html { redirect_to shipper_path(:id => @activity.shipper_id), notice: 'Activity was successfully updated.' }
-          else
-            format.html { redirect_to activities_path, notice: 'Activity was successfully updated.' }
-          end
-        else
-          format.html { redirect_to activities_path, notice: 'Activity was successfully updated.' }
-        end
+        format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
         format.json { render :show, status: :ok, location: @activity }
       else
         format.html { render :edit }

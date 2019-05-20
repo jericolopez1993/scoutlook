@@ -1,54 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="header-darkblue">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "#{@shipper_contact.shipper.nil? ? '' : generate_alphanumeric_id(@shipper_contact.shipper.company_name, @shipper_contact.shipper.id)}", sub_header_title: "#{@shipper_contact.shipper.nil? ? '' : link_to(@shipper_contact.shipper.company_name,  @shipper_contact.shipper)}"  %>
+  </h1>
+  <span class="pull-right">
+    <% if current_user.has_role?(:admin) %>
+      <%= link_to 'Edit', edit_shipper_contact_path(@shipper_contact), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Back', shipper_path(:id => @shipper_contact.shipper_id), :class => 'btn btn-info btn-xs' %>
+    <% end %>
+  </span>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @shipper_contact.title %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @shipper_contact.email %>
-</p>
-
-<p>
-  <strong>Work phone:</strong>
-  <%= @shipper_contact.primary_phone %>
-</p>
-
-<p>
-  <strong>Home phone:</strong>
-  <%= @shipper_contact.secondary_phone %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @shipper_contact.address %>
-</p>
-
-<p>
-  <strong>City/Town:</strong>
-  <%= @shipper_contact.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @generate_abv(shipper_contact.state).upcase %>
-</p>
-
-<p>
-  <strong>Postal:</strong>
-  <%= @shipper_contact.postal %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @shipper_contact.country %>
-</p>
-
-<p>
-  <strong>Shipper:</strong>
-  <%= @shipper_contact.shipper_id %>
-</p>
-
-<%= link_to 'Edit', edit_shipper_contact_path(@shipper_contact) %> |
-<%= link_to 'Back', shipper_contacts_path %>
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title"></h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'shipper_contacts/show_fields', shipper_contact: @shipper_contact %>
+  </div>
+</div>

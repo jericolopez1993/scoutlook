@@ -31,7 +31,7 @@ class CarrierCompaniesController < ApplicationController
 
     respond_to do |format|
       if @carrier_company.save
-        format.html { redirect_to carrier_path(:id => @carrier_company.carrier_id), notice: 'Carrier company was successfully created.' }
+        format.html { redirect_to @carrier_company, notice: 'Carrier company was successfully created.' }
         format.json { render :show, status: :created, location: @carrier_company }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class CarrierCompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @carrier_company.update(carrier_company_params)
-        format.html { redirect_to carrier_path(:id => @carrier_company.carrier_id), notice: 'Carrier company was successfully updated.' }
+        format.html { redirect_to @carrier_company, notice: 'Carrier company was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier_company }
       else
         format.html { render :edit }

@@ -39,7 +39,7 @@ class CarrierLocationsController < ApplicationController
           carrier = Carrier.find(params[:carrier_location][:carrier_id])
           carrier.update_attributes(:head_office => @carrier_location.id)
         end
-        format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Location was successfully created.' }
+        format.html { redirect_to @carrier_location, notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, carrier_location: @carrier_location }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class CarrierLocationsController < ApplicationController
           carrier.update_attributes(:head_office => @carrier_location.id)
         end
 
-        format.html { redirect_to carrier_path(:id => @carrier_location.carrier_id), notice: 'Location was successfully updated.' }
+        format.html { redirect_to @carrier_location, notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, carrier_location: @carrier_location }
       else
         format.html { render :edit }
