@@ -5,8 +5,7 @@ class CarrierLane < ApplicationRecord
     ['United States', [
       "AL", "AK", "AZ", "AZ-Yuma", "AR", "CA", "CA-Fresno", "CA-Bakersfield", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME",
       "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NJ", "NV", "NY", "NY-Brooklyn", "NY-Bronx", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD",
-      "TN", "TX", "TX-McAllen", "UT", "VT", "VA", "WA", "WV", "WI", "WY",
-      "US-Northeast", "US-Northeast (No Bronx)", "US-Southeast", "US-Northwest", "US-Midwest",
+      "TN", "TX", "TX-McAllen", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
     ]],
     ['Canada', [
       "BC", "AB", "SK", "MB", "ON", "QC", "NB", "NS", "PEI", "NL", "NU",

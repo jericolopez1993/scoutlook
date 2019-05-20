@@ -226,7 +226,8 @@ module ApplicationHelper
 
   def shade_sales_priority(sales_priority)
     if sales_priority.include?("A")
-      "<span class='text-lime'>#{sales_priority}</span>"
+      # "<span class='text-lime'>#{sales_priority}</span>"
+      "<span class='text-lime'>A</span>"
     elsif sales_priority.include?("B")
       "<span class='text-indigo'>#{sales_priority}</span>"
     elsif sales_priority.include?("D")
@@ -505,6 +506,31 @@ module ApplicationHelper
     end
   end
 
+  def truncate_fields(field)
+    if field
+      if field.length > 20
+        "<span class='learned' data-toggle='tooltip' data-placement='left'data-html='true' title='#{field}'>#{truncate(ActionView::Base.full_sanitizer.sanitize(field), length: 20, omission: '...')}</span>"
+      else
+        field
+      end
+    else
+      ""
+    end
+  end
+
+  def truncate_mc_number(mc_number)
+    if mc_number
+      if mc_number.length > 8
+        "<span class='learned' data-toggle='tooltip' data-placement='left'data-html='true' title='#{mc_number}'>#{truncate(ActionView::Base.full_sanitizer.sanitize(mc_number), length: 8, omission: '...')}</span>"
+      else
+        mc_number
+      end
+    else
+      ""
+    end
+
+  end
+
   def generate_abv(loc)
     if loc == "NY-Brooklyn"
       "BKN"
@@ -518,16 +544,16 @@ module ApplicationHelper
       "BKC"
     elsif loc == "AZ-Yuma"
       "YUZ"
-    elsif loc == "US-Northeast"
-      "US-NE"
-    elsif loc == "US-Southeast"
-      "US-SE"
-    elsif loc == "US-Northwest"
-      "US-NW"
-    elsif loc == "US-Midwest"
-      "US-MW"
-    elsif loc == "US-Northeast (No Bronx)"
-      "US-NE (No BXN)"
+    elsif ["US-Northeast", "US-Southeast", "US-Northwest", "US-Midwest", "US-Northeast (No Bronx)"].include?(loc)
+      "US"
+    # elsif loc == "US-Southeast"
+    #   "US-SE"
+    # elsif loc == "US-Northwest"
+    #   "US-NW"
+    # elsif loc == "US-Midwest"
+    #   "US-MW"
+    # elsif loc == "US-Northeast (No Bronx)"
+    #   "US-NE (No BXN)"
     else
       loc
     end
