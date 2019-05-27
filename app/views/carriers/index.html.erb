@@ -1,3 +1,42 @@
+
+<style>
+  p {
+    display: inline-block!important;
+  }
+  .hide {
+    visibility: hidden;
+  }
+  div.link a:visited {
+    color: #6f060b!important;
+  }
+  div.link a {
+    text-decoration: underline;
+  }
+  @media screen and (max-width: 479px) {
+    .dt-buttons.btn-group {
+      padding-top: 25px!important;
+    }
+  }
+  @media (max-width: 767px) {
+    .panel-inverse > .panel-heading {
+      background: 0 0;
+    }
+    .md-nav {
+      display: none;
+    }
+    .nav-pills .nav-link, .nav-pills > li > a {
+      background-color: #fff;
+      margin: 5px;
+    }
+    label {
+      text-align: left!important;
+    }
+  }
+  label {
+    text-align: right;
+  }
+</style>
+
 <style>
   .badge a {
     color: #fff!important;
@@ -19,120 +58,76 @@
   }
   </style>
 <% end %>
+<!-- begin page-header -->
+<div class="header-scout">
+  <h1 class="pull-left">Carriers</h1>
+  <span class="pull-right">
+    <%= render 'carriers/header/buttons_and_links' %>
+  </span>
+</div>
+<!-- end page-header -->
+
 <!-- begin panel -->
-<div style="width: 100%">
-  <div class="panel panel-scout">
-    <div class="panel-heading">
-      <div class="panel-heading-btn">
-        <%= render 'carriers/header/buttons_and_links' %>
+<div class="panel panel-inverse">
+  <div class="panel-heading" style="padding: 5px 15px">
+    <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
+      <li class="nav-items">
+        <a href="#all" data-toggle="tab" class="nav-link" style="padding:5px; margin: 0px 10px">
+          <span class="d-sm-block d-none"><h4 class="panel-title">All</h4></span>
+        </a>
+      </li>
+      <li class="nav-items">
+        <a href="#customers" data-toggle="tab" class="nav-link active" style="padding:5px; margin: 0px 10px">
+          <span class="d-sm-block d-none"><h4 class="panel-title">Customers</h4></span>
+        </a>
+      </li>
+    </ul>
+
+    <% if is_mobile %>
+      <div class="row">
+        <div class="col-12 text-center nav-hide" id="m-nav-pill">
+          <ul class="nav nav-pills" style="margin-bottom: 0px;">
+            <li class="nav-items col-4">
+              <a href="#all" data-toggle="tab" class="nav-link" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">All</h4></span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="#customers" data-toggle="tab" class="nav-link active" style="padding: 5px 0;">
+                <span class="d-sm-block"><h4 class="panel-title">Customers</h4></span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <h4 class="panel-title lp-header">Carriers</h4>
+    <% end %>
+  </div>
+  <% if is_mobile %>
+    <div class="col-12 text-inverse" id="hide-m-nav"  style="font-size: 14px;">
+        <i class="fas fa-plus float-right p-r-10 p-t-10" style="margin-bottom: -20px; margin-top: 20px;"><span class="float-right">&nbsp;show tabs</span></i>
     </div>
-    <div class="panel-body">
-      <table class="table table-striped table-bordered display nowrap"  data-order="[[3, &quot;asc&quot;]]" id="carrier_table">
-        <thead>
-          <tr>
-            <th></th>
-            <th class="text-center"><i class="fas fa-clock"></i></th>
-            <th>RO</th>
-            <th>Class</th>
-            <th>MC</th>
-            <th>Name</th>
-            <th>ST/PV</th>
-            <th>Ops Name</th>
-            <th>Ops Phone</th>
-            <th>Reef</th>
-            <th>Lane</th>
-            <th>Ops Email</th>
-            <th>Appr</th>
-            <th>CR</th>
-            <th class="text-center">LstDateCon</th>
-            <th>6M</th>
-            <th>1M</th>
-          </tr>
-        </thead>
-        <tfoot>
-          <tr>
-            <th></th>
-            <th></th>
-            <th>RO</th>
-            <th>Class</th>
-            <th>MC</th>
-            <th>Name</th>
-            <th>ST/PV</th>
-            <th>Ops Name</th>
-            <th>Ops Phone</th>
-            <th>Reef</th>
-            <th>Lane</th>
-            <th>Ops Email</th>
-            <th>Appr</th>
-            <th>CR</th>
-            <th>LstDateCon</th>
-            <th>6M</th>
-            <th>1M</th>
-          </tr>
-        </tfoot>
-        <tbody class="spacer">
-          <% @carriers.each do |carrier| %>
-            <tr>
-              <td><%= carrier.id %></td>
-              <td>
-                <% if carrier.reminders %>
-                  <% carrier.reminders.each do |reminder| %>
-                      <%= reminder_to_html(reminder).html_safe %>
-                  <% end %>
-                <% end %>
-              </td>
-              <td class="text-center link"><%= carrier.relationship_owner_name.blank? ? '' : "#{link_to(covert_initials(carrier.relationship_owner_name), user_path(:id => carrier.relationship_owner))}".html_safe %></td>
-              <td class="text-center"><%= shade_sales_priority(carrier.sales_priority).html_safe %></td>
-              <td>
-                <%= truncate_mc_number(carrier.mc_number).html_safe%>
-              </td>
-              <td class="link">
-                <%= render "carriers/link", carrier: carrier %>
-              </td>
-              <td><%= carrier.state.nil? ? '' : generate_abv(carrier.state).upcase %></td>
-              <td>
-                <%= truncate_fields(carrier.poc_name).html_safe %>
-              </td>
-              <td><b><%= carrier.primary_phone.nil? ? '' : generate_phone_number("", carrier.primary_phone, carrier.primary_extension_number, carrier.primary_eligible_texting, carrier.primary_phone_type).html_safe %></b></td>
-              <td class="text-center"><%= carrier.reefers %></td>
-              <td>
-                <% if !carrier.lane_origin.nil? && carrier.lane_origin != "" %>
-                  <% carrier.lane_origin.split(',').map(&:to_s).each do |origin| %>
-                    <%= generate_location2(origin, params[:controller], carrier.lane_id).html_safe %>
-                  <% end %>
-                <% end %>
-                <% if !carrier.lane_destination.nil? && carrier.lane_destination != "" %>
-                &rarr;
-                <% carrier.lane_destination.split(',').map(&:to_s).each do |destination| %>
-                  <%= generate_location2(destination, params[:controller], carrier.lane_id).html_safe %>
-                <% end %>
-              <% end %>
-              </td>
-              <td>
-                <% if !carrier.contact_email.nil?  %>
-                  <a href="mailto:<%= carrier.contact_email %>?Subject=Hello%20<%= carrier.poc_name.nil? ? '' :  carrier.poc_name.capitalize  %>" target="_top">
-                    <%= carrier.contact_email.downcase %>&nbsp;<i class="far fa-envelope"></i>
-                  </a>
-                <% end %>
-              </td>
-              <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%=  carrier.date_opened.nil? ? "" : carrier.date_opened.strftime('%m/%d/%Y').to_s %></td>
-              <td class="text-center"><%= carrier.load_last_6_month %></td>
-              <td class="text-center"><%= carrier.load_last_month %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class="col-12 nav-hide text-inverse" style="font-size: 14px;" id="show-m-nav">
+        <i class="fas fa-minus float-right p-r-10 p-t-10" style="margin-bottom: -20px; margin-top: 20px;"><span class="float-right">&nbsp;hide tabs</span></i>
+    </div>
+  <% end %>
+  <div class="tab-content">
+    <!-- begin tab-pane -->
+    <div class="tab-pane fade" id="all">
+      <div class="panel-body">
+        <%= render 'carriers/table', carriers: @carriers, table_type: "carrier" %>
+      </div>
+    </div>
+    <div class="tab-pane fade active show" id="customers">
+      <%= render 'carriers/table', carriers: Carrier.mine(current_user.id), table_type: "customer" %>
     </div>
   </div>
 </div>
 
+
 <script language="javascript">
   var user_id = "<%= current_user.id %>";
   $(document).ready(function() {
+    filterAndSelectAllTable("customer_table", 1);
     filterAndSelectAllTable("carrier_table", 1);
     $('#send-mail-btn').on('click', function(){
         var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
