@@ -27,11 +27,11 @@ label {
   </h1>
   <span class="pull-right">
     <% if !@activity.carrier.nil? %>
-      <%= link_to 'Edit', edit_activity_path(:previous_controller => "carriers"), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
+      <%= link_to 'Edit', edit_activity_path(:previous_controller => "carriers"), :class => 'btn btn-warning btn-xs', target: :_blank %>&nbsp;&nbsp;
       <% carrier = Carrier.find(@activity.carrier_id)%>
       <%= link_to 'Back to Carrier', carrier, :class => 'btn btn-info btn-xs' %>
     <% elsif !@activity.shipper.nil? %>
-      <%= link_to 'Edit', edit_activity_path(:previous_controller => "shippers"), :class => 'btn btn-warning btn-xs' %>&nbsp;&nbsp;
+      <%= link_to 'Edit', edit_activity_path(:previous_controller => "shippers"), :class => 'btn btn-warning btn-xs', target: :_blank %>&nbsp;&nbsp;
       <% shipper = Shipper.find(@activity.shipper_id)%>
       <%= link_to 'Back to Shipper', shipper, :class => 'btn btn-info btn-xs' %>
     <% else %>

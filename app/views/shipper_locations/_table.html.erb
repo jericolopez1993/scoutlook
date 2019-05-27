@@ -17,8 +17,8 @@
       <% shipper_locations.each do |shipper_location| %>
         <tr>
           <td>
-            <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipper_location, :class => 'btn btn-info btn-xs' %>
-            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipper_location_path(shipper_location), :class => 'btn btn-warning btn-xs' %>
+            <%= link_to '<i class="far fa-eye"></i>'.html_safe, shipper_location, :class => 'btn btn-info btn-xs', target: :_blank %>
+            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_shipper_location_path(shipper_location), :class => 'btn btn-warning btn-xs', target: :_blank %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, shipper_location, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
           </td>
           <td style="text-align: center;"><%= shipper_location.is_origin ? '<div class="mr-0 tags"><span class="label label-warning">Origin</span></div>'.html_safe : '' %>

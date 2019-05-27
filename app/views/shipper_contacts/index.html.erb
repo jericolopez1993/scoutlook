@@ -29,8 +29,8 @@
         <td><%= shipper_contact.postal %></td>
         <td><%= shipper_contact.country %></td>
         <td><%= shipper_contact.shipper_id %></td>
-        <td><%= link_to 'Show', shipper_contact %></td>
-        <td><%= link_to 'Edit', edit_shipper_contact_path(shipper_contact) %></td>
+        <td><%= link_to 'Show', shipper_contact, target: :_blank %></td>
+        <td><%= link_to 'Edit', edit_shipper_contact_path(shipper_contact), target: :_blank %></td>
         <td><%= link_to 'Delete', shipper_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

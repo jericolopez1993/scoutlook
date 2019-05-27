@@ -5,7 +5,7 @@
   </h1>
   <span class="pull-right">
     <% if current_user.has_role?(:admin) %>
-      <%= link_to 'Edit', edit_shipper_lane_path(@shipper_lane), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Edit', edit_shipper_lane_path(@shipper_lane), :class => 'btn btn-warning btn-xs', target: :_blank %>
       <%= link_to 'Back', shipper_path(:id => @shipper_lane.shipper_id), :class => 'btn btn-info btn-xs' %>
     <% end %>
   </span>

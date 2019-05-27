@@ -42,7 +42,7 @@
     <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@shipper.company_name, @shipper.id), sub_header_title:is_mobile ? @shipper.company_name.truncate(15) : @shipper.company_name %>
   </h1>
   <span class="pull-right">
-    <%= link_to 'Edit', edit_shipper_path(@shipper), :class => 'btn btn-warning btn-xs' %>
+    <%= link_to 'Edit', edit_shipper_path(@shipper), :class => 'btn btn-warning btn-xs', target: :_blank %>
     <%= link_to 'Back', shippers_path, :class => 'btn btn-info btn-xs' %>
     <%= link_to 'Delete', @shipper, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
   </span>

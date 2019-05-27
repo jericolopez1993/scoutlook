@@ -24,6 +24,6 @@
         <% end %>
       <% end %>
     ">
-      <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper, :class => generate_styling_activities(shipper.last_activity_date) %>
+      <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper, :class => generate_styling_activities(shipper.last_activity_date), target: :_blank %>
   </span>
 <% end %>

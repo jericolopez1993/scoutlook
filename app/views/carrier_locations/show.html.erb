@@ -4,7 +4,7 @@
   </h1>
   <span class="pull-right">
     <% if current_user.has_role?(:admin) %>
-      <%= link_to 'Edit', edit_carrier_location_path(@carrier_location), :class => 'btn btn-warning btn-xs' %>
+      <%= link_to 'Edit', edit_carrier_location_path(@carrier_location), :class => 'btn btn-warning btn-xs', target: :_blank %>
       <%= link_to 'Back', carrier_path(:id => @carrier_location.carrier_id), :class => 'btn btn-info btn-xs' %>
     <% end %>
   </span>
