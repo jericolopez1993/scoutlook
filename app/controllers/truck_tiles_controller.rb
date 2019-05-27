@@ -43,7 +43,6 @@ class TruckTilesController < ApplicationController
   # PATCH/PUT /truck_tiles/1.json
   def update
     if @truck_tile.load_tile
-      puts "#{@truck_tile.load_tile.to_json}"
       @truck_tile.load_tile.update_attributes(:status => params[:truck_tile][:status])
     end
     respond_to do |format|

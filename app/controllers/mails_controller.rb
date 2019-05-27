@@ -7,7 +7,6 @@ class MailsController < ApplicationController
   before_action :generate_body, only: [:new]
 
   def new
-    puts "#{@content}"
   end
 
   def create

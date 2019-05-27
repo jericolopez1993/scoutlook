@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered display nowrap"  data-order="[[3, &quot;asc&quot;]]" id="<%= table_type %>_table">
+<table class="table table-bordered display nowrap"  data-order="[[3, &quot;asc&quot;]]" id="<%= table_type %>_table">
   <thead>
     <tr>
       <th></th>
@@ -43,7 +43,7 @@
   </tfoot>
   <tbody class="spacer">
     <% carriers.each do |carrier| %>
-      <tr>
+      <tr class="<%= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>">
         <td><%= carrier.id %></td>
         <td>
           <% if carrier.reminders %>

@@ -154,7 +154,6 @@
     var categories = $('input:checkbox[name="category"]:checked').map(function() {
       return '^' + this.value + '\$';
     }).get().join('|');
-    console.log(categories)
     table.search(categories, 5, true, false, false, false).draw();
     // table.fnFilter();
 

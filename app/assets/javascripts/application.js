@@ -507,7 +507,6 @@ function filterTable(id){
 
     $('input', this.footer()).on('keyup change', function () {
       if (that.search() !== this.value) {
-        console.log("hello")
         that.search( this.value ).draw();
       }
     });
@@ -589,7 +588,6 @@ function filterAndSelectAllTable(id, ordered) {
 
     $('input', this.footer()).on('keyup change', function() {
       if (that.search() !== this.value) {
-        console.log("hello")
         that.search(this.value).draw();
       }
     });

@@ -51,7 +51,6 @@
 <%#= tinymce %>
 <script language="javascript">
   var availableTags = [<%= raw contacts.map(&:to_s).join(", ") %>];
-  console.log(availableTags);
   $(document).ready(function () {
     // $('#wysihtml5').wysihtml5();
     $('#email-to').tagit({

@@ -34,7 +34,6 @@ class CarriersController < ApplicationController
   # GET /carriers/1.json
   def show
     audits = get_audits(@carrier, nil)
-    puts "#{audits.to_json}"
   end
 
   # GET /carriers/new
@@ -173,7 +172,6 @@ class CarriersController < ApplicationController
     @ids = params[:ids]
     @phone_numbers = []
     @contacts = Carrier.where("carriers.id IN (#{@ids})").where("primary_eligible_texting = '1' OR secondary_phone_type = '1'")
-    puts "#{@contacts.to_json}"
     @contacts.each do |contact|
       if contact.primary_eligible_texting && contact.primary_phone_type == "Cell"
         @phone_numbers.push(contact.primary_phone)
