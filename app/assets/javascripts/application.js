@@ -492,6 +492,7 @@ function filterTable(id){
   // DataTable
   var table = $('#' + id).DataTable({
     "scrollX": true,
+    stateSave: true,
     "drawCallback": function( settings ) {
       $('[data-toggle="tooltip"]').tooltip({
           trigger: 'hover',
@@ -511,6 +512,46 @@ function filterTable(id){
       }
     });
   });
+}
+function filterCarrierTable(id) {
+  $('#' + id + ' tfoot th').each(function() {
+    var title = $(this).text();
+    if (title != "" && title != undefined && title != null) {
+      $(this).html('<input type="text" placeholder="Search ' + title + '" style="width: 100%;"/>');
+    }
+  });
+
+  // DataTable
+  var table = $('#' + id).DataTable({
+    'columnDefs': [{
+      'targets': 0,
+      'checkboxes': {
+        'selectRow': true
+      }
+    }],
+    'select': {
+      'style': 'multi'
+    },
+    "scrollX": true,
+    stateSave: true,
+    "drawCallback": function(settings) {
+      $('[data-toggle="tooltip"]').tooltip({
+        trigger: 'hover',
+        html: true
+      })
+    }
+  });
+  // Apply the search
+  table.columns().every(function() {
+    var that = this;
+
+    $('input', this.footer()).on('keyup change', function() {
+      if (that.search() !== this.value) {
+        that.search(this.value).draw();
+      }
+    });
+  });
+  return table;
 }
 
 function filterAndSelectAllTable(id, ordered) {
@@ -532,10 +573,8 @@ function filterAndSelectAllTable(id, ordered) {
     'select': {
       'style': 'multi'
     },
-    'order': [
-      [ordered, 'asc']
-    ],
     "scrollX": true,
+    stateSave: true,
     "drawCallback": function(settings) {
       $('[data-toggle="tooltip"]').tooltip({
         trigger: 'hover',

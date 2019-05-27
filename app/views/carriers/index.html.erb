@@ -126,17 +126,18 @@
 
 <script language="javascript">
   var user_id = "<%= current_user.id %>";
-  $(document).ready(function() {
+  var table;
+  $(function() {
     filterAndSelectAllTable("customer_table", 1);
-    filterAndSelectAllTable("carrier_table", 1);
+    table = filterCarrierTable("carrier_table");
     $('#send-mail-btn').on('click', function(){
-        var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
+        var rows_selected = table.column(0).checkboxes.selected();
         if (rows_selected.join(",") != ""){
           $.redirect('/carriers/compose_mail', {'ids': rows_selected.join(",")});
         }
     });
     $('#send-text-btn').on('click', function(){
-        var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
+        var rows_selected = table.column(0).checkboxes.selected();
         if (rows_selected.join(",") != ""){
           $.redirect('/carriers/compose_sms', {'ids': rows_selected.join(",")});
         }
@@ -146,19 +147,15 @@
                  "<h5 style='display: inline; padding-right: 10px;'>O<input style='vertical-align: middle' type='checkbox' name='category' onchange='filterme()' value='O' <%= @carrier_categories[2] ? 'checked' : ''%>></h5>" +
                  "<h5 style='display: inline; padding-right: 25px;'>D<input style='vertical-align: middle' type='checkbox' name='category' onchange='filterme()' value='D' <%= @carrier_categories[3] ? 'checked' : ''%>></h5></div>"
     $('#carrier_table_filter').prepend(checkboxes)
-  });
-</script>
-<script type="text/javascript">
-  $(function() {
-    table = $('#carrier_table').dataTable();
     filterme();
-  })
+  });
   function filterme() {
     var categories = $('input:checkbox[name="category"]:checked').map(function() {
       return '^' + this.value + '\$';
     }).get().join('|');
     console.log(categories)
-    table.fnFilter(categories, 5, true, false, false, false);
+    table.search(categories, 5, true, false, false, false).draw();
+    // table.fnFilter();
 
     var userCategories = $('input:checkbox[name="category"]').map(function() {
         return $(this).prop("checked");

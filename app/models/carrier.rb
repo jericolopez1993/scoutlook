@@ -4,6 +4,8 @@ class Carrier < ApplicationRecord
   has_many_attached :attachment_file
   after_destroy :remove_children
 
+  validates_uniqueness_of :mc_number
+
   belongs_to :relationship_owner_user, class_name: "User", foreign_key: "relationship_owner", optional: true
   belongs_to :carrier_setup_user, class_name: "User", foreign_key: "carrier_setup", optional: true
 
