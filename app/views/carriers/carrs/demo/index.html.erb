@@ -76,7 +76,13 @@
           <% CarrDemo.all.each do |carr| %>
             <tr>
               <td><%= carr['MC#'] %></td>
-              <td><%= carr['Carrier_Name'] %></td>
+              <td>
+                <% if carr['carrier_id'] %>
+                  <a href='/carriers/<%= carr['carrier_id'] %>' target="_blank"><%= carr['Carrier_Name'] %></a>
+                <% else %>
+                  <%= carr['Carrier_Name'] %>
+                <% end %>
+              </td>
               <td><%= generate_rank_text(carr['Current_Tier']).html_safe %></td>
               <td><%= generate_rank_text(carr['Previous_Tier']).html_safe %></td>
               <td><%= generate_rank_text(carr['Highest_Tier']).html_safe %></td>
