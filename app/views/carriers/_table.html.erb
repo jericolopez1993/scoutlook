@@ -7,6 +7,7 @@
       <th>Class</th>
       <th>MC</th>
       <th>Name</th>
+      <th>Load Days</th>
       <th>ST/PV</th>
       <th>Ops Name</th>
       <th>Ops Phone</th>
@@ -28,6 +29,7 @@
       <th>Class</th>
       <th>MC</th>
       <th>Name</th>
+      <th>Load Days</th>
       <th>ST/PV</th>
       <th>Ops Name</th>
       <th>Ops Phone</th>
@@ -60,6 +62,7 @@
         <td class="link">
           <%= render "carriers/link", carrier: carrier %>
         </td>
+        <td><%= carrier.load_days %></td>
         <td><%= carrier.state.nil? ? '' : generate_abv(carrier.state).upcase %></td>
         <td>
           <%= truncate_fields(carrier.poc_name).html_safe %>

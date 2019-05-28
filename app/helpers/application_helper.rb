@@ -263,16 +263,22 @@ module ApplicationHelper
   def reminder_to_sentence(reminder)
     on_sentence = ""
 
-    if reminder.carrier
-      on_sentence = on_sentence + reminder.carrier.display_name_reminder
-    elsif reminder.shipper
-      on_sentence = on_sentence + reminder.shipper.display_name_reminder
-    elsif reminder.activity
-      on_sentence = on_sentence + reminder.activity.display_name
+    if reminder.carrier_id
+      on_sentence = on_sentence + "<a href='/carriers/#{reminder.carrier_id}'>#{reminder.carrier_name}</a>"
+    elsif reminder.shipper_id
+      on_sentence = on_sentence + "<a href='/shippers/#{reminder.shipper_id}'>#{reminder.shipper_name}</a>"
+    elsif reminder.activity_id
+      if reminder.activity_carrier_id
+        on_sentence = on_sentence + "<a href='/carriers/#{reminder.activity_carrier_id}'>#{reminder.activity_carrier_name}</a>"
+      elsif reminder.activity_shipper_id
+        on_sentence = on_sentence + "<a href='/shippers/#{reminder.activity_shipper_id}'>#{reminder.activity_shipper_name}</a>"
+      else
+        on_sentence = on_sentence + "<a href='/activities/#{reminder.activity_id}'>Activity</a>"
+      end
     else
       on_sentence = on_sentence + reminder.display_name
     end
-    if reminder.carrier || reminder.shipper || reminder.activity
+    if reminder.carrier_id || reminder.shipper_id || reminder.activity_id
       on_sentence = on_sentence + "<a data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type.nil? ? '' : reminder.reminder_type} <br>Notes: #{reminder.notes.nil? ? '' : reminder.notes.gsub("'", '&#39;')}' href='/reminders/#{reminder.id}'>#{truncate_html(reminder.notes, :length => 50, :omission => '...', :escape => false)}</a>"
     else
       on_sentence = "There is a " + on_sentence + "."

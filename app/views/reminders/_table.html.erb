@@ -52,11 +52,11 @@
         <% if with_actions %>
           <td>
             <%= link_to '<i class="far fa-eye"></i>'.html_safe, reminder_path(:id => reminder.id, :previous_controller => params[:controller]), :class => 'btn btn-info btn-xs' %>
-            <% if reminder.carrier %>
+            <% if reminder.carrier_id %>
               <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "carrier"), :class => 'btn btn-warning btn-xs' %>
-            <% elsif reminder.shipper %>
+            <% elsif reminder.shipper_id %>
               <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "shipper"), :class => 'btn btn-warning btn-xs' %>
-            <% elsif reminder.activity %>
+            <% elsif reminder.activity_id %>
                 <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_reminder_path(reminder, :previous_controller => params[:controller], :client_type => "activity"), :class => 'btn btn-warning btn-xs' %>
             <% end %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, reminder_path(:id => reminder.id, :previous_controller => params[:controller]), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
@@ -64,16 +64,24 @@
         <% end %>
         <% if params[:controller] == "reminders"%>
         <td class="link">
-          <% carrier = reminder.carrier ? reminder.carrier : (reminder.activity ? reminder.activity.carrier : nil) %>
-          <%= render "carriers/link", carrier: carrier %>
+          <%= reminder.carrier_id && "<a href='/carriers/#{reminder.carrier_id}'>#{reminder.carrier_name}</a>".html_safe %>
         </td>
         <td class="link">
-          <% shipper = reminder.shipper ? reminder.shipper : (reminder.activity ? reminder.activity.shipper : nil) %>
-          <%= render "shippers/link", shipper: shipper %>
+        <%= reminder.shipper_id && "<a href='/shippers/#{reminder.shipper_id}'>#{reminder.shipper_name}</a>".html_safe %>
         </td>
-        <td class="link"><%= reminder.activity && link_to(reminder.activity.campaign_name.blank? ? "(no name)" : reminder.activity.campaign_name, reminder.activity) %></td>
+        <td class="link">
+          <% if reminder.activity_id %>
+            <% if reminder.activity_carrier_id %>
+              <a href='/carriers/<%= reminder.activity_carrier_id %>'><%= reminder.activity_carrier_name %></a>
+            <% elsif reminder.activity_shipper_id %>
+              <a href='/shippers/<%= reminder.activity_shipper_id %>'><%= reminder.activity_shipper_name %></a>
+            <% else %>
+              <a href='/activities/<%= reminder.activity_id %>'>Activity</a>
+            <% end %>
+          <% end %>
+        </td>
         <% end %>
-        <td class="link"><%= reminder.user && link_to(reminder.user.full_name.blank? ? "(no name)" : reminder.user.full_name, reminder.user) %></td>
+        <td class="link"><%= reminder.user_id && "<a href='/users/#{reminder.user_id}'>#{reminder.user_name}</a>".html_safe %></td>
         <td><%= reminder.reminder_type %></td>
         <td>
           <% if reminder.reminder_date %>
