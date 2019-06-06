@@ -493,6 +493,7 @@ function filterTable(id){
   var table = $('#' + id).DataTable({
     "scrollX": true,
     stateSave: true,
+    "pageLength": 50,
     "drawCallback": function( settings ) {
       $('[data-toggle="tooltip"]').tooltip({
           trigger: 'hover',
@@ -533,6 +534,7 @@ function filterCarrierTable(id) {
     },
     "scrollX": true,
     stateSave: true,
+    "pageLength": 50,
     "drawCallback": function(settings) {
       $('[data-toggle="tooltip"]').tooltip({
         trigger: 'hover',
@@ -574,6 +576,7 @@ function filterAndSelectAllTable(id, ordered) {
     },
     "scrollX": true,
     stateSave: true,
+    "pageLength": 50,
     "drawCallback": function(settings) {
       $('[data-toggle="tooltip"]').tooltip({
         trigger: 'hover',
