@@ -2,6 +2,8 @@
 <div class="header-scout">
   <h1 class="pull-left">
     <%= render 'layouts/static/header', header_title: params[:action] == 'new' ? 'Create New Carrier' : "Edit Carrier - #{carrier.company_name}" %>
+
+    <i class="fas fa-spinner fa-pulse"></i>
   </h1>
 </div>
 <!-- end page-header -->
@@ -42,6 +44,7 @@
             <label class="text-right m-position-left col-md-2 col-6 col-form-label" style="font-size: 16px;">Complete Record *:</label>
             <div class="col-md-9 col-6">
                 <%= form.check_box :complete_record, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: carrier.complete_record %>
+
             </div>
           </div>
           <div class="form-group row m-b-15">
@@ -60,6 +63,7 @@
             <%= form.label :mc_number, 'MC Number *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.text_field :mc_number, class: 'form-control', 'data-parsley-required' => true %>
+              <i id="mc_loader" class="fas fa-spinner fa-pulse loader" style="display: none;"></i>
             </div>
           </div>
           <div class="form-group row m-b-15">
@@ -72,24 +76,6 @@
             <%= form.label :carrier_setup, 'Carrier Setup *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :carrier_setup, User.where(:cs => true).collect {|r| [ "#{r.first_name} #{r.last_name}", r.id ] },{:include_blank => true, :selected => carrier.carrier_setup}, class: 'form-control', 'data-parsley-required' => true %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :load_last_month, 'Loads Last Month:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-              <%= form.number_field :load_last_month, class: 'form-control', :disabled => true %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :load_last_6_month, 'Loads Last 6 Months:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-              <%= form.number_field :load_last_6_month, class: 'form-control', :disabled => true %>
-            </div>
-          </div>
-          <div class="form-group row m-b-15">
-            <%= form.label :last_load_date, 'Last Load Date:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
-            <div class="col-md-9 col-sm-8">
-              <%= form.text_field :last_load_date, class: 'form-control datepicker-autoClose', 'data-inputmask' => "'alias': 'mm/dd/yyyy'", value: carrier.last_load_date, :id => "last_load_date", :disabled => true %>
             </div>
           </div>
           <div class="form-group row m-b-15">
@@ -212,7 +198,64 @@
 <%= tinymce %>
 <!-- end panel -->
 <script type="text/javascript">
+  var current_mc_number = '<%= carrier.mc_number %>';
+
+  function checkMCNumber(mc_number) {
+    $.ajax({
+      method: 'get',
+      url: '/api/carriers/check_mc_number',
+      data: {mc_number: mc_number}
+    }).done(function(data) {
+      if (data.available){
+        $('#carrier_mc_number').removeClass('parsley-error');
+        $("#mc_number_msg").remove();
+        $('#carrier_mc_number').addClass('parsley-success');
+        $('#carrier_mc_number').after(function() {
+          return "<ul class='parsley-success-list filled' id='mc_number_msg'><li class='parsley-required'><b>MC Number is Available.</b></li></ul>";
+        });
+        $(':input[type="submit"]').prop('disabled', false);
+      }else{
+        $('#carrier_mc_number').removeClass('parsley-success');
+        $("#mc_number_msg").remove();
+        $('#carrier_mc_number').addClass('parsley-error');
+        $('#carrier_mc_number').after(function() {
+          return "<ul class='parsley-errors-list filled' id='mc_number_msg'><li class='parsley-required'>" + data.error +"</li></ul>";
+        });
+      }
+    });
+  }
   $(document).ready(function() {
+
+    $('#carrier_mc_number').on('change keyup', function() {
+      var mc_number = $(this).val();
+      $('#mc_loader').show();
+      $(':input[type="submit"]').prop('disabled', true);
+      if (mc_number) {
+        if (current_mc_number != ''){
+          if (mc_number != current_mc_number) {
+            checkMCNumber(mc_number);
+          }else{
+            $('#carrier_mc_number').removeClass('parsley-error');
+            $("#mc_number_msg").remove();
+            $('#carrier_mc_number').addClass('parsley-success');
+            $('#carrier_mc_number').after(function() {
+              return "<ul class='parsley-success-list filled' id='mc_number_msg'><li class='parsley-required'><b>This is Carrier's current MC Number.</b></li></ul>";
+            });
+            $(':input[type="submit"]').prop('disabled', false);
+          }
+        }else{
+          checkMCNumber(mc_number);
+        }
+      }else{
+        $('#carrier_mc_number').addClass('parsley-error');
+        $("#mc_number_msg").remove();
+        $('#carrier_mc_number').after(function() {
+          return "<ul class='parsley-errors-list filled' id='mc_number_msg'><li class='parsley-required'>This value is required.</li></ul>";
+        });
+      }
+      $('#mc_loader').hide();
+    });
+
     $('#carrier_reefers').on('change keyup', function(){
       if ($('#carrier_reefers').val() > 0) {
         $("#carrier_dry_vans").attr({ "min" : 0 });

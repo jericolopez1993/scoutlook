@@ -103,7 +103,11 @@ Rails.application.routes.draw do
      end
    end
    resources :clients
-   resources :carriers
+   resources :carriers do
+     collection do
+       get      'check_mc_number'
+     end
+   end
    resources :carrier_contacts
    resources :shipper_contacts
    resources :activities

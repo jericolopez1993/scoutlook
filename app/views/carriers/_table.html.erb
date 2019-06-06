@@ -20,8 +20,6 @@
       <th>Appr</th>
       <th>CR</th>
       <th class="text-center">LstDateCon</th>
-      <th>6M</th>
-      <th>1M</th>
     </tr>
   </thead>
   <tfoot>
@@ -45,8 +43,6 @@
       <th>Appr</th>
       <th>CR</th>
       <th>LstDateCon</th>
-      <th>6M</th>
-      <th>1M</th>
     </tr>
   </tfoot>
   <tbody class="spacer">
@@ -101,8 +97,6 @@
         <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
         <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
         <td class="text-center"><%=  carrier.date_opened.nil? ? "" : carrier.date_opened.strftime('%m/%d/%Y').to_s %></td>
-        <td class="text-center"><%= carrier.load_last_6_month %></td>
-        <td class="text-center"><%= carrier.load_last_month %></td>
       </tr>
     <% end %>
   </tbody>

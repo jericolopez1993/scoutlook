@@ -465,3 +465,24 @@ ul.wysihtml5-toolbar li a[title="Insert image"] { display: none; }
   vertical-align:middle;
   color:white;
   }
+
+.loader {
+  float: right;
+  margin-right: -25px;
+  margin-top: -25px;
+  font-size: 1.5em;
+}
+
+.parsley-success-list.filled {
+    margin-top: 5px !important;
+}
+
+.parsley-success-list {
+    padding: 0 !important;
+    list-style-type: none !important;
+    margin: 0 !important;
+        margin-top: 0px;
+    color: #00acac;
+    font-size: 12px !important;
+    line-height: inherit !important;
+}
