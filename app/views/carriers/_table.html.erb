@@ -7,6 +7,9 @@
       <th>Class</th>
       <th>MC</th>
       <th>Name</th>
+      <th>Tier</th>
+      <th>Load Last Month</th>
+      <th>Load Last 6 Month</th>
       <th>Load Days</th>
       <th>ST/PV</th>
       <th>Ops Name</th>
@@ -29,6 +32,9 @@
       <th>Class</th>
       <th>MC</th>
       <th>Name</th>
+      <th>Tier</th>
+      <th>Load Last Month</th>
+      <th>Load Last 6 Month</th>
       <th>Load Days</th>
       <th>ST/PV</th>
       <th>Ops Name</th>
@@ -62,6 +68,9 @@
         <td class="link">
           <%= render "carriers/link", carrier: carrier %>
         </td>
+        <td><%= generate_rank_text(carrier.current_tier).html_safe %></td>
+        <td><%= carrier.last_month %></td>
+        <td><%= carrier.last_6_months %></td>
         <td><%= carrier.load_days %></td>
         <td><%= carrier.state.nil? ? '' : generate_abv(carrier.state).upcase %></td>
         <td>
