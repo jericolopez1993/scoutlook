@@ -1,4 +1,4 @@
-<table class="table table-bordered display nowrap"  data-order="[[3, &quot;asc&quot;]]" id="<%= table_type %>_table">
+<table class="table table-bordered display nowrap"  data-order="[[6, &quot;desc&quot;],[7, &quot;desc&quot;],[8, &quot;desc&quot;],[9, &quot;desc&quot;]]" id="<%= table_type %>_table">
   <thead>
     <tr>
       <th></th>
@@ -7,10 +7,10 @@
       <th>Class</th>
       <th>MC</th>
       <th>Name</th>
+      <th>Load Days</th>
       <th>Tier</th>
       <th>Load Last Month</th>
       <th>Load Last 6 Month</th>
-      <th>Load Days</th>
       <th>ST/PV</th>
       <th>Ops Name</th>
       <th>Ops Phone</th>
@@ -32,10 +32,10 @@
       <th>Class</th>
       <th>MC</th>
       <th>Name</th>
+      <th>Load Days</th>
       <th>Tier</th>
       <th>Load Last Month</th>
       <th>Load Last 6 Month</th>
-      <th>Load Days</th>
       <th>ST/PV</th>
       <th>Ops Name</th>
       <th>Ops Phone</th>
@@ -68,10 +68,10 @@
         <td class="link">
           <%= render "carriers/link", carrier: carrier %>
         </td>
+        <td><%= carrier.load_days %></td>
         <td><%= generate_rank_text(carrier.current_tier).html_safe %></td>
         <td><%= carrier.last_month %></td>
         <td><%= carrier.last_6_months %></td>
-        <td><%= carrier.load_days %></td>
         <td><%= carrier.state.nil? ? '' : generate_abv(carrier.state).upcase %></td>
         <td>
           <%= truncate_fields(carrier.poc_name).html_safe %>

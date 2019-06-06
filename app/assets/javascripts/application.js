@@ -565,6 +565,7 @@ function filterAndSelectAllTable(id, ordered) {
 
   // DataTable
   var table = $('#' + id).DataTable({
+    "order": [[ 6, "desc" ], [ 7, "desc" ], [ 8, "desc" ], [ 9, "desc" ]],
     'columnDefs': [{
       'targets': 0,
       'checkboxes': {
