@@ -33,8 +33,12 @@
               <%= user.cs ? "<span class='badge badge-success'>CS</span>".html_safe : ""%>
             </td>
             <td>
-              <a class="btn btn-warning btn-xs" href="/users/<%= user.id %>/edit"><i class="far fa-edit"></i></a>
-              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href="/users/<%= user.id %>"><i class="fas fa-trash-alt"></i></a>
+              <% if policy(user).update? %>
+                <a class="btn btn-warning btn-xs" href="/users/<%= user.id %>/edit"><i class="far fa-edit"></i></a>
+              <% end %>
+              <% if policy(user).destroy? %>
+                <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href="/users/<%= user.id %>"><i class="fas fa-trash-alt"></i></a>
+              <% end %>
             </td>
           </tr>
         <% end %>

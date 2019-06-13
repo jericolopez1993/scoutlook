@@ -8,6 +8,7 @@ class UsersController < ApplicationController
       redirect_to(unauthenticated_root_path)
     else
       @users = User.all
+      authorize @users
     end
   end
 
@@ -17,6 +18,7 @@ class UsersController < ApplicationController
     if !user_signed_in?
       redirect_to(unauthenticated_root_path)
     end
+    authorize @user
   end
 
   # GET /users/new
@@ -26,6 +28,7 @@ class UsersController < ApplicationController
     else
       @user = User.new
     end
+    authorize @user
   end
 
   # GET /users/1/edit
@@ -33,11 +36,13 @@ class UsersController < ApplicationController
     if !user_signed_in?
       redirect_to(unauthenticated_root_path)
     end
+    authorize @user
   end
 
   # POST /users
   # POST /users.json
   def create
+    authorize @user
     @user = User.new(user_params)
     @user.skip_confirmation!
     respond_to do |format|
@@ -60,6 +65,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    authorize @user
     respond_to do |format|
       if !user_params.fetch(:password, '').empty?  # so it won't throw the ParameterMissing error
         if @user.update(user_params)
