@@ -9,13 +9,12 @@
       <th>Name</th>
       <th>Load Days</th>
       <th>Tier</th>
-      <th>Load Last Month</th>
-      <th>Load Last 6 Month</th>
-      <th>ST/PV</th>
+      <th>1M</th>
+      <th>6M</th>
+      <th>Lane</th>
       <th>Ops Name</th>
       <th>Ops Phone</th>
       <th>Reef</th>
-      <th>Lane</th>
       <th>Ops Email</th>
       <th>Appr</th>
       <th>CR</th>
@@ -32,13 +31,12 @@
       <th>Name</th>
       <th>Load Days</th>
       <th>Tier</th>
-      <th>Load Last Month</th>
-      <th>Load Last 6 Month</th>
-      <th>ST/PV</th>
+      <th>1M</th>
+      <th>6M</th>
+      <th>Lane</th>
       <th>Ops Name</th>
       <th>Ops Phone</th>
       <th>Reef</th>
-      <th>Lane</th>
       <th>Ops Email</th>
       <th>Appr</th>
       <th>CR</th>
@@ -68,12 +66,6 @@
         <td><%= generate_rank_text(carrier.current_tier).html_safe %></td>
         <td><%= carrier.last_month %></td>
         <td><%= carrier.last_6_months %></td>
-        <td><%= carrier.state.nil? ? '' : generate_abv(carrier.state).upcase %></td>
-        <td>
-          <%= truncate_fields(carrier.poc_name).html_safe %>
-        </td>
-        <td><b><%= carrier.primary_phone.nil? ? '' : generate_phone_number("", carrier.primary_phone, carrier.primary_extension_number, carrier.primary_eligible_texting, carrier.primary_phone_type).html_safe %></b></td>
-        <td class="text-center"><%= carrier.reefers %></td>
         <td>
           <% if !carrier.lane_origin.nil? && carrier.lane_origin != "" %>
             <% carrier.lane_origin.split(',').map(&:to_s).each do |origin| %>
@@ -87,6 +79,12 @@
           <% end %>
         <% end %>
         </td>
+        <td>
+          <%= truncate_fields(carrier.poc_name).html_safe %>
+        </td>
+        <td><b><%= carrier.primary_phone.nil? ? '' : generate_phone_number("", carrier.primary_phone, carrier.primary_extension_number, carrier.primary_eligible_texting, carrier.primary_phone_type).html_safe %></b></td>
+        <td class="text-center"><%= carrier.reefers %></td>
+
         <td>
           <% if !carrier.contact_email.nil?  %>
             <a href="mailto:<%= carrier.contact_email %>?Subject=Hello%20<%= carrier.poc_name.nil? ? '' :  carrier.poc_name.capitalize  %>" target="_top">
