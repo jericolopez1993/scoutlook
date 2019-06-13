@@ -91,25 +91,29 @@ class CarriersController < ApplicationController
         format.html { redirect_to @carrier, notice: 'Carrier was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier }
       else
-        if @carrier.update(carrier_params)
-          if @carrier.location.nil?
-            @location = CarrierLocation.new(location_params)
-            @location.carrier_id = @carrier.id
-            if @location.save
-              @carrier.update_attributes(:head_office => @location.id)
+        if current_user.id == @carrier.relationship_owner || params[:carrier][:relationship_owner] == @carrier.relationship_owner.to_s
+          if @carrier.update(carrier_params)
+            if @carrier.location.nil?
+              @location = CarrierLocation.new(location_params)
+              @location.carrier_id = @carrier.id
+              if @location.save
+                @carrier.update_attributes(:head_office => @location.id)
+              end
+            else
+              @carrier.location.update_attributes(location_params)
             end
-          else
-            @carrier.location.update_attributes(location_params)
-          end
 
-          if params[:carrier][:attachment_file].present?
-            @carrier.attachment_file.attach(params[:carrier][:attachment_file])
+            if params[:carrier][:attachment_file].present?
+              @carrier.attachment_file.attach(params[:carrier][:attachment_file])
+            end
+            format.html { redirect_to @carrier, notice: 'Carrier was successfully updated.' }
+            format.json { render :show, status: :ok, location: @carrier }
+          else
+            format.html { render :edit }
+            format.json { render json: @carrier.errors, status: :unprocessable_entity }
           end
-          format.html { redirect_to @carrier, notice: 'Carrier was successfully updated.' }
-          format.json { render :show, status: :ok, location: @carrier }
         else
-          format.html { render :edit }
-          format.json { render json: @carrier.errors, status: :unprocessable_entity }
+          format.html { redirect_to edit_carrier_path(@carrier), notice: "You are not authorize to change the carrier's ownership." }
         end
       end
     end
