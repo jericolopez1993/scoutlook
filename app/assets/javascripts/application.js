@@ -20,6 +20,7 @@
 //= require vendor/countries
 //= require vendor/depends_on
 //= require vendor/email-inbox
+//= require vendor/sweet-alert.min
 //= require inputmask
 //= require jquery.inputmask
 //= require inputmask.extensions

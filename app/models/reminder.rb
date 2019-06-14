@@ -3,6 +3,13 @@ class Reminder < ApplicationRecord
   belongs_to :shipper, optional: true
   belongs_to :activity, optional: true
   belongs_to :user, optional: true
+  before_save :notify_users
+
+  def notify_users
+    if last_reminded_changed?
+      ReminderBroadcastJob.perform_later self
+    end
+  end
 
   def display_name
       "<a href='/reminders/#{self.id}'>Reminder</a>"
