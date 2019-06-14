@@ -84,6 +84,13 @@ namespace :deploy do
     end
   end
 
+  desc 'Restart Nginx'
+  task :restart_nginx do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'nginx:restart'
+    end
+  end
+
   desc 'Seed Dump'
   task :seed_dump do
     on roles(:app), in: :sequence, wait: 5 do

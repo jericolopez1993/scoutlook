@@ -1,5 +1,5 @@
 # Change these
-server 'ubuntu@ec2-99-79-132-191.ca-central-1.compute.amazonaws.com', roles: [:web, :app, :db], primary: true
+server 'ubuntu@scoutlook.ca', roles: [:web, :app, :db], primary: true
 server 'ubuntu@ec2-35-182-21-87.ca-central-1.compute.amazonaws.com', roles: [:web, :app, :db]
 
 set :repo_url,        'git@gitlab.com:opinionatedsoft/scoutcrm.git'
