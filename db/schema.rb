@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_11_200331) do
+ActiveRecord::Schema.define(version: 2019_06_16_025912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,12 +94,13 @@ ActiveRecord::Schema.define(version: 2019_04_11_200331) do
     t.float "Load_Last_Month"
     t.float "Load_Last_3_Months"
     t.float "Load_Last_6_Months"
-    t.text "MC#"
+    t.text "mcnum"
     t.text "Phone#1"
     t.text "Phone#2"
     t.text "Prime Status"
     t.text "Owner"
-    t.text "Days_Since"
+    t.text "MC#"
+    t.bigint "Days_Since"
   end
 
   create_table "carr_new", id: false, force: :cascade do |t|
@@ -107,10 +108,11 @@ ActiveRecord::Schema.define(version: 2019_04_11_200331) do
     t.bigint "Load_Last_Month"
     t.datetime "First_Load_Date"
     t.float "Gross_Margin_%"
-    t.text "MC#"
+    t.text "mcnum"
     t.text "Phone#1"
     t.text "Phone#2"
     t.text "Prime Status"
+    t.text "MC#"
     t.text "Owner"
   end
 
@@ -125,11 +127,12 @@ ActiveRecord::Schema.define(version: 2019_04_11_200331) do
     t.float "Load_Last_Month"
     t.float "Load_Last_3_Months"
     t.float "Load_Last_6_Months"
+    t.text "mcnum"
     t.text "Highest_Tier_Reached"
-    t.text "MC#"
     t.text "Phone#1"
     t.text "Phone#2"
     t.text "Prime Status"
+    t.text "MC#"
     t.text "Owner"
   end
 
@@ -255,6 +258,8 @@ ActiveRecord::Schema.define(version: 2019_04_11_200331) do
     t.boolean "contract_rates", default: false
     t.integer "years_established"
     t.string "category"
+    t.string "previous_mc_number"
+    t.boolean "blacklisted", default: false
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -270,6 +275,64 @@ ActiveRecord::Schema.define(version: 2019_04_11_200331) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "df", id: false, force: :cascade do |t|
+    t.text "Unnamed: 0_x"
+    t.text "carr_name_5"
+    t.float "carr_sys"
+    t.text "carrier_currency_7"
+    t.float "carrier_total_6"
+    t.text "cons_city_4"
+    t.text "currency_11"
+    t.text "cust_key"
+    t.text "cust_name_2"
+    t.float "cust_sys"
+    t.float "customer_total_10"
+    t.text "dispatcher"
+    t.float "exch_rate"
+    t.float "grossmargin"
+    t.text "inv_num_9"
+    t.text "loadsh_num"
+    t.text "mcnum"
+    t.text "salesperson"
+    t.text "salesperson_12"
+    t.text "ship_city_3"
+    t.datetime "ship_date_1"
+    t.float "slsploadcnt"
+    t.text "userchar1_14"
+    t.float "userchar2_13"
+    t.text "userchar3_8"
+    t.text "userchar4"
+    t.text "year"
+    t.text "month"
+    t.text "week"
+    t.text "major_origin"
+    t.text "major_dest"
+    t.float "commission"
+    t.float "commission_d"
+    t.float "commission_s"
+    t.float "commission_sd"
+    t.float "gp_not_commission"
+    t.float "usd_cust_sys"
+    t.float "usd_carr_sys"
+    t.float "usd_grossmargin"
+    t.float "usd_commission"
+    t.float "usd_commission_d"
+    t.float "usd_commission_s"
+    t.float "usd_commission_sd"
+    t.float "usd_gp_not_commission"
+    t.text "carrier_class"
+    t.text "carrier_class2"
+    t.text "carrier_class3"
+    t.text "carrier_class4"
+    t.float "days_since"
+    t.float "Unnamed: 0_y"
+    t.float "count"
+    t.text "route"
+    t.float "lengthInMeters"
+    t.float "travelTimeInSeconds"
+    t.float "lengthInMiles"
   end
 
   create_table "load_tiles", force: :cascade do |t|
@@ -358,6 +421,14 @@ ActiveRecord::Schema.define(version: 2019_04_11_200331) do
     t.datetime "updated_at", null: false
     t.integer "origin_location_id"
     t.integer "destination_location_id"
+  end
+
+  create_table "mc_latest_date", id: false, force: :cascade do |t|
+    t.text "mcnum"
+    t.datetime "ship_date_1"
+    t.float "loadsh_num"
+    t.float "loadsh_num_6mon"
+    t.text "Tier"
   end
 
   create_table "messages", force: :cascade do |t|

@@ -23,6 +23,12 @@
             </div>
           </div>
           <div class="row">
+            <label class="col-4 col-form-label">Black-Listed?</label>
+            <div class="col-8 lbl-padding-t">
+              <%= carrier.blacklisted ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+            </div>
+          </div>
+          <div class="row">
             <label class="col-4 col-form-label">Last Contact:</label>
             <div class="col-8 lbl-padding-t link">
               <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : (carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s + " " + (carrier.last_contact_date.user.nil? ? "" : link_to(carrier.last_contact_date.user.full_name, carrier.last_contact_date.user))).html_safe %>
@@ -44,6 +50,12 @@
             <label class="col-4 col-form-label">MC Number:</label>
             <div class="col-8 lbl-padding-t">
               <%= carrier.mc_number %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-4 col-form-label">Previous MC Number:</label>
+            <div class="col-8 lbl-padding-t">
+              <%= carrier.previous_mc_number %>
             </div>
           </div>
           <div class="row">

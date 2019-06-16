@@ -46,6 +46,13 @@
             </div>
           </div>
           <div class="form-group row m-b-15">
+            <label class="text-right m-position-left col-md-2 col-6 col-form-label" style="font-size: 16px;">Black-Listed?</label>
+            <div class="col-md-9 col-6">
+                <%= form.check_box :blacklisted, data: { render: 'switchery', theme: 'default', 'secondary-color': 'rgb(255, 91, 87)' }, checked: carrier.blacklisted %>
+
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
             <%= form.label :sales_priority, 'Carrier Class:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
               <%= form.select :sales_priority, options_for_select(['New', 'A', 'B', 'C', 'D', 'U'], carrier.sales_priority),{:include_blank => true}, class: 'form-control' %>
@@ -62,6 +69,12 @@
             <div class="col-md-9 col-sm-8">
               <%= form.text_field :mc_number, class: 'form-control', 'data-parsley-required' => true %>
               <i id="mc_loader" class="fas fa-spinner fa-pulse loader" style="display: none;"></i>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :previous_mc_number, 'Previous MC Number *:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.text_field :previous_mc_number, class: 'form-control' %>
             </div>
           </div>
           <div class="form-group row m-b-15">
