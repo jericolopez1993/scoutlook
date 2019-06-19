@@ -12,6 +12,7 @@
       <th>1M</th>
       <th>6M</th>
       <th>Lane</th>
+      <th>Black-listed</th>
       <th>Ops Name</th>
       <th>Ops Phone</th>
       <th>Reef</th>
@@ -34,6 +35,7 @@
       <th>1M</th>
       <th>6M</th>
       <th>Lane</th>
+      <th>Black-listed</th>
       <th>Ops Name</th>
       <th>Ops Phone</th>
       <th>Reef</th>
@@ -79,6 +81,7 @@
           <% end %>
         <% end %>
         </td>
+        <td><%= carrier.blacklisted ? "<i class='text-danger'>Yes</i>".html_safe : "<i class='text-success'>No</i>".html_safe %></td>
         <td>
           <%= truncate_fields(carrier.poc_name).html_safe %>
         </td>

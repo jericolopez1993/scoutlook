@@ -91,7 +91,7 @@ class CarriersController < ApplicationController
         format.html { redirect_to @carrier, notice: 'Carrier was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier }
       else
-        if current_user.id == @carrier.relationship_owner || params[:carrier][:relationship_owner] == @carrier.relationship_owner.to_s
+        # if current_user.id == @carrier.relationship_owner || params[:carrier][:relationship_owner] == @carrier.relationship_owner.to_s
           if @carrier.update(carrier_params)
             if @carrier.location.nil?
               @location = CarrierLocation.new(location_params)
@@ -112,9 +112,9 @@ class CarriersController < ApplicationController
             format.html { render :edit }
             format.json { render json: @carrier.errors, status: :unprocessable_entity }
           end
-        else
-          format.html { redirect_to edit_carrier_path(@carrier), notice: "You are not authorize to change the carrier's ownership." }
-        end
+        # else
+        #   format.html { redirect_to edit_carrier_path(@carrier), notice: "You are not authorize to change the carrier's ownership." }
+        # end
       end
     end
   end
