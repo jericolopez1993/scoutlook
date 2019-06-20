@@ -91,7 +91,7 @@
             <span>System Settings</span>
           </a>
           <ul class="sub-menu">
-            <% if current_user.admin? %>
+            <% if current_user.has_role?(:admin) %>
               <li><a href="<%= users_path %>">  <i class="fas fa-users-cog"></i>&nbsp;<span>Users</span></a></li>
             <% end %>
           </ul>
