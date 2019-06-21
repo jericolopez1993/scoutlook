@@ -59,7 +59,7 @@
         <tbody class="spacer">
           <% CarrNew.all.each do |carr| %>
             <tr>
-              <td><%= carr['MC#'] %></td>
+              <td><%= carr['mcnum'] %></td>
               <td>
                 <% if carr['carrier_id'] %>
                   <a href='/carriers/<%= carr['carrier_id'] %>' target="_blank"><%= carr['Carrier_Name'] %></a>
@@ -70,10 +70,10 @@
               <td><%= carr['Load_Last_Month'] %></td>
               <td><%= carr['First_Load_Date'] ? carr['First_Load_Date'].strftime('%m/%d/%Y') : "" %></td>
               <td><%= carr['Gross_Margin_%'] %>%</td>
-              <td><%= carr['Phone#1'] %></td>
-              <td><%= carr['Phone#2'] %></td>
-              <td><%= carr['Prime Status'] %></td>
-              <td><%= carr['Owner'] %></td>
+              <td><%= carr['primary_phone'] ? carr['primary_phone'] : carr['Phone#1'] %></td>
+              <td><%= carr['secondary_phone'] ? carr['secondary_phone'] : carr['Phone#2'] %></td>
+              <td class="text-center"><%= carr['sales_priority'] ? shade_sales_priority(carr['sales_priority']).html_safe : carr['Prime Status'] %></td>
+              <td class="text-center link"><%= carr['user_id'] ? (carr['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(carr['relationship_owner_name']), user_path(:id => carr['user_id']))}".html_safe) : carr['Owner'] %></td>
             </tr>
           <% end %>
         </tbody>
