@@ -42,8 +42,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    authorize @user
     @user = User.new(user_params)
+    authorize @user
     @user.skip_confirmation!
     respond_to do |format|
       if @user.save

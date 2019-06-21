@@ -12,11 +12,13 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && record.id == user.id
+    user.present? && user.has_role?(:admin)
+    # user.present? && record.id == user.id
   end
 
   def destroy?
-    user.present? && record.id == user.id
+    user.present? && user.has_role?(:admin)
+    # user.present? && record.id == user.id
   end
 
 
