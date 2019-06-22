@@ -21,6 +21,7 @@ services:
     depends_on:
       - db
       - mail
+      - redis
 
   jobs:
     build: .
@@ -30,3 +31,7 @@ services:
     depends_on:
       - db
       - mail
+      - redis
+
+  redis:
+    image: redis:3.2.11

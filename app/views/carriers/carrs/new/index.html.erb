@@ -62,9 +62,9 @@
               <td><%= carr['mcnum'] %></td>
               <td>
                 <% if carr['carrier_id'] %>
-                  <a href='/carriers/<%= carr['carrier_id'] %>' target="_blank"><%= carr['Carrier_Name'] %></a>
+                  <a href='/carriers/<%= carr['carrier_id'] %>' target="_blank" class="<%= generate_styling_newly(carr['First_Load_Date']) %>"><%= carr['Carrier_Name'] %></a>
                 <% else %>
-                  <%= carr['Carrier_Name'] %>
+                  <span class="<%= generate_styling_newly(carr['First_Load_Date']) %>"><%= carr['Carrier_Name'] %></span>
                 <% end %>
               </td>
               <td><%= carr['Load_Last_Month'] %></td>

@@ -413,6 +413,20 @@ module ApplicationHelper
     end
   end
 
+  def generate_styling_newly(first_load_date)
+    if first_load_date
+      if ((Date.today - 3.week)..Date.today).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(first_load_date.strftime('%m/%d/%Y').to_s)
+        "text-success"
+      elsif ((Date.today - 6.week)..(Date.today - 3.week)).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(first_load_date.strftime('%m/%d/%Y').to_s)
+        "text-warning"
+      else
+        "text-danger"
+      end
+    else
+      "text-danger"
+    end
+  end
+
   def last_edit(carrier, shipper)
     if carrier
       Audit.where(auditable_id: carrier.id).order("created_at DESC").limit(1)
