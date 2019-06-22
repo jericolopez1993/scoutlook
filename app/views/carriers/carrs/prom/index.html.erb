@@ -91,10 +91,10 @@
               <td><%= carr['Load_Last_3_Months'] %></td>
               <td><%= carr['Load_Last_6_Months'] %></td>
               <td><%= carr['Highest_Tier_Reached'] %></td>
-              <td><%= carr['Phone#1'] %></td>
-              <td><%= carr['Phone#2'] %></td>
-              <td><%= carr['Prime Status'] %></td>
-              <td><%= carr['Owner'] %></td>
+              <td><%= carr['primary_phone'] %></td>
+              <td><%= carr['secondary_phone'] %></td>
+              <td class="text-center"><%= carr['sales_priority'] ? shade_sales_priority(carr['sales_priority']).html_safe : '' %></td>
+              <td class="text-center link"><%= carr['user_id'] ? (carr['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(carr['relationship_owner_name']), user_path(:id => carr['user_id']))}".html_safe) : '' %></td>
             </tr>
           <% end %>
         </tbody>
