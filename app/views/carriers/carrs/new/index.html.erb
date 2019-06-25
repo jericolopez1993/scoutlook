@@ -29,7 +29,7 @@
       <h4 class="panel-title lp-header">Carriers (New)</h4>
     </div>
     <div class="panel-body">
-      <table class="table table-striped table-bordered display nowrap"  data-order="[[1, &quot;asc&quot;]]" id="carrier_table" width="100%">
+      <table class="table table-bordered display nowrap"  data-order="[[1, &quot;asc&quot;]]" id="carrier_table" width="100%">
         <thead>
           <tr>
             <th>MC #</th>
@@ -58,13 +58,13 @@
         </tfoot>
         <tbody class="spacer">
           <% CarrNew.all.each do |carr| %>
-            <tr>
+            <tr class="<%= generate_styling_newly(carr['First_Load_Date']) %>">
               <td><%= carr['mcnum'] %></td>
               <td>
                 <% if carr['carrier_id'] %>
-                  <a href='/carriers/<%= carr['carrier_id'] %>' target="_blank" class="<%= generate_styling_newly(carr['First_Load_Date']) %>"><%= carr['Carrier_Name'] %></a>
+                  <a href='/carriers/<%= carr['carrier_id'] %>' target="_blank"><%= carr['Carrier_Name'] %></a>
                 <% else %>
-                  <span class="<%= generate_styling_newly(carr['First_Load_Date']) %>"><%= carr['Carrier_Name'] %></span>
+                  <%= carr['Carrier_Name'] %>
                 <% end %>
               </td>
               <td><%= carr['Load_Last_Month'] %></td>

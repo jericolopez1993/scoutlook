@@ -416,14 +416,14 @@ module ApplicationHelper
   def generate_styling_newly(first_load_date)
     if first_load_date
       if ((Date.today - 3.week)..Date.today).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(first_load_date.strftime('%m/%d/%Y').to_s)
-        "text-success"
+        "bg-success"
       elsif ((Date.today - 6.week)..(Date.today - 3.week)).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(first_load_date.strftime('%m/%d/%Y').to_s)
-        "text-warning"
+        "bg-warning"
       else
-        "text-danger"
+        "bg-danger"
       end
     else
-      "text-danger"
+      "bg-danger"
     end
   end
 
