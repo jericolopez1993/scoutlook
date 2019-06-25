@@ -15,7 +15,7 @@ class CarrNew < ApplicationRecord
     contacts.secondary_phone_type,
     contacts.secondary_extension_number,
     contacts.secondary_eligible_texting"
-  ).joins('LEFT JOIN carriers ON CONCAT("MC", carriers.mc_number) = carr_new.mcnum').joins("LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id").joins("LEFT JOIN users AS relationship_owner_user ON relationship_owner_user.id = carriers.relationship_owner")}
+  ).joins('LEFT JOIN carriers ON carriers.mc_number = carr_new."MC#"'').joins("LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id").joins("LEFT JOIN users AS relationship_owner_user ON relationship_owner_user.id = carriers.relationship_owner")}
 
   default_scope {listings}
 end
