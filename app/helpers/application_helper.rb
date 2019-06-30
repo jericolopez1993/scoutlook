@@ -416,14 +416,14 @@ module ApplicationHelper
   def generate_styling_newly(first_load_date)
     if first_load_date
       if ((Date.today - 3.week)..Date.today).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(first_load_date.strftime('%m/%d/%Y').to_s)
-        "bg-success"
+        "bg-lightgreen"
       elsif ((Date.today - 6.week)..(Date.today - 3.week)).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(first_load_date.strftime('%m/%d/%Y').to_s)
-        "bg-warning"
+        "bg-lightyellow"
       else
-        "bg-danger"
+        "bg-lightpink"
       end
     else
-      "bg-danger"
+      "bg-lightpink"
     end
   end
 
