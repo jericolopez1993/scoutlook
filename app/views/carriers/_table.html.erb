@@ -70,8 +70,8 @@
         <td class="text-center"><%= carrier.reefers %></td>
         <td><%= carrier.load_days %></td>
         <td><%= generate_rank_text(carrier.current_tier).html_safe %></td>
-        <td><%= carrier.last_month && carrier.last_month.round %></td>
-        <td><%= carrier.last_month && carrier.last_6_months.round %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.last_month && carrier.last_month.round %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.last_month && carrier.last_6_months.round %></td>
         <td>
           <% if !carrier.lane_origin.nil? && carrier.lane_origin != "" %>
             <% carrier.lane_origin.split(',').map(&:to_s).each do |origin| %>
