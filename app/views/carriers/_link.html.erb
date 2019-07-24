@@ -11,6 +11,7 @@
       <b>Class</b>: <%= carrier.sales_priority %><br>
       <b>MC Number</b>: <%= carrier.mc_number %><br>
       <b>Reefers Count</b>: <%= carrier.reefers %><br>
+      <b>Teams Count</b>: <%= carrier.teams %><br>
       <b>City</b>: <%= carrier.city.blank? ? '(none)' : carrier.city %><br>
       <b>Sate/Province</b>:<%= carrier.state.blank? ? '(none)' : generate_abv(carrier.state).upcase %><br>
       <b>Last Contact Date</b>: <%= carrier.date_opened.nil? ? "" : carrier.date_opened.strftime('%m/%d/%Y').to_s %><br>
