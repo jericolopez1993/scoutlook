@@ -66,9 +66,9 @@
         <td class="link">
           <%= render "carriers/link", carrier: carrier %>
         </td>
-        <td class="text-center"><%= carrier.teams %></td>
-        <td class="text-center"><%= carrier.reefers %></td>
-        <td><%= carrier.load_days %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.reefers %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.teams %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.load_days %></td>
         <td><%= generate_rank_text(carrier.current_tier).html_safe %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.last_month && carrier.last_month.round %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.last_month && carrier.last_6_months.round %></td>
