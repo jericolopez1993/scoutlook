@@ -108,6 +108,7 @@ Rails.application.routes.draw do
      collection do
        get      'check_mc_number'
        get      'summaries'
+       get      'my_summaries'
      end
    end
    resources :carrier_contacts
