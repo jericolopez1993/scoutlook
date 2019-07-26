@@ -12,6 +12,11 @@ class CarriersController < ApplicationController
       begin
         if current_user.has_role?(:admin)
           @carriers = Carrier.all
+          latest_date = McLatestDate.where("mcnum IN (SELECT mc_number FROM carriers)")
+          @reefers = @carriers.sum("carriers.reefers")
+          @teams = @carriers.sum("carriers.teams")
+          @last_month = latest_date.sum("loadsh_num")
+          @last_6_months = latest_date.sum("loadsh_num_6mon")
           authorize @carriers
         elsif current_user.has_role?(:steward) || current_user.ro || current_user.cs
           @carriers = Carrier.where("relationship_owner = ? OR carrier_setup = ?", current_user.id, current_user.id)
