@@ -576,6 +576,11 @@ function filterAndSelectAllTable(id, ordered) {
     },
     "scrollX": true,
     "pageLength": 50,
+    "initComplete": function(settings, json) {
+      selectors = "Operator Search:&nbsp;&nbsp;<select id='filter_column' class='form-control'><option value='6'>Reefers</option><option value='7'>Teams</option><option value='8'>DSL</option><option value='10'>1M</option><option value='11'>6M</option></select>&nbsp;<select id='filter_comparator' class='form-control'><option value='eq'>=</option><option value='gt'>&gt;=</option><option value='lt'>&lt;=</option><option value='ne'>!=</option></select><input type='text' class='form-control' id='filter_value' style='width: 10%;''>&nbsp;&nbsp;|&nbsp;&nbsp;";
+
+      $('#' + id + '_filter').prepend(selectors);
+    },
     "drawCallback": function(settings) {
       $('[data-toggle="tooltip"]').tooltip({
         trigger: 'hover',

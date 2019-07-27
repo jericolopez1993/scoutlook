@@ -1,4 +1,3 @@
-
 <style>
   p {
     display: inline-block!important;
@@ -24,7 +23,8 @@
     .md-nav {
       display: none;
     }
-    .nav-pills .nav-link, .nav-pills > li > a {
+    .nav-pills .nav-link,
+    .nav-pills > li > a {
       background-color: #fff;
       margin: 5px;
     }
@@ -47,15 +47,15 @@
 </style>
 <% if params[:controller] == "carriers" %>
   <style media="screen">
-  .tooltip-inner {
-    background-color: #6f060b!important;
-  }
-  .tooltip .arrow::before{
-    border-right-color: #6f060b!important;
-  }
-  th {
-    vertical-align: top;
-  }
+    .tooltip-inner {
+      background-color: #6f060b!important;
+    }
+    .tooltip .arrow::before {
+      border-right-color: #6f060b!important;
+    }
+    th {
+      vertical-align: top;
+    }
   </style>
 <% end %>
 <!-- begin page-header -->
@@ -73,12 +73,16 @@
     <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
       <li class="nav-items">
         <a href="#all" data-toggle="tab" class="nav-link" style="padding:5px; margin: 0px 10px" id="btn_all_carriers">
-          <span class="d-sm-block d-none"><h4 class="panel-title">All Carriers</h4></span>
+          <span class="d-sm-block d-none">
+            <h4 class="panel-title">All Carriers</h4>
+          </span>
         </a>
       </li>
       <li class="nav-items">
         <a href="#customers" data-toggle="tab" class="nav-link active" style="padding:5px; margin: 0px 10px" id="btn_my_carriers">
-          <span class="d-sm-block d-none"><h4 class="panel-title">My Carriers</h4></span>
+          <span class="d-sm-block d-none">
+            <h4 class="panel-title">My Carriers</h4>
+          </span>
         </a>
       </li>
     </ul>
@@ -89,12 +93,16 @@
           <ul class="nav nav-pills" style="margin-bottom: 0px;">
             <li class="nav-items col-4">
               <a href="#all" data-toggle="tab" class="nav-link" style="padding: 5px 0;" id="btn_all_carriers">
-                <span class="d-sm-block"><h4 class="panel-title">All Carriers</h4></span>
+                <span class="d-sm-block">
+                  <h4 class="panel-title">All Carriers</h4>
+                </span>
               </a>
             </li>
             <li class="nav-items col-4">
               <a href="#customers" data-toggle="tab" class="nav-link active" style="padding: 5px 0;" id="btn_my_carriers">
-                <span class="d-sm-block"><h4 class="panel-title">My Carriers</h4></span>
+                <span class="d-sm-block">
+                  <h4 class="panel-title">My Carriers</h4>
+                </span>
               </a>
             </li>
           </ul>
@@ -115,11 +123,13 @@
     </span>
   </div>
   <% if is_mobile %>
-    <div class="col-12 text-inverse" id="hide-m-nav"  style="font-size: 14px;">
-        <i class="fas fa-plus float-right p-r-10 p-t-10" style="margin-bottom: -20px; margin-top: 20px;"><span class="float-right">&nbsp;show tabs</span></i>
+    <div class="col-12 text-inverse" id="hide-m-nav" style="font-size: 14px;">
+      <i class="fas fa-plus float-right p-r-10 p-t-10" style="margin-bottom: -20px; margin-top: 20px;">
+        <span class="float-right">&nbsp;show tabs</span></i>
     </div>
     <div class="col-12 nav-hide text-inverse" style="font-size: 14px;" id="show-m-nav">
-        <i class="fas fa-minus float-right p-r-10 p-t-10" style="margin-bottom: -20px; margin-top: 20px;"><span class="float-right">&nbsp;hide tabs</span></i>
+      <i class="fas fa-minus float-right p-r-10 p-t-10" style="margin-bottom: -20px; margin-top: 20px;">
+        <span class="float-right">&nbsp;hide tabs</span></i>
     </div>
   <% end %>
   <div class="tab-content">
@@ -134,26 +144,69 @@
     </div>
   </div>
 </div>
+<script language="javascript">
 
+  $.fn.dataTableExt.afnFiltering.push(function( oSettings, aData, iDataIndex ) {
+    var column_index = $('#filter_column').val();
+    var comparator = $('#filter_comparator').val();
+    var value = $('#filter_value').val();
+
+    if (value.length > 0 && !isNaN(parseInt(value, 10))) {
+
+      value = parseInt(value, 10);
+      var row_data = parseInt(aData[column_index], 10);
+
+      switch (comparator) {
+        case 'eq':
+          return row_data == value ? true : false;
+          break;
+        case 'gt':
+          return row_data >= value ? true : false;
+          break;
+        case 'lt':
+          return row_data <= value ? true : false;
+          break;
+        case 'ne':
+          return row_data != value ? true : false;
+          break;
+      }
+
+    }
+
+    return true;
+  });
+</script>
 
 <script language="javascript">
   var user_id = "<%= current_user.id %>";
   // var table;
-  $(function() {
+  $(function () {
     filterAndSelectAllTable("customer_table", 1);
     filterAndSelectAllTable("carrier_table", 1);
-    // table = filterCarrierTable("carrier_table");
-    $('#send-mail-btn').on('click', function(){
-        var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
-        if (rows_selected.join(",") != ""){
-          $.redirect('/carriers/compose_mail', {'ids': rows_selected.join(",")});
-        }
+
+    var oTable = $('#customer_table').DataTable();
+
+    $('#filter_column').change(function () {
+      oTable.draw();
     });
-    $('#send-text-btn').on('click', function(){
-        var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
-        if (rows_selected.join(",") != ""){
-          $.redirect('/carriers/compose_sms', {'ids': rows_selected.join(",")});
-        }
+    $('#filter_comparator').change(function () {
+      oTable.draw();
+    });
+    $('#filter_value').keyup(function () {
+      oTable.draw();
+    });
+
+    $('#send-mail-btn').on('click', function () {
+      var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
+      if (rows_selected.join(",") != "") {
+        $.redirect('/carriers/compose_mail', {'ids': rows_selected.join(",")});
+      }
+    });
+    $('#send-text-btn').on('click', function () {
+      var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
+      if (rows_selected.join(",") != "") {
+        $.redirect('/carriers/compose_sms', {'ids': rows_selected.join(",")});
+      }
     });
     $('#carrier_table tbody').on('click', 'input[type="checkbox"]', function (e) {
       var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
@@ -181,34 +234,27 @@
       })
     });
 
-    $('#btn_all_carriers').click(function (){
+    $('#btn_all_carriers').click(function () {
+      oTable = $('#carrier_table').DataTable();
       $('#all_carrier_count').show();
       $('#my_carrier_count').hide();
     });
 
-    $('#btn_my_carriers').click(function (){
+    $('#btn_my_carriers').click(function () {
+      oTable = $('#customer_table').DataTable();
       $('#my_carrier_count').show();
       $('#all_carrier_count').hide();
     });
-
-
-
-    // checkboxes = "<div class='category_filter' style='display: inline;'><h5 style='display: inline; padding-right: 10px;'>P<input style='vertical-align: middle' type='checkbox' name='category' onchange='filterme()' value='P' <%= @carrier_categories[0] ? 'checked' : ''%>></h5>" +
-    //              "<h5 style='display: inline; padding-right: 10px;'>S<input style='vertical-align: middle' type='checkbox' name='category' onchange='filterme()' value='S' <%= @carrier_categories[1] ? 'checked' : ''%>></h5>" +
-    //              "<h5 style='display: inline; padding-right: 10px;'>O<input style='vertical-align: middle' type='checkbox' name='category' onchange='filterme()' value='O' <%= @carrier_categories[2] ? 'checked' : ''%>></h5>" +
-    //              "<h5 style='display: inline; padding-right: 25px;'>D<input style='vertical-align: middle' type='checkbox' name='category' onchange='filterme()' value='D' <%= @carrier_categories[3] ? 'checked' : ''%>></h5></div>"
-    // $('#carrier_table_filter').prepend(checkboxes)
-    // filterme();
   });
   function filterme() {
-    var categories = $('input:checkbox[name="category"]:checked').map(function() {
+    var categories = $('input:checkbox[name="category"]:checked').map(function () {
       return '^' + this.value + '\$';
     }).get().join('|');
     table.search(categories, 5, true, false, false, false).draw();
     // table.fnFilter();
 
-    var userCategories = $('input:checkbox[name="category"]').map(function() {
-        return $(this).prop("checked");
+    var userCategories = $('input:checkbox[name="category"]').map(function () {
+      return $(this).prop("checked");
     }).get().join(',');
     $.ajax({
       method: "PUT",
@@ -216,7 +262,6 @@
       data: {
         carrier_categories: userCategories
       }
-    }).done(function(data) {
-    });
+    }).done(function (data) {});
   }
 </script>
