@@ -144,44 +144,13 @@
     </div>
   </div>
 </div>
-<script language="javascript">
 
-  $.fn.dataTableExt.afnFiltering.push(function( oSettings, aData, iDataIndex ) {
-    var column_index = $('#filter_column').val();
-    var comparator = $('#filter_comparator').val();
-    var value = $('#filter_value').val();
-
-    if (value) {
-      if (value.length > 0 && !isNaN(parseInt(value, 10))) {
-        value = parseInt(value, 10);
-        var row_data = parseInt(aData[column_index], 10);
-        switch (comparator) {
-          case 'eq':
-            return row_data == value ? true : false;
-            break;
-          case 'gt':
-            return row_data >= value ? true : false;
-            break;
-          case 'lt':
-            return row_data <= value ? true : false;
-            break;
-          case 'ne':
-            return row_data != value ? true : false;
-            break;
-        }
-      }
-    }
-
-    return true;
-  });
-</script>
-
-<script language="javascript">
-  var user_id = "<%= current_user.id %>";
+<!-- <script language="javascript">
+  var user_id = "<%#= current_user.id %>";
   // var table;
   $(function () {
-    filterAndSelectAllTable("customer_table", 1);
-    filterAndSelectAllTable("carrier_table", 1);
+    filterAndSelectAllTable("customer", 1);
+    filterAndSelectAllTable("carrier", 1);
 
     var oTable = $('#customer_table').DataTable();
 
@@ -263,4 +232,4 @@
       }
     }).done(function (data) {});
   }
-</script>
+</script> -->
