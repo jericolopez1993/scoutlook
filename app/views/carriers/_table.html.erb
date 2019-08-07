@@ -1,18 +1,4 @@
-Operator Search:&nbsp;&nbsp;
-<select id='<%= table_type %>_filter_column' class='form-control'>
-    <option value='6'>Reefers</option>
-    <option value='7'>Teams</option>
-    <option value='8'>DSL</option>
-    <option value='10'>1M</option>
-    <option value='11'>6M</option>
-</select>&nbsp;
-<select id='<%= table_type %>_filter_comparator' class='form-control'>
-    <option value='eq'>=</option>
-    <option value='gt'>&gt;=</option>
-    <option value='lt'>&lt;=</option>
-    <option value='ne'>!=</option>
-</select>
-<input type='text' class='form-control' id='<%= table_type %>_filter_value' style='width: 10%;' '>&nbsp;&nbsp;|&nbsp;&nbsp;
+
 <table class="table table-bordered display nowrap"  data-order="[[6, &quot;desc&quot;],[7, &quot;desc&quot;],[8, &quot;desc&quot;],[9, &quot;desc&quot;]]" id="<%= table_type %>_table">
   <thead>
     <tr>
@@ -150,6 +136,7 @@ Operator Search:&nbsp;&nbsp;
 </script>
 <script language="javascript">
   $(function () {
+    var table;
     $('#<%= table_type %>_table tfoot th').each(function() {
       var title = $(this).text();
       if (title != "" && title != undefined && title != null) {
@@ -158,7 +145,7 @@ Operator Search:&nbsp;&nbsp;
     });
 
     // DataTable
-    var table = $('#<%= table_type %>_table').DataTable({
+      table = $('#<%= table_type %>_table').DataTable({
       "order": [[ 6, "desc" ], [ 7, "desc" ], [ 8, "desc" ], [ 9, "desc" ]],
       'columnDefs': [{
         'targets': 0,
@@ -179,16 +166,6 @@ Operator Search:&nbsp;&nbsp;
       }
     });
 
-    $('#<%= table_type %>_filter_column').change(function () {
-      table.draw();
-    });
-    $('#<%= table_type %>_filter_comparator').change(function () {
-      table.draw();
-    });
-    $('#<%= table_type %>_filter_value').keyup(function () {
-      table.draw();
-    });
-
     // Apply the search
     table.columns().every(function() {
       var that = this;
@@ -198,6 +175,18 @@ Operator Search:&nbsp;&nbsp;
           that.search(this.value).draw();
         }
       });
+    });
+    innerHTML = $( "#<%= table_type %>_table_filter" ).html()
+    operatorSearch = "&nbsp;&nbsp;|&nbsp;&nbsp;Operator Search:&nbsp;&nbsp;<select id='<%= table_type %>_filter_column' class='form-control'><option value='6'>Reefers</option><option value='7'>Teams</option><option value='8'>DSL</option><option value='10'>1M</option><option value='11'>6M</option></select>&nbsp;<select id='<%= table_type %>_filter_comparator' class='form-control'><option value='eq'>=</option><option value='gt'>&gt;=</option><option value='lt'>&lt;=</option><option value='ne'>!=</option></select><input type='text' class='form-control' id='<%= table_type %>_filter_value' style='width: 10%;' '>"
+    $( "#<%= table_type %>_table_filter" ).append( operatorSearch );
+    $('#<%= table_type %>_filter_column').change(function () {
+      table.draw();
+    });
+    $('#<%= table_type %>_filter_comparator').change(function () {
+      table.draw();
+    });
+    $('#<%= table_type %>_filter_value').keyup(function () {
+      table.draw();
     });
   });
 
