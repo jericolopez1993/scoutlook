@@ -84,16 +84,16 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: scoutcrm
-  username: scoutcrm
-  password: Vb8eC4MqhoUjBa
-  host: scoutlook.ch1xmgtvyyuk.ca-central-1.rds.amazonaws.com
+# production:
+#   <<: *default
+#   database: scoutcrm
+#   username: scoutcrm
+#   password: Vb8eC4MqhoUjBa
+#   host: scoutlook.ch1xmgtvyyuk.ca-central-1.rds.amazonaws.com
 
 staging:
   <<: *default
-  database: scoutcrm
-  username: scoutcrm
-  password: password
+  database: scoutcrm_staging
+  username: scoutcrm_staging
+  password: nHShAx3Rni9qegWs
   host: localhost
