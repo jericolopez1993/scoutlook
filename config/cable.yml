@@ -1,6 +1,6 @@
 development:
   adapter: redis
-  # url: redis://scoutlook.ca:6379
+  url: redis://redis:6379
   # channel_prefix: scout_development
 
 test:
