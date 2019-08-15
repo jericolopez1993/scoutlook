@@ -135,7 +135,11 @@
   });
 </script>
 <script language="javascript">
+
   $(function () {
+
+
+
     var table;
     $('#<%= table_type %>_table tfoot th').each(function() {
       var title = $(this).text();
@@ -163,6 +167,24 @@
           trigger: 'hover',
           html: true
         })
+        var api = this.api();
+         nb_cols = api.columns().nodes().length;
+         j = 6;
+         while(j < nb_cols){
+           if ([6, 7, 10, 11].includes(j)) {
+             var pageTotal = Math.round(api.column(j, {search: 'applied'}).data().sum() * 100) / 100;
+             if (j===6) {
+               $('#<%= table_type %>_reefer_count').html(pageTotal);
+             }else if(j===7) {
+               $('#<%= table_type %>_team_count').html(pageTotal);
+             }else if(j===10) {
+               $('#<%= table_type %>_1m_count').html(pageTotal);
+             }else if(j===11) {
+               $('#<%= table_type %>_6m_count').html(pageTotal);
+             }
+           }
+           j++;
+         }
       }
     });
 

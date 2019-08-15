@@ -109,18 +109,8 @@
         </div>
       </div>
     <% end %>
-    <span id="all_carrier_count" class="pull-right" style="margin-top: -24px; display: none;">
-      <b>Reefers:</b>&nbsp;<u id="reefer_count"><%= @reefers %></u>&nbsp;&nbsp;
-      <b>Teams:</b>&nbsp;<u id="team_count"><%= @teams %></u>&nbsp;&nbsp;
-      <b>1M:</b>&nbsp;<u id="1m_count"><%= @last_month %></u>&nbsp;&nbsp;
-      <b>6M:</b>&nbsp;<u id="6m_count"><%= @last_6_months %></u>&nbsp;&nbsp;
-    </span>
-    <span id="my_carrier_count" class="pull-right" style="margin-top: -24px;">
-      <b>Reefers:</b>&nbsp;<u id="my_reefer_count"><%= @my_reefers %></u>&nbsp;&nbsp;
-      <b>Teams:</b>&nbsp;<u id="my_team_count"><%= @my_teams %></u>&nbsp;&nbsp;
-      <b>1M:</b>&nbsp;<u id="my_1m_count"><%= @my_last_month %></u>&nbsp;&nbsp;
-      <b>6M:</b>&nbsp;<u id="my_6m_count"><%= @my_last_6_months %></u>&nbsp;&nbsp;
-    </span>
+      <%= render 'carriers/filter_summary', table_type: "carrier", show: false %>
+      <%= render 'carriers/filter_summary', table_type: "customer", show: true %>
   </div>
   <% if is_mobile %>
     <div class="col-12 text-inverse" id="hide-m-nav" style="font-size: 14px;">
@@ -160,40 +150,15 @@
         $.redirect('/carriers/compose_sms', {'ids': rows_selected.join(",")});
       }
     });
-    $('#carrier_table tbody').on('click', 'input[type="checkbox"]', function (e) {
-      var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
-      $.ajax({
-        method: 'get',
-        url: '/api/carriers/summaries?ids=' + rows_selected.join(",")
-      }).done(function (data) {
-        $('#reefer_count').html(data['reefers']);
-        $('#team_count').html(data['teams']);
-        $('#1m_count').html(data['last_month']);
-        $('#6m_count').html(data['last_6_months']);
-      })
-    });
-
-    $('#customer_table tbody').on('click', 'input[type="checkbox"]', function (e) {
-      var rows_selected = $('#customer_table').DataTable().column(0).checkboxes.selected();
-      $.ajax({
-        method: 'get',
-        url: '/api/carriers/my_summaries?ids=' + rows_selected.join(",")
-      }).done(function (data) {
-        $('#my_reefer_count').html(data['reefers']);
-        $('#my_team_count').html(data['teams']);
-        $('#my_1m_count').html(data['last_month']);
-        $('#my_6m_count').html(data['last_6_months']);
-      })
-    });
 
     $('#btn_all_carriers').click(function () {
-      $('#all_carrier_count').show();
-      $('#my_carrier_count').hide();
+      $('#carrier_carrier_count').show();
+      $('#customer_carrier_count').hide();
     });
 
     $('#btn_my_carriers').click(function () {
-      $('#my_carrier_count').show();
-      $('#all_carrier_count').hide();
+      $('#customer_carrier_count').show();
+      $('#carrier_carrier_count').hide();
     });
   });
   function filterme() {
