@@ -1,7 +1,12 @@
 development:
   adapter: redis
-  # url: redis://scoutlook.ca:6379
-  # channel_prefix: scout_development
+  url: redis://scoutlook.ca:6379
+  channel_prefix: scout_development
+
+staging:
+  adapter: redis
+  url: redis://scoutlook.ca:6379
+  channel_prefix: scout_staging
 
 test:
   adapter: async

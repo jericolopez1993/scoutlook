@@ -1,3 +1,4 @@
+
 <table class="table table-bordered display nowrap"  data-order="[[6, &quot;desc&quot;],[7, &quot;desc&quot;],[8, &quot;desc&quot;],[9, &quot;desc&quot;]]" id="<%= table_type %>_table">
   <thead>
     <tr>
@@ -71,7 +72,7 @@
         <td class="text-center" style="font-size: 15px;"><%= carrier.load_days %></td>
         <td><%= generate_rank_text(carrier.current_tier).html_safe %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.last_month && carrier.last_month.round %></td>
-        <td class="text-center" style="font-size: 15px;"><%= carrier.last_month && carrier.last_6_months.round %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.last_6_months && carrier.last_6_months.round %></td>
         <td>
           <% if !carrier.lane_origin.nil? && carrier.lane_origin != "" %>
             <% carrier.lane_origin.split(',').map(&:to_s).each do |origin| %>
@@ -104,3 +105,111 @@
     <% end %>
   </tbody>
 </table>
+<script language="javascript">
+  $.fn.dataTableExt.afnFiltering.push(function( oSettings, aData, iDataIndex ) {
+    var column_index = $('#<%= table_type %>_filter_column').val();
+    var comparator = $('#<%= table_type %>_filter_comparator').val();
+    var value = $('#<%= table_type %>_filter_value').val();
+
+    if (value) {
+      if (value.length > 0 && !isNaN(parseInt(value, 10))) {
+        value = parseInt(value, 10);
+        var row_data = parseInt(aData[column_index], 10);
+        switch (comparator) {
+          case 'eq':
+            return row_data == value ? true : false;
+            break;
+          case 'gt':
+            return row_data >= value ? true : false;
+            break;
+          case 'lt':
+            return row_data <= value ? true : false;
+            break;
+          case 'ne':
+            return row_data != value ? true : false;
+            break;
+        }
+      }
+    }
+    return true;
+  });
+</script>
+<script language="javascript">
+
+  $(function () {
+
+
+
+    var table;
+    $('#<%= table_type %>_table tfoot th').each(function() {
+      var title = $(this).text();
+      if (title != "" && title != undefined && title != null) {
+        $(this).html('<input type="text" placeholder="Search ' + title + '" style="width: 100%;"/>');
+      }
+    });
+
+    // DataTable
+      table = $('#<%= table_type %>_table').DataTable({
+      "order": [[ 6, "desc" ], [ 7, "desc" ], [ 8, "desc" ], [ 9, "desc" ]],
+      'columnDefs': [{
+        'targets': 0,
+        'checkboxes': {
+          'selectRow': true
+        }
+      }],
+      'select': {
+        'style': 'multi'
+      },
+      "scrollX": true,
+      "pageLength": 50,
+      "drawCallback": function(settings) {
+        $('[data-toggle="tooltip"]').tooltip({
+          trigger: 'hover',
+          html: true
+        })
+        var api = this.api();
+         nb_cols = api.columns().nodes().length;
+         j = 6;
+         while(j < nb_cols){
+           if ([6, 7, 10, 11].includes(j)) {
+             var pageTotal = Math.round(api.column(j, {search: 'applied'}).data().sum() * 100) / 100;
+             if (j===6) {
+               $('#<%= table_type %>_reefer_count').html(pageTotal);
+             }else if(j===7) {
+               $('#<%= table_type %>_team_count').html(pageTotal);
+             }else if(j===10) {
+               $('#<%= table_type %>_1m_count').html(pageTotal);
+             }else if(j===11) {
+               $('#<%= table_type %>_6m_count').html(pageTotal);
+             }
+           }
+           j++;
+         }
+      }
+    });
+
+    // Apply the search
+    table.columns().every(function() {
+      var that = this;
+
+      $('input', this.footer()).on('keyup change', function() {
+        if (that.search() !== this.value) {
+          that.search(this.value).draw();
+        }
+      });
+    });
+    innerHTML = $( "#<%= table_type %>_table_filter" ).html()
+    operatorSearch = "&nbsp;&nbsp;|&nbsp;&nbsp;Operator Search:&nbsp;&nbsp;<select id='<%= table_type %>_filter_column' class='form-control'><option value='6'>Reefers</option><option value='7'>Teams</option><option value='8'>DSL</option><option value='10'>1M</option><option value='11'>6M</option></select>&nbsp;<select id='<%= table_type %>_filter_comparator' class='form-control'><option value='eq'>=</option><option value='gt'>&gt;=</option><option value='lt'>&lt;=</option><option value='ne'>!=</option></select><input type='text' class='form-control' id='<%= table_type %>_filter_value' style='width: 10%;' '>"
+    $( "#<%= table_type %>_table_filter" ).append( operatorSearch );
+    $('#<%= table_type %>_filter_column').change(function () {
+      table.draw();
+    });
+    $('#<%= table_type %>_filter_comparator').change(function () {
+      table.draw();
+    });
+    $('#<%= table_type %>_filter_value').keyup(function () {
+      table.draw();
+    });
+  });
+
+</script>

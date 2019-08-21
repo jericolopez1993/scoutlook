@@ -555,7 +555,7 @@ function filterCarrierTable(id) {
 }
 
 function filterAndSelectAllTable(id, ordered) {
-  $('#' + id + ' tfoot th').each(function() {
+  $('#' + id + '_table tfoot th').each(function() {
     var title = $(this).text();
     if (title != "" && title != undefined && title != null) {
       $(this).html('<input type="text" placeholder="Search ' + title + '" style="width: 100%;"/>');
@@ -563,7 +563,7 @@ function filterAndSelectAllTable(id, ordered) {
   });
 
   // DataTable
-  var table = $('#' + id).DataTable({
+  var table = $('#' + id + '_table').DataTable({
     "order": [[ 6, "desc" ], [ 7, "desc" ], [ 8, "desc" ], [ 9, "desc" ]],
     'columnDefs': [{
       'targets': 0,
@@ -576,6 +576,13 @@ function filterAndSelectAllTable(id, ordered) {
     },
     "scrollX": true,
     "pageLength": 50,
+    "initComplete": function(settings, json) {
+      selectors = "Operator Search:&nbsp;&nbsp;<select id='" + id + "_filter_column' class='form-control'><option value='6'>Reefers</option><option value='7'>Teams</option><option value='8'>DSL</option><option value='10'>1M</option><option value='11'>6M</option></select>&nbsp;<select id='" + id + "_filter_comparator' class='form-control'><option value='eq'>=</option><option value='gt'>&gt;=</option><option value='lt'>&lt;=</option><option value='ne'>!=</option></select><input type='text' class='form-control' id='" + id + "_filter_value' style='width: 10%;''>&nbsp;&nbsp;|&nbsp;&nbsp;";
+
+      if (id != "shipper") {
+        $('#' + id + '_table_filter').prepend(selectors);
+      }
+    },
     "drawCallback": function(settings) {
       $('[data-toggle="tooltip"]').tooltip({
         trigger: 'hover',

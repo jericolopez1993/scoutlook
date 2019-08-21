@@ -93,7 +93,7 @@ production:
 
 staging:
   <<: *default
-  database: scoutv1_staging
-  username: pb_platform
-  password: pb_platform
+  database: scoutcrm_staging
+  username: scoutcrm_staging
+  password: nHShAx3Rni9qegWs
   host: localhost
