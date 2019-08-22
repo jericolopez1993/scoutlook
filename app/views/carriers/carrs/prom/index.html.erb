@@ -86,10 +86,18 @@
               <td><%= generate_rank_text(carr['Highest_Tier']).html_safe %></td>
               <td><%= carr['Highest_Tier_Date'] ? DateTime.parse(carr['Highest_Tier_Date']).strftime('%m/%d/%Y') : "" %></td>
               <td><%= carr['Gross_Margin_%'] %>%</td>
-              <td><%= carr['Load_Last_Week'] %></td>
-              <td><%= carr['Load_Last_Month'] %></td>
-              <td><%= carr['Load_Last_3_Months'] %></td>
-              <td><%= carr['Load_Last_6_Months'] %></td>
+              <td><%= number_with_precision(carr['Load_Last_Week'],
+                                            strip_insignificant_zeros: true,
+                                            precision: 2) %></td>
+              <td><%= number_with_precision(carr['Load_Last_Month'],
+                                            strip_insignificant_zeros: true,
+                                            precision: 2) %></td>
+              <td><%= number_with_precision(carr['Load_Last_6_Months'],
+                                            strip_insignificant_zeros: true,
+                                            precision: 2) %></td>
+              <td><%= number_with_precision(carr['Load_Last_3_Months'],
+                                            strip_insignificant_zeros: true,
+                                            precision: 2) %></td>
               <td><%= carr['Highest_Tier_Reached'] %></td>
               <td><%= carr['primary_phone'] %></td>
               <td><%= carr['secondary_phone'] %></td>
