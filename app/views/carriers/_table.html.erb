@@ -67,12 +67,12 @@
         <td class="link">
           <%= render "carriers/link", carrier: carrier %>
         </td>
-        <td class="text-center" style="font-size: 15px;"><%= carrier.reefers %></td>
-        <td class="text-center" style="font-size: 15px;"><%= carrier.teams %></td>
-        <td class="text-center" style="font-size: 15px;"><%= carrier.load_days %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.reefers && (carrier.reefers if carrier.reefers > 0) %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.teams && (carrier.teams if carrier.teams > 0) %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.load_days && (carrier.load_days if carrier.load_days > 0) %></td>
         <td><%= generate_rank_text(carrier.current_tier).html_safe %></td>
-        <td class="text-center" style="font-size: 15px;"><%= carrier.last_month && carrier.last_month.round %></td>
-        <td class="text-center" style="font-size: 15px;"><%= carrier.last_6_months && carrier.last_6_months.round %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.last_month && (carrier.last_month.round if carrier.last_month > 0) %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.last_6_months && (carrier.last_6_months.round if carrier.last_month > 0) %></td>
         <td>
           <% if !carrier.lane_origin.nil? && carrier.lane_origin != "" %>
             <% carrier.lane_origin.split(',').map(&:to_s).each do |origin| %>

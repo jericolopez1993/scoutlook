@@ -90,16 +90,16 @@
               <td><%= carr['Gross_Margin_%'] %>%</td>
               <td><%= number_with_precision(carr['Load_Last_Week'],
                                             strip_insignificant_zeros: true,
-                                            precision: 2) %></td>
+                                            precision: 2) if carr['Load_Last_Week'] > 0 %></td>
               <td><%= number_with_precision(carr['Load_Last_Month'],
                                             strip_insignificant_zeros: true,
-                                            precision: 2) %></td>
-              <td><%= number_with_precision(carr['Load_Last_6_Months'],
-                                            strip_insignificant_zeros: true,
-                                            precision: 2) %></td>
+                                            precision: 2) if carr['Load_Last_Month'] > 0 %></td>
               <td><%= number_with_precision(carr['Load_Last_3_Months'],
                                             strip_insignificant_zeros: true,
-                                            precision: 2) %></td>
+                                            precision: 2) if carr['Load_Last_3_Months'] > 0 %></td>
+              <td><%= number_with_precision(carr['Load_Last_6_Months'],
+                                            strip_insignificant_zeros: true,
+                                            precision: 2) if carr['Load_Last_6_Months'] > 0 %></td>
               <td><%= carr['Highest_Tier_Reached'] %></td>
               <td><%= carr['primary_phone'] %></td>
               <td><%= carr['secondary_phone'] %></td>
