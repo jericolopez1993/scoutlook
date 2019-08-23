@@ -353,6 +353,10 @@ module ApplicationHelper
     str_date
   end
 
+  def format_reminder(reminder_date, reminder_type, notes)
+    "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder_type.nil? ? '' : reminder_type} <br>Notes: #{notes.nil? ? '' : notes.gsub("'", '&#39;')}' class='badge badge-danger badge-square'>#{reminder_date.strftime("%m/%d/%Y")}</span> "
+  end
+
   def organize_date(date)
     if date.is_a? Date
       date = date.to_s

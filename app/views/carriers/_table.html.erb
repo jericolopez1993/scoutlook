@@ -53,11 +53,7 @@
       <tr class="<%= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>">
         <td><%= carrier.id %></td>
         <td>
-          <% if carrier.reminders %>
-            <% carrier.reminders.each do |reminder| %>
-                <%= reminder_to_html(reminder).html_safe %>
-            <% end %>
-          <% end %>
+          <%= format_reminder(carrier.c_reminder_date, carrier.c_reminder_type, carrier.c_reminder_notes).html_safe if carrier.c_reminder_date  %>
         </td>
         <td class="text-center link"><%= carrier.relationship_owner_name.blank? ? '' : "#{link_to(covert_initials(carrier.relationship_owner_name), user_path(:id => carrier.relationship_owner))}".html_safe %></td>
         <td class="text-center"><%= shade_sales_priority(carrier.sales_priority).html_safe %></td>
@@ -69,20 +65,20 @@
         </td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.reefers && (carrier.reefers if carrier.reefers > 0) %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.teams && (carrier.teams if carrier.teams > 0) %></td>
-        <td class="text-center" style="font-size: 15px;"><%= carrier.load_days && (carrier.load_days if carrier.load_days > 0) %></td>
-        <td><%= generate_rank_text(carrier.current_tier).html_safe %></td>
-        <td class="text-center" style="font-size: 15px;"><%= carrier.last_month && (carrier.last_month.round if carrier.last_month > 0) %></td>
-        <td class="text-center" style="font-size: 15px;"><%= carrier.last_6_months && (carrier.last_6_months.round if carrier.last_month > 0) %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_load_days && (carrier.c_mc_latest_date_load_days if carrier.c_mc_latest_date_load_days > 0) %></td>
+        <td><%= generate_rank_text(carrier.c_mc_latest_date_tier).html_safe %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_month && (carrier.c_mc_latest_date_last_month.round if carrier.c_mc_latest_date_last_month > 0) %></td>
+        <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_6_months && (carrier.c_mc_latest_date_last_6_months.round if carrier.c_mc_latest_date_last_6_months > 0) %></td>
         <td>
-          <% if !carrier.lane_origin.nil? && carrier.lane_origin != "" %>
-            <% carrier.lane_origin.split(',').map(&:to_s).each do |origin| %>
-              <%= generate_location2(origin, params[:controller], carrier.lane_id).html_safe %>
+          <% if carrier.c_lane_origin %>
+            <% carrier.c_lane_origin.split(',').map(&:to_s).each do |origin| %>
+              <%= generate_location2(origin, params[:controller], carrier.c_lane_id).html_safe %>
             <% end %>
           <% end %>
-          <% if !carrier.lane_destination.nil? && carrier.lane_destination != "" %>
+          <% if carrier.c_lane_destination %>
           &rarr;
-          <% carrier.lane_destination.split(',').map(&:to_s).each do |destination| %>
-            <%= generate_location2(destination, params[:controller], carrier.lane_id).html_safe %>
+          <% carrier.c_lane_destination.split(',').map(&:to_s).each do |destination| %>
+            <%= generate_location2(destination, params[:controller], carrier.c_lane_id).html_safe %>
           <% end %>
         <% end %>
         </td>

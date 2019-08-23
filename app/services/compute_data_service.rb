@@ -83,7 +83,7 @@ class ComputeDataService
     if carrier_id
       @carrier = Carrier.find(carrier_id)
       lane = CarrierLane.where(:carrier_id => carrier_id).order("created_at DESC").first
-      @carrier.update_attributes(:c_lane_origin => lane.lane_origin, :c_lane_destination => lane.lane_destination)
+      @carrier.update_attributes(:c_lane_origin => lane.lane_origin, :c_lane_destination => lane.lane_destination, :c_lane_id => lane.id)
     end
   end
 

@@ -267,6 +267,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_083020) do
     t.string "c_reminder_type"
     t.string "c_lane_destination"
     t.string "c_lane_origin"
+    t.integer "c_lane_id"
     t.string "c_mc_latest_date_tier"
     t.integer "c_mc_latest_date_last_month"
     t.integer "c_mc_latest_date_last_6_months"
