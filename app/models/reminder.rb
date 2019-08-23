@@ -4,6 +4,11 @@ class Reminder < ApplicationRecord
   belongs_to :activity, optional: true
   belongs_to :user, optional: true
   before_save :notify_users
+  after_save :update_computed_data
+
+  def update_computed_data
+    ComputeDataService.new.reminder(self.carrier_id)
+  end
 
   def notify_users
     if last_reminded_changed?

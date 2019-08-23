@@ -1,5 +1,6 @@
 class CarrierLane < ApplicationRecord
   audited
+  after_save :update_computed_data
   belongs_to :carrier, optional: true
   ORIGINS = [
     ['United States', [
@@ -13,6 +14,10 @@ class CarrierLane < ApplicationRecord
     ]]
   ]
   DESTINATIONS = ORIGINS
+
+  def update_computed_data
+    ComputeDataService.new.lane(self.carrier_id)
+  end
 
   def display_name
     if self.carrier.nil?
