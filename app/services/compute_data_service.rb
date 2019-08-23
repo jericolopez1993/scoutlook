@@ -102,7 +102,9 @@ class ComputeDataService
     if carrier_id
       @carrier = Carrier.find(carrier_id)
       audit = Audit.where("((auditable_type = 'Carrier' AND auditable_id IN (#{carrier_id})) OR (auditable_type = 'CarrierCompany' AND auditable_id IN (SELECT carrier_companies.id FROM carrier_companies WHERE carrier_companies.carrier_id = #{carrier_id})) OR (auditable_type = 'CarrierContact' AND auditable_id IN (SELECT carrier_contacts.id FROM carrier_contacts WHERE carrier_contacts.carrier_id = #{carrier_id})) OR (auditable_type = 'CarrierLane' AND auditable_id IN (SELECT carrier_lanes.id FROM carrier_lanes WHERE carrier_lanes.carrier_id = #{carrier_id})) OR (auditable_type = 'CarrierLocation' AND auditable_id IN (SELECT carrier_locations.id FROM carrier_locations WHERE carrier_locations.carrier_id = #{carrier_id})) OR (auditable_type = 'Activity' AND auditable_id IN (SELECT activities.id FROM activities WHERE activities.carrier_id = #{carrier_id})) OR (auditable_type = 'Rate' AND auditable_id IN (SELECT rates.id FROM rates WHERE rates.carrier_id = #{carrier_id})) OR (auditable_type = 'Reminder' AND auditable_id IN (SELECT reminders.id FROM reminders WHERE reminders.carrier_id = #{carrier_id})))").order("created_at DESC").first
-      @carrier.update_attributes(:c_auditable_last_activity_date => audit.created_at)
+      if audit
+        @carrier.update_attributes(:c_auditable_last_activity_date => audit.created_at)
+      end
     end
   end
 end
