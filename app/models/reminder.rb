@@ -8,6 +8,9 @@ class Reminder < ApplicationRecord
 
   def update_computed_data
     ComputeDataService.new.reminder(self.carrier_id)
+    if self.shipper_id
+      ComputeDataShippersService.new.reminder(self.shipper_id)
+    end
   end
 
   def notify_users

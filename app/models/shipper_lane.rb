@@ -1,5 +1,6 @@
 class ShipperLane < ApplicationRecord
   audited
+  after_save :update_computed_data
   belongs_to :shipper, optional: true
 
   ORIGINS = [
@@ -14,6 +15,12 @@ class ShipperLane < ApplicationRecord
     ]]
   ]
   DESTINATIONS = ORIGINS
+
+
+  def update_computed_data
+    ComputeDataShippersService.new.lane(self.shipper_id)
+  end
+
   def display_name
     if self.shipper.nil?
       "Lane"
