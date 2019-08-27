@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_083020) do
+ActiveRecord::Schema.define(version: 2019_08_27_074331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -701,6 +701,15 @@ ActiveRecord::Schema.define(version: 2019_08_23_083020) do
     t.boolean "approved", default: false
     t.date "date_approved"
     t.integer "years_established"
+    t.date "c_reminder_date"
+    t.integer "c_reminder_id"
+    t.text "c_reminder_notes"
+    t.string "c_reminder_interval"
+    t.string "c_reminder_type"
+    t.string "c_lane_destination"
+    t.string "c_lane_origin"
+    t.integer "c_lane_id"
+    t.datetime "c_auditable_last_activity_date"
   end
 
   create_table "tile_tabs", force: :cascade do |t|

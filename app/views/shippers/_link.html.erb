@@ -12,7 +12,7 @@
       <b>City</b>: <%= shipper.city.blank? ? '(none)' : shipper.city %><br>
       <b>Sate/Province</b>: <%= shipper.state.blank? ? '(none)' : generate_abv(shipper.state).upcase %><br>
       <b>Last Contact Date</b>: <%= shipper.date_opened.nil? ? "" : shipper.date_opened.strftime('%m/%d/%Y').to_s %><br>
-      <b>Last Edit Date</b>: <%= shipper.last_activity_date.nil? ? "" : shipper.last_activity_date.strftime("%m/%d/%Y") %><br>
+      <b>Last Edit Date</b>: <%= shipper.c_auditable_last_activity_date.nil? ? '' : shipper.c_auditable_last_activity_date.strftime("%m/%d/%Y").to_s %><br>
       <% if params[:controller] != "activities" %>
         <hr>
         <% if !shipper.activities.empty? %>
@@ -24,6 +24,6 @@
         <% end %>
       <% end %>
     ">
-      <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper, :class => generate_styling_activities(shipper.last_activity_date), target: :_blank %>
+      <%= link_to shipper.company_name.blank? ? "(no name)" : shipper.company_name, shipper, :class => generate_styling_activities(shipper.c_auditable_last_activity_date), target: :_blank %>
   </span>
 <% end %>
