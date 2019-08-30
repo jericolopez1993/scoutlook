@@ -1,5 +1,12 @@
 namespace :computed_data do
   desc "TODO"
+  task all: :environment do
+    Rake::Task["computed_data:reminders"].invoke
+    Rake::Task["computed_data:lanes"].invoke
+    Rake::Task["computed_data:mc_latest_dates"].invoke
+    Rake::Task["computed_data:audits"].invoke
+  end
+
   task reminders: :environment do
     #Carriers
     @carrier_ids = Reminder.all.pluck(:carrier_id).uniq

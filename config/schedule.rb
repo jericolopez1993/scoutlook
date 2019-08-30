@@ -22,10 +22,5 @@ every :day, at: '12:01am' do
   rake "reminder:check_due"
 end
 every :hour do
-  rake "computed_data:reminders"
-  rake "computed_data:lanes"
-end
-every 10.minutes do
-  rake "computed_data:mc_latest_dates"
-  rake "computed_data:audits"
+  rake "computed_data:all"
 end
