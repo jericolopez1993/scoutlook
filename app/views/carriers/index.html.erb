@@ -139,15 +139,25 @@
   var user_id = "<%= current_user.id %>";
   $(function () {
     $('#send-mail-btn').on('click', function () {
-      var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
-      if (rows_selected.join(",") != "") {
-        $.redirect('/carriers/compose_mail', {'ids': rows_selected.join(",")});
+      var carriers_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
+      if (carriers_selected.join(",") != "") {
+        $.redirect('/carriers/compose_mail', {'ids': carriers_selected.join(",")});
+      }
+
+      var customers_selected = $('#customer_table').DataTable().column(0).checkboxes.selected();
+      if (customers_selected.join(",") != "") {
+        $.redirect('/carriers/compose_mail', {'ids': customers_selected.join(",")});
       }
     });
     $('#send-text-btn').on('click', function () {
-      var rows_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
-      if (rows_selected.join(",") != "") {
-        $.redirect('/carriers/compose_sms', {'ids': rows_selected.join(",")});
+      var carriers_selected = $('#carrier_table').DataTable().column(0).checkboxes.selected();
+      if (carriers_selected.join(",") != "") {
+        $.redirect('/carriers/compose_sms', {'ids': carriers_selected.join(",")});
+      }
+
+      var customers_selected = $('#customer_table').DataTable().column(0).checkboxes.selected();
+      if (customers_selected.join(",") != "") {
+        $.redirect('/carriers/compose_sms', {'ids': customers_selected.join(",")});
       }
     });
 

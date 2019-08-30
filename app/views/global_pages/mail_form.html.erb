@@ -18,16 +18,17 @@
   <!-- begin vertical-box-row -->
   <div class="vertical-box-row bg-white">
     <%= form_tag("/#{params[:controller]}/send_mail", id: 'mail_form', multipart: true) do %>
+      <input type="hidden" name="ids" value="<%= @ids %>">
+      <input type="hidden" name="to" value="<%= @contacts %>">
       <!-- begin email to -->
-      <div class="email-to">
+      <!-- <div class="email-to">
         <label class="control-label">To:</label>
-        <input name="to" id="email-to" class="primary line-mode" value="<%= @contacts %>">
-        <input type="hidden" name="ids" value="<%= @ids %>">
+        <input name="to" id="email-to" class="primary line-mode" value="<%#= @contacts %>">
+      </div> -->
 
-      </div>
       <!-- end email to -->
 
-      <div data-id="extra-cc"></div>
+      <!-- <div data-id="extra-cc"></div> -->
 
       <!-- begin email subject -->
       <div class="email-subject">
@@ -67,10 +68,10 @@
         return html;
       }
      });
-    $('#email-to').tagit({
-      fieldName: 'to[]',
-      availableTags: availableTags
-    });
+    // $('#email-to').tagit({
+    //   fieldName: 'to[]',
+    //   availableTags: availableTags
+    // });
   });
   $(document).on('click', '[data-click="add-cc"]', function (e) {
     e.preventDefault();
