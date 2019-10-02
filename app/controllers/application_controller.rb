@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   layout :layout_by_resource
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  rescue_from I18n::InvalidLocaleData
+  # rescue_from I18n::InvalidLocaleData
   helper_method :is_mobile
 
   private
