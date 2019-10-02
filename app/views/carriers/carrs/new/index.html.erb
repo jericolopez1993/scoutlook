@@ -29,14 +29,19 @@
       <h4 class="panel-title lp-header">Carriers (New)</h4>
     </div>
     <div class="panel-body">
-      <table class="table table-black table-bordered display nowrap"  data-order="[[1, &quot;asc&quot;]]" id="carrier_table" width="100%">
+      <table class="table table-black table-bordered display nowrap"  data-order="[[3, &quot;desc&quot;]]" id="carrier_table" width="100%">
         <thead>
           <tr>
             <th>MC #</th>
             <th>Name</th>
-            <th>Load Last Month</th>
+            <th>Trucks</th>
+            <th>Reefers</th>
+            <th>Teams</th>
+            <th>ORG</th>
+            <th>DEST</th>
+            <th><abbr title="Loads Last Month">LLM</abbr></th>
             <th>First Load Date</th>
-            <th>Gross Margin %</th>
+            <th><abbr title="Gross Margin %">GM</abbr></th>
             <th>Phone #1</th>
             <th>Phone #2</th>
             <th>Prime Status</th>
@@ -47,9 +52,14 @@
           <tr>
             <th>MC #</th>
             <th>Name</th>
-            <th>Load Last Month</th>
+            <th>Trucks</th>
+            <th>Reefers</th>
+            <th>Teams</th>
+            <th>ORG</th>
+            <th>DEST</th>
+            <th>LLM</th>
             <th>First Load Date</th>
-            <th>Gross Margin %</th>
+            <th>GM</th>
             <th>Phone #1</th>
             <th>Phone #2</th>
             <th>Prime Status</th>
@@ -67,6 +77,11 @@
                   <%= carr['Carrier_Name'] %>
                 <% end %>
               </td>
+              <td><%= carr['power_units'] %></td>
+              <td><%= carr['reefers'] %></td>
+              <td><%= carr['teams'] %></td>
+              <td></td>
+              <td></td>
               <td><%= carr['Load_Last_Month'] %></td>
               <td><%= carr['First_Load_Date'] ? carr['First_Load_Date'].strftime('%m/%d/%Y') : "" %></td>
               <td><%= carr['Gross_Margin_%'] %>%</td>
