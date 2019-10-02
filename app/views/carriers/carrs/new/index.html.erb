@@ -77,9 +77,9 @@
                   <%= carr['Carrier_Name'] %>
                 <% end %>
               </td>
-              <td><%= carr['power_units'] %></td>
-              <td><%= carr['reefers'] %></td>
-              <td><%= carr['teams'] %></td>
+              <td><%= carr['power_units'] if carr['power_units'] && carr['power_units'] > 0 %></td>
+              <td><%= carr['reefers'] if carr['reefers'] && carr['reefers'] > 0 %></td>
+              <td><%= carr['teams'] if carr['teams'] && carr['teams'] > 0 %></td>
               <td></td>
               <td></td>
               <td><%= carr['Load_Last_Month'] %></td>
