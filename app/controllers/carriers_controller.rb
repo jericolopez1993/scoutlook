@@ -25,6 +25,10 @@ class CarriersController < ApplicationController
           @my_last_month = (latest_date.sum("loadsh_num")).round
           @my_last_6_months = (latest_date.sum("loadsh_num_6mon")).round
 
+
+          mc_number_list = @carriers.pluck(:mc_number)
+          @carr_new = CarrNew.where('mcnum NOT IN (?)', mc_number_list)
+
           authorize @carriers
         elsif current_user.has_role?(:steward) || current_user.ro || current_user.cs
           @carriers = Carrier.where("relationship_owner = ? OR carrier_setup = ?", current_user.id, current_user.id)

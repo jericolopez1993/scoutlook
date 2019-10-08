@@ -126,11 +126,11 @@
     <!-- begin tab-pane -->
     <div class="tab-pane fade" id="all">
       <div class="panel-body">
-        <%= render 'carriers/table', carriers: @carriers, table_type: "carrier" %>
+        <%= render 'carriers/table', carriers: @carriers, carr_new: @carr_new, table_type: "carrier" %>
       </div>
     </div>
     <div class="tab-pane fade active show" id="customers">
-      <%= render 'carriers/table', carriers: @my_carriers, table_type: "customer" %>
+      <%= render 'carriers/table', carriers: @my_carriers, carr_new: [], table_type: "customer" %>
     </div>
   </div>
 </div>
