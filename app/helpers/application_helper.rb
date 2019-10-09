@@ -430,6 +430,41 @@ module ApplicationHelper
       "bg-lightpink"
     end
   end
+  def generate_styling_newly(first_load_date)
+    if first_load_date
+      if ((Date.today - 3.week)..Date.today).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(first_load_date.strftime('%m/%d/%Y').to_s)
+        "bg-lightgreen"
+      elsif ((Date.today - 6.week)..(Date.today - 3.week)).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(first_load_date.strftime('%m/%d/%Y').to_s)
+        "bg-lightyellow"
+      else
+        "bg-lightpink"
+      end
+    else
+      "bg-lightpink"
+    end
+  end
+
+  def generate_styling_carriers(created_at, interview)
+    if created_at
+      if ((Date.today - 1.week)..Date.today).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(created_at.strftime('%m/%d/%Y').to_s)
+        if interview
+          "bg-lightgreen"
+        else
+          "bg-white"
+        end
+      elsif !((Date.today - 1.week)..Date.today).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(created_at.strftime('%m/%d/%Y').to_s)
+        if interview
+          "bg-lightgreen"
+        else
+          "bg-lightblue"
+        end
+      else
+        "bg-lightpink"
+      end
+    else
+      "bg-lightpink"
+    end
+  end
 
   def last_edit(carrier, shipper)
     if carrier

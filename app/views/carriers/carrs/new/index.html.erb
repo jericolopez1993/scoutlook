@@ -46,6 +46,10 @@
             <th>Phone #2</th>
             <th>Prime Status</th>
             <th>Owner</th>
+            <th>LW</th>
+            <th>2W</th>
+            <th>3W</th>
+            <th>4W</th>
           </tr>
         </thead>
         <tfoot>
@@ -64,6 +68,10 @@
             <th>Phone #2</th>
             <th>Prime Status</th>
             <th>Owner</th>
+            <th>LW</th>
+            <th>2W</th>
+            <th>3W</th>
+            <th>4W</th>
           </tr>
         </tfoot>
         <tbody class="spacer">
@@ -89,6 +97,10 @@
               <td><%= carr['secondary_phone'] %></td>
               <td class="text-center"><%= carr['sales_priority'] ? shade_sales_priority(carr['sales_priority']).html_safe : '' %></td>
               <td class="text-center link"><%= carr['user_id'] ? (carr['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(carr['relationship_owner_name']), user_path(:id => carr['user_id']))}".html_safe) : '' %></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
             </tr>
           <% end %>
         </tbody>

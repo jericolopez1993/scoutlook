@@ -14,6 +14,10 @@
       <th>Team</th>
       <th>DSL</th>
       <th>Tier</th>
+      <th>LW</th>
+      <th>2W</th>
+      <th>3W</th>
+      <th>4W</th>
       <th>1M</th>
       <th>6M</th>
       <th>Lane</th>
@@ -40,6 +44,10 @@
       <th>Team</th>
       <th>DSL</th>
       <th>Tier</th>
+      <th>LW</th>
+      <th>2W</th>
+      <th>3W</th>
+      <th>4W</th>
       <th>1M</th>
       <th>6M</th>
       <th>Lane</th>
@@ -54,7 +62,8 @@
   </tfoot>
   <tbody class="spacer">
     <% carriers.each do |carrier| %>
-      <tr class="<%= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>">
+      <%#= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>
+      <tr class="<%= generate_styling_carriers(carrier.created_at, carrier.interview) %>">
         <td><%= carrier.id %></td>
         <td>
           <%= format_reminder(carrier.c_reminder_date, carrier.c_reminder_type, carrier.c_reminder_notes).html_safe if carrier.c_reminder_date  %>
@@ -73,6 +82,10 @@
         <td class="text-center" style="font-size: 15px;"><%= carrier.teams && (carrier.teams if carrier.teams > 0) %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_load_days && (carrier.c_mc_latest_date_load_days if carrier.c_mc_latest_date_load_days > 0) %></td>
         <td><%= generate_rank_text(carrier.c_mc_latest_date_tier).html_safe %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_month && (carrier.c_mc_latest_date_last_month.round if carrier.c_mc_latest_date_last_month > 0) %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_6_months && (carrier.c_mc_latest_date_last_6_months.round if carrier.c_mc_latest_date_last_6_months > 0) %></td>
         <td>
