@@ -4,6 +4,8 @@
     <tr>
       <th></th>
       <th class="text-center"><i class="fas fa-clock"></i></th>
+      <th>Interview</th>
+      <th>Wolfbyte</th>
       <th>RO</th>
       <th>Class</th>
       <th>MC</th>
@@ -28,6 +30,8 @@
     <tr>
       <th></th>
       <th></th>
+      <th>Interview</th>
+      <th>Wolfbyte</th>
       <th>RO</th>
       <th>Class</th>
       <th>MC</th>
@@ -55,6 +59,8 @@
         <td>
           <%= format_reminder(carrier.c_reminder_date, carrier.c_reminder_type, carrier.c_reminder_notes).html_safe if carrier.c_reminder_date  %>
         </td>
+        <td><%= carrier.interview ? "<i class='text-danger'>Yes</i>".html_safe : "<i class='text-success'>No</i>".html_safe %></td>
+        <td><%= carrier.wolfbyte ? "<i class='text-danger'>Yes</i>".html_safe : "<i class='text-success'>No</i>".html_safe %></td>
         <td class="text-center link"><%= carrier.relationship_owner_name.blank? ? '' : "#{link_to(covert_initials(carrier.relationship_owner_name), user_path(:id => carrier.relationship_owner))}".html_safe %></td>
         <td class="text-center"><%= shade_sales_priority(carrier.sales_priority).html_safe %></td>
         <td>
