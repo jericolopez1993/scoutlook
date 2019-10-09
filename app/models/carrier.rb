@@ -2,6 +2,7 @@ class Carrier < ApplicationRecord
   audited
   before_save :approved?
   has_many_attached :attachment_file
+  has_one_attached :interview_attachment_file
   after_destroy :remove_children
 
   validates_uniqueness_of :mc_number

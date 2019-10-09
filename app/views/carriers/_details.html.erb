@@ -29,6 +29,26 @@
             </div>
           </div>
           <div class="row">
+            <label class="col-4 col-form-label">Wolfbyte?</label>
+            <div class="col-8 lbl-padding-t">
+              <%= carrier.wolfbyte ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-4 col-form-label">Interviewed?</label>
+            <div class="col-8 lbl-padding-t">
+              <%= carrier.interview ? "<i class='fas fa-check fa-2x text-success'></i>".html_safe : "<i class='fas fa-times fa-2x text-danger'></i>".html_safe %>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-4 col-form-label">Interview Form:</label>
+            <div class="col-8 lbl-padding-t">
+              <% if carrier.interview_attachment_file.attached? %>
+                <%= link_to carrier.interview_attachment_file.filename, rails_blob_path(carrier.interview_attachment_file), target: :_blank %>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
             <label class="col-4 col-form-label">Last Contact:</label>
             <div class="col-8 lbl-padding-t link">
               <%= carrier.last_contact_date.nil? || carrier.last_contact_date.date_opened.nil? ? "" : (carrier.last_contact_date.date_opened.strftime('%m/%d/%Y').to_s + " " + (carrier.last_contact_date.user.nil? ? "" : link_to(carrier.last_contact_date.user.full_name, carrier.last_contact_date.user))).html_safe %>

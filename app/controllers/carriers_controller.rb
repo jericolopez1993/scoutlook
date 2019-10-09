@@ -78,14 +78,10 @@ class CarriersController < ApplicationController
     @carrier = Carrier.new(carrier_params)
     respond_to do |format|
       if @carrier.save
-        @location = CarrierLocation.new(location_params)
-        @location.carrier_id = @carrier.id
-        if @location.save
-          @carrier.update_attributes(:head_office => @location.id)
-        end
-        if params[:carrier][:attachment_file].present?
-          @carrier.attachment_file.attach(params[:carrier][:attachment_file])
-        end
+
+        save_interview_form
+        save_location
+        save_attachment_file
 
         format.html { redirect_to @carrier, notice: 'Carrier was successfully created.' }
         format.json { render :show, status: :created, location: @carrier }
@@ -110,19 +106,11 @@ class CarriersController < ApplicationController
       else
         # if current_user.id == @carrier.relationship_owner || params[:carrier][:relationship_owner] == @carrier.relationship_owner.to_s
           if @carrier.update(carrier_params)
-            if @carrier.location.nil?
-              @location = CarrierLocation.new(location_params)
-              @location.carrier_id = @carrier.id
-              if @location.save
-                @carrier.update_attributes(:head_office => @location.id)
-              end
-            else
-              @carrier.location.update_attributes(location_params)
-            end
 
-            if params[:carrier][:attachment_file].present?
-              @carrier.attachment_file.attach(params[:carrier][:attachment_file])
-            end
+            save_interview_form
+            save_location
+            save_attachment_file
+
             format.html { redirect_to @carrier, notice: 'Carrier was successfully updated.' }
             format.json { render :show, status: :ok, location: @carrier }
           else
@@ -236,9 +224,34 @@ class CarriersController < ApplicationController
       authorize @carrier
     end
 
+    def save_interview_form
+      if params[:carrier][:interview_attachment_file].present?
+        @carrier.interview_attachment_file.attach(params[:carrier][:interview_attachment_file])
+      end
+      @carrier.update_attributes(:interview =>  params[:carrier][:interview_attachment_file].present?)
+    end
+
+    def save_location
+      if @carrier.location.nil?
+        @location = CarrierLocation.new(location_params)
+        @location.carrier_id = @carrier.id
+        if @location.save
+          @carrier.update_attributes(:head_office => @location.id)
+        end
+      else
+        @carrier.location.update_attributes(location_params)
+      end
+    end
+
+    def save_attachment_file
+      if params[:carrier][:attachment_file].present?
+        @carrier.attachment_file.attach(params[:carrier][:attachment_file])
+      end
+    end
+
     # Never trust parameters fr om the scary internet, only allow the white list through.
     def carrier_params
-      params.require(:carrier).permit(:relationship_owner, :carrier_setup, :company_name, :carrier_id, :parent_id, :category, :sales_priority, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval, :score_card, :freight_guard, :years_in_business, :years_established, :owner_operators, :reefers, :dry_vans, :flat_beds, :teams, :contract_rates, :find_loads, :complete_record, :total_fleet_size, :website, :linkedin, :last_contact, :last_contact_by, :power_units, :company_drivers, :load_last_month, :load_last_6_month, :approved, :mc_number, :last_load_date, :previous_mc_number, :blacklisted)
+      params.require(:carrier).permit(:relationship_owner, :carrier_setup, :company_name, :carrier_id, :parent_id, :category, :sales_priority, :phone, :annual_revenue, :industry, :primary_industry, :hazardous, :food_grade, :freight_revenue, :volume_intra, :volume_inter, :volume_to_usa, :volume_from_usa, :notes, :credit_status, :credit_approval, :score_card, :freight_guard, :years_in_business, :years_established, :owner_operators, :reefers, :dry_vans, :flat_beds, :teams, :contract_rates, :find_loads, :complete_record, :total_fleet_size, :website, :linkedin, :last_contact, :last_contact_by, :power_units, :company_drivers, :load_last_month, :load_last_6_month, :approved, :mc_number, :last_load_date, :previous_mc_number, :blacklisted, :wolfbyte)
     end
 
     def location_params
