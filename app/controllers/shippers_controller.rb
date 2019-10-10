@@ -51,15 +51,8 @@ class ShippersController < ApplicationController
     @shipper = Shipper.new(shipper_params)
     respond_to do |format|
       if @shipper.save
-        @location = ShipperLocation.new(location_params)
-        @location.shipper_id = @shipper.id
-        if @location.save
-          @shipper.update_attributes(:head_office => @location.id)
-        end
-        if params[:shipper][:attachment_file].present?
-          @shipper.attachment_file.attach(params[:shipper][:attachment_file])
-        end
-
+        save_location
+        save_attachment_file
         format.html { redirect_to @shipper, notice: 'Shipper was successfully created.' }
         format.json { render :show, status: :created, location: @shipper }
       else
@@ -82,19 +75,8 @@ class ShippersController < ApplicationController
         format.json { render :show, status: :ok, location: @shipper }
       else
         if @shipper.update(shipper_params)
-          if @shipper.location.nil?
-            @location = ShipperLocation.new(location_params)
-            @location.shipper_id = @shipper.id
-            if @location.save
-              @shipper.update_attributes(:head_office => @location.id)
-            end
-          else
-            @shipper.location.update_attributes(location_params)
-          end
-
-          if params[:shipper][:attachment_file].present?
-            @shipper.attachment_file.attach(params[:shipper][:attachment_file])
-          end
+          save_location
+          save_attachment_file
           format.html { redirect_to @shipper, notice: 'Shipper was successfully updated.' }
           format.json { render :show, status: :ok, location: @shipper }
         else
@@ -190,6 +172,24 @@ class ShippersController < ApplicationController
     def set_shipper
       @shipper = Shipper.find(params[:id])
       authorize @shipper
+    end
+    
+    def save_location
+      if @shipper.location.nil?
+        @location = ShipperLocation.new(location_params)
+        @location.shipper_id = @shipper.id
+        if @location.save
+          @shipper.update_attributes(:head_office => @location.id)
+        end
+      else
+        @shipper.location.update_attributes(location_params)
+      end
+    end
+
+    def save_attachment_file
+      if params[:shipper][:attachment_file].present?
+        @shipper.attachment_file.attach(params[:shipper][:attachment_file])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

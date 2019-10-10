@@ -43,8 +43,7 @@
             <th>First Load Date</th>
             <th><abbr title="Gross Margin %">GM</abbr></th>
             <th>Phone #1</th>
-            <th>Phone #2</th>
-            <th>Prime Status</th>
+            <th>Class</th>
             <th>Owner</th>
             <th>LW</th>
             <th>2W</th>
@@ -65,8 +64,7 @@
             <th>First Load Date</th>
             <th>GM</th>
             <th>Phone #1</th>
-            <th>Phone #2</th>
-            <th>Prime Status</th>
+            <th>Class</th>
             <th>Owner</th>
             <th>LW</th>
             <th>2W</th>
@@ -94,7 +92,6 @@
               <td><%= carr['First_Load_Date'] ? carr['First_Load_Date'].strftime('%m/%d/%Y') : "" %></td>
               <td><%= carr['Gross_Margin_%'] %>%</td>
               <td><%= carr['primary_phone'] %></td>
-              <td><%= carr['secondary_phone'] %></td>
               <td class="text-center"><%= carr['sales_priority'] ? shade_sales_priority(carr['sales_priority']).html_safe : '' %></td>
               <td class="text-center link"><%= carr['user_id'] ? (carr['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(carr['relationship_owner_name']), user_path(:id => carr['user_id']))}".html_safe) : '' %></td>
               <td></td>
