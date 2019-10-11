@@ -1,0 +1,2 @@
+class DfLoad < ApplicationRecord
+end

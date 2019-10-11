@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_08_171315) do
+ActiveRecord::Schema.define(version: 2019_10_11_055243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -349,6 +349,32 @@ ActiveRecord::Schema.define(version: 2019_10_08_171315) do
     t.float "lengthInMeters"
     t.float "travelTimeInSeconds"
     t.float "lengthInMiles"
+  end
+
+  create_table "df_loads", force: :cascade do |t|
+    t.text "Load_Num"
+    t.datetime "Ship_Date"
+    t.text "Customer"
+    t.text "Origin"
+    t.text "OS"
+    t.text "Destination"
+    t.text "DS"
+    t.text "MC_Num"
+    t.text "Carrier"
+    t.text "Curr"
+    t.bigint "TTT"
+    t.bigint "Billing"
+    t.bigint "GM"
+    t.text "GMPER"
+    t.bigint "Cust_Sys"
+    t.bigint "Carr_Sys"
+    t.bigint "Gross_Margin"
+    t.float "Exchange_Rate"
+    t.text "Sales"
+    t.text "Dispatch"
+    t.text "Truck"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "load_tiles", force: :cascade do |t|

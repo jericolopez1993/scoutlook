@@ -1,0 +1,15 @@
+<!-- begin page-header -->
+<%#= render 'layouts/static/header', header_title: 'Rates' %>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel panel-emerald">
+    <div class="panel-heading">
+      <h4 class="panel-title lp-header">Loads</h4>
+    </div>
+    <div class="panel-body">
+        <%= render 'table', loads: @loads %>
+    </div>
+  </div>
+</div>
+<!-- end panel -->
