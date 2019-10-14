@@ -1,0 +1,161 @@
+<style>
+  div.link a:visited {
+    color: #dd8b00!important;
+  }
+  div.link a {
+    text-decoration: underline;
+  }
+@media (max-width: 767px) {
+  label {
+    text-align: left!important;
+  }
+}
+label {
+  text-align: right;
+}
+</style>
+<!-- begin page-header -->
+<div class="header-scout">
+  <h1 class="pull-left">
+      <%= render 'layouts/static/header', header_title: "#{@load['Load_Num']}"  %>
+  </h1>
+  <span class="pull-right">
+    <%= link_to 'Back to Loads', loads_path, :class => 'btn btn-info btn-xs' %>
+  </span>
+</div>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title">  </h4>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Load #:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Load_Num'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Ship Date:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Ship_Date'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Customer:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Customer'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Origin:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Origin'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">OS:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['OS'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Destination:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Destination'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">DS:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['DS'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">MC #:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['MC_Num'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Carrier:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Carrier'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Curr:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Curr'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">TTT:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['TTT'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Billing:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Billing'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">GM:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['GM'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">GMPER:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['GMPER'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Cust Sys:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Cust_Sys'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Carr Sys:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Carr_Sys'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Gross Margin:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Gross_Margin'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Exchange Rate:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Exchange_Rate'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Sales:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Sales'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Dispatch:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Dispatch'] %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Truck:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @load['Truck'] %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end panel -->

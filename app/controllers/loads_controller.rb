@@ -20,6 +20,6 @@ class LoadsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_load
-      @load = DfLoad.where("Load_Num = ?", params[:load_num]).first
+      @load = DfLoad.where('"Load_Num" = ?', params[:id]).first
     end
 end
