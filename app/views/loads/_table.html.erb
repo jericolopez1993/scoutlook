@@ -4,7 +4,7 @@
 <!-- begin panel -->
 <h4 class="panel-title">Load Listings</h4>
 <div class="panel-body">
-  <table class="table table-bordered display nowrap" id="loads_table">
+  <table class="table table-bordered display nowrap" id="loads-datatable">
     <thead>
       <tr>
         <th>Load #</th>
@@ -30,37 +30,6 @@
         <th>Truck</th>
       </tr>
 		</thead>
-    <tbody>
-      <% loads.each do |load| %>
-        <tr>
-          <td><%= load['Load_Num']%></td>
-          <td><%= load['Ship_Date']%></td>
-          <td><%= load['Customer']%></td>
-          <td><%= load['Origin']%></td>
-          <td><%= load['OS']%></td>
-          <td><%= load['Destination']%></td>
-          <td><%= load['DS']%></td>
-          <td><%= load['MC_Num']%></td>
-          <td><%= load['Carrier']%></td>
-          <td><%= load['Curr']%></td>
-          <td><%= load['TTT']%></td>
-          <td><%= load['Billing']%></td>
-          <td><%= load['GM']%></td>
-          <td><%= load['GMPER']%></td>
-          <td><%= load['Cust_Sys']%></td>
-          <td><%= load['Carr_Sys']%></td>
-          <td><%= load['Gross_Margin']%></td>
-          <td><%= load['Exchange_Rate']%></td>
-          <td><%= load['Sales']%></td>
-          <td><%= load['Dispatch']%></td>
-          <td><%= load['Truck']%></td>
-			  </tr>
-      <% end %>
-    </tbody>
+  
   </table>
 </div>
-<script language="javascript">
-  $(document).ready(function() {
-    filterTable("loads_table");
-  });
-</script>

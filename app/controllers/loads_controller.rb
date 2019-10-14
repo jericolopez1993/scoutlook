@@ -5,7 +5,11 @@ class LoadsController < ApplicationController
   # GET /loads
   # GET /loads.json
   def index
-    @loads = DfLoad.all.limit(50)
+    # @loads = DfLoad.all.limit(50)
+    respond_to do |format|
+      format.html
+      format.json { render json: DfLoadDatatable.new(params) }
+    end
   end
 
   # GET /load/1
