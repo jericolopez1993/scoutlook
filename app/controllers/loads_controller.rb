@@ -8,7 +8,7 @@ class LoadsController < ApplicationController
     # @loads = DfLoad.all.limit(50)
     respond_to do |format|
       format.html
-      format.json { render json: DfLoadDatatable.new(params) }
+      format.json { render json: DfLoadDatatable.new(params, view_context: view_context) }
     end
   end
 
@@ -20,6 +20,6 @@ class LoadsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_load
-      @load = DfLoad.where('"Load_Num" = ?', params[:id]).first
+      @load = DfLoad.where('load_num = ?', params[:id]).first
     end
 end

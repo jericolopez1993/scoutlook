@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_11_055243) do
+ActiveRecord::Schema.define(version: 2019_10_15_154704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -351,30 +351,28 @@ ActiveRecord::Schema.define(version: 2019_10_11_055243) do
     t.float "lengthInMiles"
   end
 
-  create_table "df_loads", force: :cascade do |t|
-    t.text "Load_Num"
-    t.datetime "Ship_Date"
-    t.text "Customer"
-    t.text "Origin"
-    t.text "OS"
-    t.text "Destination"
-    t.text "DS"
-    t.text "MC_Num"
-    t.text "Carrier"
-    t.text "Curr"
-    t.bigint "TTT"
-    t.bigint "Billing"
-    t.bigint "GM"
-    t.text "GMPER"
-    t.bigint "Cust_Sys"
-    t.bigint "Carr_Sys"
-    t.bigint "Gross_Margin"
-    t.float "Exchange_Rate"
-    t.text "Sales"
-    t.text "Dispatch"
-    t.text "Truck"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "df_loads", id: false, force: :cascade do |t|
+    t.text "load_num"
+    t.datetime "ship_date"
+    t.text "customer"
+    t.text "origin"
+    t.text "os"
+    t.text "destination"
+    t.text "ds"
+    t.text "mc_num"
+    t.text "carrier"
+    t.text "curr"
+    t.float "ttt"
+    t.float "billing"
+    t.float "gm"
+    t.text "gmper"
+    t.float "cust_sys"
+    t.float "carr_sys"
+    t.float "gross_margin"
+    t.float "exchange_rate"
+    t.text "sales"
+    t.text "dispatch"
+    t.text "truck"
   end
 
   create_table "load_tiles", force: :cascade do |t|

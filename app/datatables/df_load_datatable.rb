@@ -1,4 +1,13 @@
 class DfLoadDatatable < AjaxDatatablesRails::ActiveRecord
+  extend Forwardable
+
+  def_delegator :@view, :link_to
+  def_delegator :@view, :carrier_path
+
+  def initialize(params, opts = {})
+    @view = opts[:view_context]
+    super
+  end
 
   def view_columns
     # Declare strings in this format: ModelName.column_name
@@ -6,53 +15,53 @@ class DfLoadDatatable < AjaxDatatablesRails::ActiveRecord
     @view_columns ||= {
       # id: { source: "User.id", cond: :eq },
       # name: { source: "User.name", cond: :like }
-      load_number: { source: '"Load_Num"' },
-      ship_date: { source: '"Ship_Date"' },
-      customer: { source: '"Customer"' },
-      origin: { source: '"Origin"' },
-      os: { source: '"OS"' },
-      destination: { source: '"Destination"' },
-      ds: { source: '"DS"' },
-      mc_number: { source: '"MC_Num"' },
-      carrier: { source: '"Carrier"' },
-      curr: { source: '"Curr"' },
-      ttt: { source: '"TTT"' },
-      billing: { source: '"Billing"' },
-      gm: { source: '"GM"' },
-      gmper: { source: '"GMPER"' },
-      cust_sys: { source: '"Cust_Sys"' },
-      carr_sys: { source: '"Carr_Sys"' },
-      gross_margin: { source: '"Gross_Margin"' },
-      exchange_rate: { source: '"Exchange_Rate"' },
-      sales: { source: '"Sales"' },
-      dispatch: { source: '"Dispatch"' },
-      truck: { source: '"Truck"' }
+      load_number: { source: "DfLoad.load_num" },
+      ship_date: { source: "DfLoad.ship_date" },
+      customer: { source: "DfLoad.customer" },
+      origin: { source: "DfLoad.origin" },
+      os: { source: "DfLoad.os" },
+      destination: { source: "DfLoad.destination" },
+      ds: { source: "DfLoad.ds" },
+      mc_number: { source: "DfLoad.mc_num" },
+      carrier: { source: "DfLoad.carrier" },
+      curr: { source: "DfLoad.curr" },
+      ttt: { source: "DfLoad.ttt" },
+      billing: { source: "DfLoad.billing" },
+      gm: { source: "DfLoad.gm" },
+      gmper: { source: "DfLoad.gmper" },
+      cust_sys: { source: "DfLoad.cust_sys" },
+      carr_sys: { source: "DfLoad.carr_sys" },
+      gross_margin: { source: "DfLoad.gross_margin" },
+      exchange_rate: { source: "DfLoad.exchange_rate" },
+      sales: { source: "DfLoad.sales" },
+      dispatch: { source: "DfLoad.dispatch" },
+      truck: { source: "DfLoad.truck" }
     }
   end
   def data
     records.map do |record|
       {
-        load_number: record['Load_Num'],
-        ship_date: record['Ship_Date'],
-        customer: record['Customer'],
-        origin: record['Origin'],
-        os: record['OS'],
-        destination: record['Destination'],
-        ds: record['DS'],
-        mc_number: record['MC_Num'],
-        carrier: record['Carrier'],
-        curr: record['Curr'],
-        ttt: record['TTT'],
-        billing: record['Billing'],
-        gm: record['GM'],
-        gmper: record['GMPER'],
-        cust_sys: record['Cust_Sys'],
-        carr_sys: record['Carr_Sys'],
-        gross_margin: record['Gross_Margin'],
-        exchange_rate: record['Exchange_Rate'],
-        sales: record['Sales'],
-        dispatch: record['Dispatch'],
-        truck: record['Truck']
+        load_number: link_to(record.load_num, controller: "loads", action: "show", id: record.load_num),
+        ship_date: record.ship_date,
+        customer: record.customer,
+        origin: record.origin,
+        os: record.os,
+        destination: record.destination,
+        ds: record.ds,
+        mc_number: record.mc_num,
+        carrier: record['carrier_id'] ? link_to(record.carrier, controller: "carriers", action: "show", id: record['carrier_id']) : record.carrier,
+        curr: record.curr,
+        ttt: record.ttt,
+        billing: record.billing,
+        gm: record.gm,
+        gmper: record.gmper,
+        cust_sys: record.cust_sys,
+        carr_sys: record.carr_sys,
+        gross_margin: record.gross_margin,
+        exchange_rate: record.exchange_rate,
+        sales: record.sales,
+        dispatch: record.dispatch,
+        truck: record.truck
         # example:
         # id: record.id,
         # name: record.name

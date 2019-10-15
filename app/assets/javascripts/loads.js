@@ -14,14 +14,15 @@ jQuery(document).ready(function() {
     },
     "pagingType": "full_numbers",
     "columns": [
-      {"data": "load_number",
-      "render": function(data, type, row, meta){
-              if(type === 'display'){
-                  data = '<a href="/loads/' + data + '">' + data + '</a>';
-              }
-
-              return data;
-           }},
+      {"data": "load_number"
+      // "render": function(data, type, row, meta){
+      //         if(type === 'display'){
+      //             data = '<a href="/loads/' + data + '">' + data + '</a>';
+      //         }
+      //
+      //         return data;
+      //      }},
+      },
       {"data": "ship_date"},
       {"data": "customer"},
       {"data": "origin"},

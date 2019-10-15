@@ -33,127 +33,127 @@ label {
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Load #:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Load_Num'] %>
+        <%= @load.load_num %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Ship Date:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Ship_Date'] %>
+        <%= @load.ship_date %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Customer:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Customer'] %>
+        <%= @load.customer %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Origin:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Origin'] %>
+        <%= @load.origin %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">OS:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['OS'] %>
+        <%= @load.os %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Destination:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Destination'] %>
+        <%= @load.destination %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">DS:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['DS'] %>
+        <%= @load.ds %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">MC #:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['MC_Num'] %>
+        <%= @load.mc_num %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Carrier:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Carrier'] %>
+        <%= @load['carrier_id'] ? link_to(@load.carrier, controller: "carriers", action: "show", id: @load['carrier_id']) : @load.carrier %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Curr:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Curr'] %>
+        <%= @load.curr %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">TTT:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['TTT'] %>
+        <%= @load.ttt %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Billing:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Billing'] %>
+        <%= @load.billing %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">GM:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['GM'] %>
+        <%= @load.gm %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">GMPER:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['GMPER'] %>
+        <%= @load.gmper %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Cust Sys:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Cust_Sys'] %>
+        <%= @load.cust_sys %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Carr Sys:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Carr_Sys'] %>
+        <%= @load.carr_sys %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Gross Margin:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Gross_Margin'] %>
+        <%= @load.gross_margin %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Exchange Rate:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Exchange_Rate'] %>
+        <%= @load.exchange_rate %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Sales:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Sales'] %>
+        <%= @load.sales %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Dispatch:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Dispatch'] %>
+        <%= @load.dispatch %>
       </div>
     </div>
     <div class="row">
       <label class="col-md-2 col-6 col-form-label">Truck:</label>
       <div class="col-md-9 col-6 lbl-padding-t">
-        <%= @load['Truck'] %>
+        <%= @load.truck %>
       </div>
     </div>
   </div>
