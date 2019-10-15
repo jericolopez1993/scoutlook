@@ -37,6 +37,7 @@
             <th>Trucks</th>
             <th>Reefers</th>
             <th>Teams</th>
+            <th>Contact</th>
             <th>ORG</th>
             <th>DEST</th>
             <th><abbr title="Loads Last Month">LLM</abbr></th>
@@ -58,6 +59,7 @@
             <th>Trucks</th>
             <th>Reefers</th>
             <th>Teams</th>
+            <th>Contact</th>
             <th>ORG</th>
             <th>DEST</th>
             <th>LLM</th>
@@ -86,18 +88,19 @@
               <td><%= carr['power_units'] if carr['power_units'] && carr['power_units'] > 0 %></td>
               <td><%= carr['reefers'] if carr['reefers'] && carr['reefers'] > 0 %></td>
               <td><%= carr['teams'] if carr['teams'] && carr['teams'] > 0 %></td>
-              <td></td>
-              <td></td>
+              <td><%= carr['Contact'] %></td>
+              <td><%= carr['Last_OS'] %></td>
+              <td><%= carr['Last_DS'] %></td>
               <td><%= carr['Load_Last_Month'] %></td>
               <td><%= carr['First_Load_Date'] ? carr['First_Load_Date'].strftime('%m/%d/%Y') : "" %></td>
               <td><%= carr['Gross_Margin_%'] %>%</td>
               <td><%= carr['primary_phone'] %></td>
               <td class="text-center"><%= carr['sales_priority'] ? shade_sales_priority(carr['sales_priority']).html_safe : '' %></td>
               <td class="text-center link"><%= carr['user_id'] ? (carr['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(carr['relationship_owner_name']), user_path(:id => carr['user_id']))}".html_safe) : '' %></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td><%= carr['Loads_LW'] %></td>
+              <td><%= carr['Loads_2W'] %></td>
+              <td><%= carr['Loads_3W'] %></td>
+              <td><%= carr['Loads_4W'] %></td>
             </tr>
           <% end %>
         </tbody>
