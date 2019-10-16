@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_15_154704) do
+ActiveRecord::Schema.define(version: 2019_10_16_093551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,56 +84,64 @@ ActiveRecord::Schema.define(version: 2019_10_15_154704) do
   end
 
   create_table "carr_demo", id: false, force: :cascade do |t|
-    t.text "Carrier_Name"
-    t.text "Current_Tier"
-    t.text "Previous_Tier"
-    t.text "Highest_Tier"
-    t.text "Highest_Tier_Date"
-    t.float "Gross_Margin_%"
-    t.float "Load_Last_Week"
-    t.float "Load_Last_Month"
-    t.float "Load_Last_3_Months"
-    t.float "Load_Last_6_Months"
+    t.text "carrier_name"
+    t.text "current_tier"
+    t.text "previous_tier"
+    t.text "highest_tier"
+    t.text "highest_tier_date"
+    t.float "gross_margin"
+    t.float "load_last_week"
+    t.float "load_last_month"
+    t.float "load_last_3_months"
+    t.float "load_last_6_months"
     t.text "mcnum"
-    t.text "Phone#1"
-    t.text "Phone#2"
-    t.text "Prime Status"
-    t.text "Owner"
-    t.text "MC#"
-    t.bigint "Days_Since"
+    t.text "phone1"
+    t.text "phone2"
+    t.text "prime_status"
+    t.text "owner"
+    t.text "mc_number"
+    t.bigint "days_since"
   end
 
   create_table "carr_new", id: false, force: :cascade do |t|
-    t.text "Carrier_Name"
-    t.bigint "Load_Last_Month"
-    t.datetime "First_Load_Date"
-    t.float "Gross_Margin_%"
+    t.text "carrier_name"
+    t.text "contact"
+    t.bigint "load_last_month"
+    t.datetime "first_load_date"
+    t.datetime "last_load_date"
+    t.text "last_os"
+    t.text "last_ds"
+    t.float "gross_margin"
     t.text "mcnum"
-    t.text "Phone#1"
-    t.text "Phone#2"
-    t.text "Prime Status"
-    t.text "MC#"
-    t.text "Owner"
+    t.bigint "loads_lw"
+    t.bigint "loads_2w"
+    t.bigint "loads_3w"
+    t.bigint "loads_4w"
+    t.text "phone1"
+    t.text "phone2"
+    t.text "prime_status"
+    t.text "mc_number"
+    t.text "owner"
   end
 
   create_table "carr_prom", id: false, force: :cascade do |t|
-    t.text "Carrier_Name"
-    t.text "Current_Tier"
-    t.text "Previous_Tier"
-    t.text "Highest_Tier"
-    t.text "Highest_Tier_Date"
-    t.float "Gross_Margin_%"
-    t.float "Load_Last_Week"
-    t.float "Load_Last_Month"
-    t.float "Load_Last_3_Months"
-    t.float "Load_Last_6_Months"
+    t.text "carrier_name"
+    t.text "current_tier"
+    t.text "previous_tier"
+    t.text "highest_tier"
+    t.text "highest_tier_date"
+    t.float "gross_margin"
+    t.float "load_last_week"
+    t.float "load_last_month"
+    t.float "load_last_3_months"
+    t.float "load_last_6_months"
     t.text "mcnum"
-    t.text "Highest_Tier_Reached"
-    t.text "Phone#1"
-    t.text "Phone#2"
-    t.text "Prime Status"
-    t.text "MC#"
-    t.text "Owner"
+    t.text "highest_tier_reached"
+    t.text "phone1"
+    t.text "phone2"
+    t.text "prime_status"
+    t.text "mc_number"
+    t.text "owner"
   end
 
   create_table "carrier_companies", force: :cascade do |t|
@@ -468,7 +476,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_154704) do
     t.datetime "ship_date_1"
     t.float "loadsh_num"
     t.float "loadsh_num_6mon"
-    t.text "Tier"
+    t.text "tier"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -484,53 +492,6 @@ ActiveRecord::Schema.define(version: 2019_10_15_154704) do
     t.boolean "inbox", default: false
     t.integer "carrier_id"
     t.integer "shipper_id"
-  end
-
-  create_table "oauth_access_grants", force: :cascade do |t|
-    t.bigint "resource_owner_id", null: false
-    t.bigint "application_id", null: false
-    t.string "token", null: false
-    t.integer "expires_in", null: false
-    t.text "redirect_uri", null: false
-    t.datetime "created_at", null: false
-    t.datetime "revoked_at"
-    t.string "scopes"
-    t.index ["application_id"], name: "index_oauth_access_grants_on_application_id"
-    t.index ["resource_owner_id"], name: "index_oauth_access_grants_on_resource_owner_id"
-    t.index ["token"], name: "index_oauth_access_grants_on_token", unique: true
-  end
-
-  create_table "oauth_access_tokens", force: :cascade do |t|
-    t.bigint "resource_owner_id"
-    t.bigint "application_id"
-    t.string "token", null: false
-    t.string "refresh_token"
-    t.integer "expires_in"
-    t.datetime "revoked_at"
-    t.datetime "created_at", null: false
-    t.string "scopes"
-    t.string "previous_refresh_token", default: "", null: false
-    t.index ["application_id"], name: "index_oauth_access_tokens_on_application_id"
-    t.index ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
-    t.index ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
-    t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true
-  end
-
-  create_table "oauth_applications", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "uid", null: false
-    t.string "secret", null: false
-    t.text "redirect_uri", null: false
-    t.string "scopes", default: "", null: false
-    t.boolean "confidential", default: true, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
-  end
-
-  create_table "oauth_openid_requests", force: :cascade do |t|
-    t.integer "access_grant_id", null: false
-    t.string "nonce", null: false
   end
 
   create_table "rates", force: :cascade do |t|
@@ -835,7 +796,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_154704) do
     t.integer "shipper_contact_id"
     t.boolean "ro", default: false
     t.boolean "cs", default: false
-    t.text "email_signature", default: "    <table class=\"m_-3783900543240753759MsoNormalTable\" style=\"color: #222222; font-family: Arial, Helvetica, sans-serif; font-size: small; border-collapse: collapse;\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n      <tbody>\n        <tr style=\"height: 72.55pt;\">\n          <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 126.15pt; border-top: none; border-bottom: none; border-left: none; border-image: initial; border-right: 1pt solid red; padding: 0cm 5.4pt; height: 72.55pt;\" valign=\"top\" width=\"168\">\n            <table class=\"m_-3783900543240753759MsoNormalTable\" style=\"width: 116.1pt;\" border=\"0\" width=\"155\" cellspacing=\"0\" cellpadding=\"0\">\n              <tbody>\n                <tr style=\"height: 13.3pt;\">\n                  <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 116.1pt; padding: 0cm; height: 13.3pt;\" width=\"155\">\n                    <p class=\"MsoNormal\" style=\"margin: 0px; text-align: center;\" align=\"center\"><strong><span style=\"font-size: 14pt; font-family: Arial, sans-serif; color: black;\">{{Full Name}}</span></strong><u></u><u></u></p>\n                  </td>\n                </tr>\n                <tr style=\"height: 7pt;\">\n                  <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 116.1pt; padding: 0cm; height: 7pt;\" width=\"155\">\n                    <p class=\"MsoNormal\" style=\"margin: 0px;\"><strong><span style=\"font-size: 5pt; font-family: Arial, sans-serif; color: black;\">&nbsp;</span></strong><u></u><u></u></p>\n                  </td>\n                </tr>\n                <tr style=\"height: 43.7pt;\">\n                  <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 116.1pt; padding: 0cm; height: 43.7pt;\" width=\"155\">\n                    <p class=\"MsoNormal\" style=\"margin: 0px; text-align: center; line-height: 14.95px;\" align=\"center\"><a style=\"color: #1155cc;\" href=\"http://scoutlogistics.com/\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=http://scoutlogistics.com/&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNFbnVmtYqeDo0aN1UsYBjs8QtKT5Q\"><span style=\"color: windowtext; text-decoration-line: none;\"><img id=\"m_-3783900543240753759Picture_x0020_1\" class=\"CToWUd\" style=\"width: 140px;\" src=\"https://scoutlogistics.com/images/logo.png\" alt=\"scout.png\" border=\"0\" data-image-whitelisted=\"\" /></span></a><u></u><u></u></p>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n          </td>\n          <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 227.3pt; padding: 0cm 5.4pt; height: 72.55pt;\" colspan=\"2\" valign=\"top\" width=\"303\">\n            <table class=\"m_-3783900543240753759MsoNormalTable\" style=\"width: 215.65pt;\" border=\"0\" width=\"288\" cellspacing=\"0\" cellpadding=\"0\">\n              <tbody>\n                <tr style=\"height: 11.65pt;\">\n                  <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 11.65pt;\" width=\"288\">\n                    <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 9pt; line-height: 13.8px; font-family: Arial, sans-serif; color: black;\">{{Title}}</span></strong><u></u><u></u></p>\n                  </td>\n                </tr>\n                <tr style=\"height: 12.5pt;\">\n                  <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 12.5pt;\" width=\"288\">\n                    <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 9pt; line-height: 13.8px; font-family: Arial, sans-serif; color: black;\">Scout Logistics Corporation<u></u><u></u></span></strong></p>\n                  </td>\n                </tr>\n                <tr style=\"height: 3.9pt;\">\n                  <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 3.9pt;\" width=\"288\">\n                    <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><span style=\"font-size: 3pt; line-height: 4.6px; font-family: Arial, sans-serif; color: black;\">&nbsp;</span><u></u><u></u></p>\n                  </td>\n                </tr>\n                <tr style=\"height: 32.8pt;\">\n                  <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 32.8pt;\" width=\"288\">\n                    <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">Phone:</span></strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">&nbsp;{{Phone}}<u></u><u></u></span></p>\n                    <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">Direct</span></strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">: {{Direct}}<u></u><u></u></span></p>\n                    <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">Toll Free:</span></strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">&nbsp;{{Toll Free}}<u></u><u></u></span></p>\n                    <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">Cell:</span></strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">&nbsp;{{Cell}}<u></u><u></u></span></p>\n                  </td>\n                </tr>\n                <tr>\n                  <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm;\" width=\"288\">&nbsp;</td>\n                </tr>\n                <tr style=\"height: 10.9pt;\">\n                  <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 10.9pt;\" width=\"288\">\n                    <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><a style=\"color: #1155cc;\" href=\"mailto:\" target=\"_blank\" rel=\"noopener\"><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: blue;\">{{E-Mail Address}}</span></a><u></u><u></u></p>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n          </td>\n        </tr>\n        <tr style=\"height: 43.7pt;\">\n          <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 344.25pt; border-right: none; border-bottom: none; border-left: none; border-image: initial; border-top: 1pt solid red; padding: 0cm 5.4pt; height: 43.7pt;\" colspan=\"2\" width=\"459\">\n            <p class=\"MsoNormal\" style=\"margin: 0px;\">&nbsp;\n              <a style=\"color: #1155cc;\" href=\"https://www.bestmanagedcompanies.ca/en/Pages/Home.aspx\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://www.bestmanagedcompanies.ca/en/Pages/Home.aspx&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNEr8SxfsYq20EXSAi98sbF7nmyQ5g\">\n              <span style=\"color: windowtext; text-decoration-line: none;\">\n              <img id=\"m_-3783900543240753759Picture_x0020_3\" class=\"CToWUd\" style=\"width: 120px; height: 50px;\" src=\"https://openroadhyundairichmond.com/sites/default/files/styles/scale_width_1280/public/assets/blog_post/hero/2019-01/bestmanaged.jpg?itok=t9OECK-I\" alt=\"deloitt\" width=\"94\" height=\"38\" border=\"0\" data-image-whitelisted=\"\" /></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n              <a style=\"color: #1155cc;\" href=\"http://bridlebash.org/\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=http://bridlebash.org/&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNEfAlXJNFkmz9fIis3Uk4fCiUtgug\">\n              <span style=\"color: windowtext; text-decoration-line: none;\">\n              <img id=\"m_-3783900543240753759Picture_x0020_4\" class=\"CToWUd\" style=\"width: 120px; height: 50px;\" src=\"https://mms.businesswire.com/media/20160912005699/en/543482/4/Bridle_Bash_Logo_%282%29.jpg\" alt=\"bridlebash\" width=\"105\" height=\"43\" border=\"0\" data-image-whitelisted=\"\" /></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n              <a style=\"color: #1155cc;\" href=\"https://www.facebook.com/pages/Scout-Logistics/194502150588319\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://www.facebook.com/pages/Scout-Logistics/194502150588319&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNHNRrVAjgjPX_9bp205GTH4iHxpWQ\">\n              <span style=\"color: windowtext; text-decoration-line: none;\">\n              <img id=\"m_-3783900543240753759Picture_x0020_5\" class=\"CToWUd\" style=\"width: 0.3541in; height: 0.3541in;\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAaVBMVEU6VZ////81Up0yT5xgc61+jbsvTZyXo8hFXaOirM0nSJmlrs7O1OUkRpkfQ5doerLr7fTHzeE9WKHV2umHlcDy9Pnd4eyut9O1vtdZbat5ibmWoceGk7/M0eSrs9G/xtxMY6ZvgLVIYaWJ8OFBAAAC40lEQVR4nO3c63KqMBRAYU9iqaLg/d7W2vd/yE5nzt/ihjTsvTNrPQDDNxIDJDqZEBERERERERERERERERFZL4QYqydF7ZMcXKyadju97m/zzhZ7n8SqCY/T8Z+kXa19sv2LdbztRLqflu6EsXm8i3kOhbF9WffxeROG9tHT50xYbTd9fb6E7Vt/nydhqO9DgH6EcdZ7BPoSVpdhPjfCajUU6EQYhwN9COPncKALYdgeChe2socIv8LmnAJ0IIzXJKADYZMyCD0IE69R+8Iw+F7Gi7CVv67wKQzTVKB1YbMsXBhSbtdcCOtT6cLUudC8MD7SgbaFdepsb17YDHw140YYZn8ANC2M+78QWl57qvoMw8PuvHC3fljL70k3q7qu/a0Bt9LZ8HhpgvbJDioKgffWp28SvqRA7TMdmvDJ6egWKBV+Ob1EJ1LhyfB09yyZ0PFHKBMeG+3TTEgkPFXap5mQSGj5nuxpIuELQsshRGg/hAjthxCh/RAitB9ChPZDiNB+CBHarwxh6PiJci3ZWnptnv3SWRm4ev2920IgPN86jvDTfKsqrD4EiMR0V98qyceU1kF3iXgEofLy2wjCe/FX6Yful+kIwn3xwpXuOv8Iws/ihcr3NPmFa+UdU/mFS+XdKPmFZ+UtU/mFr8WPQ+3nx/zCi/K2t/xC7VcA2YUH7b2Z2YXqWxezCzfFf4bqmzOzC2/Ff9M8ihdqT4f5hdrDMLtQ+VXiCEL93x7mFiq/ShxBOC9+HL5pTxbZhVPtySK7UNuXXXhQH4a5hWvtZ6fswnf1ySL3GvBZ/yqdbGcdSf4O8q3rCLpL+P8LvxdFu02qjiNo455Vxn6arhAitB9ChPZDiNB+CBHaDyFC+yFEaD+ECO2HEKH9ECK0H0KE9kOI0H4IEdoPIUL7IURoP4QI7YcQof0QIrQfQoT2Q4jQfggR2g8hQvshRGg/hAjthxCh/RAitB9ChPZDiNB+CBH26BsaQkVVLImVewAAAABJRU5ErkJggg==\" alt=\"facebook\" width=\"34\" height=\"34\" border=\"0\" data-image-whitelisted=\"\" /></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n              <a style=\"color: #1155cc;\" href=\"https://www.linkedin.com/company/scout-logistics-corporation?trk=company_logo\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://www.linkedin.com/company/scout-logistics-corporation?trk%3Dcompany_logo&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNGV6B5fwhVVDd_D9cKRhP4YXrsI0w\">\n              <span style=\"color: windowtext; text-decoration-line: none;\">\n              <img id=\"m_-3783900543240753759Picture_x0020_6\" class=\"CToWUd\" style=\"width: 0.3541in; height: 0.3541in;\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBdyMXpSBhckZFZI5kiArYAj4g-ZqXvjCrKWzy8WqtHchR0e64\" alt=\"linkedin\" width=\"34\" height=\"34\" border=\"0\" data-image-whitelisted=\"\" /></span></a>&nbsp;&nbsp;\n              <wbr />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n              <a style=\"color: #1155cc;\" href=\"http://www.twitter.com/scoutlogistics/\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=http://www.twitter.com/scoutlogistics/&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNHNp7s0zkxV-wsGpoM7nLGCbmTLFw\">\n              <span style=\"color: windowtext; text-decoration-line: none;\">\n              <img id=\"m_-3783900543240753759Picture_x0020_7\" class=\"CToWUd\" style=\"width: 0.3541in; height: 0.3541in;\" src=\"https://cdn3.iconfinder.com/data/icons/inficons/512/twitter.png\" alt=\"twitter\" width=\"34\" height=\"34\" border=\"0\" data-image-whitelisted=\"\" /></span></a><u></u><u></u></p>\n          </td>\n          <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 9.25pt; padding: 0cm; height: 43.7pt;\" width=\"12\">\n            <p class=\"MsoNormal\" style=\"margin: 0px;\">&nbsp;<u></u><u></u></p>\n          </td>\n        </tr>\n        <tr style=\"height: 24.2pt;\">\n          <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 344.25pt; padding: 0cm 5.4pt; height: 24.2pt;\" colspan=\"2\" width=\"459\">\n            <p class=\"MsoNormal\" style=\"margin: 0px; text-align: center;\" align=\"center\"><span style=\"font-size: 8pt; font-family: Arial, sans-serif; color: #943634;\">\"The one thing that doesn't abide by majority rule is a person's conscience.\"<u></u><u></u></span></p>\n            <p class=\"MsoNormal\" style=\"margin: 0px; text-align: center;\" align=\"center\"><span style=\"font-size: 8pt; font-family: Arial, sans-serif; color: #943634;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<wbr /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Atticus Finch \"To Kill a Mocking Bird\"</span></p>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n"
+    t.text "email_signature", default: "<table class=\"m_-3783900543240753759MsoNormalTable\" style=\"color: #222222; font-family: Arial, Helvetica, sans-serif; font-size: small; border-collapse: collapse;\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n  <tbody>\n    <tr style=\"height: 72.55pt;\">\n      <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 126.15pt; border-top: none; border-bottom: none; border-left: none; border-image: initial; border-right: 1pt solid red; padding: 0cm 5.4pt; height: 72.55pt;\" valign=\"top\" width=\"168\">\n        <table class=\"m_-3783900543240753759MsoNormalTable\" style=\"width: 116.1pt;\" border=\"0\" width=\"155\" cellspacing=\"0\" cellpadding=\"0\">\n          <tbody>\n            <tr style=\"height: 13.3pt;\">\n              <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 116.1pt; padding: 0cm; height: 13.3pt;\" width=\"155\">\n                <p class=\"MsoNormal\" style=\"margin: 0px; text-align: center;\" align=\"center\"><strong><span style=\"font-size: 14pt; font-family: Arial, sans-serif; color: black;\">{{Full Name}}</span></strong><u></u><u></u></p>\n              </td>\n            </tr>\n            <tr style=\"height: 7pt;\">\n              <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 116.1pt; padding: 0cm; height: 7pt;\" width=\"155\">\n                <p class=\"MsoNormal\" style=\"margin: 0px;\"><strong><span style=\"font-size: 5pt; font-family: Arial, sans-serif; color: black;\">&nbsp;</span></strong><u></u><u></u></p>\n              </td>\n            </tr>\n            <tr style=\"height: 43.7pt;\">\n              <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 116.1pt; padding: 0cm; height: 43.7pt;\" width=\"155\">\n                <p class=\"MsoNormal\" style=\"margin: 0px; text-align: center; line-height: 14.95px;\" align=\"center\"><a style=\"color: #1155cc;\" href=\"http://scoutlogistics.com/\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=http://scoutlogistics.com/&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNFbnVmtYqeDo0aN1UsYBjs8QtKT5Q\"><span style=\"color: windowtext; text-decoration-line: none;\"><img id=\"m_-3783900543240753759Picture_x0020_1\" class=\"CToWUd\" style=\"width: 1.4722in; height: 0.5in;\" src=\"https://mail.google.com/mail/u/1?ui=2&amp;ik=0d45c08a95&amp;attid=0.1&amp;permmsgid=msg-f:1627446255443866610&amp;th=1695d9bf2ac573f2&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ-MG6FB6N6j-w6GdN-davSzHHyIOfJtDf7FzpVVxS8QNYhTcxJ08B47p-bkjVrxDwM0FyiCW036QjCF8pVVTG0-pQietx7Us6oi8IIUL9A4UBfUfGBYOnbUWwM&amp;disp=emb\" alt=\"scout.png\" width=\"141\" height=\"48\" border=\"0\" data-image-whitelisted=\"\" /></span></a><u></u><u></u></p>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </td>\n      <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 227.3pt; padding: 0cm 5.4pt; height: 72.55pt;\" colspan=\"2\" valign=\"top\" width=\"303\">\n        <table class=\"m_-3783900543240753759MsoNormalTable\" style=\"width: 215.65pt;\" border=\"0\" width=\"288\" cellspacing=\"0\" cellpadding=\"0\">\n          <tbody>\n            <tr style=\"height: 11.65pt;\">\n              <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 11.65pt;\" width=\"288\">\n                <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 9pt; line-height: 13.8px; font-family: Arial, sans-serif; color: black;\">{{Title}}</span></strong><u></u><u></u></p>\n              </td>\n            </tr>\n            <tr style=\"height: 12.5pt;\">\n              <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 12.5pt;\" width=\"288\">\n                <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 9pt; line-height: 13.8px; font-family: Arial, sans-serif; color: black;\">Scout Logistics Corporation<u></u><u></u></span></strong></p>\n              </td>\n            </tr>\n            <tr style=\"height: 3.9pt;\">\n              <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 3.9pt;\" width=\"288\">\n                <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><span style=\"font-size: 3pt; line-height: 4.6px; font-family: Arial, sans-serif; color: black;\">&nbsp;</span><u></u><u></u></p>\n              </td>\n            </tr>\n            <tr style=\"height: 32.8pt;\">\n              <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 32.8pt;\" width=\"288\">\n                <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">Phone:</span></strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">&nbsp;{{Phone}}<u></u><u></u></span></p>\n                <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">Direct</span></strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">: {{Direct}}<u></u><u></u></span></p>\n                <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">Toll Free:</span></strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">&nbsp;{{Toll Free}}<u></u><u></u></span></p>\n                <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">Cell:</span></strong><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;\">&nbsp;{{Cell}}<u></u><u></u></span></p>\n              </td>\n            </tr>\n            <tr>\n              <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm;\" width=\"288\">&nbsp;</td>\n            </tr>\n            <tr style=\"height: 10.9pt;\">\n              <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 10.9pt;\" width=\"288\">\n                <p class=\"MsoNormal\" style=\"margin: 0px; line-height: 14.95px;\"><a style=\"color: #1155cc;\" href=\"mailto:\" target=\"_blank\" rel=\"noopener\"><span style=\"font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: blue;\">{{E-Mail Address}}</span></a><u></u><u></u></p>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </td>\n    </tr>\n    <tr style=\"height: 43.7pt;\">\n      <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 344.25pt; border-right: none; border-bottom: none; border-left: none; border-image: initial; border-top: 1pt solid red; padding: 0cm 5.4pt; height: 43.7pt;\" colspan=\"2\" width=\"459\">\n        <p class=\"MsoNormal\" style=\"margin: 0px;\">&nbsp;<a style=\"color: #1155cc;\" href=\"https://www.bestmanagedcompanies.ca/en/Pages/Home.aspx\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://www.bestmanagedcompanies.ca/en/Pages/Home.aspx&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNEr8SxfsYq20EXSAi98sbF7nmyQ5g\"><span style=\"color: windowtext; text-decoration-line: none;\"><img id=\"m_-3783900543240753759Picture_x0020_3\" class=\"CToWUd\" style=\"width: 0.9791in; height: 0.3958in;\" src=\"https://mail.google.com/mail/u/1?ui=2&amp;ik=0d45c08a95&amp;attid=0.2&amp;permmsgid=msg-f:1627446255443866610&amp;th=1695d9bf2ac573f2&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ-_YY7udTul7DqKAwyx3cN7qonZu89kLVI_9P8_iaByF9OimDCz_87Ci8Kabg9TayvQfYIYRU249svyCXPBfNp-1Syz3ObYLtt8VHmbKQSQtOJwL1X8kl9YS5w&amp;disp=emb\" alt=\"deloitt\" width=\"94\" height=\"38\" border=\"0\" data-image-whitelisted=\"\" /></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color: #1155cc;\" href=\"http://bridlebash.org/\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=http://bridlebash.org/&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNEfAlXJNFkmz9fIis3Uk4fCiUtgug\"><span style=\"color: windowtext; text-decoration-line: none;\"><img id=\"m_-3783900543240753759Picture_x0020_4\" class=\"CToWUd\" style=\"width: 1.0972in; height: 0.4444in;\" src=\"https://mail.google.com/mail/u/1?ui=2&amp;ik=0d45c08a95&amp;attid=0.3&amp;permmsgid=msg-f:1627446255443866610&amp;th=1695d9bf2ac573f2&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ_69cNIQ1YNRDU3RtFKgAJ5sFkqvl1MXyC0kCmfxkZPH6N3CBlJwrfSOuf4sMzvzfoMJOSxbArAtSZQl3H45whG4IngRnM4ExYfExIYXv3zQnBDrD5i3Pa-23g&amp;disp=emb\" alt=\"bridlebash\" width=\"105\" height=\"43\" border=\"0\" data-image-whitelisted=\"\" /></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color: #1155cc;\" href=\"https://www.facebook.com/pages/Scout-Logistics/194502150588319\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://www.facebook.com/pages/Scout-Logistics/194502150588319&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNHNRrVAjgjPX_9bp205GTH4iHxpWQ\"><span style=\"color: windowtext; text-decoration-line: none;\"><img id=\"m_-3783900543240753759Picture_x0020_5\" class=\"CToWUd\" style=\"width: 0.3541in; height: 0.3541in;\" src=\"https://mail.google.com/mail/u/1?ui=2&amp;ik=0d45c08a95&amp;attid=0.4&amp;permmsgid=msg-f:1627446255443866610&amp;th=1695d9bf2ac573f2&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ8W1kp19Z2UyVjCrrI9-I8214wLlit15xjENu3enaC2xupPXEemlqJ5NufkR4ItjAvtrghBvauM4ufDoO-ObY2b5X8HJBEqd2h7LeNkeaM9nd6ohg8L5ktMoEw&amp;disp=emb\" alt=\"facebook\" width=\"34\" height=\"34\" border=\"0\" data-image-whitelisted=\"\" /></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color: #1155cc;\" href=\"https://www.linkedin.com/company/scout-logistics-corporation?trk=company_logo\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://www.linkedin.com/company/scout-logistics-corporation?trk%3Dcompany_logo&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNGV6B5fwhVVDd_D9cKRhP4YXrsI0w\"><span style=\"color: windowtext; text-decoration-line: none;\"><img id=\"m_-3783900543240753759Picture_x0020_6\" class=\"CToWUd\" style=\"width: 0.3541in; height: 0.3541in;\" src=\"https://mail.google.com/mail/u/1?ui=2&amp;ik=0d45c08a95&amp;attid=0.5&amp;permmsgid=msg-f:1627446255443866610&amp;th=1695d9bf2ac573f2&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ8-NfGqZ6-YC_bNhpv7sFuxyDFCONVfVSD0AxxGrt7OFnT3E4oKmu4xs_BuVJAliVGV_DjKDiqSRmb0TsY6ffUWeDowwwYkYt85NBaX4-ADy6avNvfKuKsu_Rc&amp;disp=emb\" alt=\"linkedin\" width=\"34\" height=\"34\" border=\"0\" data-image-whitelisted=\"\" /></span></a>&nbsp;&nbsp;<wbr />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color: #1155cc;\" href=\"http://www.twitter.com/scoutlogistics/\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=http://www.twitter.com/scoutlogistics/&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNHNp7s0zkxV-wsGpoM7nLGCbmTLFw\"><span style=\"color: windowtext; text-decoration-line: none;\"><img id=\"m_-3783900543240753759Picture_x0020_7\" class=\"CToWUd\" style=\"width: 0.3541in; height: 0.3541in;\" src=\"https://mail.google.com/mail/u/1?ui=2&amp;ik=0d45c08a95&amp;attid=0.6&amp;permmsgid=msg-f:1627446255443866610&amp;th=1695d9bf2ac573f2&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ_2hBnzLSNfTtiIedyLDmNNy7J9QnDP-y99Qv4yu7d5s71jBnT3Cky53BJyWMC921CfZJHnweekNVJDVZdRXgmApan-5-RszPBRUmjokvIuQsH62ek7wOUYvmI&amp;disp=emb\" alt=\"twitter\" width=\"34\" height=\"34\" border=\"0\" data-image-whitelisted=\"\" /></span></a><u></u><u></u></p>\n      </td>\n      <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 9.25pt; padding: 0cm; height: 43.7pt;\" width=\"12\">\n        <p class=\"MsoNormal\" style=\"margin: 0px;\">&nbsp;<u></u><u></u></p>\n      </td>\n    </tr>\n    <tr style=\"height: 24.2pt;\">\n      <td style=\"font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 344.25pt; padding: 0cm 5.4pt; height: 24.2pt;\" colspan=\"2\" width=\"459\">\n        <p class=\"MsoNormal\" style=\"margin: 0px; text-align: center;\" align=\"center\"><span style=\"font-size: 8pt; font-family: Arial, sans-serif; color: #943634;\">\"The one thing that doesn't abide by majority rule is a person's conscience.\"<u></u><u></u></span></p>\n        <p class=\"MsoNormal\" style=\"margin: 0px; text-align: center;\" align=\"center\"><span style=\"font-size: 8pt; font-family: Arial, sans-serif; color: #943634;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<wbr /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Atticus Finch \"To Kill a Mocking Bird\"</span></p>\n      </td>\n    </tr>\n  </tbody>\n</table>\n"
     t.string "carrier_categories"
     t.string "shipper_categories"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -851,7 +812,4 @@ ActiveRecord::Schema.define(version: 2019_10_15_154704) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
-  add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
-  add_foreign_key "oauth_openid_requests", "oauth_access_grants", column: "access_grant_id"
 end

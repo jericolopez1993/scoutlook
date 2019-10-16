@@ -73,32 +73,32 @@
         <tbody class="spacer">
           <% CarrProm.all.each do |carr| %>
             <tr>
-              <td><%= carr['MC#'] %></td>
+              <td><%= carr['mc_number'] %></td>
               <td>
                 <% if carr['carrier_id'] %>
-                  <a href='/carriers/<%= carr['carrier_id'] %>' target="_blank"><%= carr['Carrier_Name'] %></a>
+                  <a href='/carriers/<%= carr['carrier_id'] %>' target="_blank"><%= carr['carrier_name'] %></a>
                 <% else %>
-                  <%= carr['Carrier_Name'] %>
+                  <%= carr['carrier_name'] %>
                 <% end %>
               </td>
-              <td><%= generate_rank_text(carr['Current_Tier']).html_safe %></td>
-              <td><%= generate_rank_text(carr['Previous_Tier']).html_safe %></td>
-              <td><%= generate_rank_text(carr['Highest_Tier']).html_safe %></td>
-              <td><%= carr['Highest_Tier_Date'] ? DateTime.parse(carr['Highest_Tier_Date']).strftime('%m/%d/%Y') : "" %></td>
-              <td><%= carr['Gross_Margin_%'] %>%</td>
-              <td><%= number_with_precision(carr['Load_Last_Week'],
+              <td><%= generate_rank_text(carr['current_tier']).html_safe %></td>
+              <td><%= generate_rank_text(carr['previous_tier']).html_safe %></td>
+              <td><%= generate_rank_text(carr['highest_tier']).html_safe %></td>
+              <td><%= carr['highest_tier_date'] ? DateTime.parse(carr['highest_tier_date']).strftime('%m/%d/%Y') : "" %></td>
+              <td><%= carr['gross_margin'] %>%</td>
+              <td><%= number_with_precision(carr['load_last_week'],
                                             strip_insignificant_zeros: true,
-                                            precision: 2) if carr['Load_Last_Week'] > 0 %></td>
-              <td><%= number_with_precision(carr['Load_Last_Month'],
+                                            precision: 2) if carr['load_last_week'] > 0 %></td>
+              <td><%= number_with_precision(carr['load_last_month'],
                                             strip_insignificant_zeros: true,
-                                            precision: 2) if carr['Load_Last_Month'] > 0 %></td>
-              <td><%= number_with_precision(carr['Load_Last_3_Months'],
+                                            precision: 2) if carr['load_last_month'] > 0 %></td>
+              <td><%= number_with_precision(carr['load_last_3_months'],
                                             strip_insignificant_zeros: true,
-                                            precision: 2) if carr['Load_Last_3_Months'] > 0 %></td>
-              <td><%= number_with_precision(carr['Load_Last_6_Months'],
+                                            precision: 2) if carr['load_last_3_months'] > 0 %></td>
+              <td><%= number_with_precision(carr['load_last_6_months'],
                                             strip_insignificant_zeros: true,
-                                            precision: 2) if carr['Load_Last_6_Months'] > 0 %></td>
-              <td><%= carr['Highest_Tier_Reached'] %></td>
+                                            precision: 2) if carr['load_last_6_months'] > 0 %></td>
+              <td><%= carr['highest_tier_reached'] %></td>
               <td><%= carr['primary_phone'] %></td>
               <td><%= carr['secondary_phone'] %></td>
               <td class="text-center"><%= carr['sales_priority'] ? shade_sales_priority(carr['sales_priority']).html_safe : '' %></td>

@@ -1,7 +1,8 @@
 class CarrProm < ApplicationRecord
   self.table_name = "carr_prom"
 
-  scope :listings, -> {select("carr_prom.*,
+  scope :listings, -> {select("
+    carr_prom.*,
     carriers.id AS carrier_id,
     carriers.sales_priority,
     CONCAT(relationship_owner_user.first_name, ' ', relationship_owner_user.last_name) AS relationship_owner_name,
@@ -15,7 +16,13 @@ class CarrProm < ApplicationRecord
     contacts.secondary_phone_type,
     contacts.secondary_extension_number,
     contacts.secondary_eligible_texting"
-  ).joins('LEFT JOIN carriers ON carriers.mc_number = carr_prom."MC#"').joins("LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id").joins("LEFT JOIN users AS relationship_owner_user ON relationship_owner_user.id = carriers.relationship_owner")}
+  ).joins('
+    LEFT JOIN carriers ON carriers.mc_number = carr_prom.mc_number
+    ').joins("
+    LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id
+    ").joins("
+    LEFT JOIN users AS relationship_owner_user ON relationship_owner_user.id = carriers.relationship_owner
+    ")}
 
   default_scope {listings}
 

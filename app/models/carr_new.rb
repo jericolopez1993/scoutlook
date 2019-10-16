@@ -21,7 +21,7 @@ class CarrNew < ApplicationRecord
       contacts.secondary_extension_number,
       contacts.secondary_eligible_texting"
     ).joins(
-      'LEFT JOIN carriers ON carriers.mc_number = carr_new."MC#"'
+      'LEFT JOIN carriers ON carriers.mc_number = carr_new.mc_number'
     ).joins(
       "LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id"
     ).joins(

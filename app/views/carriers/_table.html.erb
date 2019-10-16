@@ -82,10 +82,10 @@
         <td class="text-center" style="font-size: 15px;"><%= carrier.teams && (carrier.teams if carrier.teams > 0) %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_load_days && (carrier.c_mc_latest_date_load_days if carrier.c_mc_latest_date_load_days > 0) %></td>
         <td><%= generate_rank_text(carrier.c_mc_latest_date_tier).html_safe %></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><%= carrier.loads_lw %></td>
+        <td><%= carrier.loads_2w %></td>
+        <td><%= carrier.loads_3w %></td>
+        <td><%= carrier.loads_4w %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_month && (carrier.c_mc_latest_date_last_month.round if carrier.c_mc_latest_date_last_month > 0) %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_6_months && (carrier.c_mc_latest_date_last_6_months.round if carrier.c_mc_latest_date_last_6_months > 0) %></td>
         <td>

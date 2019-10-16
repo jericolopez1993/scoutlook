@@ -93,7 +93,7 @@ class ComputeDataService
       mc_latest_date = McLatestDate.select("*, (SELECT (now()::date - ship_date_1::date) FROM mc_latest_date WHERE mcnum = '#{@carrier.mc_number}' ORDER BY ship_date_1 DESC LIMIT 1) AS load_days").where(:mcnum => @carrier.mc_number).order("ship_date_1 DESC").first
 
       if mc_latest_date
-        @carrier.update_attributes(:c_mc_latest_date_tier => mc_latest_date["Tier"], :c_mc_latest_date_last_month => mc_latest_date.loadsh_num, :c_mc_latest_date_last_6_months => mc_latest_date.loadsh_num_6mon, :c_mc_latest_date_load_days => mc_latest_date.load_days)
+        @carrier.update_attributes(:c_mc_latest_date_tier => mc_latest_date["tier"], :c_mc_latest_date_last_month => mc_latest_date.loadsh_num, :c_mc_latest_date_last_6_months => mc_latest_date.loadsh_num_6mon, :c_mc_latest_date_load_days => mc_latest_date.load_days)
       end
     end
   end
