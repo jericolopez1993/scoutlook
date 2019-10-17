@@ -32,6 +32,8 @@
       <table class="table table-black table-bordered display nowrap"  data-order="[[3, &quot;desc&quot;]]" id="carrier_table" width="100%">
         <thead>
           <tr>
+            <th>Interview</th>
+            <th>Wolfbyte</th>
             <th>MC #</th>
             <th>Name</th>
             <th>Trucks</th>
@@ -49,11 +51,13 @@
             <th>LW</th>
             <th>2W</th>
             <th>3W</th>
-            <th>4W</th>
+            <th>6W</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
+            <th>Interview</th>
+            <th>Wolfbyte</th>
             <th>MC #</th>
             <th>Name</th>
             <th>Trucks</th>
@@ -71,12 +75,14 @@
             <th>LW</th>
             <th>2W</th>
             <th>3W</th>
-            <th>4W</th>
+            <th>6W</th>
           </tr>
         </tfoot>
         <tbody class="spacer">
           <% CarrNew.all.each do |carr| %>
-            <tr class="<%= generate_styling_newly(carr['first_load_date']) %>">
+            <tr class="<%= generate_styling_carriers(carr['first_load_date'], carr['interview']) %>">
+              <td><%= carr['interview'] ? "<i class='text-danger'>Yes</i>".html_safe : "<i class='text-success'>No</i>".html_safe %></td>
+              <td><%= carr['wolfbyte'] ? "<i class='text-danger'>Yes</i>".html_safe : "<i class='text-success'>No</i>".html_safe %></td>
               <td><%= carr['mc_number'] %></td>
               <td>
                 <% if carr['carrier_id'] %>
@@ -100,7 +106,7 @@
               <td><%= carr['loads_lw'] %></td>
               <td><%= carr['loads_2w'] %></td>
               <td><%= carr['loads_3w'] %></td>
-              <td><%= carr['loads_4w'] %></td>
+              <td><%= carr['loads_6w'] %></td>
             </tr>
           <% end %>
         </tbody>

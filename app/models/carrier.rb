@@ -131,6 +131,8 @@ class Carrier < ApplicationRecord
     carr_new.loads_2w,
     carr_new.loads_3w,
     carr_new.loads_4w,
+    carr_new.loads_5w,
+    carr_new.loads_6w,
     (SELECT date_opened FROM activities WHERE activities.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) as date_opened,
     CONCAT(relationship_owner_user.first_name, ' ', relationship_owner_user.last_name) as relationship_owner_name,
     CONCAT(carrier_setup_user.first_name, ' ', carrier_setup_user.last_name) as carrier_setup_name,

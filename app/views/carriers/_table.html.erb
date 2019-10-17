@@ -17,7 +17,7 @@
       <th>LW</th>
       <th>2W</th>
       <th>3W</th>
-      <th>4W</th>
+      <th>6W</th>
       <th>1M</th>
       <th>6M</th>
       <th>Lane</th>
@@ -47,7 +47,7 @@
       <th>LW</th>
       <th>2W</th>
       <th>3W</th>
-      <th>4W</th>
+      <th>6W</th>
       <th>1M</th>
       <th>6M</th>
       <th>Lane</th>
@@ -63,7 +63,8 @@
   <tbody class="spacer">
     <% carriers.each do |carrier| %>
       <%#= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>
-      <tr class="<%= generate_styling_carriers(carrier.created_at, carrier.interview) %>">
+      <tr class="<%= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>">
+
         <td><%= carrier.id %></td>
         <td>
           <%= format_reminder(carrier.c_reminder_date, carrier.c_reminder_type, carrier.c_reminder_notes).html_safe if carrier.c_reminder_date  %>
@@ -85,7 +86,7 @@
         <td><%= carrier.loads_lw %></td>
         <td><%= carrier.loads_2w %></td>
         <td><%= carrier.loads_3w %></td>
-        <td><%= carrier.loads_4w %></td>
+        <td><%= carrier['loads_6w'] %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_month && (carrier.c_mc_latest_date_last_month.round if carrier.c_mc_latest_date_last_month > 0) %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_6_months && (carrier.c_mc_latest_date_last_6_months.round if carrier.c_mc_latest_date_last_6_months > 0) %></td>
         <td>

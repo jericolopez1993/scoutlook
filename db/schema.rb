@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_093551) do
+ActiveRecord::Schema.define(version: 2019_10_17_084604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 2019_10_16_093551) do
     t.text "prime_status"
     t.text "mc_number"
     t.text "owner"
+    t.integer "loads_5w"
+    t.integer "loads_6w"
   end
 
   create_table "carr_prom", id: false, force: :cascade do |t|

@@ -228,7 +228,8 @@ class CarriersController < ApplicationController
       if params[:carrier][:interview_attachment_file].present?
         @carrier.interview_attachment_file.attach(params[:carrier][:interview_attachment_file])
       end
-      @carrier.update_attributes(:interview =>  params[:carrier][:interview_attachment_file].present?)
+      interview = @carrier.interview_attachment_file.attached? || params[:carrier][:interview_attachment_file].present?
+      @carrier.update_attributes(:interview =>  interview)
     end
 
     def save_location

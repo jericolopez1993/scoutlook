@@ -454,9 +454,9 @@ module ApplicationHelper
         end
       elsif !((Date.today - 1.week)..Date.today).collect {|x| x.strftime('%m/%d/%Y').to_s }.include?(created_at.strftime('%m/%d/%Y').to_s)
         if interview
-          "bg-lightgreen"
-        else
           "bg-lightblue"
+        else
+          "bg-lightpink"
         end
       else
         "bg-lightpink"
