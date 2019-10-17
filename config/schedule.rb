@@ -20,6 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 every :day, at: '12:01am' do
   rake "reminder:check_due"
+  rake "checks_new_carriers:check_and_drop"
 end
 every :hour do
   rake "computed_data:all"
