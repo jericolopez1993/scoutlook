@@ -32,6 +32,7 @@ class Carrier < ApplicationRecord
 
   scope :listings, -> {select("
     carriers.*,
+    carriers.id AS carrier_id,
     (DATE(carriers.created_at) = DATE(CURRENT_DATE - 21)) AS three_weeks_lapse,
     contacts.primary_phone,
     contacts.primary_phone_type,

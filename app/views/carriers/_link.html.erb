@@ -16,7 +16,7 @@
       <b>Sate/Province</b>:<%= carrier.state.blank? ? '(none)' : generate_abv(carrier.state).upcase %><br>
       <b>Last Contact Date</b>: <%= carrier.date_opened.nil? ? "" : carrier.date_opened.strftime('%m/%d/%Y').to_s %><br>
       <b>Last Edit Date</b>: <%= carrier.c_auditable_last_activity_date.nil? ? '' : carrier.c_auditable_last_activity_date.strftime("%m/%d/%Y").to_s %><br>
-      <% if params[:controller] != "activities" %>
+      <% if params[:controller] != "activities" && params[:action] != "newly" %>
           <hr>
           <% if !carrier.activities.empty? %>
             <b>Last Activity Name</b>: <%= carrier.campaign_name.blank? ? '(no name)' : carrier.campaign_name %><br>
@@ -27,6 +27,6 @@
           <% end %>
       <% end %>
     ">
-    <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier, :class => generate_styling_activities(carrier.c_auditable_last_activity_date), target: :_blank %>
+    <%= link_to carrier.company_name.blank? ? "(no name)" : carrier.company_name, carrier_path(:id => carrier.carrier_id), :class => generate_styling_activities(carrier.c_auditable_last_activity_date), target: :_blank %>
   </span>
 <% end %>

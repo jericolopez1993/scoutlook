@@ -4,8 +4,8 @@
     <tr>
       <th></th>
       <th class="text-center"><i class="fas fa-clock"></i></th>
-      <th>Interview</th>
-      <th>Wolfbyte</th>
+      <th>INT</th>
+      <th>WB</th>
       <th>RO</th>
       <th>Class</th>
       <th>MC</th>
@@ -17,6 +17,8 @@
       <th>LW</th>
       <th>2W</th>
       <th>3W</th>
+      <th>4W</th>
+      <th>5W</th>
       <th>6W</th>
       <th>1M</th>
       <th>6M</th>
@@ -34,8 +36,8 @@
     <tr>
       <th></th>
       <th></th>
-      <th>Interview</th>
-      <th>Wolfbyte</th>
+      <th>INT</th>
+      <th>WB</th>
       <th>RO</th>
       <th>Class</th>
       <th>MC</th>
@@ -47,6 +49,8 @@
       <th>LW</th>
       <th>2W</th>
       <th>3W</th>
+      <th>4W</th>
+      <th>5W</th>
       <th>6W</th>
       <th>1M</th>
       <th>6M</th>
@@ -69,8 +73,8 @@
         <td>
           <%= format_reminder(carrier.c_reminder_date, carrier.c_reminder_type, carrier.c_reminder_notes).html_safe if carrier.c_reminder_date  %>
         </td>
-        <td><%= carrier.interview ? "<i class='text-danger'>Yes</i>".html_safe : "<i class='text-success'>No</i>".html_safe %></td>
-        <td><%= carrier.wolfbyte ? "<i class='text-danger'>Yes</i>".html_safe : "<i class='text-success'>No</i>".html_safe %></td>
+        <td><%= carrier.interview ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
+        <td><%= carrier.wolfbyte ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
         <td class="text-center link"><%= carrier.relationship_owner_name.blank? ? '' : "#{link_to(covert_initials(carrier.relationship_owner_name), user_path(:id => carrier.relationship_owner))}".html_safe %></td>
         <td class="text-center"><%= shade_sales_priority(carrier.sales_priority).html_safe %></td>
         <td>
@@ -86,6 +90,8 @@
         <td><%= carrier.loads_lw %></td>
         <td><%= carrier.loads_2w %></td>
         <td><%= carrier.loads_3w %></td>
+        <td><%= carrier['loads_4w'] %></td>
+        <td><%= carrier['loads_5w'] %></td>
         <td><%= carrier['loads_6w'] %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_month && (carrier.c_mc_latest_date_last_month.round if carrier.c_mc_latest_date_last_month > 0) %></td>
         <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_6_months && (carrier.c_mc_latest_date_last_6_months.round if carrier.c_mc_latest_date_last_6_months > 0) %></td>

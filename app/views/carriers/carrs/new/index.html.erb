@@ -29,11 +29,13 @@
       <h4 class="panel-title lp-header">Carriers (New)</h4>
     </div>
     <div class="panel-body">
-      <table class="table table-black table-bordered display nowrap"  data-order="[[3, &quot;desc&quot;]]" id="carrier_table" width="100%">
+      <table class="table table-black table-bordered display nowrap"  data-order="[[13, &quot;desc&quot;]]" id="carrier_table" width="100%">
         <thead>
           <tr>
-            <th>Interview</th>
-            <th>Wolfbyte</th>
+            <th>INT</th>
+            <th>WB</th>
+            <th>Class</th>
+            <th>Owner</th>
             <th>MC #</th>
             <th>Name</th>
             <th>Trucks</th>
@@ -42,22 +44,23 @@
             <th>Contact</th>
             <th>ORG</th>
             <th>DEST</th>
-            <th><abbr title="Loads Last Month">LLM</abbr></th>
-            <th>First Load Date</th>
+            <th>WK</th>
+            <th>First Load</th>
             <th><abbr title="Gross Margin %">GM</abbr></th>
-            <th>Phone #1</th>
-            <th>Class</th>
-            <th>Owner</th>
             <th>LW</th>
             <th>2W</th>
             <th>3W</th>
+            <th>4W</th>
+            <th>5W</th>
             <th>6W</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
-            <th>Interview</th>
-            <th>Wolfbyte</th>
+            <th>INT</th>
+            <th>WB</th>
+            <th>Class</th>
+            <th>Owner</th>
             <th>MC #</th>
             <th>Name</th>
             <th>Trucks</th>
@@ -66,27 +69,28 @@
             <th>Contact</th>
             <th>ORG</th>
             <th>DEST</th>
-            <th>LLM</th>
-            <th>First Load Date</th>
+            <th>WK</th>
+            <th>First Load</th>
             <th>GM</th>
-            <th>Phone #1</th>
-            <th>Class</th>
-            <th>Owner</th>
             <th>LW</th>
             <th>2W</th>
             <th>3W</th>
+            <th>4W</th>
+            <th>5W</th>
             <th>6W</th>
           </tr>
         </tfoot>
         <tbody class="spacer">
           <% CarrNew.all.each do |carr| %>
             <tr class="<%= generate_styling_carriers(carr['first_load_date'], carr['interview']) %>">
-              <td><%= carr['interview'] ? "<i class='text-danger'>Yes</i>".html_safe : "<i class='text-success'>No</i>".html_safe %></td>
-              <td><%= carr['wolfbyte'] ? "<i class='text-danger'>Yes</i>".html_safe : "<i class='text-success'>No</i>".html_safe %></td>
+              <td><%= carr['interview']  ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
+              <td><%= carr['wolfbyte'] ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
+              <td class="text-center"><%= carr['sales_priority'] ? shade_sales_priority(carr['sales_priority']).html_safe : '' %></td>
+              <td class="text-center link"><%= carr['user_id'] ? (carr['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(carr['relationship_owner_name']), user_path(:id => carr['user_id']))}".html_safe) : '' %></td>
               <td><%= carr['mc_number'] %></td>
               <td>
                 <% if carr['carrier_id'] %>
-                  <a href='/carriers/<%= carr['carrier_id'] %>' target="_blank"><%= carr['carrier_name'] %></a>
+                <%= render "carriers/link", carrier: carr %>
                 <% else %>
                   <%= carr['carrier_name'] %>
                 <% end %>
@@ -97,15 +101,14 @@
               <td><%= carr['contact'] %></td>
               <td><%= carr['last_os'] %></td>
               <td><%= carr['last_ds'] %></td>
-              <td><%= carr['load_last_month'] %></td>
+              <td><%= carr['wk'].to_i %></td>
               <td><%= carr['first_load_date'] ? carr['first_load_date'].strftime('%m/%d/%Y') : "" %></td>
               <td><%= carr['gross_margin'] %>%</td>
-              <td><%= carr['primary_phone'] %></td>
-              <td class="text-center"><%= carr['sales_priority'] ? shade_sales_priority(carr['sales_priority']).html_safe : '' %></td>
-              <td class="text-center link"><%= carr['user_id'] ? (carr['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(carr['relationship_owner_name']), user_path(:id => carr['user_id']))}".html_safe) : '' %></td>
               <td><%= carr['loads_lw'] %></td>
               <td><%= carr['loads_2w'] %></td>
               <td><%= carr['loads_3w'] %></td>
+              <td><%= carr['loads_4w'] %></td>
+              <td><%= carr['loads_5w'] %></td>
               <td><%= carr['loads_6w'] %></td>
             </tr>
           <% end %>
