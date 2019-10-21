@@ -19,7 +19,7 @@ class DfLoad < ApplicationRecord
       contacts.secondary_extension_number,
       contacts.secondary_eligible_texting'
     ).joins(
-      'LEFT JOIN carriers ON carriers.mc_number = REPLACE (df_loads.mc_num, \'MC\', \'\')'
+      'LEFT JOIN carriers ON carriers.mc_number = REPLACE ("MC_Num", \'MC\', \'\')'
     ).joins(
       "LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id"
     ).joins(
