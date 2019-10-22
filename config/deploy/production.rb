@@ -1,5 +1,5 @@
 # Change these
-server 'ubuntu@scoutlook.ca', roles: [:web, :app, :db], primary: true
+server 'ubuntu@scoutlook.ca', roles: [:web, :app, :db, :worker], primary: true
 server 'ubuntu@scoutlook.opinionated.software', roles: [:web, :app, :db]
 
 set :repo_url,        'git@gitlab.com:opinionatedsoft/scoutcrm.git'
