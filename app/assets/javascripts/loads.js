@@ -2,6 +2,7 @@ jQuery(document).ready(function() {
   $('#loads-datatable').dataTable({
     "processing": true,
     "serverSide": true,
+    fixedHeader: true,
     "ajax": {
       "url": $('#loads-datatable').data('source')
     },
@@ -47,5 +48,26 @@ jQuery(document).ready(function() {
     // pagingType is optional, if you want full pagination controls.
     // Check dataTables documentation to learn more about
     // available options.
-  });
+  }).yadcf([
+    {column_number : 0, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 1, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 2, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 3, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 4, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 5, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 6, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 7, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 8, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 9, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 10, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 11, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 12, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 13, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 14, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 15, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 16, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 17, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 18, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 19, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 20, filter_type: "text", filter_reset_button_text: false}]);
 });

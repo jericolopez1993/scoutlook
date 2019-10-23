@@ -22,7 +22,10 @@
  *= require_self
  */
 
-
+ .yadcf-filter {
+   width: 100%;
+   min-width: 50px;
+ }
 .m-nav {
   display: none;
 }
