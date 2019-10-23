@@ -27,6 +27,17 @@ namespace :nginx do
     end
 end
 
+namespace :cron do
+    %w(start stop restart reload).each do |command|
+        desc "#{command.capitalize} CRON"
+        task command do
+            on roles(:non_worker) do
+                execute :sudo, "service cron #{command}"
+            end
+        end
+    end
+end
+
 namespace :seed do
   desc "Backup the database based on environment"
   task :make_dirs do
@@ -91,6 +102,13 @@ namespace :deploy do
     end
   end
 
+  desc 'Stop Cron'
+  task :stop_cron do
+    on roles(:non_worker), in: :sequence, wait: 5 do
+      invoke 'cron:stop'
+    end
+  end
+
   desc 'Seed Dump'
   task :seed_dump do
     on roles(:app), in: :sequence, wait: 5 do
@@ -105,6 +123,7 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
+  after  :finishing,    :stop_cron
   after  :finishing,    :restart_nginx
   # after  :finishing,    :start_nginx
   # after  :finishing,    :seed_dump
