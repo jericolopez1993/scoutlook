@@ -33,7 +33,9 @@
     <% if ['production', 'staging'].include?(Rails.env)%>
       <script src="https://browser.sentry-cdn.com/5.6.2/bundle.min.js" integrity="sha384-H4chu/XQ3ztniOYTpWo+kwec6yx3KQutpNkHiKyeY05XCZwCSap7KSwahg16pzJo" crossorigin="anonymous"></script>
       <script>
-        Sentry.init({ dsn: 'https://92b75050203e49b3904fbcb823032b2c:0faf76f6d60044d5929f7d30b3649d71@sentry.io/1304853' });
+        Sentry.init({
+              dsn: 'https://92b75050203e49b3904fbcb823032b2c:0faf76f6d60044d5929f7d30b3649d71@sentry.io/1304853',
+			        ignoreErrors: ['TypeError'] });
       </script>
     <% end %>
 
