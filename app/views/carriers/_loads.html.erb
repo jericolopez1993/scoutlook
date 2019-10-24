@@ -43,7 +43,7 @@
         <th>Cust Sys</th>
         <th>Carr Sys</th>
         <th>Gross Margin</th>
-        <th>Exchange Rate</th>
+        <th>EXCH</th>
         <th>Sales</th>
         <th>Dispatch</th>
         <th>Truck</th>
@@ -55,20 +55,20 @@
         <% loads.each do |load| %>
         <tr>
           <td><%= load.load_num %></td>
-          <td><%= load.ship_date %></td>
+          <td><%= load.ship_date.split(' ').first %></td>
           <td><%= load.customer %></td>
           <td><%= load.origin %></td>
           <td><%= load.os %></td>
           <td><%= load.destination %></td>
           <td><%= load.ds %></td>
-          <td><%= load.curr %></td>
-          <td><%= load.ttt %></td>
-          <td><%= load.billing %></td>
-          <td><%= load.gm %></td>
-          <td><%= load.gmper %></td>
-          <td><%= load.cust_sys %></td>
-          <td><%= load.carr_sys %></td>
-          <td><%= load.gross_margin %></td>
+          <td><%= load.curr.round %></td>
+          <td><%= load.ttt.round %></td>
+          <td><%= load.billing.round %></td>
+          <td><%= load.gm.round %></td>
+          <td><%= load.gmper.round %></td>
+          <td><%= load.cust_sys.round %></td>
+          <td><%= load.carr_sys.round %></td>
+          <td><%= load.gross_margin.round %></td>
           <td><%= load.exchange_rate %></td>
           <td><%= load.sales %></td>
           <td><%= load.dispatch %></td>

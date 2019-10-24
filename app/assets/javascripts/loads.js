@@ -14,6 +14,7 @@ jQuery(document).ready(function() {
       })
     },
     "pagingType": "full_numbers",
+    "order": [[1, "desc"]],
     "columns": [
       {"data": "load_number"
       // "render": function(data, type, row, meta){
