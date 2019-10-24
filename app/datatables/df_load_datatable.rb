@@ -42,7 +42,7 @@ class DfLoadDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         load_number: link_to(record.load_num, controller: "loads", action: "show", id: record.load_num),
-        ship_date: record.ship_date.split(' ').first,
+        ship_date: record.ship_date.to_date,
         customer: record.customer,
         origin: record.origin,
         os: record.os,
