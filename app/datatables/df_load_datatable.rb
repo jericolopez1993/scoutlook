@@ -54,7 +54,7 @@ class DfLoadDatatable < AjaxDatatablesRails::ActiveRecord
         ttt: record.ttt.to_f.round,
         billing: record.billing.to_f.round,
         gm: record.gm.to_f.round,
-        gmper: record.gmper.to_f.round,
+        gmper: record.gmper + '%',
         cust_sys: record.cust_sys.to_f.round,
         carr_sys: record.carr_sys.to_f.round,
         gross_margin: record.gross_margin.to_f.round,
