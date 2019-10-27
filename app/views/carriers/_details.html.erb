@@ -225,6 +225,12 @@
           <%= render 'carrier_lanes/table_ordered', lane_1: carrier.lane_1, lane_2: carrier.lane_2, lane_3: carrier.lane_3  %>
         </div>
       </div>
+      <div class="card bg-light">
+        <div class="card-body">
+          <h4 class="card-title">Notes</h4>
+          <%= render 'carrier_notes/mini_list', carrier_notes: carrier.carrier_notes %>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
       <div class="card bg-light">

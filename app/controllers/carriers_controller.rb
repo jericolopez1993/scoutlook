@@ -79,6 +79,9 @@ class CarriersController < ApplicationController
     @carrier = Carrier.new(carrier_params)
     respond_to do |format|
       if @carrier.save
+        if @carrier.notes
+          CarrierNotes.create(carrier_id: @carrier.id, user_id: current_user.id, notes: @carrier.notes)
+        end
 
         save_interview_form
         save_location
@@ -106,6 +109,11 @@ class CarriersController < ApplicationController
         format.json { render :show, status: :ok, location: @carrier }
       else
         # if current_user.id == @carrier.relationship_owner || params[:carrier][:relationship_owner] == @carrier.relationship_owner.to_s
+          if @carrier.notes != carrier_params[:notes]
+            p 'NOTE', carrier_params[:notes]
+            p CarrierNote.create(carrier_id: @carrier.id, user_id: current_user.id, notes: carrier_params[:notes])
+          end
+
           if @carrier.update(carrier_params)
 
             save_interview_form

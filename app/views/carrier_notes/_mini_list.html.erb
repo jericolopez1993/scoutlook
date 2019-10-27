@@ -1,0 +1,9 @@
+<% carrier_notes.each do |carrier_note| %>
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-title"><%= carrier_note.created_at %></h6>
+      <h6 class="card-subtitle"><%= carrier_note.user.full_name %></h6>
+      <p class="card-text"><%= carrier_note.notes.html_safe %></p>
+    </div>
+  </div>
+<% end %>

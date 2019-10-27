@@ -22,6 +22,7 @@ class Carrier < ApplicationRecord
   has_many :carrier_contacts, :dependent => :delete_all
   has_many :reminders, :dependent => :delete_all
   has_many :carrier_companies, :dependent => :delete_all
+  has_many :carrier_notes, :dependent => :delete_all
 
   has_one :origin_location, primary_key: "origin", foreign_key: 'id', class_name: "CarrierLocation"
   has_one :destination_location, primary_key: "destination", foreign_key: 'id', class_name: "CarrierLocation"
