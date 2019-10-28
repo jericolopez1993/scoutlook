@@ -39,28 +39,14 @@
     position: relative;
     /*width: 50%;
         float: right;*/
-    margin: 10px auto;
     clear: both;
-    border-radius: 4px;
     -webkit-box-shadow: 1px 1px 2px 0 rgba(50, 50, 50, 0.5);
     -moz-box-shadow: 1px 1px 2px 0 rgba(50, 50, 50, 0.5);
     box-shadow: 1px 1px 2px 0 rgba(50, 50, 50, 0.5);
   }
 
-  .kanban-centered .kanban-entry:after,
-  .kanban-centered .kanban-entry:before {
-    content: " ";
-    display: table;
-  }
-
   .kanban-centered .kanban-entry:after {
     clear: both;
-  }
-
-  .kanban-centered .kanban-entry:after,
-  .kanban-centered .kanban-entry:before {
-    content: " ";
-    display: table;
   }
 
   .kanban-centered .kanban-entry:after {
@@ -270,7 +256,7 @@
   }
 
   .kanban-col {
-    width: 280px;
+    width: 600px;
   }
 
   .panel-body {
@@ -317,7 +303,7 @@
   <%= render 'load_tiles/tabs' %>
 </div>
 <div class="tile-container" style="padding-top: 100px;">
-  <div id="sortableKanbanBoards" class="row" style="padding: 0 2%; width: 2800px;">
+  <div id="sortableKanbanBoards" class="row" style="padding: 0 2%; width: 5000px;">
     <%= render 'load_tiles/tiles' %>
   </div>
   <!-- Static Modal -->

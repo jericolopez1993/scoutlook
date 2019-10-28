@@ -1,15 +1,10 @@
-<!--sütun başlangıç-->
 <% if @tile_tab %>
   <% (session[:start_date]..session[:end_date]).to_a.each_with_index do |cdate, index|%>
     <% cdate = check_date(cdate) %>
     <div
-      class="panel
-            <%= date_group_color(cdate) %>
-            kanban-col"
-      style="margin:2% auto; border: 2px solid
-        <%= date_border_color(cdate) %>
-              border-radius: 15px; position: relative; height: 100%;">
-      <div class="panel-heading" style="border-top-right-radius: 10px; border-top-left-radius: 10px;z-index: -1;">
+      class="panel <%= date_group_color(cdate) %> kanban-col"
+      style="margin:2% auto; border: 2px solid <%= date_border_color(cdate) %>; position: relative; height: 100%;">
+      <div class="panel-heading">
         <%= date_to_words(cdate) %>
         <button id="" class="btn btn-primary btn-xs pull-right">
           <i class="fas fa-envelope"></i>
