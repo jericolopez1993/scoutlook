@@ -80,7 +80,7 @@ class CarriersController < ApplicationController
     respond_to do |format|
       if @carrier.save
         if @carrier.notes
-          CarrierNotes.create(carrier_id: @carrier.id, user_id: current_user.id, notes: @carrier.notes)
+          CarrierNote.create(carrier_id: @carrier.id, user_id: current_user.id, notes: @carrier.notes)
         end
 
         save_interview_form
