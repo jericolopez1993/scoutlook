@@ -228,7 +228,13 @@
       <div class="card bg-light">
         <div class="card-body">
           <h4 class="card-title">Notes</h4>
-          <%= render 'carrier_notes/mini_list', carrier_notes: carrier.carrier_notes %>
+          <span class="pull-right" style="margin-top: -45px;">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createCarrierNotes">
+              Add Note
+            </button>
+          </span>
+          <%= render 'carrier_notes/mini_list', carrier_notes: carrier.carrier_notes.order("created_at ") %>
+          <%= render 'carrier_notes/notes_form', carrier_note: CarrierNote.new, carrier: carrier %>
         </div>
       </div>
     </div>

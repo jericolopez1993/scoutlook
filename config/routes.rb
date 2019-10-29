@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resources :carrier_lanes
   resources :carrier_contacts
   resources :carrier_locations
+  resources :carrier_notes
   resources :carriers do
     collection do
       get     'origins'

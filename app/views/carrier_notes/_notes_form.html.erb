@@ -1,0 +1,38 @@
+<div class="modal" tabindex="-1" role="dialog" id="createCarrierNotes">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Notes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: carrier_note, local: true, :html => {id: 'carrier_note_form', class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+          <%= form.hidden_field :carrier_id, value: carrier.id %>
+          <%= form.hidden_field :user_id, value: current_user.id %>
+                  <% if carrier_note.errors.any? %>
+                    <div class="form-group row m-b-15">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="alert alert-danger" role="alert">
+                          <h4 class="alert-heading"><%= pluralize(carrier_note.errors.count, "error") %> prohibited this carrier_note from being saved:</h4>
+                          <ul>
+                            <% carrier_note.errors.full_messages.each do |message| %>
+                              <li><%= message %></li>
+                            <% end %>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                  <%= form.text_area(:notes, cols: 20, rows: 5, class: 'tinymce') %>
+        <% end %>
+        <%= tinymce %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="$('#carrier_note_form').submit();">Save</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
