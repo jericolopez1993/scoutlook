@@ -37,12 +37,12 @@
       <%= carrier_contact.same_ho ? (@carrier.head_office_location.nil? ? '' : "#{format_address(@carrier.head_office_location.address, @carrier.head_office_location.city, @carrier.head_office_location.state, @carrier.head_office_location.country, @carrier.head_office_location.postal)}") : (carrier_contact.nil? ? '' : "#{format_address(carrier_contact.address, carrier_contact.city, carrier_contact.state, carrier_contact.country, carrier_contact.postal)}")%>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <label class="col-3 col-form-label">Notes:</label>
     <div class="col-9 lbl-padding-t">
-      <%= carrier_contact.notes.nil? ? "" : carrier_contact.notes.html_safe %>
+      <%#= carrier_contact.notes.nil? ? "" : carrier_contact.notes.html_safe %>
     </div>
-  </div>
+  </div> -->
 <% else %>
   <em>No Available</em>
 <% end %>
