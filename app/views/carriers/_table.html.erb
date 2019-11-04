@@ -178,15 +178,17 @@
          nb_cols = api.columns().nodes().length;
          j = 6;
          while(j < nb_cols){
-           if ([6, 7, 10, 11].includes(j)) {
+           if ([9, 10, 13, 14, 15].includes(j)) {
              var pageTotal = Math.round(api.column(j, {search: 'applied'}).data().sum() * 100) / 100;
-             if (j===6) {
+             if (j===9) {
                $('#<%= table_type %>_reefer_count').html(pageTotal);
-             }else if(j===7) {
-               $('#<%= table_type %>_team_count').html(pageTotal);
              }else if(j===10) {
+               $('#<%= table_type %>_team_count').html(pageTotal);
+             }else if(j===13) {
+               $('#<%= table_type %>_lw_count').html(pageTotal);
+             }else if(j===14) {
                $('#<%= table_type %>_1m_count').html(pageTotal);
-             }else if(j===11) {
+             }else if(j===15) {
                $('#<%= table_type %>_6m_count').html(pageTotal);
              }
            }
