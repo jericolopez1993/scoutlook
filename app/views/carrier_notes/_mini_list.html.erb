@@ -1,6 +1,10 @@
 <% carrier_notes.each do |carrier_note| %>
   <div class="card">
     <div class="card-body">
+      <% if current_user.id == carrier_note.user_id %>
+        <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_carrier_note_path(:id => carrier_note.id), :class => 'btn btn-warning btn-xs pull-right margin-5px-left', target: :_blank %>
+        <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, carrier_note_path(:id => carrier_note.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs pull-right'%>
+      <% end %>
       <h6 class="card-title"><%= carrier_note.created_at %></h6>
       <h6 class="card-subtitle"><%= carrier_note.user.full_name %></h6>
       <p class="card-text"><%= carrier_note.notes.html_safe %></p>

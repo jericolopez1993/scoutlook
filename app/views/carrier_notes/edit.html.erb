@@ -1,0 +1,53 @@
+<!-- begin page-header -->
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "Edit Note" %>
+  </h1>
+</div>
+<!-- end page-header -->
+<!-- begin panel -->
+<%= form_with(model: @carrier_note, local: true, :html => {id: '@carrier_note_form', class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <div class="panel-heading-btn"></div>
+          <h4 class="panel-title">Information</h4>
+        </div>
+        <div class="panel-body">
+          <%= form.hidden_field :carrier_id%>
+          <%= form.hidden_field :user_id, value: current_user.id %>
+                  <% if @carrier_note.errors.any? %>
+                    <div class="form-group row m-b-15">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="alert alert-danger" role="alert">
+                          <h4 class="alert-heading"><%= pluralize(@carrier_note.errors.count, "error") %> prohibited this @carrier_note from being saved:</h4>
+                          <ul>
+                            <% @carrier_note.errors.full_messages.each do |message| %>
+                              <li><%= message %></li>
+                            <% end %>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                  <div class="form-group row m-b-15">
+                    <%= form.label :notes, 'Notes:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
+                    <div class="col-md-9 col-sm-8">
+                      <%= form.text_area(:notes, cols: 20, rows: 5, class: 'tinymce') %>
+                    </div>
+                  </div>
+          <div class="form-group row m-b-15">
+            <div class="col-md-2"></div>
+            <div class="col-md-9 col-sm-12 d-flex justify-content-end">
+              <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+                &nbsp;&nbsp;<%= link_to 'Back', @carrier_note.carrier, :class => 'btn btn-info' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<!-- end panel -->
+<%= tinymce %>
