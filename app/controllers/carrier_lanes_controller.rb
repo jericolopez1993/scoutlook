@@ -5,6 +5,7 @@ class CarrierLanesController < ApplicationController
   # GET /carrier_lanes.json
   def index
     @carrier_lanes = CarrierLane.all
+    authorize @carrier_lanes
   end
 
   # GET /carrier_lanes/1
@@ -18,6 +19,7 @@ class CarrierLanesController < ApplicationController
     if params[:carrier_id].present?
       @carrier_lane.carrier_id = params[:carrier_id]
     end
+    authorize @carrier_lane
   end
 
   # GET /carrier_lanes/1/edit
@@ -67,6 +69,7 @@ class CarrierLanesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_carrier_lane
       @carrier_lane = CarrierLane.find(params[:id])
+      authorize @carrier_lane
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

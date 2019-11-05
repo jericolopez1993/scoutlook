@@ -5,6 +5,7 @@ class CarrierCompaniesController < ApplicationController
   # GET /carrier_companies.json
   def index
     @carrier_companies = CarrierCompany.all
+    authorize @carrier_companies
   end
 
   # GET /carrier_companies/1
@@ -18,6 +19,7 @@ class CarrierCompaniesController < ApplicationController
     if params[:carrier_id].present?
       @carrier_company.carrier_id = params[:carrier_id]
     end
+    authorize @carrier_company
   end
 
   # GET /carrier_companies/1/edit
@@ -68,6 +70,7 @@ class CarrierCompaniesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_carrier_company
       @carrier_company = CarrierCompany.find(params[:id])
+      authorize @carrier_company
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

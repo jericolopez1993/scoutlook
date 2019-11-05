@@ -8,19 +8,19 @@ class CarrierPolicy < ApplicationPolicy
   end
 
   def create?
-    user.present? && (user.has_role?(:admin)  || user.ro || user.cs)
+    user.present?
   end
 
   def update?
-    return true
+    return true if record.relationship_owner_user == user.id || user.has_role?(:admin)
   end
 
   def destroy?
-    return true if user.present? && (user.has_role?(:admin)  || user.ro || user.cs)
+    return true if user.present? && (record.relationship_owner_user == user.id || user.has_role?(:admin))
   end
 
   def remove_attachment?
-    user.present? && (user.has_role?(:admin)  || user.ro || user.cs)
+    return true if user.present? && (record.relationship_owner_user == user.id || user.has_role?(:admin))
   end
 
   private

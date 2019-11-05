@@ -1,4 +1,4 @@
-class CarrierLanePolicy < ApplicationPolicy
+class CarrierCompanyPolicy < ApplicationPolicy
   def index?
     true
   end
@@ -18,9 +18,10 @@ class CarrierLanePolicy < ApplicationPolicy
   def destroy?
     return true if user.present? && (record.carrier.relationship_owner_user == user.id || user.has_role?(:admin))
   end
+
   private
 
-    def carrier_lane
+    def carrier_company
       record
     end
 end

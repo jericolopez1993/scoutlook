@@ -11,28 +11,7 @@ class CarriersController < ApplicationController
       @carriers = []
       begin
         if current_user.has_role?(:admin)
-          @carriers = Carrier.all
-          latest_date = McLatestDate.where("mcnum IN (SELECT mc_number FROM carriers)")
-          @reefers = (@carriers.sum("carriers.reefers")).round
-          @teams = (@carriers.sum("carriers.teams")).round
-          @last_month = (latest_date.sum("loadsh_num")).round
-          @last_6_months = (latest_date.sum("loadsh_num_6mon")).round
-
-          @my_carriers = Carrier.mine(current_user.id)
-          latest_date = McLatestDate.where("mcnum IN (SELECT mc_number FROM carriers WHERE relationship_owner = #{current_user.id})")
-          @my_reefers = (@my_carriers.sum("carriers.reefers")).round
-          @my_teams = (@my_carriers.sum("carriers.teams")).round
-          @my_last_month = (latest_date.sum("loadsh_num")).round
-          @my_last_6_months = (latest_date.sum("loadsh_num_6mon")).round
-
-
-          mc_number_list = @carriers.pluck(:mc_number)
-          @carr_new = CarrNew.where('mcnum NOT IN (?)', mc_number_list)
-
-          authorize @carriers
-        elsif current_user.has_role?(:steward) || current_user.ro || current_user.cs
-          @carriers = Carrier.where("relationship_owner = ? OR carrier_setup = ?", current_user.id, current_user.id)
-          authorize @carriers
+          set_carriers
         elsif current_user.has_role?(:contact)
           begin
             @carrier = Carrier.find(current_user.carrier_contact.carrier.id)
@@ -40,6 +19,8 @@ class CarriersController < ApplicationController
           rescue
             @carriers = []
           end
+        else
+          set_carriers
         end
       rescue
         @carriers = []
@@ -231,6 +212,28 @@ class CarriersController < ApplicationController
     def set_carrier
       @carrier = Carrier.find(params[:id])
       authorize @carrier
+    end
+
+    def set_carriers
+      @carriers = Carrier.all
+      latest_date = McLatestDate.where("mcnum IN (SELECT mc_number FROM carriers)")
+      @reefers = (@carriers.sum("carriers.reefers")).round
+      @teams = (@carriers.sum("carriers.teams")).round
+      @last_month = (latest_date.sum("loadsh_num")).round
+      @last_6_months = (latest_date.sum("loadsh_num_6mon")).round
+
+      @my_carriers = Carrier.mine(current_user.id)
+      latest_date = McLatestDate.where("mcnum IN (SELECT mc_number FROM carriers WHERE relationship_owner = #{current_user.id})")
+      @my_reefers = (@my_carriers.sum("carriers.reefers")).round
+      @my_teams = (@my_carriers.sum("carriers.teams")).round
+      @my_last_month = (latest_date.sum("loadsh_num")).round
+      @my_last_6_months = (latest_date.sum("loadsh_num_6mon")).round
+
+
+      mc_number_list = @carriers.pluck(:mc_number)
+      @carr_new = CarrNew.where('mcnum NOT IN (?)', mc_number_list)
+
+      authorize @carriers
     end
 
     def save_interview_form
