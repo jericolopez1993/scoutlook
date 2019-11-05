@@ -204,12 +204,12 @@
               <%= carrier.find_loads.nil? ? "" : carrier.find_loads.html_safe %>
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <label class="col-4 col-form-label">Notes:</label>
             <div class="col-8 lbl-padding-t">
-              <%= carrier.notes.nil? ? "" : carrier.notes.html_safe %>
+              <%#= carrier.notes.nil? ? "" : carrier.notes.html_safe %>
             </div>
-          </div>
+          </div> -->
           <% if !carrier.location.nil? %>
             <hr>
             <h4 class="text-inverse">Address</h4>
