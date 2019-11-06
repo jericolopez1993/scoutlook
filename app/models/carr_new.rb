@@ -16,6 +16,8 @@ class CarrNew < ApplicationRecord
       carriers.interview,
       carriers.wolfbyte,
       carriers.c_auditable_last_activity_date,
+      carriers.c_lane_origin,
+      carriers.c_lane_destination,
       (SELECT date_opened FROM activities WHERE activities.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) as date_opened,
       CONCAT(relationship_owner_user.first_name, ' ', relationship_owner_user.last_name) AS relationship_owner_name,
       carriers.relationship_owner AS user_id,
