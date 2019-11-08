@@ -49,7 +49,7 @@ class DfLoadDatatable < AjaxDatatablesRails::ActiveRecord
         destination: record.destination,
         ds: record.ds,
         mc_number: record.mc_num,
-        carrier: record['carrier_id'] ? link_to(record.carrier, controller: "carriers", action: "show", id: record['carrier_id']) : record.carrier,
+        carrier: record['carrier_id'] ? record.decorate.link_to : record.carrier,
         curr: record.curr.to_f.round,
         ttt: record.ttt.to_f.round,
         billing: record.billing.to_f.round,
