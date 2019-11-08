@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
       if current_user.has_role?(:admin)
         request.env['omniauth.origin'] || stored_location_for(resource) || authenticated_root_path
       else
-        shippers_path
+        authenticated_root_path
       end
     end
 
