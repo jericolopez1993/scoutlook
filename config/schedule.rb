@@ -25,9 +25,6 @@ end
 every :day, at: '1:00am', roles: [:worker] do
   rake "computed_data:all"
 end
-every :hour, roles: [:worker] do
-  rake "add_new_carriers:check_and_create"
-end
 # every :hour do
 #   rake "computed_data:all"
 #   rake "add_new_carriers:check_and_create"
