@@ -17,6 +17,11 @@ class LoadsController < ApplicationController
   def show
   end
 
+  def tiles
+    session[:start_date] = Date.today() - 30
+    session[:end_date] = Date.today() + 1
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_load
