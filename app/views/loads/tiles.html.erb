@@ -1,0 +1,330 @@
+<style>
+  .kanban-centered {
+    position: relative;
+    /* margin-bottom: 30px; */
+  }
+
+  .kanban-centered:after,
+  .kanban-centered:before {
+    content: " ";
+    /* display: table; */
+  }
+
+  .kanban-centered:after {
+    clear: both;
+  }
+
+  .kanban-centered:after,
+  .kanban-centered:before {
+    content: " ";
+    display: table;
+  }
+
+  .kanban-centered:after {
+    clear: both;
+  }
+
+  .kanban-centered:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 2px;
+    /*background: #f5f5f6;*/
+    top: 20px;
+    bottom: 20px;
+    /*margin-left: 18px;*/
+  }
+
+  .kanban-centered .kanban-entry {
+    position: relative;
+    /*width: 50%;
+        float: right;*/
+    clear: both;
+    -webkit-box-shadow: 1px 1px 2px 0 rgba(50, 50, 50, 0.5);
+    -moz-box-shadow: 1px 1px 2px 0 rgba(50, 50, 50, 0.5);
+    box-shadow: 1px 1px 2px 0 rgba(50, 50, 50, 0.5);
+  }
+
+  .kanban-centered .kanban-entry:after {
+    clear: both;
+  }
+
+  .kanban-centered .kanban-entry:after {
+    clear: both;
+  }
+
+  .kanban-centered .kanban-entry.begin {
+    margin-bottom: 0;
+  }
+
+  .kanban-centered .kanban-entry.left-aligned {
+    float: left;
+  }
+
+  .kanban-centered .kanban-entry.left-aligned .kanban-entry-inner {
+    margin-left: 0;
+    margin-right: -18px;
+  }
+
+  .kanban-centered .kanban-entry.left-aligned .kanban-entry-inner .kanban-time {
+    left: auto;
+    right: -100px;
+    text-align: left;
+  }
+
+  .kanban-centered .kanban-entry.left-aligned .kanban-entry-inner .kanban-icon {
+    float: right;
+  }
+
+  .kanban-centered .kanban-entry.left-aligned .kanban-entry-inner .kanban-label {
+    margin-left: 0;
+    margin-right: 70px;
+  }
+
+  .kanban-centered .kanban-entry.left-aligned .kanban-entry-inner .kanban-label:after {
+    left: auto;
+    right: 0;
+    margin-left: 0;
+    margin-right: -9px;
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner {
+    position: relative;
+    /*margin-left: -24px;*/
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner:after,
+  .kanban-centered .kanban-entry .kanban-entry-inner:before {
+    content: " ";
+    display: table;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner:after {
+    clear: both;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner:after,
+  .kanban-centered .kanban-entry .kanban-entry-inner:before {
+    content: " ";
+    display: table;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner:after {
+    clear: both;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-time {
+    position: absolute;
+    left: -100px;
+    text-align: right;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-time > span {
+    display: block;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-time > span:first-child {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-time > span:last-child {
+    font-size: 12px;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon {
+    background: #fff;
+    color: #737881;
+    display: block;
+    width: 25px;
+    height: 25px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-align: center;
+    -moz-box-shadow: 0 0 0 4px #f5f5f6;
+    -webkit-box-shadow: 0 0 0 4px #f5f5f6;
+    box-shadow: 0 0 0 4px #f5f5f6;
+    float: left;
+    margin-top: 6px;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-primary {
+    background-color: #303641;
+    color: #fff;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-secondary {
+    background-color: #ee4749;
+    color: #fff;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-success {
+    background-color: #00a651;
+    color: #fff;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-info {
+    background-color: #21a9e1;
+    color: #fff;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-warning {
+    background-color: #fad839;
+    color: #fff;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-danger {
+    background-color: #cc2424;
+    color: #fff;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label {
+    position: relative;
+    background: #f5f5f6;
+    padding: 0.75em;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 0;
+    min-height: 92px;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2,
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label p {
+    color: #737881;
+    font-family: "Noto Sans",sans-serif;
+    font-size: 12px;
+    margin: 0;
+    line-height: 1.428571429;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label p + p {
+    margin-top: 15px;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2 a {
+    color: #303641;
+  }
+
+  .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2 span {
+    -webkit-opacity: 0.6;
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+    -ms-filter: alpha(opacity=60);
+    filter: alpha(opacity=60);
+  }
+  .modal-static {
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    margin-top: -100px;
+    margin-left: -100px;
+    overflow: visible !important;
+  }
+
+  .modal-static,
+  .modal-static .modal-content,
+  .modal-static .modal-dialog {
+    width: 200px;
+    height: 150px;
+  }
+
+  .modal-static .modal-content,
+  .modal-static .modal-dialog {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .kanban-col {
+    width: 250px;
+  }
+
+  .panel-body {
+    padding: 2.5%;
+  }
+  .panel-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .panel-footer a {
+    color: #333!important;
+  }
+  .kanban-label {
+    cursor: grab;
+  }
+  .badge {
+    margin: 1px 0;
+  }
+  a {
+    color: inherit;
+    transition: none;
+    display: block;
+  }
+  a:hover {
+    color: inherit;
+  }
+  a.inline {
+    display: inline;
+  }
+  .time_inline {
+    width: 30%;
+    display: inline;
+  }
+
+  #mybutton {
+    position: fixed;
+    bottom: 4px;
+    left: 10px;
+  }
+</style>
+<div id="tile-tab-container" style="position: fixed;width: 100%;z-index: 1014">
+  <%= render 'loads/tiles/tabs' %>
+</div>
+<div class="tile-container" style="padding-top: 100px;">
+  <div id="sortableKanbanBoards" class="row" style="padding: 0 2%; width: 5000px;">
+    <%= render 'loads/tiles/tiles' %>
+  </div>
+  <!-- Static Modal -->
+  <div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="text-center">
+            <i class="fa fa-refresh fa-5x fa-spin"></i>
+            <h4>Processing...</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'loads/tiles/modal' %>
+<script type="text/javascript">
+  var origin = <%= raw CarrierLane::ORIGINS %>;
+  var destination = <%= raw CarrierLane::DESTINATIONS %>;
+  $(document).ready(function () {
+    Tiles.init();
+  });
+</script>

@@ -6,6 +6,9 @@
   <div class="panel panel-emerald">
     <div class="panel-heading">
       <h4 class="panel-title lp-header">Loads</h4>
+      <div class="panel-heading-btn" style="margin-top: -20px;">
+        <%= render 'loads/tiles/header_buttons' %>
+      </div>
     </div>
     <div class="panel-body">
         <%= render 'table', loads: @loads %>

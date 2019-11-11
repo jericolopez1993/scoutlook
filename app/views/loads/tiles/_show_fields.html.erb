@@ -1,0 +1,101 @@
+
+<div class="row">
+  <label class="col-md-3 col-6 col-form-label">Load ID:</label>
+  <div class="col-md-9 col-6 lbl-padding-t">
+    <b><%= load_tile.uniq_id %></b>
+    <span class="float-right">
+        <%= link_to '<i class="far fa-edit fa-1-2x"></i>'.html_safe, edit_load_tile_path(load_tile), :remote => true, :id => 'edit_tile', :class => 'text-warning inline' %>
+        <%= link_to '<i class="fas fa-trash-alt fa-1-2x"></i>'.html_safe, load_tile, :remote => true, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'text-danger inline'%>
+    </span>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-6 col-form-label">Truck ID:</label>
+  <div class="col-md-9 col-6 lbl-padding-t">
+    <%= load_tile.truck_tile && load_tile.truck_tile.uniq_id %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-6 col-form-label">Salesperson:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= load_tile.salesperson && load_tile.salesperson.full_name %>
+  </div>
+  <label class="col-md-3 col-6 col-form-label">Customer:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= link_to(load_tile.shipper && load_tile.shipper.company_name, load_tile.shipper, target: :_blank ) %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-6 col-form-label">Bill Rate:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= load_tile.bill_rate %>
+  </div>
+  <label class="col-md-3 col-6 col-form-label">Status:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= load_tile.status %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-6 col-form-label">Origin:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <% load_tile.origin_to_array.each do |cr| %>
+      <%= generate_location(cr, nil).html_safe %>
+    <% end %>
+  </div>
+  <label class="col-md-3 col-6 col-form-label">City:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= load_tile.origin_city %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-6 col-form-label">Destination:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <% load_tile.destination_to_array.each do |cr| %>
+      <%= generate_location(cr, nil).html_safe %>
+    <% end %>
+  </div>
+    <label class="col-md-3 col-6 col-form-label">City:</label>
+    <div class="col-md-3 col-6 lbl-padding-t">
+      <%= load_tile.destination_city %>
+    </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-6 col-form-label">Picks:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= load_tile.picks %>
+  </div>
+  <label class="col-md-3 col-6 col-form-label">Drops:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= load_tile.drops %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-6 col-form-label">PU Time:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= load_tile.pu_time %><%= load_tile.pu_general_time %>
+  </div>
+    <label class="col-md-3 col-6 col-form-label">Load Date:</label>
+    <div class="col-md-3 col-6 lbl-padding-t">
+      <%= load_tile.load_date %>
+    </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-6 col-form-label">Del Date:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= load_tile.del_date %>
+  </div>
+    <label class="col-md-3 col-6 col-form-label">Del Time:</label>
+    <div class="col-md-3 col-6 lbl-padding-t">
+      <%= load_tile.del_time %><%= load_tile.del_general_time %>
+    </div>
+</div>
+<div class="row">
+  <label class="col-md-3 col-6 col-form-label">Notes:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= load_tile.details %>
+  </div>
+  <label class="col-md-3 col-6 col-form-label">Team:</label>
+  <div class="col-md-3 col-6 lbl-padding-t">
+    <%= load_tile.teams ? "Yes" : "No" %>
+  </div>
+</div>

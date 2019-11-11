@@ -1,0 +1,30 @@
+
+  <% (session[:start_date]..session[:end_date]).to_a.each_with_index do |cdate, index|%>
+    <% cdate = check_date(cdate) %>
+    <div
+      class="panel <%= date_group_color(cdate) %> kanban-col"
+      style="margin:2px 5px; border: 2px solid <%= date_border_color(cdate) %>; position: relative; height: 100%;">
+      <div class="panel-heading">
+        <%= date_to_words(cdate) %>
+      </div>
+      <div class="panel-body row" data-date="<%= cdate %>" style="min-height: 150px;z-index: 100;margin-bottom: 30px;">
+
+              <% if @loads.length > 0  %>
+                  <% @loads.each_with_index do |load, index2|%>
+                    <% if load.ship_date == cdate  %>
+                      <div id="LOAD-<%= index%>" data-index="<%= index %>" class="col kanban-centered">
+                        <a href="<%= load_path(:id => load.load_num)%>" data-remote="true" class="kanban-entry grab" data-tile-type="LOAD" id="load<%= load.id %>" data-id="<%= load.id %>" draggable="true" style="margin-bottom: 1%;">
+                          <%= render 'loads/tiles/card', tile: load, tile_type: "load" %>
+                        </a>
+                      </div>
+                      <div class="w-100 float-chained-tile" style="margin-left: -1px;">
+                        <i class="fas fa-link fa-1-2x text-success"></i>
+                      </div>
+                    <% end %>
+                  <% end %>
+            <% end %>
+            <div id="LOAD-<%= index%>" data-index="<%= index %>" class="col kanban-centered sortable-load"></div>
+          </div>
+        </div>
+        <!--sütun bitiş-->
+      <% end %>
