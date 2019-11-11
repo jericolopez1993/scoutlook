@@ -11,7 +11,11 @@ Rails.application.routes.draw do
     end
   end
   resources :tile_tabs
-  resources :loads
+  resources :loads do
+    collection do
+      get     'tiles'
+    end
+  end
   resources :truck_tiles
   resources :load_tiles
   resources :shipper_companies
