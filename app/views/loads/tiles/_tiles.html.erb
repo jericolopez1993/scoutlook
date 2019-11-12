@@ -13,12 +13,11 @@
                   <% @loads.each_with_index do |load, index2|%>
                     <% if load.ship_date == cdate  %>
                       <div id="LOAD-<%= index%>" data-index="<%= index %>" class="col kanban-centered">
-                        <a href="<%= load_path(:id => load.load_num)%>" data-remote="true" class="kanban-entry grab" data-tile-type="LOAD" id="load<%= load.id %>" data-id="<%= load.id %>" draggable="true" style="margin-bottom: 1%;">
+                        <a href="<%= load_path(:id => load.load_num)%>" data-remote="true" class="kanban-entry grab card-link" data-tile-type="LOAD" id="load<%= load.id %>" data-id="<%= load.id %>" draggable="true" style="margin-bottom: 1%;">
                           <%= render 'loads/tiles/card', tile: load, tile_type: "load" %>
                         </a>
                       </div>
-                      <div class="w-100 float-chained-tile" style="margin-left: -1px;">
-                        <i class="fas fa-link fa-1-2x text-success"></i>
+                      <div class="w-100" style="margin-left: -1px;">
                       </div>
                     <% end %>
                   <% end %>
