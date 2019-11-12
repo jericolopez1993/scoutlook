@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :loads do
     collection do
       get     'tiles'
+      get     'details'
     end
   end
   resources :truck_tiles

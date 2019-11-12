@@ -1,5 +1,5 @@
 class LoadsController < ApplicationController
-  before_action :set_load, only: [:show]
+  before_action :set_load, only: [:show, :details]
 
 
   # GET /loads
@@ -15,6 +15,13 @@ class LoadsController < ApplicationController
   # GET /load/1
   # GET /load/1.json
   def show
+  end
+
+
+  def details
+    respond_to do |format|
+      format.js { }
+    end
   end
 
   def tiles
