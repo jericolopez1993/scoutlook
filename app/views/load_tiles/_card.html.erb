@@ -20,60 +20,23 @@
         <% end %>
         ">
         <div class="row">
-          <div class="col-md-12" style="text-align: center;">
-            <div class="row">
-              <div class="col-md-5" style="padding: 0;">
-                <div class="row">
-                  <div class="col-md-12">
-                    <% tile.origin_to_array.each do |cr| %>
-                      <%= generate_location(cr, nil).html_safe %>
-                    <% end %>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12" style="font-size: 9.5px; padding-top: 5px;">
-                    <!-- ADD LEFT CONTENT HERE -->
-                    <b><%= tile.uniq_id %></b>
-                    <span><%= tile.pu_time %><%= tile.pu_general_time %> <%= tile.try(:picks) ? (tile.picks > 1 ? "#{tile.picks}P" : "") : "" %></span>
-                    <span><%= tile.teams ? "TEAM" : ""%></span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-2" style="padding: 0;">
-                <div><i class="fas fa-arrow-right" style="vertical-align: middle;"></i></div>
-              </div>
-              <div class="col-md-5" style="padding: 0;">
-                <div class="row">
-                  <div class="col-md-12">
-                    <% tile.destination_to_array.each do |cr| %>
-                      <%= generate_location(cr, nil).html_safe %>
-                    <% end %>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12" style="font-size: 9.5px; padding-top: 5px;">
-                    <!-- ADD RIGHT CONTENT HERE -->
-                    <% if tile.shipper %>
-                      <span><%= tile.shipper && tile.shipper.company_name.gsub(/[^0-9A-Za-z]/, '')[0, 5].upcase %></span>
-                    <% end %>
-                    <% if tile.carrier %>
-                      <span><%= tile.carrier && tile.carrier.company_name.gsub(/[^0-9A-Za-z]/, '')[0, 5].upcase %></span>
-                    <% end %>
-                    <span><%= tile.del_date && tile.del_date.strftime("%^a") %> <%= tile.del_time %><%= tile.del_general_time %> <%= tile.try(:drops) ? (tile.drops > 1 ? "#{tile.drops}D" : "") : "" %></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="row">
           <div class="col-md-12">
-            <div class="text-right">
-              <%= link_to '<i class="far fa-edit fa-1-2x"></i>'.html_safe, (tile_type == "truck" ? edit_truck_tile_path(tile) : edit_load_tile_path(tile)), :remote => true, :id => 'edit_tile', :class => 'text-warning' %>
-              <%= link_to '<i class="far fa-eye fa-1-2x"></i>'.html_safe, tile, :remote => true, :id => 'show_tile', :class => 'text-success' %>
-              <%= link_to '<i class="fas fa-trash-alt fa-1-2x"></i>'.html_safe, tile, :remote => true, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'text-danger'%>
-            </div>
-          </div>
-        </div> -->
+            <span style="text-align: left;">
+              <%= tile.pu_time %><%= tile.pu_general_time %>
+              <b><%= tile.uniq_id %></b> &nbsp;
+              <% tile.origin_to_array.each do |cr| %>
+                <%= generate_location(cr, nil).html_safe %>
+              <% end %>
+              <i class="fas fa-arrow-right" style="vertical-align: middle;"></i>
+              <% tile.destination_to_array.each do |cr| %>
+                <%= generate_location(cr, nil).html_safe %>
+              <% end %>
+          </span>
+          <span style="text-align: right;float: right;">
+              <%= tile.del_date %>&nbsp;
+              <%= tile.del_time %><%= tile.del_general_time %>
+          </span>
+        </div>
+      </div>
     </div>
 </div>
