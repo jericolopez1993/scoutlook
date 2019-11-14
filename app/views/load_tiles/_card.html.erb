@@ -23,7 +23,7 @@
           <div class="col-md-12">
             <span style="text-align: left;">
               <%= tile.pu_time %><%= tile.pu_general_time %>
-              <b><%= tile.uniq_id %></b> &nbsp;
+              <b><%= tile.uniq_id %></b>
               <% tile.origin_to_array.each do |cr| %>
                 <%= generate_location(cr, nil).html_safe %>
               <% end %>
@@ -31,10 +31,20 @@
               <% tile.destination_to_array.each do |cr| %>
                 <%= generate_location(cr, nil).html_safe %>
               <% end %>
+              <%= tile.try(:picks) ? (tile.picks > 1 ? "#{tile.picks}P" : "") : "" %></span>
+              <%= tile.try(:drops) ? (tile.drops > 1 ? "#{tile.drops}D" : "") : "" %></span>
           </span>
           <span style="text-align: right;float: right;">
-              <%= tile.del_date %>&nbsp;
-              <%= tile.del_time %><%= tile.del_general_time %>
+            <%= tile.salesperson && covert_initials(tile.salesperson.full_name) %>
+            <% if tile.shipper %>
+              <span><%= tile.shipper && tile.shipper.company_name.gsub(/[^0-9A-Za-z]/, '')[0, 5].upcase %></span>
+            <% end %>
+            <% if tile.carrier %>
+              <span><%= tile.carrier && tile.carrier.company_name.gsub(/[^0-9A-Za-z]/, '')[0, 5].upcase %></span>
+            <% end %>
+            <span><%= tile.teams ? "TEAM" : ""%></span>
+            <%= tile.del_date.strftime('%m/%d/%y') %>
+            <%= tile.del_time %><%= tile.del_general_time %>
           </span>
         </div>
       </div>
