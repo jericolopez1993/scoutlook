@@ -31,8 +31,8 @@
               <% tile.destination_to_array.each do |cr| %>
                 <%= generate_location(cr, nil).html_safe %>
               <% end %>
-              <%= tile.try(:picks) ? (tile.picks > 1 ? "#{tile.picks}P" : "") : "" %></span>
-              <%= tile.try(:drops) ? (tile.drops > 1 ? "#{tile.drops}D" : "") : "" %></span>
+              <%= tile.try(:picks) ? (tile.picks > 1 ? "#{tile.picks}P" : "") : "" %>
+              <%= tile.try(:drops) ? (tile.drops > 1 ? "#{tile.drops}D" : "") : "" %>
           </span>
           <span style="text-align: right;float: right;">
             <%= tile.salesperson && covert_initials(tile.salesperson.full_name) %>
