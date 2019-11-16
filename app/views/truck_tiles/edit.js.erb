@@ -14,6 +14,7 @@ stat_selected = '<%= @truck_tile.status.present? ? @truck_tile.status : "" %>'
 
 $(document).ready(function() {
   Tiles.init();
+  FormSliderSwitcher.init();
   getStatusOptions(id_value, "edit_truck", stat_selected);
 });
 $("#showTruck").modal('show');
