@@ -10,9 +10,9 @@ class MailsController < ApplicationController
   end
 
   def create
-    params[:to].each do |contact|
-      MailMailer.send_mail(contact, params[:cc], params[:bcc], params[:subject], params[:content], current_user.email).deliver_now
-    end
+    # params[:to].each do |contact|
+    #   MailMailer.send_mail(contact, params[:cc], params[:bcc], params[:subject], params[:content], current_user.email).deliver_now
+    # end
     redirect_to "/#{params[:previous_controller]}", notice: 'Mail was successfully sent.'
   end
 
