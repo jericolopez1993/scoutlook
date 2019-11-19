@@ -1,5 +1,17 @@
+require "resque_web"
+
 Rails.application.routes.draw do
-   mount ActionCable.server => '/cable'
+  mount ActionCable.server => '/cable'
+
+  resque_web_constraint = lambda do |request|
+    current_user = request.env['warden'].user
+    current_user.present? && current_user.has_role?(:admin)
+  end
+
+  constraints resque_web_constraint do
+    mount ResqueWeb::Engine => "/jobs"
+  end
+
   resources :mailings do
     collection do
       get    'resend'
@@ -81,6 +93,7 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
+  root 'carriers#index'
   match '/users',   to: 'users#index',   via: 'get'
   match '/users/new',   to: 'users#new',   via: 'get'
   match '/users/:id/edit',   to: 'users#edit',   via: 'get',   as: 'edit_user'
