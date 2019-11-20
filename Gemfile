@@ -77,7 +77,8 @@ group :development, :test do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
-  gem 'capistrano3-delayed-job', '= 1.7.6'
+  gem "capistrano-resque", "~> 0.2.2", require: false
+  # gem 'capistrano3-delayed-job', '= 1.7.6'
 end
 
 group :development do
