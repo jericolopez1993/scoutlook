@@ -51,7 +51,7 @@ gem 'whenever', require: false
 gem 'pdfkit' # Reading and Generating a PDF from HTML Pages
 gem 'wkhtmltopdf-binary'
 gem 'truncate_html' # Removing HTML codes to Note fields
-gem 'delayed_job_active_record'
+# gem 'delayed_job_active_record'
 gem 'daemons'
 gem "aws-sdk-s3", require: false # AWS requirement for Active Storage
 gem 'twilio-ruby' # twilio gem
@@ -59,6 +59,9 @@ gem 'e164'
 gem 'redis', '~> 3.0'
 gem 'ajax-datatables-rails'
 gem 'draper'
+gem 'resque' # or a compatible alternative / fork
+gem 'resque_mailer'
+gem 'resque-scheduler'
 gem 'resque-web', require: 'resque_web' #Checking current jobs.
 
 group :development, :test do

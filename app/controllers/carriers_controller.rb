@@ -155,7 +155,8 @@ class CarriersController < ApplicationController
 
   def send_mail
     attachment_files = params[:file].present? ? params[:file] : nil
-    SendComposeMailJob.delay.perform_now(params[:to], nil, nil, params[:subject], params[:content_body], current_user.email, attachment_files)
+    SendComposeMailJob.perform_later(params[:to], nil, nil, params[:subject], params[:content_body], current_user.email, attachment_files)
+      # MailMailer.send_mail(contact, params[:cc], params[:bcc], params[:subject], params[:content], current_user.email).deliver
     save_mail
     if params[:record_activity].present?
       if params[:ids].present? && !params[:ids].blank?
@@ -183,7 +184,7 @@ class CarriersController < ApplicationController
   end
 
   def send_sms
-    SendSmsJob.perform_now(params[:to], params[:content_body])
+    SendSmsJob.perform_later(params[:to], params[:content_body])
     save_sms
     if params[:record_activity].present?
       if params[:ids].present? && !params[:ids].blank?
