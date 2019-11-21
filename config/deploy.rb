@@ -5,12 +5,14 @@ module Capistrano::DSL
   end
 end
 
-def run_remote_rake(rake_cmd)
-  rake_args = ENV['RAKE_ARGS'].to_s.split(',')
-  cmd = "cd #{fetch(:latest_release)} && #{fetch(:rake, "rake")} RAILS_ENV=#{fetch(:rails_env, "production")} #{rake_cmd}"
-  cmd += "['#{rake_args.join("','")}']" unless rake_args.empty?
-  run cmd
-  set :rakefile, nil if exists?(:rakefile)
+namespace :resque do
+  desc 'Restart Resque'
+  task :restart do
+    pid_file = "#{shared_path}/pids/resque.pid"
+    run "test -f #{pid_file} && cd #{current_path} && kill -s QUIT `cat #{pid_file}` || rm -f #{pid_file}"
+    run "cd #{current_path}; RAILS_ENV=production QUEUE='*' VERBOSE=1 nohup rake environment resque:work& > #{shared_path}/log/resque.log && echo $! > #{pid_file}"
+  end
+
 end
 
 namespace :puma do
@@ -86,7 +88,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:restart'
-      run_remote_rake "resque:restart_workers"
+      invoke 'resque:restart'
     end
   end
 
