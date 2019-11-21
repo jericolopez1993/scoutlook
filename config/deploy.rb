@@ -8,9 +8,11 @@ end
 namespace :resque do
   desc 'Restart Resque'
   task :restart do
-    pid_file = "#{shared_path}/pids/resque.pid"
-    execute "test -f #{pid_file} && cd #{current_path} && kill -s QUIT `cat #{pid_file}` || rm -f #{pid_file}"
-    execute "cd #{current_path}; RAILS_ENV=production QUEUE='*' VERBOSE=1 nohup rake environment resque:work& > #{shared_path}/log/resque.log && echo $! > #{pid_file}"
+    on roles(:app) do
+      pid_file = "#{shared_path}/pids/resque.pid"
+      execute "test -f #{pid_file} && cd #{current_path} && kill -s QUIT `cat #{pid_file}` || rm -f #{pid_file}"
+      execute "cd #{current_path}; RAILS_ENV=production QUEUE='*' VERBOSE=1 nohup rake environment resque:work& > #{shared_path}/log/resque.log && echo $! > #{pid_file}"
+    end
   end
 
 end
