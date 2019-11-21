@@ -1,4 +1,4 @@
-development: localhost:6379
+development: scoutlook.ca:6379
 test: localhost:6379
 staging: scoutlook.ca:6379
 fi: localhost:6379
