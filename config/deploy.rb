@@ -4,6 +4,22 @@ module Capistrano::DSL
     Rake::Task[task].reenable
   end
 end
+
+def run_remote_rake(rake_cmd)
+  rake_args = ENV['RAKE_ARGS'].to_s.split(',')
+  cmd = "cd #{fetch(:latest_release)} && #{fetch(:rake, "rake")} RAILS_ENV=#{fetch(:rails_env, "production")} #{rake_cmd}"
+  cmd += "['#{rake_args.join("','")}']" unless rake_args.empty?
+  run cmd
+  set :rakefile, nil if exists?(:rakefile)
+end
+
+namespace :deploy do
+  desc "Restart Resque Workers"
+  task :restart_workers, :roles => :db do
+    run_remote_rake "resque:restart_workers"
+  end
+end
+
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
@@ -77,6 +93,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:restart'
+      invoke 'deploy:restart_workers'
       # invoke 'delayed_job:restart'
     end
   end
