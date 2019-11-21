@@ -13,13 +13,6 @@ def run_remote_rake(rake_cmd)
   set :rakefile, nil if exists?(:rakefile)
 end
 
-namespace :deploy do
-  desc "Restart Resque Workers"
-  task :restart_workers, :roles => :db do
-    run_remote_rake "resque:restart_workers"
-  end
-end
-
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
@@ -93,8 +86,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:restart'
-      invoke 'deploy:restart_workers'
-      # invoke 'delayed_job:restart'
+      run_remote_rake "resque:restart_workers"
     end
   end
 
