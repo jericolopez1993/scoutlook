@@ -1,15 +1,8 @@
-require "resque_web"
-
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
-  resque_web_constraint = lambda do |request|
-    current_user = request.env['warden'].user
-    current_user.present? && current_user.has_role?(:admin)
-  end
-
-  constraints resque_web_constraint do
-    mount ResqueWeb::Engine => "/jobs"
+  authenticated :user, -> user { user.has_role?(:admin) }  do
+    mount DelayedJobWeb, at: "/delayed_job"
   end
 
   resources :mailings do

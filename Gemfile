@@ -51,7 +51,7 @@ gem 'whenever', require: false
 gem 'pdfkit' # Reading and Generating a PDF from HTML Pages
 gem 'wkhtmltopdf-binary'
 gem 'truncate_html' # Removing HTML codes to Note fields
-# gem 'delayed_job_active_record'
+gem 'delayed_job_active_record'
 gem 'daemons'
 gem "aws-sdk-s3", require: false # AWS requirement for Active Storage
 gem 'twilio-ruby' # twilio gem
@@ -59,10 +59,7 @@ gem 'e164'
 gem 'redis', '~> 3.0'
 gem 'ajax-datatables-rails'
 gem 'draper'
-gem 'resque' # or a compatible alternative / fork
-gem 'resque_mailer'
-gem 'resque-scheduler'
-gem 'resque-web', require: 'resque_web' #Checking current jobs.
+gem "delayed_job_web"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -77,7 +74,7 @@ group :development, :test do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
-  # gem 'capistrano3-delayed-job', '= 1.7.6'
+  gem 'capistrano3-delayed-job', '= 1.7.6'
 end
 
 group :development do

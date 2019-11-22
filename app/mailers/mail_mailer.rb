@@ -1,5 +1,4 @@
 class MailMailer < ApplicationMailer
-  include Resque::Mailer
   layout 'mailer'
   def send_mail(contact, cc, bcc, subject, content, from, attachment_files=nil)
     @content = content

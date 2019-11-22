@@ -11,7 +11,7 @@ require 'capistrano/puma'
 install_plugin Capistrano::Puma
 
 require "whenever/capistrano"
-# require 'capistrano/delayed_job'
+require 'capistrano/delayed_job'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }

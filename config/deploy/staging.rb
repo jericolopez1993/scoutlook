@@ -1,14 +1,13 @@
 # Change these
-server 'ubuntu@scoutlook-staging.opinionated.software', roles: [:web, :app, :db], primary: true
+server 'ubuntu@scoutlook-staging.opinionated.software', roles: [:web, :app, :db, :non_worker], primary: true
 
-set :workers, { "default" => 1, "compose_mail" => 3, "compose_sms, background_schedule" => 2 }
 set :repo_url,        'git@gitlab.com:opinionatedsoft/scoutcrm.git'
 set :application,     'scout_staging'
 set :user,            'ubuntu'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
+set :delayed_job_workers, 2
 set :branch, ENV.fetch('REVISION', 'master')
-set :resque_environment_task, true
 
 
 # Don't change these unless you know what you're doing
