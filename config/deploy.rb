@@ -5,16 +5,6 @@ module Capistrano::DSL
   end
 end
 
-namespace :resque do
-  desc 'Restart Resque'
-  task :restart do
-    on roles(:app) do
-      execute "cd #{current_path}; RAILS_ENV=production QUEUE='*' VERBOSE=1 nohup rake environment resque:work"
-    end
-  end
-
-end
-
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
@@ -88,12 +78,6 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:restart'
-    end
-  end
-
-  desc 'Restart Resque application'
-  task :restart_resque do
-    on roles(:app), in: :sequence, wait: 5 do
       invoke 'resque:restart'
     end
   end
@@ -140,7 +124,6 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
-  after  :finishing,    :restart_resque
   after  :finishing,    :stop_cron
   after  :finishing,    :restart_nginx
   # after  :finishing,    :start_nginx
