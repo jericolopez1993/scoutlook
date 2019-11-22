@@ -17,7 +17,7 @@
   <% if user_signed_in? %>
   <!-- begin header-nav -->
     <ul class="navbar-nav navbar-right">
-    
+
       <% if current_user.has_role?(:admin) %>
         <% reminders = Reminder.where(:last_reminded => Date.today) %>
         <li class="dropdown">
@@ -141,6 +141,7 @@
             <a class="dropdown-item" href="<%= users_path %>">Users</a>
             <a class="dropdown-item" href="<%= mailings_path(:mtype => 'sent') %>">Mails</a>
             <a class="dropdown-item" href="<%= messages_path(:mtype => 'sent') %>">SMS/Messages</a>
+            <a class="dropdown-item" href="<%= jobs_path %>">Background Jobs</a>
           <% end %>
           <div class="dropdown-divider"></div>
           <%= link_to('Log Out', destroy_user_session_path, method: :delete, class: "dropdown-item") %>

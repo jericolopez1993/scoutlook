@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
 
   def resend
     @message = Message.find(params[:id])
-    SendSmsJob.perform_later(@message.recipient, @message.content_body)
+    SendSmsJob.perform_now(@message.recipient, @message.content_body)
     sms = Message.new
     sms.recipient = @message.recipient
     sms.content_body = @message.content_body

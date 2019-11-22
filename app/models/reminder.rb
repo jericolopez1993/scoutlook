@@ -15,7 +15,7 @@ class Reminder < ApplicationRecord
 
   def notify_users
     if last_reminded_changed?
-      ReminderBroadcastJob.perform_later self
+      ReminderBroadcastJob.perform_now self
     end
   end
 

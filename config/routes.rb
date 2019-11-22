@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   authenticated :user, -> user { user.has_role?(:admin) }  do
-    mount DelayedJobWeb, at: "/delayed_job"
+    match "/jobs" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
   end
 
   resources :mailings do

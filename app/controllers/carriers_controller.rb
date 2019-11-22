@@ -184,7 +184,7 @@ class CarriersController < ApplicationController
   end
 
   def send_sms
-    SendSmsJob.perform_later(params[:to], params[:content_body])
+    SendSmsJob.perform_now(params[:to], params[:content_body])
     save_sms
     if params[:record_activity].present?
       if params[:ids].present? && !params[:ids].blank?
