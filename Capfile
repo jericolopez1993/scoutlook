@@ -11,7 +11,6 @@ require 'capistrano/puma'
 install_plugin Capistrano::Puma
 
 require "whenever/capistrano"
-require "capistrano-resque"
 # require 'capistrano/delayed_job'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
