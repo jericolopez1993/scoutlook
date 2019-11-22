@@ -97,10 +97,6 @@ GEM
     capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    capistrano-resque (0.2.3)
-      capistrano
-      resque
-      resque-scheduler
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
@@ -428,7 +424,6 @@ DEPENDENCIES
   capistrano
   capistrano-bundler
   capistrano-rails
-  capistrano-resque (~> 0.2.2)
   capistrano-rvm
   capistrano3-puma
   capybara (>= 2.15)
