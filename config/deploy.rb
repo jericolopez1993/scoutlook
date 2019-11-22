@@ -9,7 +9,7 @@ namespace :resque do
   desc 'Restart Resque'
   task :restart do
     on roles(:app) do
-      execute "cd #{release_path} && /usr/local/rvm/bin/rvm default do bundle exec RAILS_ENV=#{fetch(:stage)} QUEUE='*' VERBOSE=1 nohup rake environment resque:work"
+      execute "cd #{release_path} && /usr/local/rvm/bin/rvm default do bundle exec QUEUE='*' VERBOSE=1 nohup rake environment resque:work"
     end
   end
 
