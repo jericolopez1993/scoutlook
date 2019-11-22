@@ -678,7 +678,7 @@ module ApplicationHelper
       end
       "<span class='badge badge-#{color}'>#{rank}</span>"
     else
-      ""
+      "<i>No Tier Yet</i>"
     end
   end
 
