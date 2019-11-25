@@ -205,7 +205,10 @@ class CarriersController < ApplicationController
   end
 
   def newly
-    render "carriers/carrs/new/index"
+    respond_to do |format|
+      format.html
+      format.json { render json: CarrNewDatatable.new(params, view_context: view_context) }
+    end
   end
 
   private
