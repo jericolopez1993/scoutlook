@@ -197,11 +197,17 @@ class CarriersController < ApplicationController
   end
 
   def prom
-    render "carriers/carrs/prom/index"
+    respond_to do |format|
+      format.html
+      format.json { render json: CarrPromDatatable.new(params, view_context: view_context) }
+    end
   end
 
   def demo
-    render "carriers/carrs/demo/index"
+    respond_to do |format|
+      format.html
+      format.json { render json: CarrDemoDatatable.new(params, view_context: view_context) }
+    end
   end
 
   def newly

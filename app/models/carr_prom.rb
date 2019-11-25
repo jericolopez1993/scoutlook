@@ -26,4 +26,8 @@ class CarrProm < ApplicationRecord
 
   default_scope {listings}
 
+  def assigned_carrier
+    Carrier.find(self['carrier_id']) if self['carrier_id']
+  end
+
 end

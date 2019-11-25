@@ -1,0 +1,56 @@
+<style>
+  .badge a {
+    color: #fff!important;
+  }
+  td.link a:visited {
+    /* color: #6f060b!important; */
+  }
+</style>
+<% if params[:controller] == "carriers" %>
+  <style media="screen">
+  .tooltip-inner {
+    background-color: #6f060b!important;
+  }
+  .tooltip .arrow::before{
+    border-right-color: #6f060b!important;
+  }
+  th {
+    vertical-align: top;
+  }
+  </style>
+<% end %>
+<!-- begin panel -->
+<div style="width: 100%">
+  <div class="panel panel-scout">
+    <div class="panel-heading">
+      <div class="panel-heading-btn">
+        <%= render 'carriers/header/buttons_and_links' %>
+      </div>
+      <h4 class="panel-title lp-header">Carriers (Promotion)</h4>
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered display nowrap" id="promotion-datatable">
+        <thead>
+          <tr>
+            <th>MC #</th>
+            <th>Name</th>
+            <th>Current Tier</th>
+            <th>Previous Tier</th>
+            <th>Highest Tier</th>
+            <th>Highest Tier Date</th>
+            <th>Gross Margin %</th>
+            <th>1W</th>
+            <th>1M</th>
+            <th>3M</th>
+            <th>6M</th>
+            <th>Highest Tier Reached</th>
+            <th>Phone #1</th>
+            <th>Phone #2</th>
+            <th>Prime Status</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
