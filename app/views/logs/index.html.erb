@@ -6,7 +6,7 @@
     <h4 class="panel-title lp-header">Logs</h4>
   </div>
   <div class="panel-body">
-    <table class="table table-striped table-bordered data-table-no-buttons display nowrap" data-order="[[1, &quot;desc&quot;]]">
+    <table class="table table-bordered display nowrap" id="log-datatable" width="100%">
 			<thead>
 				<tr class="odd gradeX">
 					<th>User</th>
@@ -14,15 +14,6 @@
 					<th>Activity (Description)</th>
 				</tr>
 			</thead>
-			<tbody>
-        <% @logs.each do |audit| %>
-          <tr>
-            <td><%= link_to(audit.user_name, user_path(:id => audit.user_id)) %></td>
-            <td><%= audit.created_at.strftime('%m/%d/%Y %l:%M %p') %></td>
-            <td><%= audit.on_sentence(current_user).html_safe %></td>
-          </tr>
-        <% end %>
-      </tbody>
     </table>
   </div>
 </div>
