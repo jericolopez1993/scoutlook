@@ -17,7 +17,7 @@ module PbPlatform
 
     config.action_controller.allow_forgery_protection = false
     config.action_mailer.delivery_method = :smtp
-    config.active_job.queue_adapter = :resque
+    config.active_job.queue_adapter = :delayed_job
     config.enable_dependency_loading = true
     config.autoload_paths << Rails.root.join('lib')
   end

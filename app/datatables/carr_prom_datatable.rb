@@ -30,7 +30,7 @@ class CarrPromDatatable < AjaxDatatablesRails::ActiveRecord
       highest_tier_reached: { source: "CarrProm.highest_tier_reached" },
       primary_phone: { source: "CarrProm.primary_phone" },
       secondary_phone: { source: "CarrProm.secondary_phone" },
-      sales_priority: { source: "CarrProm.sales_priority" },
+      sales_priority: { source: "Carrier.sales_priority" },
       relationship_owner_name: { source: "relationship_owner_name" }
     }
   end
@@ -49,7 +49,7 @@ class CarrPromDatatable < AjaxDatatablesRails::ActiveRecord
         load_last_month: record.load_last_month && record.load_last_month > 0 ? number_with_precision(record.load_last_month, strip_insignificant_zeros: true, precision: 2) : "",
         load_last_3_months: record.load_last_3_months && record.load_last_3_months > 0 ? number_with_precision(record.load_last_3_months, strip_insignificant_zeros: true, precision: 2) : "",
         load_last_6_months: record.load_last_6_months && record.load_last_6_months > 0 ? number_with_precision(record.load_last_6_months, strip_insignificant_zeros: true, precision: 2) : "",
-        highest_tier_reached: record.highest_tier_reached,
+        highest_tier_reached: record.highest_tier_reached == "Yes"  ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe,
         primary_phone: record.primary_phone,
         secondary_phone: record.secondary_phone,
         sales_priority: record.sales_priority ? shade_sales_priority(record.sales_priority).html_safe : '',

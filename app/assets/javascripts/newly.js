@@ -43,13 +43,13 @@ jQuery(document).ready(function() {
     // Check dataTables documentation to learn more about
     // available options.
   }).yadcf([
-    {column_number : 0, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 1, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 0, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
+    {column_number : 1, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
     {column_number : 2, filter_type: "text", filter_reset_button_text: false},
     {column_number : 3, filter_type: "text", filter_reset_button_text: false},
     {column_number : 4, filter_type: "text", filter_reset_button_text: false},
     {column_number : 5, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 6, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 6, data: ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "No Tier Yet"], filter_default_label: "Tier", filter_reset_button_text: false},
     {column_number : 7, filter_type: "text", filter_reset_button_text: false},
     {column_number : 8, filter_type: "text", filter_reset_button_text: false},
     {column_number : 9, filter_type: "text", filter_reset_button_text: false},

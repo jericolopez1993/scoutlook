@@ -17,8 +17,8 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
     @view_columns ||= {
       # id: { source: "User.id", cond: :eq },
       # name: { source: "User.name", cond: :like }
-      interview: { source: "interview" },
-      wolfbyte: { source: "wolfbyte" },
+      interview: { source: "Carrier.interview", cond: :eq, },
+      wolfbyte: { source: "Carrier.wolfbyte", cond: :eq },
       sales_priority: { source: "CarrNew.sales_priority" },
       relationship_owner: { source: "relationship_owner_name" },
       mc_number: { source: "CarrNew.mc_number" },

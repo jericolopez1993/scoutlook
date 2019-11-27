@@ -29,9 +29,9 @@ class CarrDemoDatatable < AjaxDatatablesRails::ActiveRecord
       load_last_6_months: { source: "CarrDemo.load_last_6_months" },
       primary_phone: { source: "CarrDemo.primary_phone" },
       secondary_phone: { source: "CarrDemo.secondary_phone" },
-      sales_priority: { source: "CarrDemo.sales_priority" },
+      sales_priority: { source: "Carrier.sales_priority" },
       relationship_owner_name: { source: "relationship_owner_name" },
-      days_since: { source: "days_since" }
+      days_since: { source: "CarrDemo.days_since" }
     }
   end
 

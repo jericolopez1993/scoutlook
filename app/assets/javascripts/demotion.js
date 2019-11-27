@@ -39,9 +39,9 @@ jQuery(document).ready(function() {
   }).yadcf([
     {column_number : 0, filter_type: "text", filter_reset_button_text: false},
     {column_number : 1, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 2, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 3, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 4, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 2, data: ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "No Tier Yet"], filter_default_label: "Tier", filter_reset_button_text: false},
+    {column_number : 3, data: ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "No Tier Yet"], filter_default_label: "Tier", filter_reset_button_text: false},
+    {column_number : 4, data: ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "No Tier Yet"], filter_default_label: "Tier", filter_reset_button_text: false},
     {column_number : 5, filter_type: "text", filter_reset_button_text: false},
     {column_number : 6, filter_type: "text", filter_reset_button_text: false},
     {column_number : 7, filter_type: "text", filter_reset_button_text: false},
@@ -50,7 +50,7 @@ jQuery(document).ready(function() {
     {column_number : 10, filter_type: "text", filter_reset_button_text: false},
     {column_number : 11, filter_type: "text", filter_reset_button_text: false},
     {column_number : 12, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 13, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 13, data: ['New', 'A', 'B', 'C', 'D', 'U'], filter_default_label: "Status", filter_reset_button_text: false},
     {column_number : 14, filter_type: "text", filter_reset_button_text: false},
     {column_number : 15, filter_type: "text", filter_reset_button_text: false}]);
 });
