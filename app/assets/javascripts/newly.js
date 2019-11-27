@@ -22,6 +22,7 @@ jQuery(document).ready(function() {
       {"data": "relationship_owner"},
       {"data": "mc_number"},
       {"data": "carrier_name"},
+      {"data": "current_tier"},
       {"data": "power_units"},
       {"data": "reefers"},
       {"data": "teams"},

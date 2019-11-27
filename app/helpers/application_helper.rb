@@ -531,10 +531,15 @@ module ApplicationHelper
   end
 
   def check_date(cdate)
-    if cdate.is_a? String
-      cdate = Date.parse(cdate)
+    begin
+      if cdate.is_a? String
+        return Date.parse(cdate)
+      end
+      return cdate
+    rescue
+      return nil
     end
-    cdate
+
   end
 
   def date_group_color(cdate)

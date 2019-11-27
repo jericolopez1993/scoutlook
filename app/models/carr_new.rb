@@ -35,7 +35,8 @@ class CarrNew < ApplicationRecord
       locations.address,
       locations.state,
       locations.country,
-      locations.loc_type"
+      locations.loc_type,
+      carr_tier.tier"
     ).joins(
       'LEFT JOIN carriers ON carriers.mc_number = carr_new.mc_number'
     ).joins(
@@ -44,6 +45,8 @@ class CarrNew < ApplicationRecord
       "LEFT JOIN users AS relationship_owner_user ON relationship_owner_user.id = carriers.relationship_owner"
     ).joins(
       "LEFT JOIN carrier_locations AS locations ON locations.id = carriers.head_office"
+    ).joins(
+      "LEFT JOIN carr_tier ON carr_tier.mc_number = carr_new.mc_number OR carr_tier.mcnum = carr_new.mc_number"
     )
 }
 

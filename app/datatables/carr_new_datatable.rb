@@ -37,7 +37,8 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
       loads_3w: { source: "CarrNew.loads_3w" },
       loads_4w: { source: "CarrNew.loads_4w" },
       loads_5w: { source: "CarrNew.loads_5w" },
-      loads_6w: { source: "CarrNew.loads_6w" }
+      loads_6w: { source: "CarrNew.loads_6w" },
+      current_tier: { source: "CarrTier.tier" }
     }
   end
 
@@ -64,7 +65,8 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
         loads_3w: record.loads_3w,
         loads_4w: record.loads_4w,
         loads_5w: record.loads_5w,
-        loads_6w: record.loads_6w
+        loads_6w: record.loads_6w,
+        current_tier: generate_rank_text(record['tier']).html_safe
         # example:
         # id: record.id,
         # name: record.name
