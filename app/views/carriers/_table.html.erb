@@ -1,7 +1,7 @@
 
 <table class="table table-bordered display nowrap" id="<%= table_type %>_table">
   <thead>
-    <tr>
+    <tr class="odd gradeX">
       <th></th>
       <th class="text-center"><i class="fas fa-clock"></i></th>
       <th>INT</th>
@@ -28,112 +28,8 @@
       <th class="text-center">LstDateCon</th>
     </tr>
   </thead>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>INT</th>
-      <th>WB</th>
-      <th>RO</th>
-      <th>Class</th>
-      <th>MC</th>
-      <th>Name</th>
-      <th>Trucks</th>
-      <th>Reef</th>
-      <th>Team</th>
-      <th>DSL</th>
-      <th>Tier</th>
-      <th>LW</th>
-      <th>1M</th>
-      <th>6M</th>
-      <th>Lane</th>
-      <th>Black-listed</th>
-      <th>Ops Name</th>
-      <th>Ops Phone</th>
-      <th>Ops Email</th>
-      <th>Appr</th>
-      <th>CR</th>
-      <th>LstDateCon</th>
-    </tr>
-  </tfoot>
-  <tbody class="spacer">
-    <% if carriers  %>
-      <% carriers.each do |carrier| %>
-        <%#= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>
-        <tr class="<%= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>">
-          <td><%= carrier.id %></td>
-          <td data-order="<%= carrier.c_reminder_date && carrier.c_reminder_date.strftime('%Y-%m-%d') %>">
-            <%= format_reminder(carrier.c_reminder_id, carrier.c_reminder_date, carrier.c_reminder_type, carrier.c_reminder_notes).html_safe if carrier.c_reminder_date  %>
-          </td>
-          <td><%= carrier.interview ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
-          <td><%= carrier.wolfbyte ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
-          <td class="text-center link"><%= carrier.relationship_owner_name.blank? ? '' : "#{link_to(covert_initials(carrier.relationship_owner_name), user_path(:id => carrier.relationship_owner))}".html_safe %></td>
-          <td class="text-center"><%= shade_sales_priority(carrier.sales_priority).html_safe %></td>
-          <td>
-            <%= truncate_mc_number(carrier.mc_number).html_safe%>
-          </td>
-          <td class="link">
-            <%= render "carriers/link", carrier: carrier %>
-          </td>
-          <td class="text-center" style="font-size: 15px;"><%= carrier.power_units && (carrier.power_units if carrier.power_units > 0) %></td>
-          <td class="text-center" style="font-size: 15px;"><%= carrier.reefers && (carrier.reefers if carrier.reefers > 0) %></td>
-          <td class="text-center" style="font-size: 15px;"><%= carrier.teams && (carrier.teams if carrier.teams > 0) %></td>
-          <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_load_days && (carrier.c_mc_latest_date_load_days if carrier.c_mc_latest_date_load_days > 0) %></td>
-          <td><%= generate_rank_text(carrier.c_mc_latest_date_tier).html_safe %></td>
-          <td><%= carrier.c_carr_new_loads_lw %></td>
-          <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_month && (carrier.c_mc_latest_date_last_month.round if carrier.c_mc_latest_date_last_month > 0) %></td>
-          <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_6_months && (carrier.c_mc_latest_date_last_6_months.round if carrier.c_mc_latest_date_last_6_months > 0) %></td>
-          <td>
-            <% if carrier.c_lane_origin %>
-              <% carrier.c_lane_origin.split(',').map(&:to_s).each do |origin| %>
-                <%= generate_location2(origin, params[:controller], carrier.c_lane_id).html_safe %>
-              <% end %>
-            <% end %>
-            <% if carrier.c_lane_destination %>
-            &rarr;
-            <% carrier.c_lane_destination.split(',').map(&:to_s).each do |destination| %>
-              <%= generate_location2(destination, params[:controller], carrier.c_lane_id).html_safe %>
-            <% end %>
-          <% end %>
-          </td>
-          <td><%= carrier.blacklisted ? "<i class='text-danger'>Yes</i>".html_safe : "<i class='text-success'>No</i>".html_safe %></td>
-          <td>
-            <%= truncate_fields(carrier.poc_name).html_safe %>
-          </td>
-          <td><b><%= carrier.primary_phone.nil? ? '' : generate_phone_number("", carrier.primary_phone, carrier.primary_extension_number, carrier.primary_eligible_texting, carrier.primary_phone_type).html_safe %></b></td>
-          <td>
-            <% if !carrier.contact_email.nil?  %>
-              <a href="mailto:<%= carrier.contact_email %>?Subject=Hello%20<%= carrier.poc_name.nil? ? '' :  carrier.poc_name.capitalize  %>" target="_top">
-                <%= carrier.contact_email.downcase %>&nbsp;<i class="far fa-envelope"></i>
-              </a>
-            <% end %>
-          </td>
-          <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-          <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-          <td class="text-center"><%=  carrier.c_activity_date_opened.nil? ? "" : carrier.c_activity_date_opened.strftime('%m/%d/%Y').to_s %></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
 </table>
-<script language="javascript">
-  $.extend($.fn.dataTableExt.oSort, {
-    "non-empty-asc": function (str1, str2) {
-        if(str1 == "")
-            return 1;
-        if(str2 == "")
-            return -1;
-        return ((str1 < str2) ? -1 : ((str1 > str2) ? 1 : 0));
-    },
-
-    "non-empty-desc": function (str1, str2) {
-        if(str1 == "")
-            return 1;
-        if(str2 == "")
-            return -1;
-        return ((str1 < str2) ? 1 : ((str1 > str2) ? -1 : 0));
-    }
-  });
+<!-- <script language="javascript">
   $.fn.dataTableExt.afnFiltering.push(function( oSettings, aData, iDataIndex ) {
     var column_index = $('#<%= table_type %>_filter_column').val();
     var comparator = $('#<%= table_type %>_filter_comparator').val();
@@ -162,9 +58,9 @@
 
     return true;
   });
-</script>
+</script> -->
+<!-- <script language="javascript">
 
-<script language="javascript">
   $(function () {
     var table;
     $('#<%= table_type %>_table tfoot th').each(function() {
@@ -183,7 +79,7 @@
         'checkboxes': {
           'selectRow': true
         }
-      }, {type: 'non-empty', targets: 1}],
+      }],
       'select': {
         'style': 'multi'
       },
@@ -222,13 +118,8 @@
       $('input', this.footer()).on('keyup change clear', function() {
         $('[data-toggle="tooltip"]').tooltip("hide");
         if (that.search() !== this.value) {
-          if (that["0"][0] == 16) {
-            table.column(16).search(this.value.split("-").join(' ')).draw();
-          }else{
-            that.search(this.value).draw();
-          }
+          that.search(this.value).draw();
         }
-
       });
     });
     innerHTML = $( "#<%= table_type %>_table_filter" ).html()
@@ -245,4 +136,4 @@
     });
   });
 
-</script>
+</script> -->

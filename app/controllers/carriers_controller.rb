@@ -4,27 +4,9 @@ class CarriersController < ApplicationController
   # GET /carriers
   # GET /carriers.json
   def index
-    if !user_signed_in?
-      redirect_to(unauthenticated_root_path)
-    else
-      @carrier_categories = current_user.carrier_categories_to_array
-      @carriers = []
-      begin
-        if current_user.has_role?(:admin)
-          set_carriers
-        elsif current_user.has_role?(:contact)
-          begin
-            @carrier = Carrier.find(current_user.carrier_contact.carrier.id)
-            redirect_to @carrier
-          rescue
-            @carriers = []
-          end
-        else
-          set_carriers
-        end
-      rescue
-        @carriers = []
-      end
+    respond_to do |format|
+      format.html
+      format.json { render json: CarrierDatatable.new(params, user: current_user, view_context: view_context) }
     end
   end
 
