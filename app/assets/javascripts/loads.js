@@ -36,6 +36,9 @@ jQuery(document).ready(function() {
       {"data": "curr"},
       {"data": "ttt"},
       {"data": "billing"},
+      {"data": "mileage"},
+      {"data": "ttt_rpm"},
+      {"data": "bill_rpm"},
       {"data": "gm"},
       {"data": "gmper"},
       {"data": "cust_sys"},
@@ -70,5 +73,8 @@ jQuery(document).ready(function() {
     {column_number : 17, filter_type: "text", filter_reset_button_text: false},
     {column_number : 18, filter_type: "text", filter_reset_button_text: false},
     {column_number : 19, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 20, filter_type: "text", filter_reset_button_text: false}]);
+    {column_number : 20, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 21, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 22, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 23, filter_type: "text", filter_reset_button_text: false}]);
 });
