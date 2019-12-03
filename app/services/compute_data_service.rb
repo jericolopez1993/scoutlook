@@ -333,6 +333,15 @@ class ComputeDataService
     end
   end
 
+  def tier
+     Carrier.all.each do |carrier|
+         carr_tier = CarrTier.where("mc_number = ? OR mcnum = ?", carrier.mc_number, carrier.mc_number).first
+         if carr_tier
+           carrier.update_attributes(:c_carr_tier_tier => carr_tier["tier"])
+         end
+     end
+  end
+
   def audit(carrier_id)
     begin
       if carrier_id

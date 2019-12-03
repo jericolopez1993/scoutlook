@@ -4,6 +4,7 @@ namespace :computed_data do
     Rake::Task["computed_data:reminders"].invoke
     Rake::Task["computed_data:lanes"].invoke
     Rake::Task["computed_data:mc_latest_dates"].invoke
+    Rake::Task["computed_data:carr_tier"].invoke
     Rake::Task["computed_data:audits"].invoke
     Rake::Task["computed_data:activities_and_carr_news"].invoke
   end
@@ -61,6 +62,10 @@ namespace :computed_data do
     @carrier_ids.each do |id|
       ComputeDataService.new.mc_latest_date(id)
     end
+  end
+
+  task carr_tier: :environment do
+    ComputeDataService.new.tier
   end
 
   task audits: :environment do

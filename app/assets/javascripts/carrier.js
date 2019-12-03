@@ -46,8 +46,8 @@ jQuery(document).ready(function() {
     // available options.
   }).yadcf([
     {column_number : 1, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 2, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 3, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 2, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
+    {column_number : 3, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
     {column_number : 4, filter_type: "text", filter_reset_button_text: false},
     {column_number : 5, filter_type: "text", filter_reset_button_text: false},
     {column_number : 6, filter_type: "text", filter_reset_button_text: false},
@@ -56,16 +56,16 @@ jQuery(document).ready(function() {
     {column_number : 9, filter_type: "text", filter_reset_button_text: false},
     {column_number : 10, filter_type: "text", filter_reset_button_text: false},
     {column_number : 11, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 12, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 12, data: ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "No Tier Yet"], filter_default_label: "Tier", filter_reset_button_text: false},
     {column_number : 13, filter_type: "text", filter_reset_button_text: false},
     {column_number : 14, filter_type: "text", filter_reset_button_text: false},
     {column_number : 15, filter_type: "text", filter_reset_button_text: false},
     {column_number : 16, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 17, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 17, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
     {column_number : 18, filter_type: "text", filter_reset_button_text: false},
     {column_number : 19, filter_type: "text", filter_reset_button_text: false},
     {column_number : 20, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 21, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 22, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 21, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
+    {column_number : 22, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
     {column_number : 23, filter_type: "text", filter_reset_button_text: false}]);
 });
