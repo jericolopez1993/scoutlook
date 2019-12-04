@@ -101,5 +101,6 @@ jQuery(document).ready(function() {
     {column_number : 17, filter_type: "text", filter_reset_button_text: false},
     {column_number : 18, filter_type: "text", filter_reset_button_text: false},
     {column_number : 19, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 20, filter_type: "text", filter_reset_button_text: false}]);
+    {column_number : 20, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 21, filter_type: "text", filter_reset_button_text: false}]);
 });
