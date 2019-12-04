@@ -1,4 +1,38 @@
 jQuery(document).ready(function() {
+  function getDates(startDate, stopDate) {
+    var dateArray = [];
+    var currentDate = moment(startDate);
+    var stopDate = moment(stopDate);
+    while (currentDate <= stopDate) {
+        dateArray.push( moment(currentDate).format('MM/DD/YYYY') )
+        currentDate = moment(currentDate).add(1, 'days');
+    }
+    return dateArray;
+}
+
+  function generate_styling_carriers (created_at, interview){
+    arr_date = getDates(moment().subtract(7, 'days'), moment());
+    if (created_at){
+      if (arr_date.includes(created_at)) {
+        if (interview === "<i class='text-success'>Yes</i>") {
+          return "bg-lightgreen";
+        }else{
+          return "bg-white";
+        }
+      }else if (!arr_date.includes(created_at)) {
+        if (interview === "<i class='text-success'>Yes</i>") {
+          return "bg-lightblue";
+        }else{
+          return "bg-lightpink";
+        }
+      }else{
+        return "bg-lightpink";
+      }
+    }else{
+        return "bg-lightpink"
+    }
+  }
+
   $('#newly-datatable').dataTable({
     "processing": true,
     "serverSide": true,
@@ -13,8 +47,12 @@ jQuery(document).ready(function() {
           html: true
       })
     },
+    "createdRow": function ( row, data, index ) {
+      row_class = generate_styling_carriers(data.first_load_date, data.interview);
+      $(row).addClass(row_class);
+    },
     "pagingType": "full_numbers",
-    "order": [[1, "desc"]],
+    "order": [[13, "desc"]],
     "columns": [
       {"data": "interview"},
       {"data": "wolfbyte"},
