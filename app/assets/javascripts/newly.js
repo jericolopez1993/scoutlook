@@ -52,7 +52,8 @@ jQuery(document).ready(function() {
       $(row).addClass(row_class);
     },
     "pagingType": "full_numbers",
-    "order": [[13, "desc"]],
+    "order": [[13, "asc"]],
+    "pageLength": 50,
     "columns": [
       {"data": "interview"},
       {"data": "wolfbyte"},
