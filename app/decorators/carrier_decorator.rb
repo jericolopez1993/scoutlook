@@ -10,4 +10,8 @@ class CarrierDecorator < ApplicationDecorator
     h.render :partial => "carriers/lane", :locals => {carrier: object}, :formats => [:html, :json]
   end
 
+  def mc_number
+    h.render :partial => "carriers/mc_number", :locals => {carrier: object}, :formats => [:html, :json]
+  end
+
 end

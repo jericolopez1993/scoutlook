@@ -54,7 +54,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
         wolfbyte: record.wolfbyte ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe,
         relationship_owner_name: record.relationship_owner_name ? (record['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(record['relationship_owner_name']), user_path(:id => record['relationship_owner']))}".html_safe) : '',
         sales_priority: shade_sales_priority(record.sales_priority).html_safe,
-        mc_number: truncate_mc_number(record.mc_number).html_safe,
+        mc_number: record.decorate.mc_number,
         company_name: record.decorate.link_to,
         power_units: record.power_units && record.power_units > 0 ? record.power_units : "",
         reefers: record.reefers && record.reefers > 0 ? record.reefers : "",
@@ -72,6 +72,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
         approved: record.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe,
         complete_record: record.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe,
         date_opened: record.date_opened.nil? ? "" : record.date_opened.strftime('%m/%d/%Y').to_s,
+        three_weeks_lapse: record.three_weeks_lapse
 
       }
     end

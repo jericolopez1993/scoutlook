@@ -1,0 +1,3 @@
+<% if carrier && carrier.mc_number %>
+  <%= truncate_mc_number(carrier.mc_number).html_safe %>
+<% end %>
