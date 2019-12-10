@@ -50,7 +50,7 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
         sales_priority: record.sales_priority ? shade_sales_priority(record.sales_priority).html_safe : '',
         relationship_owner: record.user_id ? (record['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(record['relationship_owner_name']), user_path(:id => record['user_id']))}".html_safe) : '',
         mc_number: record.mc_number,
-        carrier_name: record['carrier_id'] ? record.decorate.link_to : record.carrier,
+        carrier_name: record['carrier_id'] ? record.decorate.link_to : record.carrier_name,
         power_units: (record.power_units && record.power_units > 0) ? record.power_units : "",
         reefers: (record.reefers && record.reefers > 0) ? record.reefers : "",
         teams: (record.teams && record.teams > 0) ? record.teams : "",
