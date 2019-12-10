@@ -10,6 +10,13 @@ class CarriersController < ApplicationController
     end
   end
 
+  def mine
+    respond_to do |format|
+      format.html
+      format.json { render json: CustomerDatatable.new(params, user: current_user, view_context: view_context) }
+    end
+  end
+
   # GET /carriers/1
   # GET /carriers/1.json
   def show

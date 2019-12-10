@@ -66,6 +66,7 @@ Rails.application.routes.draw do
       get      'show_merge'
       post     'merge'
       get      'partial_merged_table'
+      get      'mine'
     end
   end
   resources :shipper_lanes

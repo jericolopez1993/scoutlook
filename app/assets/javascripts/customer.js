@@ -1,8 +1,8 @@
 $(function () {
   $.fn.dataTableExt.afnFiltering.push(function( oSettings, aData, iDataIndex ) {
-    var column_index = $('#carrier_table_filter_column').val();
-    var comparator = $('#carrier_table_filter_comparator').val();
-    var value = $('#carrier_table_filter_value').val();
+    var column_index = $('#customer_table_filter_column').val();
+    var comparator = $('#customer_table_filter_comparator').val();
+    var value = $('#customer_table_filter_value').val();
 
     if (value) {
       if (value.length > 0 && !isNaN(parseInt(value, 10))) {
@@ -27,12 +27,12 @@ $(function () {
     return true;
   });
 
-  var table = $('#carrier_table').dataTable({
+  var table = $('#customer_table').dataTable({
     "processing": true,
     "serverSide": true,
     fixedHeader: true,
     "ajax": {
-      "url": $('#carrier_table').data('source')
+      "url": $('#customer_table').data('source')
     },
     "scrollX": true,
     "pageLength": 50,
@@ -50,15 +50,15 @@ $(function () {
              var pageTotal = Math.round(api.column(j, {search: 'applied'}).data().sum() * 100) / 100;
                console.log(pageTotal);
              if (j===9) {
-               $('#carrier_reefer_count').html(pageTotal);
+               $('#customer_reefer_count').html(pageTotal);
              }else if(j===10) {
-               $('#carrier_team_count').html(pageTotal);
+               $('#customer_team_count').html(pageTotal);
              }else if(j===13) {
-               $('#carrier_lw_count').html(pageTotal);
+               $('#customer_lw_count').html(pageTotal);
              }else if(j===14) {
-               $('#carrier_1m_count').html(pageTotal);
+               $('#customer_1m_count').html(pageTotal);
              }else if(j===15) {
-               $('#carrier_6m_count').html(pageTotal);
+               $('#customer_6m_count').html(pageTotal);
              }
            }
            j++;
@@ -132,16 +132,16 @@ $(function () {
     {column_number : 22, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
     {column_number : 23, filter_type: "text", filter_reset_button_text: false}]);
 
-    innerHTML = $( "#carrier_table_filter" ).html()
-      operatorSearch = "&nbsp;&nbsp;|&nbsp;&nbsp;Operator Search:&nbsp;&nbsp;<select id='carrier_table_filter_column' class='form-control'><option value='6'>Reefers</option><option value='7'>Teams</option><option value='8'>DSL</option><option value='10'>1M</option><option value='11'>6M</option></select>&nbsp;<select id='carrier_table_filter_comparator' class='form-control'><option value='eq'>=</option><option value='gt'>&gt;=</option><option value='lt'>&lt;=</option><option value='ne'>!=</option></select><input type='text' class='form-control' id='carrier_table_filter_value' style='width: 10%;' '>"
-      $( "#carrier_table_filter" ).append( operatorSearch );
-      $('#carrier_table_filter_column').change(function () {
+    innerHTML = $( "#customer_table_filter" ).html()
+      operatorSearch = "&nbsp;&nbsp;|&nbsp;&nbsp;Operator Search:&nbsp;&nbsp;<select id='customer_table_filter_column' class='form-control'><option value='6'>Reefers</option><option value='7'>Teams</option><option value='8'>DSL</option><option value='10'>1M</option><option value='11'>6M</option></select>&nbsp;<select id='customer_table_filter_comparator' class='form-control'><option value='eq'>=</option><option value='gt'>&gt;=</option><option value='lt'>&lt;=</option><option value='ne'>!=</option></select><input type='text' class='form-control' id='customer_table_filter_value' style='width: 10%;' '>"
+      $( "#customer_table_filter" ).append( operatorSearch );
+      $('#customer_table_filter_column').change(function () {
         table.draw();
       });
-      $('#carrier_table_filter_comparator').change(function () {
+      $('#customer_table_filter_comparator').change(function () {
         table.draw();
       });
-      $('#carrier_table_filter_value').keyup(function () {
+      $('#customer_table_filter_value').keyup(function () {
         table.draw();
       });
 

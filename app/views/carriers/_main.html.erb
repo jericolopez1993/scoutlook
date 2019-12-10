@@ -1,0 +1,153 @@
+<style>
+  p {
+    display: inline-block!important;
+  }
+  .hide {
+    visibility: hidden;
+  }
+  div.link a:visited {
+    color: #6f060b!important;
+  }
+  div.link a {
+    text-decoration: underline;
+  }
+  @media screen and (max-width: 479px) {
+    .dt-buttons.btn-group {
+      padding-top: 25px!important;
+    }
+  }
+  @media (max-width: 767px) {
+    .panel-inverse > .panel-heading {
+      background: 0 0;
+    }
+    .md-nav {
+      display: none;
+    }
+    .nav-pills .nav-link,
+    .nav-pills > li > a {
+      background-color: #fff;
+      margin: 5px;
+    }
+    label {
+      text-align: left!important;
+    }
+  }
+  label {
+    text-align: right;
+  }
+</style>
+
+<style>
+  .badge a {
+    color: #fff!important;
+  }
+  td.link a:visited {
+    /* color: #6f060b!important; */
+  }
+</style>
+<% if params[:controller] == "carriers" %>
+  <style media="screen">
+    .tooltip-inner {
+      background-color: #6f060b!important;
+    }
+    .tooltip .arrow::before {
+      border-right-color: #6f060b!important;
+    }
+    th {
+      vertical-align: top;
+    }
+  </style>
+<% end %>
+<!-- begin page-header -->
+<div class="header-scout">
+  <h1 class="pull-left">Carriers</h1>
+  <span class="pull-right">
+    <%= render 'carriers/header/buttons_and_links' %>
+  </span>
+</div>
+<!-- end page-header -->
+
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading" style="padding: 5px 15px">
+    <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
+      <li class="nav-items">
+        <a href="<%= carriers_path %>" class="nav-link <%= params[:action] == 'index' ? 'active' : '' %>" style="padding:5px; margin: 0px 10px" id="btn_all_carriers">
+          <span class="d-sm-block d-none">
+            <h4 class="panel-title">All Carriers</h4>
+          </span>
+        </a>
+      </li>
+      <li class="nav-items">
+        <a href="<%= mine_carriers_path %>" class="nav-link <%= params[:action] == 'mine' ? 'active' : '' %>" style="padding:5px; margin: 0px 10px" id="btn_my_carriers">
+          <span class="d-sm-block d-none">
+            <h4 class="panel-title">My Carriers</h4>
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <% if is_mobile %>
+      <div class="row">
+        <div class="col-12 text-center nav-hide" id="m-nav-pill">
+          <ul class="nav nav-pills" style="margin-bottom: 0px;">
+            <li class="nav-items col-4">
+              <a href="<%= carriers_path %>" data-toggle="tab" class="nav-link" style="padding: 5px 0;" id="btn_all_carriers">
+                <span class="d-sm-block">
+                  <h4 class="panel-title">All Carriers</h4>
+                </span>
+              </a>
+            </li>
+            <li class="nav-items col-4">
+              <a href="<%= mine_carriers_path %>" data-toggle="tab" class="nav-link active" style="padding: 5px 0;" id="btn_my_carriers">
+                <span class="d-sm-block">
+                  <h4 class="panel-title">My Carriers</h4>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+      <%#= render 'carriers/filter_summary', table_type: "carrier", show: false %>
+      <%= render 'carriers/filter_summary', table_type: table_type, show: true %>
+  </div>
+  <%= render 'carriers/table', table_type: table_type %>
+</div>
+
+<script language="javascript">
+  var user_id = "<%= current_user.id %>";
+  var table_type = "<%= table_type %>";
+  $(function () {
+    $('#send-mail-btn').on('click', function () {
+      var carriers_selected = $('#' + table_type + '_table').DataTable().column(0).checkboxes.selected();
+      if (carriers_selected.join(",") != "") {
+        $.redirect('/carriers/compose_mail', {'ids': carriers_selected.join(",")});
+      }
+    });
+    $('#send-text-btn').on('click', function () {
+      var carriers_selected = $('#' + table_type + '_table').DataTable().column(0).checkboxes.selected();
+      if (carriers_selected.join(",") != "") {
+        $.redirect('/carriers/compose_sms', {'ids': carriers_selected.join(",")});
+      }
+    });
+  });
+  function filterme() {
+    var categories = $('input:checkbox[name="category"]:checked').map(function () {
+      return '^' + this.value + '\$';
+    }).get().join('|');
+    table.search(categories, 5, true, false, false, false).draw();
+    // table.fnFilter();
+
+    var userCategories = $('input:checkbox[name="category"]').map(function () {
+      return $(this).prop("checked");
+    }).get().join(',');
+    $.ajax({
+      method: "PUT",
+      url: "/api/users/" + user_id,
+      data: {
+        carrier_categories: userCategories
+      }
+    }).done(function (data) {});
+  }
+</script>
