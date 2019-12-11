@@ -36,7 +36,7 @@ class Shipper < ApplicationRecord
 
   BLUE = ["NY", "NY-Brooklyn", "NY-Bronx",]
   LIGHT_BLUE = ["AL", "AK", "AR", "CO", "CT", "DE", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME",
-  "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NJ", "NV", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD",
+  "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NH", "NJ", "NV", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD",
   "TN", "UT", "VT", "VA", "WV", "WI", "WY",]
   DARK_BLUE = ["US-Northeast", "US-Northeast (No Bronx)", "US-Southeast", "US-Northwest", "US-Midwest",]
   BROWN = ["TX", "TX-McAllen"]
