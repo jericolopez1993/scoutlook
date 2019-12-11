@@ -31,7 +31,6 @@
 //= require tinymce
 //= require select2
 //= require tiles
-//= require_tree .
 var originTags = [
   "AL",
   "AK",

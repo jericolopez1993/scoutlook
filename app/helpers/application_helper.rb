@@ -1,6 +1,34 @@
 module ApplicationHelper
   include HTTParty
 
+  def has_table
+    controller_index_array = ['activities', 'carrier_companies', 'carrier_contacts', 'carrier_lanes', 'carrier_locations', 'carrier_notes', 'carriers', 'loads', 'logs', 'master_invoices', 'master_signals', 'rates', 'reminders', 'shipments', 'shipper_companies', 'shipper_contacts', 'shipper_lanes', 'shipper_locations', 'shippers', 'users']
+    action_index_array = ['index', 'mine', 'newly', 'demo', 'prom']
+    controller_show_array = ['carriers', 'activities', 'shippers']
+    action_show_array = ['show']
+
+    return (controller_index_array.include?(params[:controller]) && action_index_array.include?(params[:action])) || (controller_show_array.include?(params[:controller]) && action_show_array.include?(params[:action]))
+  end
+
+  def is_ajax_datatable
+    controller_array = ['loads', 'logs']
+    action_array = ['newly', 'demo', 'prom']
+
+    return (controller_array.include?(params[:controller]) && params[:action] == 'index') || (params[:controller] == 'carriers' && action_array.include?(params[:action]))
+  end
+
+  def ajax_datatable_js
+    if params[:action] == 'demo'
+      "demotion"
+    elsif params[:action] == 'prom'
+      "promotion"
+    elsif params[:action] == 'index'
+      params[:controller]
+    else
+      params[:action]
+    end
+  end
+
   def generate_alphanumeric_id(str = "", id)
     count = id.to_s.rjust(3, '0')
     if str.nil?
