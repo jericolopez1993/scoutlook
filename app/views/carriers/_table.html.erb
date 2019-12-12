@@ -129,7 +129,7 @@
         var row_data = parseInt(aData[column_index], 10);
         switch (comparator) {
           case 'eq':
-            return row_data == value ? true : false;
+            return row_data === value ? true : false;
             break;
           case 'gt':
             return row_data >= value ? true : false;
@@ -143,6 +143,7 @@
         }
       }
     }
+
     return true;
   });
 </script>
@@ -202,7 +203,6 @@
     // Apply the search
     table.columns().every(function() {
       var that = this;
-
       $('input', this.footer()).on('keyup change', function() {
         if (that.search() !== this.value) {
           that.search(this.value).draw();
@@ -210,7 +210,7 @@
       });
     });
     innerHTML = $( "#<%= table_type %>_table_filter" ).html()
-    operatorSearch = "&nbsp;&nbsp;|&nbsp;&nbsp;Operator Search:&nbsp;&nbsp;<select id='<%= table_type %>_filter_column' class='form-control'><option value='6'>Reefers</option><option value='7'>Teams</option><option value='8'>DSL</option><option value='10'>1M</option><option value='11'>6M</option></select>&nbsp;<select id='<%= table_type %>_filter_comparator' class='form-control'><option value='eq'>=</option><option value='gt'>&gt;=</option><option value='lt'>&lt;=</option><option value='ne'>!=</option></select><input type='text' class='form-control' id='<%= table_type %>_filter_value' style='width: 10%;' '>"
+    operatorSearch = "&nbsp;&nbsp;|&nbsp;&nbsp;Operator Search:&nbsp;&nbsp;<select id='<%= table_type %>_filter_column' class='form-control'><option value='9'>Reefers</option><option value='10'>Teams</option><option value='11'>DSL</option><option value='14'>1M</option><option value='15'>6M</option></select>&nbsp;<select id='<%= table_type %>_filter_comparator' class='form-control'><option value='eq'>=</option><option value='gt'>&gt;=</option><option value='lt'>&lt;=</option><option value='ne'>!=</option></select><input type='text' class='form-control' id='<%= table_type %>_filter_value' style='width: 10%;' '>"
     $( "#<%= table_type %>_table_filter" ).append( operatorSearch );
     $('#<%= table_type %>_filter_column').change(function () {
       table.draw();
