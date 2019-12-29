@@ -233,7 +233,7 @@
               Add Note
             </button>
           </span>
-          <%= render 'carrier_notes/mini_list', carrier_notes: carrier.carrier_notes.order("created_at ") %>
+          <%= render 'carrier_notes/mini_list', carrier_notes: carrier.carrier_notes.order("created_at DESC") %>
           <%= render 'carrier_notes/notes_form', carrier_note: CarrierNote.new, carrier: carrier %>
         </div>
       </div>
