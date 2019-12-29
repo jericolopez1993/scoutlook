@@ -32,7 +32,7 @@ class CarriersController < ApplicationController
   # GET /carriers/1.json
   def show
     audits = get_audits(@carrier, nil)
-    @loads = DfLoad.where("mc_num = 'MC#{@carrier.mc_number}").order('ship_date DESC')
+    @loads = DfLoad.where("mc_num = 'MC#{@carrier.mc_number}'").order('ship_date DESC')
   end
 
   # GET /carriers/new
