@@ -382,7 +382,16 @@ module ApplicationHelper
   end
 
   def format_reminder(reminder_date, reminder_type, notes)
-    "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder_type.nil? ? '' : reminder_type} <br>Notes: #{notes.nil? ? '' : notes.gsub("'", '&#39;')}' class='badge badge-danger badge-square'>#{reminder_date.strftime("%m/%d/%Y")}</span> "
+    theme_color = "badge-secondary"
+    if reminder_date > Date.today
+      theme_color = "badge-danger"
+    elsif reminder_date < Date.today
+      theme_color = "badge-green"
+    elsif reminder_date == Date.today
+      theme_color = "badge-primary"
+    end
+
+    "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder_type.nil? ? '' : reminder_type} <br>Notes: #{notes.nil? ? '' : notes.gsub("'", '&#39;')}' class='badge #{theme_color} badge-square'>#{reminder_date.strftime("%m/%d/%Y")}</span> "
   end
 
   def organize_date(date)
