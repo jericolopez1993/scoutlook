@@ -9,14 +9,14 @@ namespace :computed_data do
 
   task reminders: :environment do
     #Carriers
-    @carrier_ids = Reminder.all.pluck(:carrier_id).uniq
+    @carrier_ids = Carrier.all.pluck(:id).uniq
 
     @carrier_ids.each do |id|
       ComputeDataService.new.reminder(id)
     end
 
     #Shipper
-    @shipper_ids = Reminder.all.pluck(:shipper_id).uniq
+    @shipper_ids = Shipper.all.pluck(:id).uniq
 
     @shipper_ids.each do |id|
       ComputedDataShippersService.new.reminder(id)
