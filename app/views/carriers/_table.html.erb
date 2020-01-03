@@ -63,7 +63,7 @@
         <tr class="<%= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>">
           <td><%= carrier.id %></td>
           <td>
-            <%= format_reminder(carrier.c_reminder_date, carrier.c_reminder_type, carrier.c_reminder_notes).html_safe if carrier.c_reminder_date  %>
+            <%= format_reminder(carrier.c_reminder_id, carrier.c_reminder_date, carrier.c_reminder_type, carrier.c_reminder_notes).html_safe if carrier.c_reminder_date  %>
           </td>
           <td><%= carrier.interview ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
           <td><%= carrier.wolfbyte ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>

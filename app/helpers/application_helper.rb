@@ -381,7 +381,7 @@ module ApplicationHelper
     str_date
   end
 
-  def format_reminder(reminder_date, reminder_type, notes)
+  def format_reminder(reminder_id, reminder_date, reminder_type, notes)
     theme_color = "badge-secondary"
     if reminder_date > Date.today
       theme_color = "badge-danger"
@@ -391,7 +391,8 @@ module ApplicationHelper
       theme_color = "badge-primary"
     end
 
-    "<span data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder_type.nil? ? '' : reminder_type} <br>Notes: #{notes.nil? ? '' : notes.gsub("'", '&#39;')}' class='badge #{theme_color} badge-square'>#{reminder_date.strftime("%m/%d/%Y")}</span> "
+
+    "<a href='#{edit_reminder_path(:id => reminder_id)}' target='popup' onclick=\"window.open('#{edit_reminder_path(:id => reminder_id)}','popup','width=600,height=600'); return false;\"  data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder_type.nil? ? '' : reminder_type} <br>Notes: #{notes.nil? ? '' : notes.gsub("'", '&#39;')}' class='badge #{theme_color} badge-square'>#{reminder_date.strftime("%m/%d/%Y")}</a> "
   end
 
   def organize_date(date)
