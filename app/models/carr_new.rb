@@ -5,7 +5,7 @@ class CarrNew < ApplicationRecord
     select("
       carr_new.*,
       carr_new.carrier_name AS company_name,
-      (date_part('week', NOW()) - date_part('week', carr_new.first_load_date)) AS wk,
+      TO_CHAR(NOW() - carr_new.first_load_date, 'W') AS wk,
       carriers.id AS carrier_id,
       carriers.sales_priority,
       carriers.power_units,
