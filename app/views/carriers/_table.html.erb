@@ -61,7 +61,6 @@
       <% carriers.each do |carrier| %>
         <%#= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>
         <tr class="<%= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>">
-
           <td><%= carrier.id %></td>
           <td>
             <%= format_reminder(carrier.c_reminder_date, carrier.c_reminder_type, carrier.c_reminder_notes).html_safe if carrier.c_reminder_date  %>

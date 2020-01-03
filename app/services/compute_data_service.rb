@@ -4,6 +4,7 @@ class ComputeDataService
       if carrier_id
         @carrier = Carrier.find(carrier_id)
 
+        has_reminder = false
         @carrier.reminders.order('updated_at DESC').each do |reminder|
           c_reminder_date = nil
           if reminder.recurring
@@ -72,10 +73,26 @@ class ComputeDataService
             c_reminder_notes = reminder.notes
             c_reminder_type = reminder.reminder_type
 
-            @carrier.update_attributes(:c_reminder_id => c_reminder_id, :c_reminder_date => c_reminder_date, :c_reminder_interval => c_reminder_interval, :c_reminder_notes => c_reminder_notes, :c_reminder_type => c_reminder_type)
+            @carrier.update_attributes(
+              :c_reminder_id => c_reminder_id,
+              :c_reminder_date => c_reminder_date,
+              :c_reminder_interval => c_reminder_interval,
+              :c_reminder_notes => c_reminder_notes,
+              :c_reminder_type => c_reminder_type
+            )
+            has_reminder = true
             break
           end
+        end
 
+        unless has_reminder
+          @carrier.update_attributes(
+            :c_reminder_id => nil,
+            :c_reminder_date => nil,
+            :c_reminder_interval => nil,
+            :c_reminder_notes => nil,
+            :c_reminder_type => nil
+          )
         end
       end
     rescue

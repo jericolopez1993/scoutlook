@@ -3,6 +3,7 @@ class ComputedDataShippersService
     if shipper_id
       @shipper = Shipper.find(shipper_id)
 
+      has_reminder = false
       @shipper.reminders.order('updated_at DESC').each do |reminder|
         c_reminder_date = nil
         if reminder.recurring
@@ -71,10 +72,26 @@ class ComputedDataShippersService
           c_reminder_notes = reminder.notes
           c_reminder_type = reminder.reminder_type
 
-          @shipper.update_attributes(:c_reminder_id => c_reminder_id, :c_reminder_date => c_reminder_date, :c_reminder_interval => c_reminder_interval, :c_reminder_notes => c_reminder_notes, :c_reminder_type => c_reminder_type)
+          @shipper.update_attributes(
+            :c_reminder_id => c_reminder_id,
+            :c_reminder_date => c_reminder_date,
+            :c_reminder_interval => c_reminder_interval,
+            :c_reminder_notes => c_reminder_notes,
+            :c_reminder_type => c_reminder_type
+          )
+          has_reminder = true
           break
         end
+      end
 
+      unless has_reminder
+        @shipper.update_attributes(
+          :c_reminder_id => nil,
+          :c_reminder_date => nil,
+          :c_reminder_interval => nil,
+          :c_reminder_notes => nil,
+          :c_reminder_type => nil
+        )
       end
     end
   end
@@ -84,7 +101,8 @@ class ComputedDataShippersService
       begin
         @shipper = Shipper.find(shipper_id)
         lane = ShipperLane.where(:shipper_id => shipper_id).order("created_at DESC").first
-        @shipper.update_attributes(:c_lane_origin => lane.lane_origin, :c_lane_destination => lane.lane_destination, :c_lane_id => lane.id)
+        @shipper.update_attributes(:c_lane_origin => lane.lane_origin,
+          :c_lane_destination => lane.lane_destination, :c_lane_id => lane.id)
       rescue
       end
     end
