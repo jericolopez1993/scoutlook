@@ -64,7 +64,13 @@ class RemindersController < ApplicationController
   def destroy
     @reminder.destroy
     respond_to do |format|
-      format.html { redirect_to reminders_url, notice: 'Reminder was successfully destroyed.' }
+      if @previous_controller == "carriers"
+        format.html { redirect_to carrier_path(:id => @reminder.carrier_id), notice: 'Reminder was successfully removed.' }
+      elsif @previous_controller == "shippers"
+        format.html { redirect_to shipper_path(:id => @reminder.shipper_id), notice: 'Reminder was successfully removed.' }
+      else
+        format.html { redirect_to reminders_url, notice: 'Reminder was successfully removed.' }
+      end
       format.json { head :no_content }
     end
   end
