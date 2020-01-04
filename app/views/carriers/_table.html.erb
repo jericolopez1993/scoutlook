@@ -62,7 +62,7 @@
         <%#= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>
         <tr class="<%= (carrier.sales_priority == "B" && carrier.three_weeks_lapse) ? 'table-warning' : '' %>">
           <td><%= carrier.id %></td>
-          <td>
+          <td data-order="<%= carrier.c_reminder_date && carrier.c_reminder_date.strftime('%Y-%m-%d') %>">
             <%= format_reminder(carrier.c_reminder_id, carrier.c_reminder_date, carrier.c_reminder_type, carrier.c_reminder_notes).html_safe if carrier.c_reminder_date  %>
           </td>
           <td><%= carrier.interview ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
@@ -117,6 +117,24 @@
   </tbody>
 </table>
 <script language="javascript">
+  $.extend($.fn.dataTableExt.oSort, {
+    "non-empty-asc": function (str1, str2) {
+        if(str1 == "")
+            return 1;
+        if(str2 == "")
+            return -1;
+        return ((str1 < str2) ? -1 : ((str1 > str2) ? 1 : 0));
+    },
+
+    "non-empty-desc": function (str1, str2) {
+        if(str1 == "")
+            return 1;
+        if(str2 == "")
+            return -1;
+        return ((str1 < str2) ? 1 : ((str1 > str2) ? -1 : 0));
+    }
+  });
+
   $.fn.dataTableExt.afnFiltering.push(function( oSettings, aData, iDataIndex ) {
     var column_index = $('#<%= table_type %>_filter_column').val();
     var comparator = $('#<%= table_type %>_filter_comparator').val();
@@ -146,8 +164,8 @@
     return true;
   });
 </script>
-<script language="javascript">
 
+<script language="javascript">
   $(function () {
     var table;
     $('#<%= table_type %>_table tfoot th').each(function() {
@@ -165,7 +183,7 @@
         'checkboxes': {
           'selectRow': true
         }
-      }],
+      }, {type: 'non-empty', targets: 1}],
       'select': {
         'style': 'multi'
       },
