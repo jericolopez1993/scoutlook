@@ -62,16 +62,30 @@ class RemindersController < ApplicationController
   # DELETE /reminders/1
   # DELETE /reminders/1.json
   def destroy
-    @reminder.destroy
-    respond_to do |format|
-      if @previous_controller == "carriers"
-        format.html { redirect_to carrier_path(:id => @reminder.carrier_id), notice: 'Reminder was successfully removed.' }
-      elsif @previous_controller == "shippers"
-        format.html { redirect_to shipper_path(:id => @reminder.shipper_id), notice: 'Reminder was successfully removed.' }
-      else
-        format.html { redirect_to reminders_url, notice: 'Reminder was successfully removed.' }
+    if @reminder.destroy
+      if @reminder.carrier_id
+        carrier = Carrier.find(@reminder.carrier_id)
+        if carrier.c_reminder_id == @reminder.id
+          carrier.update_attributes(
+            :c_reminder_id => nil,
+            :c_reminder_date => nil,
+            :c_reminder_interval => nil,
+            :c_reminder_notes => nil,
+            :c_reminder_type => nil
+          )
+        end
       end
-      format.json { head :no_content }
+
+      respond_to do |format|
+        if @previous_controller == "carriers"
+          format.html { redirect_to carrier_path(:id => @reminder.carrier_id), notice: 'Reminder was successfully removed.' }
+        elsif @previous_controller == "shippers"
+          format.html { redirect_to shipper_path(:id => @reminder.shipper_id), notice: 'Reminder was successfully removed.' }
+        else
+          format.html { redirect_to reminders_url, notice: 'Reminder was successfully removed.' }
+        end
+        format.json { head :no_content }
+      end
     end
   end
 
