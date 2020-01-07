@@ -1,0 +1,41 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr class="odd gradeX">
+      <th>MC #</th>
+      <th>Name</th>
+      <th>Trucks</th>
+      <th>Reef</th>
+      <th>Team</th>
+      <th>DSL</th>
+      <th>LW</th>
+      <th>1M</th>
+      <th>6M</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @carriers.each do |carrier| %>
+      <tr>
+        <td><%= carrier.mc_number %></td>
+        <td><%= carrier.company_name %></td>
+        <td><%= carrier.power_units %></td>
+        <td><%= carrier.reefers %></td>
+        <td><%= carrier.teams %></td>
+        <td><%= carrier.c_mc_latest_date_load_days %></td>
+        <td><%= carrier.loads_lw %></td>
+        <td><%= carrier.c_mc_latest_date_last_month %></td>
+        <td><%= carrier.c_mc_latest_date_last_6_months %></td>
+      </tr>
+    <% end %>
+    <tr class="success" style="font-weight: bolder;">
+      <td></td>
+      <td class="text-right">Total:</td>
+      <td><%= @power_units %></td>
+      <td><%= @reefers %></td>
+      <td><%= @teams %></td>
+      <td><%= @c_mc_latest_date_load_days %></td>
+      <td><%= @loads_lw %></td>
+      <td><%= @c_mc_latest_date_last_month %></td>
+      <td><%= @c_mc_latest_date_last_6_months %></td>
+    </tr>
+  </tbody>
+</table>

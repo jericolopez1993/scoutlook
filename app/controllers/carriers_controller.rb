@@ -229,6 +229,32 @@ class CarriersController < ApplicationController
       redirect_to carrier_path(:id => params[:carrier_merger][:main_carrier_id])
   end
 
+  def partial_merged_table
+    carrier_ids = params[:id]
+    @power_units = 0
+    @reefers = 0
+    @teams = 0
+    @c_mc_latest_date_load_days = 0
+    @loads_lw = 0
+    @c_mc_latest_date_last_month = 0
+    @c_mc_latest_date_last_6_months = 0
+
+    if params[:other_carrier_ids]
+      carrier_ids = "#{carrier_ids}," + params[:other_carrier_ids].to_s.tr('[]', '').tr('"', '').gsub(', ', ',').to_s
+    end
+
+    @carriers = Carrier.where("carriers.id IN (#{carrier_ids})")
+    @power_units = @carriers.sum(:power_units)
+    @reefers = @carriers.sum(:reefers)
+    @teams = @carriers.sum(:teams)
+    @c_mc_latest_date_load_days = @carriers.sum(:c_mc_latest_date_load_days)
+    @loads_lw = @carriers.sum("carr_new.loads_lw")
+    @c_mc_latest_date_last_month = @carriers.sum(:c_mc_latest_date_last_month)
+    @c_mc_latest_date_last_6_months = @carriers.sum(:c_mc_latest_date_last_6_months)
+
+    render :layout => false
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_carrier

@@ -81,7 +81,7 @@
             <tr>
               <td><%= shipper.id %></td>
               <td>
-                <%= format_reminder(shipper.c_reminder_date, shipper.c_reminder_type, shipper.c_reminder_notes).html_safe if shipper.c_reminder_date  %>
+                <%= format_reminder(shipper.c_reminder_id, shipper.c_reminder_date, shipper.c_reminder_type, shipper.c_reminder_notes).html_safe if shipper.c_reminder_date  %>
               </td>
               <td class="text-center link"><%= shipper.relationship_owner_name.blank? ? '' : "#{link_to(covert_initials(shipper.relationship_owner_name), user_path(:id => shipper.relationship_owner))}".html_safe %></td>
               <td class="text-center"><%= shade_sales_priority(shipper.sales_priority).html_safe %></td>
