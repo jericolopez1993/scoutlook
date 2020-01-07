@@ -219,6 +219,16 @@ class CarriersController < ApplicationController
     end
   end
 
+  def show_merge
+    @duplicate_carriers = Carrier.where("(carriers.mc_number LIKE '%#{params[:mc_number]}' OR carriers.company_name = ?) AND carriers.id <> ?", params[:company_name], params[:id])
+    @all_duplicate_carriers = Carrier.where("(carriers.mc_number LIKE '%#{params[:mc_number]}' OR carriers.company_name = ?)", params[:company_name])
+    @carrier = Carrier.find(params[:id])
+  end
+
+  def merge
+      redirect_to carrier_path(:id => params[:carrier_merger][:main_carrier_id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_carrier

@@ -1,0 +1,69 @@
+<!-- begin page-header -->
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "Merger" %>
+  </h1>
+</div>
+<!-- end page-header -->
+<!-- begin panel -->
+<%= form_with(url: merge_carriers_path,  local: true, :html => {class: 'form-horizontal', 'data-parsley-validate' => true}) do |form| %>
+  <%= form.hidden_field :carrier_id  %>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <div class="panel-heading-btn"></div>
+          <h4 class="panel-title">Carrier Merger</h4>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <label class="text-right m-position-left col-md-2 col-sm-4 col-form-label">Name:</label>
+            <div class="col-md-9 col-sm-8">
+              <%= @carrier.company_name %>
+            </div>
+          </div>
+            <div class="row">
+              <label class="text-right m-position-left col-md-2 col-sm-4 col-form-label">MC Number:</label>
+              <div class="col-md-9 col-sm-8">
+                <%= @carrier.mc_number %>
+              </div>
+            </div>
+          <div class="form-group row m-b-15">
+            <%= form.label :other_carriers, 'Other Carriers:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+                <%= form.select :other_carriers, @duplicate_carriers.collect {|dc| [ "#{dc.company_name} - #{dc.mc_number}", dc.id ] }, {:include_blank => false}, class: 'other_carriers-multiple-select2', multiple: true %>
+            </div>
+          </div>
+        <div class="form-group row m-b-15">
+          <%= form.label :main_carrier_id, 'Main Carrier:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-9 col-sm-8">
+              <%= form.select :main_carrier_id, @all_duplicate_carriers.collect {|dc| [ "#{dc.company_name} - #{dc.mc_number} ", dc.id ] }, {:include_blank => false}, class: 'all_duplicate_carriers-select2' %>
+          </div>
+        </div>
+          <hr>
+          <div class="form-group row m-b-15">
+            <div class="col-md-2"></div>
+            <div class="col-md-9 col-sm-12 d-flex justify-content-end">
+              <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+              <% if params[:action] == 'new' %>
+                &nbsp;&nbsp;<%= link_to 'Back', carrier_path(@carrier_merger.main_carrier_id), :class => 'btn btn-default' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<!-- end panel -->
+<%= tinymce %>
+<!-- end panel -->
+
+
+<script language="javascript">
+
+  $(function () {
+    $(".other_carriers-multiple-select2").select2({ placeholder: "Select carriers", allowClear: true });
+    $(".all_duplicate_carriers-select2").select2({ placeholder: "Select the main carrier", allowClear: true });
+  });
+</script>

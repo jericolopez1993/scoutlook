@@ -42,6 +42,7 @@
     <%= render 'layouts/static/header', header_title: generate_alphanumeric_id(@carrier.company_name, @carrier.id), sub_header_title: is_mobile ? @carrier.company_name.truncate(15) : @carrier.company_name %>
   </h1>
   <span class="pull-right">
+    <%= link_to 'Merge', show_merge_carriers_path(:id => @carrier.id, :mc_number => @carrier.mc_number, :company_name => @carrier.company_name), :class => 'btn btn-purple btn-xs', target: :_blank %>
     <%= link_to 'Edit', edit_carrier_path(@carrier), :class => 'btn btn-warning btn-xs', target: :_blank %>
     <%= link_to 'Back', carriers_path, :class => 'btn btn-info btn-xs' %>
     <%= link_to 'Delete', @carrier, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>

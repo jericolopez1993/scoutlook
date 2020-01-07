@@ -59,6 +59,8 @@ Rails.application.routes.draw do
       get      'prom'
       get      'demo'
       get      'newly'
+      get      'show_merge'
+      post     'merge'
     end
   end
   resources :shipper_lanes
