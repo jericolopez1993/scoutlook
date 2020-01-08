@@ -77,7 +77,7 @@ class DfLoadDatatable < AjaxDatatablesRails::ActiveRecord
 
   def get_raw_records
     # insert query here
-    DfLoad.all
+    DfLoad.listings
   end
 
 end

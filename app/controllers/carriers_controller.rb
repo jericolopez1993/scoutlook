@@ -32,7 +32,7 @@ class CarriersController < ApplicationController
   # GET /carriers/1.json
   def show
     audits = get_audits(@carrier, nil)
-    @loads = DfLoad.where("mc_num = 'MC#{@carrier.mc_number}'").order('ship_date DESC')
+    @loads = DfLoad.listings.where("mc_num = 'MC#{@carrier.mc_number}'").order('ship_date DESC')
   end
 
   # GET /carriers/new
@@ -226,7 +226,27 @@ class CarriersController < ApplicationController
   end
 
   def merge
-      redirect_to carrier_path(:id => params[:carrier_merger][:main_carrier_id])
+    carrier_ids = ""
+
+    if params[:id] && params[:id] != params[:main_carrier_id]
+      carrier_ids = "#{params[:id]}"
+    end
+
+    if params[:other_carriers]
+      if !carrier_ids.blank?
+        carrier_ids = "#{carrier_ids}," + convert_array(params[:other_carriers])
+      else
+        carrier_ids =  convert_array(params[:other_carriers])
+      end
+    end
+    if params[:main_carrier_id] && params[:other_carriers]
+      MergeDataServices.new.carrier(params[:main_carrier_id], carrier_ids)
+      flash[:notice] = "Successfully Merged Carriers to the Main Carrier."
+    else
+      flash[:error] = "Please make sure that main carrier and other carriers have data."
+    end
+
+    redirect_to carrier_path(:id => params[:main_carrier_id])
   end
 
   def partial_merged_table
@@ -239,17 +259,20 @@ class CarriersController < ApplicationController
     @c_mc_latest_date_last_month = 0
     @c_mc_latest_date_last_6_months = 0
 
+    if params[:main_carrier_id]
+      carrier_ids = "#{carrier_ids}, #{params[:main_carrier_id]}"
+    end
+
     if params[:other_carrier_ids]
       carrier_ids = "#{carrier_ids}," + params[:other_carrier_ids].to_s.tr('[]', '').tr('"', '').gsub(', ', ',').to_s
     end
-    puts "#{carrier_ids}"
 
     @carriers = Carrier.where("carriers.id IN (#{carrier_ids})")
     @carrier_contacts = CarrierContact.where("carrier_id IN (#{carrier_ids})")
     @carrier_lanes = CarrierLane.where("carrier_id IN (#{carrier_ids})")
     @reminders = Reminder.where("reminders.carrier_id IN (#{carrier_ids})")
     @carrier_notes = CarrierNote.where("carrier_id IN (#{carrier_ids})")
-    @loads = DfLoad.where("mc_num IN (#{@carriers.pluck(:mc_number).map { |n| "'#{n}'" }.join(",")})")
+    @loads = DfLoad.listings.where("mc_num IN (#{@carriers.pluck(:mc_number).map { |n| "'#{n}'" }.join(",")})")
 
     @power_units = @carriers.sum(:power_units)
     @reefers = @carriers.sum(:reefers)

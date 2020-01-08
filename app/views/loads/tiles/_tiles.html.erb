@@ -8,7 +8,7 @@
         <%= date_to_words(cdate) %>
       </div>
       <div class="panel-body row" data-date="<%= cdate %>" style="min-height: 150px;z-index: 100;margin-bottom: 30px;">
-        <% @loads = DfLoad.where(:ship_date => cdate) %>
+        <% @loads = DfLoad.listings.where(:ship_date => cdate) %>
               <% if @loads.length > 0  %>
                   <% @loads.each_with_index do |load, index2|%>
                     <% if load.ship_date == cdate  %>
