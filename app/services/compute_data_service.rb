@@ -4,13 +4,28 @@ class ComputeDataService
       if carrier_id
         @carrier = Carrier.find(carrier_id)
 
-        has_reminder = false
-        @carrier.reminders.order('updated_at DESC').each do |reminder|
-          c_reminder_date = nil
-          if reminder.recurring
-            if reminder.last_reminded
-              current_date = reminder.last_reminded
-              if current_date <= Date.today
+        if @carrier.reminders
+          @carrier.reminders.order('updated_at DESC').each do |reminder|
+            c_reminder_date = nil
+            if reminder.recurring
+              if reminder.last_reminded
+                current_date = reminder.last_reminded
+                if current_date <= Date.today
+                  if current_date == Date.today
+                    c_reminder_date = current_date
+                  end
+                  until current_date >= Date.today
+                    current_date += reminder.reminder_interval.days
+                  end
+                  if reminder.reminder_interval > 0 && current_date > Date.today
+                    c_reminder_date = current_date
+                  end
+                else
+                  c_reminder_date = reminder.reminder_date
+                end
+
+              elsif reminder.reminder_date
+                current_date = reminder.reminder_date
                 if current_date == Date.today
                   c_reminder_date = current_date
                 end
@@ -21,79 +36,65 @@ class ComputeDataService
                   c_reminder_date = current_date
                 end
               else
-                c_reminder_date = reminder.reminder_date
-              end
-
-            elsif reminder.reminder_date
-              current_date = reminder.reminder_date
-              if current_date == Date.today
-                c_reminder_date = current_date
-              end
-              until current_date >= Date.today
-                current_date += reminder.reminder_interval.days
-              end
-              if reminder.reminder_interval > 0 && current_date > Date.today
-                c_reminder_date = current_date
+                current_date = reminder.created_at
+                until current_date >= Date.today
+                  current_date += reminder.reminder_interval.days
+                end
+                if current_date >= Date.today
+                  c_reminder_date = reminder.current_date
+                end
               end
             else
-              current_date = reminder.created_at
-              until current_date >= Date.today
-                current_date += reminder.reminder_interval.days
-              end
-              if current_date >= Date.today
-                c_reminder_date = reminder.current_date
-              end
-            end
-          else
-            if reminder.reminder_interval > 0
-              if reminder.reminder_date
-                quot = ((Date.today.to_date - reminder.reminder_date.to_date).to_i / reminder.reminder_interval)
-                if quot >= 1 && reminder.reminder_date >= Date.today
-                  c_reminder_date = reminder.reminder_date
-                else
-                  if (reminder.reminder_date + reminder.reminder_interval.days) == Date.today.to_date
-                    c_reminder_date = Date.today
+              if reminder.reminder_interval > 0
+                if reminder.reminder_date
+                  quot = ((Date.today.to_date - reminder.reminder_date.to_date).to_i / reminder.reminder_interval)
+                  if quot >= 1 && reminder.reminder_date >= Date.today
+                    c_reminder_date = reminder.reminder_date
+                  else
+                    if (reminder.reminder_date + reminder.reminder_interval.days) == Date.today.to_date
+                      c_reminder_date = Date.today
+                    end
                   end
+                else
+                  c_reminder_date = reminder.created_at + reminder.reminder_interval.days
                 end
               else
-                c_reminder_date = reminder.created_at + reminder.reminder_interval.days
-              end
-            else
-              if reminder.reminder_date
-                if reminder.reminder_date >= Date.today
-                  c_reminder_date = reminder.reminder_date
+                if reminder.reminder_date
+                  if reminder.reminder_date >= Date.today
+                    c_reminder_date = reminder.reminder_date
+                  else
+                    c_reminder_date = reminder.last_reminded
+                  end
                 end
               end
             end
+
+            if c_reminder_date
+              c_reminder_interval = reminder.reminder_interval
+              c_reminder_id = reminder.id
+              c_reminder_notes = reminder.notes
+              c_reminder_type = reminder.reminder_type
+
+              @carrier.update_attributes(
+                :c_reminder_id => c_reminder_id,
+                :c_reminder_date => c_reminder_date,
+                :c_reminder_interval => c_reminder_interval,
+                :c_reminder_notes => c_reminder_notes,
+                :c_reminder_type => c_reminder_type
+              )
+              break
+            end
           end
-
-          if c_reminder_date
-            c_reminder_interval = reminder.reminder_interval
-            c_reminder_id = reminder.id
-            c_reminder_notes = reminder.notes
-            c_reminder_type = reminder.reminder_type
-
+        else
             @carrier.update_attributes(
-              :c_reminder_id => c_reminder_id,
-              :c_reminder_date => c_reminder_date,
-              :c_reminder_interval => c_reminder_interval,
-              :c_reminder_notes => c_reminder_notes,
-              :c_reminder_type => c_reminder_type
+              :c_reminder_id => nil,
+              :c_reminder_date => nil,
+              :c_reminder_interval => nil,
+              :c_reminder_notes => nil,
+              :c_reminder_type => nil
             )
-            has_reminder = true
-            break
-          end
         end
 
-        unless has_reminder
-          @carrier.update_attributes(
-            :c_reminder_id => nil,
-            :c_reminder_date => nil,
-            :c_reminder_interval => nil,
-            :c_reminder_notes => nil,
-            :c_reminder_type => nil
-          )
-        end
       end
     rescue
     end
