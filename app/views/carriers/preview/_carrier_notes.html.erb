@@ -1,0 +1,26 @@
+<h4>Notes</h4>
+<table  class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if !carrier_notes.nil? %>
+      <% carrier_notes.each do |carrier_note| %>
+        <tr>
+          <td>
+            <span
+              class="learned"
+              data-toggle="tooltip"
+              data-placement="left"
+              data-html="true"
+              title="<%= carrier_note.notes.nil? ? '' : carrier_note.notes %>">
+                <%= carrier_note.notes.nil? ? '' : truncate_html_to_sentence(carrier_note.notes) %>
+            </span>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

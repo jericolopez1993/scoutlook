@@ -1,0 +1,45 @@
+<h4>Lanes</h4>
+<table  class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Priority</th>
+      <th>Prefer Teams?</th>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Commodities</th>
+      <th>Trucks Per Week</th>
+      <th>Preferred Load Days</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if !carrier_lanes.nil? %>
+      <% carrier_lanes.each do |carrier_lane| %>
+        <tr>
+          <td><%= carrier_lane.lane_priority_display %></td>
+          <td><%= carrier_lane.prefer_team ? "<b class='text-success'>Yes</b>".html_safe : "<i class='text-danger'>No</i>".html_safe %></td>
+          <td>
+            <% carrier_lane.lane_origin_to_array.each do |cr| %>
+              <%= generate_location(cr, nil).html_safe %>
+            <% end %>
+          </td>
+          <td>
+            <% carrier_lane.lane_destination_to_array.each do |cr| %>
+              <%= generate_location(cr, nil).html_safe %>
+            <% end %>
+          </td>
+          <td>
+            <% carrier_lane.commodities_to_array.each do |cr| %>
+              <span class="badge badge-inverse"><%= cr %></span>
+            <% end %>
+          </td>
+          <td><%= carrier_lane.truck_per_week %></td>
+          <td>
+            <% carrier_lane.preferred_load_day_to_array.each do |cr| %>
+              <span class="badge badge-inverse"><%= cr %></span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

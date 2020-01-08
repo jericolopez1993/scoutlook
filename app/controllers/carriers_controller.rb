@@ -242,8 +242,15 @@ class CarriersController < ApplicationController
     if params[:other_carrier_ids]
       carrier_ids = "#{carrier_ids}," + params[:other_carrier_ids].to_s.tr('[]', '').tr('"', '').gsub(', ', ',').to_s
     end
+    puts "#{carrier_ids}"
 
     @carriers = Carrier.where("carriers.id IN (#{carrier_ids})")
+    @carrier_contacts = CarrierContact.where("carrier_id IN (#{carrier_ids})")
+    @carrier_lanes = CarrierLane.where("carrier_id IN (#{carrier_ids})")
+    @reminders = Reminder.where("reminders.carrier_id IN (#{carrier_ids})")
+    @carrier_notes = CarrierNote.where("carrier_id IN (#{carrier_ids})")
+    @loads = DfLoad.where("mc_num IN (#{@carriers.pluck(:mc_number).map { |n| "'#{n}'" }.join(",")})")
+
     @power_units = @carriers.sum(:power_units)
     @reefers = @carriers.sum(:reefers)
     @teams = @carriers.sum(:teams)

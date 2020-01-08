@@ -1,0 +1,59 @@
+<h4>Loads</h4>
+<table class="table table-bordered display nowrap">
+  <thead>
+    <tr>
+      <th>Load #</th>
+      <th>Ship Date</th>
+      <th>Cust</th>
+      <th>Orig</th>
+      <th>OS</th>
+      <th>Dest</th>
+      <th>DS</th>
+      <th>Curr</th>
+      <th>TTT</th>
+      <th>Billing</th>
+      <th>Mileage</th>
+      <th>TTT RPM</th>
+      <th>Bill RPM</th>
+      <th>GM</th>
+      <th>GMPER</th>
+      <th>Cu.Sys</th>
+      <th>Ca.Sys</th>
+      <th>G.Margin</th>
+      <th>EXCH</th>
+      <th>Sales</th>
+      <th>Dispatch</th>
+      <th>Truck</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if !loads.nil? %>
+      <% loads.each do |load| %>
+        <tr>
+          <td><%= load["load_num"] %></td>
+          <td><%= load["ship_date"] %></td>
+          <td><%= load["customer"] %></td>
+          <td><%= load["origin"] %></td>
+          <td><%= load["os"] %></td>
+          <td><%= load["destination"] %></td>
+          <td><%= load["ds"] %></td>
+          <td><%= load["curr"] %></td>
+          <td><%= load["ttt"] %></td>
+          <td><%= load["billing"] %></td>
+          <td><%= load["mileage"] %></td>
+          <td><%= load["ttt_rpm"] %></td>
+          <td><%= load["bill_rpm"] %></td>
+          <td><%= load["gm"] %></td>
+          <td><%= load["gmper"] %></td>
+          <td><%= load["cust_sys"] %></td>
+          <td><%= load["carr_sys"] %></td>
+          <td><%= load["gross_margin"] %></td>
+          <td><%= load["exchange_rate"] %></td>
+          <td><%= load["sales"] %></td>
+          <td><%= load["dispatch"] %></td>
+          <td><%= load["truck"] %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
