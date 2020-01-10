@@ -50,7 +50,7 @@
           <div class="form-group row m-b-15">
             <div class="col-md-2"></div>
             <div class="col-md-9 col-sm-12 d-flex justify-content-end">
-              <%= form.submit 'Submit', :class => 'btn btn-primary', data: { confirm: "The Other Carriers will be DELETED in the process, with no easy way to recover.\nAre you sure you want to merge these carriers?" } %>
+              <%= form.submit 'Submit', :class => 'btn btn-primary', :id => "merge_btn", data: { confirm: "The Other Carriers will be DELETED in the process, with no easy way to recover.\nAre you sure you want to merge these carriers?" } %>
               <% if params[:action] == 'new' %>
                 &nbsp;&nbsp;<%= link_to 'Back', carrier_path(@carrier_merger.main_carrier_id), :class => 'btn btn-default' %>
               <% end %>
@@ -71,15 +71,31 @@
   function getSummaryData(){
     var main_carrier_id = $("#main_carrier_id").val();
     var other_carrier_ids = $("#other_carriers").val();
-    $.ajax({
-      method: 'get',
-      url: "/carriers/partial_merged_table",
-      data: {id: primary_carrier_id, main_carrier_id: main_carrier_id, other_carrier_ids: other_carrier_ids}
-    }).done(function(data) {
-      $("#merged_table").html(data)
-    });
+    if (main_carrier_id && other_carrier_ids.length > 0) {
+      $('#merge_btn').removeAttr("disabled");
+        console.log(true)
+          console.log($("#other_carriers").val())
+      $.ajax({
+        method: 'get',
+        url: "/carriers/partial_merged_table",
+        data: {id: primary_carrier_id, main_carrier_id: main_carrier_id, other_carrier_ids: other_carrier_ids}
+      }).done(function(data) {
+        $("#merged_table").html(data)
+      });
+    }else{
+      console.log(false)
+      $("#merge_btn").prop('disabled', true);
+      $("#merged_table").html("");
+    }
+
   }
   $(function () {
+    if ($("#main_carrier_id").val() && $("#other_carriers").val().length > 0) {
+      $('#merge_btn').removeAttr("disabled");
+    }else{
+      console.log(false)
+      $("#merge_btn").attr("disabled", true);
+    }
     $(".other_carriers-multiple-select2").select2({ placeholder: "Select carriers", allowClear: true });
     $(".all_duplicate_carriers-select2").select2({ placeholder: "Select the main carrier", allowClear: true });
     $('.other_carriers-multiple-select2').change(function(e) {
