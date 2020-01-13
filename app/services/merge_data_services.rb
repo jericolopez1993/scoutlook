@@ -30,16 +30,16 @@ class MergeDataServices
       mc_latest_dates.update_all(:mcnum => carrier.mc_number)
 
       #Sum up all the numbers from the merged carrier to the main carrier.
-      carrier.power_units = carrier.power_units + carriers.sum(:power_units)
-      carrier.reefers = carrier.reefers + carriers.sum(:reefers)
-      carrier.teams = carrier.teams + carriers.sum(:teams)
-      carrier.c_mc_latest_date_load_days = carrier.c_mc_latest_date_load_days + carriers.sum(:c_mc_latest_date_load_days)
-      carrier.c_mc_latest_date_last_month = carrier.c_mc_latest_date_last_month + carriers.sum(:c_mc_latest_date_last_month)
-      carrier.c_mc_latest_date_last_6_months = carrier.c_mc_latest_date_last_6_months + carriers.sum(:c_mc_latest_date_last_6_months)
-      carrier.owner_operators = carrier.owner_operators + carriers.sum(:owner_operators)
-      carrier.dry_vans = carrier.dry_vans + carriers.sum(:dry_vans)
-      carrier.flat_beds = carrier.flat_beds + carriers.sum(:flat_beds)
-      carrier.teams = carrier.teams + carriers.sum(:teams)
+      carrier.power_units = (carrier.power_units ? carrier.power_units : 0) + carriers.sum(:power_units)
+      carrier.reefers = (carrier.reefers ? carrier.reefers : 0) + carriers.sum(:reefers)
+      carrier.teams = (carrier.teams ? carrier.teams : 0) + carriers.sum(:teams)
+      carrier.c_mc_latest_date_load_days = (carrier.c_mc_latest_date_load_days ? carrier.c_mc_latest_date_load_days : 0) + carriers.sum(:c_mc_latest_date_load_days)
+      carrier.c_mc_latest_date_last_month = (carrier.c_mc_latest_date_last_month ? carrier.c_mc_latest_date_last_month : 0) + carriers.sum(:c_mc_latest_date_last_month)
+      carrier.c_mc_latest_date_last_6_months = (carrier.c_mc_latest_date_last_6_months ? carrier.c_mc_latest_date_last_6_months : 0) + carriers.sum(:c_mc_latest_date_last_6_months)
+      carrier.owner_operators = (carrier.owner_operators ? carrier.owner_operators : 0) + carriers.sum(:owner_operators)
+      carrier.dry_vans = (carrier.dry_vans ? carrier.dry_vans : 0) + carriers.sum(:dry_vans)
+      carrier.flat_beds = (carrier.flat_beds ? carrier.flat_beds : 0) + carriers.sum(:flat_beds)
+      carrier.teams = (carrier.teams ? carrier.teams : 0) + carriers.sum(:teams)
       carrier.save
 
       #Delete all the merged carrier.
@@ -50,8 +50,6 @@ class MergeDataServices
       ComputeDataService.new.lane(main_carrier_id)
       ComputeDataService.new.mc_latest_date(main_carrier_id)
       ComputeDataService.new.audit(main_carrier_id)
-
-    else
     end
   end
 end
