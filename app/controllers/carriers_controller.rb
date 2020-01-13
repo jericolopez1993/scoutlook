@@ -225,7 +225,7 @@ class CarriersController < ApplicationController
       company_name_substring = params[:company_name][0, 5]
     end
     @duplicate_carriers = Carrier.where("(carriers.mc_number::text ILIKE '%#{params[:mc_number]}%' OR carriers.company_name = ? OR carriers.company_name ILIKE '#{company_name_substring}%' ) AND carriers.id <> ?", params[:company_name], params[:id])
-    @all_duplicate_carriers = Carrier.where("(carriers.mc_number::text LIKE '%#{params[:mc_number]}%' OR carriers.company_name = ?)", params[:company_name])
+    @all_duplicate_carriers = Carrier.where("(carriers.mc_number::text ILIKE '%#{params[:mc_number]}%' OR carriers.company_name = ? OR carriers.company_name ILIKE '#{company_name_substring}%')", params[:company_name])
     @carrier = Carrier.find(params[:id])
   end
 
