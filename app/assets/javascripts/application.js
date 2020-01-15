@@ -17,6 +17,7 @@
 //= require vendor/table-manage-buttons.demo.min
 //= require vendor/render.highlight
 //= require vendor/form-slider-switcher.demo
+//= require vendor/bootstrap3-wysihtml5.all.min
 //= require vendor/countries
 //= require vendor/depends_on
 //= require vendor/email-inbox
