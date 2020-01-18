@@ -96,7 +96,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
     :user_name => 'kevinmarceloph',
-    :password => 'bd2ejj36epxP3Qcn',
+    :password => 'WHVtaraAcXQFL5',
     :domain => 'scout.net',
     :address => 'smtp.sendgrid.net',
     :port => 587,

@@ -155,7 +155,7 @@ class CarriersController < ApplicationController
 
   def send_mail
     attachment_files = params[:file].present? ? params[:file] : nil
-    SendComposeMailJob.perform_now(params[:to], nil, nil, params[:subject], params[:content_body], current_user.email, attachment_files)
+    SendComposeMailJob.delay.perform_now(params[:to], nil, nil, params[:subject], params[:content_body], current_user.email, attachment_files)
       # MailMailer.send_mail(contact, params[:cc], params[:bcc], params[:subject], params[:content], current_user.email).deliver
     save_mail
     if params[:record_activity].present?
@@ -165,7 +165,7 @@ class CarriersController < ApplicationController
         end
       end
     end
-    # redirect_to carriers_path, notice: 'Mail was successfully sent to carrier/s.'
+    redirect_to carriers_path, notice: 'Mail was successfully sent to carrier/s.'
   end
 
   def compose_sms
@@ -297,7 +297,7 @@ class CarriersController < ApplicationController
     end
 
     def set_carriers
-      @carriers = Carrier.limit(100)
+      @carriers = Carrier.all
       latest_date = McLatestDate.where("mcnum IN (SELECT mc_number FROM carriers)")
       @reefers = (@carriers.sum("carriers.reefers")).round
       @teams = (@carriers.sum("carriers.teams")).round
