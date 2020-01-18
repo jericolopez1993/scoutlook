@@ -134,7 +134,6 @@
         return ((str1 < str2) ? 1 : ((str1 > str2) ? -1 : 0));
     }
   });
-
   $.fn.dataTableExt.afnFiltering.push(function( oSettings, aData, iDataIndex ) {
     var column_index = $('#<%= table_type %>_filter_column').val();
     var comparator = $('#<%= table_type %>_filter_comparator').val();
@@ -220,10 +219,15 @@
     // Apply the search
     table.columns().every(function() {
       var that = this;
-      $('input', this.footer()).on('keyup change', function() {
+      $('input', this.footer()).on('keyup change clear', function() {
         if (that.search() !== this.value) {
-          that.search(this.value).draw();
+          if (that["0"][0] == 16) {
+            table.column(16).search(this.value.split("-").join(' ')).draw();
+          }else{
+            that.search(this.value).draw();
+          }
         }
+
       });
     });
     innerHTML = $( "#<%= table_type %>_table_filter" ).html()
