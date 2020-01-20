@@ -14,10 +14,10 @@
             <div class="wrapper p-0">
               <div class="nav-title"><b>FOLDERS</b></div>
               <ul class="nav nav-inbox">
-                <li class="<%= if @mtype == 'inbox' then "active" end %>"><a href="<%= mailings_path(:mtype => 'inbox') %>"><i class="fa fa-inbox fa-fw m-r-5"></i> Inbox</a></li>
-                <li class="<%= if @mtype == 'archive' then "active" end %>"><a href="<%= mailings_path(:mtype => 'archive') %>"><i class="fa fa-flag fa-fw m-r-5"></i> Archived</a></li>
+                <!-- <li class="<%= if @mtype == 'inbox' then "active" end %>"><a href="<%= mailings_path(:mtype => 'inbox') %>"><i class="fa fa-inbox fa-fw m-r-5"></i> Inbox</a></li> -->
+                <!-- <li class="<%= if @mtype == 'archive' then "active" end %>"><a href="<%= mailings_path(:mtype => 'archive') %>"><i class="fa fa-flag fa-fw m-r-5"></i> Archived</a></li> -->
                 <li class="<%= if @mtype == 'sent' then "active" end %>"><a href="<%= mailings_path(:mtype => 'sent') %>"><i class="fa fa-envelope fa-fw m-r-5"></i> Sent</a></li>
-                <li class="<%= if @mtype == 'trash' then "active" end %>"><a href="<%= mailings_path(:mtype => 'trash') %>"><i class="fa fa-trash fa-fw m-r-5"></i> Trash</a></li>
+                <!-- <li class="<%= if @mtype == 'trash' then "active" end %>"><a href="<%= mailings_path(:mtype => 'trash') %>"><i class="fa fa-trash fa-fw m-r-5"></i> Trash</a></li> -->
               </ul>
             </div>
             <!-- end wrapper -->

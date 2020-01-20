@@ -18,14 +18,18 @@ module ApplicationHelper
   end
 
   def ajax_datatable_js
-    if params[:action] == 'demo'
-      "demotion"
-    elsif params[:action] == 'prom'
-      "promotion"
-    elsif params[:action] == 'index'
-      params[:controller]
+    if  params[:controller] == 'logs'
+      "log"
     else
-      params[:action]
+      if params[:action] == 'demo'
+        "demotion"
+      elsif params[:action] == 'prom'
+        "promotion"
+      elsif params[:action] == 'index'
+        params[:controller]
+      else
+        params[:action]
+      end
     end
   end
 
