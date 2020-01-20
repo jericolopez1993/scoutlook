@@ -521,3 +521,8 @@ ul.wysihtml5-toolbar li a[title="Insert image"] { display: none; }
   margin-right: -20px;
   margin-top: -30px
 }
+
+#carrier_table_length > label, #customer_table_length > label {
+  display: block;
+  padding: 3%;
+}

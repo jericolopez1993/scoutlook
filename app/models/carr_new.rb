@@ -21,6 +21,7 @@ class CarrNew < ApplicationRecord
       carriers.c_lane_destination,
       (SELECT date_opened FROM activities WHERE activities.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) as date_opened,
       CONCAT(relationship_owner_user.first_name, ' ', relationship_owner_user.last_name) AS relationship_owner_name,
+      CONCAT(SUBSTR(relationship_owner_user.first_name, 1, 1), SUBSTR(relationship_owner_user.last_name, 1, 1)) AS relationship_owner_initials,
       carriers.relationship_owner AS user_id,
       CONCAT(contacts.first_name, ' ', contacts.last_name) AS poc_name,
       contacts.primary_phone,

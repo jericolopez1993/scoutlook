@@ -1,4 +1,5 @@
 $(function () {
+
   $.fn.dataTableExt.afnFiltering.push(function( oSettings, aData, iDataIndex ) {
     var column_index = $('#customer_table_filter_column').val();
     var comparator = $('#customer_table_filter_comparator').val();
@@ -32,7 +33,16 @@ $(function () {
     "serverSide": true,
     fixedHeader: true,
     "ajax": {
-      "url": $('#customer_table').data('source')
+      "url": $('#customer_table').data('source'),
+      "dataSrc": function ( json ) {
+        console.log(json);
+        $('#customer_reefer_count').html(json.reefers_sum);
+        $('#customer_team_count').html(json.teams_sum);
+        $('#customer_lw_count').html(json.loads_lws_sum);
+        $('#customer_1m_count').html(json.one_m_sum);
+        $('#customer_6m_count').html(json.six_m_sum);
+        return json.data;
+      }
     },
     "scrollX": true,
     "pageLength": 50,
@@ -41,28 +51,28 @@ $(function () {
           trigger: 'hover',
           html: true
         })
-        var api = this.api();
-         nb_cols = api.columns().nodes().length;
-         j = 6;
-         while(j < nb_cols){
-           console.log(j);
-           if ([9, 10, 13, 14, 15].includes(j)) {
-             var pageTotal = Math.round(api.column(j, {search: 'applied'}).data().sum() * 100) / 100;
-               console.log(pageTotal);
-             if (j===9) {
-               $('#customer_reefer_count').html(pageTotal);
-             }else if(j===10) {
-               $('#customer_team_count').html(pageTotal);
-             }else if(j===13) {
-               $('#customer_lw_count').html(pageTotal);
-             }else if(j===14) {
-               $('#customer_1m_count').html(pageTotal);
-             }else if(j===15) {
-               $('#customer_6m_count').html(pageTotal);
-             }
-           }
-           j++;
-         }
+        // var api = this.api();
+        //  nb_cols = api.columns().nodes().length;
+        //  j = 6;
+        //  while(j < nb_cols){
+        //    console.log(j);
+        //    if ([9, 10, 13, 14, 15].includes(j)) {
+        //      var pageTotal = Math.round(api.column(j, {search: 'applied'}).data().sum() * 100) / 100;
+        //        console.log(pageTotal);
+        //      if (j===9) {
+        //        $('#customer_reefer_count').html(pageTotal);
+        //      }else if(j===10) {
+        //        $('#customer_team_count').html(pageTotal);
+        //      }else if(j===13) {
+        //        $('#customer_lw_count').html(pageTotal);
+        //      }else if(j===14) {
+        //        $('#customer_1m_count').html(pageTotal);
+        //      }else if(j===15) {
+        //        $('#customer_6m_count').html(pageTotal);
+        //      }
+        //    }
+        //    j++;
+        //  }
       },
     "pagingType": "full_numbers",
     "createdRow": function ( row, data, index ) {
@@ -116,13 +126,13 @@ $(function () {
     {column_number : 6, filter_type: "text", filter_reset_button_text: false},
     {column_number : 7, filter_type: "text", filter_reset_button_text: false},
     {column_number : 8, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 9, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 10, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 11, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 9, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "reefers_range"},
+    {column_number : 10, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "teams_range"},
+    {column_number : 11, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "dsls_range"},
     {column_number : 12, data: ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "No Tier Yet"], filter_default_label: "Tier", filter_reset_button_text: false},
-    {column_number : 13, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 14, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 15, filter_type: "text", filter_reset_button_text: false},
+    {column_number : 13, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "lws_range"},
+    {column_number : 14, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "1ms_range"},
+    {column_number : 15, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "6ms_range"},
     {column_number : 16, filter_type: "text", filter_reset_button_text: false},
     {column_number : 17, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
     {column_number : 18, filter_type: "text", filter_reset_button_text: false},
@@ -133,16 +143,6 @@ $(function () {
     {column_number : 23, filter_type: "text", filter_reset_button_text: false}]);
 
     innerHTML = $( "#customer_table_filter" ).html()
-      operatorSearch = "&nbsp;&nbsp;|&nbsp;&nbsp;Operator Search:&nbsp;&nbsp;<select id='customer_table_filter_column' class='form-control'><option value='6'>Reefers</option><option value='7'>Teams</option><option value='8'>DSL</option><option value='10'>1M</option><option value='11'>6M</option></select>&nbsp;<select id='customer_table_filter_comparator' class='form-control'><option value='eq'>=</option><option value='gt'>&gt;=</option><option value='lt'>&lt;=</option><option value='ne'>!=</option></select><input type='text' class='form-control' id='customer_table_filter_value' style='width: 10%;' '>"
-      $( "#customer_table_filter" ).append( operatorSearch );
-      $('#customer_table_filter_column').change(function () {
-        table.draw();
-      });
-      $('#customer_table_filter_comparator').change(function () {
-        table.draw();
-      });
-      $('#customer_table_filter_value').keyup(function () {
-        table.draw();
-      });
-
+    $( "#customer_table_length" ).append(innerHTML);
+    $( "#customer_table_filter" ).html( "<div style='display: inline-block;'><table><tr><td>Teams:</td><td id='teams_range'></td><td>LW:</td><td id='lws_range'></td></tr><tr><td>Reefers:</td><td id='reefers_range'></td><td>1M:</td><td id='1ms_range'></td></tr><tr><td>DSL:</td><td id='dsls_range'></td><td>6M:</td><td id='6ms_range'></td></tr></table></div>" );
 });

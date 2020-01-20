@@ -25,14 +25,14 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
       sales_priority: { source: "Carrier.sales_priority" },
       mc_number: { source: "Carrier.mc_number" },
       company_name: { source: "Carrier.company_name" },
-      power_units: { source: "Carrier.power_units" },
-      reefers: { source: "Carrier.reefers" },
-      teams: { source: "Carrier.teams" },
-      c_mc_latest_date_load_days: { source: "Carrier.c_mc_latest_date_load_days" },
+      power_units: { source: "Carrier.power_units", cond: filter_on_range },
+      reefers: { source: "Carrier.reefers", cond: filter_on_range },
+      teams: { source: "Carrier.teams", cond: filter_on_range },
+      c_mc_latest_date_load_days: { source: "Carrier.c_mc_latest_date_load_days", cond: filter_on_range },
       c_mc_latest_date_tier: { source: "Carrier.c_mc_latest_date_tier, Carrier.c_carr_tier_tier" },
-      loads_lw: { source: "Carrier.loads_lw" },
-      c_mc_latest_date_last_month: { source: "Carrier.c_mc_latest_date_last_month" },
-      c_mc_latest_date_last_6_months: { source: "Carrier.c_mc_latest_date_last_6_months" },
+      loads_lw: { source: "Carrier.loads_lw", cond: filter_on_range },
+      c_mc_latest_date_last_month: { source: "Carrier.c_mc_latest_date_last_month", cond: filter_on_range },
+      c_mc_latest_date_last_6_months: { source: "Carrier.c_mc_latest_date_last_6_months", cond: filter_on_range },
       c_lane_origin: { source: "Carrier.c_lane_origin, Carrier.c_lane_destination" },
       c_lane_destination: { source: "Carrier.c_lane_destination" },
       blacklisted: { source: "Carrier.blacklisted" },
@@ -49,7 +49,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id: check_box_tag('carriers[]', record.id),
-        c_reminder_date: record.c_reminder_date ? format_reminder(record.c_reminder_date, record.c_reminder_type, record.c_reminder_notes).html_safe : "",
+        c_reminder_date: record.c_reminder_date ? format_reminder(record.c_reminder_id, record.c_reminder_date, record.c_reminder_type, record.c_reminder_notes).html_safe : "",
         interview: record.interview ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe,
         wolfbyte: record.wolfbyte ? "<i class='text-success'>Yes</i>".html_safe : "<i class='text-danger'>No</i>".html_safe,
         relationship_owner_name: record.relationship_owner_name ? (record['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(record['relationship_owner_name']), user_path(:id => record['relationship_owner']))}".html_safe) : '',
@@ -80,7 +80,58 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
 
   def get_raw_records
     # insert query here
-    Carrier.all
+    Carrier.listings
+  end
+
+  def filter_on_range
+    ->(column, value) {
+      data_values = column.search.value.split("-yadcf_delim-")
+      ::Arel::Nodes::Between.new(
+          Arel.sql(column.field.to_s),
+          Arel::Nodes::And.new(
+            [
+              data_values[0] ? data_values[0].to_i : 0,
+              data_values[1] ? data_values[1].to_i : 99999
+            ]
+          )
+        )
+
+    }
+  end
+
+  def as_json(options = {})
+      {
+        :draw => params[:draw].to_i,
+        :recordsTotal =>  get_raw_records.length,
+        :recordsFiltered => filter_records(get_raw_records).length,
+        :reefers_sum => reefers_sum,
+        :teams_sum => teams_sum,
+        :loads_lws_sum => loads_lws_sum,
+        :one_m_sum => one_m_sum,
+        :six_m_sum => six_m_sum,
+        :data => data
+
+      }
+  end
+
+  def reefers_sum
+    records.sum(:reefers)
+  end
+
+  def teams_sum
+    records.sum(:teams)
+  end
+
+  def loads_lws_sum
+    records.sum(:loads_lw)
+  end
+
+  def one_m_sum
+    records.sum(:c_mc_latest_date_last_month)
+  end
+
+  def six_m_sum
+    records.sum(:c_mc_latest_date_last_6_months)
   end
 
 end

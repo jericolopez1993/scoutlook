@@ -57,9 +57,10 @@ gem "aws-sdk-s3", require: false # AWS requirement for Active Storage
 gem 'twilio-ruby' # twilio gem
 gem 'e164'
 gem 'redis', '~> 3.0'
-gem 'ajax-datatables-rails'
+gem 'ajax-datatables-rails', git: 'https://github.com/jbox-web/ajax-datatables-rails.git'
 gem 'draper'
 gem "delayed_job_web"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

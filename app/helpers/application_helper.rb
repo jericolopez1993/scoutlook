@@ -395,7 +395,7 @@ module ApplicationHelper
       theme_color = "badge-primary"
     end
 
-    "<a href='#{edit_reminder_path(:id => reminder_id)}' target='popup' onclick=\"window.open('#{edit_reminder_path(:id => reminder_id)}','popup','width=600,height=600'); return false;\"  data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder_type.nil? ? '' : reminder_type} <br>Notes: #{notes.nil? ? '' : notes.gsub("'", '&#39;')}' class='badge #{theme_color} badge-square'>#{reminder_date.strftime("%m/%d/%Y")}</a> "
+    "<a href='/reminders/#{reminder_id}/edit' target='popup' onclick=\"window.open('/reminders/#{reminder_id}/edit','popup','width=600,height=600'); return false;\"  data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder_type.nil? ? '' : reminder_type} <br>Notes: #{notes.nil? ? '' : notes.gsub("'", '&#39;')}' class='badge #{theme_color} badge-square'>#{reminder_date.strftime("%m/%d/%Y")}</a> "
   end
 
   def organize_date(date)

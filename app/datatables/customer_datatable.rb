@@ -88,4 +88,39 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
     @user ||= options[:user]
   end
 
+  def as_json(options = {})
+      {
+        :draw => params[:draw].to_i,
+        :recordsTotal =>  get_raw_records.length,
+        :recordsFiltered => filter_records(get_raw_records).length,
+        :reefers_sum => reefers_sum,
+        :teams_sum => teams_sum,
+        :loads_lws_sum => loads_lws_sum,
+        :one_m_sum => one_m_sum,
+        :six_m_sum => six_m_sum,
+        :data => data
+
+      }
+  end
+
+  def reefers_sum
+    records.sum(:reefers)
+  end
+
+  def teams_sum
+    records.sum(:teams)
+  end
+
+  def loads_lws_sum
+    records.sum(:loads_lw)
+  end
+
+  def one_m_sum
+    records.sum(:c_mc_latest_date_last_month)
+  end
+
+  def six_m_sum
+    records.sum(:c_mc_latest_date_last_6_months)
+  end
+
 end
