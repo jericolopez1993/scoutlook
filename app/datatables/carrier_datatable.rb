@@ -33,7 +33,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
       loads_lw: { source: "Carrier.loads_lw", cond: filter_on_range },
       c_mc_latest_date_last_month: { source: "Carrier.c_mc_latest_date_last_month", cond: filter_on_range },
       c_mc_latest_date_last_6_months: { source: "Carrier.c_mc_latest_date_last_6_months", cond: filter_on_range },
-      c_lane_origin: { source: "Carrier.c_lane_origin, Carrier.c_lane_destination" },
+      c_lane_origin: { source: "Carrier.c_lane_origin", cond: filter_on_lane },
       c_lane_destination: { source: "Carrier.c_lane_destination" },
       blacklisted: { source: "Carrier.blacklisted" },
       poc_name: {source: "poc_name"},
@@ -95,6 +95,19 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
             ]
           )
         )
+
+    }
+  end
+
+  def filter_on_lane
+    ->(column, value) {
+      data_values = column.search.value.split("-")
+      # ::Arel::Nodes::And.new(
+      #   [
+      #     data_values[0],
+      #     data_values[1]
+      #   ]
+      # )
 
     }
   end

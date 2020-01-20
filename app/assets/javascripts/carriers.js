@@ -44,6 +44,13 @@ $(function () {
         return json.data;
       }
     },
+    "rowCallback": function (row, data) {
+      console.log(data.sales_priority == "<span class='text-indigo'>B</span>");
+      console.log(data.three_weeks_lapse);
+      if (data.sales_priority == "<span class='text-indigo'>B</span>" && data.three_weeks_lapse){
+        $(row).addClass('table-warning');
+      }
+    },
     "scrollX": true,
     "pageLength": 50,
     "drawCallback": function(settings) {
