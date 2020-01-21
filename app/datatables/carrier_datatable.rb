@@ -21,7 +21,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
       c_reminder_date: { source: "Carrier.c_reminder_date" },
       interview: { source: "Carrier.interview", cond: :eq },
       wolfbyte: { source: "Carrier.wolfbyte", cond: :eq },
-      relationship_owner_name: { source: "Carrier.relationship_owner_name" },
+      relationship_owner_name: { source: "Carrier.relationship_owner_name", cond: filter_for_relationship_owner_initials },
       sales_priority: { source: "Carrier.sales_priority" },
       mc_number: { source: "Carrier.mc_number" },
       company_name: { source: "Carrier.company_name" },
@@ -102,14 +102,18 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_lane
     ->(column, value) {
       data_values = column.search.value.split("-")
-      # ::Arel::Nodes::And.new(
-      #   [
-      #     data_values[0],
-      #     data_values[1]
-      #   ]
-      # )
+      sql = "(c_lane_origin ILIKE '%#{data_values[0]}%' OR c_lane_destination ILIKE '%#{data_values[0]}%')"
+      if data_values.length > 1
+        sql = sql + " AND (c_lane_origin ILIKE '%#{data_values[1]}%' OR c_lane_destination ILIKE '%#{data_values[1]}%')"
+      end
+      sql
 
     }
+  end
+
+
+  def filter_for_relationship_owner_initials
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(SUBSTR(relationship_owner_user.first_name, 1, 1), SUBSTR(relationship_owner_user.last_name, 1, 1))").matches("%#{column.search.value}%") }
   end
 
   def as_json(options = {})
