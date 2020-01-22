@@ -1,5 +1,4 @@
 class MailMailer < ApplicationMailer
-  layout 'mailer'
   def send_mail(contact, cc, bcc, subject, content, from, attachment_files=nil)
     @content = content
     if attachment_files.present? && !attachment_files.nil?
