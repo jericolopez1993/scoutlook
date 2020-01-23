@@ -721,10 +721,16 @@ module ApplicationHelper
         color = "success"
       elsif rank == "Diamond"
         color = "purple"
+      else
+        color = "dark"
       end
-      "<span class='badge badge-#{color}'>#{rank}</span>"
+      if color == "dark"
+        "<span class='badge badge-#{color} badge-square'>No Tier</span>"
+      else
+        "<span class='badge badge-#{color}'>#{rank}</span>"
+      end
     else
-      "<i>No Tier Yet</i>"
+      "<span class='badge badge-#{color} badge-square'>No Tier</span>"
     end
   end
 

@@ -29,19 +29,19 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
       reefers: { source: "Carrier.reefers", cond: filter_on_range },
       teams: { source: "Carrier.teams", cond: filter_on_range },
       c_mc_latest_date_load_days: { source: "Carrier.c_mc_latest_date_load_days", cond: filter_on_range },
-      c_mc_latest_date_tier: { source: "Carrier.c_mc_latest_date_tier, Carrier.c_carr_tier_tier" },
+      tier: { source: "tier", cond: filter_on_tier },
       loads_lw: { source: "Carrier.loads_lw", cond: filter_on_range },
       c_mc_latest_date_last_month: { source: "Carrier.c_mc_latest_date_last_month", cond: filter_on_range },
       c_mc_latest_date_last_6_months: { source: "Carrier.c_mc_latest_date_last_6_months", cond: filter_on_range },
       c_lane_origin: { source: "Carrier.c_lane_origin", cond: filter_on_lane },
       c_lane_destination: { source: "Carrier.c_lane_destination" },
-      blacklisted: { source: "Carrier.blacklisted" },
-      poc_name: {source: "poc_name"},
-      primary_phone: { source: "Carrier.primary_phone" },
-      contact_email: {source: "contact_email"},
-      approved: { source: "Carrier.approved" },
-      complete_record: { source: "Carrier.complete_record" },
-      date_opened: { source: "Carrier.date_opened" }
+      blacklisted: { source: "Carrier.blacklisted", cond: filter_on_blacklisted },
+      poc_name: {source: "poc_name", cond: filter_on_poc_name},
+      primary_phone: { source: "primary_phone", cond: filter_on_primary_phone },
+      contact_email: {source: "contact_email", cond: filter_on_contact_email},
+      approved: { source: "Carrier.approved", cond: filter_on_approved },
+      complete_record: { source: "Carrier.complete_record", cond: filter_on_complete_record },
+      date_opened: { source: "date_opened", cond: filter_on_date_opened}
     }
   end
 
@@ -60,7 +60,7 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
         reefers: record.reefers && record.reefers > 0 ? record.reefers : "",
         teams: record.teams && record.teams > 0 ? record.teams : "",
         c_mc_latest_date_load_days: record.c_mc_latest_date_load_days && record.c_mc_latest_date_load_days > 0 ? record.c_mc_latest_date_load_days : "",
-        c_mc_latest_date_tier: record.c_mc_latest_date_tier ? generate_rank_text(record.c_mc_latest_date_tier).html_safe : (record.c_carr_tier_tier ? generate_rank_text(record.c_carr_tier_tier).html_safe : "No Tier Yet"),
+        tier: generate_rank_text(record.tier).html_safe,
         loads_lw: record.loads_lw,
         c_mc_latest_date_last_month: record.c_mc_latest_date_last_month && record.c_mc_latest_date_last_month > 0 ? record.c_mc_latest_date_last_month : "",
         c_mc_latest_date_last_6_months: record.c_mc_latest_date_last_6_months && record.c_mc_latest_date_last_6_months > 0 ? record.c_mc_latest_date_last_6_months : "",
@@ -107,10 +107,48 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
         sql = sql + " AND (c_lane_origin ILIKE '%#{data_values[1]}%' OR c_lane_destination ILIKE '%#{data_values[1]}%')"
       end
       sql
-
     }
   end
 
+
+  def filter_on_primary_phone
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("contacts.primary_phone").matches("%#{column.search.value}%") }
+  end
+
+  def filter_on_contact_email
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("contacts.email").matches("%#{column.search.value}%") }
+  end
+
+  def filter_on_date_opened
+    ->(column, value) {::Arel::Nodes::SqlLiteral.new("CAST((SELECT date_opened FROM activities WHERE activities.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) AS VARCHAR)").matches("%#{column.search.value}%")}
+  end
+
+  def filter_on_approved
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("carriers.approved").eq(column.search.value) }
+  end
+
+  def filter_on_complete_record
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("carriers.complete_record").eq(column.search.value) }
+  end
+
+  def filter_on_blacklisted
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("carriers.blacklisted").eq(column.search.value) }
+  end
+
+  def filter_on_poc_name
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(contacts.first_name, ' ', contacts.last_name)").matches("%#{column.search.value}%") }
+  end
+
+  def filter_on_tier
+    ->(column, value) {
+      puts "#{column.search.value}"
+      if column.search.value == "None"
+        "COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = '' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'None'"
+      else
+      ::Arel::Nodes::SqlLiteral.new("COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier)").matches("%#{column.search.value}%")
+      end
+    }
+  end
 
   def filter_for_relationship_owner_initials
     ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(SUBSTR(relationship_owner_user.first_name, 1, 1), SUBSTR(relationship_owner_user.last_name, 1, 1))").matches("%#{column.search.value}%") }
@@ -150,5 +188,9 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
   def six_m_sum
     records.sum(:c_mc_latest_date_last_6_months)
   end
-  
+
+  def user
+    @user ||= options[:user]
+  end
+
 end
