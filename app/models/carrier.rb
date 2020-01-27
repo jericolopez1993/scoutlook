@@ -32,6 +32,7 @@ class Carrier < ApplicationRecord
   has_one :pdm, primary_key: "pdm_id", foreign_key: 'id', class_name: "CarrierContact"
 
   scope :listings, -> {select("
+    DISTINCT carriers.id,
     carriers.*,
     carriers.id AS carrier_id,
     (DATE(carriers.created_at) = DATE(CURRENT_DATE - 21)) AS three_weeks_lapse,
@@ -76,6 +77,7 @@ class Carrier < ApplicationRecord
     )}
 
   scope :overall, ->(id) {where(:id => id).select("
+    DISTINCT carriers.id,
     carriers.*,
     (DATE(carriers.created_at) = DATE(CURRENT_DATE - 21)) AS three_weeks_lapse,
     contacts.primary_phone,
