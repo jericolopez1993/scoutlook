@@ -20,7 +20,7 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
       interview: { source: "Carrier.interview", cond: :eq, },
       wolfbyte: { source: "Carrier.wolfbyte", cond: :eq },
       sales_priority: { source: "CarrNew.sales_priority" },
-      relationship_owner: { source: "relationship_owner_name" },
+      relationship_owner: { source: "relationship_owner_name", cond: filter_for_relationship_owner_initials  },
       mc_number: { source: "CarrNew.mc_number" },
       carrier_name: { source: "CarrNew.carrier_name" },
       power_units: { source: "CarrNew.power_units" },
@@ -29,7 +29,7 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
       contact: { source: "CarrNew.contact" },
       last_os: { source: "CarrNew.last_os" },
       last_ds: { source: "CarrNew.last_ds" },
-      wk: { source: "wk" },
+      wk: { source: "wk", cond: filter_for_wk },
       first_load_date: { source: "CarrNew.first_load_date" },
       gross_margin: { source: "CarrNew.gross_margin" },
       loads_lw: { source: "CarrNew.loads_lw" },
@@ -76,7 +76,16 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
 
   def get_raw_records
     # insert query here
-    CarrNew.all
+    CarrNew.listings
   end
+
+  def filter_for_wk
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CAST(TO_CHAR(NOW() - carr_new.first_load_date, 'W') AS INTEGER)").eq(column.search.value.to_i) }
+  end
+
+  def filter_for_relationship_owner_initials
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(SUBSTR(relationship_owner_user.first_name, 1, 1), SUBSTR(relationship_owner_user.last_name, 1, 1))").matches("%#{column.search.value}%") }
+  end
+
 
 end
