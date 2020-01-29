@@ -6,4 +6,5 @@ AjaxDatatablesRails.configure do |config|
 
   # Or you can use your rails environment adapter if you want a generic dev and production
   # config.db_adapter = Rails.configuration.database_configuration[Rails.env]['adapter'].to_sym
+  config.nulls_last = true
 end

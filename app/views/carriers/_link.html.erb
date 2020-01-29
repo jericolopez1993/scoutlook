@@ -20,10 +20,17 @@
       <b>Last Edit Date</b>: <%= carrier.c_auditable_last_activity_date.nil? ? '' : carrier.c_auditable_last_activity_date.strftime("%m/%d/%Y").to_s %><br>
       <% if params[:controller] != "activities" && params[:action] != "newly" %>
           <hr>
+<<<<<<< HEAD
           <% if carrier.c_activity_date_opened %>
             <b>Last Activity Name</b>: <%= carrier.c_activity_campaign_name.blank? ? '(no name)' : carrier.c_activity_campaign_name %><br>
             <b>Last Activity Type</b>: <%= carrier.c_activity_activity_type.nil? ? '' : carrier.c_activity_activity_type %><br>
             <b>Last Activity Status</b>: <%= carrier.c_activity_status ? 'Open' : 'Closed' %><br>
+=======
+          <% if carrier.c_auditable_last_activity_date %>
+            <b>Last Activity Name</b>: <%= carrier.campaign_name.blank? ? '(no name)' : carrier.campaign_name %><br>
+            <b>Last Activity Type</b>: <%= carrier.activity_type.nil? ? '' : carrier.activity_type %><br>
+            <b>Last Activity Status</b>: <%= carrier.activity_status ? 'Open' : 'Closed' %><br>
+>>>>>>> Added condition on sorting and filtering dates.
           <% else %>
             <b>Last Activity</b>: None <br>
           <% end %>
