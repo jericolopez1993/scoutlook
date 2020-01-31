@@ -27,6 +27,8 @@ module ApplicationHelper
         "promotion"
       elsif params[:action] == 'index'
         params[:controller]
+      elsif params[:action] == 'mine'
+        "customer"
       else
         params[:action]
       end
