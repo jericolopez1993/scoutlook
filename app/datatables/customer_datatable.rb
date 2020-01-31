@@ -25,14 +25,14 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
       sales_priority: { source: "Carrier.sales_priority" },
       mc_number: { source: "Carrier.mc_number" },
       company_name: { source: "Carrier.company_name" },
-      power_units: { source: "Carrier.power_units", cond: filter_on_range },
-      reefers: { source: "Carrier.reefers", cond: filter_on_range },
-      teams: { source: "Carrier.teams", cond: filter_on_range },
-      c_mc_latest_date_load_days: { source: "Carrier.c_mc_latest_date_load_days", cond: filter_on_range },
+      power_units: { source: "current_power_units", cond: filter_on_range },
+      reefers: { source: "current_reefers", cond: filter_on_range },
+      teams: { source: "current_teams", cond: filter_on_range },
+      c_mc_latest_date_load_days: { source: "current_c_mc_latest_date_load_days", cond: filter_on_range },
       tier: { source: "tier", cond: filter_on_tier },
       loads_lw: { source: "Carrier.loads_lw", cond: filter_on_range },
-      c_mc_latest_date_last_month: { source: "Carrier.c_mc_latest_date_last_month", cond: filter_on_range },
-      c_mc_latest_date_last_6_months: { source: "Carrier.c_mc_latest_date_last_6_months", cond: filter_on_range },
+      c_mc_latest_date_last_month: { source: "current_c_mc_latest_date_last_month", cond: filter_on_range },
+      c_mc_latest_date_last_6_months: { source: "current_c_mc_latest_date_last_6_months", cond: filter_on_range },
       c_lane_origin: { source: "Carrier.c_lane_origin", cond: filter_on_lane },
       c_lane_destination: { source: "Carrier.c_lane_destination" },
       blacklisted: { source: "Carrier.blacklisted", cond: filter_on_blacklisted },
@@ -83,6 +83,22 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
     Carrier.where(:relationship_owner => user.id)
   end
 
+  def filter_on_range_teams
+    ->(column, value) {
+      data_values = column.search.value.split("-yadcf_delim-")
+      ::Arel::Nodes::Between.new(
+          Arel.sql("COALESCE(carriers.teams, NULL)"),
+          Arel::Nodes::And.new(
+            [
+              data_values[0] ? data_values[0].to_i : 0,
+              data_values[1] ? data_values[1].to_i : 99999
+            ]
+          )
+        )
+
+    }
+  end
+
   def filter_on_range
     ->(column, value) {
       data_values = column.search.value.split("-yadcf_delim-")
@@ -96,6 +112,16 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
           )
         )
 
+    }
+  end
+
+  def filter_on_numbers
+    ->(column, value) {
+      if (column.search.value && column.search.value != 0 && column.search.value !=  "0")
+        "#{column.field.to_s} <> 0 AND #{column.field.to_s} = #{column.search.value}"
+      else
+        "#{column.field.to_s} = #{column.search.value}"
+      end
     }
   end
 
@@ -120,7 +146,11 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def filter_on_date_opened
-    ->(column, value) {::Arel::Nodes::SqlLiteral.new("CAST((SELECT date_opened FROM activities WHERE activities.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) AS VARCHAR)").matches("%#{column.search.value}%")}
+    ->(column, value) {
+      date_opened = column.search.value.tr('/', '-')
+      ::Arel::Nodes::SqlLiteral.new("CAST((SELECT date_opened FROM activities WHERE activities.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) AS VARCHAR)").matches("%#{
+        date_opened}%")
+    }
   end
 
   def filter_on_approved
@@ -187,10 +217,6 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
 
   def six_m_sum
     records.sum(:c_mc_latest_date_last_6_months)
-  end
-
-  def user
-    @user ||= options[:user]
   end
 
 end
