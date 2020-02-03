@@ -15,7 +15,7 @@
       <b>Last Edit Date</b>: <%= shipper.c_auditable_last_activity_date.nil? ? '' : shipper.c_auditable_last_activity_date.strftime("%m/%d/%Y").to_s %><br>
       <% if params[:controller] != "activities" %>
         <hr>
-        <% if !shipper.activities.empty? %>
+        <% if !shipper.c_auditable_last_activity_date %>
           <b>Last Activity Name</b>: <%= shipper.campaign_name.blank? ? '(no name)' : shipper.campaign_name %><br>
           <b>Last Activity Type</b>: <%= shipper.activity_type.nil? ? '' : shipper.activity_type %><br>
           <b>Last Activity Status</b>: <%= shipper.activity_status ? 'Open' : 'Closed' %><br>

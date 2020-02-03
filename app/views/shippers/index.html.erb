@@ -54,85 +54,7 @@
             <th>Commodities</th>
           </tr>
         </thead>
-        <tfoot>
-          <tr>
-            <th></th>
-            <th></th>
-            <th>RO</th>
-            <th>Class</th>
-            <th>Name</th>
-            <th>ST/PV</th>
-            <th>DM Name</th>
-            <th>DM Phone</th>
-            <th>Lane</th>
-            <th>DM Email</th>
-            <th>Appr</th>
-            <th>CR</th>
-            <th>LstDateCon</th>
-            <th>1M</th>
-            <th>6M</th>
-            <th>City</th>
-            <th>LPM</th>
-            <th>Commodities</th>
-          </tr>
-        </tfoot>
-        <tbody class="spacer">
-          <% @shippers.each do |shipper| %>
-            <tr>
-              <td><%= shipper.id %></td>
-              <td>
-                <%= format_reminder(shipper.c_reminder_id, shipper.c_reminder_date, shipper.c_reminder_type, shipper.c_reminder_notes).html_safe if shipper.c_reminder_date  %>
-              </td>
-              <td class="text-center link"><%= shipper.relationship_owner_name.blank? ? '' : "#{link_to(covert_initials(shipper.relationship_owner_name), user_path(:id => shipper.relationship_owner))}".html_safe %></td>
-              <td class="text-center"><%= shade_sales_priority(shipper.sales_priority).html_safe %></td>
-              <td class="link">
-                <%= render "shippers/link", shipper: shipper %>
-              </td>
-              <td><%= shipper.location.nil? ? '' : generate_abv(shipper.location.state).upcase %></td>
-              <td><%= truncate_fields(shipper.pdm_name).html_safe %></td>
-              <td><b><%=generate_phone_number("", shipper.primary_phone, shipper.primary_extension_number, shipper.primary_eligible_texting, shipper.primary_phone_type).html_safe %></b></td>
-              <td>
-                <% if shipper.c_lane_origin %>
-                  <% shipper.c_lane_origin.split(',').map(&:to_s).each do |origin| %>
-                    <%= generate_location2(origin, params[:controller], shipper.c_lane_id).html_safe %>
-                  <% end %>
-                <% end %>
-                <% if shipper.c_lane_destination %>
-                &rarr;
-                <% shipper.c_lane_destination.split(',').map(&:to_s).each do |destination| %>
-                  <%= generate_location2(destination, params[:controller], shipper.c_lane_id).html_safe %>
-                <% end %>
-              <% end %>
-              </td>
-              <td><% if !shipper.contact_email.nil?  %><a href="mailto:<%= shipper.contact_email %>?Subject=Hello%20<%= shipper.pdm_name.nil? ? '' :  shipper.pdm_name.capitalize  %>" target="_top"><%= shipper.contact_email.downcase %>&nbsp;<i class="far fa-envelope"></i></a><% end %></td>
-              <td class="text-center"><%= shipper.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= shipper.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-              <td class="text-center"><%= shipper.date_opened.nil? ? "" : shipper.date_opened.strftime('%m/%d/%Y').to_s %></td>
-              <td class="text-center"><%= shipper.load_last_month %></td>
-              <td class="text-center"><%= shipper.load_last_6_month %></td>
-              <td><%= shipper.city %></td>
-              <td><%= shipper.loads_per_month %></td>
-              <td>
-                <% shipper.commodities_to_array.first(5).each do |cr| %>
-                  <span class="badge badge-inverse"><%= cr %></span>
-                <% end %>
-                <% if shipper.commodities_to_array.count >= 5 %>
-                <span
-                  data-toggle="tooltip"
-                  data-placement="right"
-                  data-html="true"
-                  title="
-                  <% shipper.commodities_to_array.drop(5).each do |cr| %>
-                    <span class='badge badge-success'><%= cr %></span>
-                  <% end %>
-                  ">
-                  <span class="badge badge-inverse">+<%= shipper.commodities_to_array.count - 5 %></span>
-                </span>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
+
       </table>
     </div>
   </div>
@@ -140,7 +62,6 @@
 
 <script language="javascript">
   $(document).ready(function() {
-    filterTable("shipper_table");
     $('#send-mail-btn').on('click', function(){
         var rows_selected = $('#shipper_table').DataTable().column(0).checkboxes.selected();
         if (rows_selected.join(",") != ""){

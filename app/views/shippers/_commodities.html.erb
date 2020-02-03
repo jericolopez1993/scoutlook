@@ -1,0 +1,16 @@
+<% shipper.commodities_to_array.first(5).each do |cr| %>
+    <span class="badge badge-inverse"><%= cr %></span>
+  <% end %>
+  <% if shipper.commodities_to_array.count >= 5 %>
+  <span
+    data-toggle="tooltip"
+    data-placement="right"
+    data-html="true"
+    title="
+    <% shipper.commodities_to_array.drop(5).each do |cr| %>
+      <span class='badge badge-success'><%= cr %></span>
+    <% end %>
+    ">
+    <span class="badge badge-inverse">+<%= shipper.commodities_to_array.count - 5 %></span>
+  </span>
+  <% end %>

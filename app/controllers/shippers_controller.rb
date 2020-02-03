@@ -4,24 +4,9 @@ class ShippersController < ApplicationController
   # GET /shippers
   # GET /shippers.json
   def index
-    if !user_signed_in?
-      redirect_to(unauthenticated_root_path)
-    else
-      @shippers = []
-      if current_user.has_role?(:admin)
-        @shippers = Shipper.all
-        authorize @shippers
-      elsif current_user.has_role?(:steward) || current_user.ro || current_user.cs
-        @shippers = Shipper.where(:relationship_owner => current_user.id)
-        authorize @shippers
-      elsif current_user.has_role?(:contact)
-        begin
-          @shipper = Shipper.find(current_user.shipper_contact.shipper.id)
-          redirect_to @shipper
-        rescue
-          @shippers = []
-        end
-      end
+    respond_to do |format|
+      format.html
+      format.json { render json: ShipperDatatable.new(params, user: current_user, view_context: view_context) }
     end
   end
 
