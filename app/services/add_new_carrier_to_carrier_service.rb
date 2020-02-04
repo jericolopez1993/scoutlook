@@ -1,7 +1,7 @@
 class AddNewCarrierToCarrierService
   def check_and_create
     mc_number_list = Carrier.all.pluck(:mc_number)
-    carr_new = CarrNew.where('mcnum NOT IN (?)', mc_number_list)
+    carr_new = CarrNew.where('mcnum NOT IN (?) AND mc_number NOT IN (?)', mc_number_list, mc_number_list)
     user_names = CarrNew.all.pluck("Owner").uniq
     users = JSON.parse(User.select("users.id, users.first_name, users.last_name, CONCAT(users.first_name, ' ', users.last_name) AS full_name").where("CONCAT(users.first_name, ' ', users.last_name) IN (?)", user_names).to_json)
     carriers = []

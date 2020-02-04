@@ -73,93 +73,15 @@ class Carrier < ApplicationRecord
     ").joins("
       LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id
     ").joins(
-      'LEFT JOIN carr_new ON carr_new.mc_number = carriers.mc_number'
-    )}
-
-  scope :overall, ->(id) {where(:id => id).select("
-    DISTINCT carriers.id,
-    carriers.*,
-    (DATE(carriers.created_at) = DATE(CURRENT_DATE - 21)) AS three_weeks_lapse,
-    contacts.primary_phone,
-    contacts.primary_phone_type,
-    contacts.primary_extension_number,
-    contacts.primary_eligible_texting,
-    contacts.secondary_phone,
-    contacts.secondary_phone_type,
-    contacts.secondary_extension_number,
-    contacts.secondary_eligible_texting,
-    contacts.email as contact_email,
-    locations.city,
-    locations.address,
-    locations.state,
-    locations.country,
-    locations.loc_type,
-    carr_new.loads_lw,
-    carr_new.loads_2w,
-    carr_new.loads_3w,
-    carr_new.loads_4w,
-    (SELECT date_opened FROM activities WHERE activities.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) as date_opened,
-    CONCAT(relationship_owner_user.first_name, ' ', relationship_owner_user.last_name) as relationship_owner_name,
-    CONCAT(carrier_setup_user.first_name, ' ', carrier_setup_user.last_name) as carrier_setup_name,
-    CONCAT(contacts.first_name, ' ', contacts.last_name) as poc_name,
-    (SELECT cnactivities.campaign_name FROM activities AS cnactivities WHERE cnactivities.carrier_id =  carriers.id ORDER BY created_at DESC LIMIT 1) AS campaign_name,
-    (SELECT atactivities.activity_type FROM activities AS atactivities WHERE atactivities.carrier_id =  carriers.id ORDER BY created_at DESC LIMIT 1) AS activity_type,
-    (SELECT sactivities.status FROM activities AS sactivities WHERE sactivities.carrier_id =  carriers.id ORDER BY created_at DESC LIMIT 1) AS activity_status
-    ").joins("
-      LEFT JOIN users AS carrier_setup_user ON carrier_setup_user.id = carriers.carrier_setup
-    ").joins("
-      LEFT JOIN users AS relationship_owner_user ON relationship_owner_user.id = carriers.relationship_owner
-    ").joins("
-      LEFT JOIN carrier_locations AS locations ON locations.id = carriers.head_office
-    ").joins("
-      LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id
-    ").joins(
-      'LEFT JOIN carr_new ON carr_new.mc_number = carriers.mc_number'
-    ).limit(1)}
-
-  scope :mine, ->(id) {where(:relationship_owner => id).select("
-    carriers.*,
-    (DATE(carriers.created_at) = DATE(CURRENT_DATE - 21)) AS three_weeks_lapse,
-    contacts.primary_phone,
-    contacts.primary_phone_type,
-    contacts.primary_extension_number,
-    contacts.primary_eligible_texting,
-    contacts.secondary_phone,
-    contacts.secondary_phone_type,
-    contacts.secondary_extension_number,
-    contacts.secondary_eligible_texting,
-    contacts.email as contact_email,
-    locations.city,
-    locations.address,
-    locations.state,
-    locations.country,
-    locations.loc_type,
-    carr_new.loads_lw,
-    carr_new.loads_2w,
-    carr_new.loads_3w,
-    carr_new.loads_4w,
-    carr_new.loads_5w,
-    carr_new.loads_6w,
-    (SELECT date_opened FROM activities WHERE activities.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) as date_opened,
-    CONCAT(relationship_owner_user.first_name, ' ', relationship_owner_user.last_name) as relationship_owner_name,
-    CONCAT(carrier_setup_user.first_name, ' ', carrier_setup_user.last_name) as carrier_setup_name,
-    CONCAT(contacts.first_name, ' ', contacts.last_name) as poc_name,
-    (SELECT cnactivities.campaign_name FROM activities AS cnactivities WHERE cnactivities.carrier_id =  carriers.id ORDER BY created_at DESC LIMIT 1) AS campaign_name,
-    (SELECT atactivities.activity_type FROM activities AS atactivities WHERE atactivities.carrier_id =  carriers.id ORDER BY created_at DESC LIMIT 1) AS activity_type,
-    (SELECT sactivities.status FROM activities AS sactivities WHERE sactivities.carrier_id =  carriers.id ORDER BY created_at DESC LIMIT 1) AS activity_status
-    ").joins("
-      LEFT JOIN users AS carrier_setup_user ON carrier_setup_user.id = carriers.carrier_setup
-    ").joins("
-      LEFT JOIN users AS relationship_owner_user ON relationship_owner_user.id = carriers.relationship_owner
-    ").joins("
-      LEFT JOIN carrier_locations AS locations ON locations.id = carriers.head_office
-    ").joins("
-      LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id
-    ").joins(
-      'LEFT JOIN carr_new ON carr_new.mc_number = carriers.mc_number'
+      'LEFT JOIN carr_new ON carr_new.mc_number = carriers.mc_number AND carr_new.carrier_name = carriers.company_name'
     )}
 
   default_scope {listings}
+
+  scope :overall, ->(id) {where(:id => id).limit(1)}
+
+  scope :mine, ->(id) {where(:relationship_owner => id)}
+
 
   BLUE = ["NY", "NY-Brooklyn", "NY-Bronx",]
   LIGHT_BLUE = ["AL", "AK", "AR", "CO", "CT", "DE", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME",
