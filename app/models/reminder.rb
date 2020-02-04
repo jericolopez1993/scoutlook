@@ -6,13 +6,18 @@ class Reminder < ApplicationRecord
   before_save :notify_users
   after_save :update_computed_data
 
-
   validate :reminder_date_cannot_be_in_the_past
 
    def reminder_date_cannot_be_in_the_past
-     unchanged_reminder = Reminder.find(self.id)
-     if self.reminder_date.present? && self.reminder_date < Date.today && unchanged_reminder.reminder_date != self.reminder_date
-       errors.add(:reminder_date, "can't be in the past")
+     if self.new_record?
+       if  self.reminder_date < Date.today
+         errors.add(:reminder_date, "can't be in the past")
+       end
+     else
+       unchanged_reminder = Reminder.find(self.id)
+       if self.reminder_date.present? && self.reminder_date < Date.today && unchanged_reminder.reminder_date != self.reminder_date
+         errors.add(:reminder_date, "can't be in the past")
+       end
      end
    end
 
