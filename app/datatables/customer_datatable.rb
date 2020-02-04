@@ -83,6 +83,10 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
     Carrier.where(:relationship_owner => user.id)
   end
 
+  def user
+    @user ||= options[:user]
+  end
+
   def filter_on_range_teams
     ->(column, value) {
       data_values = column.search.value.split("-yadcf_delim-")
