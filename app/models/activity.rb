@@ -12,6 +12,25 @@ class Activity < ApplicationRecord
   has_many :rate, :dependent => :delete_all
   has_many :reminders, :dependent => :delete_all
 
+  scope :listings, -> {select("
+    activities.*,
+    CONCAT(users.first_name, ' ', users.last_name) as user_name,
+    COALESCE(carrier_locations.state, shipper_locations.state) as location_state,
+    COALESCE(carriers.company_name, shippers.company_name) as current_name,
+    carriers.company_name as carrier_name,
+    shippers.company_name as shipper_name
+    ").joins("
+      LEFT JOIN users ON users.id = activities.user_id
+    ").joins("
+      LEFT JOIN carriers ON carriers.id = activities.carrier_id
+    ").joins("
+      LEFT JOIN shippers ON shippers.id = activities.shipper_id
+    ").joins("
+      LEFT JOIN carrier_locations ON carrier_locations.id = carriers.head_office
+    ").joins("
+      LEFT JOIN shipper_locations ON shipper_locations.id = shippers.head_office
+    ")}
+
   def update_computed_data
     ComputeDataService.new.reminder(self.carrier_id)
   end

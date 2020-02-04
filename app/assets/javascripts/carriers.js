@@ -57,29 +57,6 @@ $(function () {
         $('[data-toggle="tooltip"]').tooltip({
           trigger: 'hover',
           html: true
-        })
-        // var api = this.api();
-        //  nb_cols = api.columns().nodes().length;
-        //  j = 6;
-        //  while(j < nb_cols){
-        //    console.log(j);
-        //    if ([9, 10, 13, 14, 15].includes(j)) {
-        //      var pageTotal = Math.round(api.column(j, {search: 'applied'}).data().sum() * 100) / 100;
-        //        console.log(pageTotal);
-        //      if (j===9) {
-        //        $('#carrier_reefer_count').html(pageTotal);
-        //      }else if(j===10) {
-        //        $('#carrier_team_count').html(pageTotal);
-        //      }else if(j===13) {
-        //        $('#carrier_lw_count').html(pageTotal);
-        //      }else if(j===14) {
-        //        $('#carrier_1m_count').html(pageTotal);
-        //      }else if(j===15) {
-        //        $('#carrier_6m_count').html(pageTotal);
-        //      }
-        //    }
-        //    j++;
-        //  }
       },
     "pagingType": "full_numbers",
     "createdRow": function ( row, data, index ) {
@@ -121,39 +98,32 @@ $(function () {
       {"data": "complete_record"},
       {"data": "date_opened"}
     ]
-    // pagingType is optional, if you want full pagination controls.
-    // Check dataTables documentation to learn more about
-    // available options.
-  }).yadcf([
-    {column_number : 1, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 2, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
-    {column_number : 3, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
-    {column_number : 4, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 5, data: ['New', 'A', 'B', 'C', 'D', 'U'], filter_default_label: "Prior", filter_reset_button_text: false},
-    {column_number : 6, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 7, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 8, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 9, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "reefers_range"},
-    {column_number : 10, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "teams_range"},
-    {column_number : 11, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "dsls_range"},
-    {column_number : 12, data: ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "None"], filter_default_label: "Tier", filter_reset_button_text: false},
-    {column_number : 13, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "lws_range"},
-    {column_number : 14, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "1ms_range"},
-    {column_number : 15, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "6ms_range"},
-    {column_number : 16, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 17, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
-    {column_number : 18, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 19, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 20, filter_type: "text", filter_reset_button_text: false},
-    {column_number : 21, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
-    {column_number : 22, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
-    {column_number : 23, filter_type: "text", filter_reset_button_text: false}]);
+  });
 
-    // $( "#carrier_table_length" ).append('<label>Search:<input type="search" class="form-control input-sm" id="filterbox" placeholder="" aria-controls="carrier_table"></label>');
-    $( "#carrier_table_filter" ).html( "<div style='display: inline-block;'><table><tr><td>Teams:</td><td id='teams_range'></td><td>LW:</td><td id='lws_range'></td></tr><tr><td>Reefers:</td><td id='reefers_range'></td><td>1M:</td><td id='1ms_range'></td></tr><tr><td>DSL:</td><td id='dsls_range'></td><td>6M:</td><td id='6ms_range'></td></tr></table></div>" );
+  $( "#carrier_table_filter" ).html( "<div style='display: inline-block;'><table><tr><td>Teams:</td><td id='teams_range'></td><td>LW:</td><td id='lws_range'></td></tr><tr><td>Reefers:</td><td id='reefers_range'></td><td>1M:</td><td id='1ms_range'></td></tr><tr><td>DSL:</td><td id='dsls_range'></td><td>6M:</td><td id='6ms_range'></td></tr></table></div>" );
 
-    // $("#filterbox").keyup(function() {
-    //   console.log("test")
-    //   $('#carrier_table').DataTable().search(this.value, false, false).draw();
-    // });
+    table.yadcf([
+      {column_number : 1, filter_type: "text", filter_reset_button_text: false},
+      {column_number : 2, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
+      {column_number : 3, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
+      {column_number : 4, filter_type: "text", filter_reset_button_text: false},
+      {column_number : 5, data: ['New', 'A', 'B', 'C', 'D', 'U'], filter_default_label: "Prior", filter_reset_button_text: false},
+      {column_number : 6, filter_type: "text", filter_reset_button_text: false},
+      {column_number : 7, filter_type: "text", filter_reset_button_text: false},
+      {column_number : 8, filter_type: "text", filter_reset_button_text: false},
+      {column_number : 9, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "reefers_range"},
+      {column_number : 10, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "teams_range"},
+      {column_number : 11, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "dsls_range"},
+      {column_number : 12, data: ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "None"], filter_default_label: "Tier", filter_reset_button_text: false},
+      {column_number : 13, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "lws_range"},
+      {column_number : 14, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "1ms_range"},
+      {column_number : 15, filter_type: "range_number", filter_reset_button_text: false, filter_container_id: "6ms_range"},
+      {column_number : 16, filter_type: "text", filter_reset_button_text: false},
+      {column_number : 17, data: [{value: 1,label: 'Yes'}, {value: 0,label: 'No'}], filter_default_label: "Y/N", filter_reset_button_text: false},
+      {column_number : 18, filter_type: "text", filter_reset_button_text: false},
+      {column_number : 19, filter_type: "text", filter_reset_button_text: false},
+      {column_number : 20, filter_type: "text", filter_reset_button_text: false},
+      {column_number : 21, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
+      {column_number : 22, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
+      {column_number : 23, filter_type: "text", filter_reset_button_text: false}]);
 });

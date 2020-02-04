@@ -2,6 +2,34 @@
 <%#= render 'layouts/static/header', header_title: 'Activities' %>
 <!-- end page-header -->
 <!-- begin panel -->
+<% if params[:controller] == "activities" %>
+  <style>
+    .tooltip-inner {
+      background-color: #dd8b00!important;
+    }
+    .tooltip .arrow::before{
+      border-right-color: #dd8b00!important;
+    }
+    td.link a:visited {
+      color: #dd8b00!important;
+    }
+    .learned p {
+      margin-bottom: 0!important;
+    }
+  </style>
+<% elsif params[:controller] == "carriers" %>
+  <style>
+    td.link a:visited {
+      color: #6f060b!important;
+    }
+  </style>
+<% elsif params[:controller] == "shippers" %>
+  <style>
+    td.link a:visited {
+      color: #013a38!important;
+    }
+  </style>
+<% end %>
 <div class="panel panel-inverse">
   <div class="panel panel-yelloworange">
     <div class="panel-heading">
@@ -24,11 +52,25 @@
       <h4 class="panel-title lp-header">Activities</h4>
     </div>
     <div class="panel-body">
-      <% if current_user.has_role?(:admin) %>
-        <%= render 'table', activities: @activities.order('date_closed DESC NULLS FIRST'), show_carrier: true, show_shipper: true, current_controller: params[:controller] %>
-      <% else %>
-        <%= render 'table', activities: Activity.where("user_id = ?", current_user.id).order('date_closed DESC NULLS FIRST'), show_carrier: true, show_shipper: true, current_controller: params[:controller] %>
-      <% end %>
+      <table class="table table-striped table-bordered display nowrap"  id="activities_table">
+        <thead>
+          <tr>
+            <th data-orderable="false">Actions</th>
+            <th>SP</th>
+            <th>Name</th>
+            <th>ST/PV</th>
+            <th>LPW</th>
+            <th>Open</th>
+            <th>Close</th>
+            <th>Outcome</th>
+            <th>Learned</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+      </table>
+
     </div>
   </div>
 </div>

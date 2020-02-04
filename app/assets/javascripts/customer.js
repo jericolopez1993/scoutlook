@@ -58,28 +58,6 @@ $(function () {
           trigger: 'hover',
           html: true
         })
-        // var api = this.api();
-        //  nb_cols = api.columns().nodes().length;
-        //  j = 6;
-        //  while(j < nb_cols){
-        //    console.log(j);
-        //    if ([9, 10, 13, 14, 15].includes(j)) {
-        //      var pageTotal = Math.round(api.column(j, {search: 'applied'}).data().sum() * 100) / 100;
-        //        console.log(pageTotal);
-        //      if (j===9) {
-        //        $('#customer_reefer_count').html(pageTotal);
-        //      }else if(j===10) {
-        //        $('#customer_team_count').html(pageTotal);
-        //      }else if(j===13) {
-        //        $('#customer_lw_count').html(pageTotal);
-        //      }else if(j===14) {
-        //        $('#customer_1m_count').html(pageTotal);
-        //      }else if(j===15) {
-        //        $('#customer_6m_count').html(pageTotal);
-        //      }
-        //    }
-        //    j++;
-        //  }
       },
     "pagingType": "full_numbers",
     "createdRow": function ( row, data, index ) {
@@ -121,9 +99,6 @@ $(function () {
       {"data": "complete_record"},
       {"data": "date_opened"}
     ]
-    // pagingType is optional, if you want full pagination controls.
-    // Check dataTables documentation to learn more about
-    // available options.
   })
     $( "#customer_table_filter" ).html( "<div style='display: inline-block;'><table><tr><td>Teams:</td><td id='teams_range'></td><td>LW:</td><td id='lws_range'></td></tr><tr><td>Reefers:</td><td id='reefers_range'></td><td>1M:</td><td id='1ms_range'></td></tr><tr><td>DSL:</td><td id='dsls_range'></td><td>6M:</td><td id='6ms_range'></td></tr></table></div>" );
     table.yadcf([

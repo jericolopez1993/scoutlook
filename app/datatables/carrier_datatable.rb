@@ -111,7 +111,6 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
             ]
           )
         )
-
     }
   end
 
@@ -135,7 +134,6 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
       sql
     }
   end
-
 
   def filter_on_primary_phone
     ->(column, value) { ::Arel::Nodes::SqlLiteral.new("contacts.primary_phone").matches("%#{column.search.value}%") }

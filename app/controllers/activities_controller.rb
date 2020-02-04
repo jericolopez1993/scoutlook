@@ -6,8 +6,10 @@ class ActivitiesController < ApplicationController
   # GET /activities
   # GET /activities.json
   def index
-    @activities = Activity.all
-    authorize @activities
+    respond_to do |format|
+      format.html
+      format.json { render json: ActivityDatatable.new(params, user: current_user, view_context: view_context) }
+    end
   end
 
   # GET /activities/1
