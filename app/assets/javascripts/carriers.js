@@ -57,6 +57,7 @@ $(function () {
         $('[data-toggle="tooltip"]').tooltip({
           trigger: 'hover',
           html: true
+        });
       },
     "pagingType": "full_numbers",
     "createdRow": function ( row, data, index ) {

@@ -80,7 +80,7 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
 
   def get_raw_records
     # insert query here
-    Carrier.where(:relationship_owner => user.id)
+    Carrier.mine(user.id)
   end
 
   def user
