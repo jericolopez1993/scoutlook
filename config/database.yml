@@ -91,6 +91,9 @@ production:
   password: Vb8eC4MqhoUjBa
   host: scoutlook.ch1xmgtvyyuk.ca-central-1.rds.amazonaws.com
 
+  # pg_dump -U scoutcrm -h scoutlook.ch1xmgtvyyuk.ca-central-1.rds.amazonaws.com scoutcrm > scoutcrm.sql
+  # psql -U kevin2 scoutv1_development < scoutcrm.sql
+
 staging:
   <<: *default
   database: scoutcrm_staging

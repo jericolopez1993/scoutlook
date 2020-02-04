@@ -18,20 +18,20 @@ class ShipperDatatable < AjaxDatatablesRails::ActiveRecord
     @view_columns ||= {
       id: { source: "Shipper.id" },
       c_reminder_date: { source: "Shipper.c_reminder_date" },
-      relationship_owner_name: { source: "Shipper.relationship_owner" },
+      relationship_owner_name: { source: "Shipper.relationship_owner", cond: filter_for_relationship_owner_initials },
       sales_priority: { source: "Shipper.sales_priority" },
       company_name: { source: "Shipper.company_name" },
-      state: { source: "state" },
-      pdm_name: { source: "pdm_name" },
-      primary_phone: { source: "primary_phone" },
-      c_lane_origin: { source: "Shipper.c_lane_origin" },
-      contact_email: { source: "contact_email" },
-      approved: { source: "Shipper.approved" },
-      complete_record: { source: "Shipper.complete_record" },
-      date_opened: { source: "Shipper.date_opened" },
+      state: { source: "state", cond: filter_on_state },
+      pdm_name: { source: "pdm_name", cond: filter_on_pdm_name },
+      primary_phone: { source: "primary_phone", cond: filter_on_primary_phone },
+      c_lane_origin: { source: "Shipper.c_lane_origin", cond: filter_on_lane },
+      contact_email: { source: "contact_email", cond: filter_on_contact_email },
+      approved: { source: "Shipper.approved", cond: filter_on_approved },
+      complete_record: { source: "Shipper.complete_record", cond: filter_on_complete_record },
+      date_opened: { source: "Shipper.date_opened", cond: filter_on_date_opened },
       load_last_month: { source: "Shipper.load_last_month" },
       load_last_6_month: { source: "Shipper.load_last_6_month" },
-      city: { source: "city" },
+      city: { source: "city", cond: filter_on_city },
       loads_per_month: { source: "Shipper.loads_per_month" },
       commodities: { source: "Shipper.commodities" },
     }
@@ -71,5 +71,57 @@ class ShipperDatatable < AjaxDatatablesRails::ActiveRecord
   def user
     @user ||= options[:user]
   end
+
+    def filter_on_lane
+      ->(column, value) {
+        data_values = column.search.value.split("-")
+        sql = "(c_lane_origin ILIKE '%#{data_values[0]}%' OR c_lane_destination ILIKE '%#{data_values[0]}%')"
+        if data_values.length > 1
+          sql = sql + " AND (c_lane_origin ILIKE '%#{data_values[1]}%' OR c_lane_destination ILIKE '%#{data_values[1]}%')"
+        end
+        sql
+      }
+    end
+
+    def filter_on_state
+      ->(column, value) { ::Arel::Nodes::SqlLiteral.new("locations.state").matches("%#{column.search.value}%") }
+    end
+
+    def filter_on_city
+      ->(column, value) { ::Arel::Nodes::SqlLiteral.new("locations.city").matches("%#{column.search.value}%") }
+    end
+
+    def filter_on_primary_phone
+      ->(column, value) { ::Arel::Nodes::SqlLiteral.new("contacts.primary_phone").matches("%#{column.search.value}%") }
+    end
+
+    def filter_on_contact_email
+      ->(column, value) { ::Arel::Nodes::SqlLiteral.new("contacts.email").matches("%#{column.search.value}%") }
+    end
+
+    def filter_on_date_opened
+      ->(column, value) {
+        date_opened = column.search.value.tr('/', '-')
+        ::Arel::Nodes::SqlLiteral.new("CAST((SELECT date_opened FROM activities WHERE activities.shipper_id = shippers.id ORDER BY created_at DESC LIMIT 1) AS VARCHAR)").matches("%#{
+          date_opened}%")
+      }
+    end
+
+    def filter_on_approved
+      ->(column, value) { ::Arel::Nodes::SqlLiteral.new("shippers.approved").eq(column.search.value) }
+    end
+
+    def filter_on_complete_record
+      ->(column, value) { ::Arel::Nodes::SqlLiteral.new("shippers.complete_record").eq(column.search.value) }
+    end
+
+
+    def filter_on_pdm_name
+      ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(contacts.first_name, ' ', contacts.last_name)").matches("%#{column.search.value}%") }
+    end
+
+    def filter_for_relationship_owner_initials
+      ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(SUBSTR(relationship_owner_user.first_name, 1, 1), SUBSTR(relationship_owner_user.last_name, 1, 1))").matches("%#{column.search.value}%") }
+    end
 
 end
