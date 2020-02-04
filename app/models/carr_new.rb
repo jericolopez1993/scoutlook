@@ -3,6 +3,7 @@ class CarrNew < ApplicationRecord
 
   scope :listings, -> {
     select("
+      DISTINCT(carr_new.mc_number, carr_new.carrier_name),
       carr_new.*,
       carr_new.carrier_name AS company_name,
       CAST(TO_CHAR(NOW() - carr_new.first_load_date, 'W') AS INTEGER) AS wk,
@@ -46,7 +47,7 @@ class CarrNew < ApplicationRecord
     ).joins(
       "LEFT JOIN carrier_locations AS locations ON locations.id = carriers.head_office"
     ).joins(
-      "LEFT JOIN carr_tier ON carr_tier.mc_number = carr_new.mc_number OR carr_tier.mcnum = carr_new.mc_number"
+      "LEFT JOIN carr_tier ON carr_tier.mc_number = carr_new.mc_number AND carr_tier.carr_name_5 = carr_new.carrier_name"
     )
 }
 
