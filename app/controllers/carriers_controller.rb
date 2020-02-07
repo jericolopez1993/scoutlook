@@ -155,9 +155,8 @@ class CarriersController < ApplicationController
 
   def send_mail
     attachment_files = params[:file].present? ? params[:file] : nil
-    SendComposeMailJob.delay.perform_now(params[:to], nil, nil, params[:subject], params[:content_body], current_user.email, attachment_files)
-      # MailMailer.send_mail(contact, params[:cc], params[:bcc], params[:subject], params[:content], current_user.email).deliver
     save_mail
+    SendComposeMailJob.delay.perform_now(params[:to], nil, nil, params[:subject], params[:content_body], current_user.email, @mail.id, attachment_files)
     if params[:record_activity].present?
       if params[:ids].present? && !params[:ids].blank?
         Carrier.where("carriers.id IN (#{params[:ids]})").each do |carrier|
@@ -357,16 +356,17 @@ class CarriersController < ApplicationController
     end
 
     def save_mail
-      mail = Mailing.new
-      mail.recipient = params[:to]
-      mail.sender = current_user.email
-      mail.subject = params[:subject]
-      mail.content_body = params[:content_body]
-      mail.user_id = current_user.id
-      mail.sent = true
-      if mail.save
+      @mail = Mailing.new
+      @mail.recipient = params[:to]
+      @mail.sender = current_user.email
+      @mail.subject = params[:subject]
+      @mail.content_body = params[:content_body]
+      @mail.user_id = current_user.id
+      @mail.status = "Pending"
+      @mail.sent = true
+      if @mail.save
         if params[:file].present?
-          mail.attachment_files.attach(params[:file])
+          @mail.attachment_files.attach(params[:file])
         end
       end
     end

@@ -1,0 +1,96 @@
+<!-- begin vertical-box -->
+<div class="vertical-box with-grid">
+  <%= render 'mailings/sidebar_nav' %>
+  <!-- begin vertical-box-column -->
+  <div class="vertical-box-column bg-white">
+    <!-- begin vertical-box -->
+    <div class="vertical-box">
+      <%= render 'mailings/buttons' %>
+      <!-- begin vertical-box-row -->
+      <div class="vertical-box-row">
+        <!-- begin vertical-box-cell -->
+        <div class="vertical-box-cell">
+          <!-- begin vertical-box-inner-cell -->
+          <div class="vertical-box-inner-cell">
+            <!-- begin scrollbar -->
+            <div data-scrollbar="true" data-height="100%">
+              <!-- begin list-email -->
+              <ul class="list-group list-group-lg no-radius list-email" id="list-email">
+                  <%= render 'mailings/row', mailings: mailings %>
+              </ul>
+              <!-- end list-email -->
+            </div>
+            <!-- end scrollbar -->
+          </div>
+          <!-- end vertical-box-inner-cell -->
+        </div>
+        <!-- end vertical-box-cell -->
+      </div>
+      <!-- end vertical-box-row -->
+      <!-- begin wrapper -->
+      <div class="wrapper bg-silver-lighter clearfix">
+        <!-- <div class="btn-group pull-right">
+          <button class="btn btn-white btn-sm">
+            <i class="fa fa-chevron-left f-s-14 t-plus-1"></i>
+          </button>
+          <button class="btn btn-white btn-sm">
+            <i class="fa fa-chevron-right f-s-14 t-plus-1"></i>
+          </button>
+        </div> -->
+        <div class="m-t-5 text-inverse f-w-600"><%= mailings.length %> message/s</div>
+      </div>
+      <!-- end wrapper -->
+    </div>
+    <!-- end vertical-box -->
+  </div>
+  <!-- end vertical-box-column -->
+</div>
+<!-- end vertical-box -->
+<script type="text/javascript">
+  function getCheckboxValues(){
+    mails = [];
+    $.each($("input[data-checked=email-checkbox]:checked"), function(){
+      mails.push($(this).val());
+    });
+    return mails;
+  }
+  function updateMails(mtype){
+    mails = getCheckboxValues();
+    $.ajax({
+      url: "/api/mailings/update_mails",
+      data: {
+        mail_ids: mails,
+        mtype: mtype
+      },
+      type: "POST",
+      success: function(response) {
+
+      }
+    });
+  }
+  $(document).ready(function() {
+    $('#delete-btn').click(function() {
+      mails = getCheckboxValues();
+      $.ajax({
+        url: "/api/mailings/delete_mails",
+        data: {
+          mail_ids: mails
+        },
+        type: "POST",
+        success: function(response) {
+
+        }
+      });
+    });
+    $('#to-sent-btn').click(function() {
+      updateMails('sent');
+    });
+    $('#archive-btn').click(function() {
+      updateMails('archive');
+    });
+    $('#trash-btn').click(function() {
+      updateMails('trash');
+    });
+
+  });
+</script>

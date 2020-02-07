@@ -1,9 +1,26 @@
 class MailingsController < ApplicationController
-  before_action :set_listings, only: [:index]
+  # before_action :set_listings, only: [:index]
 
   layout 'mail'
 
   def index
+    @mailings = Mailing.all
+  end
+
+  def pending
+    @mailings = Mailing.pending
+  end
+
+  def sending
+    @mailings = Mailing.sending
+  end
+
+  def delivered
+    @mailings = Mailing.delivered
+  end
+
+  def failed
+    @mailings = Mailing.failed
   end
 
   def show

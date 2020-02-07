@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   resources :mailings do
     collection do
       get    'resend'
+      get     'pending'
+      get     'sending'
+      get     'delivered'
+      get     'failed'
     end
   end
   resources :messages do
