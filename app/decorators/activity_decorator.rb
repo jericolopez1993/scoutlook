@@ -1,13 +1,13 @@
-class ShipperDecorator < ApplicationDecorator
+class ActivityDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate :company_name
 
   def link_to_shipper
-    h.render :partial => "shippers/link", :locals => {shipper: object}, :formats => [:html, :json]
+    h.render :partial => "shippers/link", :locals => {shipper: object.shipper}, :formats => [:html, :json]
   end
 
   def link_to_carrier
-    h.render :partial => "carriers/link", :locals => {carrier: object}, :formats => [:html, :json]
+    h.render :partial => "carriers/link", :locals => {carrier: object.carrier}, :formats => [:html, :json]
   end
 
   def notes
