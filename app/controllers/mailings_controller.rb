@@ -37,7 +37,12 @@ class MailingsController < ApplicationController
   def set_listings
     if params[:mtype].present?
       if params[:mtype] == "sent"
-        @mailings = Mailing.sents(current_user.id)
+        if current_user.email == "admin@test.com"
+          @mailings = Mailing.all_sents
+        else
+          @mailings = Mailing.sents(current_user.id)
+        end
+
       elsif params[:mtype] == "trash"
         @mailings = Mailing.trashes(current_user.id)
       elsif params[:mtype] == "archive"
