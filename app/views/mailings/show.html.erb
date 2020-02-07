@@ -24,9 +24,12 @@
 
                     <div class="media-body">
                       <div class="email-from text-inverse f-s-14 f-w-600 m-b-3">
-                        from <%= @mailing.sender %>
+                       <%= @mailing.sender %> &nbsp; <%= generate_mail_status(params[:action], @mailing.status) %>
                       </div>
-                      <div class="m-b-3"><i class="fa fa-clock fa-fw"></i> <%= @mailing.created_at.strftime('%m/%d/%Y %l:%M %p') %></div>
+                      <div class="m-b-3">Date Created: <%= @mailing.created_at.strftime('%m/%d/%Y %l:%M %p') %></div>
+                      <% if @mailing.status == "Delivered" %>
+                        <div class="m-b-3">Date Sent: <%= @mailing.date_sent.strftime('%m/%d/%Y %l:%M %p') %></div>
+                      <% end %>
                       <div class="email-to">
                         To: <%= @mailing.recipient %>
                       </div>

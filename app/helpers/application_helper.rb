@@ -728,4 +728,23 @@ module ApplicationHelper
     end
   end
 
+  def generate_mail_status(action, status)
+    if action == 'index' || action == 'show'
+      status_color = ""
+      if status == 'Pending'
+        status_color = "badge-info"
+      elsif status == 'Sending'
+        status_color = "badge-warning"
+      elsif status == 'Delivered'
+        status_color = "badge-green"
+      elsif status == 'Failed'
+        status_color = "badge-danger"
+      end
+
+      return "<span class='badge #{status_color}'>#{status}</span> ".html_safe
+    else
+      return ""
+    end
+  end
+
 end

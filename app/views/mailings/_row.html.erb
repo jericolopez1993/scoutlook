@@ -12,7 +12,7 @@
     </a>
     <div class="email-info">
       <a href="<%= mailing_path(:id => mail.id, :mtype => @mtype)%>">
-        <span class="email-time"><%= mail.created_at.strftime('%m/%d/%Y')%></span>
+        <span class="email-time"><%= generate_mail_status(params[:action], mail.status) %><%= mail.created_at.strftime('%m/%d/%Y')%></span>
         <span class="email-sender"><%= mail.recipient %></span>
         <span class="email-title"><%= mail.subject %></span>
         <span class="email-desc"><%= truncate_html_to_sentence(mail.content_body) %></span>

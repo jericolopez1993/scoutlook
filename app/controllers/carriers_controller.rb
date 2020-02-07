@@ -357,7 +357,7 @@ class CarriersController < ApplicationController
 
     def save_mail
       @mail = Mailing.new
-      @mail.recipient = params[:to]
+      @mail.recipient = params[:to].split(',').reject(&:blank?).map(&:to_s).join(', ')
       @mail.sender = current_user.email
       @mail.subject = params[:subject]
       @mail.content_body = params[:content_body]

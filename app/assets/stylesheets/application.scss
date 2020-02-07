@@ -30,6 +30,10 @@
   display: none;
 }
 
+.list-email .email-time {
+  width: auto !important;
+}
+
 body.pattern-white{
   background: url(asset_path('pattern-bg-white.png'));
 }
