@@ -1,7 +1,7 @@
 class SendComposeMailJob < ApplicationJob
   queue_as :compose_mail
 
-  def perform(contact, cc, bcc, subject, content, from, mail_id attachment_files=nil)
+  def perform(contact, cc, bcc, subject, content, from, mail_id, attachment_files=nil)
     @mail = Mailing.find(mail_id)
     @mail.update_attributes(status: "Sending")
     begin
