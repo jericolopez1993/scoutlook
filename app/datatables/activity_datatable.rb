@@ -43,7 +43,7 @@ class ActivityDatatable < AjaxDatatablesRails::ActiveRecord
         date_opened: convert_date(record.date_opened),
         date_closed: convert_date(record.date_closed),
         outcome: record.outcome,
-        notes: record.decorate.note,
+        notes: record.decorate.notes,
         activity_type: record.activity_type,
         status: record.status ? 'Open' : 'Closed',
         reason: record.reason

@@ -11,7 +11,7 @@ class ActivityDecorator < ApplicationDecorator
   end
 
   def notes
-    h.render :partial => "carriers/note", :locals => {activity: object}, :formats => [:html, :json]
+    h.render :partial => "activities/note", :locals => {activity: object}, :formats => [:html, :json]
   end
 
   def dt_actions
