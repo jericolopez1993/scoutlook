@@ -7,11 +7,11 @@
         <input type="checkbox" data-checked="email-checkbox" value="<%= mail.id %>" />
       </label>
     </div>
-    <a href="<%= mailing_path(:id => mail.id, :mtype => @mtype)%>" class="email-user bg-gradient-blue">
+    <a href="<%= mailing_path(:id => mail.id)%>" class="email-user bg-gradient-blue">
       <span class="text-white"><%= mail.recipient[0].upcase %></span>
     </a>
     <div class="email-info">
-      <a href="<%= mailing_path(:id => mail.id, :mtype => @mtype)%>">
+      <a href="<%= mailing_path(:id => mail.id)%>">
         <span class="email-time"><%= generate_mail_status(params[:action], mail.status) %><%= mail.created_at.strftime('%m/%d/%Y')%></span>
         <span class="email-sender"><%= mail.recipient %></span>
         <span class="email-title"><%= mail.subject %></span>

@@ -31,7 +31,6 @@ class MailingsController < ApplicationController
   def resend
     @mailing = Mailing.find(params[:id])
     attachment_files = @mailing.attachment_files.attached? ? @mailing.attachment_files : nil
-    SendComposeMailJob.delay.perform_now(@mailing.recipient, nil, nil, @mailing.subject, @mailing.content_body, current_user.email, attachment_files)
     mail = Mailing.new
     mail.recipient = @mailing.recipient
     mail.sender = @mailing.sender
@@ -46,6 +45,7 @@ class MailingsController < ApplicationController
         end
       end
     end
+    SendComposeMailJob.delay.perform_now(@mailing.recipient, nil, nil, @mailing.subject, @mailing.content_body, current_user.email, mail.id, attachment_files)
     redirect_to mailing_path(:id => @mailing.id, :mtype => params[:mtype])
   end
 

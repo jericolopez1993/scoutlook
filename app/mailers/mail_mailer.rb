@@ -10,8 +10,6 @@ class MailMailer < ApplicationMailer
     mail(
       :from => from,
       :to => contact,
-      :cc => cc,
-      :bcc => bcc,
       :subject => subject
     )
   end
