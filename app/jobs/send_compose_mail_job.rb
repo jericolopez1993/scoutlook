@@ -7,7 +7,7 @@ class SendComposeMailJob < ApplicationJob
     begin
       contact.split(',').reject(&:blank?).map(&:to_s).each do |contact|
         if contact
-          MailMailer.send_mail(contact.downcase, cc, bcc, subject, content, from, attachment_files).deliver
+          MailMailer.send_mail(contact.downcase.strip, cc, bcc, subject, content, from, attachment_files).deliver
         end
       end
       @mail.update_attributes(status: "Delivered", date_sent: Time.now)
