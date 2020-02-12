@@ -109,6 +109,13 @@ namespace :deploy do
     end
   end
 
+  desc 'Kill Crons'
+  task :kill_cron do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "kill $(ps aux | grep '[d]elayed_job' | awk '{print $2}')"
+    end
+  end
+
   desc 'Seed Dump'
   task :seed_dump do
     on roles(:app), in: :sequence, wait: 5 do
@@ -120,6 +127,7 @@ namespace :deploy do
   # before :starting,     :stop_nginx
   # before :starting,     :seed_dump
   before :starting,     :check_revision
+  before :starting,     :kill_cron
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart

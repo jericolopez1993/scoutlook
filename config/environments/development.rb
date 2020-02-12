@@ -51,22 +51,22 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
-
-  config.action_mailer.default_url_options = { host:'app.scoutlook.ca'}
-
-  # Do not dump schema after migrations.
-  config.active_record.dump_schema_after_migration = false
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.smtp_settings = {
-    :user_name => 'kevinmarceloph',
-    :password => 'WHVtaraAcXQFL5',
-    :domain => 'scout.net',
-    :address => 'smtp.sendgrid.net',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  # config.action_mailer.default_url_options = { host:'app.scoutlook.ca'}
+  #
+  # # Do not dump schema after migrations.
+  # config.active_record.dump_schema_after_migration = false
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.smtp_settings = {
+  #   :user_name => 'kevinmarceloph',
+  #   :password => 'WHVtaraAcXQFL5',
+  #   :domain => 'scout.net',
+  #   :address => 'smtp.sendgrid.net',
+  #   :port => 587,
+  #   :authentication => :plain,
+  #   :enable_starttls_auto => true
+  # }
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
