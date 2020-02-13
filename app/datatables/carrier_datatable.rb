@@ -87,7 +87,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
     ->(column, value) {
       data_values = column.search.value.split("-yadcf_delim-")
       ::Arel::Nodes::Between.new(
-          Arel.sql("COALESCE(carriers.teams, NULL)"),
+          Arel.sql(column.field.to_s),
           Arel::Nodes::And.new(
             [
               data_values[0] ? data_values[0].to_i : 0,
@@ -103,7 +103,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
     ->(column, value) {
       data_values = column.search.value.split("-yadcf_delim-")
       ::Arel::Nodes::Between.new(
-          Arel.sql(column.field.to_s),
+          Arel.sql("carriers.#{column.field.to_s.gsub("current_", "")}"),
           Arel::Nodes::And.new(
             [
               data_values[0] ? data_values[0].to_i : 0,
