@@ -9,8 +9,8 @@ local:
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 amazon:
   service: S3
-  access_key_id: AKIAJXHNUAKCNJV7NIEQ
-  secret_access_key: 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
+  access_key_id: AKIAJNTBTX754Q5YDI6Q
+  secret_access_key: 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
   region: ca-central-1
   bucket: scoutlook
 
