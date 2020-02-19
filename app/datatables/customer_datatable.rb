@@ -25,7 +25,7 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
       sales_priority: { source: "Carrier.sales_priority" },
       mc_number: { source: "Carrier.mc_number" },
       company_name: { source: "Carrier.company_name" },
-      power_units: { source: "current_power_units", cond: filter_on_range },
+      power_units: { source: "current_power_units", cond: filter_on_numbers },
       reefers: { source: "current_reefers", cond: filter_on_range },
       teams: { source: "current_teams", cond: filter_on_range },
       c_mc_latest_date_load_days: { source: "current_c_mc_latest_date_load_days", cond: filter_on_range },
@@ -122,9 +122,9 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_numbers
     ->(column, value) {
       if (column.search.value && column.search.value != 0 && column.search.value !=  "0")
-        "#{column.field.to_s} <> 0 AND #{column.field.to_s} = #{column.search.value}"
+        "carriers.#{column.field.to_s.gsub("current_", "")} <> 0 AND carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
       else
-        "#{column.field.to_s} = #{column.search.value}"
+        "carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
       end
     }
   end
