@@ -526,3 +526,7 @@ ul.wysihtml5-toolbar li a[title="Insert image"] { display: none; }
   display: block;
   padding: 3%;
 }
+
+.datepicker.dropdown-menu {
+  z-index: 2000 !important;
+}

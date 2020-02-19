@@ -126,5 +126,5 @@ $(function () {
       {column_number : 20, filter_type: "text", filter_reset_button_text: false},
       {column_number : 21, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
       {column_number : 22, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
-      {column_number : 23, filter_type: "text", filter_reset_button_text: false}]);
+      {column_number : 23, filter_type: "date"}]);
 });
