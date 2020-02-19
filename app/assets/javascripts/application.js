@@ -507,6 +507,7 @@ function filterTable(id){
     var that = this;
 
     $('input', this.footer()).on('keyup change', function () {
+      $('[data-toggle="tooltip"]').tooltip("hide");
       if (that.search() !== this.value) {
         that.search( this.value ).draw();
       }
@@ -546,6 +547,7 @@ function filterCarrierTable(id) {
     var that = this;
 
     $('input', this.footer()).on('keyup change', function() {
+      $('[data-toggle="tooltip"]').tooltip("hide");
       if (that.search() !== this.value) {
         that.search(this.value).draw();
       }
@@ -596,6 +598,7 @@ function filterAndSelectAllTable(id, ordered) {
     var that = this;
 
     $('input', this.footer()).on('keyup change', function() {
+      $('[data-toggle="tooltip"]').tooltip("hide");
       if (that.search() !== this.value) {
         that.search(this.value).draw();
       }

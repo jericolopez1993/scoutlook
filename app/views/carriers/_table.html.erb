@@ -220,6 +220,7 @@
     table.columns().every(function() {
       var that = this;
       $('input', this.footer()).on('keyup change clear', function() {
+        $('[data-toggle="tooltip"]').tooltip("hide");
         if (that.search() !== this.value) {
           if (that["0"][0] == 16) {
             table.column(16).search(this.value.split("-").join(' ')).draw();
