@@ -171,7 +171,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
     ->(column, value) {
       puts "#{column.search.value}"
       if column.search.value == "None"
-        "COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = '' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'None'"
+        "COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = '' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'None' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'none' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'NONE' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'N/A' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'NA' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) IS NULL"
       else
       ::Arel::Nodes::SqlLiteral.new("COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier)").matches("%#{column.search.value}%")
       end
