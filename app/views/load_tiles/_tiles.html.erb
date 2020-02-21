@@ -24,15 +24,16 @@
                           <a href="<%= load_tile_path(load_tile)%>" data-remote="true" class="kanban-entry grab card-link" data-tile-type="LOAD" id="load<%= load_tile.id %>" data-id="<%= load_tile.id %>" draggable="true">
                             <%= render 'load_tiles/card', tile: load_tile, tile_type: "load" %>
                           </a>
+                            <i class="fas fa-link fa-1-2x text-success loads-chained-icon"></i>
                         </div>
                         <div id="TRUCK-<%= index%>" data-index="<%= index %>" class="col-6 kanban-centered">
                           <a href="<%= truck_tile_path(load_tile.truck_tile)%>" data-remote="true" class="kanban-entry grab card-link" data-tile-type="TRUCK" id="truck<%= load_tile.truck_tile.id %>" data-id="<%= load_tile.truck_tile.id %>" draggable="true">
                             <%= render 'load_tiles/card', tile: load_tile.truck_tile, tile_type: "truck" %>
                           </a>
                         </div>
-                        <div class="w-100 float-chained-tile" style="margin-left: -1px;">
+                        <!-- <div class="w-100 float-chained-tile" style="margin-left: -1px;">
                           <i class="fas fa-link fa-1-2x text-success"></i>
-                        </div>
+                        </div> -->
                       <% end %>
                     <% else %>
                       <div id="LOAD-<%= index%>" data-index="<%= index %>" class="col-6 kanban-centered sortable-load">
