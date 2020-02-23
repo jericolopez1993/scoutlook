@@ -30,7 +30,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
       teams: { source: "current_teams", cond: filter_on_range },
       c_mc_latest_date_load_days: { source: "current_c_mc_latest_date_load_days", cond: filter_on_range },
       tier: { source: "tier", cond: filter_on_tier },
-      loads_lw: { source: "Carrier.loads_lw", cond: filter_on_range },
+      loads_lw: { source: "loads_lw", cond: filter_on_range },
       c_mc_latest_date_last_month: { source: "current_c_mc_latest_date_last_month", cond: filter_on_range },
       c_mc_latest_date_last_6_months: { source: "current_c_mc_latest_date_last_6_months", cond: filter_on_range },
       c_lane_origin: { source: "Carrier.c_lane_origin", cond: filter_on_lane },
@@ -102,8 +102,12 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_range
     ->(column, value) {
       data_values = column.search.value.split("-yadcf_delim-")
+      column_name = "carriers.#{column.field.to_s.gsub("current_", "")}"
+      if column.field.to_s == 'loads_lw'
+        column_name = "carr_new.#{column.field.to_s.gsub("current_", "")}"
+      end
       ::Arel::Nodes::Between.new(
-          Arel.sql("carriers.#{column.field.to_s.gsub("current_", "")}"),
+          Arel.sql(column_name),
           Arel::Nodes::And.new(
             [
               data_values[0] ? data_values[0].to_i : 0,
@@ -116,11 +120,12 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
 
   def filter_on_numbers
     ->(column, value) {
-      if (column.search.value && column.search.value != 0 && column.search.value !=  "0")
-        "carriers.#{column.field.to_s.gsub("current_", "")} <> 0 AND carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
-      else
-        "carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
-      end
+      "carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
+      # if (column.search.value && column.search.value != 0 && column.search.value !=  "0")
+      #   "carriers.#{column.field.to_s.gsub("current_", "")} <> 0 AND carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
+      # else
+      #   "carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
+      # end
     }
   end
 
