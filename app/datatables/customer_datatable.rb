@@ -13,7 +13,6 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
     super
   end
 
-
   def view_columns
     # Declare strings in this format: ModelName.column_name
     # or in aliased_join_table.column_name format
@@ -121,7 +120,7 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
 
   def filter_on_numbers
     ->(column, value) {
-      "carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
+      ::Arel::Nodes::SqlLiteral.new("carriers.#{column.field.to_s.gsub("current_", "")}").eq(column.search.value)
       # if (column.search.value && column.search.value != 0 && column.search.value !=  "0")
       #   "carriers.#{column.field.to_s.gsub("current_", "")} <> 0 AND carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
       # else
@@ -133,11 +132,31 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_lane
     ->(column, value) {
       data_values = column.search.value.split("-")
-      sql = "(c_lane_origin ILIKE '%#{data_values[0]}%' OR c_lane_destination ILIKE '%#{data_values[0]}%')"
       if data_values.length > 1
-        sql = sql + " AND (c_lane_origin ILIKE '%#{data_values[1]}%' OR c_lane_destination ILIKE '%#{data_values[1]}%')"
+        ::Arel::Nodes::And.new(
+          [
+            Arel::Nodes::Grouping.new(
+              Arel::Nodes::Or.new(
+                Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{data_values[0]}%"),
+                Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{data_values[0]}%")
+              )
+            ),
+            Arel::Nodes::Grouping.new(
+              Arel::Nodes::Or.new(
+                Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{data_values[1]}%"),
+                Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{data_values[1]}%")
+              )
+            )
+          ]
+        )
+      else
+        ::Arel::Nodes::Grouping.new(
+          Arel::Nodes::Or.new(
+              Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{data_values[0]}%"),
+              Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{data_values[0]}%")
+          )
+        )
       end
-      sql
     }
   end
 
