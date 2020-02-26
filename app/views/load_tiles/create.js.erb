@@ -1,10 +1,9 @@
-callProcessingModal();
 $("div#sortableKanbanBoards").html("<%= escape_javascript(render 'load_tiles/tiles') %>");
 $("div#newLoadForm").find(".modal-body").html("<%= escape_javascript(render 'load_tiles/form', load_tile: LoadTile.new, form_id: 'new_load') %>");
 $(".new-load-origin-multiple").select2({placeholder: "Select origins", allowClear: true, dropdownParent: $("#new_load")});
 $(".new-load-destination-multiple").select2({placeholder: "Select destinations", allowClear: true, dropdownParent: $("#new_load")});
-$("#newLoadForm").modal('hide');
 $(document).ready(function() {
   Tiles.init();
   FormSliderSwitcher.init();
 });
+$('#processing-modal').modal('hide');

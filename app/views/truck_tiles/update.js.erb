@@ -1,11 +1,9 @@
-callProcessingModal();
 $("div#sortableKanbanBoards").html("<%= escape_javascript(render 'load_tiles/tiles') %>");
 $('#edit_truck').trigger("reset");
 $('.new-truck-origin-multiple').val(null).trigger('change');
 $('.new-truck-destination-multiple').val(null).trigger('change');
-$("#showTruck").modal('hide');
-
 $(document).ready(function() {
   Tiles.init();
   FormSliderSwitcher.init();
 });
+$('#processing-modal').modal('hide');

@@ -137,6 +137,22 @@ var handleTile = function() {
       autoclose: true,
       orientation: 'auto bottom'
     });
+    $("#new_load").submit(function(){
+      $("#newLoadForm").modal('hide');
+      $('#processing-modal').modal('show');
+    });
+    $("#edit_load").submit(function(){
+      $("#showLoad").modal('hide');
+      $('#processing-modal').modal('show');
+    });
+    $("#new_truck").submit(function(){
+      $("#newTruckForm").modal('hide');
+      $('#processing-modal').modal('show');
+    });
+    $("#edit_truck").submit(function(){
+      $("#showTruck").modal('hide');
+      $('#processing-modal').modal('show');
+    });
   });
 };
 
