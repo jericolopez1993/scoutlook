@@ -31,6 +31,10 @@ $(function () {
   var table = $('#customer_table').dataTable({
     "processing": true,
     "serverSide": true,
+    'language': {
+            'loadingRecords': '&nbsp;',
+            'processing': '<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Loading...'
+        },
     fixedHeader: true,
     "ajax": {
       "url": $('#customer_table').data('source'),
@@ -42,6 +46,14 @@ $(function () {
         $('#customer_1m_count').html(json.one_m_sum);
         $('#customer_6m_count').html(json.six_m_sum);
         return json.data;
+      },
+      beforeSend: function(){
+        // Here, manually add the loading message.
+        $('#carrier_table > tbody').html(
+          '<tr class="odd">' +
+            '<td valign="top" colspan="24" class="dataTables_empty">Loading&hellip;</td>' +
+          '</tr>'
+        );
       }
     },
     "rowCallback": function (row, data) {
