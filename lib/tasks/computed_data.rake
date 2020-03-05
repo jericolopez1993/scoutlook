@@ -9,16 +9,7 @@ namespace :computed_data do
   end
 
   task one_time: :environment do
-    @carrier_ids = Carrier.all.pluck(:id).uniq
-
-    @carrier_ids.each do |id|
-      ComputeDataService.new.reminder(id)
-      ComputeDataService.new.activity(id)
-      ComputeDataService.new.carr_new(id)
-      ComputeDataService.new.lane(id)
-      ComputeDataService.new.mc_latest_date(id)
-      ComputeDataService.new.audit(id)
-    end
+    ComputeDataService.new.all
   end
 
   task reminders: :environment do

@@ -23,7 +23,15 @@ every :day, at: '12:01am', roles: [:worker] do
   # rake "checks_new_carriers:check_and_drop"
 end
 every :day, at: '1:00am', roles: [:worker] do
-  rake "computed_data:all"
+  rake "computed_data:one_time"
+end
+
+every :day, at: '6:00pm', roles: [:worker] do
+  rake "computed_data:one_time"
+end
+
+every :day, at: '6:00am', roles: [:worker] do
+  rake "computed_data:one_time"
 end
 # every :hour do
 #   rake "computed_data:all"
