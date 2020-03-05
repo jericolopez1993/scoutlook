@@ -111,6 +111,34 @@ class ComputeDataService
     end
   end
 
+  def activity(carrier_id)
+    begin
+      if carrier_id
+        @carrier = Carrier.find(carrier_id)
+        activity = Activity.where(:carrier_id => carrier_id).order("created_at DESC").first
+        @carrier.update_attributes(:c_activity_date_opened => activity.date_opened, :c_activity_campaign_name => activity.campaign_name, :c_activity_activity_type => activity.activity_type, :c_activity_status => activity.status)
+      end
+    rescue
+    end
+  end
+
+
+  def carr_new(carrier_id)
+    begin
+      if carrier_id
+        carr_new.mc_number = carriers.mc_number AND carr_new.carrier_name = carriers.company_name
+        @carrier = Carrier.find(carrier_id)
+        carr_new = CarrNew.where("mc_number = '#{@carrier.mc_number}' AND carrier_name = '#{@carrier.company_name}'").first
+        if carr_new
+          @carrier.update_attributes(:c_carr_new_loads_lw => carr_new.loads_lw, :c_carr_new_loads_2w => carr_new.loads_2w, :c_carr_new_loads_3w => carr_new.loads_3w, :c_carr_new_loads_4w => carr_new.loads_4w)
+        else
+          @carrier.update_attributes(:c_carr_new_loads_lw => nil, :c_carr_new_loads_2w => nil, :c_carr_new_loads_3w => nil, :c_carr_new_loads_4w => nil)
+        end
+      end
+    rescue
+    end
+  end
+
   def mc_latest_date(carrier_id)
     begin
       if carrier_id

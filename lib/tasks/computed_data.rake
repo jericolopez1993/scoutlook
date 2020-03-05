@@ -5,6 +5,20 @@ namespace :computed_data do
     Rake::Task["computed_data:lanes"].invoke
     Rake::Task["computed_data:mc_latest_dates"].invoke
     Rake::Task["computed_data:audits"].invoke
+    Rake::Task["computed_data:activities_and_carr_news"].invoke
+  end
+
+  task one_time: :environment do
+    @carrier_ids = Carrier.all.pluck(:id).uniq
+
+    @carrier_ids.each do |id|
+      ComputeDataService.new.reminder(id)
+      ComputeDataService.new.activity(id)
+      ComputeDataService.new.carr_new(id)
+      ComputeDataService.new.lane(id)
+      ComputeDataService.new.mc_latest_date(id)
+      ComputeDataService.new.audit(id)
+    end
   end
 
   task reminders: :environment do
@@ -20,6 +34,17 @@ namespace :computed_data do
 
     @shipper_ids.each do |id|
       ComputedDataShippersService.new.reminder(id)
+    end
+  end
+
+
+  task activities_and_carr_news: :environment do
+    #Carriers
+    @carrier_ids = Carrier.all.pluck(:id).uniq
+
+    @carrier_ids.each do |id|
+      ComputeDataService.new.activity(id)
+      ComputeDataService.new.carr_new(id)
     end
   end
 
