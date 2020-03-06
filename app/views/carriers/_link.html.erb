@@ -12,18 +12,18 @@
       <b>MC Number</b>: <%= carrier.mc_number %><br>
       <b>Reefers Count</b>: <%= carrier.reefers %><br>
       <b>Number of Teams</b>: <%= carrier.teams %><br>
-      <b>Lanes</b>:   <%= carrier.current_origin if carrier.current_origin %>&rarr;  <%= carrier.current_destination if carrier.current_destination %><br>
+      <b>Lanes</b>:   <%= carrier.c_lane_origin if carrier.c_lane_origin %>&rarr;  <%= carrier.c_lane_destination if carrier.c_lane_destination %><br>
       <hr>
       <b>City</b>: <%= carrier.city.blank? ? '(none)' : carrier.city %><br>
       <b>Sate/Province</b>:<%= carrier.state.blank? ? '(none)' : generate_abv(carrier.state).upcase %><br>
-      <b>Last Contact Date</b>: <%= carrier.date_opened.nil? ? "" : carrier.date_opened.strftime('%m/%d/%Y').to_s %><br>
+      <b>Last Contact Date</b>: <%= carrier.c_activity_date_opened.nil? ? "" : carrier.c_activity_date_opened.strftime('%m/%d/%Y').to_s %><br>
       <b>Last Edit Date</b>: <%= carrier.c_auditable_last_activity_date.nil? ? '' : carrier.c_auditable_last_activity_date.strftime("%m/%d/%Y").to_s %><br>
       <% if params[:controller] != "activities" && params[:action] != "newly" %>
           <hr>
-          <% if !carrier.activities.empty? %>
-            <b>Last Activity Name</b>: <%= carrier.campaign_name.blank? ? '(no name)' : carrier.campaign_name %><br>
-            <b>Last Activity Type</b>: <%= carrier.activity_type.nil? ? '' : carrier.activity_type %><br>
-            <b>Last Activity Status</b>: <%= carrier.activity_status ? 'Open' : 'Closed' %><br>
+          <% if carrier.c_activity_date_opened %>
+            <b>Last Activity Name</b>: <%= carrier.c_activity_campaign_name.blank? ? '(no name)' : carrier.c_activity_campaign_name %><br>
+            <b>Last Activity Type</b>: <%= carrier.c_activity_activity_type.nil? ? '' : carrier.c_activity_activity_type %><br>
+            <b>Last Activity Status</b>: <%= carrier.c_activity_status ? 'Open' : 'Closed' %><br>
           <% else %>
             <b>Last Activity</b>: None <br>
           <% end %>

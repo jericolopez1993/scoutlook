@@ -50,20 +50,9 @@ class Carrier < ApplicationRecord
     locations.state,
     locations.country,
     locations.loc_type,
-    carr_new.loads_lw,
-    carr_new.loads_2w,
-    carr_new.loads_3w,
-    carr_new.loads_4w,
-    (SELECT lane_origin FROM carrier_lanes WHERE carrier_lanes.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) as current_origin,
-    (SELECT lane_destination FROM carrier_lanes WHERE carrier_lanes.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) as current_destination,
-    (SELECT id FROM carrier_lanes WHERE carrier_lanes.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) as current_lane_id,
-    (SELECT date_opened FROM activities WHERE activities.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) as date_opened,
     CONCAT(relationship_owner_user.first_name, ' ', relationship_owner_user.last_name) as relationship_owner_name,
     CONCAT(carrier_setup_user.first_name, ' ', carrier_setup_user.last_name) as carrier_setup_name,
-    CONCAT(contacts.first_name, ' ', contacts.last_name) as poc_name,
-    (SELECT cnactivities.campaign_name FROM activities AS cnactivities WHERE cnactivities.carrier_id =  carriers.id ORDER BY created_at DESC LIMIT 1) AS campaign_name,
-    (SELECT atactivities.activity_type FROM activities AS atactivities WHERE atactivities.carrier_id =  carriers.id ORDER BY created_at DESC LIMIT 1) AS activity_type,
-    (SELECT sactivities.status FROM activities AS sactivities WHERE sactivities.carrier_id =  carriers.id ORDER BY created_at DESC LIMIT 1) AS activity_status
+    CONCAT(contacts.first_name, ' ', contacts.last_name) as poc_name
     ").joins("
       LEFT JOIN users AS carrier_setup_user ON carrier_setup_user.id = carriers.carrier_setup
     ").joins("
@@ -72,9 +61,7 @@ class Carrier < ApplicationRecord
       LEFT JOIN carrier_locations AS locations ON locations.id = carriers.head_office
     ").joins("
       LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id
-    ").joins(
-      'LEFT JOIN carr_new ON carr_new.mc_number = carriers.mc_number AND carr_new.carrier_name = carriers.company_name'
-    )}
+    ")}
 
   default_scope {listings}
 

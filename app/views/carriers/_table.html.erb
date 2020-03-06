@@ -80,19 +80,19 @@
           <td class="text-center" style="font-size: 15px;"><%= carrier.teams && (carrier.teams if carrier.teams > 0) %></td>
           <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_load_days && (carrier.c_mc_latest_date_load_days if carrier.c_mc_latest_date_load_days > 0) %></td>
           <td><%= generate_rank_text(carrier.c_mc_latest_date_tier).html_safe %></td>
-          <td><%= carrier.loads_lw %></td>
+          <td><%= carrier.c_carr_new_loads_lw %></td>
           <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_month && (carrier.c_mc_latest_date_last_month.round if carrier.c_mc_latest_date_last_month > 0) %></td>
           <td class="text-center" style="font-size: 15px;"><%= carrier.c_mc_latest_date_last_6_months && (carrier.c_mc_latest_date_last_6_months.round if carrier.c_mc_latest_date_last_6_months > 0) %></td>
           <td>
-            <% if carrier.current_origin %>
-              <% carrier.current_origin.split(',').map(&:to_s).each do |origin| %>
-                <%= generate_location2(origin, params[:controller], carrier.current_lane_id).html_safe %>
+            <% if carrier.c_lane_origin %>
+              <% carrier.c_lane_origin.split(',').map(&:to_s).each do |origin| %>
+                <%= generate_location2(origin, params[:controller], carrier.c_lane_id).html_safe %>
               <% end %>
             <% end %>
-            <% if carrier.current_destination %>
+            <% if carrier.c_lane_destination %>
             &rarr;
-            <% carrier.current_destination.split(',').map(&:to_s).each do |destination| %>
-              <%= generate_location2(destination, params[:controller], carrier.current_lane_id).html_safe %>
+            <% carrier.c_lane_destination.split(',').map(&:to_s).each do |destination| %>
+              <%= generate_location2(destination, params[:controller], carrier.c_lane_id).html_safe %>
             <% end %>
           <% end %>
           </td>
@@ -110,7 +110,7 @@
           </td>
           <td class="text-center"><%= carrier.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
           <td class="text-center"><%= carrier.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe %></td>
-          <td class="text-center"><%=  carrier.date_opened.nil? ? "" : carrier.date_opened.strftime('%m/%d/%Y').to_s %></td>
+          <td class="text-center"><%=  carrier.c_activity_date_opened.nil? ? "" : carrier.c_activity_date_opened.strftime('%m/%d/%Y').to_s %></td>
         </tr>
       <% end %>
     <% end %>
@@ -177,6 +177,7 @@
     // DataTable
       table = $('#<%= table_type %>_table').DataTable({
       "order": [[ 6, "desc" ], [ 7, "desc" ], [ 8, "desc" ], [ 9, "desc" ]],
+      "pageLength": 50,
       'columnDefs': [{
         'targets': 0,
         'checkboxes': {
@@ -187,7 +188,6 @@
         'style': 'multi'
       },
       "scrollX": true,
-      "pageLength": 50,
       "drawCallback": function(settings) {
         $('[data-toggle="tooltip"]').tooltip({
           trigger: 'hover',
