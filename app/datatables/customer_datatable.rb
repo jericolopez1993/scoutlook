@@ -25,14 +25,14 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
       sales_priority: { source: "Carrier.sales_priority" },
       mc_number: { source: "Carrier.mc_number" },
       company_name: { source: "Carrier.company_name" },
-      power_units: { source: "current_power_units", cond: filter_on_numbers },
-      reefers: { source: "current_reefers", cond: filter_on_range },
-      teams: { source: "current_teams", cond: filter_on_range },
-      c_mc_latest_date_load_days: { source: "current_c_mc_latest_date_load_days", cond: filter_on_range },
-      tier: { source: "tier", cond: filter_on_tier },
-      loads_lw: { source: "loads_lw", cond: filter_on_range },
-      c_mc_latest_date_last_month: { source: "current_c_mc_latest_date_last_month", cond: filter_on_range },
-      c_mc_latest_date_last_6_months: { source: "current_c_mc_latest_date_last_6_months", cond: filter_on_range },
+      power_units: { source: "Carrier.power_units", cond: filter_on_numbers },
+      reefers: { source: "Carrier.reefers", cond: filter_on_range },
+      teams: { source: "Carrier.teams", cond: filter_on_range },
+      c_mc_latest_date_load_days: { source: "Carrier.c_mc_latest_date_load_days", cond: filter_on_range },
+      tier: { source: "Carrier.c_mc_latest_date_tier", cond: filter_on_tier },
+      loads_lw: { source: "Carrier.c_carr_new_loads_lw", cond: filter_on_range },
+      c_mc_latest_date_last_month: { source: "Carrier.c_mc_latest_date_last_month", cond: filter_on_range },
+      c_mc_latest_date_last_6_months: { source: "Carrier.c_mc_latest_date_last_6_months", cond: filter_on_range },
       c_lane_origin: { source: "Carrier.c_lane_origin", cond: filter_on_lane },
       c_lane_destination: { source: "Carrier.c_lane_destination" },
       blacklisted: { source: "Carrier.blacklisted", cond: filter_on_blacklisted },
@@ -41,7 +41,7 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
       contact_email: {source: "contact_email", cond: filter_on_contact_email},
       approved: { source: "Carrier.approved", cond: filter_on_approved },
       complete_record: { source: "Carrier.complete_record", cond: filter_on_complete_record },
-      date_opened: { source: "date_opened", cond: filter_on_date_opened}
+      date_opened: { source: "Carrier.c_activity_date_opened", cond: filter_on_date_opened}
     }
   end
 
@@ -60,8 +60,8 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
         reefers: record.reefers && record.reefers > 0 ? record.reefers : "",
         teams: record.teams && record.teams > 0 ? record.teams : "",
         c_mc_latest_date_load_days: record.c_mc_latest_date_load_days && record.c_mc_latest_date_load_days > 0 ? record.c_mc_latest_date_load_days : "",
-        tier: generate_rank_text(record.tier).html_safe,
-        loads_lw: record.loads_lw,
+        tier: generate_rank_text(record.c_mc_latest_date_tier).html_safe,
+        loads_lw: record.c_carr_new_loads_lw,
         c_mc_latest_date_last_month: record.c_mc_latest_date_last_month && record.c_mc_latest_date_last_month > 0 ? record.c_mc_latest_date_last_month : "",
         c_mc_latest_date_last_6_months: record.c_mc_latest_date_last_6_months && record.c_mc_latest_date_last_6_months > 0 ? record.c_mc_latest_date_last_6_months : "",
         c_lane_origin: record.decorate.lanes,
@@ -71,7 +71,7 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
         contact_email: !record.contact_email.nil? ? "<a href='mailto:#{record.contact_email}?Subject=Hello%20#{record.poc_name.nil? ? '' :  record.poc_name.capitalize}' target='_top'>#{record.contact_email.downcase}&nbsp;<i class='far fa-envelope'></i></a>".html_safe : "",
         approved: record.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe,
         complete_record: record.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe,
-        date_opened: record.date_opened.nil? ? "" : record.date_opened.strftime('%m/%d/%Y').to_s,
+        date_opened: record.c_activity_date_opened.nil? ? "" : record.c_activity_date_opened.strftime('%m/%d/%Y').to_s,
         three_weeks_lapse: record.three_weeks_lapse
 
       }
@@ -81,6 +81,10 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
   def get_raw_records
     # insert query here
     Carrier.mine(user.id)
+  end
+
+  def user
+    @user ||= options[:user]
   end
 
   def filter_on_range_teams
@@ -102,10 +106,7 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_range
     ->(column, value) {
       data_values = column.search.value.split("-yadcf_delim-")
-      column_name = "carriers.#{column.field.to_s.gsub("current_", "")}"
-      if column.field.to_s == 'loads_lw'
-        column_name = "carr_new.#{column.field.to_s.gsub("current_", "")}"
-      end
+      column_name = "carriers.#{column.field.to_s}"
       ::Arel::Nodes::Between.new(
           Arel.sql(column_name),
           Arel::Nodes::And.new(
@@ -120,7 +121,7 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
 
   def filter_on_numbers
     ->(column, value) {
-      ::Arel::Nodes::SqlLiteral.new("carriers.#{column.field.to_s.gsub("current_", "")}").eq(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("carriers.#{column.field.to_s}").eq(column.search.value)
       # if (column.search.value && column.search.value != 0 && column.search.value !=  "0")
       #   "carriers.#{column.field.to_s.gsub("current_", "")} <> 0 AND carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
       # else
@@ -171,7 +172,7 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_date_opened
     ->(column, value) {
       date_opened = column.search.value.tr('/', '-')
-      ::Arel::Nodes::SqlLiteral.new("CAST((SELECT date_opened FROM activities WHERE activities.carrier_id = carriers.id ORDER BY created_at DESC LIMIT 1) AS VARCHAR)").matches("%#{
+      ::Arel::Nodes::SqlLiteral.new("carriers.c_activity_date_opened").matches("%#{
         date_opened}%")
     }
   end
@@ -231,7 +232,7 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def loads_lws_sum
-    records.sum(:loads_lw)
+    records.sum(:c_carr_new_loads_lw)
   end
 
   def one_m_sum
