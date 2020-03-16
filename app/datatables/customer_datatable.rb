@@ -87,6 +87,10 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
     @user ||= options[:user]
   end
 
+  def is_numeric?(obj)
+   obj.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
+  end
+
   def filter_on_range_teams
     ->(column, value) {
       data_values = column.search.value.split("-yadcf_delim-")
@@ -121,7 +125,11 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
 
   def filter_on_numbers
     ->(column, value) {
-      ::Arel::Nodes::SqlLiteral.new("carriers.#{column.field.to_s}").eq(column.search.value)
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("carriers.#{column.field.to_s}").eq(column.search.value)
+      else
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{column.search.value}%")
+      end
       # if (column.search.value && column.search.value != 0 && column.search.value !=  "0")
       #   "carriers.#{column.field.to_s.gsub("current_", "")} <> 0 AND carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
       # else
@@ -239,21 +247,40 @@ class CustomerDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_date_opened
     ->(column, value) {
       date_opened = column.search.value.tr('/', '-')
-      ::Arel::Nodes::SqlLiteral.new("carriers.c_activity_date_opened").matches("%#{
+      ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{
         date_opened}%")
     }
   end
 
   def filter_on_approved
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("carriers.approved").eq(column.search.value) }
+    ->(column, value) {
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("carriers.approved").eq(column.search.value)
+      else
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{column.search.value}%")
+      end
+    }
   end
 
   def filter_on_complete_record
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("carriers.complete_record").eq(column.search.value) }
+    ->(column, value) {
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("carriers.complete_record").eq(column.search.value)
+      else
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{column.search.value}%")
+      end
+    }
+
   end
 
   def filter_on_blacklisted
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("carriers.blacklisted").eq(column.search.value) }
+    ->(column, value) {
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("carriers.blacklisted").eq(column.search.value)
+      else
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{column.search.value}%")
+      end
+    }
   end
 
   def filter_on_poc_name
