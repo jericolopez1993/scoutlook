@@ -141,6 +141,7 @@ $(function () {
       {column_number : 23, filter_type: "date"}]);
 
   $('#datatable-search').keyup(function(){
-    table.fnFilter($(this).val());
+    search_term = encodeURI($(this).val());
+    table.fnFilter(search_term);
   })
 });

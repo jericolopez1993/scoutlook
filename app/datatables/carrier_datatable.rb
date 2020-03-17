@@ -2,6 +2,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
   include ApplicationHelper
   include ActionView::Helpers::NumberHelper
   extend Forwardable
+  require 'uri'
 
   def_delegator :@view, :check_box_tag
   def_delegator :@view, :link_to
@@ -17,14 +18,14 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
     # Declare strings in this format: ModelName.column_name
     # or in aliased_join_table.column_name format
     @view_columns ||= {
-      id: { source: "Carrier.id" },
-      c_reminder_date: { source: "Carrier.c_reminder_date" },
-      interview: { source: "Carrier.interview", cond: :eq },
-      wolfbyte: { source: "Carrier.wolfbyte", cond: :eq },
+      id: { source: "Carrier.id", cond: filter_on_id },
+      c_reminder_date: { source: "Carrier.c_reminder_date", cond: filter_on_date },
+      interview: { source: "Carrier.interview", cond: filter_on_boolean },
+      wolfbyte: { source: "Carrier.wolfbyte", cond: filter_on_boolean },
       relationship_owner_name: { source: "Carrier.relationship_owner_name", cond: filter_for_relationship_owner_initials },
-      sales_priority: { source: "Carrier.sales_priority" },
-      mc_number: { source: "Carrier.mc_number" },
-      company_name: { source: "Carrier.company_name" },
+      sales_priority: { source: "Carrier.sales_priority", cond: filter_on_string },
+      mc_number: { source: "Carrier.mc_number", cond: filter_on_string },
+      company_name: { source: "Carrier.company_name", cond: filter_on_string },
       power_units: { source: "Carrier.power_units", cond: filter_on_numbers },
       reefers: { source: "Carrier.reefers", cond: filter_on_range },
       teams: { source: "Carrier.teams", cond: filter_on_range },
@@ -35,13 +36,13 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
       c_mc_latest_date_last_6_months: { source: "Carrier.c_mc_latest_date_last_6_months", cond: filter_on_range },
       c_lane_origin: { source: "Carrier.c_lane_origin", cond: filter_on_lane },
       c_lane_destination: { source: "Carrier.c_lane_destination" },
-      blacklisted: { source: "Carrier.blacklisted", cond: filter_on_blacklisted },
+      blacklisted: { source: "Carrier.blacklisted", cond: filter_on_boolean },
       poc_name: {source: "poc_name", cond: filter_on_poc_name},
       primary_phone: { source: "primary_phone", cond: filter_on_primary_phone },
       contact_email: {source: "contact_email", cond: filter_on_contact_email},
-      approved: { source: "Carrier.approved", cond: filter_on_approved },
-      complete_record: { source: "Carrier.complete_record", cond: filter_on_complete_record },
-      date_opened: { source: "Carrier.c_activity_date_opened", cond: filter_on_date_opened}
+      approved: { source: "Carrier.approved", cond: filter_on_boolean },
+      complete_record: { source: "Carrier.complete_record", cond: filter_on_boolean },
+      date_opened: { source: "Carrier.c_activity_date_opened", cond: filter_on_date }
     }
   end
 
@@ -87,6 +88,45 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
    obj.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
   end
 
+  def filter_on_id
+    ->(column, value) {
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("carriers.id").eq(column.search.value)
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+  def filter_on_string
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+    }
+  end
+
+  def filter_on_boolean
+    ->(column, value) {
+      if is_numeric?(column.search.value) && column.search.value.to_i < 2
+        ::Arel::Nodes::SqlLiteral.new("carriers.#{column.field.to_s}").eq(column.search.value)
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+
+  def filter_on_date
+    ->(column, value) {
+      date_value = column.search.value.tr('/', '-')
+      search_value = URI.unescape(date_value)
+      ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{
+          search_value}%")
+    }
+  end
+
   def filter_on_range_teams
     ->(column, value) {
       data_values = column.search.value.split("-yadcf_delim-")
@@ -107,6 +147,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
     ->(column, value) {
       data_values = column.search.value.split("-yadcf_delim-")
       column_name = "carriers.#{column.field.to_s}"
+      if is_numeric?(data_values[0]) || is_numeric?(data_values[1])
       ::Arel::Nodes::Between.new(
           Arel.sql(column_name),
           Arel::Nodes::And.new(
@@ -116,15 +157,20 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
             ]
           )
         )
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
     }
   end
 
   def filter_on_numbers
     ->(column, value) {
+      search_value = URI.unescape(column.search.value)
       if is_numeric?(column.search.value)
-        ::Arel::Nodes::SqlLiteral.new("carriers.#{column.field.to_s}").eq(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("carriers.#{column.field.to_s}").eq(search_value)
       else
-        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{column.search.value}%")
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
       end
       # if (column.search.value && column.search.value != 0 && column.search.value !=  "0")
       #   "carriers.#{column.field.to_s.gsub("current_", "")} <> 0 AND carriers.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
@@ -233,18 +279,25 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def filter_on_primary_phone
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("contacts.primary_phone").matches("%#{column.search.value}%") }
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("contacts.primary_phone").matches("%#{search_value}%")
+    }
   end
 
   def filter_on_contact_email
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("contacts.email").matches("%#{column.search.value}%") }
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("contacts.email").matches("%#{search_value}%")
+    }
   end
 
   def filter_on_date_opened
     ->(column, value) {
       date_opened = column.search.value.tr('/', '-')
+      search_value = URI.unescape(date_opened)
       ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{
-        date_opened}%")
+        search_value}%")
     }
   end
 
@@ -253,7 +306,8 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
       if is_numeric?(column.search.value)
         ::Arel::Nodes::SqlLiteral.new("carriers.approved").eq(column.search.value)
       else
-        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{column.search.value}%")
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
       end
     }
   end
@@ -263,7 +317,8 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
       if is_numeric?(column.search.value)
         ::Arel::Nodes::SqlLiteral.new("carriers.complete_record").eq(column.search.value)
       else
-        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{column.search.value}%")
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
       end
     }
 
@@ -274,28 +329,35 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
       if is_numeric?(column.search.value)
         ::Arel::Nodes::SqlLiteral.new("carriers.blacklisted").eq(column.search.value)
       else
-        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{column.search.value}%")
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
       end
     }
   end
 
   def filter_on_poc_name
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(contacts.first_name, ' ', contacts.last_name)").matches("%#{column.search.value}%") }
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("CONCAT(contacts.first_name, ' ', contacts.last_name)").matches("%#{search_value}%")
+     }
   end
 
   def filter_on_tier
     ->(column, value) {
-      puts "#{column.search.value}"
       if column.search.value == "None"
         "COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = '' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'None' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'none' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'NONE' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'N/A' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) = 'NA' OR COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier) IS NULL"
       else
-      ::Arel::Nodes::SqlLiteral.new("COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier)").matches("%#{column.search.value}%")
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("COALESCE(carriers.c_mc_latest_date_tier,carriers.c_carr_tier_tier)").matches("%#{search_value}%")
       end
     }
   end
 
   def filter_for_relationship_owner_initials
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(SUBSTR(relationship_owner_user.first_name, 1, 1), SUBSTR(relationship_owner_user.last_name, 1, 1))").matches("%#{column.search.value}%") }
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("CONCAT(SUBSTR(relationship_owner_user.first_name, 1, 1), SUBSTR(relationship_owner_user.last_name, 1, 1))").matches("%#{search_value}%")
+    }
   end
 
   def as_json(options = {})
