@@ -11,6 +11,7 @@ namespace :computed_data do
 
   task one_time: :environment do
     ComputeDataService.new.all
+    ComputedDataShippersService.new.all
   end
 
   task reminders: :environment do

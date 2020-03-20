@@ -16,24 +16,24 @@ class ShipperDatatable < AjaxDatatablesRails::ActiveRecord
     # Declare strings in this format: ModelName.column_name
     # or in aliased_join_table.column_name format
     @view_columns ||= {
-      id: { source: "Shipper.id" },
-      c_reminder_date: { source: "Shipper.c_reminder_date" },
+      id: { source: "Shipper.id", cond: filter_on_id },
+      c_reminder_date: { source: "Shipper.c_reminder_date", cond: filter_on_date },
       relationship_owner_name: { source: "Shipper.relationship_owner", cond: filter_for_relationship_owner_initials },
-      sales_priority: { source: "Shipper.sales_priority" },
-      company_name: { source: "Shipper.company_name" },
+      sales_priority: { source: "Shipper.sales_priority", cond: filter_on_numbers },
+      company_name: { source: "Shipper.company_name", cond: filter_on_string },
       state: { source: "state", cond: filter_on_state },
       pdm_name: { source: "pdm_name", cond: filter_on_pdm_name },
       primary_phone: { source: "primary_phone", cond: filter_on_primary_phone },
       c_lane_origin: { source: "Shipper.c_lane_origin", cond: filter_on_lane },
       contact_email: { source: "contact_email", cond: filter_on_contact_email },
-      approved: { source: "Shipper.approved", cond: filter_on_approved },
-      complete_record: { source: "Shipper.complete_record", cond: filter_on_complete_record },
-      date_opened: { source: "Shipper.date_opened", cond: filter_on_date_opened },
-      load_last_month: { source: "Shipper.load_last_month" },
-      load_last_6_month: { source: "Shipper.load_last_6_month" },
+      approved: { source: "Shipper.approved", cond: filter_on_boolean },
+      complete_record: { source: "Shipper.complete_record", cond: filter_on_boolean },
+      date_opened: { source: "Shipper.c_activity_date_opened", cond: filter_on_date },
+      load_last_month: { source: "Shipper.load_last_month", cond: filter_on_numbers },
+      load_last_6_month: { source: "Shipper.load_last_6_month", cond: filter_on_numbers },
       city: { source: "city", cond: filter_on_city },
-      loads_per_month: { source: "Shipper.loads_per_month" },
-      commodities: { source: "Shipper.commodities" },
+      loads_per_month: { source: "Shipper.loads_per_month", cond: filter_on_numbers },
+      commodities: { source: "Shipper.commodities", cond: filter_on_string },
     }
   end
 
@@ -52,7 +52,7 @@ class ShipperDatatable < AjaxDatatablesRails::ActiveRecord
         contact_email: !record.contact_email.nil? ? "<a href='mailto:#{record.contact_email}?Subject=Hello%20#{record.pdm_name.nil? ? '' :  record.pdm_name.capitalize}' target='_top'>#{record.contact_email.downcase}&nbsp;<i class='far fa-envelope'></i></a>".html_safe : "",
         approved: record.approved ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe,
         complete_record: record.complete_record ? "<b class='text-success'>Y</b>".html_safe : "<i class='text-danger'>N</i>".html_safe,
-        date_opened: record.date_opened.nil? ? "" : record.date_opened.strftime('%m/%d/%Y').to_s,
+        date_opened: record.c_activity_date_opened.nil? ? "" : record.c_activity_date_opened.strftime('%m/%d/%Y').to_s,
         load_last_month: record.load_last_month,
         load_last_6_month: record.load_last_6_month,
         city: record.city,
@@ -72,16 +72,157 @@ class ShipperDatatable < AjaxDatatablesRails::ActiveRecord
     @user ||= options[:user]
   end
 
-    def filter_on_lane
-      ->(column, value) {
-        data_values = column.search.value.split("-")
-        sql = "(c_lane_origin ILIKE '%#{data_values[0]}%' OR c_lane_destination ILIKE '%#{data_values[0]}%')"
-        if data_values.length > 1
-          sql = sql + " AND (c_lane_origin ILIKE '%#{data_values[1]}%' OR c_lane_destination ILIKE '%#{data_values[1]}%')"
+  def is_numeric?(obj)
+   obj.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
+  end
+
+  def filter_on_id
+    ->(column, value) {
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("shippers.id").eq(column.search.value)
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(shippers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+  def filter_on_string
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("CAST(shippers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+    }
+  end
+
+  def filter_on_boolean
+    ->(column, value) {
+      if is_numeric?(column.search.value) && column.search.value.to_i < 2
+        ::Arel::Nodes::SqlLiteral.new("shippers.#{column.field.to_s}").eq(column.search.value)
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(shippers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+
+  def filter_on_date
+    ->(column, value) {
+      date_value = column.search.value.tr('/', '-')
+      search_value = URI.unescape(date_value)
+      ::Arel::Nodes::SqlLiteral.new("CAST(shippers.#{column.field.to_s} AS VARCHAR)").matches("%#{
+          search_value}%")
+    }
+  end
+
+  def filter_on_numbers
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("shippers.#{column.field.to_s}").eq(search_value)
+      else
+        ::Arel::Nodes::SqlLiteral.new("CAST(shippers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+  def filter_on_lane
+    ->(column, value) {
+      data_values = column.search.value.split("-")
+      if data_values.length > 1
+         data_column_0 = data_values[0].split(" ")
+         data_column_1 = data_values[1].split(" ")
+         data_value_0_sql_script = nil
+         data_value_1_sql_script = nil
+         if data_column_0.length > 1
+           data_column_0.each do |dc|
+             if data_value_0_sql_script.nil?
+               data_value_0_sql_script = Arel::Nodes::Or.new(
+                               Arel::Nodes::SqlLiteral.new("shippers.c_lane_origin").matches("%#{dc.strip}%"),
+                               Arel::Nodes::SqlLiteral.new("shippers.c_lane_destination").matches("%#{dc.strip}%")
+                             )
+             else
+               data_value_0_sql_script = Arel::Nodes::Or.new(
+                               data_value_0_sql_script,
+                               Arel::Nodes::Or.new(
+                                               Arel::Nodes::SqlLiteral.new("shippers.c_lane_origin").matches("%#{dc.strip}%"),
+                                               Arel::Nodes::SqlLiteral.new("shippers.c_lane_destination").matches("%#{dc.strip}%")
+                                             )
+                             )
+             end
+           end
+         else
+           data_value_0_sql_script =   Arel::Nodes::Or.new(
+                             Arel::Nodes::SqlLiteral.new("shippers.c_lane_origin").matches("%#{data_values[0].strip}%"),
+                             Arel::Nodes::SqlLiteral.new("shippers.c_lane_destination").matches("%#{data_values[0].strip}%")
+                           )
+         end
+         if data_column_1.length > 1
+           data_column_1.each do |dc|
+             if data_value_1_sql_script.nil?
+               data_value_1_sql_script = Arel::Nodes::Or.new(
+                               Arel::Nodes::SqlLiteral.new("shippers.c_lane_origin").matches("%#{dc.strip}%"),
+                               Arel::Nodes::SqlLiteral.new("shippers.c_lane_destination").matches("%#{dc.strip}%")
+                             )
+             else
+               data_value_1_sql_script = Arel::Nodes::Or.new(
+                               data_value_1_sql_script,
+                               Arel::Nodes::Or.new(
+                                               Arel::Nodes::SqlLiteral.new("shippers.c_lane_origin").matches("%#{dc.strip}%"),
+                                               Arel::Nodes::SqlLiteral.new("shippers.c_lane_destination").matches("%#{dc.strip}%")
+                                             )
+                             )
+             end
+           end
+         else
+           data_value_1_sql_script =   Arel::Nodes::Or.new(
+                             Arel::Nodes::SqlLiteral.new("shippers.c_lane_origin").matches("%#{data_values[1].strip}%"),
+                             Arel::Nodes::SqlLiteral.new("shippers.c_lane_destination").matches("%#{data_values[1].strip}%")
+                           )
+         end
+         ::Arel::Nodes::And.new(
+           [
+             Arel::Nodes::Grouping.new(
+               data_value_0_sql_script
+             ),
+             Arel::Nodes::Grouping.new(
+               data_value_1_sql_script
+             )
+           ]
+         )
+      else
+        data_column_0 = data_values[0].split(" ")
+        puts "data_column_0.length::: #{data_column_0.length}"
+        data_value_0_sql_script = nil
+        if data_column_0.length > 1
+          data_column_0.each do |dc|
+            if data_value_0_sql_script.nil?
+              data_value_0_sql_script = Arel::Nodes::Or.new(
+                              Arel::Nodes::SqlLiteral.new("shippers.c_lane_origin").matches("%#{dc.strip}%"),
+                              Arel::Nodes::SqlLiteral.new("shippers.c_lane_destination").matches("%#{dc.strip}%")
+                            )
+            else
+              data_value_0_sql_script = Arel::Nodes::Or.new(
+                              data_value_0_sql_script,
+                              Arel::Nodes::Or.new(
+                                              Arel::Nodes::SqlLiteral.new("shippers.c_lane_origin").matches("%#{dc.strip}%"),
+                                              Arel::Nodes::SqlLiteral.new("shippers.c_lane_destination").matches("%#{dc.strip}%")
+                                            )
+                            )
+            end
+          end
+        else
+          data_value_0_sql_script =   Arel::Nodes::Or.new(
+                            Arel::Nodes::SqlLiteral.new("shippers.c_lane_origin").matches("%#{data_values[0].strip}%"),
+                            Arel::Nodes::SqlLiteral.new("shippers.c_lane_destination").matches("%#{data_values[0].strip}%")
+                          )
         end
-        sql
-      }
-    end
+        ::Arel::Nodes::Grouping.new(
+          data_value_0_sql_script
+        )
+      end
+    }
+  end
 
     def filter_on_state
       ->(column, value) { ::Arel::Nodes::SqlLiteral.new("locations.state").matches("%#{column.search.value}%") }
@@ -98,23 +239,6 @@ class ShipperDatatable < AjaxDatatablesRails::ActiveRecord
     def filter_on_contact_email
       ->(column, value) { ::Arel::Nodes::SqlLiteral.new("contacts.email").matches("%#{column.search.value}%") }
     end
-
-    def filter_on_date_opened
-      ->(column, value) {
-        date_opened = column.search.value.tr('/', '-')
-        ::Arel::Nodes::SqlLiteral.new("CAST((SELECT date_opened FROM activities WHERE activities.shipper_id = shippers.id ORDER BY created_at DESC LIMIT 1) AS VARCHAR)").matches("%#{
-          date_opened}%")
-      }
-    end
-
-    def filter_on_approved
-      ->(column, value) { ::Arel::Nodes::SqlLiteral.new("shippers.approved").eq(column.search.value) }
-    end
-
-    def filter_on_complete_record
-      ->(column, value) { ::Arel::Nodes::SqlLiteral.new("shippers.complete_record").eq(column.search.value) }
-    end
-
 
     def filter_on_pdm_name
       ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(contacts.first_name, ' ', contacts.last_name)").matches("%#{column.search.value}%") }

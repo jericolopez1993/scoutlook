@@ -42,12 +42,8 @@ class Shipper < ApplicationRecord
       locations.state,
       locations.country,
       locations.loc_type,
-      (SELECT date_opened FROM activities WHERE activities.shipper_id = shippers.id ORDER BY created_at DESC LIMIT 1) as date_opened,
       CONCAT(relationship_owner_user.first_name, ' ', relationship_owner_user.last_name) as relationship_owner_name,
-      CONCAT(contacts.first_name, ' ', contacts.last_name) as pdm_name,
-      (SELECT cnactivities.campaign_name FROM activities AS cnactivities WHERE cnactivities.shipper_id =  shippers.id ORDER BY created_at DESC LIMIT 1) AS campaign_name,
-      (SELECT atactivities.activity_type FROM activities AS atactivities WHERE atactivities.shipper_id =  shippers.id ORDER BY created_at DESC LIMIT 1) AS activity_type,
-      (SELECT sactivities.status FROM activities AS sactivities WHERE sactivities.shipper_id =  shippers.id ORDER BY created_at DESC LIMIT 1) AS activity_status
+      CONCAT(contacts.first_name, ' ', contacts.last_name) as pdm_name
     ").joins("
       LEFT JOIN users AS relationship_owner_user ON relationship_owner_user.id = shippers.relationship_owner
     ").joins("
