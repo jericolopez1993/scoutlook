@@ -16,18 +16,18 @@ class ActivityDatatable < AjaxDatatablesRails::ActiveRecord
     # Declare strings in this format: ModelName.column_name
     # or in aliased_join_table.column_name format
     @view_columns ||= {
-      id: { source: "Activity.id"},
+      id: { source: "Activity.id", cond: filter_on_id},
       sp: { source: "user_name_initials", cond: filter_on_sp },
       name: { source: "current_name", cond: filter_on_name },
       location_state: { source: "location_state", cond: filter_on_location_state },
-      loads_per_week: { source: "Activity.loads_per_week", cond: filter_on_loads_per_week },
-      date_opened: { source: "Activity.date_opened", cond: filter_on_date_opened },
-      date_closed: { source: "Activity.date_closed", cond: filter_on_date_closed },
-      outcome: { source: "Activity.outcome" },
-      notes: { source: "Activity.notes" },
-      activity_type: { source: "Activity.activity_type" },
-      status: { source: "Activity.status", cond: filter_on_status },
-      reason: { source: "Activity.reason" }
+      loads_per_week: { source: "Activity.loads_per_week", cond: filter_on_numbers },
+      date_opened: { source: "Activity.date_opened", cond: filter_on_boolean },
+      date_closed: { source: "Activity.date_closed", cond: filter_on_boolean },
+      outcome: { source: "Activity.outcome", cond: filter_on_id },
+      notes: { source: "Activity.notes", cond: filter_on_string },
+      activity_type: { source: "Activity.activity_type", cond: filter_on_string },
+      status: { source: "Activity.status", cond: filter_on_string },
+      reason: { source: "Activity.reason", cond: filter_on_string }
     }
   end
 
@@ -56,38 +56,70 @@ class ActivityDatatable < AjaxDatatablesRails::ActiveRecord
     Activity.listings
   end
 
-  def filter_on_sp
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(users.first_name, ' ', users.last_name").matches("%#{column.search.value}%") }
+  def is_numeric?(obj)
+   obj.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
   end
 
-  def filter_on_location_state
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("COALESCE(carrier_locations.state, shipper_locations.state)").matches("%#{column.search.value}%") }
+  def filter_on_id
+    ->(column, value) {
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("activities.id").eq(column.search.value)
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(activities.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+  def filter_on_string
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("CAST(activities.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+    }
+  end
+
+  def filter_on_boolean
+    ->(column, value) {
+      if is_numeric?(column.search.value) && column.search.value.to_i < 2
+        ::Arel::Nodes::SqlLiteral.new("activities.#{column.field.to_s}").eq(column.search.value)
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(activities.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+
+  def filter_on_date
+    ->(column, value) {
+      date_value = column.search.value.tr('/', '-')
+      search_value = URI.unescape(date_value)
+      ::Arel::Nodes::SqlLiteral.new("CAST(activities.#{column.field.to_s} AS VARCHAR)").matches("%#{
+          search_value}%")
+    }
+  end
+
+  def filter_on_numbers
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("activities.#{column.field.to_s}").eq(search_value)
+      else
+        ::Arel::Nodes::SqlLiteral.new("CAST(activities.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+  def filter_on_sp
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(users.first_name, ' ', users.last_name)").matches("%#{column.search.value}%") }
   end
 
   def filter_on_name
     ->(column, value) { ::Arel::Nodes::SqlLiteral.new("COALESCE(carriers.company_name, shippers.company_name)").matches("%#{column.search.value}%") }
   end
 
-  def filter_on_loads_per_week
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("activities.loads_per_week").eq(column.search.value) }
-  end
-
-  def filter_on_date_opened
-    ->(column, value) {
-      date_opened = column.search.value.tr('/', '-')
-      ::Arel::Nodes::SqlLiteral.new("CAST(activities.date_opened AS VARCHAR)").matches("%#{date_opened}%")
-    }
-  end
-
-  def filter_on_date_closed
-    ->(column, value) {
-      date_closed = column.search.value.tr('/', '-')
-      ::Arel::Nodes::SqlLiteral.new("CAST(activities.date_closed AS VARCHAR)").matches("%#{date_closed}%")
-    }
-  end
-
-  def filter_on_status
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("activities.status").eq(column.search.value) }
+  def filter_on_location_state
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("COALESCE(carrier_locations.state, shipper_locations.state)").matches("%#{column.search.value}%") }
   end
 
 end
