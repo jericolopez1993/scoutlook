@@ -5,9 +5,12 @@ class RatesController < ApplicationController
 
   # GET /rates
   # GET /rates.json
+
   def index
-    @rates = Rate.all
-    authorize @rates
+    respond_to do |format|
+      format.html
+      format.json { render json: RateDatatable.new(params, view_context: view_context) }
+    end
   end
 
   # GET /rates/1

@@ -24,7 +24,65 @@
       <h4 class="panel-title lp-header">Rates</h4>
     </div>
     <div class="panel-body">
-        <%= render 'table', rates: Rate.all, with_actions: true %>
+      <% if params[:controller] == "rates" %>
+        <style>
+          .tooltip-inner {
+            background-color: #033309!important;
+          }
+          .tooltip .arrow::before{
+            border-right-color: #033309!important;
+          }
+          td.link a:visited {
+            color: #033309!important;
+          }
+        </style>
+      <% elsif params[:controller] == "carriers" %>
+        <style>
+          td.link a:visited {
+            color: #6f060b!important;
+          }
+        </style>
+      <% elsif params[:controller] == "shippers" %>
+        <style>
+          td.link a:visited {
+            color: #013a38!important;
+          }
+        </style>
+      <% elsif params[:controller] == "activities" %>
+        <style>
+          td.link a:visited {
+            color: #dd8b00!important;
+          }
+        </style>
+      <% end %>
+      <table table class="table table-striped table-bordered display nowrap" id="rate-datatable">
+        <thead>
+          <tr class="odd gradeX">
+            <th data-orderable="false">Actions</th>
+            <th>Origin City</th>
+            <th>Origin ST/PV</th>
+            <th>Destination City</th>
+            <th>Destination ST/PV</th>
+            <th>Miles</th>
+            <th>Type</th>
+            <th>Picks</th>
+            <th>Drops</th>
+            <th>Team</th>
+            <th>Commodities</th>
+            <th>Bid</th>
+            <th>Ask</th>
+            <th>Accepted</th>
+            <th>Cost</th>
+            <th>Currency</th>
+            <th>MC #</th>
+            <th>Notes</th>
+            <th>Date Created</th>
+            <th>Carrier</th>
+            <th>Shipper</th>
+          </tr>
+        </thead>
+      </table>
+
     </div>
   </div>
 </div>

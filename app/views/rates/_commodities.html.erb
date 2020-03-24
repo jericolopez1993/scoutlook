@@ -1,0 +1,16 @@
+<% rate.commodities_to_array.first(5).each do |cr| %>
+  <span class="badge badge-inverse"><%= cr %></span>
+<% end %>
+<% if rate.commodities_to_array.count >= 5 %>
+<span
+  data-toggle="tooltip"
+  data-placement="right"
+  data-html="true"
+  title="
+  <% rate.commodities_to_array.drop(5).each do |cr| %>
+    <span class='badge badge-green'><%= cr %></span>
+  <% end %>
+  ">
+  <span class="badge badge-inverse">+<%= rate.commodities_to_array.count - 5 %></span>
+</span>
+<% end %>
