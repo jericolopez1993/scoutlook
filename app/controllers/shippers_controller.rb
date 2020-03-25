@@ -105,8 +105,8 @@ class ShippersController < ApplicationController
   end
 
   def compose_mail
-    @ids = params[:ids]
-    contacts = Shipper.where("shippers.id IN (#{@ids})").pluck("shipper_contacts.email").join(",")
+    check_ids
+    contacts = Shipper.where("shippers.id IN (#{@ids})").pluck("contacts.email").join(",")
     render 'global_pages/mail_form', :layout => 'mail'
   end
 
@@ -125,7 +125,7 @@ class ShippersController < ApplicationController
   end
 
   def compose_sms
-    @ids = params[:ids]
+    check_ids
     @phone_numbers = []
     @contacts = Shipper.where("shippers.id IN (#{@ids})").where("primary_eligible_texting = '1' OR secondary_phone_type = '1'")
     @contacts.each do |contact|
@@ -213,5 +213,18 @@ class ShippersController < ApplicationController
       sms.user_id = current_user.id
       sms.sent = true
       sms.save
+    end
+
+    def check_ids
+      ids = params[:ids].split(',').map { |id| id.tr('<input type=\"checkbox\" name=\"shippers[]\" id=\"shippers_\" value=\"', '').tr('\" />', '') }
+      filtered_ids = []
+
+      ids.each do |id|
+        if id && id != " "
+          filtered_ids.push(id.to_i)
+        end
+      end
+
+      @ids = filtered_ids.join(',')
     end
 end

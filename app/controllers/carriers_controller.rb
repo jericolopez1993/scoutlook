@@ -137,7 +137,7 @@ class CarriersController < ApplicationController
   end
 
   def compose_mail
-    @ids = params[:ids]
+    check_ids
     @contacts = Carrier.where("carriers.id IN (#{@ids})").pluck("contacts.email").join(",")
     render 'global_pages/mail_form', :layout => 'mail'
   end
@@ -157,7 +157,7 @@ class CarriersController < ApplicationController
   end
 
   def compose_sms
-    @ids = params[:ids]
+    check_ids
     @phone_numbers = []
     @contacts = Carrier.where("carriers.id IN (#{@ids})").where("primary_eligible_texting = '1' OR secondary_phone_type = '1'")
     @contacts.each do |contact|
@@ -367,5 +367,18 @@ class CarriersController < ApplicationController
       sms.user_id = current_user.id
       sms.sent = true
       sms.save
+    end
+
+    def check_ids
+      ids = params[:ids].split(',').map { |id| id.tr('<input type=\"checkbox\" name=\"carriers[]\" id=\"carriers_\" value=\"', '').tr('\" />', '') }
+      filtered_ids = []
+
+      ids.each do |id|
+        if id && id != " "
+          filtered_ids.push(id.to_i)
+        end
+      end
+
+      @ids = filtered_ids.join(',')
     end
 end
