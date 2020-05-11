@@ -17,28 +17,28 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
     @view_columns ||= {
       # id: { source: "User.id", cond: :eq },
       # name: { source: "User.name", cond: :like }
-      interview: { source: "Carrier.interview", cond: :eq, },
-      wolfbyte: { source: "Carrier.wolfbyte", cond: :eq },
-      sales_priority: { source: "CarrNew.sales_priority" },
-      relationship_owner: { source: "relationship_owner_name", cond: filter_for_relationship_owner_initials  },
-      mc_number: { source: "CarrNew.mc_number" },
-      carrier_name: { source: "CarrNew.carrier_name" },
-      power_units: { source: "CarrNew.power_units" },
-      reefers: { source: "CarrNew.reefers" },
-      teams: { source: "CarrNew.teams" },
-      contact: { source: "CarrNew.contact" },
-      last_os: { source: "CarrNew.last_os" },
-      last_ds: { source: "CarrNew.last_ds" },
+      interview: { source: "Carrier.interview", cond: filter_for_boolean_carriers },
+      wolfbyte: { source: "Carrier.wolfbyte", cond: filter_for_boolean_carriers },
+      sales_priority: { source: "CarrNew.sales_priority", cond: filter_on_string_carriers },
+      relationship_owner: { source: "relationship_owner_name", cond: filter_for_relationship_owner_initials },
+      mc_number: { source: "CarrNew.mc_number", cond: filter_on_string },
+      carrier_name: { source: "CarrNew.carrier_name", cond: filter_on_string },
+      power_units: { source: "Carrier.power_units", cond: filter_on_numbers_carriers },
+      reefers: { source: "Carrier.reefers", cond: filter_on_numbers_carriers },
+      teams: { source: "Carrier.teams", cond: filter_on_numbers_carriers },
+      contact: { source: "CarrNew.contact", cond: filter_on_string },
+      last_os: { source: "CarrNew.last_os", cond: filter_on_string },
+      last_ds: { source: "CarrNew.last_ds", cond: filter_on_string },
       wk: { source: "wk", cond: filter_for_wk },
-      first_load_date: { source: "CarrNew.first_load_date" },
-      gross_margin: { source: "CarrNew.gross_margin" },
-      loads_lw: { source: "CarrNew.loads_lw" },
-      loads_2w: { source: "CarrNew.loads_2w" },
-      loads_3w: { source: "CarrNew.loads_3w" },
-      loads_4w: { source: "CarrNew.loads_4w" },
-      loads_5w: { source: "CarrNew.loads_5w" },
-      loads_6w: { source: "CarrNew.loads_6w" },
-      current_tier: { source: "CarrTier.tier" }
+      first_load_date: { source: "CarrNew.first_load_date", cond: filter_on_date },
+      gross_margin: { source: "CarrNew.gross_margin", cond: filter_on_numbers },
+      loads_lw: { source: "CarrNew.loads_lw", cond: filter_on_numbers },
+      loads_2w: { source: "CarrNew.loads_2w", cond: filter_on_numbers },
+      loads_3w: { source: "CarrNew.loads_3w", cond: filter_on_numbers },
+      loads_4w: { source: "CarrNew.loads_4w", cond: filter_on_numbers },
+      loads_5w: { source: "CarrNew.loads_5w", cond: filter_on_numbers },
+      loads_6w: { source: "CarrNew.loads_6w", cond: filter_on_numbers },
+      current_tier: { source: "CarrTier.tier", cond: filter_for_tier }
     }
   end
 
@@ -83,8 +83,116 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
     ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CAST(TO_CHAR(NOW() - carr_new.first_load_date, 'W') AS INTEGER)").eq(column.search.value.to_i) }
   end
 
+  def filter_for_tier
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("carr_tier.tier").matches("%#{column.search.value}%") }
+  end
+
+  def filter_for_boolean_carriers
+    ->(column, value) {
+      if is_numeric?(column.search.value) && column.search.value.to_i < 2
+        ::Arel::Nodes::SqlLiteral.new("carriers.#{column.field.to_s}").eq(column.search.value)
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
   def filter_for_relationship_owner_initials
     ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CONCAT(SUBSTR(relationship_owner_user.first_name, 1, 1), SUBSTR(relationship_owner_user.last_name, 1, 1))").matches("%#{column.search.value}%") }
+  end
+
+  def is_numeric?(obj)
+   obj.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
+  end
+
+  def filter_on_id
+    ->(column, value) {
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("carr_new.id").eq(column.search.value)
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+  def filter_on_string
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+    }
+  end
+
+  def filter_on_string_carriers
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+    }
+  end
+
+  def filter_on_boolean
+    ->(column, value) {
+      if is_numeric?(column.search.value) && column.search.value.to_i < 2
+        ::Arel::Nodes::SqlLiteral.new("carr_new.#{column.field.to_s}").eq(column.search.value)
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+
+  def filter_on_date
+    ->(column, value) {
+      date_value = column.search.value.tr('/', '-')
+      search_value = URI.unescape(date_value)
+      ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{
+          search_value}%")
+    }
+  end
+
+  def filter_on_range
+    ->(column, value) {
+      data_values = column.search.value.split("-yadcf_delim-")
+      column_name = "carr_new.#{column.field.to_s}"
+      if is_numeric?(data_values[0]) || is_numeric?(data_values[1])
+      ::Arel::Nodes::Between.new(
+          Arel.sql(column_name),
+          Arel::Nodes::And.new(
+            [
+              data_values[0] ? data_values[0].to_i : 0,
+              data_values[1] ? data_values[1].to_i : 99999
+            ]
+          )
+        )
+      else
+        search_value = URI.unescape(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+  def filter_on_numbers
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("carr_new.#{column.field.to_s}").eq(search_value)
+      else
+        ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
+  end
+
+  def filter_on_numbers_carriers
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      if is_numeric?(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("carriers.#{column.field.to_s}").eq(search_value)
+      else
+        ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      end
+    }
   end
 
 
