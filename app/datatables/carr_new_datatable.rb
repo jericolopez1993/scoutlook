@@ -19,7 +19,7 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
       # name: { source: "User.name", cond: :like }
       interview: { source: "Carrier.interview", cond: filter_for_boolean_carriers },
       wolfbyte: { source: "Carrier.wolfbyte", cond: filter_for_boolean_carriers },
-      sales_priority: { source: "CarrNew.sales_priority", cond: filter_on_string_carriers },
+      sales_priority: { source: "Carrier.sales_priority", cond: filter_on_string_carriers },
       relationship_owner: { source: "relationship_owner_name", cond: filter_for_relationship_owner_initials },
       mc_number: { source: "CarrNew.mc_number", cond: filter_on_string },
       carrier_name: { source: "CarrNew.carrier_name", cond: filter_on_string },

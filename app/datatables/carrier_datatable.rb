@@ -22,7 +22,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
       c_reminder_date: { source: "Carrier.c_reminder_date", cond: filter_on_date },
       interview: { source: "Carrier.interview", cond: filter_on_boolean },
       wolfbyte: { source: "Carrier.wolfbyte", cond: filter_on_boolean },
-      relationship_owner_name: { source: "Carrier.relationship_owner_name", cond: filter_for_relationship_owner_initials },
+      relationship_owner_name: { source: "relationship_owner_name", cond: filter_for_relationship_owner_initials },
       sales_priority: { source: "Carrier.sales_priority", cond: filter_on_string },
       mc_number: { source: "Carrier.mc_number", cond: filter_on_string },
       company_name: { source: "Carrier.company_name", cond: filter_on_string },
