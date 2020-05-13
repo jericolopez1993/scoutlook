@@ -56,7 +56,7 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
         relationship_owner_name: record.relationship_owner_name ? (record['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(record['relationship_owner_name']), user_path(:id => record['relationship_owner']))}".html_safe) : '',
         sales_priority: shade_sales_priority(record.sales_priority).html_safe,
         mc_number: record.decorate.mc_number,
-        company_name: record.decorate.link_to,
+        company_name: record.decorate.truncate_link_to,
         power_units: record.power_units && record.power_units > 0 ? record.power_units : "",
         reefers: record.reefers && record.reefers > 0 ? record.reefers : "",
         teams: record.teams && record.teams > 0 ? record.teams : "",
