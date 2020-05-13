@@ -1,0 +1,34 @@
+<% if carrier %>
+  <span
+    data-toggle="tooltip"
+    data-placement="right"
+    data-html="true"
+    title="
+      <b>Name</b>: <%= carrier.company_name.blank? ? "(no name)" : carrier.company_name %><br>
+      <b>Ops Name</b>: <%= carrier.poc_name %><br>
+      <b>Ops Phone</b>: <%= generate_phone_number("", carrier.primary_phone, carrier.primary_extension_number, carrier.primary_eligible_texting, carrier.primary_phone_type).html_safe %><br/>
+      <b>Ops Email</b>: <%= carrier.contact_email && carrier.contact_email.downcase %><br>
+      <b>Class</b>: <%= carrier.sales_priority %><br>
+      <b>MC Number</b>: <%= carrier.mc_number %><br>
+      <b>Reefers Count</b>: <%= carrier.reefers %><br>
+      <b>Number of Teams</b>: <%= carrier.teams %><br>
+      <b>Lanes</b>:   <%= carrier.c_lane_origin if carrier.c_lane_origin %>&rarr;  <%= carrier.c_lane_destination if carrier.c_lane_destination %><br>
+      <hr>
+      <b>City</b>: <%= carrier.city.blank? ? '(none)' : carrier.city %><br>
+      <b>Sate/Province</b>:<%= carrier.state.blank? ? '(none)' : generate_abv(carrier.state).upcase %><br>
+      <b>Last Contact Date</b>: <%= carrier.c_activity_date_opened.nil? ? "" : carrier.c_activity_date_opened.strftime('%m/%d/%Y').to_s %><br>
+      <b>Last Edit Date</b>: <%= carrier.c_auditable_last_activity_date.nil? ? '' : carrier.c_auditable_last_activity_date.strftime("%m/%d/%Y").to_s %><br>
+      <% if params[:controller] != "activities" && params[:action] != "newly" %>
+          <hr>
+          <% if carrier.c_activity_date_opened %>
+            <b>Last Activity Name</b>: <%= carrier.c_activity_campaign_name.blank? ? '(no name)' : carrier.c_activity_campaign_name %><br>
+            <b>Last Activity Type</b>: <%= carrier.c_activity_activity_type.nil? ? '' : carrier.c_activity_activity_type %><br>
+            <b>Last Activity Status</b>: <%= carrier.c_activity_status ? 'Open' : 'Closed' %><br>
+          <% else %>
+            <b>Last Activity</b>: None <br>
+          <% end %>
+      <% end %>
+    ">
+    <%= link_to carrier.company_name.blank? ? "(no name)" : truncate(carrier.company_name, length: 20, omission: '...'), carrier_path(:id => carrier.carrier_id), :class => generate_styling_activities(carrier.c_auditable_last_activity_date), target: :_blank %>
+  </span>
+<% end %>
