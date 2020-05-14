@@ -131,7 +131,7 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
-  after  :finishing,    :stop_cron
+  # after  :finishing,    :stop_cron
   after  :finishing,    :restart_nginx
   # after  :finishing,    :start_nginx
   # after  :finishing,    :seed_dump
