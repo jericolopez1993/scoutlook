@@ -5,7 +5,7 @@ class CarrierLane < ApplicationRecord
   ORIGINS = [
     ['United States', [
       "AL", "AK", "AZ", "AZ-Yuma", "AR", "CA", "CA-Fresno", "CA-Bakersfield", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME",
-      "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NH", "NJ", "NV", "NY", "NY-Brooklyn", "NY-Bronx", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD",
+      "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NH", "NM", "NJ", "NV", "NY", "NY-Brooklyn", "NY-Bronx", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD",
       "TN", "TX", "TX-McAllen", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
     ]],
     ['Canada', [
