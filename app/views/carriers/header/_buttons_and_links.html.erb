@@ -1,3 +1,6 @@
+<% if params[:action] == 'newly' %>
+  <button id="delete-carrier-btn" class="btn btn-danger btn-xs">Remove from New</button>
+<% end %>
 <button id="send-text-btn" class="btn btn-green btn-xs"><i class="fas fa-comment-alt"></i></button>
 <button id="send-mail-btn" class="btn btn-primary btn-xs"><i class="fas fa-envelope"></i></button>
 <%= link_to 'Create Carrier', new_carrier_path, :class => 'btn btn-danger btn-xs', target: :_blank %>

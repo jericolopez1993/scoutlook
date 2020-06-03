@@ -277,6 +277,27 @@ class CarriersController < ApplicationController
     render :layout => false
   end
 
+  def delete_new
+    mc_numbers = params[:mc_numbers].split(',')
+
+    existing_carriers = Carrier.where("carriers.mc_number IN (?)", mc_numbers).pluck("carriers.mc_number")
+    new_carriers = CarrNew.where("mc_number IN (?)", mc_numbers)
+
+    new_carriers.each do |carr_new|
+      unless existing_carriers.include?(carr_new.mc_number)
+          AddNewCarrierToCarrierService.new.single_create(carr_new)
+      end
+    end
+
+    mc_numbers = mc_numbers.map{|n| "'#{n}'"}.join(",")
+    ActiveRecord::Base.connection.execute("DELETE FROM carr_new WHERE mc_number IN (#{mc_numbers})")
+
+    respond_to do |format|
+      format.html { redirect_to newly_carriers_url, notice: 'Carrier was successfully removed from New.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_carrier

@@ -13,4 +13,12 @@ class AddNewCarrierToCarrierService
     end
     Carrier.create(carriers)
   end
+
+  def single_create(carr)
+    if carr
+      user = User.where("CONCAT(users.first_name, ' ', users.last_name) = ?", carr['owner'])
+      user_id = user.present? ? user['id'] : nil
+      Carrier.create(company_name: carr['carrier_name'], mc_number: carr['mc_number'], relationship_owner: user_id, phone: carr['phone1'], sales_priority: "U")
+    end
+  end
 end
