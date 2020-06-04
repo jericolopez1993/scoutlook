@@ -1,6 +1,6 @@
 # Change these
-server 'ubuntu@scoutlook.ca', roles: [:web, :app, :db, :worker], primary: true
-server 'ubuntu@scoutlook.opinionated.software', roles: [:web, :app, :db, :non_worker]
+server 'ubuntu@scoutlook.ca', roles: [:web, :app, :db, :worker, :prod], primary: true
+server 'ubuntu@scoutlook.opinionated.software', roles: [:web, :app, :db, :non_worker, :prod]
 
 set :repo_url,        'git@github.com:jericolopez1993/scoutlook.git'
 set :application,     'scout_prod'

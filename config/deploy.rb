@@ -111,7 +111,7 @@ namespace :deploy do
 
   desc 'Kill Crons'
   task :kill_cron do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:prod), in: :sequence, wait: 5 do
       execute "kill $(ps aux | grep '[d]elayed_job' | awk '{print $2}')"
     end
   end
