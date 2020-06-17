@@ -1,5 +1,5 @@
 class Carrier < ApplicationRecord
-  audited
+  include Auditable
   before_save :approved?
   has_many_attached :attachment_file
   has_one_attached :interview_attachment_file
@@ -30,6 +30,11 @@ class Carrier < ApplicationRecord
   has_one :location, primary_key: "head_office", foreign_key: 'id', class_name: "CarrierLocation"
   has_one :poc, primary_key: "poc_id", foreign_key: 'id', class_name: "CarrierContact"
   has_one :pdm, primary_key: "pdm_id", foreign_key: 'id', class_name: "CarrierContact"
+
+  scope :audits, -> {select("audits.*, carriers.company_name").joins("
+      INNER JOIN audits ON ((audits.auditable_type = 'Carrier' AND audits.auditable_id IN (carriers.id)) OR (audits.auditable_type = 'CarrierCompany' AND audits.auditable_id IN (SELECT carrier_companies.id FROM carrier_companies WHERE carrier_companies.carrier_id = carriers.id)) OR (audits.auditable_type = 'CarrierContact' AND audits.auditable_id IN (SELECT carrier_contacts.id FROM carrier_contacts WHERE carrier_contacts.carrier_id = carriers.id)) OR (audits.auditable_type = 'CarrierLane' AND audits.auditable_id IN (SELECT carrier_lanes.id FROM carrier_lanes WHERE carrier_lanes.carrier_id = carriers.id)) OR (audits.auditable_type = 'CarrierLocation' AND audits.auditable_id IN (SELECT carrier_locations.id FROM carrier_locations WHERE carrier_locations.carrier_id = carriers.id)) OR (audits.auditable_type = 'Activity' AND audits.auditable_id IN (SELECT activities.id FROM activities WHERE activities.carrier_id = carriers.id)) OR (audits.auditable_type = 'Rate' AND audits.auditable_id IN (SELECT rates.id FROM rates WHERE rates.carrier_id = carriers.id)) OR (audits.auditable_type = 'Reminder' AND audits.auditable_id IN (SELECT reminders.id FROM reminders WHERE reminders.carrier_id = carriers.id)))
+    ").where("(audits.id, audits.created_at) IN (SELECT id, MAX(created_at) FROM audits GROUP BY id)").order("audits.created_at")
+  }
 
   scope :listings, -> {select("
     DISTINCT carriers.id,
@@ -63,7 +68,7 @@ class Carrier < ApplicationRecord
       LEFT JOIN carrier_contacts AS contacts ON contacts.id = carriers.poc_id
     ")}
 
-  default_scope {listings}
+  # default_scope {listings}
 
   scope :overall, ->(id) {where(:id => id).limit(1)}
 

@@ -3,10 +3,28 @@ class ApplicationController < ActionController::Base
   include Pundit
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_current_user
+  before_action :set_current_action
   layout :layout_by_resource
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   # rescue_from I18n::InvalidLocaleData
   helper_method :is_mobile
+
+  def set_current_user
+    if current_user
+      User.current = current_user
+    else
+      User.current = nil
+    end
+  end
+
+  def set_current_action
+    if params[:action]
+      User.current_action = params[:action]
+    else
+      User.current_action = nil
+    end
+  end
 
   private
     def set_raven_context

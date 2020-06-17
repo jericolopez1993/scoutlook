@@ -26,6 +26,22 @@ class User < ApplicationRecord
     end
   end
 
+  def self.current
+    Thread.current[:user]
+  end
+
+  def self.current=(user)
+    Thread.current[:user] = user
+  end
+
+  def self.current_action
+    Thread.current[:action]
+  end
+
+  def self.current_action=(action)
+    Thread.current[:action] = action
+  end
+
   protected
    def password_required?
      return false if skip_password_validation
