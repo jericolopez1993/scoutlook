@@ -38,7 +38,7 @@ class LogDatatable < AjaxDatatablesRails::ActiveRecord
 
   def get_raw_records
     # insert query here
-    Log.overall.where.not(:main_id => nil).group("logs.id, users.id").order("logs.main_id,logs.created_at DESC")
+    Log.overall.where.not(:main_id => nil).where.not(:user_id => nil).group("logs.id, users.id").order("logs.main_id,logs.created_at DESC")
   end
 
   def user

@@ -74,7 +74,9 @@ module Auditable
     end
 
     def save_log
-      Log.create(:model_type => class_name.to_s, :main_id => main_id, :sub_id => sub_id, :user_id => current_user_id, :action_name => current_action, :description => generate_description)
+      if current_user_id
+        Log.create(:model_type => class_name.to_s, :main_id => main_id, :sub_id => sub_id, :user_id => current_user_id, :action_name => current_action, :description => generate_description)
+      end
     end
   end
 end
