@@ -1,7 +1,7 @@
 class MoveAuditsServices
   def move
     logs = []
-    audits = Audit.limit(5000)
+    audits = Audit.order("created_at DESC").limit(10000)
     audits.each do |audit|
       main_id = nil
       sub_id = nil
