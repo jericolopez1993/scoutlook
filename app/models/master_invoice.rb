@@ -1,5 +1,5 @@
 class MasterInvoice < ApplicationRecord
-  include Auditable only: [:own_status]
+  include Auditable
   has_one_attached :attachment_file
   def display_name
       if self.invoice_number.present? && self.invoice_number != "" && !self.invoice_number.nil?
