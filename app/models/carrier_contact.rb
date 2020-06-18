@@ -1,5 +1,5 @@
 class CarrierContact < ApplicationRecord
-  audited
+  include Auditable
   belongs_to :carrier_location, foreign_key: 'location_id', optional: true
   belongs_to :carrier, optional: true
   has_one :user, primary_key: "id", foreign_key: 'carrier_contact_id'

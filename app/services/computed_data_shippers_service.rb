@@ -113,9 +113,10 @@ class ComputedDataShippersService
             # Lanes - END
 
             # Audit - START
-            audit = Audit.where("((auditable_type = 'Shipper' AND auditable_id IN (#{shipper.id})) OR (auditable_type = 'ShipperCompany' AND auditable_id IN (SELECT shipper_companies.id FROM shipper_companies WHERE shipper_companies.shipper_id = #{shipper.id})) OR (auditable_type = 'ShipperContact' AND auditable_id IN (SELECT shipper_contacts.id FROM shipper_contacts WHERE shipper_contacts.shipper_id = #{shipper.id})) OR (auditable_type = 'ShipperLane' AND auditable_id IN (SELECT shipper_lanes.id FROM shipper_lanes WHERE shipper_lanes.shipper_id = #{shipper.id})) OR (auditable_type = 'ShipperLocation' AND auditable_id IN (SELECT shipper_locations.id FROM shipper_locations WHERE shipper_locations.shipper_id = #{shipper.id})) OR (auditable_type = 'Activity' AND auditable_id IN (SELECT activities.id FROM activities WHERE activities.shipper_id = #{shipper.id})) OR (auditable_type = 'Rate' AND auditable_id IN (SELECT rates.id FROM rates WHERE rates.shipper_id = #{shipper.id})) OR (auditable_type = 'Reminder' AND auditable_id IN (SELECT reminders.id FROM reminders WHERE reminders.shipper_id = #{shipper.id})))").order("created_at DESC").first
-            if audit
-              c_auditable_last_activity_date = audit.created_at
+            log = Log.where("model_type IN ('Shipper', 'ShipperCompany', 'ShipperContact', 'ShipperLane', 'ShipperLocation', 'Activity', 'Rate', 'Reminder')").where(:main_id => shipper.id).order("created_at DESC").first
+
+            if log
+              c_auditable_last_activity_date = log.created_at
             end
             # Audit - END
 

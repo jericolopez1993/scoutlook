@@ -1,5 +1,5 @@
 class ShipperLocation < ApplicationRecord
-  audited
+  include Auditable
   belongs_to :shipper, optional: true
   def display_name
     if self.shipper.nil?

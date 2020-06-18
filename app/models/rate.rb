@@ -1,5 +1,5 @@
 class Rate < ApplicationRecord
-  audited
+  include Auditable
   has_one_attached :supporting_pdf
   belongs_to :user, optional: true
   belongs_to :activity, optional: true

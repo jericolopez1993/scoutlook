@@ -1,5 +1,5 @@
 class ShipperLane < ApplicationRecord
-  audited
+  include Auditable
   after_save :update_computed_data
   belongs_to :shipper, optional: true
 

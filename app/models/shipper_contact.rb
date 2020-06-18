@@ -1,5 +1,5 @@
 class ShipperContact < ApplicationRecord
-  audited
+  include Auditable
   belongs_to :shipper_location, foreign_key: 'location_id', optional: true
   belongs_to :shipper, optional: true
   has_one :user, primary_key: "id", foreign_key: 'shipper_contact_id'

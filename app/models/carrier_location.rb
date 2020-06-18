@@ -1,5 +1,5 @@
 class CarrierLocation < ApplicationRecord
-  audited
+  include Auditable
   belongs_to :carrier, optional: true
 
   def display_name

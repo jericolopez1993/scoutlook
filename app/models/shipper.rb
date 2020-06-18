@@ -1,5 +1,5 @@
 class Shipper < ApplicationRecord
-  audited
+  include Auditable
   before_save :approved?
   has_many_attached :attachment_file
   after_destroy :remove_children

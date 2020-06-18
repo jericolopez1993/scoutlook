@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :skip_password_validation
-  audited
+  include Auditable
   rolify
   has_one_attached :avatar
   # Include default devise modules. Others available are:

@@ -16,9 +16,9 @@ class LogDatatable < AjaxDatatablesRails::ActiveRecord
     # or in aliased_join_table.column_name format
     @view_columns ||= {
       user_name: { source: "user_name" },
-      created_at: { source: "Audit.created_at" },
-      auditable_type: { source: "Audit.auditable_type" },
-      user_id: { source: "Audit.user_id" },
+      created_at: { source: "Log.created_at" },
+      auditable_type: { source: "Log.description" },
+      user_id: { source: "Log.user_id" },
     }
   end
 
@@ -27,7 +27,7 @@ class LogDatatable < AjaxDatatablesRails::ActiveRecord
       {
         user_name: record.user_name,
         created_at: record.created_at.strftime('%m/%d/%Y %l:%M %p'),
-        auditable_type: record.on_sentence(user).html_safe,
+        auditable_type: record.description.html_safe,
         user_id: record.user_id ? (record.user_name.blank? ? '(no name)' : "#{link_to(record.user_name, user_path(:id => record.user_id))}".html_safe) : ''
         # example:
         # id: record.id,
@@ -38,7 +38,7 @@ class LogDatatable < AjaxDatatablesRails::ActiveRecord
 
   def get_raw_records
     # insert query here
-    Audit.overall
+    Log.overall.where.not(:main_id => nil).group("logs.id, users.id").order("logs.main_id,logs.created_at DESC")
   end
 
   def user

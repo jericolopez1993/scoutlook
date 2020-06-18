@@ -31,9 +31,9 @@ class MoveAuditsServices
         end
       end
 
-      puts "#{{model_type: audit.auditable_type, main_id: main_id, sub_id: sub_id, user_id: audit.user_id, action_name: audit.action, description: audit.on_sentence}}"
+      puts "#{{model_type: audit.auditable_type, main_id: main_id, sub_id: sub_id, user_id: audit.user_id, action_name: audit.action, description: audit.on_sentence, :created_at => audit.created_at.strftime("%Y-%m-%d %H:%m"), :updated_at => audit.created_at.strftime("%Y-%m-%d %H:%m")}}"
 
-      logs.push({model_type: audit.auditable_type, main_id: main_id, sub_id: sub_id, user_id: audit.user_id, action_name: audit.action, description: audit.on_sentence})
+      logs.push({model_type: audit.auditable_type, main_id: main_id, sub_id: sub_id, user_id: audit.user_id, action_name: audit.action, description: audit.on_sentence, :created_at => audit.created_at.strftime("%Y-%m-%d %H:%m"), :updated_at => audit.created_at.strftime("%Y-%m-%d %H:%m")})
     end
     Log.create(logs)
     audits.delete_all

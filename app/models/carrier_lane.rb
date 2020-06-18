@@ -1,5 +1,5 @@
 class CarrierLane < ApplicationRecord
-  audited
+  include Auditable
   after_save :update_computed_data
   belongs_to :carrier, optional: true
   ORIGINS = [

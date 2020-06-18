@@ -1,5 +1,5 @@
 class Activity < ApplicationRecord
-  audited
+  include Auditable
   after_save :update_computed_data
   has_many_attached :proposal_pdf
   has_one_attached :credit_application

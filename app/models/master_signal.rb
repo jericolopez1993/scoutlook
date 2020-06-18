@@ -1,5 +1,5 @@
 class MasterSignal < ApplicationRecord
-  audited
+  include Auditable
   def display_name
     if self.client.nil?
       "<a href='/signals/#{self.id}'>Signal</a>"

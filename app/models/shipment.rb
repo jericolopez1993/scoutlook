@@ -1,5 +1,5 @@
 class Shipment < ApplicationRecord
-  audited only: [:shipment_status]
+  include Auditable
   has_one_attached :shipment_attachment_file
   def display_name
     if self.invoice.nil?

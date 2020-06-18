@@ -3,7 +3,9 @@ module Auditable
 
   included do
 
-    before_save :save_log
+    after_save :save_log
+
+    before_destroy :save_log
 
     private
 
