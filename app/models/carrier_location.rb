@@ -3,10 +3,10 @@ class CarrierLocation < ApplicationRecord
   belongs_to :carrier, optional: true
 
   def display_name
-    if self.carrier.nil?
-      "Location"
-    else
+    if self.carrier_id
       "Location to #{self.carrier.display_name}"
+    else
+      "Locationsssss"
     end
   end
 end

@@ -64,7 +64,7 @@ module Auditable
         @to_sentence = @to_sentence + " removed " + @string_article  + " #{class_name == 'MasterInvoice' ? 'Invoice' : (class_name == 'MasterSignal' ? 'Signal' : class_name.titleize)}"
       else
         begin
-          class_object = class_name.singularize.classify.constantize.find(self.auditable_id)
+          class_object = class_name.singularize.classify.constantize.find(self.id)
           @to_sentence = @to_sentence + " " + current_action + "d " + @string_article + " " + " #{class_object.display_name}"
         rescue
           @to_sentence = @to_sentence + " " + current_action + "d " + @string_article + " " + " #{class_name == 'MasterInvoice' ? 'Invoice' : (class_name == 'MasterSignal' ? 'Signal' : class_name.titleize)}"
