@@ -15,10 +15,10 @@ class LogDatatable < AjaxDatatablesRails::ActiveRecord
     # Declare strings in this format: ModelName.column_name
     # or in aliased_join_table.column_name format
     @view_columns ||= {
-      user_name: { source: "user_name" },
-      created_at: { source: "Log.created_at" },
-      auditable_type: { source: "Log.description" },
-      user_id: { source: "Log.user_id" },
+      user_name: { source: "user_name", cond: filter_on_user_name },
+      created_at: { source: "created_at", cond: filter_on_date },
+      auditable_type: { source: "description", cond: filter_on_string },
+      user_id: { source: "user_id" },
     }
   end
 
@@ -38,11 +38,44 @@ class LogDatatable < AjaxDatatablesRails::ActiveRecord
 
   def get_raw_records
     # insert query here
-    Log.overall.where.not(:main_id => nil).where.not(:user_id => nil).group("logs.id, users.id").order("logs.main_id,logs.created_at DESC")
+    Log.overall
   end
 
   def user
     @user ||= options[:user]
   end
+
+  def as_json(options = {})
+      {
+        :draw => params[:draw].to_i,
+        :recordsTotal =>  get_raw_records.length,
+        :recordsFiltered => filter_records(get_raw_records).length,
+        :data => data
+
+      }
+  end
+
+  def filter_on_user_name
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("CONCAT(users.first_name, ' ', users.last_name)").matches("%#{search_value}%")
+    }
+  end
+
+  def filter_on_string
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("CAST(logs.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+    }
+  end
+
+    def filter_on_date
+      ->(column, value) {
+        date_value = column.search.value.tr('/', '-')
+        search_value = URI.unescape(date_value)
+        ::Arel::Nodes::SqlLiteral.new("CAST(logs.#{column.field.to_s} AS VARCHAR)").matches("%#{
+            search_value}%")
+      }
+    end
 
 end
