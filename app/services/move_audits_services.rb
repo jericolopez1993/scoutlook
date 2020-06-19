@@ -38,4 +38,30 @@ class MoveAuditsServices
     Log.create(logs)
     audits.delete_all
   end
+
+  def update_description
+    logs = Log.select("logs.*, CONCAT(users.first_name, ' ', users.last_name) as user_name").joins("INNER JOIN users ON users.id = logs.user_id").where.not(:user_id => nil, :sub_id => nil, :action_name => 'destroy')
+
+    logs.each do |log|
+      to_sentence = log.user_name
+      class_name = log.model_type
+      current_action = log.action_name
+      class_object_string = log.model_type.to_s
+
+      if class_object_string.starts_with?('A', 'E', 'I', 'O', 'U', 'MasterInvoice')
+        string_article = "an"
+      else
+        string_article = "a"
+      end
+
+      begin
+        class_object = log.model_type.singularize.classify.constantize.find(log.sub_id)
+        to_sentence = to_sentence + " " + current_action + "d " + string_article + " " + "#{class_object.display_name}"
+      rescue
+        to_sentence = to_sentence + " " + current_action + "d " + string_article + " " + "#{class_name == 'MasterInvoice' ? 'Invoice' : (class_name == 'MasterSignal' ? 'Signal' : class_name.titleize)}"
+      end
+      puts "#{to_sentence}"
+      log.update_attributes(:description => to_sentence)
+    end
+  end
 end

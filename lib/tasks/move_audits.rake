@@ -3,4 +3,8 @@ namespace :move_audits do
   task move: :environment do
     MoveAuditsServices.new.move
   end
+
+  task update_description: :environment do
+    MoveAuditsServices.new.update_description
+  end
 end
