@@ -277,26 +277,31 @@ module ApplicationHelper
     end
   end
   def interval_to_text(reminder_interval)
-    if reminder_interval == 7
-      "1 wk"
-    elsif reminder_interval == 14
-      "2 wk"
+    if reminder_interval == 1
+      "every day"
+    elsif reminder_interval == 7
+      "by-weekly"
     elsif reminder_interval == 30
-      "1M"
+      "by-monthly"
     elsif reminder_interval == 90
-      "3M"
-    elsif reminder_interval == 180
-      "6M"
+      "by-quarterly"
     elsif reminder_interval == 360
-      "12M"
+      "by-yearly"
     else
-      ""
+      "every #{reminder_interval} days"
     end
   end
 
   def reminder_to_sentence(reminder)
     on_sentence = ""
 
+    if reminder.carrier_id || reminder.shipper_id || reminder.activity_id
+      on_sentence = on_sentence + "<a style='display: inline-flex;' data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type.nil? ? '' : reminder.reminder_type} <br>Notes: #{reminder.notes.nil? ? '' : reminder.notes.gsub("'", '&#39;')}' href='/reminders/#{reminder.id}'>#{truncate_html(reminder.notes, :length => 50, :omission => '...', :escape => false)}</a>"
+    else
+      on_sentence = "There is a " + on_sentence + "."
+    end
+
+    on_sentence = on_sentence + " ("
     if reminder.carrier_id
       on_sentence = on_sentence + "<a href='/carriers/#{reminder.carrier_id}'>#{reminder.carrier_name}</a>"
     elsif reminder.shipper_id
@@ -312,11 +317,8 @@ module ApplicationHelper
     else
       on_sentence = on_sentence + reminder.display_name
     end
-    if reminder.carrier_id || reminder.shipper_id || reminder.activity_id
-      on_sentence = on_sentence + "<a data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder.reminder_type.nil? ? '' : reminder.reminder_type} <br>Notes: #{reminder.notes.nil? ? '' : reminder.notes.gsub("'", '&#39;')}' href='/reminders/#{reminder.id}'>#{truncate_html(reminder.notes, :length => 50, :omission => '...', :escape => false)}</a>"
-    else
-      on_sentence = "There is a " + on_sentence + "."
-    end
+    on_sentence = on_sentence + ")"
+
     on_sentence
   end
 
@@ -387,17 +389,22 @@ module ApplicationHelper
     str_date
   end
 
-  def format_reminder(reminder_id, reminder_date, reminder_type, notes)
+  def format_reminder(reminder_id, reminder_date, reminder_type, notes, completed)
     theme_color = "badge-secondary"
-    if reminder_date > Date.today
+
+    if completed
       theme_color = "badge-green"
-    elsif reminder_date < Date.today
-      theme_color = "badge-danger"
-    elsif reminder_date == Date.today
-      theme_color = "badge-primary"
     end
 
     "<a href='/reminders/#{reminder_id}/edit' target='popup' onclick=\"window.open('/reminders/#{reminder_id}/edit','popup','width=600,height=600'); return false;\"  data-toggle='tooltip' data-placement='right' data-html='true' title='Types: #{reminder_type.nil? ? '' : reminder_type} <br>Notes: #{notes.nil? ? '' : notes.gsub("'", '&#39;')}' class='badge #{theme_color} badge-square'>#{reminder_date.strftime("%m/%d/%Y")}</a> "
+  end
+
+  def get_order_reminder(reminder)
+    if reminder.completed
+      return 2
+    else
+      return 1
+    end
   end
 
   def organize_date(date)

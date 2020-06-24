@@ -20,5 +20,6 @@ module PbPlatform
     config.active_job.queue_adapter = :delayed_job
     config.enable_dependency_loading = true
     config.autoload_paths << Rails.root.join('lib')
+    # config.time_zone = 'Eastern Time (US & Canada)'
   end
 end

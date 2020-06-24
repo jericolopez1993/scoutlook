@@ -219,6 +219,7 @@ class ComputedDataShippersService
               c_reminder_id = reminder.id
               c_reminder_notes = reminder.notes
               c_reminder_type = reminder.reminder_type
+              c_reminder_completed = reminder.completed
 
               @shipper.update_attributes(
                 :c_reminder_id => c_reminder_id,

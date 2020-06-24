@@ -8,6 +8,10 @@ class Reminder < ApplicationRecord
 
   validate :reminder_date_cannot_be_in_the_past
 
+  scope :incomplete, -> do
+    where(:completed => false).order('created_at DESC')
+  end
+
    def reminder_date_cannot_be_in_the_past
      if self.new_record?
        if  self.reminder_date < Date.today
@@ -45,10 +49,10 @@ class Reminder < ApplicationRecord
   def reminder_date_interval
     if self.reminder_date
       date = self.reminder_date + self.reminder_interval.days
-      date.strftime("%m/%d/%Y")
+      date.strftime("%m/%d/%Y %l:%M %P")
     elsif self.reminder_date.nil?
       date = self.created_at + self.reminder_interval.days
-      date.strftime("%m/%d/%Y")
+      date.strftime("%m/%d/%Y %l:%M %P")
     elsif self.reminder_interval.nil?
       date = nil
     end
@@ -60,13 +64,13 @@ class Reminder < ApplicationRecord
       until current >= Date.today
         current += self.reminder_interval.days
       end
-      current.strftime("%m/%d/%Y")
+      current.strftime("%m/%d/%Y %l:%M %P")
     else
       current = self.created_at + self.reminder_interval.days
       until current >= Date.today
         current += self.reminder_interval.days
       end
-      current.strftime("%m/%d/%Y")
+      current.strftime("%m/%d/%Y %l:%M %P")
     end
   end
 end

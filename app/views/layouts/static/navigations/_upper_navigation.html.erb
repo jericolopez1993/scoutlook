@@ -19,7 +19,7 @@
     <ul class="navbar-nav navbar-right">
 
       <% if current_user.has_role?(:admin) %>
-        <% reminders = Reminder.where(:last_reminded => Date.today) %>
+        <% reminders = Reminder.incomplete %>
         <li class="dropdown">
           <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
             <i class="fas fa-clock"></i>
@@ -44,7 +44,7 @@
                   <li class="media">
                     <div class="media-body notification-padding">
                       <h6 class="media-heading"><%= reminder_to_sentence(reminder).html_safe %></h6>
-                      <div class="text-muted f-s-11"></div>
+                      <div class="text-muted f-s-11"><%= reminder.created_at.strftime("%m/%d/%Y %l:%M %P") %></div>
                     </div>
                   </li>
                 <% end %>
@@ -79,7 +79,7 @@
                   <li class="media">
                     <div class="media-body notification-padding">
                       <h6 class="media-heading"><%= audit.description.html_safe %></h6>
-                      <div class="text-muted f-s-11"><%= audit.created_at %></div>
+                      <div class="text-muted f-s-11"><%= audit.created_at.strftime("%m/%d/%Y %l:%M %P") %></div>
                     </div>
                   </li>
                 <% end %>
@@ -88,7 +88,7 @@
                 <li class="media">
                   <div class="media-body notification-padding">
                     <h6 class="media-heading"><%= audit.description.html_safe %></h6>
-                    <div class="text-muted f-s-11"><%= audit.created_at %></div>
+                    <div class="text-muted f-s-11"><%= audit.created_at.strftime("%m/%d/%Y %l:%M %P") %></div>
                   </div>
                 </li>
               <% end %>

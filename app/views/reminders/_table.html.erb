@@ -27,6 +27,7 @@
       <th>Next Reminder Date</th>
       <th>Last Reminded</th>
       <th width="25%">Notes</th>
+      <th>Created Date</th>
     </tr>
   </thead>
   <tfoot>
@@ -44,6 +45,7 @@
       <th>Next Reminder Date</th>
       <th>Last Reminded</th>
       <th width="25%">Notes</th>
+      <th>Created Date</th>
     </tr>
   </tfoot>
   <tbody class="spacer">
@@ -83,39 +85,39 @@
         <% end %>
         <td class="link"><%= reminder.user_id && "<a href='/users/#{reminder.user_id}'>#{reminder.user_name}</a>".html_safe %></td>
         <td><%= reminder.reminder_type %></td>
-        <td>
-          <% if reminder.reminder_date %>
-            <% if reminder.reminder_date > Date.today %>
-              <% if reminder.recurring %>
-                <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y")})" %>
-              <% else %>
-                <% if reminder.reminder_interval %>
-                  <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.reminder_date.strftime("%m/%d/%Y")})" %>
-                <% else %>
-                  <%= reminder.reminder_date %>
-                <% end %>
-              <% end %>
-            <% else %>
-              <% if reminder.recurring %>
-                <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y")})" %>
-              <% else %>
-                <% if reminder.reminder_interval %>
-                  <% if reminder.reminder_date_interval > Date.today.strftime("%m/%d/%Y") %>
-                    <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.reminder_date.strftime("%m/%d/%Y")})" %>
-                  <% else %>
-                    Done
-                  <% end %>
-                <% else %>
-                  Done
-                <% end %>
-              <% end %>
-            <% end %>
+        <td data-order="<%= get_order_reminder(reminder) %>">
+          <% if reminder.completed %>
+            Done
           <% else %>
-            <% if reminder.recurring %>
-              <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.created_at.strftime("%m/%d/%Y")})" %>
+            <% if reminder.reminder_date %>
+              <% if reminder.reminder_date > Date.today %>
+                <% if reminder.recurring %>
+                  <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})" %>
+                <% else %>
+                  <% if reminder.reminder_interval %>
+                    <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})" %>
+                  <% else %>
+                    <%= reminder.reminder_date %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% if reminder.recurring %>
+                  <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})" %>
+                <% else %>
+                  <% if reminder.reminder_interval %>
+                    <% if reminder.reminder_date_interval > Date.today.strftime("%m/%d/%Y") %>
+                      <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})" %>
+                      <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
             <% else %>
-              <% if reminder.reminder_interval %>
-                <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.created_at.strftime("%m/%d/%Y")})" %>
+              <% if reminder.recurring %>
+                <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.created_at.strftime("%m/%d/%Y %l:%M %P")})" %>
+              <% else %>
+                <% if reminder.reminder_interval %>
+                  <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.created_at.strftime("%m/%d/%Y %l:%M %P")})" %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
@@ -131,6 +133,8 @@
               <%= reminder.notes.nil? ? '' : truncate_html_to_sentence(reminder.notes) %>
           </span>
         </td>
+        <td><%= reminder.created_at.strftime('%m/%d/%Y %l:%M %p') %></td>
+
       </tr>
     <% end %>
   </tbody>
@@ -138,6 +142,35 @@
 
 <script language="javascript">
   $(document).ready(function() {
-    filterTable("reminders_table");
+    $('#reminders_table tfoot th').each(function () {
+      var title = $(this).text();
+      $(this).html('<input type="text" placeholder="Search '+title+'" style="width: 100%;"/>');
+    });
+
+    // DataTable
+    var table = $('#reminders_table').DataTable({
+      columnDefs: [{ 'targets': 7, type: 'date' }, { 'targets': 9, type: 'date' }],
+      "order": [[ 6, "asc"], [ 9, "desc" ]],
+      "scrollX": true,
+      "pageLength": 50,
+      "drawCallback": function( settings ) {
+        $('[data-toggle="tooltip"]').tooltip({
+            trigger: 'hover',
+            html: true
+        })
+      },
+    });
+
+    // Apply the search
+    table.columns().every(function () {
+      var that = this;
+
+      $('input', this.footer()).on('keyup change', function () {
+        $('[data-toggle="tooltip"]').tooltip("hide");
+        if (that.search() !== this.value) {
+          that.search( this.value ).draw();
+        }
+      });
+    });
   });
 </script>
