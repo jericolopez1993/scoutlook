@@ -21,23 +21,23 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
       wolfbyte: { source: "Carrier.wolfbyte", cond: filter_for_boolean_carriers },
       sales_priority: { source: "Carrier.sales_priority", cond: filter_on_string_carriers },
       relationship_owner: { source: "relationship_owner_name", cond: filter_for_relationship_owner_initials },
-      mc_number: { source: "CarrNew.mc_number", cond: filter_on_string },
-      carrier_name: { source: "CarrNew.carrier_name", cond: filter_on_string },
+      mc_number: { source: "SlCarrNew.mc_number", cond: filter_on_string },
+      carrier_name: { source: "SlCarrNew.carrier_name", cond: filter_on_string },
       power_units: { source: "Carrier.power_units", cond: filter_on_numbers_carriers },
       reefers: { source: "Carrier.reefers", cond: filter_on_numbers_carriers },
       teams: { source: "Carrier.teams", cond: filter_on_numbers_carriers },
-      contact: { source: "CarrNew.contact", cond: filter_on_string },
-      last_os: { source: "CarrNew.last_os", cond: filter_on_string },
-      last_ds: { source: "CarrNew.last_ds", cond: filter_on_string },
+      contact: { source: "SlCarrNew.contact", cond: filter_on_string },
+      last_os: { source: "SlCarrNew.last_os", cond: filter_on_string },
+      last_ds: { source: "SlCarrNew.last_ds", cond: filter_on_string },
       wk: { source: "wk", cond: filter_for_wk },
-      first_load_date: { source: "CarrNew.first_load_date", cond: filter_on_date },
-      gross_margin: { source: "CarrNew.gross_margin", cond: filter_on_numbers },
-      loads_lw: { source: "CarrNew.loads_lw", cond: filter_on_numbers },
-      loads_2w: { source: "CarrNew.loads_2w", cond: filter_on_numbers },
-      loads_3w: { source: "CarrNew.loads_3w", cond: filter_on_numbers },
-      loads_4w: { source: "CarrNew.loads_4w", cond: filter_on_numbers },
-      loads_5w: { source: "CarrNew.loads_5w", cond: filter_on_numbers },
-      loads_6w: { source: "CarrNew.loads_6w", cond: filter_on_numbers },
+      first_load_date: { source: "SlCarrNew.first_load_date", cond: filter_on_date },
+      gross_margin: { source: "SlCarrNew.gross_margin", cond: filter_on_numbers },
+      loads_lw: { source: "SlCarrNew.loads_lw", cond: filter_on_numbers },
+      loads_2w: { source: "SlCarrNew.loads_2w", cond: filter_on_numbers },
+      loads_3w: { source: "SlCarrNew.loads_3w", cond: filter_on_numbers },
+      loads_4w: { source: "SlCarrNew.loads_4w", cond: filter_on_numbers },
+      loads_5w: { source: "SlCarrNew.loads_5w", cond: filter_on_numbers },
+      loads_6w: { source: "SlCarrNew.loads_6w", cond: filter_on_numbers },
       current_tier: { source: "CarrTier.tier", cond: filter_for_tier }
     }
   end
@@ -76,7 +76,7 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
 
   def get_raw_records
     # insert query here
-    CarrNew.listings
+    SlCarrNew.listings
   end
 
   def filter_for_wk

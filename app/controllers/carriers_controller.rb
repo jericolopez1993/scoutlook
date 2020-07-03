@@ -281,16 +281,17 @@ class CarriersController < ApplicationController
     mc_numbers = params[:mc_numbers].split(',')
 
     existing_carriers = Carrier.where("carriers.mc_number IN (?)", mc_numbers).pluck("carriers.mc_number")
-    new_carriers = CarrNew.where("mc_number IN (?)", mc_numbers)
+    new_carriers = SlCarrNew.where("mc_number IN (?)", mc_numbers)
 
+    # Adds the new carrier to the main carrier listings
     new_carriers.each do |carr_new|
       unless existing_carriers.include?(carr_new.mc_number)
           AddNewCarrierToCarrierService.new.single_create(carr_new)
       end
     end
 
-    mc_numbers = mc_numbers.map{|n| "'#{n}'"}.join(",")
-    ActiveRecord::Base.connection.execute("DELETE FROM carr_new WHERE mc_number IN (#{mc_numbers})")
+    # Remove the new carrier from the table. But this only updates the data to make sure that the new carrier doesn't comeback on the table.
+    new_carriers.update_all(:is_deleted => true, :deleted_at => Time.now)
 
     respond_to do |format|
       format.html { redirect_to newly_carriers_url, notice: 'Carrier was successfully removed from New.' }
