@@ -80,7 +80,7 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def filter_for_wk
-    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CAST(TO_CHAR(NOW() - carr_new.first_load_date, 'W') AS INTEGER)").eq(column.search.value.to_i) }
+    ->(column, value) { ::Arel::Nodes::SqlLiteral.new("CAST(TO_CHAR(NOW() - sl_carr_news.first_load_date, 'W') AS INTEGER)").eq(column.search.value.to_i) }
   end
 
   def filter_for_tier
@@ -109,10 +109,10 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_id
     ->(column, value) {
       if is_numeric?(column.search.value)
-        ::Arel::Nodes::SqlLiteral.new("carr_new.id").eq(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("sl_carr_news.id").eq(column.search.value)
       else
         search_value = URI.unescape(column.search.value)
-        ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+        ::Arel::Nodes::SqlLiteral.new("CAST(sl_carr_news.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
       end
     }
   end
@@ -120,7 +120,7 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_string
     ->(column, value) {
       search_value = URI.unescape(column.search.value)
-      ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+      ::Arel::Nodes::SqlLiteral.new("CAST(sl_carr_news.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
     }
   end
 
@@ -134,10 +134,10 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_boolean
     ->(column, value) {
       if is_numeric?(column.search.value) && column.search.value.to_i < 2
-        ::Arel::Nodes::SqlLiteral.new("carr_new.#{column.field.to_s}").eq(column.search.value)
+        ::Arel::Nodes::SqlLiteral.new("sl_carr_news.#{column.field.to_s}").eq(column.search.value)
       else
         search_value = URI.unescape(column.search.value)
-        ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+        ::Arel::Nodes::SqlLiteral.new("CAST(sl_carr_news.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
       end
     }
   end
@@ -147,7 +147,7 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
     ->(column, value) {
       date_value = column.search.value.tr('/', '-')
       search_value = URI.unescape(date_value)
-      ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{
+      ::Arel::Nodes::SqlLiteral.new("CAST(sl_carr_news.#{column.field.to_s} AS VARCHAR)").matches("%#{
           search_value}%")
     }
   end
@@ -155,7 +155,7 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_range
     ->(column, value) {
       data_values = column.search.value.split("-yadcf_delim-")
-      column_name = "carr_new.#{column.field.to_s}"
+      column_name = "sl_carr_news.#{column.field.to_s}"
       if is_numeric?(data_values[0]) || is_numeric?(data_values[1])
       ::Arel::Nodes::Between.new(
           Arel.sql(column_name),
@@ -168,7 +168,7 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
         )
       else
         search_value = URI.unescape(column.search.value)
-        ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+        ::Arel::Nodes::SqlLiteral.new("CAST(sl_carr_news.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
       end
     }
   end
@@ -177,9 +177,9 @@ class CarrNewDatatable < AjaxDatatablesRails::ActiveRecord
     ->(column, value) {
       search_value = URI.unescape(column.search.value)
       if is_numeric?(column.search.value)
-        ::Arel::Nodes::SqlLiteral.new("carr_new.#{column.field.to_s}").eq(search_value)
+        ::Arel::Nodes::SqlLiteral.new("sl_carr_news.#{column.field.to_s}").eq(search_value)
       else
-        ::Arel::Nodes::SqlLiteral.new("CAST(carr_new.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+        ::Arel::Nodes::SqlLiteral.new("CAST(sl_carr_news.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
       end
     }
   end
