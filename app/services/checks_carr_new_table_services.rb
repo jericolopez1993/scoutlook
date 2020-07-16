@@ -5,9 +5,9 @@ class ChecksCarrNewTableServices
   end
 
   def check_and_move
-    sl_carr_news = SlCarrNew.all.pluck(:mcnum)
+    sl_carr_news = SlCarrNew.all.pluck(:mc_number)
     if sl_carr_news.length > 0
-      carr_news = CarrNew.where.not('mcnum IN (?)', sl_carr_news)
+      carr_news = CarrNew.where('mc_number NOT IN (?)', sl_carr_news)
     else
       carr_news = CarrNew.all
     end
