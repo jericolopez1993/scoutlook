@@ -20,11 +20,6 @@
 # Learn more: http://github.com/javan/whenever
 every :day, at: '12:01am', roles: [:worker] do
   rake "reminder:check_due"
-  rake "checks_new_carriers:check_and_move"
-end
-
-every :day, at: '12:01pm', roles: [:worker] do
-  rake "checks_new_carriers:check_and_move"
 end
 
 every :day, at: '1:00am', roles: [:worker] do
@@ -38,7 +33,9 @@ end
 every :day, at: '6:00am', roles: [:worker] do
   rake "computed_data:one_time"
 end
-# every :hour do
+
+every :hour do
 #   rake "computed_data:all"
 #   rake "add_new_carriers:check_and_create"
-# end
+  rake "checks_new_carriers:check_and_move"
+end
