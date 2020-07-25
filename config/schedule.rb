@@ -34,7 +34,7 @@ every :day, at: '6:00am', roles: [:worker] do
   rake "computed_data:one_time"
 end
 
-every :hour dos
+every :hour do
 #   rake "computed_data:all"
 #   rake "add_new_carriers:check_and_create"
   rake "checks_new_carriers:check_and_move"
