@@ -16,7 +16,7 @@
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
-
+set :output, "log/cron.log"
 # Learn more: http://github.com/javan/whenever
 every :day, at: '12:01am', roles: [:worker] do
   rake "reminder:check_due"
@@ -35,6 +35,8 @@ every :day, at: '6:00am', roles: [:worker] do
 end
 
 every :hour do
+
+end
 #   rake "computed_data:all"
 #   rake "add_new_carriers:check_and_create"
   rake "checks_new_carriers:check_and_move"
