@@ -1,7 +1,19 @@
 <br/>
 <div class="row">
-  <div class="col text-right">
+  <div class="col-6"></div>
+  <div class="col-6 text-right">
     Search: <input type="text" id="datatable-search">
+  </div>
+  <div class="col-6"></div>
+  <div class="col-6 text-right">
+    Lanes:
+    <div class="lanes-search">
+      <select id="from_lanes" name="from_lanes[]" multiple=""></select>
+    </div>
+
+    <div class="lanes-search">
+      <select id="to_lanes" name="to_lanes[]" multiple=""></select>
+    </div>
   </div>
 </div>
 <table class="table table-bordered display nowrap" id="<%= table_type %>_table">
