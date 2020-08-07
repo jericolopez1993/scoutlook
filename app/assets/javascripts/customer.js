@@ -121,7 +121,6 @@ $(function () {
       {column_number : 6, filter_type: "text", filter_reset_button_text: false},
       {column_number : 7, data: ['New', 'A', 'B', 'C', 'D', 'U'], filter_default_label: "Prior", filter_reset_button_text: false},
       {column_number : 8, filter_type: "text", filter_reset_button_text: false},
-      {column_number : 9, filter_type: "text", filter_reset_button_text: false},
       {column_number : 10, filter_type: "text", filter_reset_button_text: false},
       {column_number : 11, filter_type: "text", filter_reset_button_text: false},
       {column_number : 12, filter_type: "text", filter_reset_button_text: false},
@@ -140,4 +139,20 @@ $(function () {
       search_term = encodeURI($(this).val());
       table.fnFilter(search_term);
     })
+    $("#from_lanes, #to_lanes").on('keyup change click', function() {
+      var from_lanes_values = $("#from_lanes").val().toString();
+      var to_lanes_values = $("#to_lanes").val().toString();
+      var lane_values = from_lanes_values + "-" + to_lanes_values;
+
+      table.api().columns(9).search(lane_values).draw();
+    });
+    $
+    $("#from_lanes").select2({
+      placeholder: "From",
+      allowClear: true,
+      width: 'resolve'});
+    $("#to_lanes").select2({
+      placeholder: "To",
+      allowClear: true,
+      width: 'resolve'});
 });

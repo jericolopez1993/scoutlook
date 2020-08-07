@@ -183,98 +183,115 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
   def filter_on_lane
     ->(column, value) {
       data_values = column.search.value.split("-")
-      if data_values.length > 1
-         data_column_0 = data_values[0].split(" ")
-         data_column_1 = data_values[1].split(" ")
-         data_value_0_sql_script = nil
-         data_value_1_sql_script = nil
-         if data_column_0.length > 1
-           data_column_0.each do |dc|
-             if data_value_0_sql_script.nil?
-               data_value_0_sql_script = Arel::Nodes::Or.new(
-                               Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{dc.strip}%"),
-                               Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{dc.strip}%")
-                             )
-             else
-               data_value_0_sql_script = Arel::Nodes::Or.new(
-                               data_value_0_sql_script,
-                               Arel::Nodes::Or.new(
-                                               Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{dc.strip}%"),
-                                               Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{dc.strip}%")
-                                             )
-                             )
-             end
-           end
-         else
-           data_value_0_sql_script =   Arel::Nodes::Or.new(
-                             Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{data_values[0].strip}%"),
-                             Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{data_values[0].strip}%")
-                           )
-         end
-         if data_column_1.length > 1
-           data_column_1.each do |dc|
-             if data_value_1_sql_script.nil?
-               data_value_1_sql_script = Arel::Nodes::Or.new(
-                               Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{dc.strip}%"),
-                               Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{dc.strip}%")
-                             )
-             else
-               data_value_1_sql_script = Arel::Nodes::Or.new(
-                               data_value_1_sql_script,
-                               Arel::Nodes::Or.new(
-                                               Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{dc.strip}%"),
-                                               Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{dc.strip}%")
-                                             )
-                             )
-             end
-           end
-         else
-           data_value_1_sql_script =   Arel::Nodes::Or.new(
-                             Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{data_values[1].strip}%"),
-                             Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{data_values[1].strip}%")
-                           )
-         end
-         ::Arel::Nodes::And.new(
-           [
-             Arel::Nodes::Grouping.new(
-               data_value_0_sql_script
-             ),
-             Arel::Nodes::Grouping.new(
-               data_value_1_sql_script
-             )
-           ]
-         )
-      else
-        data_column_0 = data_values[0].split(" ")
-        puts "data_column_0.length::: #{data_column_0.length}"
-        data_value_0_sql_script = nil
-        if data_column_0.length > 1
-          data_column_0.each do |dc|
-            if data_value_0_sql_script.nil?
-              data_value_0_sql_script = Arel::Nodes::Or.new(
-                              Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{dc.strip}%"),
-                              Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{dc.strip}%")
-                            )
+      from_origin = []
+      to_destination = []
+      lane_sql_script = nil
+
+      if data_values[0]
+        from_origin = data_values[0].split(",")
+      end
+
+      if data_values[1]
+         to_destination = data_values[1].split(",")
+      end
+
+      from_origin_length = from_origin.length
+      to_destination_length = to_destination.length
+
+      if from_origin_length > 0 && to_destination_length > 0
+        from_origin.each do |origin|
+          origin_script = Arel::Nodes::Grouping.new(
+            Arel::Nodes::Or.new(
+              Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%,#{origin}%"),
+              Arel::Nodes::Or.new(
+                Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%,#{origin}"),
+                Arel::Nodes::Or.new(
+                  Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("#{origin},%"),
+                  Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches(origin)
+                )
+              )
+            )
+          )
+          to_destination.each do |dest|
+            destination_script = Arel::Nodes::Grouping.new(
+              Arel::Nodes::Or.new(
+                Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%,#{dest}%"),
+                Arel::Nodes::Or.new(
+                  Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%,#{dest}"),
+                  Arel::Nodes::Or.new(
+                    Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("#{dest},%"),
+                    Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches(dest)
+                  )
+                )
+              )
+            )
+            current_script = Arel::Nodes::Grouping.new(
+              Arel::Nodes::And.new(
+                [
+                  origin_script,
+                  destination_script
+                ]
+              )
+            )
+            if lane_sql_script.nil?
+              lane_sql_script = current_script
             else
-              data_value_0_sql_script = Arel::Nodes::Or.new(
-                              data_value_0_sql_script,
-                              Arel::Nodes::Or.new(
-                                              Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{dc.strip}%"),
-                                              Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{dc.strip}%")
-                                            )
+              lane_sql_script = Arel::Nodes::Or.new(
+                              lane_sql_script,
+                              current_script
                             )
             end
           end
-        else
-          data_value_0_sql_script =   Arel::Nodes::Or.new(
-                            Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%#{data_values[0].strip}%"),
-                            Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%#{data_values[0].strip}%")
-                          )
         end
-        ::Arel::Nodes::Grouping.new(
-          data_value_0_sql_script
-        )
+      elsif from_origin_length > 0 && to_destination_length == 0
+        from_origin.each do |origin|
+          origin_script = Arel::Nodes::Grouping.new(
+            Arel::Nodes::Or.new(
+              Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%,#{origin}%"),
+              Arel::Nodes::Or.new(
+                Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("%,#{origin}"),
+                Arel::Nodes::Or.new(
+                  Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches("#{origin},%"),
+                  Arel::Nodes::SqlLiteral.new("carriers.c_lane_origin").matches(origin)
+                )
+              )
+            )
+          )
+          if lane_sql_script.nil?
+            lane_sql_script = origin_script
+          else
+            lane_sql_script = Arel::Nodes::Or.new(
+                            lane_sql_script,
+                            origin_script
+                          )
+          end
+        end
+      elsif from_origin_length == 0 && to_destination_length > 0
+        to_destination.each do |dest|
+          destination_script = Arel::Nodes::Grouping.new(
+            Arel::Nodes::Or.new(
+              Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%,#{dest}%"),
+              Arel::Nodes::Or.new(
+                Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("%,#{dest}"),
+                Arel::Nodes::Or.new(
+                  Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches("#{dest},%"),
+                  Arel::Nodes::SqlLiteral.new("carriers.c_lane_destination").matches(dest)
+                )
+              )
+            )
+          )
+          if lane_sql_script.nil?
+            lane_sql_script = destination_script
+          else
+            lane_sql_script = Arel::Nodes::Or.new(
+                            lane_sql_script,
+                            destination_script
+                          )
+          end
+        end
       end
+
+      lane_sql_script
     }
   end
 

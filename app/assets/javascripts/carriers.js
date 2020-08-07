@@ -150,11 +150,9 @@ $(function () {
   $("#from_lanes").select2({
     placeholder: "From",
     allowClear: true,
-    width: 'resolve',
-    data: originTags });
+    width: 'resolve' });
   $("#to_lanes").select2({
     placeholder: "To",
     allowClear: true,
-    width: 'resolve',
-    data: originTags });
+    width: 'resolve' });
 });

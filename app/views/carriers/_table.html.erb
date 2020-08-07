@@ -8,11 +8,11 @@
   <div class="col-6 text-right">
     Lanes:
     <div class="lanes-search">
-      <select id="from_lanes" name="from_lanes[]" multiple=""></select>
+      <%= select_tag :from_lanes, grouped_options_for_select(ShipperLane::ORIGINS), class: 'form-control', multiple: true %>
     </div>
 
     <div class="lanes-search">
-      <select id="to_lanes" name="to_lanes[]" multiple=""></select>
+      <%= select_tag :to_lanes, grouped_options_for_select(ShipperLane::ORIGINS), class: 'form-control', multiple: true %>
     </div>
   </div>
 </div>
