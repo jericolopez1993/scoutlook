@@ -4,7 +4,7 @@ module ApplicationHelper
   def has_table
     controller_index_array = ['activities', 'carrier_companies', 'carrier_contacts', 'carrier_lanes', 'carrier_locations', 'carrier_notes', 'carriers', 'loads', 'logs', 'master_invoices', 'master_signals', 'rates', 'reminders', 'shipments', 'shipper_companies', 'shipper_contacts', 'shipper_lanes', 'shipper_locations', 'shippers', 'users']
     action_index_array = ['index', 'mine', 'newly', 'demo', 'prom']
-    controller_show_array = ['carriers', 'activities', 'shippers']
+    controller_show_array = ['carriers', 'activities', 'shippers', 'email_templates']
     action_show_array = ['show']
 
     return (controller_index_array.include?(params[:controller]) && action_index_array.include?(params[:action])) || (controller_show_array.include?(params[:controller]) && action_show_array.include?(params[:action]))

@@ -1,0 +1,36 @@
+<table class="table table-striped table-bordered data-table-no-buttons display nowrap" width="100%">
+  <thead>
+    <tr class="odd gradeX">
+      <th data-orderable="false" width="5%">Actions</th>
+      <th>Position</th>
+      <th>Logo</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% email_links.each do |email_link| %>
+      <tr>
+        <td>
+          <%= link_to '<i class="far fa-eye"></i>'.html_safe, carrier_company, :class => 'btn btn-info btn-xs', target: :_blank %>
+          <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_carrier_company_path(carrier_company), :class => 'btn btn-warning btn-xs', target: :_blank %>
+          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, carrier_company, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+        </td>
+        <td><%= email_link.position %></td>
+        <td><%= email_link.link %></td>
+        <td>
+          <% if !email_link.logo_image.nil?  %>
+            <% if email_link.logo_image.attached? %>
+              <%= image_tag email_link.logo_image %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script language="javascript">
+  $(document).ready(function() {
+    filterTable("email_links_table");
+  });
+</script>
