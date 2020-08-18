@@ -61,7 +61,7 @@ class EmailLinksController < ApplicationController
     end
 
     def email_link_params
-      params.require(:email_link).permit(:position, :link)
+      params.require(:email_link).permit(:name, :position, :link)
     end
 
 end

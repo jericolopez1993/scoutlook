@@ -1,0 +1,142 @@
+<table class="m_-3783900543240753759MsoNormalTable" style="color: #222222; font-family: Arial, Helvetica, sans-serif; font-size: small; border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr style="height: 72.55pt;">
+      <td
+        style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 126.15pt; border-top: none; border-bottom: none; border-left: none; border-image: initial; border-right: 1pt solid red; padding: 0cm 5.4pt; height: 72.55pt;"
+        valign="top"
+        width="168">
+        <table class="m_-3783900543240753759MsoNormalTable" style="width: 116.1pt;" border="0" width="155" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr style="height: 13.3pt;">
+              <td style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 116.1pt; padding: 0cm; height: 13.3pt;" width="155">
+                <p class="MsoNormal" style="margin: 0px; text-align: center;" align="center">
+                  <strong>
+                    <span style="font-size: 14pt; font-family: Arial, sans-serif; color: black;"><%= current_user.full_name %></span>
+                  </strong>
+                </p>
+              </td>
+            </tr>
+            <tr style="height: 43.7pt;">
+              <td style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 116.1pt; padding: 0cm; height: 43.7pt;" width="155">
+                <p class="MsoNormal" style="margin: 0px; text-align: center; line-height: 14.95px;" align="center">
+                  <a
+                    style="color: #1155cc;"
+                    href="http://scoutlogistics.com/"
+                    target="_blank"
+                    rel="noopener"
+                    data-saferedirecturl="https://www.google.com/url?q=http://scoutlogistics.com/&amp;source=gmail&amp;ust=1552317655498000&amp;usg=AFQjCNFbnVmtYqeDo0aN1UsYBjs8QtKT5Q">
+                    <span style="color: windowtext; text-decoration-line: none;">
+                      <% if !email_template.logo_image.nil?  %>
+                        <% if email_template.logo_image.attached? %>
+                          <img style="width: 202px !important; height: 49px !important;" src="<%= url_for(email_template.logo_image) %>" alt="scout.png" border="0"/>
+                        <% else %>
+                          <img style="width: 202px !important; height: 49px !important;" src="<%= asset_path('email_template/scout-logo.png') %>" alt="scout.png" border="0"/>
+                        <% end %>
+                      <% else %>
+                        <img style="width: 202px !important; height: 49px !important;" src="<%= asset_path('email_template/scout-logo.png') %>" alt="scout.png" border="0"/>
+                      <% end %>
+                    </span>
+                  </a>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 227.3pt; padding: 0cm 5.4pt; height: 72.55pt;" colspan="2" valign="top" width="303">
+        <table class="m_-3783900543240753759MsoNormalTable" style="width: 215.65pt;" border="0" width="288" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr style="height: 11.65pt;">
+              <td style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 11.65pt;" width="288">
+                <p class="MsoNormal" style="margin: 0px; line-height: 14.95px;">
+                  <strong>
+                    <span style="font-size: 9pt; line-height: 13.8px; font-family: Arial, sans-serif; color: black;"><%= current_user.position %></span>
+                  </strong>
+                </p>
+              </td>
+            </tr>
+            <tr style="height: 12.5pt;">
+              <td style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 12.5pt;" width="288">
+                <p class="MsoNormal" style="margin: 0px; line-height: 14.95px;">
+                  <strong>
+                    <span style="font-size: 9pt; line-height: 13.8px; font-family: Arial, sans-serif; color: black;"><%= email_template.name %>
+                    </span>
+                  </strong>
+                </p>
+              </td>
+            </tr>
+            <tr style="height: 3.9pt;">
+              <td style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 3.9pt;" width="288">
+                <p class="MsoNormal" style="margin: 0px; line-height: 14.95px;">
+                  <span style="font-size: 3pt; line-height: 4.6px; font-family: Arial, sans-serif; color: black;">&nbsp;</span>
+                </p>
+              </td>
+            </tr>
+            <tr style="height: 32.8pt;">
+              <td style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 32.8pt;" width="288">
+                <p class="MsoNormal" style="margin: 0px; line-height: 14.95px;">
+                  <strong>
+                    <span style="font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;">Phone:
+                    </span>
+                  </strong>
+                  <span style="font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: black;"><%= current_user.phone_number %>
+                  </span>
+                </p>
+                <p class="MsoNormal" style="margin: 0px; line-height: 14.95px;">
+                  <strong>
+                    <span style="font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; ">Direct:
+                    </span>
+                  </strong>
+                  <span style="font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif;"><%= current_user.direct_number %>
+                  </span>
+                </p>
+                <p class="MsoNormal" style="margin: 0px; line-height: 14.95px;">
+                  <strong>
+                    <span style="font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; ">Toll Free:
+                    </span>
+                  </strong>
+                  <span style="font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif;"><%= current_user.toll_free %>
+                  </span>
+                </p>
+              </td>
+            </tr>
+            <tr style="height: 10.9pt;">
+              <td style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 215.65pt; padding: 0cm; height: 10.9pt;" width="288">
+                <p class="MsoNormal" style="margin: 0px; line-height: 14.95px;">
+                  <a style="color: #1155cc;" href="mailto:" target="_blank" rel="noopener">
+                    <span style="font-size: 8pt; line-height: 12.2667px; font-family: Arial, sans-serif; color: blue;"><%= current_user.email %></span>
+                  </a>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr style="height: 43.7pt;">
+      <td
+        style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 344.25pt; border-right: none; border-bottom: none; border-left: none; border-image: initial; border-top: 1pt solid red; padding: 0cm 5.4pt; height: 43.7pt;"
+        colspan="2"
+        width="459">
+        <p class="MsoNormal" style="margin: 0px;">&nbsp;
+          <% EmailLink.order("position ASC").each do |email_link| %>
+            <a style="color: #1155cc; padding-right: 15px" href="<%= email_link.link %>" target="_blank">
+              <span style="color: windowtext; text-decoration-line: none;">
+                <% if !email_link.logo_image.nil?  %>
+                  <% if email_link.logo_image.attached? %>
+                    <img style="width: auto !important; height: 34px !important;" src="<%= url_for(email_link.logo_image) %>" border="0"/>
+                  <% end %>
+                <% end %>
+              </span>
+            </a>
+          <% end %>
+        </p>
+      </td>
+    </tr>
+    <tr style="height: 24.2pt;">
+      <td style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 344.25pt; padding: 0cm 5.4pt; height: 24.2pt; text-align: right;" colspan="2" width="459">
+        <%= email_template.footer_description.html_safe %>
+      </td>
+    </tr>
+  </tbody>
+</table>

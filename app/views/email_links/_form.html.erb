@@ -26,6 +26,14 @@
           </div>
         </div>
         <% end %>
+
+        <div class="form-group row m-b-15">
+          <%= form.label :name, 'Name:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
+          <div class="col-md-4 col-sm-8" style="position: relative">
+            <%= form.text_field :name, class: 'form-control'%>
+          </div>
+        </div>
+
         <div class="form-group row m-b-15">
           <%= form.label :position, 'Position:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
           <div class="col-md-4 col-sm-8" style="position: relative">
