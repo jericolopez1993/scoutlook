@@ -285,8 +285,10 @@ class CarriersController < ApplicationController
 
     # Adds the new carrier to the main carrier listings
     new_carriers.each do |carr_new|
-      unless existing_carriers.include?(carr_new.mc_number)
-          AddNewCarrierToCarrierService.new.single_create(carr_new)
+      if existing_carriers.include?(carr_new.mc_number)
+        AddNewCarrierToCarrierService.new.single_update(carr_new)
+      else
+        AddNewCarrierToCarrierService.new.single_create(carr_new)
       end
     end
 
