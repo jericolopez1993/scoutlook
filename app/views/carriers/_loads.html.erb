@@ -61,7 +61,7 @@
         <% loads.each do |load| %>
         <tr>
           <td><%= load.load_num %></td>
-          <td><%= load.ship_date.to_date %></td>
+          <td data-sort="<%= load.ship_date.to_date.strftime("%Y%m%d%H%M%s") %>"><%= load.ship_date.to_date %></td>
           <td><%= load.customer %></td>
           <td><%= load.origin %></td>
           <td><%= load.os %></td>

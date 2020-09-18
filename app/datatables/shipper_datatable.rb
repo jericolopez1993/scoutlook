@@ -41,7 +41,7 @@ class ShipperDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id: check_box_tag('shippers[]', record.id),
-        c_reminder_date: record.c_reminder_date ? format_reminder(record.c_reminder_id, record.c_reminder_date, record.c_reminder_type, record.c_reminder_notes).html_safe : "",
+        c_reminder_date: record.c_reminder_date ? format_reminder(record.c_reminder_id, record.c_reminder_date, record.c_reminder_type, record.c_reminder_notes, record.c_reminder_completed).html_safe : "",
         relationship_owner_name: record.relationship_owner_name ? (record['relationship_owner_name'].blank? ? '(no name)' : "#{link_to(covert_initials(record['relationship_owner_name']), user_path(:id => record['relationship_owner']))}".html_safe) : '',
         sales_priority: shade_sales_priority(record.sales_priority).html_safe,
         company_name: record.decorate.link_to,
