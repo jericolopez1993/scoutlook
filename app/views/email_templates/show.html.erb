@@ -1,0 +1,88 @@
+<style>
+  div.link a:visited {
+    color: #dd8b00!important;
+  }
+  div.link a {
+    text-decoration: underline;
+  }
+@media (max-width: 767px) {
+  label {
+    text-align: left!important;
+  }
+}
+label {
+  text-align: right;
+}
+</style>
+<!-- begin page-header -->
+<div class="header-scout">
+  <h1 class="pull-left">
+    <%= render 'layouts/static/header', header_title: "Email Template" %>
+  </h1>
+  <span class="pull-right">
+    <%= link_to 'Edit', edit_email_template_path(:id => @email_template.id), :class => 'btn btn-warning btn-xs', target: :_blank %>&nbsp;&nbsp;
+    <%= link_to 'Back', activities_path, :class => 'btn btn-info btn-xs' %>
+  </span>
+</div>
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading">
+    <h4 class="panel-title"></h4>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-6">
+        <h4 class="text-inverse">Left Side</h4>
+        <div class="row">
+          <label class="col-md-2 col-6 col-form-label">Company Logo:</label>
+          <div class="col-md-9 col-6 lbl-padding-t">
+            <% if !@email_template.logo_image.nil?  %>
+              <% if @email_template.logo_image.attached? %>
+                <%= image_tag @email_template.logo_image %>
+              <% else %>
+                <img src="<%= asset_path('email_template/scout-logo.png') %>" />
+              <% end %>
+            <% else %>
+              <img src="<%= asset_path('email_template/scout-logo.png') %>" />
+            <% end %>
+          </div>
+        </div>
+
+        <hr>
+        <h4 class="text-inverse">Right Side</h4>
+        <div class="row">
+          <label class="col-md-2 col-6 col-form-label">Company Name:</label>
+          <div class="col-md-9 col-6 lbl-padding-t">
+            <%= @email_template.name %>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <h4 class="text-inverse">Preview</h4>
+        <div class="row">
+          <%= render 'preview', email_template: @email_template %>
+        </div>
+      </div>
+
+    </div>
+
+
+    <hr>
+    <h4 class="text-inverse">Other Logos</h4>
+    <%= link_to 'Add New Image Link', new_email_link_path, :class => 'btn btn-primary btn-xs' %>
+    <%= render 'email_links/table', email_links: EmailLink.all %>
+
+    <hr>
+    <h4 class="text-inverse">Footer</h4>
+    <div class="row">
+      <label class="col-md-2 col-6 col-form-label">Quote/Others:</label>
+      <div class="col-md-9 col-6 lbl-padding-t">
+        <%= @email_template.footer_description.html_safe %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- end panel -->

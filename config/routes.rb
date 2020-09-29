@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   resources :shipments
   resources :master_invoices, :path => 'invoices'
   resources :mails
+  resources :email_templates
+  resources :email_links
   resources :activities do
     collection do
       post    'quick_create'

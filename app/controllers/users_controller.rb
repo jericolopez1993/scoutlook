@@ -123,6 +123,6 @@ class UsersController < ApplicationController
     def user_params
       params[:user][:ro] = params[:ro].present?
       params[:user][:cs] = params[:cs].present?
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :ro, :cs, :email_signature)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :ro, :cs, :email_signature, :position, :phone_number, :direct_number, :toll_free)
     end
 end
