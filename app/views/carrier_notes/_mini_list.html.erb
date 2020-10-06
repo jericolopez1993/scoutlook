@@ -6,7 +6,7 @@
         <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, carrier_note_path(:id => carrier_note.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs pull-right'%>
       <% end %>
       <h6 class="card-title"><%= carrier_note.created_at %></h6>
-      <h6 class="card-subtitle"><%= carrier_note.user.full_name %></h6>
+      <h6 class="card-subtitle"><%= carrier_note.user && carrier_note.user.full_name %></h6>
       <p class="card-text"><%= carrier_note.notes && carrier_note.notes.html_safe %></p>
     </div>
   </div>
