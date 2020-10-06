@@ -2,7 +2,10 @@
 server 'ubuntu@scoutlook.ca', roles: [:web, :app, :db, :worker, :prod], primary: true
 server 'ubuntu@scoutlook.opinionated.software', roles: [:web, :app, :db, :non_worker, :prod]
 
-set :repo_url,        'git@github.com:jericolopez1993/scoutlook.git'
+set :repo_url,        'https://github.com/jericolopez1993/scoutlook.git'
+set :scm_username,    "jericolopez0107"
+set :scm_password,    "wV46GnmfW2WHPsp8"
+set :scm, :git
 set :application,     'scout_prod'
 set :user,            'ubuntu'
 set :puma_threads,    [4, 16]
