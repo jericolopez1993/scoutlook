@@ -1,6 +1,6 @@
 # Change these
-# server 'ubuntu@scoutlook.ca', roles: [:web, :app, :db, :worker, :prod], primary: true
-server 'ubuntu@scoutlook.opinionated.software', roles: [:web, :app, :db, :worker, :prod]
+server 'ubuntu@scoutlook.opinionated.software', roles: [:web, :app, :db, :worker, :prod], primary: true
+server 'ubuntu@99.79.186.43', roles: [:web, :app, :db, :non_worker, :prod]
 
 set :repo_url,        'https://github.com/jericolopez1993/scoutlook.git'
 set :git_http_username, 'jericolopez0107'
