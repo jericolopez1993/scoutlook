@@ -23,8 +23,12 @@ default: &default
 
 development:
   <<: *default
-  database: scoutv1_development
-  pool: 5
+  database: scoutcrm
+  username: scoutcrm
+  password: Vb8eC4MqhoUjBa
+  host: scoutlook.ch1xmgtvyyuk.ca-central-1.rds.amazonaws.com
+  # database: scoutv1_development
+  # pool: 5
   # host: db
   # username: postgres
   # password: root
