@@ -88,7 +88,7 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
-  config.logger = ActiveSupport::Logger::new(Rails.root.join('log', "#{Rails.env}.log"), 1, 50 * 1024 * 1024)
+  config.logger = ActiveSupport::Logger::new(config.log_file, 1, 50 * 1024 * 1024)
   config.action_mailer.default_url_options = { host:'app.scoutlook.ca'}
 
   # Do not dump schema after migrations.
