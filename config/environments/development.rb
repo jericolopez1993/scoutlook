@@ -49,6 +49,8 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.logger = ActiveSupport::Logger::new(Rails.root.join('log', "#{Rails.env}.log"), 1, 50 * 1024 * 1024)
+
   # Suppress logger output for asset requests.
   config.assets.quiet = true
   # config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
