@@ -159,7 +159,9 @@ class CarrierDatatable < AjaxDatatablesRails::ActiveRecord
         )
       else
         search_value = URI.unescape(column.search.value)
+        if search_value != "-yadcf_delim-" 
         ::Arel::Nodes::SqlLiteral.new("CAST(carriers.#{column.field.to_s} AS VARCHAR)").matches("%#{search_value}%")
+        end
       end
     }
   end

@@ -133,7 +133,12 @@ $(function () {
       {column_number : 19, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
       {column_number : 20, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false},
       {column_number : 21, filter_type: "text", filter_reset_button_text: false},
-      {column_number : 22, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false}]);
+      {column_number : 22, data: [{value: 1,label: 'Y'}, {value: 0,label: 'N'}], filter_default_label: "Y/N", filter_reset_button_text: false}],
+      {externally_triggered: true});
+
+  $('#overall_search').click(function (){
+    yadcf.exFilterExternallyTriggered(table);
+  });
 
   $('#datatable-search').keyup(function(){
     search_term = encodeURI($(this).val());

@@ -15,6 +15,9 @@
       <%= select_tag :to_lanes, grouped_options_for_select(ShipperLane::ORIGINS), class: 'form-control', multiple: true %>
     </div>
   </div>
+  <div class="col-12 text-right" style="margin-top: 10px;">
+    <button id="overall_search" class="btn btn-primary">Overall Search</i></button>
+  </div>
 </div>
 <table class="table table-bordered display nowrap" id="<%= table_type %>_table">
   <thead>
