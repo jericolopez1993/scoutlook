@@ -66,7 +66,7 @@
           <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
             <i class="fa fa-bell"></i>
             <% if @global_summary.log_total > 0 %>
-              <span class="label"><%= audits.length %></span>
+              <span class="label"><%= @global_summary.log_total %></span>
             <% end %>
           </a>
           <ul class="notification dropdown-menu media-list dropdown-menu-right">
