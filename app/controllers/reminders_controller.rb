@@ -5,11 +5,12 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.json
   def index
-    if current_user.has_role?(:admin)
-      @reminders = Reminder.listings
-    else
-      @reminders = Reminder.listings.where("user_id = ?", current_user.id)
-    end
+     @reminders = []
+    # if current_user.has_role?(:admin)
+    #   @reminders = Reminder.listings
+    # else
+    #   @reminders = Reminder.listings.where("user_id = ?", current_user.id)
+    # end
   end
 
   # GET /reminders/1
