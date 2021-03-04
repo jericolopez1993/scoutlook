@@ -10,8 +10,16 @@ namespace :computed_data do
   end
 
   task one_time: :environment do
+    time_start = Time.now
     ComputeDataService.new.all
-    ComputedDataShippersService.new.all
+    # ComputedDataShippersService.new.all
+    time_end = Time.now
+    puts "-------------------------------"
+    puts "Carrier One Time Run"
+    puts "Time Started: #{time_start}"
+    puts "Time Ended: #{time_end}"
+    puts "Computed Data Finished: (#{time_end - time_start})"
+    puts "-------------------------------"
   end
 
   task reminders: :environment do
@@ -41,6 +49,23 @@ namespace :computed_data do
     end
   end
 
+  task carr_news: :environment do
+    time_start = Time.now
+    ActiveRecord::Base.connection.execute("UPDATE carriers SET
+            c_carr_new_loads_lw = (SELECT COUNT(*) FROM df_loads WHERE df_loads.ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '7 DAY' and df_loads.ship_date < DATE_TRUNC('WEEK', NOW()) AND (df_loads.mc_num = carriers.mc_number AND df_loads.carrier = carriers.company_name)),
+            c_carr_new_loads_2w = (SELECT COUNT(*) FROM df_loads WHERE df_loads.ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '14 DAY' and df_loads.ship_date < DATE_TRUNC('WEEK', NOW()) - INTERVAL '8 DAY' AND (df_loads.mc_num = carriers.mc_number AND df_loads.carrier = carriers.company_name)),
+            c_carr_new_loads_3w = (SELECT COUNT(*) FROM df_loads WHERE df_loads.ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '21 DAY' and df_loads.ship_date < DATE_TRUNC('WEEK', NOW()) - INTERVAL '15 DAY' AND (df_loads.mc_num = carriers.mc_number AND df_loads.carrier = carriers.company_name)),
+            c_carr_new_loads_4w = (SELECT COUNT(*) FROM df_loads WHERE df_loads.ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '28 DAY' and df_loads.ship_date < DATE_TRUNC('WEEK', NOW()) - INTERVAL '22 DAY' AND (df_loads.mc_num = carriers.mc_number AND df_loads.carrier = carriers.company_name)),
+            c_mc_latest_date_last_month = (SELECT COUNT(*) FROM df_loads WHERE ship_date >= DATE_TRUNC('MONTH', NOW()) - INTERVAL '1 DAY' and ship_date < DATE_TRUNC('MONTH', DATE_TRUNC('MONTH', NOW()) - INTERVAL '1 DAY') AND (df_loads.mc_num = carriers.mc_number AND df_loads.carrier = carriers.company_name))")
+   time_end = Time.now
+   puts "-------------------------------"
+   puts "Load Count"
+   puts "Time Started: #{time_start}"
+   puts "Time Ended: #{time_end}"
+   puts "Computed Data Finished: (#{time_end - time_start})"
+   puts "-------------------------------"
+  end
+
   task lanes: :environment do
     #Carriers
     @carrier_ids = CarrierLane.all.pluck(:carrier_id).uniq
@@ -52,7 +77,7 @@ namespace :computed_data do
     #Shipper
     @shipper_ids = ShipperLane.all.pluck(:shipper_id).uniq
 
-    @shipper_ids.each do |id|
+    @shipper_ids.each do |id|ActiveRecord::Base.connection.raw_connection.execute
       ComputedDataShippersService.new.lane(id)
     end
   end
@@ -83,5 +108,9 @@ namespace :computed_data do
     @shipper_ids.each do |id|
       ComputedDataShippersService.new.audit(id)
     end
+  end
+
+  task global_summaries: :environment do
+    GlobalSummaryServices.new.run
   end
 end

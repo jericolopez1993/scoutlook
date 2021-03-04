@@ -120,26 +120,6 @@ class ComputeDataService
             end
             # Lanes - END
 
-            # CarrNew - START
-            carr_new = CarrNew.where("mc_number = '#{carrier.mc_number}' AND carrier_name = E'#{carrier.company_name.gsub("'"){"\\'"}}'").first
-            if carr_new
-              c_carr_new_loads_lw = carr_new.loads_lw
-              c_carr_new_loads_2w = carr_new.loads_2w
-              c_carr_new_loads_3w = carr_new.loads_3w
-              c_carr_new_loads_4w = carr_new.loads_4w
-            end
-            # CarrNew - END
-
-            # McLatestDate - START
-            mc_latest_date = McLatestDate.select("*, (SELECT (now()::date - ship_date_1::date) FROM mc_latest_date WHERE mcnum = '#{carrier.mc_number}' ORDER BY ship_date_1 DESC LIMIT 1) AS load_days").where(:mcnum => carrier.mc_number).order("ship_date_1 DESC").first
-            if mc_latest_date
-              c_mc_latest_date_tier = mc_latest_date["tier"]
-              c_mc_latest_date_last_month = mc_latest_date.loadsh_num
-              c_mc_latest_date_last_6_months = mc_latest_date.loadsh_num_6mon
-              c_mc_latest_date_load_days =  mc_latest_date.load_days
-            end
-            # McLatestDate - END
-
             # Audit - START
             log = Log.where("model_type IN ('Carrier', 'CarrierCompany', 'CarrierContact', 'CarrierLane', 'CarrierLocation', 'CarrierNote', 'Activity', 'Rate', 'Reminder')").where(:main_id => carrier.id).order("created_at DESC").first
 
@@ -162,16 +142,12 @@ class ComputeDataService
               :c_lane_origin => c_lane_origin,
               :c_lane_destination => c_lane_destination,
               :c_lane_id => c_lane_id,
-              :c_carr_new_loads_lw => c_carr_new_loads_lw,
-              :c_carr_new_loads_2w => c_carr_new_loads_2w,
-              :c_carr_new_loads_3w => c_carr_new_loads_3w,
-              :c_carr_new_loads_4w => c_carr_new_loads_4w,
               :c_mc_latest_date_tier => c_mc_latest_date_tier,
-              :c_mc_latest_date_last_month => c_mc_latest_date_last_month,
               :c_mc_latest_date_last_6_months => c_mc_latest_date_last_6_months,
               :c_mc_latest_date_load_days =>  c_mc_latest_date_load_days,
               :c_auditable_last_activity_date => c_auditable_last_activity_date
             )
+
           end
         rescue
         end
@@ -308,13 +284,17 @@ class ComputeDataService
   def carr_new(carrier_id)
     begin
       if carrier_id
-        carr_new.mc_number = carriers.mc_number AND carr_new.carrier_name = carriers.company_name
-        @carrier = Carrier.find(carrier_id)
+        carrier = Carrier.find(carrier_id)
+        puts "#{carrier_id}"
         carr_new = CarrNew.where("mc_number = '#{@carrier.mc_number}' AND carrier_name = '#{@carrier.company_name}'").first
+        load_lw = DfLoad.where("ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '7 DAY' and ship_date < DATE_TRUNC('WEEK', NOW())").where("mc_num = '#{carrier.mc_number}' AND carrier = '#{carrier.company_name.gsub("'"){"\\'"}}'").length
+        load_2w = DfLoad.where("ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '14 DAY' and ship_date < DATE_TRUNC('WEEK', NOW())  - INTERVAL '8 DAY'").where("mc_num = '#{carrier.mc_number}' AND carrier = '#{carrier.company_name.gsub("'"){"\\'"}}'").length
+        load_3w = DfLoad.where("ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '21 DAY' and ship_date < DATE_TRUNC('WEEK', NOW())  - INTERVAL '15 DAY'").where("mc_num = '#{carrier.mc_number}' AND carrier = '#{carrier.company_name.gsub("'"){"\\'"}}'").length
+        load_4w = DfLoad.where("ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '28 DAY' and ship_date < DATE_TRUNC('WEEK', NOW())  - INTERVAL '22 DAY'").where("mc_num = '#{carrier.mc_number}' AND carrier = '#{carrier.company_name.gsub("'"){"\\'"}}'").length
         if carr_new
-          @carrier.update_attributes(:c_carr_new_loads_lw => carr_new.loads_lw, :c_carr_new_loads_2w => carr_new.loads_2w, :c_carr_new_loads_3w => carr_new.loads_3w, :c_carr_new_loads_4w => carr_new.loads_4w)
+          carrier.update_attributes(:c_carr_new_loads_lw => load_lw, :c_carr_new_loads_2w => load_2w, :c_carr_new_loads_3w => load_3w, :c_carr_new_loads_4w => load_4w)
         else
-          @carrier.update_attributes(:c_carr_new_loads_lw => nil, :c_carr_new_loads_2w => nil, :c_carr_new_loads_3w => nil, :c_carr_new_loads_4w => nil)
+          carrier.update_attributes(:c_carr_new_loads_lw => nil, :c_carr_new_loads_2w => nil, :c_carr_new_loads_3w => nil, :c_carr_new_loads_4w => nil)
         end
       end
     rescue

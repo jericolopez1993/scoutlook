@@ -137,21 +137,16 @@ $(function () {
       {externally_triggered: true});
 
   $('#overall_search').click(function (){
-    yadcf.exFilterExternallyTriggered(table);
-  });
-
-  $('#datatable-search').keyup(function(){
-    search_term = encodeURI($(this).val());
-    table.fnFilter(search_term);
-  })
-  $("#from_lanes, #to_lanes").on('keyup change click', function() {
+    var search_term = encodeURI($("#datatable-search").val());
     var from_lanes_values = $("#from_lanes").val().toString();
     var to_lanes_values = $("#to_lanes").val().toString();
     var lane_values = from_lanes_values + "-" + to_lanes_values;
 
-    table.api().columns(9).search(lane_values).draw();
+    table.api().search(search_term);
+    table.api().columns(9).search(lane_values);
+    yadcf.exFilterExternallyTriggered(table);
   });
-  $
+  
   $("#from_lanes").select2({
     placeholder: "From",
     allowClear: true,

@@ -44,7 +44,7 @@ class Reminder < ApplicationRecord
 
   scope :listings, -> {select("reminders.*, carriers.company_name AS carrier_name, shippers.company_name AS shipper_name, activities.shipper_id AS activity_shipper_id, activities.carrier_id AS activity_carrier_id, (SELECT company_name FROM carriers WHERE id = activities.carrier_id LIMIT 1) AS activity_carrier_name, (SELECT company_name FROM shippers WHERE id = activities.shipper_id LIMIT 1) AS activity_shipper_name, concat_ws(' ', users.first_name, users.last_name) AS user_name").joins("LEFT JOIN shippers ON shippers.id = reminders.shipper_id").joins("LEFT JOIN carriers ON carriers.id = reminders.carrier_id").joins("LEFT JOIN users ON users.id = reminders.user_id").joins("LEFT JOIN activities ON activities.id = reminders.activity_id")}
 
-  default_scope {listings}
+  # default_scope {listings}
 
   def reminder_date_interval
     if self.reminder_date

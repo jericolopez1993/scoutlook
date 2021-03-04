@@ -2,6 +2,7 @@ class DfLoad < ApplicationRecord
   scope :listings, -> {
     select('
       df_loads.*,
+      TO_DATE(CAST(ship_date AS TEXT),  \'YYYY-MM-DD \') AS ship_date_date,
       carriers.id AS carrier_id,
       carriers.sales_priority,
       carriers.power_units,

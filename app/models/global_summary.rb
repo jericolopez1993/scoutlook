@@ -1,0 +1,2 @@
+class GlobalSummary < ApplicationRecord
+end

@@ -5,6 +5,14 @@ namespace :checks_new_carriers do
   end
 
   task check_and_move: :environment do
+    time_start = Time.now
     ChecksCarrNewTableServices.new.check_and_move
+    time_end = Time.now
+    puts "-------------------------------"
+    puts "Check and Move New Carriers to Scoutlook Carrier"
+    puts "Time Started: #{time_start}"
+    puts "Time Ended: #{time_end}"
+    puts "Computed Data Finished: (#{time_end - time_start})"
+    puts "-------------------------------"
   end
 end
