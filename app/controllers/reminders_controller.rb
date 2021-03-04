@@ -5,7 +5,11 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.json
   def index
-    @reminders = Reminder.all
+    if current_user.has_role?(:admin)
+      @reminders = Reminder.listings
+    else
+      @reminders = Reminder.listings.where("user_id = ?", current_user.id)
+    end
   end
 
   # GET /reminders/1
@@ -113,7 +117,7 @@ class RemindersController < ApplicationController
       else
         params[:reminder][:reminder_date] = nil
       end
-      
+
       if params[:reminder][:notes].present?
         params[:reminder][:notes] = params[:reminder][:notes].gsub("'", '&#39;')
       end
