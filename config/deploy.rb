@@ -127,7 +127,7 @@ namespace :deploy do
   before :starting,     :stop_nginx
   # before :starting,     :seed_dump
   before :starting,     :check_revision
-  before :starting,     :kill_cron
+  # before :starting,     :kill_cron
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
