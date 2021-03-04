@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_current_user
   before_action :set_current_action
+  before_action :get_logs_and_reminders
   layout :layout_by_resource
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   # rescue_from I18n::InvalidLocaleData
@@ -15,6 +16,20 @@ class ApplicationController < ActionController::Base
       User.current = current_user
     else
       User.current = nil
+    end
+  end
+
+  def get_logs_and_reminders
+    @global_summary = GlobalSummary.first
+    @current_reminders = []
+    @current_logs = []
+
+    if @global_summary.reminder_ids != "[]"
+      @current_reminders = Reminder.listings.where("reminders.id IN (#{@global_summary.reminder_ids.tr('[]', '')})")
+    end
+
+    if @global_summary.log_ids != "[]"
+      @current_logs = Log.overall.where("logs.id IN (#{@global_summary.log_ids.tr('[]', '')})")
     end
   end
 

@@ -112,7 +112,11 @@ namespace :deploy do
   desc 'Kill Crons'
   task :kill_cron do
     on roles(:prod), in: :sequence, wait: 5 do
-      execute "kill $(ps aux | grep '[d]elayed_job' | awk '{print $2}')"
+      begin
+        execute "kill $(ps aux | grep '[d]elayed_job' | awk '{print $2}')"
+      rescue
+        puts "No existing cron job running for now."
+      end
     end
   end
 
@@ -127,7 +131,7 @@ namespace :deploy do
   before :starting,     :stop_nginx
   # before :starting,     :seed_dump
   before :starting,     :check_revision
-  # before :starting,     :kill_cron
+  before :starting,     :kill_cron
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart

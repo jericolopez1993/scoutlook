@@ -111,6 +111,14 @@ namespace :computed_data do
   end
 
   task global_summaries: :environment do
+    time_start = Time.now
     GlobalSummaryServices.new.run
+    time_end = Time.now
+    puts "-------------------------------"
+    puts "Global Summary Run"
+    puts "Time Started: #{time_start}"
+    puts "Time Ended: #{time_end}"
+    puts "Computed Data Finished: (#{time_end - time_start})"
+    puts "-------------------------------"
   end
 end

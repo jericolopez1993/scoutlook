@@ -2,8 +2,8 @@ class GlobalSummaryServices
   def run
     reminder_total = Reminder.incomplete.length
     reminder_ids = Reminder.incomplete.limit(10).pluck(:id)
-    log_total = Log.today.length
-    log_ids = Log.today.limit(10).pluck(:id)
+    log_total = Log.where("logs.created_at >= ?", Time.zone.today.midnight).order("created_at DESC").length
+    log_ids = Log.where("logs.created_at >= ?", Time.zone.today.midnight).order("created_at DESC").limit(10).pluck(:id)
 
     GlobalSummary.delete_all
     summary = GlobalSummary.new

@@ -19,20 +19,18 @@
     <ul class="navbar-nav navbar-right">
 
       <% if current_user.has_role?(:admin) %>
-        <%# reminders = Reminder.incomplete %>
-        <% reminders = [] %>
         <li class="dropdown">
           <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
             <i class="fas fa-clock"></i>
-            <% if reminders.length > 0 %>
-              <span class="label"><%= reminders.length %></span>
+            <% if @global_summary.reminder_total > 0 %>
+              <span class="label"><%= @global_summary.reminder_total %></span>
             <% end %>
           </a>
           <ul class="dropdown-menu media-list dropdown-menu-right">
-            <li class="dropdown-header">REMINDERS (<%= reminders.length %>)</li>
-            <% if reminders.length > 0%>
+            <li class="dropdown-header">REMINDERS (<%= @global_summary.reminder_total %>)</li>
+            <% if @global_summary.reminder_total > 0 %>
               <% if is_mobile %>
-                <% reminders.limit(5).each do |reminder|%>
+                <% @current_reminders.limit(5).each do |reminder|%>
                   <li class="media">
                     <div class="media-body notification-padding">
                       <h6 class="media-heading"><%= reminder_to_sentence(reminder).html_safe %></h6>
@@ -41,7 +39,7 @@
                   </li>
                 <% end %>
               <% else %>
-                <% reminders.limit(10).each do |reminder|%>
+                <% @current_reminders.each do |reminder|%>
                   <li class="media">
                     <div class="media-body notification-padding">
                       <h6 class="media-heading"><%= reminder_to_sentence(reminder).html_safe %></h6>
@@ -64,19 +62,18 @@
         </li>
       <% end %>
       <% if current_user.has_role?(:admin) %>
-        <% audits = Log.today %>
         <li class="dropdown">
           <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
             <i class="fa fa-bell"></i>
-            <% if audits.length > 0 %>
+            <% if @global_summary.log_total > 0 %>
               <span class="label"><%= audits.length %></span>
             <% end %>
           </a>
           <ul class="notification dropdown-menu media-list dropdown-menu-right">
-            <li class="dropdown-header">NOTIFICATIONS (<%= audits.length %>)</li>
-            <% if audits.length > 0%>
+            <li class="dropdown-header">NOTIFICATIONS (<%= @global_summary.log_total %>)</li>
+            <% if @global_summary.log_total > 0 %>
               <% if is_mobile %>
-                <% audits.limit(5).each do |audit|%>
+                <% @current_logs.limit(5).each do |audit|%>
                   <li class="media">
                     <div class="media-body notification-padding">
                       <h6 class="media-heading"><%= audit.description.html_safe %></h6>
@@ -85,7 +82,7 @@
                   </li>
                 <% end %>
               <% else %>
-              <% audits.limit(10).each do |audit|%>
+              <% @current_logs.each do |audit|%>
                 <li class="media">
                   <div class="media-body notification-padding">
                     <h6 class="media-heading"><%= audit.description.html_safe %></h6>

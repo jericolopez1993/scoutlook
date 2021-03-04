@@ -27,3 +27,7 @@ every :sunday, at: '1:00am', roles: [:worker] do
   rake "computed_data:carr_news"
   rake "checks_new_carriers:check_and_move"
 end
+
+every :hour, roles: [:worker] do
+  rake "computed_data:global_summaries"
+end
