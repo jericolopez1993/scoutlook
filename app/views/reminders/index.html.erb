@@ -26,7 +26,23 @@
       <h4 class="panel-title lp-header">Reminder</h4>
     </div>
     <div class="panel-body">
-      <%= render 'table', reminders: @reminders, with_actions: true %>
+      <table table class="table table-striped table-bordered display nowrap" id="reminder-datatable">
+        <thead>
+          <tr class="odd gradeX">
+            <th width="10%">Actions</th>
+            <th>Carrier</th>
+            <th>Shipper</th>
+            <th>Activity</th>
+            <th>User</th>
+            <th>Type</th>
+            <th>Reminder Date</th>
+            <th>Completed</th>
+            <th>Last Reminded</th>
+            <th width="25%">Notes</th>
+            <th>Created Date</th>
+          </tr>
+        </thead>
+      </table>
     </div>
   </div>
 </div>

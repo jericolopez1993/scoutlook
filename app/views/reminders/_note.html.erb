@@ -1,0 +1,8 @@
+<span
+  class="learned"
+  data-toggle="tooltip"
+  data-placement="right"
+  data-html="true"
+  title="<%= reminder.notes.nil? ? '' : reminder.notes %>">
+    <%= reminder.notes.nil? ? '' : truncate_html_to_sentence(reminder.notes) %>
+</span>

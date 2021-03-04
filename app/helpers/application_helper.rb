@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def is_ajax_datatable
-    controller_array = ['loads', 'logs', 'shippers', 'activities', 'rates']
+    controller_array = ['loads', 'logs', 'shippers', 'activities', 'rates', 'reminders']
     action_array = ['index', 'mine', 'newly', 'demo', 'prom']
 
     return (controller_array.include?(params[:controller]) && params[:action] == 'index') || (params[:controller] == 'carriers' && action_array.include?(params[:action]))

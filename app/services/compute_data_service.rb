@@ -336,4 +336,14 @@ class ComputeDataService
     rescue
     end
   end
+
+  def next_reminder_date(reminder)
+    reminder_date = reminder.reminder_date
+    if reminder.recurring
+      reminder_date = reminder.reminder_date_reccuring
+    elsif reminder.reminder_interval
+      reminder_date = reminder.reminder_date_interval
+    end
+    reminder.update_attributes(:next_reminder_date => reminder_date)
+  end
 end

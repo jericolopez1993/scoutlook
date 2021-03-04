@@ -1,0 +1,35 @@
+<% if reminder.completed %>
+  Done
+<% else %>
+  <% if reminder.reminder_date %>
+    <% if reminder.reminder_date > Date.today %>
+      <% if reminder.recurring %>
+        <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})" %>
+      <% else %>
+        <% if reminder.reminder_interval %>
+          <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})" %>
+        <% else %>
+          <%= reminder.reminder_date %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <% if reminder.recurring %>
+        <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})" %>
+      <% else %>
+        <% if reminder.reminder_interval %>
+          <% if reminder.reminder_date_interval > Date.today.strftime("%m/%d/%Y") %>
+            <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})" %>
+            <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <% if reminder.recurring %>
+      <%= "#{reminder.reminder_date_reccuring} (#{interval_to_text(reminder.reminder_interval)} recurring from #{reminder.created_at.strftime("%m/%d/%Y %l:%M %P")})" %>
+    <% else %>
+      <% if reminder.reminder_interval %>
+        <%= "#{reminder.reminder_date_interval} (#{interval_to_text(reminder.reminder_interval)} from #{reminder.created_at.strftime("%m/%d/%Y %l:%M %P")})" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -5,7 +5,10 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.json
   def index
-     @reminders = []
+    respond_to do |format|
+      format.html
+      format.json { render json: ReminderDatatable.new(params, view_context: view_context) }
+    end
     # if current_user.has_role?(:admin)
     #   @reminders = Reminder.listings
     # else
