@@ -30,4 +30,5 @@ end
 
 every :hour, roles: [:worker] do
   rake "computed_data:global_summaries"
+  rake "computed_data:next_reminder_date"
 end

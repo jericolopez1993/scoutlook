@@ -22,7 +22,7 @@ jQuery(document).ready(function() {
       {"data": "campaign_name"},
       {"data": "user_name"},
       {"data": "reminder_type"},
-      {"data": "reminder_date"},
+      {"data": "next_reminder_date"},
       {"data": "completed"},
       {"data": "last_reminded"},
       {"data": "notes"},

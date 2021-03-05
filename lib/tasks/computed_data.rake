@@ -121,4 +121,18 @@ namespace :computed_data do
     puts "Computed Data Finished: (#{time_end - time_start})"
     puts "-------------------------------"
   end
+
+  task next_reminder_date: :environment do
+    time_start = Time.now
+    Reminder.where(:recurring => true).each do |reminder|
+      ComputeDataService.new.next_reminder_date(reminder)
+    end
+    time_end = Time.now
+    puts "-------------------------------"
+    puts "Reminders"
+    puts "Time Started: #{time_start}"
+    puts "Time Ended: #{time_end}"
+    puts "Computed Data Finished: (#{time_end - time_start})"
+    puts "-------------------------------"
+  end
 end

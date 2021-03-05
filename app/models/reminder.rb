@@ -28,6 +28,7 @@ class Reminder < ApplicationRecord
   def update_computed_data
     ComputeDataService.new.reminder(self.carrier_id)
     GlobalSummaryServices.new.run
+    ComputeDataService.next_reminder_date(self)
     if self.shipper_id
       ComputedDataShippersService.new.reminder(self.shipper_id)
     end
@@ -52,8 +53,7 @@ class Reminder < ApplicationRecord
     activities.campaign_name AS campaign_name,
     (SELECT company_name FROM carriers WHERE id = activities.carrier_id LIMIT 1) AS activity_carrier_name,
     (SELECT company_name FROM shippers WHERE id = activities.shipper_id LIMIT 1) AS activity_shipper_name,
-    concat_ws(' ', users.first_name, users.last_name) AS user_name,
-    (COALESCE(reminders.reminder_date, reminders.created_at)) AS next_reminder_date
+    concat_ws(' ', users.first_name, users.last_name) AS user_name
     ").joins("
       LEFT JOIN shippers
       ON shippers.id = reminders.shipper_id
@@ -71,49 +71,74 @@ class Reminder < ApplicationRecord
   # default_scope {listings}
 
   def reminder_date_interval
+    current = self.created_at
+
     if self.reminder_date
-      date = self.reminder_date + self.reminder_interval.days
-      date.strftime("%m/%d/%Y %l:%M %P")
-    elsif self.reminder_date.nil?
-      date = self.created_at + self.reminder_interval.days
-      date.strftime("%m/%d/%Y %l:%M %P")
-    elsif self.reminder_interval.nil?
-      date = nil
+      current = self.reminder_date
     end
+
+    if self.reminder_interval > 0
+      current = current + self.reminder_interval.days
+    end
+
+    return current.strftime("%m/%d/%Y %l:%M %P")
   end
 
   def reminder_date_reccuring
+    current = self.created_at
+
     if self.reminder_date
-      current = self.reminder_date + self.reminder_interval.days
-      until current >= Date.today
-        current += self.reminder_interval.days
+      current = self.reminder_date
+    end
+
+    if self.reminder_interval > 0
+      current = current + self.reminder_interval.days
+
+      if current < Date.today
+        until current >= Date.today
+          current += self.reminder_interval.days
+        end
       end
-      current.strftime("%m/%d/%Y %l:%M %P")
+    end
+
+    current.strftime("%m/%d/%Y %l:%M %P")
+  end
+
+  def self.interval_to_text(reminder_interval)
+    if reminder_interval == 1
+      "every day"
+    elsif reminder_interval == 7
+      "by-weekly"
+    elsif reminder_interval == 30
+      "by-monthly"
+    elsif reminder_interval == 90
+      "by-quarterly"
+    elsif reminder_interval == 360
+      "by-yearly"
     else
-      current = self.created_at + self.reminder_interval.days
-      until current >= Date.today
-        current += self.reminder_interval.days
-      end
-      current.strftime("%m/%d/%Y %l:%M %P")
+      "every #{reminder_interval} days"
     end
   end
 
-  def self.compute_next_reminder_date
-    if self.completed
+  def self.compute_next_reminder_date(reminder)
+    if reminder.completed
       return "Done"
     end
 
-    final_reminder_date = self.reminder_date
-    reminder_date = self.created_at
+    reminder_date = reminder.next_reminder_date
 
-    if self.reminder_date
-      reminder_date = self.reminder_date
+    unless reminder.next_reminder_date
+      reminder_date = reminder.created_at
     end
 
-    if self.recurring
-      reminder_date = "#{self.reminder_date_reccuring} (#{interval_to_text(self.reminder_interval)} recurring from #{reminder_date.strftime("%m/%d/%Y %l:%M %P")})"
-    elsif self.reminder_interval
-      reminder_date = "#{self.reminder_date_interval} (#{interval_to_text(self.reminder_interval)} from #{reminder_date.strftime("%m/%d/%Y %l:%M %P")})"
+    if reminder.reminder_date
+      reminder_date = reminder.reminder_date
+    end
+
+    if reminder.recurring
+      reminder_date = "#{reminder.next_reminder_date} (#{Reminder.interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})"
+    elsif reminder.reminder_interval
+      reminder_date = "#{reminder.next_reminder_date} (#{Reminder.interval_to_text(reminder.reminder_interval)} from #{reminder.created_at.strftime("%m/%d/%Y %l:%M %P")})"
     end
 
     return reminder_date

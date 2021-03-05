@@ -163,68 +163,7 @@ class ComputeDataService
 
         if @carrier.reminders
           @carrier.reminders.order('updated_at DESC').each do |reminder|
-            c_reminder_date = nil
-            if reminder.recurring
-              if reminder.last_reminded
-                current_date = reminder.last_reminded
-                if current_date <= Date.today
-                  if current_date == Date.today
-                    c_reminder_date = current_date
-                  end
-                  until current_date >= Date.today
-                    current_date += reminder.reminder_interval.days
-                  end
-                  if reminder.reminder_interval > 0 && current_date > Date.today
-                    c_reminder_date = current_date
-                  end
-                else
-                  c_reminder_date = reminder.reminder_date
-                end
-
-              elsif reminder.reminder_date
-                current_date = reminder.reminder_date
-                if current_date == Date.today
-                  c_reminder_date = current_date
-                end
-                until current_date >= Date.today
-                  current_date += reminder.reminder_interval.days
-                end
-                if reminder.reminder_interval > 0 && current_date > Date.today
-                  c_reminder_date = current_date
-                end
-              else
-                current_date = reminder.created_at
-                until current_date >= Date.today
-                  current_date += reminder.reminder_interval.days
-                end
-                if current_date >= Date.today
-                  c_reminder_date = reminder.current_date
-                end
-              end
-            else
-              if reminder.reminder_interval > 0
-                if reminder.reminder_date
-                  quot = ((Date.today.to_date - reminder.reminder_date.to_date).to_i / reminder.reminder_interval)
-                  if quot >= 1 && reminder.reminder_date >= Date.today
-                    c_reminder_date = reminder.reminder_date
-                  else
-                    if (reminder.reminder_date + reminder.reminder_interval.days) == Date.today.to_date
-                      c_reminder_date = Date.today
-                    end
-                  end
-                else
-                  c_reminder_date = reminder.created_at + reminder.reminder_interval.days
-                end
-              else
-                if reminder.reminder_date
-                  if reminder.reminder_date >= Date.today
-                    c_reminder_date = reminder.reminder_date
-                  else
-                    c_reminder_date = reminder.last_reminded
-                  end
-                end
-              end
-            end
+            c_reminder_date = reminder.next_reminder_date
 
             if c_reminder_date
               c_reminder_interval = reminder.reminder_interval
