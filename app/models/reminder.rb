@@ -129,16 +129,16 @@ class Reminder < ApplicationRecord
 
     unless reminder.next_reminder_date
       reminder_date = reminder.created_at
-    end
 
-    if reminder.reminder_date
-      reminder_date = reminder.reminder_date
+      if reminder.reminder_date
+        reminder_date = reminder.reminder_date
+      end
     end
 
     if reminder.recurring
-      reminder_date = "#{reminder.next_reminder_date} (#{Reminder.interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})"
+      reminder_date = "#{reminder_date} (#{Reminder.interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})"
     elsif reminder.reminder_interval
-      reminder_date = "#{reminder.next_reminder_date} (#{Reminder.interval_to_text(reminder.reminder_interval)} from #{reminder.created_at.strftime("%m/%d/%Y %l:%M %P")})"
+      reminder_date = "#{reminder_date} (#{Reminder.interval_to_text(reminder.reminder_interval)} from #{reminder.created_at.strftime("%m/%d/%Y %l:%M %P")})"
     end
 
     return reminder_date
