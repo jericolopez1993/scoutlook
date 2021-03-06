@@ -100,7 +100,7 @@ class RemindersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reminder
-      @reminder = Reminder.find(params[:id])
+      @reminder = Reminder.listings.find(params[:id])
     end
 
     def set_previous_controller
