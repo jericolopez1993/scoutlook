@@ -27,7 +27,7 @@ class Reminder < ApplicationRecord
 
   def update_computed_data
     ComputeDataService.new.reminder(self.carrier_id)
-    Reminder.compute_next_reminder_date(self)
+    ComputeDataService.new.next_reminder_date(self)
     GlobalSummaryServices.new.run
     if self.shipper_id
       ComputedDataShippersService.new.reminder(self.shipper_id)
