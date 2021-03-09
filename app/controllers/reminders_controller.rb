@@ -44,6 +44,7 @@ class RemindersController < ApplicationController
 
     respond_to do |format|
       if @reminder.save
+        ComputeDataService.new.next_reminder_date(@reminder)
         format.html { redirect_to @reminder, notice: 'Reminder was successfully created.' }
         format.json { render :show, status: :created, location: @reminder }
       else
@@ -58,6 +59,7 @@ class RemindersController < ApplicationController
   def update
     respond_to do |format|
       if @reminder.update(reminder_params)
+        ComputeDataService.new.next_reminder_date(@reminder)
         format.html { redirect_to @reminder, notice: 'Reminder was successfully updated.' }
         format.json { render :show, status: :ok, location: @reminder }
       else
