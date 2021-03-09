@@ -28,7 +28,7 @@ every :tuesday, at: '6:00am', roles: [:worker] do
   rake "checks_new_carriers:check_and_move"
 end
 
-every :tuesday, at: '1:00pm', roles: [:worker] do
+every :tuesday, at: '2:30pm', roles: [:worker] do
   rake "computed_data:one_time"
   rake "computed_data:carr_news"
   rake "checks_new_carriers:check_and_move"
