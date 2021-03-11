@@ -82,7 +82,6 @@ class ComputeDataService
               :c_lane_destination => c_lane_destination,
               :c_lane_id => c_lane_id,
               :c_mc_latest_date_tier => c_mc_latest_date_tier,
-              :c_mc_latest_date_last_6_months => c_mc_latest_date_last_6_months,
               :c_mc_latest_date_load_days =>  c_mc_latest_date_load_days,
               :c_auditable_last_activity_date => c_auditable_last_activity_date
             )
@@ -163,17 +162,15 @@ class ComputeDataService
     begin
       if carrier_id
         carrier = Carrier.find(carrier_id)
-        puts "#{carrier_id}"
-        carr_new = CarrNew.where("mc_number = '#{@carrier.mc_number}' AND carrier_name = '#{@carrier.company_name}'").first
         load_lw = DfLoad.where("ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '7 DAY' and ship_date < DATE_TRUNC('WEEK', NOW())").where("mc_num = '#{carrier.mc_number}' AND carrier = '#{carrier.company_name.gsub("'"){"\\'"}}'").length
         load_2w = DfLoad.where("ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '14 DAY' and ship_date < DATE_TRUNC('WEEK', NOW())  - INTERVAL '8 DAY'").where("mc_num = '#{carrier.mc_number}' AND carrier = '#{carrier.company_name.gsub("'"){"\\'"}}'").length
         load_3w = DfLoad.where("ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '21 DAY' and ship_date < DATE_TRUNC('WEEK', NOW())  - INTERVAL '15 DAY'").where("mc_num = '#{carrier.mc_number}' AND carrier = '#{carrier.company_name.gsub("'"){"\\'"}}'").length
         load_4w = DfLoad.where("ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '28 DAY' and ship_date < DATE_TRUNC('WEEK', NOW())  - INTERVAL '22 DAY'").where("mc_num = '#{carrier.mc_number}' AND carrier = '#{carrier.company_name.gsub("'"){"\\'"}}'").length
-        if carr_new
-          carrier.update_attributes(:c_carr_new_loads_lw => load_lw, :c_carr_new_loads_2w => load_2w, :c_carr_new_loads_3w => load_3w, :c_carr_new_loads_4w => load_4w)
-        else
-          carrier.update_attributes(:c_carr_new_loads_lw => nil, :c_carr_new_loads_2w => nil, :c_carr_new_loads_3w => nil, :c_carr_new_loads_4w => nil)
-        end
+        load_1m = DfLoad.where("ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '28 DAY' and ship_date < DATE_TRUNC('WEEK', NOW())").where("mc_num = '#{carrier.mc_number}' AND carrier = '#{carrier.company_name.gsub("'"){"\\'"}}'").length
+        load_6m = DfLoad.where("ship_date >= DATE_TRUNC('WEEK', NOW()) - INTERVAL '168 DAY' and ship_date < DATE_TRUNC('WEEK', NOW())").where("mc_num = '#{carrier.mc_number}' AND carrier = '#{carrier.company_name.gsub("'"){"\\'"}}'").length
+
+        carrier.update_attributes(:c_carr_new_loads_lw => load_lw, :c_carr_new_loads_2w => load_2w, :c_carr_new_loads_3w => load_3w, :c_carr_new_loads_4w => load_4w, :c_mc_latest_date_last_month => load_1m, :c_mc_latest_date_last_6_months => load_6m)
+
       end
     rescue
     end

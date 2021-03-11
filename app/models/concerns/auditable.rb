@@ -61,7 +61,16 @@ module Auditable
         @string_article = "a"
       end
       if current_action == "destroy"
-        @to_sentence = @to_sentence + " removed " + @string_article  + " #{class_name == 'MasterInvoice' ? 'Invoice' : (class_name == 'MasterSignal' ? 'Signal' : class_name.titleize)}"
+        if class_name == "User"
+          begin
+            class_object = class_name.singularize.classify.constantize.find(self.id)
+            @to_sentence = @to_sentence + " removed  #{class_object.display_name})}"
+          rescue
+            @to_sentence = @to_sentence + " removed a User"
+          end
+        else
+          @to_sentence = @to_sentence + " removed " + @string_article  + " #{class_name == 'MasterInvoice' ? 'Invoice' : (class_name == 'MasterSignal' ? 'Signal' : class_name.titleize)}"
+        end
       else
         begin
           class_object = class_name.singularize.classify.constantize.find(self.id)

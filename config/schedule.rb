@@ -34,6 +34,10 @@ every :tuesday, at: '2:30pm', roles: [:worker] do
   rake "checks_new_carriers:check_and_move"
 end
 
+every :friday, at: '9:00pm', roles: [:worker] do
+  rake "computed_data:carr_news"
+end
+
 every :hour, roles: [:worker] do
   rake "computed_data:global_summaries"
   rake "computed_data:next_reminder_date"
