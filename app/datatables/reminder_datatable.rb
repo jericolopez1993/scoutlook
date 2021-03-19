@@ -19,14 +19,14 @@ class ReminderDatatable < AjaxDatatablesRails::ActiveRecord
     # or in aliased_join_table.column_name format
     @view_columns ||= {
       id: { source: "Reminder.id", cond: filter_on_id },
-      carrier_id: { source: "Reminder.carrier_id", cond: filter_on_string },
-      carrier_name: { source: "carrier_name", cond: filter_on_string },
-      shipper_id: { source: "Reminder.shipper_id", cond: filter_on_string },
-      shipper_name: { source: "shipper_name", cond: filter_on_string },
-      activity_id: { source: "Reminder.activity_id", cond: filter_on_string },
-      campaign_name: { source: "campaign_name", cond: filter_on_string },
+      carrier_id: { source: "Reminder.carrier_id", cond: filter_on_carrier_company_name },
+      carrier_name: { source: "carrier_name", cond: filter_on_carrier_company_name },
+      shipper_id: { source: "Reminder.shipper_id", cond: filter_on_shipper_company_name },
+      shipper_name: { source: "shipper_name", cond: filter_on_shipper_company_name },
+      activity_id: { source: "Reminder.activity_id", cond: filter_on_activities_campaign_name },
+      campaign_name: { source: "campaign_name", cond: filter_on_activities_campaign_name },
       user_id: { source: "Reminder.user_id", cond: filter_on_string },
-      user_name: { source: "user_name", cond: filter_on_string },
+      user_name: { source: "user_name", cond: filter_on_user_name },
       reminder_type: { source: "Reminder.reminder_type", cond: filter_on_string },
       reminder_date: { source: "Reminder.reminder_date", cond: filter_on_date },
       next_reminder_date: { source: "Reminder.next_reminder_date", cond: filter_on_date },
@@ -144,6 +144,34 @@ class ReminderDatatable < AjaxDatatablesRails::ActiveRecord
       #   "reminders.#{column.field.to_s.gsub("current_", "")} = #{column.search.value}"
       # end
     }
+  end
+
+  def filter_on_user_name
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("CONCAT(users.first_name, ' ', users.last_name)").matches("%#{search_value}%")
+     }
+  end
+
+  def filter_on_carrier_company_name
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("carriers.company_name").matches("%#{search_value}%")
+     }
+  end
+
+  def filter_on_shipper_company_name
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("shippers.company_name").matches("%#{search_value}%")
+     }
+  end
+
+  def filter_on_activities_campaign_name
+    ->(column, value) {
+      search_value = URI.unescape(column.search.value)
+      ::Arel::Nodes::SqlLiteral.new("activities.campaign_name").matches("%#{search_value}%")
+     }
   end
 
   def filter_for_relationship_owner_initials
