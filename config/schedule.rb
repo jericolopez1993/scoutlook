@@ -22,13 +22,7 @@ every :day, at: '12:01am', roles: [:worker] do
   rake "reminder:check_due"
 end
 
-every :monday, at: ['7:00pm', '10:00pm', '11:59pm'], roles: [:worker] do
-  rake "computed_data:one_time"
-  rake "computed_data:carr_news"
-  rake "checks_new_carriers:check_and_move"
-end
-
-every :tuesday, at: ['1:00am', '2:00am', '3:00am'], roles: [:worker] do
+every :day, at: ['1:00am','6:00am', '10:00pm', '11:59pm'], roles: [:worker] do
   rake "computed_data:one_time"
   rake "computed_data:carr_news"
   rake "checks_new_carriers:check_and_move"

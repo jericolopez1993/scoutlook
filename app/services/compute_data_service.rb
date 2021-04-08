@@ -24,6 +24,7 @@ class ComputeDataService
             c_mc_latest_date_last_month = nil
             c_mc_latest_date_last_6_months = nil
             c_mc_latest_date_load_days = nil
+            last_load_date = nil
             c_auditable_last_activity_date = nil
 
             # Reminders - START
@@ -67,6 +68,13 @@ class ComputeDataService
             end
             # Audit - END
 
+            number_only_mc = @carrier.mc_number.sub("MC", "")
+            mc_latest_date = McLatestDate.where("mcnum = '#{@carrier.mc_number}' OR mcnum = '#{number_only_mc}'").order("ship_date_1 DESC").first
+
+            if mc_latest_date
+              last_load_date = mc_latest_date['ship_date_1']
+            end
+
             # Update Carrier
             carrier.update_attributes(
               :c_reminder_id => c_reminder_id,
@@ -83,6 +91,7 @@ class ComputeDataService
               :c_lane_id => c_lane_id,
               :c_mc_latest_date_tier => c_mc_latest_date_tier,
               :c_mc_latest_date_load_days =>  c_mc_latest_date_load_days,
+              :last_load_date => last_load_date,
               :c_auditable_last_activity_date => c_auditable_last_activity_date
             )
 
