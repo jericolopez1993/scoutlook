@@ -15,7 +15,7 @@
     <% carrier_contacts.each do |contact| %>
       <tr>
         <td><%= contact.contact_type %></td>
-        <td><%= contact.first_name.nil? ? '' :  contact.first_name.capitalize + " " + contact.last_name.capitalize  %></td>
+        <td><%= contact.first_name.nil? ? '' :  contact.first_name.titleize + " " + contact.last_name.titleize  %></td>
         <td><%= contact.email.downcase %></td>
         <td><%= ("#{format_address(contact.address, contact.city, contact.state, contact.country, contact.postal)}")%></td>
         <td><b>

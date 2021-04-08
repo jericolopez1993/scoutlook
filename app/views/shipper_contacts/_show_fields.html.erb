@@ -21,7 +21,7 @@
   <div class="row">
     <label class="col-3 col-form-label">Email:</label>
     <div class="col-9 lbl-padding-t">
-      <a href="mailto:<%= shipper_contact.email %>?Subject=Hello%20<%= shipper_contact.first_name.nil? ? '' :  shipper_contact.first_name.capitalize + " " + shipper_contact.last_name.capitalize  %>" target="_top"><%= shipper_contact.email.downcase %>&nbsp;<i class="far fa-envelope"></i></a>
+      <a href="mailto:<%= shipper_contact.email %>?Subject=Hello%20<%= shipper_contact.first_name.nil? ? '' :  shipper_contact.first_name.titleize + " " + shipper_contact.last_name.titleize  %>" target="_top"><%= shipper_contact.email.downcase %>&nbsp;<i class="far fa-envelope"></i></a>
     </div>
   </div>
   <div class="row">

@@ -26,8 +26,8 @@
           <%= (shipper.poc_id == contact.id) ? '<div class="mr-0 tags"><span class="label label-green">POC</span></div>'.html_safe : '' %>
           <%= contact.adm ? '<div class="mr-0 tags"><span class="label label-lime">ADM</span></div>'.html_safe : '' %></td>
         <td><%= contact.contact_type %></td>
-        <td><%= contact.first_name.nil? ? '' :  contact.first_name.capitalize + " " + contact.last_name.capitalize  %></td>
-        <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name.capitalize + " " + contact.last_name.capitalize  %>" target="_top"><%= contact.email.downcase %>&nbsp;<i class="far fa-envelope"></a></i></td>
+        <td><%= contact.first_name.nil? ? '' :  contact.first_name.titleize + " " + contact.last_name.titleize  %></td>
+        <td><a href="mailto:<%= contact.email %>?Subject=Hello%20<%= contact.first_name.nil? ? '' :  contact.first_name.titleize + " " + contact.last_name.titleize  %>" target="_top"><%= contact.email.downcase %>&nbsp;<i class="far fa-envelope"></a></i></td>
         <td><%= contact.same_ho ? (shipper.head_office_location.nil? ? '' : "#{format_address(shipper.head_office_location.address, shipper.head_office_location.city, shipper.head_office_location.state, shipper.head_office_location.country, shipper.head_office_location.postal)}") : ("#{format_address(contact.address, contact.city, contact.state, contact.country, contact.postal)}")%></td>
         <td><b>
           <% if contact.primary_phone && contact.primary_eligible_texting %>

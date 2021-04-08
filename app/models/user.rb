@@ -15,7 +15,7 @@ class User < ApplicationRecord
   end
 
   def full_name
-    (self.first_name.nil? ? '' : self.first_name.capitalize) + " " + (self.last_name.nil? ? '' : self.last_name.capitalize)
+    (self.first_name.nil? ? '' : self.first_name.titleize) + " " + (self.last_name.nil? ? '' : self.last_name.titleize)
   end
 
   def carrier_categories_to_array

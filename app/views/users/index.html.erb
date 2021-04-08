@@ -22,7 +22,7 @@
 			<tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= user.first_name && user.first_name.capitalize %> <%= user.last_name && user.last_name.capitalize %></td>
+            <td><%= user.first_name && user.first_name.titleize %> <%= user.last_name && user.last_name.titleize %></td>
             <td><%= user.email %></td>
             <td style="text-align: center;">
               <%= user.has_role?(:admin) ? "<span class='badge badge-dark'>ADMIN</span>".html_safe : ""%>

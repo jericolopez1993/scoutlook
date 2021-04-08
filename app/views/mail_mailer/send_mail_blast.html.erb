@@ -13,7 +13,7 @@
               <td style="font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif; margin: 0px; width: 116.1pt; padding: 0cm; height: 13.3pt;" width="155">
                 <p class="MsoNormal" style="margin: 0px; text-align: center;" align="center">
                   <strong>
-                    <span style="font-size: 14pt; font-family: Arial, sans-serif; color: black;"><%= @current_user.full_name %></span>
+                    <span style="font-size: 14pt; font-family: Arial, sans-serif; color: black;"><%= @current_user.full_name && @current_user.full_name.titleize %></span>
                   </strong>
                 </p>
               </td>
