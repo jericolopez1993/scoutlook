@@ -1,0 +1,2 @@
+class PlanningSheet < ApplicationRecord
+end

@@ -1,0 +1,27 @@
+<%= form_with(model: planning_sheet, local: true) do |form| %>
+  <% if planning_sheet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(planning_sheet.errors.count, "error") %> prohibited this planning_sheet from being saved:</h2>
+
+      <ul>
+      <% planning_sheet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :sheet_url %>
+    <%= form.text_field :sheet_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :created_by %>
+    <%= form.number_field :created_by %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

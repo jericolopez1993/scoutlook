@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sheet url:</strong>
+  <%= @planning_sheet.sheet_url %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @planning_sheet.created_by %>
+</p>
+
+<%= link_to 'Edit', edit_planning_sheet_path(@planning_sheet) %> |
+<%= link_to 'Back', planning_sheets_path %>
