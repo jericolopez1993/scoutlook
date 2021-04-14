@@ -1,0 +1,108 @@
+<style>
+    .tooltip-inner {
+      background-color: #033309!important;
+    }
+    .tooltip .arrow::before{
+      border-right-color: #033309!important;
+    }
+    td.link a:visited {
+      color: #033309!important;
+    }
+</style>
+<style>
+  p {
+    display: inline-block!important;
+  }
+  .hide {
+    visibility: hidden;
+  }
+  div.link a:visited {
+    color: #6f060b!important;
+  }
+  div.link a {
+    text-decoration: underline;
+  }
+  @media screen and (max-width: 479px) {
+    .dt-buttons.btn-group {
+      padding-top: 25px!important;
+    }
+  }
+  @media (max-width: 767px) {
+    .panel-inverse > .panel-heading {
+      background: 0 0;
+    }
+    .md-nav {
+      display: none;
+    }
+    .nav-pills .nav-link,
+    .nav-pills > li > a {
+      background-color: #fff;
+      margin: 5px;
+    }
+    label {
+      text-align: left!important;
+    }
+  }
+  label {
+    text-align: right;
+  }
+
+  div.dataTables_wrapper div.dataTables_processing {
+      top: 85% !important;
+  }
+</style>
+
+<style>
+  .badge a {
+    color: #fff!important;
+  }
+  td.link a:visited {
+    /* color: #6f060b!important; */
+  }
+</style>
+<!-- begin page-header -->
+<div class="header-scout">
+  <h1 class="pull-left">Planning Sheets</h1>
+  <span class="pull-right">
+    <%= link_to 'Go Current Sheet', planning_sheets_path, :class => 'btn btn-primary btn-xs', target: :_blank %>
+    <%= link_to 'New Sheet', new_planning_sheet_path, :class => 'btn btn-danger btn-xs', target: :_blank %>
+  </span>
+</div>
+<!-- end page-header -->
+
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading" style="padding: 5px 15px">
+  </div>
+  <table table class="table table-striped table-bordered display nowrap" style="width: 100%" id="planning_sheets_table">
+    <thead>
+      <tr class="odd gradeX">
+        <th data-orderable="false">Actions</th>
+        <th>URL</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th data-orderable="false">Actions</th>
+        <th>URL</th>
+      </tr>
+    </tfoot>
+    <tbody class="spacer">
+      <% @planning_sheets.each do |planning_sheet| %>
+        <tr>
+          <td>
+            <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_planning_sheet_path(planning_sheet), :class => 'btn btn-warning btn-xs' %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, planning_sheet_path(:id => planning_sheet.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+          </td>
+          <td><%= planning_sheet.sheet_url %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script language="javascript">
+  $(document).ready(function() {
+    filterTable("planning_sheets_table");
+  });
+</script>

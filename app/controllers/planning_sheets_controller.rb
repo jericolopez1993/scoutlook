@@ -4,6 +4,10 @@ class PlanningSheetsController < ApplicationController
   # GET /planning_sheets
   # GET /planning_sheets.json
   def index
+    @planning_sheet = PlanningSheet.last
+  end
+
+  def list
     @planning_sheets = PlanningSheet.all
   end
 
@@ -28,7 +32,7 @@ class PlanningSheetsController < ApplicationController
 
     respond_to do |format|
       if @planning_sheet.save
-        format.html { redirect_to @planning_sheet, notice: 'Planning sheet was successfully created.' }
+        format.html { redirect_to planning_sheets_path, notice: 'Planning sheet was successfully created.' }
         format.json { render :show, status: :created, location: @planning_sheet }
       else
         format.html { render :new }
@@ -42,7 +46,7 @@ class PlanningSheetsController < ApplicationController
   def update
     respond_to do |format|
       if @planning_sheet.update(planning_sheet_params)
-        format.html { redirect_to @planning_sheet, notice: 'Planning sheet was successfully updated.' }
+        format.html { redirect_to planning_sheets_path, notice: 'Planning sheet was successfully updated.' }
         format.json { render :show, status: :ok, location: @planning_sheet }
       else
         format.html { render :edit }
@@ -56,7 +60,7 @@ class PlanningSheetsController < ApplicationController
   def destroy
     @planning_sheet.destroy
     respond_to do |format|
-      format.html { redirect_to planning_sheets_url, notice: 'Planning sheet was successfully destroyed.' }
+      format.html { redirect_to planning_sheets_path, notice: 'Planning sheet was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

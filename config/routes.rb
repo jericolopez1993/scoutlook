@@ -86,7 +86,11 @@ Rails.application.routes.draw do
     end
   end
   resources :logs
-  resources :planning_sheets
+  resources :planning_sheets do
+    collection do
+      get     'list'
+    end
+  end
   devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     get '/sign-in' => "devise/sessions#new", :as => :login

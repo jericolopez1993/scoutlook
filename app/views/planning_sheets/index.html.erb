@@ -53,6 +53,8 @@
 <div class="header-scout">
   <h1 class="pull-left">Planning Sheets</h1>
   <span class="pull-right">
+    <%= link_to 'Past Sheets', list_planning_sheets_path, :class => 'btn btn-primary btn-xs', target: :_blank %>
+    <%= link_to 'New Sheet', new_planning_sheet_path, :class => 'btn btn-danger btn-xs', target: :_blank %>
   </span>
 </div>
 <!-- end page-header -->
@@ -61,5 +63,9 @@
 <div class="panel panel-inverse">
   <div class="panel-heading" style="padding: 5px 15px">
   </div>
-   <iframe src="https://www.w3schools.com" title="W3Schools Free Online Web Tutorials"></iframe>
+    <% if @planning_sheet %>
+      <iframe src="<%= @planning_sheet.sheet_url %>" width="100%" height="720"></iframe>
+    <% else %>
+      <div class="text-center" style="padding: 20px;">No Planning Sheet for Today.</div>
+    <% end %>
 </div>
