@@ -1,14 +1,68 @@
-<p id="notice"><%= notice %></p>
+<style>
+  p {
+    display: inline-block!important;
+  }
+  .hide {
+    visibility: hidden;
+  }
+  div.link a:visited {
+    color: #6f060b!important;
+  }
+  div.link a {
+    text-decoration: underline;
+  }
+  @media screen and (max-width: 479px) {
+    .dt-buttons.btn-group {
+      padding-top: 25px!important;
+    }
+  }
+  @media (max-width: 767px) {
+    .panel-inverse > .panel-heading {
+      background: 0 0;
+    }
+    .md-nav {
+      display: none;
+    }
+    .nav-pills .nav-link,
+    .nav-pills > li > a {
+      background-color: #fff;
+      margin: 5px;
+    }
+    label {
+      text-align: left!important;
+    }
+  }
+  label {
+    text-align: right;
+  }
 
-<p>
-  <strong>Sheet url:</strong>
-  <%= @planning_sheet.sheet_url %>
-</p>
+  div.dataTables_wrapper div.dataTables_processing {
+      top: 85% !important;
+  }
+</style>
 
-<p>
-  <strong>Created by:</strong>
-  <%= @planning_sheet.created_by %>
-</p>
+<style>
+  .badge a {
+    color: #fff!important;
+  }
+  td.link a:visited {
+    /* color: #6f060b!important; */
+  }
+</style>
+<!-- begin page-header -->
+<div class="header-scout">
+  <h1 class="pull-left">Planning Sheets</h1>
+  <span class="pull-right">
+    <%= link_to 'Go to Current Sheet', planning_sheets_path, :class => 'btn btn-primary btn-xs', target: :_blank %>
+    <%= link_to 'Past Sheets', list_planning_sheets_path, :class => 'btn btn-warning btn-xs', target: :_blank %>
+    <%= link_to 'New Sheet', new_planning_sheet_path, :class => 'btn btn-danger btn-xs', target: :_blank %>
+  </span>
+</div>
+<!-- end page-header -->
 
-<%= link_to 'Edit', edit_planning_sheet_path(@planning_sheet) %> |
-<%= link_to 'Back', planning_sheets_path %>
+<!-- begin panel -->
+<div class="panel panel-inverse">
+  <div class="panel-heading" style="padding: 5px 15px">
+  </div>
+    <%= render 'sheet_preview', planning_sheet: @planning_sheet %>
+</div>

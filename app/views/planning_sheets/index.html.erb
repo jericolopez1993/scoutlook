@@ -63,9 +63,5 @@
 <div class="panel panel-inverse">
   <div class="panel-heading" style="padding: 5px 15px">
   </div>
-    <% if @planning_sheet %>
-      <iframe src="<%= @planning_sheet.sheet_url %>" width="100%" height="720"></iframe>
-    <% else %>
-      <div class="text-center" style="padding: 20px;">No Planning Sheet for Today.</div>
-    <% end %>
+    <%= render 'sheet_preview', planning_sheet: @planning_sheet %>
 </div>

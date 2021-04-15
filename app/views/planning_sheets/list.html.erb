@@ -91,6 +91,7 @@
       <% @planning_sheets.each do |planning_sheet| %>
         <tr>
           <td>
+            <%= link_to '<i class="far fa-eye"></i>'.html_safe, planning_sheet, :class => 'btn btn-info btn-xs', target: :_blank %>
             <%= link_to '<i class="far fa-edit"></i>'.html_safe, edit_planning_sheet_path(planning_sheet), :class => 'btn btn-warning btn-xs' %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, planning_sheet_path(:id => planning_sheet.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
           </td>
