@@ -1,14 +1,14 @@
 class PlanningSheetsController < ApplicationController
-  before_action :set_planning_sheet, only: [:show, :edit, :update, :destroy]
+  before_action :set_planning_sheet, only: [:index, :show, :edit, :update, :destroy]
 
   # GET /planning_sheets
   # GET /planning_sheets.json
   def index
-    @planning_sheet = PlanningSheet.last
+    @planning_sheets = PlanningSheet.where(:active => true).order("updated_at DESC")
   end
 
   def list
-    @planning_sheets = PlanningSheet.all
+    @planning_sheets = PlanningSheet.where(:active => true)
   end
 
   # GET /planning_sheets/1
@@ -68,11 +68,15 @@ class PlanningSheetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_planning_sheet
-      @planning_sheet = PlanningSheet.find(params[:id])
+      if params[:id]
+        @planning_sheet = PlanningSheet.find(params[:id])
+      else
+        @planning_sheet = PlanningSheet.last
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def planning_sheet_params
-      params.require(:planning_sheet).permit(:sheet_url, :created_by)
+      params.require(:planning_sheet).permit(:sheet_url, :sheet_name, :created_by)
     end
 end

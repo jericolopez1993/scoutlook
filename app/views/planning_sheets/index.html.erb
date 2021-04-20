@@ -53,8 +53,10 @@
 <div class="header-scout">
   <h1 class="pull-left">Planning Sheets</h1>
   <span class="pull-right">
-    <%= link_to 'Past Sheets', list_planning_sheets_path, :class => 'btn btn-primary btn-xs', target: :_blank %>
-    <%= link_to 'New Sheet', new_planning_sheet_path, :class => 'btn btn-danger btn-xs', target: :_blank %>
+    <%#= link_to 'Past Sheets', list_planning_sheets_path, :class => 'btn btn-primary btn-xs', target: :_blank %>
+    <%= link_to 'Delete Sheet', planning_sheet_path(:id => @planning_sheet.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs'%>
+    <%= link_to 'Edit Sheet'.html_safe, edit_planning_sheet_path(@planning_sheet), :class => 'btn btn-warning btn-xs' %>
+    <%= link_to 'New Sheet', new_planning_sheet_path, :class => 'btn btn-primary btn-xs', target: :_blank %>
   </span>
 </div>
 <!-- end page-header -->
@@ -62,6 +64,17 @@
 <!-- begin panel -->
 <div class="panel panel-inverse">
   <div class="panel-heading" style="padding: 5px 15px">
+    <ul class="nav nav-pills md-nav" style="margin-bottom: 0px;">
+      <% @planning_sheets.each do |planning_sheet| %>
+        <li class="nav-items">
+          <a href="<%= planning_sheets_path(:id => planning_sheet.id) %>" class="nav-link <%= @planning_sheet.id == planning_sheet.id ? 'active' : '' %>" style="padding:5px; margin: 0px 10px" >
+            <span class="d-sm-block d-none">
+              <h4 class="panel-title"><%= (planning_sheet.sheet_name && planning_sheet.sheet_name != "")  ? planning_sheet.sheet_name : "Untitled" %></h4>
+            </span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
   </div>
     <%= render 'sheet_preview', planning_sheet: @planning_sheet %>
 </div>

@@ -12,7 +12,7 @@
       <div class="panel panel-inverse">
         <div class="panel-heading">
           <div class="panel-heading-btn"></div>
-          <h4 class="panel-title">Information<%= params[:action] == 'edit' ? (": " + generate_alphanumeric_id(planning_sheet.lane_origin, planning_sheet.id) + " - #{planning_sheet.lane_origin}") : "" %></h4>
+          <h4 class="panel-title">Information</h4>
         </div>
         <div class="panel-body">
           <% if planning_sheet.errors.any? %>
@@ -24,11 +24,18 @@
                     <% planning_sheet.errors.full_messages.each do |message| %>
                       <li><%= message %></li>
                     <% end %>
-                  </ul>
+                  </ul>ss
                 </div>
               </div>
             </div>
           <% end %>
+            <%= form.hidden_field :created_by, value: current_user.id %>
+          <div class="form-group row m-b-15">
+            <%= form.label :sheet_name, 'Sheet Name:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
+            <div class="col-md-9 col-sm-8">
+              <%= form.text_field :sheet_name, class: 'form-control' %>
+            </div>
+          </div>
           <div class="form-group row m-b-15">
             <%= form.label :sheet_url, 'Sheet URL:', class: 'text-right m-position-left col-md-2 col-sm-4 col-form-label' %>
             <div class="col-md-9 col-sm-8">
