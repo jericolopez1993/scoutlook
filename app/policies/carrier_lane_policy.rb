@@ -8,15 +8,15 @@ class CarrierLanePolicy < ApplicationPolicy
   end
 
   def create?
-    user.present? && (user.has_role?(:admin) || user.ro || user.cs)
+    user.present? && (user.has_role?(:admin) || user.has_role?(:carrier_development) || user.ro || user.cs)
   end
 
   def update?
-    return true if user.present? && (record.carrier.relationship_owner == user.id || user.has_role?(:admin))
+    return true if user.present? && (record.carrier.relationship_owner == user.id || user.has_role?(:admin) || user.has_role?(:carrier_development))
   end
 
   def destroy?
-    return true if user.present? && (record.carrier.relationship_owner == user.id || user.has_role?(:admin))
+    return true if user.present? && (record.carrier.relationship_owner == user.id || user.has_role?(:admin) || user.has_role?(:carrier_development))
   end
   private
 

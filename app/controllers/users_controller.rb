@@ -50,6 +50,9 @@ class UsersController < ApplicationController
         if params[:is_admin].present?
           @user.add_role :admin
         end
+        if params[:is_carrier_development].present?
+          @user.add_role :carrier_development
+        end
         if params[:user][:avatar].present?
           user.avatar.attach(params[:user][:avatar])
         end
@@ -74,6 +77,11 @@ class UsersController < ApplicationController
           elsif !params[:is_admin].present? && @user.has_role?(:admin)
             @user.remove_role :admin
           end
+          if params[:is_carrier_development].present? && !@user.has_role?(:carrier_development)
+            @user.add_role :carrier_development
+          elsif !params[:is_carrier_development].present? && @user.has_role?(:carrier_development)
+            @user.remove_role :carrier_development
+          end
           if params[:user][:avatar].present?
             user.avatar.attach(params[:user][:avatar])
           end
@@ -89,6 +97,11 @@ class UsersController < ApplicationController
             @user.add_role :admin
           elsif !params[:is_admin].present? && @user.has_role?(:admin)
             @user.remove_role :admin
+          end
+          if params[:is_carrier_development].present? && !@user.has_role?(:carrier_development)
+            @user.add_role :carrier_development
+          elsif !params[:is_carrier_development].present? && @user.has_role?(:carrier_development)
+            @user.remove_role :carrier_development
           end
           if params[:user][:avatar].present?
             user.avatar.attach(params[:user][:avatar])

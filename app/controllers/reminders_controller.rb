@@ -7,7 +7,7 @@ class RemindersController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render json: ReminderDatatable.new(params, view_context: view_context) }
+      format.json { render json: ReminderDatatable.new(params, user: current_user, view_context: view_context) }
     end
     # if current_user.has_role?(:admin)
     #   @reminders = Reminder.listings

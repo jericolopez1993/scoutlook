@@ -27,4 +27,10 @@ namespace :reminder do
       end
     end
   end
+
+  task notify_assign_users: :environment do
+    Reminder.where(:reminder_date => Time.now).each do |reminder|
+      reminder.notify_users
+    end
+  end
 end

@@ -14,7 +14,8 @@ class Reminder < ApplicationRecord
 
    def reminder_date_cannot_be_in_the_past
      if self.new_record?
-       if  self.reminder_date < Date.today
+       puts "#{self.reminder_date}"
+       if  self.reminder_date < Time.now
          errors.add(:reminder_date, "can't be in the past")
        end
      else
@@ -34,9 +35,7 @@ class Reminder < ApplicationRecord
   end
 
   def notify_users
-    if last_reminded_changed?
-      ReminderBroadcastJob.perform_now self
-    end
+    ReminderBroadcastJob.perform_now self
   end
 
   def display_name
@@ -119,20 +118,26 @@ class Reminder < ApplicationRecord
     end
   end
 
+  def get_next_reminder_date
+    reminder_date = self.next_reminder_date
+
+    unless self.next_reminder_date
+      reminder_date = self.created_at
+
+      if self.reminder_date
+        reminder_date = self.reminder_date
+      end
+    end
+
+    return reminder_date
+  end
+
   def self.compute_next_reminder_date(reminder)
     if reminder.completed
       return "Done"
     end
 
-    reminder_date = reminder.next_reminder_date
-
-    unless reminder.next_reminder_date
-      reminder_date = reminder.created_at
-
-      if reminder.reminder_date
-        reminder_date = reminder.reminder_date
-      end
-    end
+    reminder_date = reminder.get_next_reminder_date
 
     if reminder.recurring
       reminder_date = "#{reminder_date} (#{Reminder.interval_to_text(reminder.reminder_interval)} recurring from #{reminder.reminder_date.strftime("%m/%d/%Y %l:%M %P")})"

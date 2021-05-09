@@ -29,7 +29,7 @@ class ComputeDataService
 
             # Reminders - START
             carrier.reminders.order('updated_at DESC').each do |reminder|
-              c_reminder_date = Reminder.compute_next_reminder_date(reminder)
+              c_reminder_date = reminder.get_next_reminder_date
 
               if c_reminder_date
                 c_reminder_interval = reminder.reminder_interval

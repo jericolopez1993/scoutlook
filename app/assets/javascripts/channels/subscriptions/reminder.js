@@ -1,6 +1,5 @@
-
 App.cable.subscriptions.create(
-  { channel: "ReminderChannel", code: "example" },
+  { channel: "RemindersChannel", code: "example" },
 
   {
     connected: function() {

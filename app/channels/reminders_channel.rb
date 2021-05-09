@@ -1,6 +1,6 @@
-class ReminderChannel < ApplicationCable::Channel
+class RemindersChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "reminder_channel"
+    stream_from "reminder_channel:#{current_user.id}"
   end
 
   def unsubscribed

@@ -22,6 +22,10 @@ every :day, at: '12:01am', roles: [:worker] do
   rake "reminder:check_due"
 end
 
+every :minute, roles: [:worker] do
+  rake "reminder:notify_assign_users"
+end
+
 every :day, at: ['1:00am','6:00am', '10:00pm', '11:59pm'], roles: [:worker] do
   rake "computed_data:one_time"
   rake "computed_data:carr_news"
