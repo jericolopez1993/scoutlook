@@ -29,8 +29,18 @@ namespace :reminder do
   end
 
   task notify_assign_users: :environment do
-    Reminder.where(:reminder_date => Time.now).each do |reminder|
+    time_start = Time.now
+    reminders = Reminder.where(:reminder_date => Time.now)
+
+    reminders.each do |reminder|
       reminder.notify_users
     end
+    time_end = Time.now
+    puts "-------------------------------"
+    puts "Nofity User: #{reminders.length}"
+    puts "Time Started: #{time_start}"
+    puts "Time Ended: #{time_end}"
+    puts "Computed Data Finished: (#{time_end - time_start})"
+    puts "-------------------------------"
   end
 end
