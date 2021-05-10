@@ -3,7 +3,7 @@ class Reminder < ApplicationRecord
   belongs_to :shipper, optional: true
   belongs_to :activity, optional: true
   belongs_to :user, optional: true
-  before_save :notify_users
+  # before_save :notify_users
   after_save :update_computed_data
 
   validate :reminder_date_cannot_be_in_the_past
