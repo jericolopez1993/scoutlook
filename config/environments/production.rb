@@ -81,7 +81,7 @@ Rails.application.configure do
 
   # config.action_cable.url = "ws://app.scoutlook.ca/cable"
 
-  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
+  # config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
