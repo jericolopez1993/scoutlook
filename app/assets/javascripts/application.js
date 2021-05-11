@@ -32,6 +32,7 @@
 //= require tinymce
 //= require select2
 //= require tiles
+//= require cable
 var originTags = [
   "AL",
   "AK",

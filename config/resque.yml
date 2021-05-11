@@ -1,5 +1,5 @@
-development: app.scoutlook.ca:6379
+development: 3.98.62.116:6379
 test: localhost:6379
-staging: app.scoutlook.ca:6379
+staging: scoutlook-production-ro.zh4knt.ng.0001.cac1.cache.amazonaws.com:6379
 fi: localhost:6379
 production: app.scoutlook.ca:6379

@@ -1,14 +1,16 @@
-# Change these
-server 'ubuntu@scoutlook-staging.opinionated.software', roles: [:web, :app, :db, :non_worker], primary: true
+server 'ubuntu@3.98.62.116', roles: [:web, :app, :db, :worker, :prod], primary: true
 
-set :repo_url,        'git@github.com:jericolopez1993/scoutlook.git'
+set :repo_url,        'https://github.com/jericolopez1993/scoutlook.git'
+set :git_http_username, 'jericolopez0107'
+set :git_http_password, 'wV46GnmfW2WHPsp8'
 set :application,     'scout_staging'
 set :user,            'ubuntu'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 set :delayed_job_workers, 2
-set :branch, ENV.fetch('REVISION', 'master')
+set :branch, ENV.fetch('REVISION', 'development')
 set :rvm_ruby_version, '2.6.0'
+set :ssh_options, paranoid: false
 
 
 # Don't change these unless you know what you're doing
