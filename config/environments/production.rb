@@ -79,7 +79,7 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # config.action_cable.url = "ws://app.scoutlook.ca/cable"
+  config.action_cable.url = "ws://scoutlook-production-ro.zh4knt.ng.0001.cac1.cache.amazonaws.com/cable"
 
   # config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
 
