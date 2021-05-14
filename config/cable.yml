@@ -1,6 +1,6 @@
 development:
   adapter: redis
-  url: redis://3.98.62.116:6379
+  url: redis://scoutlook-production-ro.zh4knt.ng.0001.cac1.cache.amazonaws.com:6379
   channel_prefix: scout_development
 
 staging:
