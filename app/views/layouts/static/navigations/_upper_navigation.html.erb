@@ -21,17 +21,17 @@
   <!-- begin header-nav -->
     <ul class="navbar-nav navbar-right">
 
-      <% if current_user.has_role?(:admin) %>
+      <% if current_user.has_role?(:admin) || current_user.has_role?(:carrier_development) %>
         <li class="dropdown">
           <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
             <i class="fas fa-clock"></i>
-            <% if @global_summary.reminder_total > 0 %>
-              <span class="label"><%= @global_summary.reminder_total %></span>
+            <% if @reminder_total > 0 %>
+              <span class="label"><%= @reminder_total %></span>
             <% end %>
           </a>
           <ul class="dropdown-menu media-list dropdown-menu-right">
-            <li class="dropdown-header">REMINDERS (<%= @global_summary.reminder_total %>)</li>
-            <% if @global_summary.reminder_total > 0 %>
+            <li class="dropdown-header">REMINDERS (<%= @reminder_total %>)</li>
+            <% if @reminder_total > 0 %>
               <% if is_mobile %>
                 <% @current_reminders.limit(5).each do |reminder|%>
                   <li class="media">
