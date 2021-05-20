@@ -30,7 +30,11 @@ Rails.application.routes.draw do
   resources :load_tiles
   resources :shipper_companies
   resources :carrier_companies
-  resources :reminders
+  resources :reminders do
+    collection do
+      get     'update_from_cable'
+    end
+  end
   resources :master_signals, :path => 'signals'
   resources :shipments
   resources :master_invoices, :path => 'invoices'
@@ -111,6 +115,7 @@ Rails.application.routes.draw do
   match '/users/:id',   to: 'users#update',   via: 'patch'
   match '/users/:id',   to: 'users#update',   via: 'put'
   match '/users/:id',   to: 'users#destroy',   via: 'delete'
+  # match '/reminders/:id/notify',   to: 'reminders#notify',   via: 'get'
 
  #APIs
  namespace :api do

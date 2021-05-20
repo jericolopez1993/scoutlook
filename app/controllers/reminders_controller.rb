@@ -69,6 +69,21 @@ class RemindersController < ApplicationController
     end
   end
 
+  def update_from_cable
+    action_taken = params['action_taken']
+    id = params['id']
+
+    if action_taken && id
+      reminder = Reminder.find(id)
+
+      reminder.update_attributes(:action_taken => action_taken)
+
+      render :json => reminder, :status => :ok
+    else
+      render :json => {status: 'failed'}, :status => :unprocessable_entity
+    end
+  end
+
   # DELETE /reminders/1
   # DELETE /reminders/1.json
   def destroy

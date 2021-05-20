@@ -22,7 +22,7 @@ every :day, at: '12:01am', roles: [:worker] do
   rake "reminder:check_due"
 end
 
-every :minute, roles: [:worker] do
+every 1.minute, roles: [:worker] do
   rake "reminder:notify_assign_users"
 end
 

@@ -1,3 +1,9 @@
+# action_taken:
+#       0 = nil
+#       1 = Action Taken
+#       2 = Deleted
+#       3 = Ignored
+
 class Reminder < ApplicationRecord
   belongs_to :carrier, optional: true
   belongs_to :shipper, optional: true
@@ -34,8 +40,15 @@ class Reminder < ApplicationRecord
     end
   end
 
+  def reminder_date_str
+    self.reminder_date.strftime("%Y-%m-%d %H:%M %p")
+  end
+
   def notify_users
-    ReminderBroadcastJob.perform_now self
+    reminder = self.to_json(:methods => :reminder_date_str)
+    # reminder.push({"reminder_date_str" => self.reminder_date.strftime("%Y-%m-%d %H:%M")})
+    # reminder['reminder_date_str'] = self.reminder_date.strftime("%Y-%m-%d %H:%M")
+    ActionCable.server.broadcast "reminder_channel:#{self.user_id}", data: reminder
   end
 
   def display_name
@@ -64,6 +77,8 @@ class Reminder < ApplicationRecord
     ").joins("
       LEFT JOIN activities
       ON activities.id = reminders.activity_id
+    ").where("
+      reminders.action_taken != 2
     ")}
 
   # default_scope {listings}

@@ -1,3 +1,5 @@
+ActionCable.server.config.disable_request_forgery_protection = true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

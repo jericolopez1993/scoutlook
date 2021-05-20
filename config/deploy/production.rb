@@ -11,7 +11,7 @@ set :user,            'ubuntu'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 set :delayed_job_workers, 2
-set :branch, ENV.fetch('REVISION', 'master')
+set :branch, ENV.fetch('REVISION', 'stable')
 set :rvm_ruby_version, '2.6.0'
 # set :branch, ENV.fetch('REVISION', 'SC_Carrier_Ajax')
 set :ssh_options, paranoid: false
