@@ -16,9 +16,9 @@ App.cable.subscriptions.create(
 
     received: function(data) {
       reminder = JSON.parse(data['data']);
-      url = "";
-      model = "";
-      name = "";
+      var url = "";
+      var model = "";
+      var name = "";
       if (reminder['carrier_id']){
         model = "Carrier";
         name = reminder['carrier_name'];
@@ -37,9 +37,17 @@ App.cable.subscriptions.create(
         url = "/activities/" + reminder['activity_id'];
       }
 
+      var reminder_model_name = model + ': ' + name + '<br/>';
+      var reminder_time = 'Time: ' + reminder['reminder_date'] + '<br/>';
+      var reminder_type = 'Type: ' + reminder['reminder_type'] + '<br/>';
+      var reminder_notes = 'Notes: ' + reminder['notes'];
+
+      var reminder_text = reminder_model_name + reminder_time + reminder_type + reminder_notes;
+
+
       swal({
         title: 'Reminder!',
-        text: 'You have to ' + reminder['reminder_type'] + ' ' + name,
+        text: reminder_text,
         icon: 'warning',
         buttons: {
           cancel: {
@@ -48,6 +56,13 @@ App.cable.subscriptions.create(
             visible: true,
             className: 'btn btn-default',
             closeModal: true,
+          },
+          delete: {
+            text: 'Delete',
+            value: true,
+            visible: true,
+            className: 'btn btn-danger',
+            closeModal: true
           },
           confirm: {
             text: 'Go to ' + model,
