@@ -25,11 +25,11 @@ class ApplicationController < ActionController::Base
     @current_reminders = []
     @current_logs = []
 
-    if current_user && current_user.has_role?(:carrier_development)
-      reminders = Reminder.listings.where(:user_id => current_user.id).order("reminder_date DESC")
-      @reminder_total = reminders.size
-      @current_reminders = reminders.limit(10)
-    end
+    # if current_user && current_user.has_role?(:carrier_development)
+    #   reminders = Reminder.listings.where(:user_id => current_user.id).order("reminder_date DESC")
+    #   @reminder_total = reminders.size
+    #   @current_reminders = reminders.limit(10)
+    # end
 
     if @global_summary.reminder_ids != "[]" && @current_reminders.size == 0
       @current_reminders = Reminder.listings.where("reminders.id IN (#{@global_summary.reminder_ids.tr('[]', '')})")

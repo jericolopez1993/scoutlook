@@ -61,11 +61,11 @@ class ReminderDatatable < AjaxDatatablesRails::ActiveRecord
 
   def get_raw_records
     # insert query here
-    if user.has_role?(:carrier_development)
-      Reminder.listings.where("reminders.user_id = #{user.id}")
-    else
-      Reminder.listings
-    end
+    # if user.has_role?(:carrier_development)
+    #   Reminder.listings.where("reminders.user_id = #{user.id}")
+    # else
+    Reminder.listings
+    # end
   end
 
   def user
