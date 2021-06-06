@@ -45,54 +45,64 @@ App.cable.subscriptions.create({
             var reminder_notes = '<b>Notes:</b> ' + reminder['notes'];
 
             var reminder_text = reminder_model_name + reminder_time + reminder_type + reminder_notes;
+            addToReminderBox(reminder['id'], reminder_text);
+            addReminderBoxCount();
+            slideDownReminderBox();
 
-
-            Swal.fire({
-                title: 'Reminder!',
-                html: reminder_text,
-                icon: 'warning',
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: 'Go to ' + model,
-                cancelButtonText: 'Ignore',
-                denyButtonText: 'Delete',
-            }).then((result) => {
-                var action_taken = 0;
-                var id = reminder['id'];
-
-                if (result.isConfirmed) {
-                  action_taken = 1
-                } else if (result.isDenied) {
-                  action_taken = 2
-                } else if (result.isDismissed) {
-                  action_taken = 3
-                }
-
-                $.ajax({
-                    method: 'get',
-                    url: "/reminders/update_from_cable",
-                    data: {
-                        id: id,
-                        action_taken: action_taken
-                    }
-                }).done(function(data) {
-                    reminder = data;
-
-                    if (result.isConfirmed) {
-                        var url = "";
-
-                        if (reminder['carrier_id']) {
-                            url = "/carriers/" + reminder['carrier_id'];
-                        } else if (reminder['shipper_id']) {
-                            url = "/shippers/" + reminder['shipper_id'];
-                        } else if (reminder['activity_id']) {
-                            url = "/activities/" + reminder['activity_id'];
-                        }
-
-                        window.open(url, '_blank');
-                    }
-                });
+            $.gritter.add({
+                title: 'REMINDER',
+                text: reminder_text,
+                sticky: false,
+                time: 8000,
+                class_name: 'my-sticky-class'
             });
+            //
+            // Swal.fire({
+            //     title: 'Reminder!',
+            //     html: reminder_text,
+            //     icon: 'warning',
+            //     showDenyButton: true,
+            //     showCancelButton: true,
+            //     confirmButtonText: 'Go to ' + model,
+            //     cancelButtonText: 'Ignore',
+            //     denyButtonText: 'Delete',
+            // }).then((result) => {
+            //     var action_taken = 0;
+            //     var id = reminder['id'];
+            //
+            //     if (result.isConfirmed) {
+            //       action_taken = 1
+            //     } else if (result.isDenied) {
+            //       action_taken = 2
+            //     } else if (result.isDismissed) {
+            //       action_taken = 3
+            //     }
+            //
+            //     $.ajax({
+            //         method: 'get',
+            //         url: "/reminders/update_from_cable",
+            //         data: {
+            //             id: id,
+            //             action_taken: action_taken
+            //         }
+            //     }).done(function(data) {
+            //         reminder = data;
+            //
+            //         if (result.isConfirmed) {
+            //             var url = "";
+            //
+            //             if (reminder['carrier_id']) {
+            //                 url = "/carriers/" + reminder['carrier_id'];
+            //             } else if (reminder['shipper_id']) {
+            //                 url = "/shippers/" + reminder['shipper_id'];
+            //             } else if (reminder['activity_id']) {
+            //                 url = "/activities/" + reminder['activity_id'];
+            //             }
+            //
+            //             window.open(url, '_blank');
+            //         }
+            //     });
+            // });
         }
     }
 );

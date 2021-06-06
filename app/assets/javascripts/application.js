@@ -31,6 +31,7 @@
 //= require tinymce
 //= require select2
 //= require tiles
+//= require reminder-box
 //= require cable
 var originTags = [
   "AL",

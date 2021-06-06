@@ -38,6 +38,8 @@ class ApplicationController < ActionController::Base
     if @global_summary.log_ids != "[]"
       @current_logs = Log.overall.where("logs.id IN (#{@global_summary.log_ids.tr('[]', '')})")
     end
+
+    @reminders_today = Reminder.listings.where("reminders.action_taken = 0 AND (reminders.reminder_date >= date_trunc('day', current_date) AND reminders.reminder_date <= date_trunc('day', current_date))")
   end
 
   def set_current_action
