@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
       @current_logs = Log.overall.where("logs.id IN (#{@global_summary.log_ids.tr('[]', '')})")
     end
 
-    @reminders_today = Reminder.listings.where("reminders.action_taken = 0 AND (reminders.reminder_date >= date_trunc('day', current_date) AND reminders.reminder_date <= date_trunc('day', current_date))")
+    @reminders_today = Reminder.listings.where("reminders.action_taken = 0 AND (reminders.reminder_date >= date_trunc('day', current_date) AND reminders.reminder_date <= ?)", Time.now)
   end
 
   def set_current_action

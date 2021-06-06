@@ -45,10 +45,11 @@ class Reminder < ApplicationRecord
   end
 
   def notify_users
+    user = self.user
     reminder = self.to_json(:methods => :reminder_date_str)
     # reminder.push({"reminder_date_str" => self.reminder_date.strftime("%Y-%m-%d %H:%M")})
     # reminder['reminder_date_str'] = self.reminder_date.strftime("%Y-%m-%d %H:%M")
-    ActionCable.server.broadcast "reminder_channel:#{self.user_id}", data: reminder
+    RemindersChannel.broadcast_to user, data: reminder
   end
 
   def display_name
