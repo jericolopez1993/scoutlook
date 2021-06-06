@@ -38,7 +38,9 @@
                       <% end %>
                       <br/>
                       <b>Time:</b> <%= reminder.reminder_date_str %>
+                      <br/>
                       <b>Type:</b> <%= reminder['reminder_type'] %>
+                      <br/>
                       <b>Notes:</b> <%= reminder['notes'] && reminder['notes'].html_safe %>
                     </p>
 
