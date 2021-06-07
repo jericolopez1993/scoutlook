@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :reminders do
     collection do
       get     'update_from_cable'
+      get     'get_current_reminders'
     end
   end
   resources :master_signals, :path => 'signals'

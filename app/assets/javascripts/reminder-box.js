@@ -1,4 +1,6 @@
 jQuery(document).ready(function () {
+    doPoll();
+
     $("#messagebody").animate({scrollTop: $("#messagebody")[0].scrollHeight}, 'slow');
 
     $(document).on('click', '.panel-heading span.icon_minim', function (e) {
@@ -67,12 +69,18 @@ function addReminderBoxCount() {
     var reminder_count_element = $('#reminder_box_count_badge');
     var reminder_count = parseInt(reminder_count_element.text(), 10) + 1;
     reminder_count_element.html(reminder_count)
+    if (reminder_count > 0) {
+        reminder_count_element.show();
+    }
 }
 
 function subReminderBoxCount() {
     var reminder_count_element = $('#reminder_box_count_badge');
     var reminder_count = parseInt(reminder_count_element.text(), 10) - 1;
     reminder_count_element.html(reminder_count)
+    if (reminder_count === 0) {
+        reminder_count_element.hide();
+    }
 }
 
 function addToReminderBox(id, content) {
@@ -83,7 +91,7 @@ function addToReminderBox(id, content) {
         '<div class="col-md-10 col-xs-10 ">' +
         '<div class="messages msg_sent">' +
         '<p>' + content + '</p>' +
-        '<p>' +
+        '<p class="text-right">' +
         '<button class=\'btn btn-purple btn-xs goto_button\' data-id="' + id + '">Goto</button>\n' +
         '<button class=\'btn btn-danger btn-xs delete_button\' data-id="' + id + '">Delete</button>\n' +
         '<button class=\'btn btn-grey btn-xs ignore_button\' data-id="' + id + '">Ignore</button>    </p>' +
@@ -128,4 +136,62 @@ function updateActionTaken(id, action_taken) {
         }
 
     });
+}
+
+function setReminders(reminder) {
+    var url = "";
+    var model = "";
+    var name = "";
+    if (reminder['carrier_id']) {
+        model = "Carrier";
+        name = reminder['carrier_name'];
+        url = "/carriers/" + reminder['carrier_id'];
+    } else if (reminder['shipper_id']) {
+        model = "Shipper";
+        name = reminder['shipper_name'];
+        url = "/shippers/" + reminder['shipper_id'];
+    } else if (reminder['activity_id']) {
+        model = "Activity";
+        if (reminder['activity_shipper_id']) {
+            name = reminder['activity_shipper_name'];
+        } else if (reminder['activity_carrier_id']) {
+            name = reminder['activity_carrier_name'];
+        }
+        url = "/activities/" + reminder['activity_id'];
+    }
+
+    var reminder_model_name = '<b>' + model + ':</b> ' + name + '<br/>';
+    var reminder_time = '<b>Time:</b> ' + reminder['reminder_date_str'] + '<br/>';
+    var reminder_type = '<b>Type:</b> ' + reminder['reminder_type'] + '<br/>';
+    var reminder_notes = '<b>Notes:</b> ' + reminder['notes'];
+
+    var reminder_text = reminder_model_name + reminder_time + reminder_type + reminder_notes;
+
+    return reminder_text;
+}
+
+function doPoll(){
+    $.ajax({
+        method: 'get',
+        url: "/reminders/get_current_reminders"
+    }).done(function(data) {
+        var reminders = data;
+        reminders.forEach(function (reminder) {
+            if(!document.body.contains(document.getElementById('reminder_container_' + reminder['id']))){
+                var reminder_text = setReminders(reminder);
+                addToReminderBox(reminder['id'], reminder_text);
+                addReminderBoxCount();
+                slideDownReminderBox();
+
+                $.gritter.add({
+                    title: 'REMINDER',
+                    text: reminder_text,
+                    sticky: false,
+                    time: 8000,
+                    class_name: 'my-sticky-class'
+                });
+            }
+        });
+    });
+    setTimeout(doPoll,30000);
 }

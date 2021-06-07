@@ -69,6 +69,12 @@ class RemindersController < ApplicationController
     end
   end
 
+  def get_current_reminders
+    # reminders = Reminder.listings.where(:action_taken => 0, :user_id => current_user.id, :reminder_date => Time.now.strftime("%Y-%m-%d %H:%M"))
+    reminders = Reminder.listings.order("id DESC").limit(2)
+    render :json => reminders, methods: [:reminder_date_str], :status => :ok
+  end
+
   def update_from_cable
     action_taken = params['action_taken']
     id = params['id']
