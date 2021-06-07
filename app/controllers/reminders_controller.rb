@@ -70,8 +70,8 @@ class RemindersController < ApplicationController
   end
 
   def get_current_reminders
-    # reminders = Reminder.listings.where(:action_taken => 0, :user_id => current_user.id, :reminder_date => Time.now.strftime("%Y-%m-%d %H:%M"))
-    reminders = Reminder.listings.order("id DESC").limit(2)
+    reminders = Reminder.listings.where(:action_taken => 0, :user_id => current_user.id, :reminder_date => Time.now.strftime("%Y-%m-%d %H:%M"))
+    # reminders = Reminder.listings.order("id DESC").limit(2)
     render :json => reminders, methods: [:reminder_date_str], :status => :ok
   end
 
@@ -88,6 +88,10 @@ class RemindersController < ApplicationController
     else
       render :json => {status: 'failed'}, :status => :unprocessable_entity
     end
+  end
+
+  def notify
+    render :layout => false
   end
 
   # DELETE /reminders/1

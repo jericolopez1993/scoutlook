@@ -1,5 +1,11 @@
+var newWindow = null;
+var isNotifyWindowClosed = true;
+var doPollTimeout = 30000;
+var checkReminderBoxTimeout = 30000;
+
 jQuery(document).ready(function () {
     doPoll();
+    setTimeout(checkReminderBox,checkReminderBoxTimeout);
 
     $("#messagebody").animate({scrollTop: $("#messagebody")[0].scrollHeight}, 'slow');
 
@@ -38,6 +44,14 @@ jQuery(document).ready(function () {
     $(document).on('click', '.ignore_button', function (){
         var id = $(this).data("id");
         updateActionTaken(id, 3);
+    });
+
+    //handle a broadcasted message
+    TabUtils.OnBroadcastMessage("notified", function (eventDataString) {
+        isNotifyWindowClosed = (eventDataString === 'true');
+        // if (eventDataString !== 'true') {
+        //    window.open("/reminders/notify", "ReminderWindow","directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,top=300,left=700,width=500,height=100");
+        // }
     });
 
 });
@@ -193,5 +207,24 @@ function doPoll(){
             }
         });
     });
-    setTimeout(doPoll,30000);
+    setTimeout(doPoll, doPollTimeout);
+}
+
+
+function checkReminderBox(){
+    var reminder_count_element = $('#reminder_box_count_badge');
+    var reminder_count = parseInt(reminder_count_element.text(), 10);
+
+    if (reminder_count > 0) {
+        if (isNotifyWindowClosed) {
+            newWindow = window.open("/reminders/notify", "ReminderWindow","directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,top=300,left=700,width=500,height=100");
+            newWindow.onbeforeunload = function(){
+                isNotifyWindowClosed = true;
+            }
+            isNotifyWindowClosed = newWindow.closed;
+        }
+        TabUtils.BroadcastMessageToAllTabs("notified", newWindow.closed.toString());
+    }
+
+    setTimeout(checkReminderBox, checkReminderBoxTimeout);
 }
