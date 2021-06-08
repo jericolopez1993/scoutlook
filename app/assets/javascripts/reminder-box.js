@@ -1,7 +1,7 @@
 var newWindow = null;
 var isNotifyWindowClosed = true;
 var doPollTimeout = 30000;
-var checkReminderBoxTimeout = 300000;
+var checkReminderBoxTimeout = 30000;
 
 jQuery(document).ready(function () {
     doPoll();
@@ -108,12 +108,13 @@ function addToReminderBox(id, content) {
         '<p class="text-right">' +
         '<button class=\'btn btn-purple btn-xs goto_button\' data-id="' + id + '">Goto</button>\n' +
         '<button class=\'btn btn-danger btn-xs delete_button\' data-id="' + id + '">Delete</button>\n' +
-        '<button class=\'btn btn-grey btn-xs ignore_button\' data-id="' + id + '">Ignore</button>    </p>' +
+        // '<button class=\'btn btn-grey btn-xs ignore_button\' data-id="' + id + '">Ignore</button>    ' +
+        '</p>' +
         '</div>' +
         '</div>' +
         '</div>';
-        $(body).appendTo("#messagebody");
-        $("#messagebody").animate({scrollTop: $("#messagebody")[0].scrollHeight}, 'slow');
+    $(body).appendTo("#messagebody");
+    $("#messagebody").animate({scrollTop: $("#messagebody")[0].scrollHeight}, 'slow');
 }
 
 
@@ -212,19 +213,23 @@ function doPoll(){
 
 
 function checkReminderBox(){
-    var reminder_count_element = $('#reminder_box_count_badge');
-    var reminder_count = parseInt(reminder_count_element.text(), 10);
-
-    if (reminder_count > 0) {
-        if (isNotifyWindowClosed) {
-            newWindow = window.open("/reminders/notify", "ReminderWindow","directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,top=300,left=700,width=500,height=100");
-            newWindow.onbeforeunload = function(){
-                isNotifyWindowClosed = true;
+    $.ajax({
+        method: 'get',
+        url: "/reminders/get_today_reminders"
+    }).done(function(data) {
+        var reminders = data;
+        var reminder_count = reminders.length;
+        if (reminder_count > 0) {
+            if (isNotifyWindowClosed) {
+                newWindow = window.open("/reminders/notify", "ReminderWindow","directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,top=300,left=700,width=500,height=100");
+                newWindow.onbeforeunload = function(){
+                    isNotifyWindowClosed = true;
+                }
+                isNotifyWindowClosed = newWindow.closed;
             }
-            isNotifyWindowClosed = newWindow.closed;
+            TabUtils.BroadcastMessageToAllTabs("notified", newWindow.closed.toString());
         }
-        TabUtils.BroadcastMessageToAllTabs("notified", newWindow.closed.toString());
-    }
+    });
 
     setTimeout(checkReminderBox, checkReminderBoxTimeout);
 }

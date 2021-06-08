@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     collection do
       get     'update_from_cable'
       get     'get_current_reminders'
+      get     'get_today_reminders'
       get     'notify'
     end
   end

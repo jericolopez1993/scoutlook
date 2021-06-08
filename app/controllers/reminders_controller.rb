@@ -71,7 +71,11 @@ class RemindersController < ApplicationController
 
   def get_current_reminders
     reminders = Reminder.listings.where(:action_taken => 0, :user_id => current_user.id, :reminder_date => Time.now.strftime("%Y-%m-%d %H:%M"))
-    # reminders = Reminder.listings.order("id DESC").limit(2)
+    render :json => reminders, methods: [:reminder_date_str], :status => :ok
+  end
+
+  def get_today_reminders
+    reminders = Reminder.listings.where("reminders.action_taken = 0 AND (reminders.reminder_date >= date_trunc('day', current_date) AND reminders.reminder_date <= ?)", Time.now.strftime("%Y-%m-%d %H:%M"))
     render :json => reminders, methods: [:reminder_date_str], :status => :ok
   end
 
