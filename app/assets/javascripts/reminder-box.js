@@ -1,7 +1,7 @@
 var newWindow = null;
 var isNotifyWindowClosed = true;
 var doPollTimeout = 30000;
-var checkReminderBoxTimeout = 30000;
+var checkReminderBoxTimeout = 300000;
 
 jQuery(document).ready(function () {
     doPoll();
