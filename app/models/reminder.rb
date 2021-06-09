@@ -15,7 +15,7 @@ class Reminder < ApplicationRecord
   validate :reminder_date_cannot_be_in_the_past
 
   scope :incomplete, -> do
-    where(:completed => false).order('created_at DESC')
+    where(:completed => false).where("action_taken != 2").order('created_at DESC')
   end
 
    def reminder_date_cannot_be_in_the_past
