@@ -60,6 +60,7 @@ var originTags = [
   "MO",
   "MT",
   "NE",
+  "NH",
   "NJ",
   "NV",
   "NC",

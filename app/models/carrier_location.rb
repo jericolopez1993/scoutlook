@@ -6,7 +6,7 @@ class CarrierLocation < ApplicationRecord
     if self.carrier_id
       "Location to #{self.carrier.display_name}"
     else
-      "Locationsssss"
+      "Location"
     end
   end
 end
