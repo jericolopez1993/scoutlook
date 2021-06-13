@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+function initDemotionTable() {
   $('#demotion-datatable').dataTable({
     "processing": true,
     "serverSide": true,
@@ -53,4 +53,4 @@ jQuery(document).ready(function() {
     {column_number : 13, data: ['New', 'A', 'B', 'C', 'D', 'U'], filter_default_label: "Status", filter_reset_button_text: false},
     {column_number : 14, filter_type: "text", filter_reset_button_text: false},
     {column_number : 15, filter_type: "text", filter_reset_button_text: false}]);
-});
+}

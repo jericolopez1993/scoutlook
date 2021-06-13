@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+function initLogTable() {
   $('#log-datatable').dataTable({
     "processing": true,
     "serverSide": true,
@@ -27,4 +27,4 @@ jQuery(document).ready(function() {
     {column_number : 0, filter_type: "text", filter_reset_button_text: false},
     {column_number : 1, filter_type: "text", filter_reset_button_text: false},
     {column_number : 2, filter_type: "text", filter_reset_button_text: false},]);
-});
+}

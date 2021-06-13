@@ -1,4 +1,4 @@
-$(function () {
+function initCustomerTable() {
 
   $.fn.dataTableExt.afnFiltering.push(function( oSettings, aData, iDataIndex ) {
     var column_index = $('#customer_table_filter_column').val();
@@ -155,4 +155,4 @@ $(function () {
       placeholder: "To",
       allowClear: true,
       width: 'resolve'});
-});
+}

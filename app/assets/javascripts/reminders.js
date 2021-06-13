@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+function initReminderTable() {
   $('#reminder-datatable').dataTable({
     "processing": true,
     "serverSide": true,
@@ -43,4 +43,4 @@ jQuery(document).ready(function() {
     {column_number : 8, filter_type: "text", filter_reset_button_text: false},
     {column_number : 9, filter_type: "text", filter_reset_button_text: false},
     {column_number : 10, filter_type: "text", filter_reset_button_text: false}]);
-});
+}

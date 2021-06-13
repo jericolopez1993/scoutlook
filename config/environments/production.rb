@@ -1,4 +1,4 @@
-ActionCable.server.config.disable_request_forgery_protection = true
+# ActionCable.server.config.disable_request_forgery_protection = true
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -81,8 +81,8 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.web_socket_server_url = "wss://app.scoutlook.ca/cable"
-  config.action_cable.allowed_request_origins =   ['https://app.scoutlook.ca']
+  # config.web_socket_server_url = "wss://app.scoutlook.ca/cable"
+  # config.action_cable.allowed_request_origins =   ['https://app.scoutlook.ca']
 
   # config.action_cable.url = "ws://scoutlook-production-ro.zh4knt.ng.0001.cac1.cache.amazonaws.com/cable"
 

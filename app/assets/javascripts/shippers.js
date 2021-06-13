@@ -1,4 +1,4 @@
-$(function () {
+function initShipperTable() {
   var table = $('#shipper_table').dataTable({
     "processing": true,
     "serverSide": true,
@@ -77,4 +77,4 @@ $(function () {
     {column_number : 15, filter_type: "text", filter_reset_button_text: false},
     {column_number : 16, filter_type: "text", filter_reset_button_text: false},
     {column_number : 17, filter_type: "text", filter_reset_button_text: false}]);
-});
+}

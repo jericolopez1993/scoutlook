@@ -121,36 +121,12 @@
 <script language="javascript">
   var user_id = "<%= current_user.id %>";
   var table_type = "<%= table_type %>";
-  $(function () {
-    $('#send-mail-btn').on('click', function () {
-      var carriers_selected = $('#' + table_type + '_table').DataTable().column(0).checkboxes.selected();
-      if (carriers_selected.join(",") != "") {
-        $.redirect('/carriers/compose_mail', {'ids': carriers_selected.join(",")});
+  $(document).ready(function() {
+      if (table_type === 'customer') {
+          initCustomerTable();
+      } else {
+          initCarrierTable();
       }
-    });
-    $('#send-text-btn').on('click', function () {
-      var carriers_selected = $('#' + table_type + '_table').DataTable().column(0).checkboxes.selected();
-      if (carriers_selected.join(",") != "") {
-        $.redirect('/carriers/compose_sms', {'ids': carriers_selected.join(",")});
-      }
-    });
   });
-  function filterme() {
-    var categories = $('input:checkbox[name="category"]:checked').map(function () {
-      return '^' + this.value + '\$';
-    }).get().join('|');
-    table.search(categories, 5, true, false, false, false).draw();
-    // table.fnFilter();
 
-    var userCategories = $('input:checkbox[name="category"]').map(function () {
-      return $(this).prop("checked");
-    }).get().join(',');
-    $.ajax({
-      method: "PUT",
-      url: "/api/users/" + user_id,
-      data: {
-        carrier_categories: userCategories
-      }
-    }).done(function (data) {});
-  }
 </script>

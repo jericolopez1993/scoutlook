@@ -63,15 +63,7 @@
 </div>
 
 <script language="javascript">
-  $(function () {
-    $('#delete-carrier-btn').on('click', function () {
-      var r = confirm("Are you sure, you want to remove these carriers to new?");
-      if (r == true) {
-        var carriers_selected = $('#newly-datatable').DataTable().column(0).checkboxes.selected();
-        if (carriers_selected.join(",") != "") {
-          $.redirect('/carriers/delete_new', {'mc_numbers': carriers_selected.join(",")});
-        }
-      }
+    $(document).ready(function() {
+        initNewlyTable();
     });
-  });
 </script>

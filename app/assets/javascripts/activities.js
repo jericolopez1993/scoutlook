@@ -1,4 +1,4 @@
-$(function () {
+function initActivitiesTable() {
 
   var table = $('#activities_table').dataTable({
     "processing": true,
@@ -48,4 +48,4 @@ $(function () {
       {column_number : 9, filter_type: "text", filter_reset_button_text: false},
       {column_number : 10, data: [{value: 1,label: 'Open'}, {value: 0,label: 'Closed'}], filter_default_label: "Y/N", filter_reset_button_text: false},
       {column_number : 11, filter_type: "text", filter_reset_button_text: false}]);
-});
+}

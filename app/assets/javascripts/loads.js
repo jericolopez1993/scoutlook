@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+function initLoadTable() {
   $('#loads-datatable').dataTable({
     "processing": true,
     "serverSide": true,
@@ -77,4 +77,4 @@ jQuery(document).ready(function() {
     {column_number : 21, filter_type: "text", filter_reset_button_text: false},
     {column_number : 22, filter_type: "text", filter_reset_button_text: false},
     {column_number : 23, filter_type: "text", filter_reset_button_text: false}]);
-});
+}
